@@ -6,12 +6,20 @@ import router from './router'
 import "./assets/css/global.css";
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+
+import mapBoxGl from 'mapbox-gl'
+Vue.prototype.$mapboxgl = mapBoxGl
+
 Vue.config.productionTip = false
 Vue.use(ElementUI);
+
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
-  components: { App },
+  components: {
+    App
+  },
   template: '<App/>'
 })

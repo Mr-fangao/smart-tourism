@@ -41,9 +41,9 @@
 </template>
 
 <script>
-import kdxfx from "../components/Skanalysis/kdxfx.vue";
-import odfx from "../components/Skanalysis/odfx.vue";
-import density from "../components/Skanalysis/density.vue";
+import kdxfx from "../components/feelinganalysis/kdxfx.vue";
+import odfx from "../components/feelinganalysis/odfx.vue";
+import density from "../components/feelinganalysis/density.vue";
 export default {
   components: { kdxfx, odfx, density },
   name: "skAnalysis",
