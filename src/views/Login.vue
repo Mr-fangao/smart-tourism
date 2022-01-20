@@ -1,8 +1,8 @@
 <template>
   <div class="login">
     <div class="header">
-      
-      <h1>就业推荐与智能分析系统</h1>
+      <img src="../assets/img/logo.png" />
+      <h1>行游天下·景点智能分析与推荐系统</h1>
     </div>
     <div class="main">
       <div class="login_style">
@@ -37,7 +37,7 @@
             <el-checkbox class="check">记住登录密码</el-checkbox>
           </el-form-item>
           <el-form-item>
-            <el-button id="btn" class="button" type="primary" round @click="handleLogin"
+            <el-button id="btn" class="button" type="primary" round
               >立即登录</el-button
             >
           </el-form-item>
@@ -73,7 +73,7 @@ export default {
 };
 </script>
 
-<style lang="less"scoped>
+<style lang="less" scoped>
 .login {
   display: flex;
   flex-direction: column;
@@ -87,13 +87,16 @@ export default {
     align-items: center;
     height: 10%;
     width: 100%;
-   
+    img {
+        height: 30px;
+        padding-left: 10px;
+      }
     h1 {
-      font-size: 24px;
-      color: #ffffff;
+      font-size: 28px;
+      color: #1D3340;
       font-family: Microsoft YaHei;
       font-weight: bold;
-      margin-left: 20px;
+      margin-left: 10px;
     }
   }
   .main {
@@ -102,24 +105,21 @@ export default {
     align-items: center;
     width: 100%;
     height: 100%;
-    background-size: 100% 100%;
     margin: 150px 0px;
     .login_style {
       display: flex;
       flex-direction: column;
       align-items: center;
       position: relative;
-      width: 40%;
-      height: 70%;
-      .login-from {
-        display: flex;
-        flex-direction: column;
-      }
+      width: 32%;
+      height: 85%;
+      background-color: rgba(79, 106, 135, 0.5);
       h2 {
         font-size: 20px;
         color: #ffffff;
         font-family: Microsoft YaHei;
         font-weight: bold;
+        margin-top: 30px;
         margin-bottom: 20px;
       }
       img {
