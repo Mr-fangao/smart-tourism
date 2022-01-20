@@ -1,10 +1,10 @@
 <template>
   <div class="login">
+    <div class="main">
     <div class="header">
       <img src="../assets/img/logo.png" />
       <h1>行游天下·景点智能分析与推荐系统</h1>
     </div>
-    <div class="main">
       <div class="login_style">
         <h2>用户平台登录</h2>
         <el-form
@@ -81,38 +81,43 @@ export default {
   height: 100%;
   background: url(../assets/login/login_background.jpg);
   background-size: 100% 100%;
-  .header {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    height: 10%;
-    width: 100%;
-    img {
-        height: 30px;
-        padding-left: 10px;
-      }
-    h1 {
-      font-size: 28px;
-      color: #1D3340;
-      font-family: Microsoft YaHei;
-      font-weight: bold;
-      margin-left: 10px;
-    }
-  }
+  
   .main {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
     height: 100%;
-    margin: 150px 0px;
+    margin: 120px 0px;
+    .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 30%;
+    width: 100%;
+    padding-bottom: 15px;
+    img {
+        height: 40px;
+        padding-left: 10px;
+      }
+    h1 {
+      font-size: 40px;
+      color: #ffffff;
+      font-family: Microsoft YaHei;
+      font-weight: bold;
+      margin-left: 10px;
+      
+    }
+  }
     .login_style {
       display: flex;
       flex-direction: column;
       align-items: center;
       position: relative;
       width: 32%;
-      height: 85%;
+      height: 70%;
       background-color: rgba(79, 106, 135, 0.5);
       h2 {
         font-size: 20px;
