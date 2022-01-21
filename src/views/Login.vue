@@ -1,10 +1,10 @@
 <template>
   <div class="login">
     <div class="main">
-    <div class="header">
-      <img src="../assets/img/logo.png" />
-      <h1>行游天下·景点智能分析与推荐系统</h1>
-    </div>
+      <div class="header">
+        <img src="../assets/img/logo.png" />
+        <h1>行游天下·景点智能分析与推荐系统</h1>
+      </div>
       <div class="login_style">
         <h2>用户平台登录</h2>
         <el-form
@@ -37,7 +37,12 @@
             <el-checkbox class="check">记住登录密码</el-checkbox>
           </el-form-item>
           <el-form-item>
-            <el-button id="btn" class="button" type="primary" round
+            <el-button
+              id="btn"
+              class="button"
+              type="primary"
+              round
+              @click="handleLogin"
               >立即登录</el-button
             >
           </el-form-item>
@@ -48,7 +53,7 @@
 </template>
 
 <script>
-
+import request from '@/utils/request'
 export default {
   data() {
     return {
@@ -69,7 +74,23 @@ export default {
         document.getElementById("btn").click();
       }
     },
-      },
+    handleLogin() {
+      request.post("/api/user/queryuser", this.loginFrom).then((res) => {
+        console.log(res.code);
+        if (res.code == "0") {
+          this.$router.push({ name: "recommend" });
+        } else {
+          this.$message({
+            type: "error",
+            message: res.description,
+          });
+        }
+      });
+      // request.get("/api/data/querySalary", this.loginFrom).then((res) => {
+      //   console.log(res.data);
+      // });
+    },
+  },
 };
 </script>
 
@@ -81,7 +102,7 @@ export default {
   height: 100%;
   background: url(../assets/login/login_background.jpg);
   background-size: 100% 100%;
-  
+
   .main {
     display: flex;
     flex-direction: column;
@@ -91,26 +112,25 @@ export default {
     height: 100%;
     margin: 120px 0px;
     .header {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    height: 30%;
-    width: 100%;
-    padding-bottom: 15px;
-    img {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      height: 30%;
+      width: 100%;
+      padding-bottom: 15px;
+      img {
         height: 40px;
         padding-left: 10px;
       }
-    h1 {
-      font-size: 40px;
-      color: #ffffff;
-      font-family: Microsoft YaHei;
-      font-weight: bold;
-      margin-left: 10px;
-      
+      h1 {
+        font-size: 40px;
+        color: #ffffff;
+        font-family: Microsoft YaHei;
+        font-weight: bold;
+        margin-left: 10px;
+      }
     }
-  }
     .login_style {
       display: flex;
       flex-direction: column;

@@ -10,6 +10,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "axios": "^0.25.0",
     "element-ui": "^2.15.6",
     "less-loader": "^4.1.0",
     "mapbox-gl": "^2.6.1",
