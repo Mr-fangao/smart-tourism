@@ -22,7 +22,7 @@ export default new Router({
       name: 'recommend',
       component: recommend,
       meta:{
-        keepAlive:true//导航栏在该页面不显示
+        keepAlive:true
       }
     },
     {
@@ -30,7 +30,7 @@ export default new Router({
       name: 'skAnalysis',
       component: skAnalysis,
       meta:{
-        keepAlive:true//导航栏在该页面不显示
+        keepAlive:true
       }
     },
     {
@@ -38,7 +38,7 @@ export default new Router({
       name: 'thememap',
       component: thememap,
       meta:{
-        keepAlive:true//导航栏在该页面不显示
+        keepAlive:true
       }
     },
         {
@@ -46,7 +46,7 @@ export default new Router({
       name: 'feelings',
       component: feelings,
       meta:{
-        keepAlive:true//导航栏在该页面不显示
+        keepAlive:true
       }
     },
   ]
