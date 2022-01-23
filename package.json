@@ -11,6 +11,9 @@
   },
   "dependencies": {
     "axios": "^0.25.0",
+    "core-js": "^2.6.12",
+    "echarts": "^5.2.2",
+    "echarts-gl": "^1.1.2",
     "element-ui": "^2.15.6",
     "less-loader": "^4.1.0",
     "mapbox-gl": "^2.6.1",

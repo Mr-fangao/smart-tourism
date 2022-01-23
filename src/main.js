@@ -6,6 +6,10 @@ import router from './router'
 import "./assets/css/global.css";
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+// 引入echarts
+import echarts from 'echarts'
+import 'echarts-gl'
+Vue.prototype.$echarts = echarts
 
 import mapBoxGl from 'mapbox-gl'
 Vue.prototype.$mapboxgl = mapBoxGl
