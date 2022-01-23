@@ -1,10 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/views/Login'
-import recommend from '@/views/recommend'
-import skAnalysis from '@/views/skAnalysis'
-import thememap from '@/views/theme'
-import feelings from '@/views/feelings'
 import notFound from '../components/notFound.vue'
 
 Vue.use(Router)
