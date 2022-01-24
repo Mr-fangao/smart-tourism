@@ -24,14 +24,14 @@ export default {
   data() {
     return {
       index: 1,
-      comp: "cmk",
+      comp: "pointgather",
       isShow: true,
     };
   },
   methods: {
     show(value) {
-      if (value === 1) this.comp = "cmk";
-      else if (value === 2) this.comp = "pointgather";
+      if (value === 1) this.comp = "pointgather";
+      else if (value === 2) this.comp = "cmk";
       //   else if (value === 3) this.comp = "density";
     },
   },
