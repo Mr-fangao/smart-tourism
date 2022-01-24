@@ -243,7 +243,7 @@ export default {
 <style scoped lang="less">
 .com-OD {
   #Heat {
-    height: 500px;
+    height: 100%;
     // border: 1px solid red;
   }
 
