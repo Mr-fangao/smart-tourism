@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <div class="select">
-      <el-button @click="                                              (1)" :class="index === 1 ? 'active' : ''" plain>点聚合图</el-button>
+      <el-button @click="show(1)" :class="index === 1 ? 'active' : ''" plain>点聚合图</el-button>
       <el-button @click="show(2)" :class="index === 2 ? 'active' : ''" plain>cmk</el-button>
       <el-button plain>朴素按11111111111钮</el-button>
       <el-button plain>朴素按钮</el-button>

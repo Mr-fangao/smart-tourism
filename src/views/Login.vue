@@ -2,11 +2,11 @@
   <div class="login">
     <div class="main">
       <div class="header">
-        <img src="../assets/img/logo.png" />
-        <h1>行游天下·景点智能分析与推荐系统</h1>
+        <!-- <img src="../assets/img/logo.png" /> -->
+        <h1>景点智能分析与推荐系统</h1>
       </div>
       <div class="login_style">
-        <h2>用户平台登录</h2>
+        <h2>用户登录</h2>
         <el-form
           ref="loginFrom"
           :model="loginFrom"
@@ -43,7 +43,7 @@
               type="primary"
               round
               @click="handleLogin"
-              >立即登录</el-button
+              >立即登录 加粗</el-button
             >
           </el-form-item>
         </el-form>

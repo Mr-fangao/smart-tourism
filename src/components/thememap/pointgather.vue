@@ -22,7 +22,7 @@ export default {
         map.on('load', function () {
             map.addSource("fillSourceID", {
                 type: "geojson" /* geojson类型资源 */,
-                data: "json/china.json" /* geojson数据 */
+                data: "../../../public/json/china.json" /* geojson数据 */
             });
             map.addLayer({
                 id: "fillID",
@@ -103,7 +103,7 @@ export default {
     height: 100%;
     // border: 1px solid red;
   }
-  height: 105%;
+  height: 100%;
   background: red;
 }
 </style>

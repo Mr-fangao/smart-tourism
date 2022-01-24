@@ -31,7 +31,7 @@ export default {
         map.on('load', function () {
             map.addSource("fillSourceID", {
                 type: "geojson" /* geojson类型资源 */,
-                data: '././public/json/china.json' /* geojson数据 */
+                data: '../../../public/json/china.json' /* geojson数据 */
             });
             map.addLayer({
                 id: "fillID",
