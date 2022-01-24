@@ -4,15 +4,10 @@
   </div>
 </template>
 <script>
-<<<<<<< HEAD
+
 import * as echarts from 'echarts';
 import "echarts-gl";
-import world from "../../assets/json/worlds.json";
-=======
-// import echarts from "echarts";
-// import "echarts-gl";
-import world from '../../assets/json/worlds.json';
->>>>>>> ce55d8ce8698b565675cae6685e0e55ed710ef8f
+import WorldJson from "../../assets/json/worlds.json";
 
 export default {
   name: "odfx",
