@@ -10,6 +10,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "@mapbox/mapbox-gl-language": "^1.0.0",
     "axios": "^0.25.0",
     "core-js": "^2.6.12",
     "echarts": "^4.1.0",
