@@ -247,7 +247,7 @@ export default {
     // border: 1px solid red;
   }
 
-  height: 300px;
-  background: red;
+  height: 100%;
+  //background: red;
 }
 </style>
