@@ -42,23 +42,24 @@ export default {
           width: 4096,
           height: 2048,
         });
+        
         //航线终点位置
         const coord = [
-          [61.210817, 35.650072],
-          [16.326528, -5.87747],
+          [118.30553, 32.2948],
+          [116.23128, 40.22077],
         ];
         //航线起点终点位置
         const lines_coord = [
           {
             coords: [
-              [2.691702, 6.258817],
-              [61.210817, 35.650072],
+              [102.58488717773437, 30.32777420617383],
+              [118.30553, 32.2948],
             ],
           },
           {
             coords: [
-              [2.691702, 6.258817],
-              [16.326528, -5.87747],
+              [108.93498483398437,34.22763500336627],
+              [116.23128,40.22077],
             ],
           },
         ];
@@ -72,10 +73,11 @@ export default {
             map: "world", //地图类型。
             zlevel: 0,
             show: true,
-            layoutCenter: ["50%", "50%"],
-            roam: false,
-            layoutSize: "90%",
-            zoom: 1,
+            layoutCenter: ["7%", "50%"],
+            roam: true,
+            layoutSize: "80%", 
+            center: [50, 36],
+            zoom: 3,
 
             label: {
               normal: {
@@ -97,14 +99,14 @@ export default {
                 areaColor: "#FFB800",
               },
               normal: {
-                areaColor: "#1b579c",
+                areaColor: "#90d7ec",
                 borderWidth: 1, //设置外层边框
-                borderColor: "#1ECEF4",
+                borderColor: "#009ad6",
               },
             },
           },
           viewControl: {
-            autoRotate: false,
+            autoRotate: true,
           },
           series: [
             {
@@ -201,14 +203,14 @@ export default {
 
         let option = {
           globe: {
-            globeRadius: 100,
+            globeRadius: 160,
             globeOuterRadius: 150,
             silent: true,
             shading: "color",
-            environment: "#000",
+            environment: "#f6f5ec",
             baseTexture: mapChart,
             viewControl: {
-              autoRotate: true,
+              autoRotate: false,
             },
             light: {
               main: {
@@ -244,6 +246,7 @@ export default {
 .com-OD {
   #Heat {
     height: 100%;
+    width: 100%; 
     // border: 1px solid red;
   }
 
