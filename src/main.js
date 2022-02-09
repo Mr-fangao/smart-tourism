@@ -6,6 +6,7 @@ import router from './router'
 import "./assets/css/global.css";
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+import 'font-awesome/css/font-awesome.min.css';
 // 引入echarts
 import * as echarts from 'echarts';
 import 'echarts-gl'

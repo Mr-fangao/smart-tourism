@@ -17,6 +17,7 @@
     "echarts-gl": "^1.1.0",
     "echarts-wordcloud": "1.0",
     "element-ui": "^2.15.6",
+    "font-awesome": "4.7",
     "less-loader": "^4.1.0",
     "mapbox-gl": "^2.6.1",
     "moment": "^2.29.1",

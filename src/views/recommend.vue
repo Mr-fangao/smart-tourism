@@ -108,28 +108,33 @@
               <div class="contentspan" style="margin-right: 3%">
                 评论数据源选择:
               </div>
-              <el-select v-model="value4" placeholder="请选择">
-                <el-option-group
-                  v-for="group in data4"
-                  :key="group.label"
-                  :label="group.label"
+              <el-select v-model="value4" multiple placeholder="请选择">
+                <el-option
+                  v-for="item in data4"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
                 >
-                  <el-option
-                    v-for="item in group.options"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"
-                  >
-                  </el-option>
-                </el-option-group>
+                </el-option>
               </el-select>
+            </div>
+            <div class="contentrow">
+              <div class="contentspan" style="margin-right: 3%">
+                <el-button style="width: 100px">开始推荐</el-button>
+              </div>
             </div>
           </div>
         </div>
-        <div class="item4">4</div>
+        <div class="item4">
+          <i
+            class="fa fa-linux fa-5x"
+            aria-hidden="true"
+            style="position: absolute; left: 26%; bottom: 3%"
+            @click="openMask"
+          ></i>
+          <dialog-bar v-model="sendVal" type="danger" title="智能AI决策助手"  v-on:cancel="clickCancel()" @danger="clickDanger()" @confirm="clickConfirm()" dangerText="Delete"></dialog-bar>
+        </div>
         <div class="pt item5">5</div>
-        <div class="pt item6">6</div>
-        <div class="pt item7">7</div>
       </div>
     </div>
   </div>
@@ -139,14 +144,20 @@
 import areaSelect from "../components/areaSelect.vue";
 import echarts from "echarts";
 import wordcloud from "../assets/js/echarts-wordcloud-master/index";
+import dialogBar from "../components/dialog.vue";
+// import dialogPage from "./dialogPage.vue";
 export default {
   name: "recommend",
   components: {
+    modalVisible:false,
     areaSelect,
     wordcloud,
+    // dialogPage,
+    "dialog-bar": dialogBar,
   },
   data() {
     return {
+      sendVal: false,
       value1: "",
       value3: "",
       value4: "",
@@ -208,30 +219,20 @@ export default {
       ],
       data4: [
         {
-          label: "默认选项",
-          options: [
-            {
-              value: "Shanghai",
-              label: "全部数据源",
-            },
-          ],
+          value: "选项1",
+          label: "携程",
         },
         {
-          label: "其他选项",
-          options: [
-            {
-              value: "Chengdu",
-              label: "三星",
-            },
-            {
-              value: "Shenzhen",
-              label: "四星",
-            },
-            {
-              value: "Guangzhou",
-              label: "五星",
-            },
-          ],
+          value: "选项2",
+          label: "去哪儿",
+        },
+        {
+          value: "选项3",
+          label: "艺龙",
+        },
+        {
+          value: "选项4",
+          label: "开心游",
         },
       ],
       options: [],
@@ -313,7 +314,13 @@ export default {
         zoom: 4,
       });
     },
-
+    // opendialogPage() {
+    //   this.modalVisible = true;
+    //   this.$nextTick(() => {
+    //     this.$refs.dialogPage.init();
+    //   });
+    //   console.log(1234);
+    // },
     handleCheckAllChange(val) {
       this.checkedLists = val
         ? this.listData.map((item) => {
@@ -389,6 +396,9 @@ export default {
         this.options = [];
       }
     },
+    openMask() {
+      this.sendVal = true;
+    },
   },
 };
 </script>
@@ -409,8 +419,8 @@ export default {
       grid-template-rows: repeat(3, 1fr);
       grid-template-areas:
         "pt1 pt4 pt5 "
-        "pt2 pt4 pt6 "
-        "pt3 pt4 pt7 ";
+        "pt2 pt4 pt5 "
+        "pt3 pt4 pt5 ";
       background-color: transparent;
       .title {
         float: left;
@@ -482,6 +492,13 @@ export default {
               width: 60%;
             }
           }
+          .contentrow:nth-child(5) {
+            .el-button {
+              margin: 14% 12% 11% 28%;
+              width: 250px !important;
+              border: 2px solid #4caf50; /* Green */
+            }
+          }
         }
       }
       .item4 {
@@ -489,12 +506,6 @@ export default {
       }
       .item5 {
         grid-area: pt5;
-      }
-      .item6 {
-        grid-area: pt6;
-      }
-      .item7 {
-        grid-area: pt7;
       }
     }
   }
