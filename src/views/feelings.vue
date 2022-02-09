@@ -1,89 +1,124 @@
 <template>
-  <div class="page">
+  <div class="content">
     <div class="left">
-      <el-tooltip
-        class="item"
-        effect="light"
-        content="Left Top 提示文字"
-        placement="left-start"
-      >
-        <el-button @click="show(1)" :class="index === 1 ? 'active' : ''"
-          >分析1</el-button
-        >
-      </el-tooltip>
-      <el-tooltip
-        class="item"
-        effect="light"
-        content="Left Center 提示文字"
-        placement="left"
-      >
-        <el-button @click="show(2)" :class="index === 2 ? 'active' : ''"
-          >分析2</el-button
-        >
-      </el-tooltip>
-      <el-tooltip
-        class="item"
-        effect="light"
-        content="Left Bottom 提示文字"
-        placement="left-end"
-      >
-        <el-button @click="show(3)" :class="index === 3 ? 'active' : ''"
-          >分析3</el-button
-        >
-      </el-tooltip>
+      <div class="title">
+        <i class="el-icon-s-claim"></i>
+        区域情感分析
+      </div>
+      <div class="crawling">
+        <el-select v-model="value" placeholder="数据来源">
+          <el-option
+            v-for="item in options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          >
+          </el-option>
+        </el-select>
+        <el-date-picker v-model="date" type="date" placeholder="选择日期">
+        </el-date-picker>
+      </div>
+      <el-button>一键爬取</el-button>
+      <div class="space"></div>
+      <div class="query">
+        <el-input placeholder="请输入关键词" v-model="input" clearable>
+        </el-input>
+        <el-button>查询</el-button>
+        <!-- <i slot="prefix" class="el-input__icon el-icon-search"></i> -->
+      </div>
+      <el-button>重置</el-button>
     </div>
-    <div class="content">
-      <keep-alive>
-        <component :is="comp" v-show="isShow"></component>
-      </keep-alive>
-    </div>
+
+    <div class="map"></div>
   </div>
 </template>
 
 <script>
-import kdxfx from "../components/feelinganalysis/kdxfx.vue";
-import odfx from "../components/feelinganalysis/odfx.vue";
-import density from "../components/feelinganalysis/density.vue";
 export default {
-  components: { kdxfx, odfx, density },
-  name: "skAnalysis",
+  name: "feelings",
+
   data() {
     return {
-      index: 1,
-      comp: "odfx",
-      isShow: true,
+      options: [
+        {
+          value: "选项1",
+          label: "微博",
+        },
+        {
+          value: "选项2",
+          label: "小红书",
+        },
+        {
+          value: "选项3",
+          label: "马蜂窝",
+        },
+      ],
+      value: "",
+      date: "",
+      input: "",
+      pickerOptions: {
+        disabledDate(time) {
+          return time.getTime() > Date.now();
+        },
+      },
     };
   },
+  mounted() {
+    this.initmap();
+  },
   methods: {
-    show(value) {
-      if (value === 1) this.comp = "kdxfx";
-      else if (value === 2) this.comp = "odfx";
-      else if (value === 3) this.comp = "density";
+    initmap() {
+      this.$mapboxgl.accessToken =
+        "pk.eyJ1IjoiY2hlbmpxIiwiYSI6ImNrcWFmdWt2bjBtZGsybmxjb29oYmRzZzEifQ.mnpiwx7_cBEyi8YiJiMRZg";
+      var map = new this.$mapboxgl.Map({
+        container: "map",
+        style: "mapbox://styles/chenjq/ckwetfomi0j1014ph4s20wu2x",
+        center: [110, 40],
+        zoom: 4,
+      });
     },
   },
 };
 </script>
 
-<style lang="less">
-.page {
+<style scoped lang="less">
+.content {
+  height: calc(100% - 50px);
   width: 100%;
-  height: 100%;
-  .content {
-    height: 80%;
-    width: 100%;
-  }
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   .left {
-    position: absolute; /*这里一定要设置*/
-    z-index: 999999; /*这里是该元素与显示屏的距离，据说越大越好，因为没有它也是可以的*/
-    float: left inherit;
-    width: 80px;
+    height: 100%;
+    width: 20%;
+    background-color: rgba(127, 194, 172, 0.3);
+    .title {
+      font-size: 16pt;
+      padding-top: 20px;
+    }
+    .crawling {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding:10px;
+      .el-select {
+        padding-right:10px ;
+      }
+
+    }
+    .query {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 10px;
+      .el-input {
+        padding-right: 10px;
+      }
+    }
   }
-  .item {
-    margin: 4px;
-  }
-  .left .el-tooltip__popper,
-  .right .el-tooltip__popper {
-    padding: 8px 10px;
+  .map {
+    height: 100%;
+    width: 78%;
   }
 }
 </style>
