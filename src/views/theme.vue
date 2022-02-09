@@ -2,8 +2,8 @@
   <div class="page">
     <div class="select">
       <el-button @click="show(1)" :class="index === 1 ? 'active' : ''" plain>点聚合图</el-button>
-      <el-button @click="show(2)" :class="index === 2 ? 'active' : ''" plain>cmk</el-button>
-      <el-button plain>朴素按11111111111钮</el-button>
+      <el-button @click="show(2)" :class="index === 2 ? 'active' : ''" plain>分层色彩图</el-button>
+      <el-button @click="show(3)" :class="index === 3 ? 'active' : ''" plain>热力图</el-button>
       <el-button plain>朴素按钮</el-button>
       <el-button plain>朴素按钮</el-button>
     </div>
@@ -18,8 +18,9 @@
 <script>
 import cmk from "../components/thememap/cmk.vue";
 import pointgather from "../components/thememap/pointgather.vue";
+import heatmap from "../components/thememap/heatmap.vue";
 export default {
-  components: { cmk, pointgather },
+  components: { cmk, pointgather,heatmap },
   name: "theme",
   data() {
     return {
@@ -32,6 +33,7 @@ export default {
     show(value) {
       if (value === 1) this.comp = "pointgather";
       else if (value === 2) this.comp = "cmk";
+      else if (value === 3) this.comp = "heatmap";
       //   else if (value === 3) this.comp = "density";
     },
   },
@@ -49,7 +51,7 @@ export default {
   .select {
     position: absolute;
     z-index: 999999;
-    right: 40px;
+    right: 400px;
     bottom: 10px;
     width: 200px;
     .el-button{
