@@ -40,9 +40,92 @@
           </div>
           <div class="content">
             <areaSelect></areaSelect>
+            <div class="cloud-wrap">
+              <div class="cloud-box" ref="cloudEl" />
+            </div>
           </div>
         </div>
-        <div class="pt item3">3</div>
+        <div class="pt item3">
+          <div class="title">
+            <i class="el-icon-s-claim"></i>
+            个性化选择
+          </div>
+          <div class="content">
+            <div class="contentrow">
+              <div class="contentspan">旅游时间选择:</div>
+              <el-date-picker
+                v-model="value1"
+                type="daterange"
+                range-separator="-"
+                size="small"
+                start-placeholder="开始日期"
+                end-placeholder="结束日期"
+              >
+              </el-date-picker>
+            </div>
+            <div class="contentrow">
+              <div class="contentspan" style="margin-right: 3%">
+                旅游目的地筛选:
+              </div>
+              <el-select
+                v-model="value"
+                multiple
+                filterable
+                remote
+                reserve-keyword
+                placeholder="请输入关键词"
+                :remote-method="remoteMethod"
+                :loading="loading"
+              >
+                <el-option
+                  v-for="item in options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                >
+                </el-option>
+              </el-select>
+            </div>
+            <div class="contentrow">
+              <div class="contentspan">景点星级筛选:</div>
+              <el-select v-model="value3" placeholder="请选择">
+                <el-option-group
+                  v-for="group in data3"
+                  :key="group.label"
+                  :label="group.label"
+                >
+                  <el-option
+                    v-for="item in group.options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"
+                  >
+                  </el-option>
+                </el-option-group>
+              </el-select>
+            </div>
+            <div class="contentrow">
+              <div class="contentspan" style="margin-right: 3%">
+                评论数据源选择:
+              </div>
+              <el-select v-model="value4" placeholder="请选择">
+                <el-option-group
+                  v-for="group in data4"
+                  :key="group.label"
+                  :label="group.label"
+                >
+                  <el-option
+                    v-for="item in group.options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"
+                  >
+                  </el-option>
+                </el-option-group>
+              </el-select>
+            </div>
+          </div>
+        </div>
         <div class="item4">4</div>
         <div class="pt item5">5</div>
         <div class="pt item6">6</div>
@@ -54,13 +137,36 @@
 
 <script>
 import areaSelect from "../components/areaSelect.vue";
+import echarts from "echarts";
+import wordcloud from "../assets/js/echarts-wordcloud-master/index";
 export default {
   name: "recommend",
   components: {
     areaSelect,
+    wordcloud,
   },
   data() {
     return {
+      value1: "",
+      value3: "",
+      value4: "",
+      cloudData: [
+        { value: 1000, name: "文字" },
+        { value: 400, name: "图片" },
+        { value: 333, name: "参考" },
+        { value: 855, name: "音视频" },
+        { value: 343, name: "新媒体" },
+        { value: 343, name: "测试1" },
+        { value: 43, name: "测试2" },
+        { value: 543, name: "测试3" },
+        { value: 333, name: "测试4" },
+        { value: 323, name: "测试5" },
+        { value: 33, name: "测试6" },
+        { value: 13, name: "测试7" },
+        { value: 543, name: "测试8" },
+        { value: 66, name: "测试9" },
+        { value: 666, name: "测试10" },
+      ],
       listData: [
         { name: "湖泊风景区", sign: 1 },
         { name: "山岳风景区", sign: 2 },
@@ -72,6 +178,118 @@ export default {
         { name: "革命纪念地", sign: 8 },
         { name: "其他风景区", sign: 9 },
       ],
+      data3: [
+        {
+          label: "默认选项",
+          options: [
+            {
+              value: "Shanghai",
+              label: "不限制",
+            },
+          ],
+        },
+        {
+          label: "其他选项",
+          options: [
+            {
+              value: "Chengdu",
+              label: "三星",
+            },
+            {
+              value: "Shenzhen",
+              label: "四星",
+            },
+            {
+              value: "Guangzhou",
+              label: "五星",
+            },
+          ],
+        },
+      ],
+      data4: [
+        {
+          label: "默认选项",
+          options: [
+            {
+              value: "Shanghai",
+              label: "全部数据源",
+            },
+          ],
+        },
+        {
+          label: "其他选项",
+          options: [
+            {
+              value: "Chengdu",
+              label: "三星",
+            },
+            {
+              value: "Shenzhen",
+              label: "四星",
+            },
+            {
+              value: "Guangzhou",
+              label: "五星",
+            },
+          ],
+        },
+      ],
+      options: [],
+      value: [],
+      list: [],
+      loading: false,
+      states: [
+        "Alabama",
+        "Alaska",
+        "Arizona",
+        "Arkansas",
+        "California",
+        "Colorado",
+        "Connecticut",
+        "Delaware",
+        "Florida",
+        "Georgia",
+        "Hawaii",
+        "Idaho",
+        "Illinois",
+        "Indiana",
+        "Iowa",
+        "Kansas",
+        "Kentucky",
+        "Louisiana",
+        "Maine",
+        "Maryland",
+        "Massachusetts",
+        "Michigan",
+        "Minnesota",
+        "Mississippi",
+        "Missouri",
+        "Montana",
+        "Nebraska",
+        "Nevada",
+        "New Hampshire",
+        "New Jersey",
+        "New Mexico",
+        "New York",
+        "North Carolina",
+        "North Dakota",
+        "Ohio",
+        "Oklahoma",
+        "Oregon",
+        "Pennsylvania",
+        "Rhode Island",
+        "South Carolina",
+        "South Dakota",
+        "Tennessee",
+        "Texas",
+        "Utah",
+        "Vermont",
+        "Virginia",
+        "Washington",
+        "West Virginia",
+        "Wisconsin",
+        "Wyoming",
+      ],
       checkedLists: [],
       checkAll: false,
       isIndeterminate: false,
@@ -79,6 +297,10 @@ export default {
   },
   mounted() {
     this.initmap();
+    this.drawCloud(this.$refs.cloudEl, this.cloudData);
+    this.list = this.states.map((item) => {
+      return { value: `value:${item}`, label: `label:${item}` };
+    });
   },
   methods: {
     initmap() {
@@ -106,6 +328,67 @@ export default {
       this.isIndeterminate =
         checkedCount > 0 && checkedCount < this.listData.length;
     },
+    drawCloud(wrapEl, data) {
+      let myChart = echarts.init(wrapEl);
+      var option = {
+        tooltip: {
+          show: true,
+        },
+        series: [
+          {
+            name: "热词",
+            type: "wordCloud",
+            sizeRange: [10, 30],
+            rotationRange: [-20, 20],
+            shape: "circle",
+            left: "center",
+            top: "center",
+            width: "100%",
+            height: "100%",
+            gridSize: 3,
+            textPadding: 0,
+            autoSize: {
+              enable: true,
+              minSize: 6,
+            },
+            textStyle: {
+              normal: {
+                color: function () {
+                  return (
+                    "rgb(" +
+                    [
+                      Math.round(Math.random() * 250),
+                      Math.round(Math.random() * 250),
+                      Math.round(Math.random() * 250),
+                    ].join(",") +
+                    ")"
+                  );
+                },
+              },
+              emphasis: {
+                shadowBlur: 10,
+                shadowColor: "#333",
+              },
+            },
+            data: data,
+          },
+        ],
+      };
+      myChart.setOption(option);
+    },
+    remoteMethod(query) {
+      if (query !== "") {
+        this.loading = true;
+        setTimeout(() => {
+          this.loading = false;
+          this.options = this.list.filter((item) => {
+            return item.label.toLowerCase().indexOf(query.toLowerCase()) > -1;
+          });
+        }, 200);
+      } else {
+        this.options = [];
+      }
+    },
   },
 };
 </script>
@@ -132,8 +415,8 @@ export default {
       .title {
         float: left;
         font-size: 14pt;
-        margin-left: 10px;
-        margin-top: 5px;
+        margin-left: 3%;
+        margin-top: 2%;
       }
       .el-checkbox-button {
         width: 120px;
@@ -148,21 +431,58 @@ export default {
       // /deep/.el-checkbox-button__inner{
       //   padding: 8px 10px;
       // }
-      // div {
-      //   text-align: center;
-      //   outline: 1px dashed rgb(136, 27, 27);
-      // }
+
       .pt {
         background-color: rgba(127, 194, 172, 0.3);
+        text-align: center;
+        outline: 1px dashed rgb(136, 27, 27);
       }
       .item1 {
         grid-area: pt1;
       }
       .item2 {
         grid-area: pt2;
+        .content {
+          height: 85%;
+          .cloud-wrap {
+            // margin-bottom: 0%;
+            width: 100%;
+            height: 80%;
+            position: relative;
+            bottom: -90px;
+            text-align: left;
+            .cloud-box {
+              // margin-top: 10%;
+              width: 100%;
+              height: 100%;
+              bottom: 35px;
+            }
+          }
+        }
       }
       .item3 {
         grid-area: pt3;
+        .content {
+          display: flex;
+          flex: auto;
+          flex-direction: column;
+          .contentrow {
+            display: flex;
+            flex-direction: row;
+            .contentspan {
+              text-align: center;
+              line-height: 40px;
+              margin-left: 5%;
+              margin-right: 6%;
+            }
+            .el-range-editor--small.el-input__inner {
+              top: 2%;
+              margin-left: 0%;
+              height: 38px;
+              width: 60%;
+            }
+          }
+        }
       }
       .item4 {
         grid-area: pt4;

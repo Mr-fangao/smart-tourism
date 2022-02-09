@@ -22,8 +22,7 @@
       >
       </el-option>
     </el-select>
-    <p></p>
-    <el-button @click="btnClick">提交</el-button>
+    <el-button @click="btnClick">查询</el-button>
   </div>
 </template>
 
@@ -80,6 +79,9 @@ export default {
         this.countryValue = this.countryProp;
         this.countryChange();
       }
+    },
+    btnClick(){
+
     },
     handleArea() {
       this.provinceOptions = [];
@@ -172,15 +174,17 @@ export default {
 </script>
 <style lang="less" scoped>
 .areaSelect-wrap {
-  margin-top: 10%;
-  margin-left: 5%;
-  width: 100%;
-  height: 15%;
+  position: absolute;
+  top: 38%;
+  left: 1%;
   .el-select {
+    position: relative;
+    width: 5%;
     margin-right: 2%;
     float: left;
     height: 20%;
-    width: 25%;
+    width:35%;
+    z-index:9
   }
 }
 </style>
