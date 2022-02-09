@@ -26,7 +26,7 @@ canvas{
   padding: 0;
   width: 100%;
 }
-div.mapboxgl-ctrl-attrib div{
+.mapboxgl-ctrl-attrib div{
   display:none !important;
 }
 
