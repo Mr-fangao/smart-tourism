@@ -132,9 +132,49 @@
             style="position: absolute; left: 26%; bottom: 3%"
             @click="openMask"
           ></i>
-          <dialog-bar v-model="sendVal" type="danger" title="智能AI决策助手"  v-on:cancel="clickCancel()" @danger="clickDanger()" @confirm="clickConfirm()" dangerText="Delete"></dialog-bar>
+          <dialog-bar
+            v-model="sendVal"
+            type="danger"
+            title="智能AI决策助手"
+            v-on:cancel="clickCancel()"
+            @danger="clickDanger()"
+            @confirm="clickConfirm()"
+            dangerText="Delete"
+          ></dialog-bar>
         </div>
-        <div class="pt item5">5</div>
+        <div class="pt item5">
+          <div class="title">
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            智能推荐
+          </div>
+          <div class="content">
+            <el-table
+              border
+              @row-click="TableClick"
+              :data="tableData"
+              style="width: 100%"
+              :default-sort="{ prop: 'date', order: 'descending' }"
+            >
+              <el-table-column type="index" :index="indexMethod">
+              </el-table-column>
+              <el-table-column type="id" label="id" v-if="false">
+              </el-table-column>
+              <el-table-column prop="date" label="日期" sortable width="180">
+              </el-table-column>
+              <el-table-column prop="name" label="姓名" sortable width="180">
+              </el-table-column>
+              <el-table-column prop="address" label="地址"> </el-table-column>
+            </el-table>
+            <poppage
+              :show="show"
+              :porpID="porpID"
+              @hideModal="hideModal"
+              @submit="submit"
+            >
+              <p>这里放弹窗的内容</p>
+            </poppage>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -145,18 +185,23 @@ import areaSelect from "../components/areaSelect.vue";
 import echarts from "echarts";
 import wordcloud from "../assets/js/echarts-wordcloud-master/index";
 import dialogBar from "../components/dialog.vue";
+import poppage from "../components/poppage.vue";
 // import dialogPage from "./dialogPage.vue";
 export default {
   name: "recommend",
   components: {
-    modalVisible:false,
+    modalVisible: false,
     areaSelect,
     wordcloud,
+    poppage,
     // dialogPage,
     "dialog-bar": dialogBar,
   },
   data() {
     return {
+      title: "弹窗标题",
+      show: false,
+      porpID: "",
       sendVal: false,
       value1: "",
       value3: "",
@@ -233,6 +278,32 @@ export default {
         {
           value: "选项4",
           label: "开心游",
+        },
+      ],
+      tableData: [
+        {
+          date: "2016-05-02",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1518 弄",
+          id: "1111111111111",
+        },
+        {
+          date: "2016-05-04",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1517 弄",
+          id: "1111111111111",
+        },
+        {
+          date: "2016-05-01",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1519 弄",
+          id: "1111111111111",
+        },
+        {
+          date: "2016-05-03",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1516 弄",
+          id: "1111111111111",
         },
       ],
       options: [],
@@ -314,6 +385,18 @@ export default {
         zoom: 4,
       });
     },
+    indexMethod(index) {
+      return index * 2;
+    },
+    hideModal() {
+      // 取消弹窗回调
+      this.show = false;
+    },
+
+    submit() {
+      // 确认弹窗回调
+      this.show = false;
+    },
     // opendialogPage() {
     //   this.modalVisible = true;
     //   this.$nextTick(() => {
@@ -321,6 +404,16 @@ export default {
     //   });
     //   console.log(1234);
     // },
+    TableClick(val) {
+      let thisRowData = this;
+      thisRowData = val;
+      console.log(val);
+      this.showPop(val);
+    },
+    showPop(val) {
+      this.porpID = val.id;
+      this.show = true;
+    },
     handleCheckAllChange(val) {
       this.checkedLists = val
         ? this.listData.map((item) => {
@@ -408,105 +501,102 @@ export default {
   // height: calc(100% - 45px);
   height: 100%;
   width: 100%;
-  #map {
-    position: relative;
-    .grid-container {
-      position: absolute;
-      display: grid;
-      height: 100%;
-      width: 100%;
-      grid-template-columns: 1fr 2fr 1fr;
-      grid-template-rows: repeat(3, 1fr);
-      grid-template-areas:
-        "pt1 pt4 pt5 "
-        "pt2 pt4 pt5 "
-        "pt3 pt4 pt5 ";
-      background-color: transparent;
-      .title {
-        float: left;
-        font-size: 14pt;
-        margin-left: 3%;
-        margin-top: 2%;
+  .grid-container {
+    position: absolute;
+    display: grid;
+    height: 100%;
+    width: 100%;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-areas:
+      "pt1 pt4 pt5 "
+      "pt2 pt4 pt5 "
+      "pt3 pt4 pt5 ";
+    background-color: transparent;
+    .title {
+      float: left;
+      font-size: 14pt;
+      margin-left: 3%;
+      margin-top: 2%;
+    }
+    .el-checkbox-button {
+      width: 120px;
+      height: 55px;
+      margin: 0px 0px 0px 0px;
+      .text {
+        font-size: 10pt;
+        letter-spacing: 0px;
+        // padding: 12px 20px;
       }
-      .el-checkbox-button {
-        width: 120px;
-        height: 55px;
-        margin: 0px 0px 0px 0px;
-        .text {
-          font-size: 10pt;
-          letter-spacing: 0px;
-          // padding: 12px 20px;
-        }
-      }
-      // /deep/.el-checkbox-button__inner{
-      //   padding: 8px 10px;
-      // }
+    }
+    // /deep/.el-checkbox-button__inner{
+    //   padding: 8px 10px;
+    // }
 
-      .pt {
-        background-color: rgba(127, 194, 172, 0.3);
-        text-align: center;
-        outline: 1px dashed rgb(136, 27, 27);
-      }
-      .item1 {
-        grid-area: pt1;
-      }
-      .item2 {
-        grid-area: pt2;
-        .content {
-          height: 85%;
-          .cloud-wrap {
-            // margin-bottom: 0%;
+    .pt {
+      background-color: rgba(127, 194, 172, 0.3);
+      text-align: center;
+      outline: 1px dashed rgb(136, 27, 27);
+    }
+    .item1 {
+      grid-area: pt1;
+    }
+    .item2 {
+      grid-area: pt2;
+      .content {
+        height: 85%;
+        .cloud-wrap {
+          // margin-bottom: 0%;
+          width: 100%;
+          height: 80%;
+          position: relative;
+          bottom: -90px;
+          text-align: left;
+          .cloud-box {
+            // margin-top: 10%;
             width: 100%;
-            height: 80%;
-            position: relative;
-            bottom: -90px;
-            text-align: left;
-            .cloud-box {
-              // margin-top: 10%;
-              width: 100%;
-              height: 100%;
-              bottom: 35px;
-            }
+            height: 100%;
+            bottom: 35px;
           }
         }
       }
-      .item3 {
-        grid-area: pt3;
-        .content {
+    }
+    .item3 {
+      grid-area: pt3;
+      .content {
+        display: flex;
+        flex: auto;
+        flex-direction: column;
+        .contentrow {
           display: flex;
-          flex: auto;
-          flex-direction: column;
-          .contentrow {
-            display: flex;
-            flex-direction: row;
-            .contentspan {
-              text-align: center;
-              line-height: 40px;
-              margin-left: 5%;
-              margin-right: 6%;
-            }
-            .el-range-editor--small.el-input__inner {
-              top: 2%;
-              margin-left: 0%;
-              height: 38px;
-              width: 60%;
-            }
+          flex-direction: row;
+          .contentspan {
+            text-align: center;
+            line-height: 40px;
+            margin-left: 5%;
+            margin-right: 6%;
           }
-          .contentrow:nth-child(5) {
-            .el-button {
-              margin: 14% 12% 11% 28%;
-              width: 250px !important;
-              border: 2px solid #4caf50; /* Green */
-            }
+          .el-range-editor--small.el-input__inner {
+            top: 2%;
+            margin-left: 0%;
+            height: 38px;
+            width: 60%;
+          }
+        }
+        .contentrow:nth-child(5) {
+          .el-button {
+            margin: 14% 12% 11% 28%;
+            width: 250px !important;
+            border: 2px solid #4caf50; /* Green */
           }
         }
       }
-      .item4 {
-        grid-area: pt4;
-      }
-      .item5 {
-        grid-area: pt5;
-      }
+    }
+    .item4 {
+      grid-area: pt4;
+    }
+    .item5 {
+      grid-area: pt5;
     }
   }
 }
