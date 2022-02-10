@@ -163,7 +163,7 @@
               </el-table-column>
               <el-table-column prop="name" label="姓名" sortable width="180">
               </el-table-column>
-              <el-table-column prop="address" label="地址"> </el-table-column>
+              <el-table-column prop="address" label="地址" sortable width="100%"> </el-table-column>
             </el-table>
             <poppage
               :show="show"
@@ -597,6 +597,11 @@ export default {
     }
     .item5 {
       grid-area: pt5;
+      .content{
+        .el-table{
+          margin: 10% 5% 0% 0% ;
+        }
+      }
     }
   }
 }
