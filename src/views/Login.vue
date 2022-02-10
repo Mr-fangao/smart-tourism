@@ -34,7 +34,7 @@
             ></el-input>
           </el-form-item>
           <el-form-item>
-            <el-checkbox class="check">记住登录密码</el-checkbox>
+            <el-checkbox class="check">记住密码</el-checkbox>
           </el-form-item>
           <el-form-item>
             <el-button
@@ -43,7 +43,7 @@
               type="primary"
               round
               @click="handleLogin"
-              >立即登录 加粗</el-button
+              >立即登录</el-button
             >
           </el-form-item>
         </el-form>
@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import request from '@/utils/request'
+import request from "@/utils/request";
 export default {
   data() {
     return {
@@ -110,13 +110,13 @@ export default {
     align-items: center;
     width: 100%;
     height: 100%;
-    margin: 120px 0px;
+    margin: 80px 0px;
     .header {
       display: flex;
       flex-direction: row;
       justify-content: center;
       align-items: center;
-      height: 30%;
+height: 15%;
       width: 100%;
       padding-bottom: 15px;
       img {
@@ -124,7 +124,7 @@ export default {
         padding-left: 10px;
       }
       h1 {
-        font-size: 40px;
+        font-size: 45pt;
         color: #ffffff;
         font-family: Microsoft YaHei;
         font-weight: bold;
@@ -136,11 +136,11 @@ export default {
       flex-direction: column;
       align-items: center;
       position: relative;
-      width: 32%;
-      height: 70%;
+width: 28%;
+      height: 45%;
       background-color: rgba(79, 106, 135, 0.5);
       h2 {
-        font-size: 20px;
+        font-size: 18pt;
         color: #ffffff;
         font-family: Microsoft YaHei;
         font-weight: bold;
@@ -161,11 +161,15 @@ export default {
       }
       .check {
         color: #ffffff;
-        margin-left: 5px;
+        margin-left: 60%;
       }
       .button {
         width: 250px;
         margin-left: 15px;
+        .span {
+          font-family: "黑体";
+          font: bold;
+        }
       }
     }
   }
