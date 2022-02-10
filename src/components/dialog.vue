@@ -48,7 +48,8 @@ export default {
 </script>
 <style lang="less" scoped>
     .dialog{
-        position: fixed;
+
+        position:absolute;
         top: 0;
         bottom: 0;
         left: 0;
