@@ -159,9 +159,9 @@
               </el-table-column>
               <el-table-column type="id" label="id" v-if="false">
               </el-table-column>
-              <el-table-column prop="date" label="日期" sortable width="180">
+              <el-table-column prop="date" label="日期" sortable width="100%">
               </el-table-column>
-              <el-table-column prop="name" label="姓名" sortable width="180">
+              <el-table-column prop="name" label="姓名" sortable width="100%">
               </el-table-column>
               <el-table-column prop="address" label="地址" sortable width="100%"> </el-table-column>
             </el-table>
