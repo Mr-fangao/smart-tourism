@@ -1,9 +1,24 @@
 <template>
   <div class="content">
     <div class="left">
-      <div class="title">
-        <i class="el-icon-s-claim"></i>
-        区域情感分析
+      <div class="block">
+        <el-timeline>
+          <el-timeline-item timestamp="top1" placement="top">
+            <el-card>
+              <h4>庐山风景区</h4>
+            </el-card>
+          </el-timeline-item>
+          <el-timeline-item timestamp="top2" placement="top">
+            <el-card>
+              <h4>庐山风景区</h4>
+            </el-card>
+          </el-timeline-item>
+          <el-timeline-item timestamp="top3" placement="top">
+            <el-card>
+              <h4>庐山风景区</h4>
+            </el-card>
+          </el-timeline-item>
+        </el-timeline>
       </div>
       <div class="crawling">
         <el-select v-model="value" placeholder="数据来源">
@@ -29,23 +44,28 @@
       <el-button>重置</el-button>
     </div>
 
-    <div class="map"></div>
+    <div class="main"></div>
+
     <div class="aside">
-     <ul>
-      <li>
-        <router-link to="/jc" exact><img src="../assets/img/feelings/jc.png"/></router-link>
-        <p>监测</p>
-        <router-link to="/qg" exact><img src="../assets/img/feelings/qg.png"/></router-link>
-        <p>情感</p>
-      </li>
-    </ul>
+      <ul>
+        <li>
+          <router-link to="/jc" exact
+            ><img src="../assets/img/feelings/jc.png"
+          /></router-link>
+          <p>监测</p>
+          <router-link to="/qg" exact
+            ><img src="../assets/img/feelings/qg.png"
+          /></router-link>
+          <p>情感</p>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "feelings",
+  name: "jc",
 
   data() {
     return {
@@ -104,17 +124,16 @@ export default {
     background-color: rgba(127, 194, 172, 0.3);
     .title {
       font-size: 16pt;
-      padding:20px 0px 10px 0px;
+      padding: 20px 0px 10px 0px;
     }
     .crawling {
       display: flex;
       flex-direction: row;
       align-items: center;
-      padding:10px;
+      padding: 10px;
       .el-select {
-        padding-right:10px;
+        padding-right: 10px;
       }
-
     }
     .query {
       display: flex;
@@ -126,37 +145,37 @@ export default {
       }
     }
   }
-  .map {
+  .main{
     height: 100%;
     width: 77%;
   }
-  .aside{
+  .aside {
     height: 100%;
     width: 3%;
     background-color: rgba(127, 194, 172, 0.3);
     ul {
-    height: 100%;
-    list-style-type: none; /*消除黑点*/
-    text-align: center;
-    li {
       height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      img{
-      height: 32px;
-      }
-      p {
-        font-size: 18px;
-        font-family: Microsoft YaHei;
-        font-weight: bold;
-        text-decoration: none; /*消除下划线*/
-        border-radius: 5px;
-        padding-bottom: 20px;
+      list-style-type: none; /*消除黑点*/
+      text-align: center;
+      li {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        img {
+          height: 32px;
+        }
+        p {
+          font-size: 18px;
+          font-family: Microsoft YaHei;
+          font-weight: bold;
+          text-decoration: none; /*消除下划线*/
+          border-radius: 5px;
+          padding-bottom: 20px;
+        }
       }
     }
-  }
   }
 }
 </style>

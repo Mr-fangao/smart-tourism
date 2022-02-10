@@ -30,7 +30,7 @@
     </div>
 
     <div class="map"></div>
-    <div class="aside">
+    <div class="right">
      <ul>
       <li>
         <router-link to="/jc" exact><img src="../assets/img/feelings/jc.png"/></router-link>
@@ -45,7 +45,7 @@
 
 <script>
 export default {
-  name: "feelings",
+  name: "qg",
 
   data() {
     return {
@@ -130,7 +130,7 @@ export default {
     height: 100%;
     width: 77%;
   }
-  .aside{
+  .right{
     height: 100%;
     width: 3%;
     background-color: rgba(127, 194, 172, 0.3);

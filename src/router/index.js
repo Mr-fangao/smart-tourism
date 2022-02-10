@@ -56,6 +56,22 @@ export default new Router({
     }
   },
   {
+    path: '/jc',
+    name: 'jc',
+    component: () => import("@/views/jc"),
+    meta: {
+      keepAlive: true
+    }
+  },
+  {
+    path: '/qg',
+    name: 'qg',
+    component: () => import("@/views/qg"),
+    meta: {
+      keepAlive: true
+    }
+  },
+  {
     path: '/thememap',
     name: 'thememap',
     component: () => import("@/views/theme"),
