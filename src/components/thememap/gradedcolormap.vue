@@ -1,5 +1,5 @@
 <template>
-  <div class="com-cmk">
+  <div class="com-gradedcolormap">
     <div id="map"></div>
     <div class="map-overlay" id="features">
       <h2>求职人数统计</h2>
@@ -16,7 +16,7 @@
 import chinajson from "../../assets/json/china.json";
 
 export default {
-  name: "cmk",
+  name: "gradedcolormap",
   mounted() {
     this.initmap();
   },
@@ -102,7 +102,7 @@ export default {
 </script>
 
 <style scoped lang="less">
-.com-cmk {
+.com-gradedcolormap {
   height: 100%;
   #map {
     position:relative;
