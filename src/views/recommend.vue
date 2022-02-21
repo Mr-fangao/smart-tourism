@@ -1,178 +1,181 @@
 <template>
   <div class="main">
     <div id="map">
-    <div class="left">
-      <div class="item1">
-        <div class="title">
-          <i class="el-icon-s-claim"></i>
-          景点类别选择
-        </div>
-        <div class="content">
-          <el-checkbox
-            style="margin: 10px -130px 0px 0px"
-            :indeterminate="isIndeterminate"
-            v-model="checkAll"
-            @change="handleCheckAllChange"
-            >全选</el-checkbox
-          >
-          <div style="margin: 15px 0"></div>
-          <el-checkbox-group
-            v-model="checkedLists"
-            @change="handleCheckedListChange"
-          >
-            <el-checkbox-button
-              size="medium"
-              v-for="item in listData"
-              :label="item.sign"
-              :key="item.sign"
-              class="drag-item"
-              border
-            >
-              <div class="text">{{ item.name }}</div>
-            </el-checkbox-button>
-          </el-checkbox-group>
-        </div>
-      </div>
-      <div class="item2">
-        <div class="title">
-          <i class="el-icon-s-claim"></i>
-          目的地城市情感形象查询
-        </div>
-        <div class="content">
-          <areaSelect></areaSelect>
-          <div class="cloud-wrap">
-            <div class="cloud-box" ref="cloudEl" />
+      <div class="left">
+        <div class="item1">
+          <div class="title">
+            <i class="el-icon-s-claim"></i>
+            景点类别选择
           </div>
-        </div>
-      </div>
-      <div class="item3">
-        <div class="title">
-          <i class="el-icon-s-claim"></i>
-          个性化选择
-        </div>
-        <div class="content">
-          <div class="contentrow">
-            <div class="contentspan">旅游时间选择:</div>
-            <el-date-picker
-              v-model="value1"
-              type="daterange"
-              range-separator="-"
-              size="small"
-              start-placeholder="开始日期"
-              end-placeholder="结束日期"
+          <div class="content">
+            <el-checkbox
+              style="margin: 10px -130px 0px 0px"
+              :indeterminate="isIndeterminate"
+              v-model="checkAll"
+              @change="handleCheckAllChange"
+              >全选</el-checkbox
             >
-            </el-date-picker>
-          </div>
-          <div class="contentrow">
-            <div class="contentspan" style="margin-right: 3%">
-              旅游目的地筛选:
-            </div>
-            <el-select
-              v-model="value"
-              multiple
-              filterable
-              remote
-              reserve-keyword
-              placeholder="请输入关键词"
-              :remote-method="remoteMethod"
-              :loading="loading"
+            <div style="margin: 15px 0"></div>
+            <el-checkbox-group
+              v-model="checkedLists"
+              @change="handleCheckedListChange"
             >
-              <el-option
-                v-for="item in options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
+              <el-checkbox-button
+                size="medium"
+                v-for="item in listData"
+                :label="item.sign"
+                :key="item.sign"
+                class="drag-item"
+                border
               >
-              </el-option>
-            </el-select>
+                <div class="text">{{ item.name }}</div>
+              </el-checkbox-button>
+            </el-checkbox-group>
           </div>
-          <div class="contentrow">
-            <div class="contentspan">景点星级筛选:</div>
-            <el-select v-model="value3" placeholder="请选择">
-              <el-option-group
-                v-for="group in data3"
-                :key="group.label"
-                :label="group.label"
+        </div>
+        <div class="item2">
+          <div class="title">
+            <i class="el-icon-s-claim"></i>
+            目的地城市情感形象查询
+          </div>
+          <div class="content">
+            <areaSelect></areaSelect>
+            <div class="cloud-wrap">
+              <div class="cloud-box" ref="cloudEl" />
+            </div>
+          </div>
+        </div>
+        <div class="item3">
+          <div class="title">
+            <i class="el-icon-s-claim"></i>
+            个性化选择
+          </div>
+          <div class="content">
+            <div class="contentrow">
+              <div class="contentspan">旅游时间选择:</div>
+              <el-date-picker
+                v-model="value1"
+                type="daterange"
+                range-separator="-"
+                size="small"
+                start-placeholder="开始日期"
+                end-placeholder="结束日期"
+              >
+              </el-date-picker>
+            </div>
+            <div class="contentrow">
+              <div class="contentspan" style="margin-right: 3%">
+                旅游目的地筛选:
+              </div>
+              <el-select
+                v-model="value"
+                multiple
+                filterable
+                remote
+                reserve-keyword
+                placeholder="请输入关键词"
+                :remote-method="remoteMethod"
+                :loading="loading"
               >
                 <el-option
-                  v-for="item in group.options"
+                  v-for="item in options"
                   :key="item.value"
                   :label="item.label"
                   :value="item.value"
                 >
                 </el-option>
-              </el-option-group>
-            </el-select>
-          </div>
-          <div class="contentrow">
-            <div class="contentspan" style="margin-right: 3%">
-              评论数据源选择:
+              </el-select>
             </div>
-            <el-select v-model="value4" multiple placeholder="请选择">
-              <el-option
-                v-for="item in data4"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              >
-              </el-option>
-            </el-select>
-          </div>
-          <div class="contentrow">
-            <div class="contentspan" style="margin-right: 3%">
-              <el-button style="width: 100px">开始推荐</el-button>
+            <div class="contentrow">
+              <div class="contentspan">景点星级筛选:</div>
+              <el-select v-model="value3" placeholder="请选择">
+                <el-option-group
+                  v-for="group in data3"
+                  :key="group.label"
+                  :label="group.label"
+                >
+                  <el-option
+                    v-for="item in group.options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"
+                  >
+                  </el-option>
+                </el-option-group>
+              </el-select>
+            </div>
+            <div class="contentrow">
+              <div class="contentspan" style="margin-right: 3%">
+                评论数据源选择:
+              </div>
+              <el-select v-model="value4" multiple placeholder="请选择">
+                <el-option
+                  v-for="item in data4"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                >
+                </el-option>
+              </el-select>
+            </div>
+            <div class="contentrow">
+              <div class="contentspan" style="margin-right: 3%">
+                <el-button style="width: 100px">开始推荐</el-button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="AI">
-      <i
-        class="fa fa-linux fa-5x"
-        aria-hidden="true"
-        style="position: absolute; left: 26%; bottom: 3%"
-        @click="openMask"
-      ></i>
-      <dialog-bar
-        v-model="sendVal"
-        type="danger"
-        title="智能AI决策助手"
-        v-on:cancel="clickCancel()"
-        @danger="clickDanger()"
-        @confirm="clickConfirm()"
-        dangerText="Delete"
-      ></dialog-bar>
-    </div>
-    <div class="right">
-      <div class="title">
-        <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-        智能推荐
+      <div class="AI">
+        <i
+          class="fa fa-linux fa-5x"
+          aria-hidden="true"
+          style="position: absolute; left: 26%; bottom: 3%"
+          @click="openMask"
+        ></i>
+        <dialog-bar
+          v-model="sendVal"
+          type="danger"
+          title="智能AI决策助手"
+          v-on:cancel="clickCancel()"
+          @danger="clickDanger()"
+          @confirm="clickConfirm()"
+          dangerText="Delete"
+        ></dialog-bar>
       </div>
-      <div class="content">
-        <el-table
-          border
-          @row-click="TableClick"
-          :data="tableData"
-          style="width: 100%"
-          :default-sort="{ prop: 'date', order: 'descending' }"
-        >
-          <el-table-column type="index" :index="indexMethod"> </el-table-column>
-          <el-table-column type="id" label="id" v-if="false"> </el-table-column>
-          <el-table-column prop="date" label="日期" sortable width="100%">
-          </el-table-column>
-          <el-table-column prop="name" label="姓名" sortable width="100%">
-          </el-table-column>
-          <el-table-column prop="address" label="地址" sortable width="100%">
-          </el-table-column>
-        </el-table>
-        <poppage
-          :show="show"
-          :porpID="porpID"
-          @hideModal="hideModal"
-          @submit="submit"
-        >
-          <p>这里放弹窗的内容</p>
-        </poppage>
+      <div class="right">
+        <div class="title">
+          <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+          智能推荐
+        </div>
+        <div class="content">
+          <el-table
+            border
+            @row-click="TableClick"
+            :data="tableData"
+            style="width: 100%"
+            :default-sort="{ prop: 'date', order: 'descending' }"
+          >
+            <el-table-column type="index" :index="indexMethod">
+            </el-table-column>
+            <el-table-column type="id" label="id" v-if="false">
+            </el-table-column>
+            <el-table-column prop="date" label="日期" sortable width="100%">
+            </el-table-column>
+            <el-table-column prop="name" label="姓名" sortable width="100%">
+            </el-table-column>
+            <el-table-column prop="address" label="地址" sortable width="100%">
+            </el-table-column>
+          </el-table>
+          <poppage
+            :show="show"
+            :porpID="porpID"
+            @hideModal="hideModal"
+            @submit="submit"
+          >
+            <p>这里放弹窗的内容</p>
+          </poppage>
+        </div>
       </div>
     </div>
   </div>
