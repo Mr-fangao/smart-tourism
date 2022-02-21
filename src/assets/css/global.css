@@ -21,9 +21,9 @@ canvas{
 }
 #map{
   position: relative;
-  height: calc(100% - 45px);
-  margin: 0;
-  padding: 0;
+  height: 100%;
+  /* margin: 0;
+  padding: 0; */
   width: 100%;
 }
 .mapboxgl-ctrl-attrib div{
