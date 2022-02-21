@@ -2,10 +2,8 @@
   <div class="com-kdxfx">
     <div id="map">
       <div class="page">
-        <div class="top">
-            <el-button>上左</el-button>
-            <el-button>上边</el-button>
-        </div>
+          <el-button>默认按钮</el-button>
+            <el-button>默认按钮</el-button>
       </div>
     </div>
   </div>
@@ -37,23 +35,11 @@ export default {
     position: absolute;
     width: 100%;
     height: 100%;
-
-    .page {
-      position: absolute; /*这里一定要设置*/
-      z-index: 999999; /*这里是该元素与显示屏的距离，据说越大越好，因为没有它也是可以的*/
-      float: right inherit;
-      width: 80px;
-      float: right;
-      
-        margin-right: 1px;
-      .item {
-        margin: 4px;
-      }
-      .top {
-        text-align: center;
-        margin-right: 1px;
-      }
-
+    .page{
+      position: absolute;
+      right: 10px;
+          width: 20%;
+    height: 100%;
     }
   }
 

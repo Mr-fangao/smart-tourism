@@ -1,7 +1,6 @@
 <template>
   <div class="login">
     <div class="video-container">
-
         <div class="filter">
           <div class="header">
             <h1>景点智能分析与推荐系统</h1>
