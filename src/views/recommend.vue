@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <div id="map">
+          <div id="map"></div>
       <div class="grid-container">
         <div class="pt item1">
           <div class="title">
@@ -182,7 +182,6 @@
           </div>
         </div>
       </div>
-    </div>
   </div>
 </template>
 
