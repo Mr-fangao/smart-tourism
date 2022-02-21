@@ -29,7 +29,7 @@
       <el-button>重置</el-button>
     </div>
 
-    <div class="map"></div>
+    <div id="map"></div>
     <div class="aside">
      <ul>
       <li>
