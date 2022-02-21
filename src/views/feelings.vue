@@ -33,9 +33,9 @@
     <div class="aside">
      <ul>
       <li>
-        <router-link to="/jc" exact><img src="../assets/img/feelings/jc.png"/></router-link>
+        <router-link to="/survey" exact><img src="../assets/img/feelings/jc.png"/></router-link>
         <p>监测</p>
-        <router-link to="/qg" exact><img src="../assets/img/feelings/qg.png"/></router-link>
+        <router-link to="/feelings" exact><img src="../assets/img/feelings/qg.png"/></router-link>
         <p>情感</p>
       </li>
     </ul>

@@ -56,17 +56,9 @@ export default new Router({
     }
   },
   {
-    path: '/jc',
-    name: 'jc',
-    component: () => import("@/views/jc"),
-    meta: {
-      keepAlive: true
-    }
-  },
-  {
-    path: '/qg',
-    name: 'qg',
-    component: () => import("@/views/qg"),
+    path: '/survey',
+    name: 'survey',
+    component: () => import("@/views/survey"),
     meta: {
       keepAlive: true
     }

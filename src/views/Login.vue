@@ -1,5 +1,15 @@
 <template>
   <div class="login">
+    <video
+      :style="fixStyle"
+      autoplay
+      loop
+      class="fillWidth"
+      v-on:canplay="canplay"
+      muted
+    >
+      <source src="../assets/video/video.mp4" type="video/mp4" />
+    </video>
     <div class="main">
       <div class="header">
         <!-- <img src="../assets/img/logo.png" /> -->
@@ -60,6 +70,9 @@ export default {
       loginFrom: {
         username: "",
         password: "",
+        vedioCanPlay: false,
+        fixStyle: "",
+        PATH_TO_MP4: "",
       },
     };
   },
@@ -100,7 +113,6 @@ export default {
   flex-direction: column;
   width: 100%;
   height: 100%;
-  background: url(../assets/login/login_background.jpg);
   background-size: 100% 100%;
 
   .main {
@@ -116,7 +128,7 @@ export default {
       flex-direction: row;
       justify-content: center;
       align-items: center;
-height: 15%;
+      height: 15%;
       width: 100%;
       padding-bottom: 15px;
       img {
@@ -136,7 +148,7 @@ height: 15%;
       flex-direction: column;
       align-items: center;
       position: relative;
-width: 28%;
+      width: 28%;
       height: 45%;
       background-color: rgba(79, 106, 135, 0.5);
       h2 {
