@@ -1,63 +1,60 @@
 <template>
   <div class="login">
-    <video
-      :style="fixStyle"
-      autoplay
-      loop
-      class="fillWidth"
-      v-on:canplay="canplay"
-      muted
-    >
-      <source src="../assets/video/video.mp4" type="video/mp4" />
-    </video>
-    <div class="main">
-      <div class="header">
-        <!-- <img src="../assets/img/logo.png" /> -->
-        <h1>景点智能分析与推荐系统</h1>
-      </div>
-      <div class="login_style">
-        <h2>用户登录</h2>
-        <el-form
-          ref="loginFrom"
-          :model="loginFrom"
-          class="login-from"
-          auto-complete="on"
-        >
-          <el-form-item>
-            <img src="../assets/login/user.png" />
-            <el-input
-              class="username"
-              placeholder="请输入用户账号"
-              v-model="loginFrom.username"
-              type="text"
-              clearable
-            ></el-input>
-          </el-form-item>
-          <el-form-item>
-            <img src="../assets/login/password.png" />
-            <el-input
-              placeholder="请输入用户密码"
-              class="password"
-              v-model="loginFrom.password"
-              show-password
-              type="password"
-            ></el-input>
-          </el-form-item>
-          <el-form-item>
-            <el-checkbox class="check">记住密码</el-checkbox>
-          </el-form-item>
-          <el-form-item>
-            <el-button
-              id="btn"
-              class="button"
-              type="primary"
-              round
-              @click="handleLogin"
-              >立即登录</el-button
+    <div class="video-container">
+
+        <div class="filter">
+          <div class="header">
+            <h1>景点智能分析与推荐系统</h1>
+          </div>
+          <div class="login_style">
+            <h2>用户登录</h2>
+            <el-form
+              ref="loginFrom"
+              :model="loginFrom"
+              class="login-from"
+              auto-complete="on"
             >
-          </el-form-item>
-        </el-form>
+              <el-form-item>
+                <img src="../assets/login/user.png" />
+                <el-input
+                  class="username"
+                  placeholder="请输入用户账号"
+                  v-model="loginFrom.username"
+                  type="text"
+                  clearable
+                ></el-input>
+              </el-form-item>
+              <el-form-item>
+                <img src="../assets/login/password.png" />
+                <el-input
+                  placeholder="请输入用户密码"
+                  class="password"
+                  v-model="loginFrom.password"
+                  show-password
+                  type="password"
+                ></el-input>
+              </el-form-item>
+              <el-form-item>
+                <el-checkbox class="check">记住密码</el-checkbox>
+              </el-form-item>
+              <el-form-item>
+                <el-button
+                  id="btn"
+                  class="button"
+                  type="primary"
+                  round
+                  @click="handleLogin"
+                  >立即登录</el-button
+                >
+              </el-form-item>
+            </el-form>
+          </div>
       </div>
+      <video autoplay loop class="fillWidth" >
+        <source src="../assets/video/video.mp4" type="video/mp4" />
+      </video>
+      <!-- ../assets/video/video.mp4
+       <video class="fullscreenvideo" src="static/mp4/fm.mp4"  autoplay ></video> -->
     </div>
   </div>
 </template>
@@ -71,8 +68,6 @@ export default {
         username: "",
         password: "",
         vedioCanPlay: false,
-        fixStyle: "",
-        PATH_TO_MP4: "",
       },
     };
   },
@@ -109,78 +104,78 @@ export default {
 
 <style lang="less" scoped>
 .login {
-  display: flex;
-  flex-direction: column;
   width: 100%;
   height: 100%;
-  background-size: 100% 100%;
-
-  .main {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  .video-container {
     width: 100%;
     height: 100%;
-    margin: 80px 0px;
-    .header {
+    overflow: hidden;
+    .fillWidth{
+      width: 100%;
+    }
+    .filter {
       display: flex;
-      flex-direction: row;
+      width: 100%;
+      height: 100%;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 15%;
-      width: 100%;
-      padding-bottom: 15px;
-      img {
-        height: 40px;
-        padding-left: 10px;
+      position: absolute;
+      z-index: 100;
+      .header {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        height: 15%;
+        width: 100%;
+        padding-bottom: 15px;
+        h1 {
+          font-size: 45pt;
+          color: #ffffff;
+          font-family: Microsoft YaHei;
+          font-weight: bold;
+          margin-left: 10px;
+        }
       }
-      h1 {
-        font-size: 45pt;
-        color: #ffffff;
-        font-family: Microsoft YaHei;
-        font-weight: bold;
-        margin-left: 10px;
-      }
-    }
-    .login_style {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      position: relative;
-      width: 28%;
-      height: 45%;
-      background-color: rgba(79, 106, 135, 0.5);
-      h2 {
-        font-size: 18pt;
-        color: #ffffff;
-        font-family: Microsoft YaHei;
-        font-weight: bold;
-        margin-top: 30px;
-        margin-bottom: 20px;
-      }
-      img {
-        height: 20px;
-        margin-top: 10px;
-      }
-      .username {
-        border-bottom: 1px solid #b8b6b6;
-        width: 250px;
-      }
-      .password {
-        border-bottom: 1px solid #b8b6b6;
-        width: 250px;
-      }
-      .check {
-        color: #ffffff;
-        margin-left: 60%;
-      }
-      .button {
-        width: 250px;
-        margin-left: 15px;
-        .span {
-          font-family: "黑体";
-          font: bold;
+      .login_style {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        width: 28%;
+        height: 45%;
+        background-color: rgba(75, 105, 135, 0.3);
+        h2 {
+          font-size: 18pt;
+          color: #ffffff;
+          font-family: Microsoft YaHei;
+          font-weight: bold;
+          margin-top: 30px;
+          margin-bottom: 20px;
+        }
+        img {
+          height: 20px;
+          margin-top: 10px;
+        }
+        .username {
+          border-bottom: 1px solid #b8b6b6;
+          width: 250px;
+        }
+        .password {
+          border-bottom: 1px solid #b8b6b6;
+          width: 250px;
+        }
+        .check {
+          color: #ffffff;
+        }
+        .button {
+          width: 250px;
+          margin-left: 15px;
+          .span {
+            font-family: "黑体";
+            font: bold;
+          }
         }
       }
     }
