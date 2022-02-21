@@ -1,57 +1,59 @@
 <template>
   <div class="login">
     <div class="video-container">
-      <div class="filter">
-        <div class="header">
-          <h1>景点智能分析与推荐系统</h1>
-        </div>
-        <div class="login_style">
-          <h2>用户登录</h2>
-          <el-form
-            ref="loginFrom"
-            :model="loginFrom"
-            class="login-from"
-            auto-complete="on"
-          >
-            <el-form-item>
-              <img src="../assets/login/user.png" />
-              <el-input
-                class="username"
-                placeholder="请输入用户账号"
-                v-model="loginFrom.username"
-                type="text"
-                clearable
-              ></el-input>
-            </el-form-item>
-            <el-form-item>
-              <img src="../assets/login/password.png" />
-              <el-input
-                placeholder="请输入用户密码"
-                class="password"
-                v-model="loginFrom.password"
-                show-password
-                type="password"
-              ></el-input>
-            </el-form-item>
-            <el-form-item>
-              <el-checkbox class="check">记住密码</el-checkbox>
-            </el-form-item>
-            <el-form-item>
-              <el-button
-                id="btn"
-                class="button"
-                type="primary"
-                round
-                @click="handleLogin"
-                >立即登录</el-button
-              >
-            </el-form-item>
-          </el-form>
-        </div>
+        <div class="filter">
+          <div class="header">
+            <h1>景点智能分析与推荐系统</h1>
+          </div>
+          <div class="login_style">
+            <h2>用户登录</h2>
+            <el-form
+              ref="loginFrom"
+              :model="loginFrom"
+              class="login-from"
+              auto-complete="on"
+            >
+              <el-form-item>
+                <img src="../assets/login/user.png" />
+                <el-input
+                  class="username"
+                  placeholder="请输入用户账号"
+                  v-model="loginFrom.username"
+                  type="text"
+                  clearable
+                ></el-input>
+              </el-form-item>
+              <el-form-item>
+                <img src="../assets/login/password.png" />
+                <el-input
+                  placeholder="请输入用户密码"
+                  class="password"
+                  v-model="loginFrom.password"
+                  show-password
+                  type="password"
+                ></el-input>
+              </el-form-item>
+              <el-form-item>
+                <el-checkbox class="check">记住密码</el-checkbox>
+              </el-form-item>
+              <el-form-item>
+                <el-button
+                  id="btn"
+                  class="button"
+                  type="primary"
+                  round
+                  @click="handleLogin"
+                  >立即登录</el-button
+                >
+              </el-form-item>
+            </el-form>
+          </div>
       </div>
-      <video autoplay loop class="fillWidth" v-on:canplay="canplay" muted>
+      <video autoplay loop class="fillWidth" >
         <source src="../assets/video/video.mp4" type="video/mp4" />
       </video>
+      <!-- ../assets/video/video.mp4
+       <video class="fullscreenvideo" src="static/mp4/fm.mp4"  autoplay ></video> -->
     </div>
   </div>
 </template>
@@ -72,40 +74,7 @@ export default {
     //登录绑定事件
     window.addEventListener("keydown", this.keyDown);
   },
-  mounted: function () {
-    window.onresize = () => {
-      const windowWidth = document.body.clientWidth;
-      const windowHeight = document.body.clientHeight;
-      const windowAspectRatio = windowHeight / windowWidth;
-      let videoWidth;
-      let videoHeight;
-      if (windowAspectRatio < 0.5625) {
-        videoWidth = windowWidth;
-        videoHeight = videoWidth * 0.5625;
-        this.fixStyle = {
-          height: windowWidth * 0.5625 + "px",
-          width: windowWidth + "px",
-          "margin-bottom": (windowHeight - videoHeight) / 2 + "px",
-          "margin-left": "initial",
-        };
-      } else {
-        videoHeight = windowHeight;
-        videoWidth = videoHeight / 0.5625;
-        this.fixStyle = {
-          height: windowHeight + "px",
-          width: windowHeight / 0.5625 + "px",
-          "margin-left": (windowWidth - videoWidth) / 2 + "px",
-          "margin-bottom": "initial",
-        };
-      }
-    };
-    window.onresize();
-  },
   methods: {
-    canplay() {
-      this.vedioCanPlay = true;
-      console.log(this.vedioCanPlay);
-    },
     keyDown(e) {
       //如果是回车则执行登录方法
       if (e.keyCode == 13) {
@@ -140,10 +109,8 @@ export default {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    video {
-      
-      height: 100%;
-      z-index: 0;
+    .fillWidth{
+      width: 100%;
     }
     .filter {
       display: flex;

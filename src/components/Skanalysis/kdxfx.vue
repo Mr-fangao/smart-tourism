@@ -1,13 +1,17 @@
 <template>
   <div class="com-kdxfx">
-    2
-    <div id="map"></div>
+    <div id="map">
+      <div class="page">
+          <el-button>默认按钮</el-button>
+            <el-button>默认按钮</el-button>
+      </div>
+    </div>
   </div>
 </template>
 <script>
 export default {
   name: "kdxfx",
-  mounted(){
+  mounted() {
     this.initmap();
   },
   methods: {
@@ -21,18 +25,24 @@ export default {
         zoom: 4,
       });
     },
-  }, 
+  },
 };
 </script>
 
 <style scoped lang="less">
 .com-kdxfx {
   #map {
-     position: absolute;
-     width: 100%; 
-     height: 100%;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    .page{
+      position: absolute;
+      right: 10px;
+          width: 20%;
+    height: 100%;
+    }
   }
-  //background: rgb(29, 31, 163);
 
+  //background: rgb(29, 31, 163);
 }
 </style>
