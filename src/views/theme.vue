@@ -4,8 +4,8 @@
       <el-button @click="show(1)" :class="index === 1 ? 'active' : ''" plain>点聚合图</el-button>
       <el-button @click="show(2)" :class="index === 2 ? 'active' : ''" plain>分层色彩图</el-button>
       <el-button @click="show(3)" :class="index === 3 ? 'active' : ''" plain>热力图</el-button>
-      <el-button plain>朴素按钮</el-button>
-      <el-button plain>朴素按钮</el-button>
+      <el-button  @click="show(4)" :class="index === 4 ? 'active' : ''" plain>时序图</el-button>
+      <el-button  @click="show(5)" :class="index === 5 ? 'active' : ''" plain>多要素统计图</el-button>
     </div>
     <div class="content">
       <keep-alive>
@@ -16,11 +16,13 @@
 </template>
 
 <script>
-import cmk from "../components/thememap/cmk.vue";
+import gradedcolormap from "../components/thememap/gradedcolormap.vue";
 import pointgather from "../components/thememap/pointgather.vue";
 import heatmap from "../components/thememap/heatmap.vue";
+import timemap from "../components/thememap/timemap.vue";
+import multimap from "../components/thememap/multimap.vue";
 export default {
-  components: { cmk, pointgather,heatmap },
+  components: { gradedcolormap, pointgather,heatmap,timemap ,multimap },
   name: "theme",
   data() {
     return {
@@ -32,8 +34,10 @@ export default {
   methods: {
     show(value) {
       if (value === 1) this.comp = "pointgather";
-      else if (value === 2) this.comp = "cmk";
+      else if (value === 2) this.comp = "gradedcolormap";
       else if (value === 3) this.comp = "heatmap";
+      else if (value === 4) this.comp = "timemap";
+      else if (value === 5) this.comp = "multimap";
       //   else if (value === 3) this.comp = "density";
     },
   },
