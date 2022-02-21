@@ -49,7 +49,7 @@
             </el-form>
           </div>
       </div>
-      <video autoplay loop class="fillWidth" >
+      <video autoplay muted loop class="fillWidth" >
         <source src="../assets/video/video.mp4" type="video/mp4" />
       </video>
       <!-- ../assets/video/video.mp4
@@ -66,7 +66,6 @@ export default {
       loginFrom: {
         username: "",
         password: "",
-        vedioCanPlay: false,
       },
     };
   },
