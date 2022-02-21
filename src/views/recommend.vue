@@ -163,7 +163,13 @@
               </el-table-column>
               <el-table-column prop="name" label="姓名" sortable width="100%">
               </el-table-column>
-              <el-table-column prop="address" label="地址" sortable width="100%"> </el-table-column>
+              <el-table-column
+                prop="address"
+                label="地址"
+                sortable
+                width="100%"
+              >
+              </el-table-column>
             </el-table>
             <poppage
               :show="show"
@@ -386,7 +392,7 @@ export default {
       });
     },
     indexMethod(index) {
-      return index * 2;
+      return index + 1;
     },
     hideModal() {
       // 取消弹窗回调
@@ -520,8 +526,8 @@ export default {
       margin-top: 2%;
     }
     .el-checkbox-button {
-      width: 120px;
-      height: 55px;
+      width: 160px;
+      height: 65px;
       margin: 0px 0px 0px 0px;
       .text {
         font-size: 10pt;
@@ -597,9 +603,9 @@ export default {
     }
     .item5 {
       grid-area: pt5;
-      .content{
-        .el-table{
-          margin: 10% 5% 0% 0% ;
+      .content {
+        .el-table {
+          margin: 10% 5% 0% 0%;
         }
       }
     }
