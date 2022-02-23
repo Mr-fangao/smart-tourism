@@ -19,14 +19,25 @@ canvas{
   margin: 0;
   padding: 0;
 }
-#map{
+/* #map{
   position: relative;
-  height: 100%;
+  height: calc(100% - 50px);
   margin: 0;
   padding: 0;
   width: 100%;
-}
-.mapboxgl-ctrl-attrib div{
+} */
+.mapboxgl-ctrl-attrib{
   display:none !important;
 }
-
+/* .mapboxgl-ctrl mapboxgl-ctrl-attrib div{
+  display:none !important;
+} */
+.parent:before {
+  content: '  ';
+ display: table;
+}
+.parent:after {
+  content: '  ';
+  display: table;
+  clear: both;
+}

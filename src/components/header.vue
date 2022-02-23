@@ -1,20 +1,21 @@
 <template>
   <nav>
-    <div class="name">
-      <img src="../assets/img/logo.png" />
-      <h1>行游天下·景点智能分析与推荐系统</h1>
-    </div>
     <ul>
-      <li>
+      <li id="u1">
         <router-link to="/recommend" exact>智能推荐</router-link>
         <router-link to="/monitor" exact>景点监测</router-link>
         <router-link to="/query" exact>景点查询</router-link>
+      </li>
+    </ul>
+    <h1>行游天下·景点智能分析与推荐系统</h1>
+    <ul>
+      <li id="u2">
         <router-link to="/skAnalysis" exact>综合分析</router-link>
         <router-link to="/feelings" exact>情感分析</router-link>
         <router-link to="/thememap" exact>专题地图</router-link>
       </li>
     </ul>
-    <span class="times">{{ time }}</span>
+    <!-- <span class="times">{{ time }}</span> -->
   </nav>
 </template>
 
@@ -58,25 +59,18 @@ nav {
   display: flex;
   flex-direction: row;
   align-items: center;
+  align-content: normal;
+  justify-content: flex-start;
   height: 50px;
-  background: url(../assets/img/header.png);
-  background-size: 100% 100%;
+  background: url(../assets/img/BG.png);
+  background-size: 100% 140%;
   padding: 0px;
-  .name {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    img {
-      height: 32px;
-      padding-left: 20px;
-    }
-    h1 {
-      font-size: 30px;
-      color: #000000;
-      font-family: Microsoft YaHei;
-      font-weight: bold;
-      margin-left: 10px;
-    }
+  h1 {
+    font-size: 25px;
+    color: #39fcff;
+    font-family: Microsoft YaHei;
+    // font-weight: bold;
+    margin-left: 10px;
   }
   .times {
     margin-right: 10px;
@@ -85,33 +79,64 @@ nav {
     font-weight: bold;
   }
   ul {
+    flex: 1;
     height: 100%;
+    width: 100%;
     list-style-type: none; /*消除黑点*/
     text-align: center;
-    margin: 0px 0px 0px 60px;
     li {
       height: 100%;
+      width: 100%;
       display: flex;
       flex-direction: row;
+      // justify-content: space-evenly;
       align-items: center;
-      margin: 0 20px;
       a {
-        font-size: 20px;
-        color: #000000; /*设置字体颜色*/
+        font-size: 16px;
+        width: 25%;
+        color: #528c8c; /*设置字体颜色*/
         font-family: Microsoft YaHei;
         font-weight: bold;
         text-decoration: none; /*消除下划线*/
-        border-radius: 5px;
-        margin: 0px 12px 0px 0px;
-        padding: 10px;
-        background: url(../assets/img/background.png);
-        background-size: 100% 100%;
+        border-radius: 0px;
+        margin: 0px 0px -10px 0px;
+        line-height: 30px;
+        background: url(../assets/img/button.png) no-repeat;
+        background-size: 100% 90%;
+        background-position: 100% 100%;
       }
+    }
+  }
+  #u1 {
+    margin-left: 10%;
+  }
+  #u2 {
+    margin-right: 10%;
+    justify-content: center;
+    a {
+      background: url(../assets/img/rightbutton.png) no-repeat;
+      background-size: 100% 90%;
+      background-position: 100% 100%;
+    }
+    a:nth-child(1) {
+      margin-left: 23px;
+    }
+    .router-link-active {
+      background: url(../assets/img/rightbuttonative.png) no-repeat;
+      margin: 0px 0px -12px 0px;
+      line-height: 30px;
+      background-size: 113% 157%;
+      background-position: 114% 0%;
     }
   }
 }
 /*选中则发生一些变化*/
 .router-link-active {
-  color: #36a503;
+  color: #e0fbff;
+  background: url(../assets/img/buttonative.png) no-repeat;
+  margin: 0px 0px -12px 0px;
+  line-height: 30px;
+  background-size: 105% 160%;
+  background-position: -85% 0%;
 }
 </style>

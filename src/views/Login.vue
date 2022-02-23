@@ -1,79 +1,141 @@
 <template>
-  <div class="login">
-    <div class="video-container">
-        <div class="filter">
-          <div class="header">
-            <h1>景点智能分析与推荐系统</h1>
-          </div>
-          <div class="login_style">
-            <h2>用户登录</h2>
-            <el-form
-              ref="loginFrom"
-              :model="loginFrom"
-              class="login-from"
-              auto-complete="on"
-            >
-              <el-form-item>
-                <img src="../assets/login/user.png" />
-                <el-input
-                  class="username"
-                  placeholder="请输入用户账号"
-                  v-model="loginFrom.username"
-                  type="text"
-                  clearable
-                ></el-input>
-              </el-form-item>
-              <el-form-item>
-                <img src="../assets/login/password.png" />
-                <el-input
-                  placeholder="请输入用户密码"
-                  class="password"
-                  v-model="loginFrom.password"
-                  show-password
-                  type="password"
-                ></el-input>
-              </el-form-item>
-              <el-form-item>
-                <el-checkbox class="check">记住密码</el-checkbox>
-              </el-form-item>
-              <el-form-item>
-                <el-button
-                  id="btn"
-                  class="button"
-                  type="primary"
-                  round
-                  @click="handleLogin"
-                  >立即登录</el-button
-                >
-              </el-form-item>
-            </el-form>
-          </div>
+  <div class="content">
+    <div class="start">
+      <el-button @click="handleLogin">开始您的旅程!</el-button>
+    </div>
+    <div id="wrap" :style="{ height: screenHeight + 'px' }">
+      <div id="main" :style="{ top: nowTop + 'px' }">
+        <ul id="pageUl" type="circle">
+          <li
+            id="pageUlLi1"
+            class="pageUlLi"
+            :class="{ active: curIndex == 1 }"
+          >
+            &nbsp;
+          </li>
+          <li
+            id="pageUlLi2"
+            class="pageUlLi"
+            :class="{ active: curIndex == 2 }"
+          >
+            &nbsp;
+          </li>
+          <li
+            id="pageUlLi3"
+            class="pageUlLi"
+            :class="{ active: curIndex == 3 }"
+          >
+            &nbsp;
+          </li>
+          <li
+            id="pageUlLi4"
+            class="pageUlLi"
+            :class="{ active: curIndex == 4 }"
+          >
+            &nbsp;
+          </li>
+          <li
+            id="pageUlLi5"
+            class="pageUlLi"
+            :class="{ active: curIndex == 5 }"
+          >
+            &nbsp;
+          </li>
+        </ul>
+        <div style="background-color: #1b6d85" id="page1" class="page"></div>
+        <div style="background-color: #5cb85c" id="page2" class="page"></div>
+        <div style="background-color: #8a6d3b" id="page3" class="page"></div>
+        <div style="background-color: #337ab7" id="page4" class="page"></div>
+        <div style="background-color: #66512c" id="page5" class="page"></div>
       </div>
-      <video autoplay muted loop class="fillWidth" >
-        <source src="../assets/video/video.mp4" type="video/mp4" />
-      </video>
-      <!-- ../assets/video/video.mp4
-       <video class="fullscreenvideo" src="static/mp4/fm.mp4"  autoplay ></video> -->
     </div>
   </div>
 </template>
-
+    
 <script>
-import request from "@/utils/request";
 export default {
+  name: "Home",
   data() {
     return {
-      loginFrom: {
-        username: "",
-        password: "",
-      },
+      screenWeight: 0, // 屏幕宽度
+      screenHeight: 0, // 屏幕高度
+      index: 1, // 用于判断翻页
+      curIndex: 1, // 当前页的index
+      startTime: 0, // 翻屏起始时间
+      endTime: 0, // 上一次翻屏结束时间
+      nowTop: 0, // 翻屏后top的位置
+      pageNum: 0, // 一共有多少页
+      main: Object,
+      obj: Object,
     };
   },
   mounted() {
+    //禁止页面滑动
+    let m = function (e) {
+      e.preventDefault();
+    };
+    document.body.style.overflow = "hidden";
+        document.addEventListener("touchmove", m, { passive: false });
     //登录绑定事件
     window.addEventListener("keydown", this.keyDown);
+
+
+    this.screenWeight = document.documentElement.clientWidth;
+    this.screenHeight = document.documentElement.clientHeight;
+    this.main = document.getElementById("main");
+    this.obj = document.getElementsByTagName("div");
+    for (let i = 0; i < this.obj.length; i++) {
+      if (this.obj[i].className == "page") {
+        this.obj[i].style.height = this.screenHeight + "px";
+      }
+    }
+    this.pageNum = document.querySelectorAll(".page").length;
+
+    // 浏览器兼容
+    if (navigator.userAgent.toLowerCase().indexOf("firefox") != -1) {
+      document.addEventListener("DOMMouseScroll", this.scrollFun, false);
+    } else if (document.addEventListener) {
+      document.addEventListener("mousewheel", this.scrollFun, false);
+    } else if (document.attachEvent) {
+      document.attachEvent("onmousewheel", this.scrollFun);
+    } else {
+      document.onmousewheel = this.scrollFun;
+    }
   },
   methods: {
+    scrollFun(event) {
+      this.startTime = new Date().getTime();
+      // mousewheel事件中的 “event.wheelDelta” 属性值：返回的如果是正值说明滚轮是向上滚动
+      // DOMMouseScroll事件中的 “event.detail” 属性值：返回的如果是负值说明滚轮是向上滚动
+      let delta = event.detail || -event.wheelDelta;
+      // 如果当前滚动开始时间和上次滚动结束时间的差值小于1.5s，则不执行翻页动作，这样做是为了实现类似节流的效果
+      if (this.startTime - this.endTime > 1500) {
+        if (
+          delta > 0 &&
+          parseInt(this.main.offsetTop) >=
+            -(this.screenHeight * (this.pageNum - 2))
+        ) {
+          // 向下滚动
+          this.index++;
+          this.toPage(this.index);
+        } else if (delta < 0 && parseInt(this.main.offsetTop) < 0) {
+          // 向上滚动
+          this.index--;
+          this.toPage(this.index);
+        }
+        // 本次翻页结束，记录结束时间，用于下次判断
+        this.endTime = new Date().getTime();
+      }
+    },
+    // 翻页
+    toPage(index) {
+      if (index != this.curIndex) {
+        let delta = index - this.curIndex;
+        this.nowTop = this.nowTop - delta * this.screenHeight;
+        this.curIndex = index;
+      }
+    },
+
     keyDown(e) {
       //如果是回车则执行登录方法
       if (e.keyCode == 13) {
@@ -81,102 +143,56 @@ export default {
       }
     },
     handleLogin() {
-      request.post("/api/user/queryuser", this.loginFrom).then((res) => {
-        console.log(res.code);
-        if (res.code == "0") {
-          this.$router.push({ name: "recommend" });
-        } else {
-          this.$message({
-            type: "error",
-            message: res.description,
-          });
-        }
-      });
-      // request.get("/api/data/querySalary", this.loginFrom).then((res) => {
-      //   console.log(res.data);
-      // });
+      this.$router.push({ name: "recommend" });
     },
   },
 };
 </script>
-
 <style lang="less" scoped>
-.login {
-  width: 100%;
+html,
+body {
   height: 100%;
-  .video-container {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    .fillWidth{
-      width: 100%;
-    }
-    .filter {
-      display: flex;
-      width: 100%;
-      height: 100%;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      position: absolute;
-      z-index: 100;
-      .header {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        height: 15%;
-        width: 100%;
-        padding-bottom: 15px;
-        h1 {
-          font-size: 45pt;
-          color: #ffffff;
-          font-family: Microsoft YaHei;
-          font-weight: bold;
-          margin-left: 10px;
-        }
-      }
-      .login_style {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        position: relative;
-        width: 28%;
-        height: 45%;
-        background-color: rgba(75, 105, 135, 0.3);
-        h2 {
-          font-size: 18pt;
-          color: #ffffff;
-          font-family: Microsoft YaHei;
-          font-weight: bold;
-          margin-top: 30px;
-          margin-bottom: 20px;
-        }
-        img {
-          height: 20px;
-          margin-top: 10px;
-        }
-        .username {
-          border-bottom: 1px solid #b8b6b6;
-          width: 250px;
-        }
-        .password {
-          border-bottom: 1px solid #b8b6b6;
-          width: 250px;
-        }
-        .check {
-          color: #ffffff;
-        }
-        .button {
-          width: 250px;
-          margin-left: 15px;
-          .span {
-            font-family: "黑体";
-            font: bold;
-          }
-        }
-      }
-    }
+}
+body,
+ul,
+li,
+a,
+p,
+div {
+  /*慎删*/
+  padding: 0px;
+  margin: 0px;
+}
+.content {
+  .start {
+    position: absolute;
+    top: 10%;
+    z-index: 9999;
   }
+}
+#wrap {
+  overflow: hidden;
+  width: 100%;
+}
+
+#main {
+  position: relative;
+  transition: top 1.5s;
+}
+
+.page {
+  /*谨删*/
+  width: 100%;
+  margin: 0;
+}
+
+#pageUl {
+  position: fixed;
+  right: 10px;
+  bottom: 50%;
+}
+
+.active {
+  color: red;
 }
 </style>
