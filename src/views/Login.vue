@@ -42,16 +42,16 @@
             &nbsp;
           </li>
         </ul>
-        <div style="background-color: #1b6d85" id="page1" class="page"></div>
-        <div style="background-color: #5cb85c" id="page2" class="page"></div>
-        <div style="background-color: #8a6d3b" id="page3" class="page"></div>
+        <div id="page1" class="page"></div>
+        <div id="page2" class="page"></div>
+        <div id="page3" class="page"></div>
         <div style="background-color: #337ab7" id="page4" class="page"></div>
         <div style="background-color: #66512c" id="page5" class="page"></div>
       </div>
     </div>
   </div>
 </template>
-    
+
 <script>
 export default {
   name: "Home",
@@ -75,10 +75,9 @@ export default {
       e.preventDefault();
     };
     document.body.style.overflow = "hidden";
-        document.addEventListener("touchmove", m, { passive: false });
+    document.addEventListener("touchmove", m, { passive: false });
     //登录绑定事件
     window.addEventListener("keydown", this.keyDown);
-
 
     this.screenWeight = document.documentElement.clientWidth;
     this.screenHeight = document.documentElement.clientHeight;
@@ -178,6 +177,21 @@ div {
 #main {
   position: relative;
   transition: top 1.5s;
+  #page1 {
+    background: url(../assets/img/login/3.jpg);
+  }
+    #page2 {
+    background: url(../assets/img/login/3.jpg);
+  }
+    #page3 {
+    background: url(../assets/img/login/3.jpg);
+  }
+    #page4 {
+    background: url(../assets/img/login/3.jpg);
+  }
+    #page5 {
+    background: url(../assets/img/login/3.jpg);
+  }
 }
 
 .page {

@@ -78,62 +78,63 @@ export default {
   height: 100%;
   z-index: 0;
 }
-  .left-part {
-    position: absolute;
-    top: 0px;
-    bottom: 0px;
-    height: 93%;
-    width: 22%;
-    float: left;
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    background: url(../assets/img/side.png) no-repeat;
-    opacity: 1;
+.left-part {
+  position: absolute;
+  top: 3px;
+  left: 0.5%;
+  bottom: 0px;
+  height: 92%;
+  width: 22%;
+  float: left;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  background: url(../assets/img/side.png) no-repeat;
+  opacity: 1;
+  background-size: 100% 100%;
+  .pt1 {
+    flex: 1;
+    // background: url(../assets/img/pt/ptbackground.png) no-repeat;
     background-size: 100% 100%;
-    .pt1 {
-      flex: 1;
-      // background: url(../assets/img/pt/ptbackground.png) no-repeat;
-      background-size: 100% 100%;
-    }
-    .pt2 {
-      flex: 1;
-      // background: url(../assets/img/pt/ptbackground.png) no-repeat;
-      background-size: 100% 100%;
-    }
-    .pt3 {
-      flex: 1;
-      // background: url(../assets/img/pt/ptbackground.png) no-repeat;
-      background-size: 100% 100%;
-    }
   }
-  .right-part {
-    position: absolute;
-    right: 0%;
-    height: 100%;
-    width: 22%;
-    float: right;
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    // background: url(../assets/img/pt/rightsidepart.png) no-repeat;
-    opacity: 1;
-    background-size: 145% 100%;
-    background-position: 100% 10%;
-    .pt4 {
-      flex: 1;
-      // background: url(../assets/img/pt/ptbackground.png) no-repeat;
-      background-size: 100% 100%;
-    }
-    .pt5 {
-      flex: 1;
-      // background: url(../assets/img/pt/ptbackground.png) no-repeat;
-      background-size: 100% 100%;
-    }
-    .pt6 {
-      flex: 1;
-      // background: url(../assets/img/pt/ptbackground.png) no-repeat;
-      background-size: 100% 100%;
-    }
+  .pt2 {
+    flex: 1;
+    // background: url(../assets/img/pt/ptbackground.png) no-repeat;
+    background-size: 100% 100%;
+  }
+  .pt3 {
+    flex: 1;
+    // background: url(../assets/img/pt/ptbackground.png) no-repeat;
+    background-size: 100% 100%;
+  }
+}
+.right-part {
+  position: absolute;
+  right: 0%;
+  height: 100%;
+  width: 22%;
+  float: right;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  // background: url(../assets/img/pt/rightsidepart.png) no-repeat;
+  opacity: 1;
+  background-size: 145% 100%;
+  background-position: 100% 10%;
+  .pt4 {
+    flex: 1;
+    // background: url(../assets/img/pt/ptbackground.png) no-repeat;
+    background-size: 100% 100%;
+  }
+  .pt5 {
+    flex: 1;
+    // background: url(../assets/img/pt/ptbackground.png) no-repeat;
+    background-size: 100% 100%;
+  }
+  .pt6 {
+    flex: 1;
+    // background: url(../assets/img/pt/ptbackground.png) no-repeat;
+    background-size: 100% 100%;
+  }
 }
 </style>
