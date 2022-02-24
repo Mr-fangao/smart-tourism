@@ -25,6 +25,6 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 0px;
-  background-color: rgb(1, 35, 32);
+  background: url("/src/assets/img/banner.png") no-repeat;
 }
 </style>

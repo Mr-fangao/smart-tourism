@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <div class="com">
     <div class="left">
       <div class="title">景点热搜Top10</div>
     </div>
@@ -11,37 +11,17 @@
     </div>
   </div>
 </template>
-
 <script>
 export default {
-  name: "survey",
-
-  data() {
-    return {
-    };
-  },
-  mounted() {
-    this.initmap();
-  },
-  methods: {
-    initmap() {
-      this.$mapboxgl.accessToken =
-        "pk.eyJ1IjoiY2hlbmpxIiwiYSI6ImNrcWFmdWt2bjBtZGsybmxjb29oYmRzZzEifQ.mnpiwx7_cBEyi8YiJiMRZg";
-      var map = new this.$mapboxgl.Map({
-        container: "map",
-        style: "mapbox://styles/chenjq/ckwetfomi0j1014ph4s20wu2x",
-        center: [110, 40],
-        zoom: 4,
-      });
-    },
-  },
+  name: "kdxfx",
 };
 </script>
 
 <style scoped lang="less">
-.content {
-  height: calc(100% - 50px);
+.com {
+  position: fixed;
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
