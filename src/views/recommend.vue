@@ -42,18 +42,6 @@ export default {
   },
   mounted() {
     this.initmap();
-    // document.body.addEventListener(
-    //   "touchmove",
-    //   function (e) {
-    //     e.preventDefault();
-    //     e.stopPropagation();
-    //   },
-    //   { passive: false }
-    // );
-    // function bodyScroll(event) {
-    //   event.preventDefault();
-    // }
-    // document.body.addEventListener("touchmove", bodyScroll, false);
   },
   methods: {
     initmap() {
