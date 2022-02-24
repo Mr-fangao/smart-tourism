@@ -61,9 +61,9 @@ export default {
         "pk.eyJ1IjoiY2hlbmpxIiwiYSI6ImNrcWFmdWt2bjBtZGsybmxjb29oYmRzZzEifQ.mnpiwx7_cBEyi8YiJiMRZg";
       var map = new this.$mapboxgl.Map({
         container: "map",
-        style: "mapbox://styles/chenjq/ckwetfomi0j1014ph4s20wu2x",
-        center: [110, 40],
-        zoom: 4,
+        style: "mapbox://styles/chenjq/cl00y9733003o14pmnk93znnm",
+        center: [105, 35],
+        zoom: 3.5,
       });
     },
   },
