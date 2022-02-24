@@ -1,6 +1,7 @@
 <template>
   <div class="content">
     <div class="start">
+      <div class="text"></div>
       <el-button @click="handleLogin">开始您的旅程!</el-button>
     </div>
     <div id="wrap" :style="{ height: screenHeight + 'px' }">
@@ -116,6 +117,9 @@ export default {
         ) {
           // 向下滚动
           this.index++;
+          if(this.index==5){
+            this.index=1
+          }
           this.toPage(this.index);
         } else if (delta < 0 && parseInt(this.main.offsetTop) < 0) {
           // 向上滚动
@@ -164,8 +168,15 @@ div {
 }
 .content {
   .start {
+    height: 25%;
+    width: 60%;
+    left: 0px;
+    background-image: -webkit-linear-gradient(left,rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%);
+    background-image: -moz-linear-gradient(left,rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%);
+    background-image: -o-linear-gradient(left,rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%);
+    background-image: linear-gradient(left,rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%);
     position: absolute;
-    top: 10%;
+    top: 40%;
     z-index: 9999;
   }
 }
@@ -178,10 +189,16 @@ div {
   position: relative;
   transition: top 1.5s;
   #page1 {
-    background: url(../assets/img/login/3.jpg);
+    background: url(../assets/img/login/1.jpg);
+        filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
+    -moz-background-size: 100% 100%;
+    background-size: 100% 100%;
   }
     #page2 {
-    background: url(../assets/img/login/3.jpg);
+    background: url(../assets/img/login/2.jpg);
+            filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
+    -moz-background-size: 100% 100%;
+    background-size: 100% 100%;
   }
     #page3 {
     background: url(../assets/img/login/3.jpg);
@@ -198,6 +215,7 @@ div {
   /*谨删*/
   width: 100%;
   margin: 0;
+  opacity: 0.6;
 }
 
 #pageUl {
