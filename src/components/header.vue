@@ -1,4 +1,5 @@
 <template>
+<div class="backcolor">
   <nav>
     <ul>
       <li id="u1">
@@ -17,6 +18,8 @@
     </ul>
     <!-- <span class="times">{{ time }}</span> -->
   </nav>
+</div>
+  
 </template>
 
 <script>
@@ -55,6 +58,9 @@ export default {
 </script>
 
 <style scoped lang="less">
+.backcolor{
+  background-color: #02191f;
+}
 nav {
   display: flex;
   flex-direction: row;
