@@ -1,11 +1,21 @@
 <template>
-  <div class="page">
+  <div id="theme">
     <div class="select">
-      <el-button @click="show(1)" :class="index === 1 ? 'active' : ''" plain>点聚合图</el-button>
-      <el-button @click="show(2)" :class="index === 2 ? 'active' : ''" plain>分层色彩图</el-button>
-      <el-button @click="show(3)" :class="index === 3 ? 'active' : ''" plain>热力图</el-button>
-      <el-button  @click="show(4)" :class="index === 4 ? 'active' : ''" plain>时序图</el-button>
-      <el-button  @click="show(5)" :class="index === 5 ? 'active' : ''" plain>多要素统计图</el-button>
+      <el-button @click="show(1)" :class="index === 1 ? 'active' : ''" plain
+        >点聚合图</el-button
+      >
+      <el-button @click="show(2)" :class="index === 2 ? 'active' : ''" plain
+        >分层色彩图</el-button
+      >
+      <el-button @click="show(3)" :class="index === 3 ? 'active' : ''" plain
+        >热力图</el-button
+      >
+      <el-button @click="show(4)" :class="index === 4 ? 'active' : ''" plain
+        >时序图</el-button
+      >
+      <el-button @click="show(5)" :class="index === 5 ? 'active' : ''" plain
+        >多要素统计图</el-button
+      >
     </div>
     <div class="content">
       <keep-alive>
@@ -22,7 +32,7 @@ import heatmap from "../components/thememap/heatmap.vue";
 import timemap from "../components/thememap/timemap.vue";
 import multimap from "../components/thememap/multimap.vue";
 export default {
-  components: { gradedcolormap, pointgather,heatmap,timemap ,multimap },
+  components: { gradedcolormap, pointgather, heatmap, timemap, multimap },
   name: "theme",
   data() {
     return {
@@ -45,24 +55,46 @@ export default {
 </script>
 
 <style lang="less">
-.page {
+#theme {
+  position: fixed;
   width: 100%;
   height: 100%;
+}
   .content {
-    height: 80%;
+    position: relative;
+    z-index: 1;
+    height: 100%;
     width: 100%;
   }
   .select {
+    z-index: 999;
+    background: url(../assets/img/buttonbg.png) no-repeat;
+    background-size: 100% 100%;
     position: absolute;
     z-index: 999999;
-    right: 400px;
-    bottom: 10px;
-    width: 200px;
-    .el-button{
-        margin-left:0px;
-        width: 180px;
-        font-size: 18px;
+    right: 5px;
+    bottom: 3%;
+    width: 14%;
+    height: 38%;
+    .el-button {
+      background: url(../assets/img/themebutton.png) no-repeat;
+      border: 0ch;
+      margin-left: 0px;
+      width: 180px;
+      font-size: 18px;
+      color: #64e9ef;
+    }
+    .el-button:nth-child(1) {
+      margin-top: 10%;
+    }
+    .el-button:nth-child(5) {
+      margin-bottom: 10%;
+    }
+    .el-button.is-plain:focus,
+    .el-button.is-plain:hover {
+      color: aliceblue;
+      background: url(../assets/img/themebuttonfocus.png) no-repeat;
     }
   }
-}
+
 </style>

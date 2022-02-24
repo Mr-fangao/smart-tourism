@@ -3,14 +3,18 @@
     <div id="map" />
     <div class="container">
       <div class="left-part">
-        <div class="pt1"></div>
-        <div class="pt2"></div>
-        <div class="pt3"></div>
+        <div class="pt pt1">
+          <div class="head title">
+            <span>111</span>
+          </div>
+        </div>
+        <div class="pt pt2"></div>
+        <div class="pt pt3"></div>
       </div>
       <div class="right-part">
-        <div class="pt4"></div>
-        <div class="pt5"></div>
-        <div class="pt6"></div>
+        <div class="pt pt4"></div>
+        <div class="pt pt5"></div>
+        <div class="pt pt6"></div>
       </div>
     </div>
   </div>
@@ -78,6 +82,28 @@ export default {
   height: 100%;
   z-index: 0;
 }
+.pt {
+  flex: 1;
+  //  background-size: 100% 100%;
+  // background: url(../assets/img/titlebg.png) no-repeat;
+}
+.head {
+  height: 20%;
+  width: 100%;
+  position: relative;
+  left: 2%;
+  background: url(../assets/img/titlebg.png) no-repeat;
+  background-size: 70% 70%;
+  > span {
+    float: left;
+    margin-left: 18%;
+    font-size: 16pt;
+    line-height: 30px;
+    color: aliceblue;
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #38e9e0,
+      0 0 70px #0cf3f3;
+  }
+}
 .left-part {
   position: absolute;
   top: 3px;
@@ -93,48 +119,31 @@ export default {
   opacity: 1;
   background-size: 100% 100%;
   .pt1 {
-    flex: 1;
-    // background: url(../assets/img/pt/ptbackground.png) no-repeat;
-    background-size: 100% 100%;
   }
   .pt2 {
-    flex: 1;
-    // background: url(../assets/img/pt/ptbackground.png) no-repeat;
-    background-size: 100% 100%;
   }
   .pt3 {
-    flex: 1;
-    // background: url(../assets/img/pt/ptbackground.png) no-repeat;
-    background-size: 100% 100%;
   }
 }
 .right-part {
   position: absolute;
-  right: 0%;
-  height: 100%;
+  top: 3px;
+  right: 0.5%;
+  bottom: 0px;
+  height: 92%;
   width: 22%;
-  float: right;
+  float: left;
   display: flex;
   flex-direction: column;
   padding: 10px;
-  // background: url(../assets/img/pt/rightsidepart.png) no-repeat;
+  background: url(../assets/img/side.png) no-repeat;
   opacity: 1;
-  background-size: 145% 100%;
-  background-position: 100% 10%;
+  background-size: 100% 100%;
   .pt4 {
-    flex: 1;
-    // background: url(../assets/img/pt/ptbackground.png) no-repeat;
-    background-size: 100% 100%;
   }
   .pt5 {
-    flex: 1;
-    // background: url(../assets/img/pt/ptbackground.png) no-repeat;
-    background-size: 100% 100%;
   }
   .pt6 {
-    flex: 1;
-    // background: url(../assets/img/pt/ptbackground.png) no-repeat;
-    background-size: 100% 100%;
   }
 }
 </style>

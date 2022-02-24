@@ -168,15 +168,15 @@ div {
 }
 .content {
   .start {
-    height: 25%;
+    height: 35%;
     width: 60%;
     left: 0px;
-    background-image: -webkit-linear-gradient(left,rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%);
-    background-image: -moz-linear-gradient(left,rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%);
-    background-image: -o-linear-gradient(left,rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%);
-    background-image: linear-gradient(left,rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%);
+    background-image: -webkit-linear-gradient(left,rgba(15,86,109,0.8) 0%,rgba(15,86,109,0.2) 100%);
+    background-image: -moz-linear-gradient(left,rgba(15,86,109,0.8) 0%,rgba(15,86,109,0.2) 100%);
+    background-image: -o-linear-gradient(left,rgba(15,86,109,0.8) 0%,rgba(15,86,109,0.2) 100%);
+    background-image: linear-gradient(left,rgba(15,86,109,0.8) 0%,rgba(15,86,109,0.2) 100%);
     position: absolute;
-    top: 40%;
+    top: 30%;
     z-index: 9999;
   }
 }
