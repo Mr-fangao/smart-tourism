@@ -30,6 +30,7 @@
                 </el-table-column>
                 <el-table-column prop="address" label="公司名称">
                 </el-table-column>
+                <el-table-column prop="message" label="信息"> </el-table-column>
                 <el-table-column prop="X" label="x" v-if="false">
                 </el-table-column>
                 <el-table-column prop="Y" label="y" v-if="false">
@@ -122,13 +123,14 @@ export default {
     },
     //加载表格数据
     load() {
-      request.post("/api/data/queryScenic", {
+      request
+        .post("/api/data/queryScenic", {
           pageNum: this.currentPage,
         })
         .then((res) => {
           console.log(res);
-          this.tableData = res.data.ScInfos;
-          this.total = res.data.total;
+          this.tableData = res.data.ScInfo;
+          this.total = res.data.total1· ;
         });
       // request
       //   .post("/api/data/queryScenic", {
@@ -142,17 +144,17 @@ export default {
       //   });
     },
     //获取当前页面数据
-    Click() {
-      request
-        .post("/api/data/queryForm", {
-          pageNum: this.currentPage,
-        })
-        .then((res) => {
-          console.log(res);
-          this.tableData = res.data.jobInfos;
-          this.total = res.data.total;
-        });
-    },
+    // Click() {
+    //   request
+    //     .post("/api/data/queryForm", {
+    //       pageNum: this.currentPage,
+    //     })
+    //     .then((res) => {
+    //       console.log(res);
+    //       this.tableData = res.data.jobInfos;
+    //       this.total = res.data.total;
+    //     });
+    // },
     //查询
     Search() {
       request
