@@ -1,19 +1,16 @@
 <template>
   <div id="feelings">
     <div class="aside">
-      <ul>
-        <li>
-          <div @click="show(1)" :class="index === 1 ? 'active' : ''">
-            <img src="../assets/img/feelings/jc.png" />
-          </div>
-          <p>监测</p>
-          <div @click="show(2)" :class="index === 2 ? 'active' : ''">
-            <img src="../assets/img/feelings/qg.png" />
-          </div>
-          <p>情感</p>
-        </li>
-      </ul>
-      <!-- <div class="sign"></div> -->
+      <el-menu>
+        <el-menu-item index="1" @click="show(1)" :class="index === 1 ? 'active' : ''" plain>
+          <i class="el-icon-menu"></i>
+          <span slot="title">导航一</span>
+        </el-menu-item>
+        <el-menu-item index="2" @click="show(2)" :class="index === 2 ? 'active' : ''" plain>
+          <i class="el-icon-menu"></i>
+          <span slot="title">导航二</span>
+        </el-menu-item>
+      </el-menu>
     </div>
     <div class="content">
       <keep-alive>
@@ -74,6 +71,21 @@ export default {
   top: 0;
   right: 0;
   background-color: rgba(2, 25, 31, 0.8);
+  .el-menu {
+    top: 40%;
+    width: 100%;
+    height: 10%;
+    right: 0%;
+    background: transparent;
+    border: none;
+  }
+  .el-menu-item.is-active {
+    color: #15abc5;
+    background: #06fafa;
+  }
+  .el-menu-item:hover {
+    background: transparent;
+  }
   ul {
     height: 100%;
     list-style-type: none; /*消除黑点*/
