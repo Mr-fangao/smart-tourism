@@ -3,21 +3,17 @@
     <div class="aside">
       <ul>
         <li>
-          <div @click="show(1)" :class="index === 1 ? 'active' : ''" plain>
+          <div @click="show(1)" :class="index === 1 ? 'active' : ''">
             <img src="../assets/img/feelings/jc.png" />
           </div>
           <p>监测</p>
-          <div
-            class="change sidebutton"
-            @click="show(2)"
-            :class="index === 2 ? 'active' : ''"
-            plain
-          >
+          <div @click="show(2)" :class="index === 2 ? 'active' : ''">
             <img src="../assets/img/feelings/qg.png" />
           </div>
           <p>情感</p>
         </li>
       </ul>
+      <!-- <div class="sign"></div> -->
     </div>
     <div class="content">
       <keep-alive>
@@ -63,9 +59,16 @@ export default {
   height: 100%;
   width: 100%;
 }
+// .sign{
+//   height: 10%;
+//   width: 1%;
+//   background-color: aqua;
+//   position: absolute;
+//   top: 50%;
+// }
 .aside {
   height: 100%;
-  z-index: 999999999999999;
+  z-index: 999999;
   position: absolute;
   width: 3%;
   top: 0;
@@ -75,6 +78,7 @@ export default {
     height: 100%;
     list-style-type: none; /*消除黑点*/
     text-align: center;
+    .beforestyle,
     li {
       height: 100%;
       display: flex;
@@ -85,16 +89,17 @@ export default {
         height: 32px;
       }
       p {
-        font-size: 18px;
+        color: aqua;
+        font-size: 12px;
         font-family: Microsoft YaHei;
-        font-weight: bold;
+        // font-weight: bold;
         text-decoration: none; /*消除下划线*/
         border-radius: 5px;
         padding-bottom: 20px;
       }
-      .change :active{
-      border-right:2px dashed #F00
-    }
+      // .changeSelectAll {
+      //   border-right: 2px dashed #f00;
+      // }
     }
   }
 }

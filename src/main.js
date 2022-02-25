@@ -8,9 +8,7 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import 'font-awesome/css/font-awesome.min.css';
 
-import Video from 'video.js'
-import 'video.js/dist/video-js.css'
-Vue.prototype.$video = Video
+
 
 // 引入echarts
 import * as echarts from 'echarts';

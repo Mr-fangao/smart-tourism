@@ -35,9 +35,9 @@
 <script>
 export default {
   name: "feelmonitor",
-  data(){
-    return{
-       options: [
+  data() {
+    return {
+      options: [
         {
           value: "选项1",
           label: "微博",
@@ -59,9 +59,9 @@ export default {
           return time.getTime() > Date.now();
         },
       },
-    }
+    };
   },
-   mounted() {
+  mounted() {
     this.initmap();
   },
   methods: {
@@ -70,7 +70,7 @@ export default {
         "pk.eyJ1IjoiY2hlbmpxIiwiYSI6ImNrcWFmdWt2bjBtZGsybmxjb29oYmRzZzEifQ.mnpiwx7_cBEyi8YiJiMRZg";
       var map = new this.$mapboxgl.Map({
         container: "map",
-        style: "mapbox://styles/chenjq/ckwetfomi0j1014ph4s20wu2x",
+        style: "mapbox://styles/chenjq/cl010ychv001214pdpa5xyq5a",
         center: [110, 40],
         zoom: 4,
       });
@@ -81,8 +81,7 @@ export default {
 
 <style scoped lang="less">
 .com {
-    position: fixed;
-    z-index: 0;
+  position: fixed;
   height: 100%;
   width: 100%;
 }
@@ -94,15 +93,15 @@ export default {
 }
 .content {
   height: 100%;
-  width: 100%;
+  width: 20%;
   position: absolute;
-  z-index: 10;
+  z-index: 100;
   top: 0%;
   display: flex;
   flex-direction: row;
   .left {
     height: 100%;
-    width: 20%;
+    width: 100%;
     margin-left: 0.5%;
     background: url("../../assets/img/side.png") no-repeat;
     background-position: 100% 10%;
