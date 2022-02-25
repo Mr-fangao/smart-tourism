@@ -25,7 +25,7 @@ import feelanalysis from "../components/feeling/feelanalysis.vue";
 import feelmonitor from "../components/feeling/feelmonitor.vue";
 export default {
   components: { feelanalysis, feelmonitor },
-  name: "theme",
+  name: "feelings",
   data() {
     return {
       index: 1,
@@ -56,13 +56,6 @@ export default {
   height: 100%;
   width: 100%;
 }
-// .sign{
-//   height: 10%;
-//   width: 1%;
-//   background-color: aqua;
-//   position: absolute;
-//   top: 50%;
-// }
 .aside {
   height: 100%;
   z-index: 999999;

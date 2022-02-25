@@ -54,6 +54,7 @@
 </template>
 
 <script>
+import request from "../utils/request";
 export default {
   name: "Home",
   data() {
@@ -117,8 +118,8 @@ export default {
         ) {
           // 向下滚动
           this.index++;
-          if(this.index==5){
-            this.index=1
+          if (this.index == 5) {
+            this.index = 1;
           }
           this.toPage(this.index);
         } else if (delta < 0 && parseInt(this.main.offsetTop) < 0) {
@@ -146,6 +147,9 @@ export default {
       }
     },
     handleLogin() {
+      // request.post("/api/data/queryuser", {}).then((res) => {
+      //   console.log(res);
+      // });
       this.$router.push({ name: "recommend" });
     },
   },
@@ -171,10 +175,26 @@ div {
     height: 35%;
     width: 60%;
     left: 0px;
-    background-image: -webkit-linear-gradient(left,rgba(15,86,109,0.8) 0%,rgba(15,86,109,0.2) 100%);
-    background-image: -moz-linear-gradient(left,rgba(15,86,109,0.8) 0%,rgba(15,86,109,0.2) 100%);
-    background-image: -o-linear-gradient(left,rgba(15,86,109,0.8) 0%,rgba(15,86,109,0.2) 100%);
-    background-image: linear-gradient(left,rgba(15,86,109,0.8) 0%,rgba(15,86,109,0.2) 100%);
+    background-image: -webkit-linear-gradient(
+      left,
+      rgba(15, 86, 109, 0.8) 0%,
+      rgba(15, 86, 109, 0.2) 100%
+    );
+    background-image: -moz-linear-gradient(
+      left,
+      rgba(15, 86, 109, 0.8) 0%,
+      rgba(15, 86, 109, 0.2) 100%
+    );
+    background-image: -o-linear-gradient(
+      left,
+      rgba(15, 86, 109, 0.8) 0%,
+      rgba(15, 86, 109, 0.2) 100%
+    );
+    background-image: linear-gradient(
+      left,
+      rgba(15, 86, 109, 0.8) 0%,
+      rgba(15, 86, 109, 0.2) 100%
+    );
     position: absolute;
     top: 30%;
     z-index: 9999;
@@ -190,23 +210,23 @@ div {
   transition: top 1.5s;
   #page1 {
     background: url(../assets/img/login/1.jpg);
-        filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
+    filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
     -moz-background-size: 100% 100%;
     background-size: 100% 100%;
   }
-    #page2 {
+  #page2 {
     background: url(../assets/img/login/2.jpg);
-            filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
+    filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
     -moz-background-size: 100% 100%;
     background-size: 100% 100%;
   }
-    #page3 {
+  #page3 {
     background: url(../assets/img/login/3.jpg);
   }
-    #page4 {
+  #page4 {
     background: url(../assets/img/login/3.jpg);
   }
-    #page5 {
+  #page5 {
     background: url(../assets/img/login/3.jpg);
   }
 }

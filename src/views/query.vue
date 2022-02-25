@@ -14,7 +14,7 @@
                 size="mini"
                 v-model="search"
                 placeholder="输入关键字搜索"
-              /><el-button size="mini" id="button" @click="Search"
+              /><el-button size="mini" id="button" @click="Search()"
                 >查询</el-button
               >
               <el-table
@@ -26,27 +26,15 @@
                 :data="tableData"
                 :height="getheight"
               >
-                <el-table-column prop="time" label="发布日期" width="120">
+                <el-table-column prop="name" label="景点名称" width="120">
                 </el-table-column>
-                <el-table-column prop="company" label="公司名称">
+                <el-table-column prop="address" label="公司名称">
                 </el-table-column>
-                <el-table-column prop="position" label="岗位名称" width="210">
+                <el-table-column prop="X" label="x" v-if="false">
                 </el-table-column>
-                <el-table-column prop="region" label="工作地区" width="120">
-                </el-table-column
-                ><el-table-column prop="salary" label="薪资范围" width="120">
-                </el-table-column
-                ><el-table-column prop="require" label="学历要求" width="120">
-                </el-table-column
-                ><el-table-column
-                  prop="experience"
-                  label="工作经验"
-                  width="120"
-                >
-                </el-table-column
-                ><el-table-column prop="type" label="公司类型" width="120">
-                </el-table-column
-                ><el-table-column prop="type" label="公司规模" width="120">
+                <el-table-column prop="Y" label="y" v-if="false">
+                </el-table-column>
+                <el-table-column type="id" label="id" v-if="false">
                 </el-table-column>
                 <el-table-column prop="detail" label="详细信息" width="120">
                   <template slot-scope="scope">
@@ -77,6 +65,7 @@
 </template>
 
 <script>
+import request from "../utils/request";
 import areaSelect from "../components/areaSelect.vue";
 import wordcloud from "../assets/js/echarts-wordcloud-master/index";
 import dialogBar from "../components/dialog.vue";
@@ -94,32 +83,10 @@ export default {
   },
   data() {
     return {
-      tableData: [
-        {
-          date: "2016-05-02",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄",
-          id: "1111111111111",
-        },
-        {
-          date: "2016-05-04",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1517 弄",
-          id: "1111111111111",
-        },
-        {
-          date: "2016-05-01",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1519 弄",
-          id: "1111111111111",
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1516 弄",
-          id: "1111111111111",
-        },
-      ],
+      tableData: [],
+      total: 0,
+      currentPage: 1,
+      search: "",
     };
   },
   mounted() {
@@ -151,21 +118,28 @@ export default {
       }
     },
     getHeight() {
-      this.getheight = window.innerHeight - 170 + "px";
+      this.getheight = window.innerHeight - 230 + "px";
     },
     //加载表格数据
     load() {
-      request
-        .post("/api/data/queryForm", {
+      request.post("/api/data/queryScenic", {
           pageNum: this.currentPage,
-          // pageSize: this.pageSize,
-          // search: this.search,
         })
         .then((res) => {
           console.log(res);
-          this.tableData = res.data.jobInfos;
+          this.tableData = res.data.ScInfos;
           this.total = res.data.total;
         });
+      // request
+      //   .post("/api/data/queryScenic", {
+      //     // pageSize: this.pageSize,
+      //     // search: this.search,
+      //   })
+      //   .then((res) => {
+      //     console.log(res);
+      //     this.tableData = res.data.ScInfos;
+      //     this.total = res.data.total;
+      //   });
     },
     //获取当前页面数据
     Click() {
@@ -270,7 +244,6 @@ export default {
         height: 100%;
         border: none;
       }
-
       /deep/.el-overlay {
         background-color: rgba(255, 255, 255, 0.02);
       }

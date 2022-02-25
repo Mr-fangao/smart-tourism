@@ -1,36 +1,24 @@
 <template>
-  <div class="page">
-    <div class="left">
-      <el-tooltip
-        class="item"
-        effect="light"
-        content="Left Top 提示文字"
-        placement="left-start"
-      >
-        <el-button @click="show(1)" :class="index === 1 ? 'active' : ''"
-          >分析1</el-button
-        >
-      </el-tooltip>
-      <el-tooltip
-        class="item"
-        effect="light"
-        content="Left Center 提示文字"
-        placement="left"
-      >
-        <el-button @click="show(2)" :class="index === 2 ? 'active' : ''"
-          >分析2</el-button
-        >
-      </el-tooltip>
-      <el-tooltip
-        class="item"
-        effect="light"
-        content="Left Bottom 提示文字"
-        placement="left-end"
-      >
-        <el-button @click="show(3)" :class="index === 3 ? 'active' : ''"
-          >分析3</el-button
-        >
-      </el-tooltip>
+  <div id="feelings">
+    <div class="aside">
+      <el-menu>
+        <el-menu-item index="1" @click="show(1)" :class="index === 1 ? 'active' : ''" plain>
+          <i class="el-icon-menu"></i>
+          <span slot="title">导航一</span>
+        </el-menu-item>
+        <el-menu-item index="2" @click="show(2)" :class="index === 2 ? 'active' : ''" plain>
+          <i class="el-icon-menu"></i>
+          <span slot="title">导航二</span>
+        </el-menu-item>
+                <el-menu-item index="3" @click="show(1)" :class="index === 1 ? 'active' : ''" plain>
+          <i class="el-icon-menu"></i>
+          <span slot="title">导航一</span>
+        </el-menu-item>
+        <el-menu-item index="4" @click="show(2)" :class="index === 2 ? 'active' : ''" plain>
+          <i class="el-icon-menu"></i>
+          <span slot="title">导航二</span>
+        </el-menu-item>
+      </el-menu>
     </div>
     <div class="content">
       <keep-alive>
@@ -41,49 +29,90 @@
 </template>
 
 <script>
-import kdxfx from "../components/Skanalysis/kdxfx.vue";
-import odfx from "../components/Skanalysis/odfx.vue";
-import density from "../components/Skanalysis/density.vue";
+import feelanalysis from "../components/feeling/feelanalysis.vue";
+import feelmonitor from "../components/feeling/feelmonitor.vue";
 export default {
-  components: { kdxfx, odfx, density },
+  components: { feelanalysis, feelmonitor },
   name: "skAnalysis",
   data() {
     return {
       index: 1,
-      comp: "odfx",
+      comp: "feelmonitor",
       isShow: true,
     };
   },
   methods: {
     show(value) {
-      if (value === 1) this.comp = "kdxfx";
-      else if (value === 2) this.comp = "odfx";
-      else if (value === 3) this.comp = "density";
+      if (value === 1) this.comp = "feelanalysis";
+      else if (value === 2) this.comp = "feelmonitor";
+      // else if (value === 3) this.comp = "heatmap";
     },
   },
 };
 </script>
 
 <style lang="less">
-.page {
+#feelings {
+  position: fixed;
   width: 100%;
   height: 100%;
-  .content {
-    height: 80%;
+}
+.content {
+  position: absolute;
+  top: 0;
+  z-index: 9999;
+  height: 100%;
+  width: 100%;
+}
+.aside {
+  height: 100%;
+  z-index: 999999;
+  position: absolute;
+  width: 3%;
+  top: 0;
+  right: 0;
+  background-color: rgba(2, 25, 31, 0.8);
+  .el-menu {
+    top: 30%;
     width: 100%;
+    height: 10%;
+    right: 0%;
+    background: transparent;
+    border: none;
   }
-  .left {
-    position: absolute; /*这里一定要设置*/
-    z-index: 999999; /*这里是该元素与显示屏的距离，据说越大越好，因为没有它也是可以的*/
-    float: left inherit;
-    width: 80px;
+  .el-menu-item.is-active {
+    color: #15abc5;
+    background: #06fafa;
   }
-  .item {
-    margin: 4px;
+   .el-menu-item {
+    color: #FFF;
   }
-  .left .el-tooltip__popper,
-  .right .el-tooltip__popper {
-    padding: 8px 10px;
+  .el-menu-item:hover {
+    background: transparent;
+  }
+  .span{
+    color: aliceblue;
+  }
+  ul {
+    height: 100%;
+    list-style-type: none; /*消除黑点*/
+    text-align: center;
+    li {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      p {
+        color: aqua;
+        font-size: 12px;
+        font-family: Microsoft YaHei;
+        // font-weight: bold;
+        text-decoration: none; /*消除下划线*/
+        border-radius: 5px;
+        padding-bottom: 20px;
+      }
+    }
   }
 }
 </style>
