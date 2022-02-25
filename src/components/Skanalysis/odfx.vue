@@ -1,6 +1,6 @@
 <template>
   <div class="com-OD">
-    <div class="Heat" ref="Heat" id="Heat"></div>
+    <!-- <div class="Heat" ref="Heat" id="Heat"></div> -->
   </div>
 </template>
 <script>

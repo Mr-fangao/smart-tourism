@@ -10,8 +10,9 @@
           <div class="sorttable">
             <el-card shadow="hover" class="tebale_card">
               <el-input
-                v-model="search"
+                prefix-icon="el-icon-search"
                 size="mini"
+                v-model="search"
                 placeholder="输入关键字搜索"
               /><el-button size="mini" id="button" @click="Search"
                 >查询</el-button
@@ -270,41 +271,44 @@ export default {
         border: none;
       }
 
-      :deep(.el-overlay) {
+      /deep/.el-overlay {
         background-color: rgba(255, 255, 255, 0.02);
       }
       .el-table,
       .el-table__expanded-cell {
         background-color: #3f5c6d2c;
       }
-      :deep(.el-table .cell) {
+      /deep/.el-table .cell {
         text-align: center;
       }
 
       // .el-pagination {
       //   margin: 10px 0px 0px 520px;
       // }
-      :deep(.el-input--mini .el-input__inner) {
+      /deep/.el-input--mini .el-input__inner {
         background-color: #6d4c3f2c;
       }
-      :deep(.el-table tbody tr:hover > td) {
+      /deep/.el-table tbody tr:hover > td {
         background-color: #ec63232c !important;
       }
-      :deep(.el-pagination .el-pager li) {
+      /deep/.el-table tr {
+        background-color: #3f5c6d2c;
+        color: #fff;
+      }
+      /deep/.el-pagination .el-pager li {
         background-color: transparent;
         color: #fff;
         margin: 0 2px;
       }
-      :deep(.el-pagination .btn-prev) {
+      /deep/.el-pagination .btn-prev {
         background-color: transparent;
         color: #fff;
       }
-      :deep(.el-pagination .btn-next) {
+      /deep/.el-pagination .btn-next {
         background-color: #00a2ff2c;
         color: #fff;
       }
     }
   }
 }
-
 </style>
