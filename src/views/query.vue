@@ -19,6 +19,7 @@
                 >查询</el-button
               >
               <el-table
+                :cell-style="{ padding: '2px 0' }"
                 :row-style="getRowClass"
                 :header-row-style="getRowClass"
                 :header-cell-style="getRowClass"
@@ -257,8 +258,8 @@ export default {
       height: 95%;
       width: 100%;
       // background-color: #0cf3f3;
-      .el-pagination{
-                left: 12%;
+      .el-pagination {
+        left: 12%;
         bottom: 2%;
         position: absolute;
       }
