@@ -10,27 +10,46 @@
           <div class="sorttable">
             <el-card shadow="hover" class="tebale_card">
               <el-input
+                id="isearch"
                 prefix-icon="el-icon-search"
                 size="mini"
                 v-model="search"
                 placeholder="输入关键字搜索"
-              /><el-button size="mini" id="button" @click="Search()"
+              /><el-button size="mini" id="button" @click="Search(search)"
                 >查询</el-button
               >
               <el-table
-                border
-                style="width: 100%; align: center"
                 :row-style="getRowClass"
                 :header-row-style="getRowClass"
                 :header-cell-style="getRowClass"
-                :data="tableData"
-                :height="getheight"
+                :height="height"
+                style="width: 100%; align: center"
+                :data="
+                  tableData.slice(
+                    (currentPage - 1) * pageSize,
+                    currentPage * pageSize
+                  )
+                "
               >
-                <el-table-column prop="name" label="景点名称" width="120">
+                <el-table-column
+                  prop="name"
+                  label="景点名称"
+                  width="120"
+                  :show-overflow-tooltip="true"
+                >
                 </el-table-column>
-                <el-table-column prop="address" label="公司名称">
+                <el-table-column
+                  prop="address"
+                  label="公司名称"
+                  :show-overflow-tooltip="true"
+                >
                 </el-table-column>
-                <el-table-column prop="message" label="信息"> </el-table-column>
+                <el-table-column
+                  prop="message"
+                  label="信息"
+                  :show-overflow-tooltip="true"
+                >
+                </el-table-column>
                 <el-table-column prop="X" label="x" v-if="false">
                 </el-table-column>
                 <el-table-column prop="Y" label="y" v-if="false">
@@ -39,21 +58,26 @@
                 </el-table-column>
                 <el-table-column prop="detail" label="详细信息" width="120">
                   <template slot-scope="scope">
-                    <el-button type="text" @click="checkDetail(scope.row.phone)"
+                    <el-button
+                      type="text"
+                      @click="checkDetail(scope.row.x, scope.row.y)"
                       >查看详情</el-button
                     >
                   </template>
                 </el-table-column>
               </el-table>
-              <div style="margin: 10px 0">
+              <div style="margin: 0px 0">
                 <el-pagination
                   @current-change="handleCurrentChange"
-                  :current-page="currentPage"
-                  :page-size="9"
-                  layout="total ,prev, pager, next, jumper"
-                  :total="total"
-                  @click="Click"
                   background
+                  layout="total,prev, pager, next,jumper"
+                  :page-sizes="[1, 3, 5, 7, 9]"
+                  :total="total"
+                  :pager-count="5"
+                  :page-count="pagecount"
+                  small
+                  :page-size="pageSize"
+                  :current-page="currentPage"
                 >
                 </el-pagination>
               </div>
@@ -85,15 +109,18 @@ export default {
   data() {
     return {
       tableData: [],
-      total: 0,
-      currentPage: 1,
+      pagecount: 0,
+      height: "",
       search: "",
+      currentPage: 1,
+      total: 0,
+      pageSize: 10,
     };
   },
   mounted() {
+    this.getHeight();
     this.initmap();
     this.load();
-    this.getHeight();
   },
   methods: {
     initmap() {
@@ -106,8 +133,26 @@ export default {
         zoom: 3.5,
       });
     },
-    checkDetail(val) {
-      console.log(val);
+    // handleSizeChange(val) {
+    //   this.currentPage = 1;
+    //   this.pageSize = val;
+    // },
+    //当前页改变时触发 跳转其他页
+    handleCurrentChange(val) {
+      request
+        .post("/api/data/queryScenic", {
+          pageNum: this.val,
+          count: this.pageSize,
+        })
+        .then((res) => {
+          console.log(res, val);
+          this.tableData = res.data.ScInfo;
+          this.pagecount = res.pages;
+        });
+      this.currentPage = val;
+    },
+    checkDetail(valx, valy) {
+      console.log(valx);
     },
     getRowClass({ row, column, rowIndex, columnIndex }) {
       return "background:#3f5c6d2c;color:#FFF;";
@@ -119,70 +164,37 @@ export default {
       }
     },
     getHeight() {
-      this.getheight = window.innerHeight - 230 + "px";
+      this.height = window.innerHeight - 230 + "px";
     },
     //加载表格数据
     load() {
       request
         .post("/api/data/queryScenic", {
           pageNum: this.currentPage,
+          count: this.pageSize,
         })
         .then((res) => {
           console.log(res);
           this.tableData = res.data.ScInfo;
-          this.total = res.data.total1· ;
+          this.pagecount = res.data.pages;
+          this.total = res.data.total;
+          // this.total = res.data.total;
         });
-      // request
-      //   .post("/api/data/queryScenic", {
-      //     // pageSize: this.pageSize,
-      //     // search: this.search,
-      //   })
-      //   .then((res) => {
-      //     console.log(res);
-      //     this.tableData = res.data.ScInfos;
-      //     this.total = res.data.total;
-      //   });
     },
-    //获取当前页面数据
-    // Click() {
-    //   request
-    //     .post("/api/data/queryForm", {
-    //       pageNum: this.currentPage,
-    //     })
-    //     .then((res) => {
-    //       console.log(res);
-    //       this.tableData = res.data.jobInfos;
-    //       this.total = res.data.total;
-    //     });
-    // },
-    //查询
     Search() {
+      this.currentPage = 1;
       request
-        .post("/api/data/queryAny", {
-          search: this.search,
+        .post("/api/data/searchScenic", {
           pageNum: this.currentPage,
+          count: this.pageSize,
+          search: this.search,
         })
         .then((res) => {
           console.log(res);
-          this.tableData = res.data.jobInfos;
+          this.tableData = res.data.ScInfo;
+          this.pagecount = res.data.pages;
           this.total = res.data.total;
         });
-    },
-    handleCurrentChange(val) {
-      //页码切换
-      console.log("当前页:${val}");
-      this.currentPage = val;
-    },
-    //分页方法（重点）
-    currentChangePage(list, currentPage) {
-      let from = (currentPage - 1) * this.pageSize;
-      let to = currentPage * this.pageSize;
-      this.tableData = [];
-      for (; from < to; from++) {
-        if (list[from]) {
-          this.tableData.push(list[from]);
-        }
-      }
     },
   },
 };
@@ -199,6 +211,10 @@ export default {
   width: 100%;
   height: 100%;
   z-index: 0;
+}
+/deep/#isearch {
+  margin-top: 10%;
+  margin-left: 10%;
 }
 .pt {
   flex: 1;
@@ -241,34 +257,50 @@ export default {
       height: 95%;
       width: 100%;
       // background-color: #0cf3f3;
+      .el-pagination{
+                left: 12%;
+        bottom: 2%;
+        position: absolute;
+      }
       .tebale_card {
         background-color: transparent;
         height: 100%;
         border: none;
+      }
+      /deep/.el-card__body {
+        padding: 6px !important;
       }
       /deep/.el-overlay {
         background-color: rgba(255, 255, 255, 0.02);
       }
       .el-table,
       .el-table__expanded-cell {
-        background-color: #3f5c6d2c;
+        background-color: #6d3f472c;
       }
       /deep/.el-table .cell {
         text-align: center;
       }
-
-      // .el-pagination {
-      //   margin: 10px 0px 0px 520px;
-      // }
+      /deep/.el-table .el-table__cell {
+        padding: 5px 0 !important;
+      }
+      /deep/.el-input {
+        position: relative;
+        font-size: 14px;
+        display: inline-block;
+        width: 50%;
+      }
       /deep/.el-input--mini .el-input__inner {
         background-color: #6d4c3f2c;
       }
       /deep/.el-table tbody tr:hover > td {
-        background-color: #ec63232c !important;
+        background-color: #23ece22c !important;
       }
       /deep/.el-table tr {
         background-color: #3f5c6d2c;
         color: #fff;
+      }
+      /deep/.el-table::before {
+        background-color: transparent;
       }
       /deep/.el-pagination .el-pager li {
         background-color: transparent;
@@ -282,6 +314,10 @@ export default {
       /deep/.el-pagination .btn-next {
         background-color: #00a2ff2c;
         color: #fff;
+      }
+      /deep/.el-table td.el-table__cell,
+      /deep/.el-table th.el-table__cell.is-leaf {
+        border-bottom: transparent !important;
       }
     }
   }
