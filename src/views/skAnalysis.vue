@@ -29,21 +29,21 @@
 </template>
 
 <script>
-import feelanalysis from "../components/feeling/feelanalysis.vue";
+import deviationellipse from "../components/Skanalysis/ellipse.vue";
 import feelmonitor from "../components/feeling/feelmonitor.vue";
 export default {
-  components: { feelanalysis, feelmonitor },
+  components: {  feelmonitor,deviationellipse },
   name: "skAnalysis",
   data() {
     return {
       index: 1,
-      comp: "feelmonitor",
+      comp: "deviationellipse",
       isShow: true,
     };
   },
   methods: {
     show(value) {
-      if (value === 1) this.comp = "feelanalysis";
+      if (value === 1) this.comp = "deviationellipse";
       else if (value === 2) this.comp = "feelmonitor";
       // else if (value === 3) this.comp = "heatmap";
     },

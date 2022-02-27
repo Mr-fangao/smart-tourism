@@ -1,5 +1,5 @@
 <template>
-  <div class="com-density">
+  <div id="com-density">
     11111
   </div>
 </template>
@@ -10,7 +10,7 @@ export default {
 </script>
 
 <style scoped lang="less">
-.com-density {
+#com-density {
   height: 300px;
   background: rgb(189, 201, 21);
 }

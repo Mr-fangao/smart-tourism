@@ -25,12 +25,7 @@
                 :header-cell-style="getRowClass"
                 :height="height"
                 style="width: 100%; align: center"
-                :data="
-                  tableData.slice(
-                    (currentPage - 1) * pageSize,
-                    currentPage * pageSize
-                  )
-                "
+                :data= tableData
               >
                 <el-table-column
                   prop="name"
@@ -121,6 +116,9 @@ export default {
   mounted() {
     this.getHeight();
     this.initmap();
+    this.load();
+  },
+  beforeCreate(){
     this.load();
   },
   methods: {

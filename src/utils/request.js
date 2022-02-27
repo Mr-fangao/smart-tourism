@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const request = axios.create({
-  timeout: 8000,
+  timeout: 30000,
 });
 
 // request 拦截器
