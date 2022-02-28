@@ -23,7 +23,7 @@ export default {
         "pk.eyJ1IjoiY2hlbmpxIiwiYSI6ImNrcWFmdWt2bjBtZGsybmxjb29oYmRzZzEifQ.mnpiwx7_cBEyi8YiJiMRZg";
       var map = new this.$mapboxgl.Map({
         container: "map",
-        style: "mapbox://styles/chenjq/ckwetfomi0j1014ph4s20wu2x",
+        style: "mapbox://styles/chenjq/cl010ychv001214pdpa5xyq5a",
         center: [110, 40],
         zoom: 5,
       });
@@ -210,6 +210,7 @@ export default {
     width: 14%;
     height: 38%;
     #button1 {
+      // background: url("../../assets/img/框.png");
       z-index: 9999;
     }
     #button2 {

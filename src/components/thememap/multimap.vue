@@ -2,7 +2,6 @@
   <div class="com-multimap">
     <div id="map"></div>
     </div>
-  </div>
 </template>
 <script>
 

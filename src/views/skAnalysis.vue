@@ -8,8 +8,8 @@
           :class="index === 1 ? 'active' : ''"
           plain
         >
-          <i class="el-icon-menu"></i>
-          <span slot="title">导航一</span>
+          <i class="fa fa-eercast fa-lg"></i>
+          <span class="tab" slot="title">椭圆</span>
         </el-menu-item>
         <el-menu-item
           index="2"
@@ -17,8 +17,8 @@
           :class="index === 2 ? 'active' : ''"
           plain
         >
-          <i class="el-icon-menu"></i>
-          <span slot="title">导航二</span>
+          <i class="fa fa-exchange fa-lg"></i>
+          <span class="tab" slot="title">客流</span>
         </el-menu-item>
         <el-menu-item
           index="3"
@@ -26,8 +26,8 @@
           :class="index === 1 ? 'active' : ''"
           plain
         >
-          <i class="el-icon-menu"></i>
-          <span slot="title">导航一</span>
+          <i class="fa fa-thermometer-0 fa-lg"></i>
+          <span class="tab" slot="title">冷热</span>
         </el-menu-item>
         <el-menu-item
           index="4"
@@ -36,7 +36,7 @@
           plain
         >
           <i class="el-icon-menu"></i>
-          <span slot="title">导航二</span>
+          <span class="tab" slot="title">导航二</span>
         </el-menu-item>
       </el-menu>
     </div>
@@ -102,7 +102,7 @@ export default {
   }
   .el-menu-item.is-active {
     color: #15abc5;
-    background: #06fafa;
+    background: transparent
   }
   .el-menu-item {
     color: #fff;
@@ -134,5 +134,9 @@ export default {
       }
     }
   }
+}
+.tab {
+  height: 38%;
+  line-height: 40px;
 }
 </style>

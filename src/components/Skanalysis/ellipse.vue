@@ -113,7 +113,7 @@ export default {
       position: relative;
       left: 4%;
       background: url(../../assets/img/titlebg.png) no-repeat;
-      background-size: 70% 70%;
+      background-size: 70% 59%;
       font-size: 16pt;
       > span {
         float: left;
@@ -131,9 +131,13 @@ export default {
       width: 100%;
       height: 30%;
       > span {
+        width: 33%;
+        height: 10%;
         margin-left: -44%;
+        margin-top: 2%;
+        border-left: 5px solid #0cf3f3;
         font-size: 12pt;
-        line-height: 34px;
+        line-height: 22px;
         color: aliceblue;
         position: absolute;
       }
@@ -175,7 +179,9 @@ export default {
   background: rgba(82, 173, 209, 0.3);
 }
 /deep/.el-button {
-  background: #24bff390;
+  background: url("../../assets/img/框.png");
+  background-size: 100% 100%;
+  // background: #24bff390;
   border: 0px solid #d80d4a;
   color: #ffffff;
   padding: 12px 20px;
@@ -187,6 +193,10 @@ export default {
   color: #409eff;
   border-color: #c6e2ff;
   background-color: #ecf5ff;
+}
+/deep/.el-range-editor--small .el-range__close-icon, .el-range-editor--small .el-range__icon {
+    line-height: 24px;
+    color: transparent;
 }
 // .mapTool1 {
 //   position: absolute;
