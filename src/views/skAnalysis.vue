@@ -2,19 +2,39 @@
   <div id="feelings">
     <div class="aside">
       <el-menu>
-        <el-menu-item index="1" @click="show(1)" :class="index === 1 ? 'active' : ''" plain>
+        <el-menu-item
+          index="1"
+          @click="show(1)"
+          :class="index === 1 ? 'active' : ''"
+          plain
+        >
           <i class="el-icon-menu"></i>
           <span slot="title">导航一</span>
         </el-menu-item>
-        <el-menu-item index="2" @click="show(2)" :class="index === 2 ? 'active' : ''" plain>
+        <el-menu-item
+          index="2"
+          @click="show(2)"
+          :class="index === 2 ? 'active' : ''"
+          plain
+        >
           <i class="el-icon-menu"></i>
           <span slot="title">导航二</span>
         </el-menu-item>
-                <el-menu-item index="3" @click="show(1)" :class="index === 1 ? 'active' : ''" plain>
+        <el-menu-item
+          index="3"
+          @click="show(1)"
+          :class="index === 1 ? 'active' : ''"
+          plain
+        >
           <i class="el-icon-menu"></i>
           <span slot="title">导航一</span>
         </el-menu-item>
-        <el-menu-item index="4" @click="show(2)" :class="index === 2 ? 'active' : ''" plain>
+        <el-menu-item
+          index="4"
+          @click="show(2)"
+          :class="index === 2 ? 'active' : ''"
+          plain
+        >
           <i class="el-icon-menu"></i>
           <span slot="title">导航二</span>
         </el-menu-item>
@@ -32,7 +52,7 @@
 import deviationellipse from "../components/Skanalysis/ellipse.vue";
 import feelmonitor from "../components/feeling/feelmonitor.vue";
 export default {
-  components: {  feelmonitor,deviationellipse },
+  components: { feelmonitor, deviationellipse },
   name: "skAnalysis",
   data() {
     return {
@@ -84,13 +104,13 @@ export default {
     color: #15abc5;
     background: #06fafa;
   }
-   .el-menu-item {
-    color: #FFF;
+  .el-menu-item {
+    color: #fff;
   }
   .el-menu-item:hover {
     background: transparent;
   }
-  .span{
+  .span {
     color: aliceblue;
   }
   ul {

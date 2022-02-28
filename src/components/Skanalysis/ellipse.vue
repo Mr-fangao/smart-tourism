@@ -7,18 +7,16 @@
           <span>标准差椭圆分析</span>
         </div>
         <div class="toppart">
-          <div class="timepick">
-            <span>数据时间</span>
-               <el-date-picker
-                v-model="value1"
-                type="daterange"
-                range-separator="-"
-                size="small"
-                start-placeholder="开始日期"
-                end-placeholder="结束日期"
-              >
-              </el-date-picker>
-          </div>
+          <span>数据时间:</span>
+          <el-date-picker
+            v-model="value1"
+            type="daterange"
+            range-separator="-"
+            size="small"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期"
+          >
+          </el-date-picker>
           <div class="maptool">
             <el-button>请求数据</el-button>
             <el-button>开始分析</el-button>
@@ -103,7 +101,12 @@ export default {
     background: url("../../assets/img/side.png") no-repeat;
     background-position: 100% 10%;
     background-size: 100% 91%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
     .title {
+      // flex: 0.5;
       margin-top: 5%;
       height: 7%;
       width: 100%;
@@ -122,7 +125,68 @@ export default {
           0 0 30px #38e9e0, 0 0 40px #0cf3f3;
       }
     }
+    .toppart {
+      position: absolute;
+      top: 10%;
+      width: 100%;
+      height: 30%;
+      > span {
+        margin-left: -44%;
+        font-size: 12pt;
+        line-height: 34px;
+        color: aliceblue;
+        position: absolute;
+      }
+      .maptool {
+        position: absolute;
+        top: 25%;
+        left: 13%;
+      }
+    }
+    .bottompart {
+      position: absolute;
+      bottom: 9%;
+      width: 100%;
+      height: 50%;
+    }
   }
+}
+/deep/.el-input__inner {
+  left: 20%;
+  position: absolute;
+  display: inline-block;
+  -webkit-appearance: none;
+  background: transparent;
+  border-radius: 4px;
+  border: 0px solid #dcdfe6;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  color: rgba(220, 225, 227, 0.96);
+  // display: inline-block;
+  font-size: inherit;
+  height: 40px;
+  line-height: 33px;
+  width: 100%;
+  padding: 0 0 0 35px;
+}
+/deep/.el-date-editor .el-range-input {
+  width: 30%;
+  height: 60%;
+  background: rgba(82, 173, 209, 0.3);
+}
+/deep/.el-button {
+  background: #24bff390;
+  border: 0px solid #d80d4a;
+  color: #ffffff;
+  padding: 12px 20px;
+  font-size: 14px;
+  border-radius: 5px;
+}
+/deep/.el-button:focus,
+.el-button:hover {
+  color: #409eff;
+  border-color: #c6e2ff;
+  background-color: #ecf5ff;
 }
 // .mapTool1 {
 //   position: absolute;
