@@ -95,6 +95,7 @@ import areaSelect from "../components/areaSelect.vue";
 import wordcloud from "../assets/js/echarts-wordcloud-master/index";
 import dialogBar from "../components/dialog.vue";
 import poppage from "../components/poppage.vue";
+import loading from "../components/loading.vue";
 // import dialogPage from "./dialogPage.vue";
 export default {
   name: "query",
@@ -103,6 +104,7 @@ export default {
     areaSelect,
     wordcloud,
     poppage,
+    loading,
     // dialogPage,
     "dialog-bar": dialogBar,
   },
@@ -179,12 +181,17 @@ export default {
           count: this.pageSize,
         })
         .then((res) => {
+          if(tableData = null)
+          loading();
           console.log(res);
           this.tableData = res.data.scInfo;
           this.pagecount = res.data.pages;
           this.total = res.data.total;
           // this.total = res.data.total;
         });
+    },
+    loading(){
+      this.bus.$emit('loading', true);
     },
     Search() {
       this.currentPage = 1;
