@@ -4,30 +4,27 @@
     <div class="content">
       <div class="left">
         <div class="title">
-          <span>区域情感分析</span>
+          <span>标准差椭圆分析</span>
         </div>
-        <div class="crawling">
-          <el-select v-model="value" placeholder="数据来源">
-            <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            >
-            </el-option>
-          </el-select>
-          <el-date-picker v-model="date" type="date" placeholder="选择日期">
-          </el-date-picker>
+        <div class="toppart">
+          <div class="timepick">
+            <span>数据时间</span>
+               <el-date-picker
+                v-model="value1"
+                type="daterange"
+                range-separator="-"
+                size="small"
+                start-placeholder="开始日期"
+                end-placeholder="结束日期"
+              >
+              </el-date-picker>
+          </div>
+          <div class="maptool">
+            <el-button>请求数据</el-button>
+            <el-button>开始分析</el-button>
+          </div>
         </div>
-        <el-button>一键爬取</el-button>
-        <div class="space"></div>
-        <div class="query">
-          <el-input placeholder="请输入关键词" v-model="input" clearable>
-          </el-input>
-          <el-button>查询</el-button>
-          <!-- <i slot="prefix" class="el-input__icon el-icon-search"></i> -->
-        </div>
-        <el-button>重置</el-button>
+        <div class="bottompart"></div>
       </div>
     </div>
     <!-- <div id="map" /> -->
@@ -55,6 +52,7 @@ export default {
   data() {
     return {
       DateValue: new Date(),
+      value1,
     };
   },
   mounted() {
@@ -122,24 +120,6 @@ export default {
         color: aliceblue;
         text-shadow: 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #fff,
           0 0 30px #38e9e0, 0 0 40px #0cf3f3;
-      }
-    }
-    .crawling {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      padding: 10px;
-      .el-select {
-        padding-right: 10px;
-      }
-    }
-    .query {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      padding: 10px;
-      .el-input {
-        padding-right: 10px;
       }
     }
   }

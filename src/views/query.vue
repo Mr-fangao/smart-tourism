@@ -10,7 +10,6 @@
           <div class="sorttable">
             <el-card shadow="hover" class="tebale_card">
               <el-input
-                id="isearch"
                 prefix-icon="el-icon-search"
                 size="mini"
                 v-model="search"
@@ -19,13 +18,13 @@
                 >查询</el-button
               >
               <el-table
-                :cell-style="{ padding: '2px 0' }"
                 :row-style="getRowClass"
+                @row-click="editCurrentApplicationApproval"
                 :header-row-style="getRowClass"
                 :header-cell-style="getRowClass"
                 :height="height"
                 style="width: 100%; align: center"
-                :data= tableData
+                :data="tableData"
               >
                 <el-table-column
                   prop="name"
@@ -46,18 +45,23 @@
                   :show-overflow-tooltip="true"
                 >
                 </el-table-column>
-                <el-table-column prop="X" label="x" v-if="false">
+                <el-table-column prop="x" label="x" v-if="false">
                 </el-table-column>
-                <el-table-column prop="Y" label="y" v-if="false">
+                <el-table-column prop="y" label="y" v-if="false">
                 </el-table-column>
                 <el-table-column type="id" label="id" v-if="false">
                 </el-table-column>
-                <el-table-column prop="detail" label="详细信息" width="120">
+                <el-table-column prop="detail" label="操作" width="120">
                   <template slot-scope="scope">
                     <el-button
                       type="text"
-                      @click="checkDetail(scope.row.x, scope.row.y)"
-                      >查看详情</el-button
+                      @click="flyToLocation(scope.row.x, scope.row.y)"
+                      >定位</el-button
+                    >
+                    <el-button
+                      type="text"
+                      @click="flyToLocation(scope.row.x, scope.row.y)"
+                      >详情</el-button
                     >
                   </template>
                 </el-table-column>
@@ -67,7 +71,6 @@
                   @current-change="handleCurrentChange"
                   background
                   layout="total,prev, pager, next,jumper"
-                  :page-sizes="[1, 3, 5, 7, 9]"
                   :total="total"
                   :pager-count="5"
                   :page-count="pagecount"
@@ -86,6 +89,7 @@
 </template>
 
 <script>
+const mapboxgl = require("mapbox-gl");
 import request from "../utils/request";
 import areaSelect from "../components/areaSelect.vue";
 import wordcloud from "../assets/js/echarts-wordcloud-master/index";
@@ -110,7 +114,8 @@ export default {
       search: "",
       currentPage: 1,
       total: 0,
-      pageSize: 10,
+      pageSize: 11,
+      location: [],
     };
   },
   mounted() {
@@ -118,40 +123,41 @@ export default {
     this.initmap();
     this.load();
   },
-  beforeCreate(){
-    this.load();
+  beforeCreate() {
+    // this.load();
   },
   methods: {
     initmap() {
       this.$mapboxgl.accessToken =
         "pk.eyJ1IjoiY2hlbmpxIiwiYSI6ImNrcWFmdWt2bjBtZGsybmxjb29oYmRzZzEifQ.mnpiwx7_cBEyi8YiJiMRZg";
-      var map = new this.$mapboxgl.Map({
+      this.map = new mapboxgl.Map({
         container: "map",
         style: "mapbox://styles/chenjq/cl010ychv001214pdpa5xyq5a",
         center: [105, 35],
         zoom: 3.5,
       });
     },
-    // handleSizeChange(val) {
-    //   this.currentPage = 1;
-    //   this.pageSize = val;
-    // },
-    //当前页改变时触发 跳转其他页
+    flyToLocation(x, y) {
+      console.log(x, y);
+      this.map.flyTo({
+        center: [x, y], // 中心点
+        zoom: 16.5, // 缩放比例
+        pitch: 45, // 倾斜度
+      });
+    },
     handleCurrentChange(val) {
+      this.currentPage = val;
+      console.log(val);
       request
         .post("/api/data/queryScenic", {
-          pageNum: this.val,
+          pageNum: val,
           count: this.pageSize,
         })
         .then((res) => {
           console.log(res, val);
-          this.tableData = res.data.ScInfo;
-          this.pagecount = res.pages;
+          this.tableData = res.data.scInfo;
+          this.pagecount = res.data.pages;
         });
-      this.currentPage = val;
-    },
-    checkDetail(valx, valy) {
-      console.log(valx);
     },
     getRowClass({ row, column, rowIndex, columnIndex }) {
       return "background:#3f5c6d2c;color:#FFF;";
@@ -174,7 +180,7 @@ export default {
         })
         .then((res) => {
           console.log(res);
-          this.tableData = res.data.ScInfo;
+          this.tableData = res.data.scInfo;
           this.pagecount = res.data.pages;
           this.total = res.data.total;
           // this.total = res.data.total;
@@ -190,12 +196,16 @@ export default {
         })
         .then((res) => {
           console.log(res);
-          this.tableData = res.data.ScInfo;
+          this.tableData = res.data.scInfo;
           this.pagecount = res.data.pages;
           this.total = res.data.total;
         });
     },
+    editCurrentApplicationApproval(row) {
+      console.log(row);
+    },
   },
+  watch: {},
 };
 </script>
 
@@ -211,10 +221,10 @@ export default {
   height: 100%;
   z-index: 0;
 }
-/deep/#isearch {
-  margin-top: 10%;
-  margin-left: 10%;
-}
+// /deep/#isearch {
+//   margin-top: 10%;
+//   margin-left: 10%;
+// }
 .pt {
   flex: 1;
   //  background-size: 100% 100%;
@@ -268,25 +278,41 @@ export default {
       }
       /deep/.el-card__body {
         padding: 6px !important;
+        height: 100%;
       }
       /deep/.el-overlay {
         background-color: rgba(255, 255, 255, 0.02);
       }
       .el-table,
       .el-table__expanded-cell {
-        background-color: #6d3f472c;
+        margin-top: 3%;
+          background: #3f5c6d2c;
+        // background: linear-gradient(
+        //   rgba(2, 89, 113, 0.9),
+        //   rgba(2, 62, 82, 0.4)
+        // );
+      }
+      /deep/ .el-button--mini,
+      .el-button--mini.is-round {
+        padding: 7px 20px;
+        position: absolute;
+        left: 60%;
+        top: 8.5%;
       }
       /deep/.el-table .cell {
         text-align: center;
       }
       /deep/.el-table .el-table__cell {
-        padding: 5px 0 !important;
+        padding: 2.5px 0 !important;
       }
-      /deep/.el-input {
+      /deep/.el-input :nth-child(1) {
         position: relative;
         font-size: 14px;
+        // color: rgba(233, 14, 80, 0.781);
         display: inline-block;
         width: 50%;
+        margin-top: 2%;
+        margin-left: -40%;
       }
       /deep/.el-input--mini .el-input__inner {
         background-color: #6d4c3f2c;
@@ -295,11 +321,20 @@ export default {
         background-color: #23ece22c !important;
       }
       /deep/.el-table tr {
-        background-color: #3f5c6d2c;
-        color: #fff;
+        color:#FFF;
+        // background-color: rgb(2, 64, 86, 0.1);
+          background-color: #6d4c3f2c;
+      }
+      /deep/ .el-table th.gutter {
+        display: table-cell !important;
+        background: #3f5c6d2c; //因为我改了我的默认表格背景颜色，所以要跟着改
       }
       /deep/.el-table::before {
         background-color: transparent;
+      }
+      /deep/.el-input__prefix {
+        left: 38px;
+        top: 26%;
       }
       /deep/.el-pagination .el-pager li {
         background-color: transparent;
