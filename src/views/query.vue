@@ -111,7 +111,7 @@ export default {
     return {
       tableData: [],
       pagecount: 0,
-      height: "",
+      height: 0,
       search: "",
       currentPage: 1,
       total: 0,
