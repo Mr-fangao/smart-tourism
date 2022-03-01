@@ -3,10 +3,10 @@
     <div id="map"></div>
     <div class="control">
       <div style="padding-top: 10px">
-        <button id="button1">取消聚类</button>
+        <el-button id="button1">取消聚类</el-button>
       </div>
       <div style="padding-top: 10px">
-        <button id="button2">执行聚类</button>
+        <el-button id="button2">执行聚类</el-button>
       </div>
     </div>
   </div>
@@ -209,13 +209,29 @@ export default {
     top: 3%;
     width: 14%;
     height: 38%;
-    #button1 {
-      // background: url("../../assets/img/框.png");
-      z-index: 9999;
-    }
-    #button2 {
-      z-index: 9999;
-    }
+    // #button1 {
+    //   background: url("../../assets/img/框.png");
+    //   z-index: 9999;
+    // }
+    // #button2 {
+    //   z-index: 9999;
+    // }
   }
+}
+/deep/.el-button {
+  background: url("../../assets/img/框.png");
+  background-size: 100% 100%;
+  // background: #24bff390;
+  border: 0px solid #d80d4a;
+  color: #ffffff;
+  padding: 12px 20px;
+  font-size: 14px;
+  border-radius: 5px;
+}
+/deep/.el-button:focus,
+.el-button:hover {
+  color: #75f8ed;
+  border-color: #c6e2ff;
+  background-color: #ecf5ff;
 }
 </style>
