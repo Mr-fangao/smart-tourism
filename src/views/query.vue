@@ -181,8 +181,7 @@ export default {
           count: this.pageSize,
         })
         .then((res) => {
-          if(tableData = null)
-          loading();
+          if ((tableData = null)) loading();
           console.log(res);
           this.tableData = res.data.scInfo;
           this.pagecount = res.data.pages;
@@ -190,8 +189,8 @@ export default {
           // this.total = res.data.total;
         });
     },
-    loading(){
-      this.bus.$emit('loading', true);
+    loading() {
+      this.bus.$emit("loading", true);
     },
     Search() {
       this.currentPage = 1;
@@ -282,6 +281,11 @@ export default {
         background-color: transparent;
         height: 100%;
         border: none;
+        .el-button {
+          background-color: #225e81e3;
+          border-color: #1edaeb;
+          color: #fff;
+        }
       }
       /deep/.el-card__body {
         padding: 6px !important;
@@ -293,7 +297,7 @@ export default {
       .el-table,
       .el-table__expanded-cell {
         margin-top: 3%;
-          background: #3f5c6d2c;
+        background: #3f5c6d2c;
         // background: linear-gradient(
         //   rgba(2, 89, 113, 0.9),
         //   rgba(2, 62, 82, 0.4)
@@ -305,6 +309,9 @@ export default {
         position: absolute;
         left: 60%;
         top: 8.5%;
+      }
+      /deep/.el-icon-search {
+        height: 0px;
       }
       /deep/.el-table .cell {
         text-align: center;
@@ -320,6 +327,9 @@ export default {
         width: 50%;
         margin-top: 2%;
         margin-left: -40%;
+        background-image: url("../assets/img/bg9.png");
+        background-size: 100% 100%;
+        border: none;
       }
       /deep/.el-input--mini .el-input__inner {
         background-color: #6d4c3f2c;
@@ -328,9 +338,9 @@ export default {
         background-color: #23ece22c !important;
       }
       /deep/.el-table tr {
-        color:#FFF;
+        color: #fff;
         // background-color: rgb(2, 64, 86, 0.1);
-          background-color: #6d4c3f2c;
+        background-color: #6d4c3f2c;
       }
       /deep/ .el-table th.gutter {
         display: table-cell !important;
