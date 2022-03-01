@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import kdxfx from "../components/Skanalysis/kdxfx.vue";
+import kdxfx from "../components/Skanalysis/cold.vue";
 import odfx from "../components/Skanalysis/odfx.vue";
 import density from "../components/Skanalysis/density.vue";
 export default {

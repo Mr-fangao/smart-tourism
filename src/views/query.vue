@@ -91,7 +91,7 @@
 <script>
 const mapboxgl = require("mapbox-gl");
 import request from "../utils/request";
-import areaSelect from "../components/areaSelect.vue";
+// import areaSelect from "../components/areaSelect.vue";
 import wordcloud from "../assets/js/echarts-wordcloud-master/index";
 // import dialogBar from "../components/dialog.vue";
 // import poppage from "../components/poppage.vue";
