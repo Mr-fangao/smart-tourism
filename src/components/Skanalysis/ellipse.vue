@@ -173,6 +173,9 @@ export default {
   width: 100%;
   padding: 0 0 0 35px;
 }
+/deep/.el-range-editor--small .el-range__icon {
+  color: transparent !important;
+}
 /deep/.el-date-editor .el-range-input {
   width: 30%;
   height: 60%;
@@ -190,14 +193,11 @@ export default {
 }
 /deep/.el-button:focus,
 .el-button:hover {
-  color: #409eff;
+  color: #75f8ed;
   border-color: #c6e2ff;
   background-color: #ecf5ff;
 }
-/deep/.el-range-editor--small .el-range__close-icon, .el-range-editor--small .el-range__icon {
-    line-height: 24px;
-    color: transparent;
-}
+
 // .mapTool1 {
 //   position: absolute;
 //   z-index: 1100;

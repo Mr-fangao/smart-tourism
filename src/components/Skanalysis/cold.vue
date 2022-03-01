@@ -1,16 +1,16 @@
 <template>
-  <div class="com-kdxfx">
+  <div class="com-cold">
     <div id="map">
       <div class="page">
-          <el-button>默认按钮</el-button>
-            <el-button>默认按钮</el-button>
+        <el-button>默认按钮</el-button>
+        <el-button>默认按钮</el-button>
       </div>
     </div>
   </div>
 </template>
 <script>
 export default {
-  name: "kdxfx",
+  name: "cold",
   mounted() {
     this.initmap();
   },
@@ -30,16 +30,16 @@ export default {
 </script>
 
 <style scoped lang="less">
-.com-kdxfx {
+.com-cold {
   #map {
     position: absolute;
     width: 100%;
     height: 100%;
-    .page{
+    .page {
       position: absolute;
       right: 10px;
-          width: 20%;
-    height: 100%;
+      width: 20%;
+      height: 100%;
     }
   }
 

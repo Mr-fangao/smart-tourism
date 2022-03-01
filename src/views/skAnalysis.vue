@@ -22,8 +22,8 @@
         </el-menu-item>
         <el-menu-item
           index="3"
-          @click="show(1)"
-          :class="index === 1 ? 'active' : ''"
+          @click="show(3)"
+          :class="index === 3 ? 'active' : ''"
           plain
         >
           <i class="fa fa-thermometer-0 fa-lg"></i>
@@ -31,8 +31,8 @@
         </el-menu-item>
         <el-menu-item
           index="4"
-          @click="show(2)"
-          :class="index === 2 ? 'active' : ''"
+          @click="show(4)"
+          :class="index === 4 ? 'active' : ''"
           plain
         >
           <i class="el-icon-menu"></i>
@@ -51,8 +51,9 @@
 <script>
 import deviationellipse from "../components/Skanalysis/ellipse.vue";
 import feelmonitor from "../components/feeling/feelmonitor.vue";
+import cold from "../components/Skanalysis/cold.vue";
 export default {
-  components: { feelmonitor, deviationellipse },
+  components: { feelmonitor, deviationellipse ,cold},
   name: "skAnalysis",
   data() {
     return {
@@ -65,6 +66,8 @@ export default {
     show(value) {
       if (value === 1) this.comp = "deviationellipse";
       else if (value === 2) this.comp = "feelmonitor";
+      else if (value === 3) this.comp = "cold";
+      else if (value === 4) this.comp = "feelmonitor";
       // else if (value === 3) this.comp = "heatmap";
     },
   },
@@ -102,7 +105,7 @@ export default {
   }
   .el-menu-item.is-active {
     color: #15abc5;
-    background: transparent
+    background: transparent;
   }
   .el-menu-item {
     color: #fff;

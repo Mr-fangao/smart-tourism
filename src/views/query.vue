@@ -19,8 +19,8 @@
               >
               <el-table
                 :row-style="getRowClass"
-                @row-click="editCurrentApplicationApproval"
                 :header-row-style="getRowClass"
+                @row-click="clickRow"
                 :header-cell-style="getRowClass"
                 :height="height"
                 style="width: 100%; align: center"
@@ -55,12 +55,12 @@
                   <template slot-scope="scope">
                     <el-button
                       type="text"
-                      @click="flyToLocation(scope.row.x, scope.row.y)"
+                      @click.stop="flyToLocation(scope.row.x, scope.row.y)"
                       >定位</el-button
                     >
                     <el-button
                       type="text"
-                      @click="flyToLocation(scope.row.x, scope.row.y)"
+                      @click.stop="flyToLocation(scope.row.x, scope.row.y)"
                       >详情</el-button
                     >
                   </template>
@@ -91,22 +91,21 @@
 <script>
 const mapboxgl = require("mapbox-gl");
 import request from "../utils/request";
-import areaSelect from "../components/areaSelect.vue";
+// import areaSelect from "../components/areaSelect.vue";
 import wordcloud from "../assets/js/echarts-wordcloud-master/index";
-import dialogBar from "../components/dialog.vue";
-import poppage from "../components/poppage.vue";
+// import dialogBar from "../components/dialog.vue";
+// import poppage from "../components/poppage.vue";
 import loading from "../components/loading.vue";
 // import dialogPage from "./dialogPage.vue";
 export default {
   name: "query",
   components: {
-    modalVisible: false,
-    areaSelect,
+    // modalVisible: false,
+    // areaSelect,
     wordcloud,
-    poppage,
+    // poppage,
     loading,
-    // dialogPage,
-    "dialog-bar": dialogBar,
+    // "dialog-bar": dialogBar,
   },
   data() {
     return {
@@ -134,7 +133,7 @@ export default {
         "pk.eyJ1IjoiY2hlbmpxIiwiYSI6ImNrcWFmdWt2bjBtZGsybmxjb29oYmRzZzEifQ.mnpiwx7_cBEyi8YiJiMRZg";
       this.map = new mapboxgl.Map({
         container: "map",
-        style: "mapbox://styles/chenjq/cl010ychv001214pdpa5xyq5a",
+        style: "mapbox://styles/chenjq/cl084urgf004014ny2nhu1xre",
         center: [105, 35],
         zoom: 3.5,
       });
@@ -181,7 +180,12 @@ export default {
           count: this.pageSize,
         })
         .then((res) => {
+<<<<<<< HEAD
           if ((tableData = null)) loading();
+=======
+          // if(tableData == null)
+          // loading();
+>>>>>>> 50893eb754e36bb4cb4f65d0a8deb2116549414b
           console.log(res);
           this.tableData = res.data.scInfo;
           this.pagecount = res.data.pages;
@@ -207,7 +211,7 @@ export default {
           this.total = res.data.total;
         });
     },
-    editCurrentApplicationApproval(row) {
+    clickRow(row) {
       console.log(row);
     },
   },
