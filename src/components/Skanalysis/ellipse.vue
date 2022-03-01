@@ -6,6 +6,8 @@
         <div class="title">
           <span>标准差椭圆分析</span>
         </div>
+        <div class="con"></div>
+
         <div class="toppart">
           <span>数据时间:</span>
           <el-date-picker
@@ -125,9 +127,18 @@ export default {
           0 0 30px #38e9e0, 0 0 40px #0cf3f3;
       }
     }
+    .con {
+      background: url("../../assets/img/analysis/idw.png") no-repeat;
+      background-size: 80% 80%;
+      position: absolute;
+      height: 23%;
+      width: 67%;
+      margin-left: 19%;
+      margin-top: 20%;
+    }
     .toppart {
       position: absolute;
-      top: 10%;
+      top: 27%;
       width: 100%;
       height: 30%;
       > span {

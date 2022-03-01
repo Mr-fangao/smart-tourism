@@ -111,7 +111,7 @@ export default {
     return {
       tableData: [],
       pagecount: 0,
-      height: 0,
+      height: "",
       search: "",
       currentPage: 1,
       total: 0,
@@ -281,7 +281,7 @@ export default {
         background-color: transparent;
         height: 100%;
         border: none;
-        .el-button {
+        #button {
           background-color: #225e81e3;
           border-color: #1edaeb;
           color: #fff;
@@ -319,6 +319,11 @@ export default {
       /deep/.el-table .el-table__cell {
         padding: 2.5px 0 !important;
       }
+      // /deep/.el-button--mini :nth-child(1){
+      //           background-color: #225e81e3;
+      //   border-color: #1edaeb;
+      //   color: #fff;
+      // }
       /deep/.el-input :nth-child(1) {
         position: relative;
         font-size: 14px;
