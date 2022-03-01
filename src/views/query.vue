@@ -133,7 +133,7 @@ export default {
         "pk.eyJ1IjoiY2hlbmpxIiwiYSI6ImNrcWFmdWt2bjBtZGsybmxjb29oYmRzZzEifQ.mnpiwx7_cBEyi8YiJiMRZg";
       this.map = new mapboxgl.Map({
         container: "map",
-        style: "mapbox://styles/chenjq/cl010ychv001214pdpa5xyq5a",
+        style: "mapbox://styles/chenjq/cl084urgf004014ny2nhu1xre",
         center: [105, 35],
         zoom: 3.5,
       });
