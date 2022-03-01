@@ -180,12 +180,8 @@ export default {
           count: this.pageSize,
         })
         .then((res) => {
-<<<<<<< HEAD
-          if ((tableData = null)) loading();
-=======
           // if(tableData == null)
           // loading();
->>>>>>> 50893eb754e36bb4cb4f65d0a8deb2116549414b
           console.log(res);
           this.tableData = res.data.scInfo;
           this.pagecount = res.data.pages;
