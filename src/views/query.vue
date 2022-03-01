@@ -19,8 +19,8 @@
               >
               <el-table
                 :row-style="getRowClass"
-                @row-click="editCurrentApplicationApproval"
                 :header-row-style="getRowClass"
+                @row-click="clickRow"
                 :header-cell-style="getRowClass"
                 :height="height"
                 style="width: 100%; align: center"
@@ -55,12 +55,12 @@
                   <template slot-scope="scope">
                     <el-button
                       type="text"
-                      @click="flyToLocation(scope.row.x, scope.row.y)"
+                      @click.stop="flyToLocation(scope.row.x, scope.row.y)"
                       >定位</el-button
                     >
                     <el-button
                       type="text"
-                      @click="flyToLocation(scope.row.x, scope.row.y)"
+                      @click.stop="flyToLocation(scope.row.x, scope.row.y)"
                       >详情</el-button
                     >
                   </template>
@@ -93,20 +93,19 @@ const mapboxgl = require("mapbox-gl");
 import request from "../utils/request";
 import areaSelect from "../components/areaSelect.vue";
 import wordcloud from "../assets/js/echarts-wordcloud-master/index";
-import dialogBar from "../components/dialog.vue";
-import poppage from "../components/poppage.vue";
+// import dialogBar from "../components/dialog.vue";
+// import poppage from "../components/poppage.vue";
 import loading from "../components/loading.vue";
 // import dialogPage from "./dialogPage.vue";
 export default {
   name: "query",
   components: {
-    modalVisible: false,
-    areaSelect,
+    // modalVisible: false,
+    // areaSelect,
     wordcloud,
-    poppage,
+    // poppage,
     loading,
-    // dialogPage,
-    "dialog-bar": dialogBar,
+    // "dialog-bar": dialogBar,
   },
   data() {
     return {
@@ -181,8 +180,8 @@ export default {
           count: this.pageSize,
         })
         .then((res) => {
-          if(tableData = null)
-          loading();
+          // if(tableData == null)
+          // loading();
           console.log(res);
           this.tableData = res.data.scInfo;
           this.pagecount = res.data.pages;
@@ -190,8 +189,8 @@ export default {
           // this.total = res.data.total;
         });
     },
-    loading(){
-      this.bus.$emit('loading', true);
+    loading() {
+      this.bus.$emit("loading", true);
     },
     Search() {
       this.currentPage = 1;
@@ -208,7 +207,7 @@ export default {
           this.total = res.data.total;
         });
     },
-    editCurrentApplicationApproval(row) {
+    clickRow(row) {
       console.log(row);
     },
   },
@@ -293,7 +292,7 @@ export default {
       .el-table,
       .el-table__expanded-cell {
         margin-top: 3%;
-          background: #3f5c6d2c;
+        background: #3f5c6d2c;
         // background: linear-gradient(
         //   rgba(2, 89, 113, 0.9),
         //   rgba(2, 62, 82, 0.4)
@@ -328,9 +327,9 @@ export default {
         background-color: #23ece22c !important;
       }
       /deep/.el-table tr {
-        color:#FFF;
+        color: #fff;
         // background-color: rgb(2, 64, 86, 0.1);
-          background-color: #6d4c3f2c;
+        background-color: #6d4c3f2c;
       }
       /deep/ .el-table th.gutter {
         display: table-cell !important;
