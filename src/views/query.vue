@@ -184,6 +184,8 @@ export default {
           // loading();
           console.log(res);
           this.tableData = res.data.scInfo;
+          this.tableData[7].x=106.60201626611412;
+          this.tableData[7].y=26.619924752919862;
           this.pagecount = res.data.pages;
           this.total = res.data.total;
           // this.total = res.data.total;

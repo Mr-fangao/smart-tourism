@@ -1,5 +1,5 @@
 <template>
-  <div id="feelings">
+  <div id="skAnalysis">
     <div class="aside">
       <el-menu>
         <el-menu-item
@@ -52,8 +52,9 @@
 import deviationellipse from "../components/Skanalysis/ellipse.vue";
 import feelmonitor from "../components/feeling/feelmonitor.vue";
 import cold from "../components/Skanalysis/cold.vue";
+import odfx from "../components/Skanalysis/odfx.vue";
 export default {
-  components: { feelmonitor, deviationellipse ,cold},
+  components: { feelmonitor, deviationellipse ,cold,odfx},
   name: "skAnalysis",
   data() {
     return {
@@ -65,7 +66,7 @@ export default {
   methods: {
     show(value) {
       if (value === 1) this.comp = "deviationellipse";
-      else if (value === 2) this.comp = "feelmonitor";
+      else if (value === 2) this.comp = "odfx";
       else if (value === 3) this.comp = "cold";
       else if (value === 4) this.comp = "feelmonitor";
       // else if (value === 3) this.comp = "heatmap";
@@ -75,7 +76,7 @@ export default {
 </script>
 
 <style lang="less">
-#feelings {
+#skAnalysis {
   position: fixed;
   width: 100%;
   height: 100%;

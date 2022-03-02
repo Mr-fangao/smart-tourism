@@ -31,6 +31,7 @@ export default {
 
 <style scoped lang="less">
 .com-OD {
+  position: relative;
   #map {
     height: 500px;
     // border: 1px solid red;

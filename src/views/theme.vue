@@ -17,13 +17,13 @@
           :class="index === 2 ? 'active' : ''"
           plain
         >
-          <i class="fa fa-exchange fa-lg"></i>
+          <i class="fa fa-sort-amount-desc fa-lg"></i>
           <span class="tab" slot="title">分级</span>
         </el-menu-item>
         <el-menu-item
           index="3"
-          @click="show(1)"
-          :class="index === 1 ? 'active' : ''"
+          @click="show(3)"
+          :class="index === 3 ? 'active' : ''"
           plain
         >
           <i class="fa fa-thermometer-0 fa-lg"></i>
@@ -31,8 +31,8 @@
         </el-menu-item>
         <el-menu-item
           index="4"
-          @click="show(2)"
-          :class="index === 2 ? 'active' : ''"
+          @click="show(4)"
+          :class="index === 4 ? 'active' : ''"
           plain
         >
           <i class="el-icon-menu"></i>

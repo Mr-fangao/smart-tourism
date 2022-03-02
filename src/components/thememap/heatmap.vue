@@ -16,7 +16,7 @@ export default {
          "pk.eyJ1IjoiY2hlbmpxIiwiYSI6ImNrcWFmdWt2bjBtZGsybmxjb29oYmRzZzEifQ.mnpiwx7_cBEyi8YiJiMRZg";
         var map = new this.$mapboxgl.Map({
             container: 'map',
-             style: "mapbox://styles/chenjq/ckwetfomi0j1014ph4s20wu2x",
+             style: "mapbox://styles/chenjq/cl010ychv001214pdpa5xyq5a",
             center: [110, 40],
             zoom: 5,
         })
@@ -118,6 +118,5 @@ export default {
     // border: 1px solid red;
   }
   height: 100%;
-  background: red;
 }
 </style>

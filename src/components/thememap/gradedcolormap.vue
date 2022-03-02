@@ -10,13 +10,13 @@
     <div class="map-overlay" id="legend">
       <div id="state-legend" class="state-legend">
         <h4>游客满意度</h4>
-        <div><span style="background-color: #723122"></span>25,000,000</div>
+        <div><span style="background-color: #313695"></span>25,000,000</div>
         <br />
-        <div><span style="background-color: #8b4225"></span>10,000,000</div>
+        <div><span style="background-color: #4575b4"></span>10,000,000</div>
         <br />
-        <div><span style="background-color: #a25626"></span>7,500,000</div>
+        <div><span style="background-color: #74add1"></span>7,500,000</div>
         <br />
-        <div><span style="background-color: #b86b25"></span>5,000,000</div>
+        <div><span style="background-color: #ffffbf"></span>5,000,000</div>
         <br />
         <div><span style="background-color: #ca8323"></span>2,500,000</div>
         <br />
@@ -59,18 +59,18 @@ export default {
             "fill-color": {
               property: "confirmed", // this will be your density property form you geojson
               stops: [
-                [1000, "#FED976"],
-                [2000, "#FEB24C"],
-                [3000, "#FD8D3C"],
-                [4000, "#FC4E2A"],
-                [5000, "#E31A1C"],
+                [1000, "#313695"],
+                [2000, "#4575b4"],
+                [3000, "#74add1"],
+                [4000, "#e0f3f8"],
+                [5000, "#ffffbf"],
               ],
             },
             "fill-opacity": 0.7 /* 透明度 */,
           },
         });
-        const layers = ["不满意", "不太满意", "比较满意", "满意", "非常满意"];
-        const colors = ["#FED976", "#FEB24C", "#FD8D3C", "#FC4E2A", "#E31A1C"];
+        // const layers = ["不满意", "不太满意", "比较满意", "满意", "非常满意"];
+        // const colors = ["#FED976", "#FEB24C", "#FD8D3C", "#FC4E2A", "#E31A1C"];
 
         //添加数据
         // const legend = document.getElementById("legend");

@@ -42,7 +42,6 @@ export default {
           width: 4096,
           height: 2048,
         });
-        
         //航线终点位置
         const coord = [
           [118.30553, 32.2948],
@@ -207,7 +206,7 @@ export default {
             globeOuterRadius: 150,
             silent: true,
             shading: "color",
-            environment: "#f6f5ec",
+            environment: "#0000",
             baseTexture: mapChart,
             viewControl: {
               autoRotate: false,
@@ -246,10 +245,9 @@ export default {
 .com-OD {
   #Heat {
     height: 100%;
-    width: 100%; 
+    width: 100%;
     // border: 1px solid red;
   }
-
   height: 100%;
   //background: red;
 }
