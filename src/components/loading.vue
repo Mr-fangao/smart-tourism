@@ -27,42 +27,23 @@ export default {
 }
 #ploding {
   margin: 0;
-  margin-top: 30%;
+  margin-top: 26%;
   padding: 10px 0;
   color: #fff;
-}
-
-.load-wrapp {
-  float: left;
-  width: 100px;
-  height: 100px;
-  margin: 0 10px 10px 0;
-  padding: 20px 20px 20px;
-  border-radius: 5px;
-  text-align: center;
-  background-color: #d8d8d8;
-}
-
-.load-wrapp p {
-  padding: 0 0 20px;
-}
-
-.load-wrapp:last-child {
-  margin-right: 0;
 }
 
 .ring-1 {
   width: 70px;
   height: 70px;
   margin: 0 auto;
-  margin-top: -110px;
+  margin-top: -7%;
   padding: 10px;
   border: 7px dashed #038bf3;
   border-radius: 100%;
 }
 
 .load-4 .ring-1 {
-  animation: loading 1.5s .3s cubic-bezier(.17, .37, .43, .67) infinite;
+  animation: loading 1.5s 0.3s cubic-bezier(0.17, 0.37, 0.43, 0.67) infinite;
 }
 
 @keyframes loading {
@@ -78,5 +59,4 @@ export default {
     transform: rotate(360deg);
   }
 }
-
 </style>
