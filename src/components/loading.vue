@@ -1,46 +1,19 @@
 <template>
-    <div class="loading" v-show="loading">
-        <img src="../assets/img/loading.gif">
-    </div>
+<div class="loading"></div>
 </template>
 <script>
 export default {
-    name: 'loading',
-    data() {
-        return {
-            loading: false
-        }
-    },
-    created() {
-        var that = this;
-        this.bus.$on('loading', function(data) {
-            that.loading = !!data;
-        })
-    }
+  name: 'Loading' // 定义的组件名称 使用时写法：loading
 }
 </script>
-<style scoped lang="less">
+<style scoped>
 .loading {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    position: fixed;
-    left: 0;
-    top: 0;
-    z-index: 999;
-    width: 100%;
-    height: 100%;
-    color: #fff;
-    background-color: rgba(0, 0, 0, 0.8);
-    p {
-        padding: .15rem .15rem .2rem;
-        color: #fff;
-        font-size: .16rem;
-    }
-    img {
-        width: .4rem;
-        height: .4rem;
-    }
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: url('../assets/img/loading.gif') center center no-repeat;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
 }
 </style>

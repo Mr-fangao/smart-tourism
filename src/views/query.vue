@@ -1,6 +1,9 @@
 <template>
   <div id="query">
     <div id="map" />
+    <transition name="fade">
+      <loading v-if="isLoading"></loading>
+    </transition>
     <div class="container">
       <div class="left-part">
         <div class="pt pt1">
@@ -109,6 +112,7 @@ export default {
   },
   data() {
     return {
+      isLoading: true,
       tableData: [],
       pagecount: 0,
       height: "",
@@ -184,16 +188,19 @@ export default {
           // loading();
           console.log(res);
           this.tableData = res.data.scInfo;
-          this.tableData[7].x=106.60201626611412;
-          this.tableData[7].y=26.619924752919862;
+          this.tableData[7].x = 106.60201626611412;
+          this.tableData[7].y = 26.619924752919862;
           this.pagecount = res.data.pages;
           this.total = res.data.total;
+          if (this.tableData != null) {
+            this.isLoading = false;
+          }
           // this.total = res.data.total;
         });
     },
-    loading() {
-      this.bus.$emit("loading", true);
-    },
+    // loading() {
+    //   this.bus.$emit("loading", true);
+    // },
     Search() {
       this.currentPage = 1;
       request
@@ -248,7 +255,7 @@ export default {
   > span {
     float: left;
     margin-left: 18%;
-    font-size: 16pt;
+    font-size: 12pt;
     line-height: 30px;
     color: aliceblue;
     text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #38e9e0,
@@ -261,7 +268,7 @@ export default {
   left: 0.5%;
   bottom: 0px;
   height: 92%;
-  width: 40%;
+  width: 30%;
   float: left;
   display: flex;
   flex-direction: column;

@@ -19,7 +19,6 @@
     <!-- <span class="times">{{ time }}</span> -->
   </nav>
 </div>
-  
 </template>
 
 <script>
