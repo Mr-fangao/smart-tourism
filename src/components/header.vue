@@ -13,22 +13,52 @@
       <ul>
         <li id="u2">
           <router-link to="/skAnalysis" exact>时空分析</router-link>
-          <router-link to="/odAnalysis.vue" exact>客流分析</router-link>
+          <router-link to="/odAnalysis" exact>客流分析</router-link>
           <router-link to="/feelings" exact>情感分析</router-link>
         </li>
       </ul>
-      <div class="user">1</div>
-      <!-- <span class="times">{{ time }}</span> -->
+      <div class="user">
+        <div class="userpng"></div>
+        <el-dropdown trigger="click">
+          <span class="el-dropdown-link">
+            个人中心<i class="el-icon-arrow-down el-icon--right"></i>
+          </span>
+          <el-dropdown-menu
+            slot="dropdown"
+            style="background: #62b6cf; border: #a5e5f6"
+          >
+            <el-dropdown-item @click.native="showPop(1111111111)"
+              >个人中心</el-dropdown-item
+            >
+            <el-dropdown-item @click.native="routerjump"
+              >返回首页</el-dropdown-item
+            >
+          </el-dropdown-menu>
+        </el-dropdown>
+      </div>
+      <poppage
+        :show="show"
+        :porpID="porpID"
+        @hideModal="hideModal"
+        @submit="submit"
+      >
+      </poppage>
     </nav>
   </div>
 </template>
 
 <script>
+import poppage from "../components/poppageForUser.vue";
 export default {
   name: "pageheader",
+  components: {
+    poppage,
+  },
   data() {
     return {
       time: "2020年08月31日 10:29",
+      index: 1,
+      show: false,
     };
   },
   mounted() {
@@ -37,6 +67,21 @@ export default {
   methods: {
     currentTime() {
       setInterval(this.getTime, 500);
+    },
+    hideModal() {
+      // 取消弹窗回调
+      this.show = false;
+    },
+    submit() {
+      // 确认弹窗回调
+      this.show = false;
+    },
+    showPop(val) {
+      this.porpID = val;
+      this.show = true;
+    },
+    routerjump(index) {
+      if (index != null) this.$router.push({ name: "Login" });
     },
     getTime() {
       let yy = new Date().getFullYear();
@@ -143,7 +188,15 @@ nav {
   right: 0;
   width: 9%;
   height: 6%;
-  background: #39fcff;
+  background-color: transparent;
+  .userpng {
+    height: 100%;
+    width: 30%;
+    background: url(../assets/img/userBG.png) no-repeat;
+    background-size: 80% 70%;
+    background-position: 100% 85%;
+    float: left;
+  }
 }
 /*选中则发生一些变化*/
 .router-link-active {
@@ -153,5 +206,25 @@ nav {
   line-height: 30px;
   background-size: 105% 160%;
   background-position: -85% 0%;
+}
+/deep/.el-dropdown {
+  display: inline-block;
+  position: relative;
+  color: #a5e5f6;
+  font-size: 14px;
+  line-height: 57px;
+  height: 90%;
+}
+/deep/.el-dropdown-menu {
+  background: #62b6cf;
+  border: #a5e5f6;
+}
+.el-dropdown-link {
+  cursor: pointer;
+}
+.el-dropdown-menu__item:focus,
+.el-dropdown-menu__item:not(.is-disabled):hover {
+  background-color: #2fa9ce;
+  color: #ffffff;
 }
 </style>

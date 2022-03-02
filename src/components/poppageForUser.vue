@@ -43,7 +43,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .modal-bg {
-        position:absolute;
+  position:absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -53,10 +53,10 @@ export default {
 }
 .modal-container {
   background: #fff;
-  border-radius: 10px;
+  border-radius: 3%;
   overflow: hidden;
   position: fixed;
-  width: 50%;
+  width: 70%;
   height: 80%;
   top: 50%;
   left: 50%;
@@ -69,7 +69,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: move;
+  cursor: pointer;
   .text{
       position:absolute inherit;
       text-align: center;

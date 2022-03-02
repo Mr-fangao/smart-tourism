@@ -15,10 +15,9 @@ export default new Router({
     }
   },
   {
-    path: '/recommend',
-    name: 'recommend',
-    component: () => import("@/views/recommend"),
-    // component: () => import("@/components/areaSelect"),
+    path: '/odAnalysis',
+    name: 'odAnalysis',
+    component: () => import("@/views/odAnalysis"),
     meta: {
       keepAlive: true
     }
