@@ -9,7 +9,7 @@
     </div>
     <div class="map-overlay" id="legend">
       <div id="state-legend" class="state-legend">
-        <h4>游客满意度</h4>
+        <h4>图例</h4>
         <div><span style="background-color: #313695"></span>25,000,000</div>
         <br />
         <div><span style="background-color: #4575b4"></span>10,000,000</div>

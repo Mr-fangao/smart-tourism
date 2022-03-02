@@ -1,24 +1,26 @@
 <template>
-<div class="backcolor">
-  <nav>
-    <ul>
-      <li id="u1">
-        <router-link to="/recommend" exact>智能推荐</router-link>
-        <router-link to="/monitor" exact>景点监测</router-link>
-        <router-link to="/query" exact>景点查询</router-link>
-      </li>
-    </ul>
-    <h1>行游天下·景点智能分析与推荐系统</h1>
-    <ul>
-      <li id="u2">
-        <router-link to="/skAnalysis" exact>综合分析</router-link>
-        <router-link to="/feelings" exact>情感分析</router-link>
-        <router-link to="/thememap" exact>专题地图</router-link>
-      </li>
-    </ul>
-    <!-- <span class="times">{{ time }}</span> -->
-  </nav>
-</div>
+  <div class="backcolor">
+    <nav>
+      <ul>
+        <li id="u1">
+          <router-link to="/recommend" exact>智能推荐</router-link>
+          <router-link to="/query" exact>景点查询</router-link>
+          <router-link to="/thememap" exact>专题地图</router-link>
+          <router-link to="/sensation" exact>形象感知</router-link>
+        </li>
+      </ul>
+      <h1>中国景点智能分析与推荐系统</h1>
+      <ul>
+        <li id="u2">
+          <router-link to="/skAnalysis" exact>时空分析</router-link>
+          <router-link to="/odAnalysis.vue" exact>客流分析</router-link>
+          <router-link to="/feelings" exact>情感分析</router-link>
+        </li>
+      </ul>
+      <div class="user">1</div>
+      <!-- <span class="times">{{ time }}</span> -->
+    </nav>
+  </div>
 </template>
 
 <script>
@@ -57,7 +59,7 @@ export default {
 </script>
 
 <style scoped lang="less">
-.backcolor{
+.backcolor {
   background-color: #02191f;
 }
 nav {
@@ -68,14 +70,14 @@ nav {
   justify-content: flex-start;
   height: 50px;
   background: url(../assets/img/BG.png);
-  background-size: 100% 140%;
+  background-size: 78% 140%;
+  background-position-x: 50%;
   padding: 0px;
   h1 {
     font-size: 25px;
     color: #39fcff;
     font-family: Microsoft YaHei;
     // font-weight: bold;
-    margin-left: 10px;
   }
   .times {
     margin-right: 10px;
@@ -91,7 +93,7 @@ nav {
     text-align: center;
     li {
       height: 100%;
-      width: 100%;
+      width: 93%;
       display: flex;
       flex-direction: row;
       // justify-content: space-evenly;
@@ -113,10 +115,9 @@ nav {
     }
   }
   #u1 {
-    margin-left: 10%;
+    margin-left: 0%;
   }
   #u2 {
-    margin-right: 10%;
     justify-content: center;
     a {
       background: url(../assets/img/rightbutton.png) no-repeat;
@@ -124,7 +125,7 @@ nav {
       background-position: 100% 100%;
     }
     a:nth-child(1) {
-      margin-left: 23px;
+      margin-left: -60px;
     }
     .router-link-active {
       background: url(../assets/img/rightbuttonative.png) no-repeat;
@@ -134,6 +135,15 @@ nav {
       background-position: 114% 0%;
     }
   }
+}
+.user {
+  position: absolute;
+  margin-right: 0%;
+  float: right;
+  right: 0;
+  width: 9%;
+  height: 6%;
+  background: #39fcff;
 }
 /*选中则发生一些变化*/
 .router-link-active {

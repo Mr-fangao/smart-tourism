@@ -24,9 +24,18 @@ export default new Router({
     }
   },
   {
-    path: '/monitor',
-    name: 'monitor',
-    component: () => import("@/views/monitor"),
+    path: '/recommend',
+    name: 'recommend',
+    component: () => import("@/views/recommend"),
+    // component: () => import("@/components/areaSelect"),
+    meta: {
+      keepAlive: true
+    }
+  },
+  {
+    path: '/sensation',
+    name: 'sensation',
+    component: () => import("@/views/sensation"),
     meta: {
       keepAlive: true
     }

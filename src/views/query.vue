@@ -31,20 +31,20 @@
               >
                 <el-table-column
                   prop="name"
-                  label="景点名称"
+                  label="名称"
                   width="120"
                   :show-overflow-tooltip="true"
                 >
                 </el-table-column>
                 <el-table-column
                   prop="address"
-                  label="公司名称"
+                  label="地址"
                   :show-overflow-tooltip="true"
                 >
                 </el-table-column>
                 <el-table-column
                   prop="message"
-                  label="信息"
+                  label="相关信息"
                   :show-overflow-tooltip="true"
                 >
                 </el-table-column>

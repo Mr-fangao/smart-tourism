@@ -52,7 +52,7 @@ export default {
   data() {
     return {
       DateValue: new Date(),
-      value1,
+      value1:'',
     };
   },
   mounted() {

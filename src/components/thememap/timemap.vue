@@ -1,7 +1,6 @@
 <template>
   <div class="com-timemap">
     <div id="map"></div>
-    </div>
   </div>
 </template>
 <script>

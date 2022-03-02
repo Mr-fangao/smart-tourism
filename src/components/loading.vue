@@ -7,9 +7,8 @@
   </div>
 </template>
 <script>
-// import "../assets/css/loading.css";
 export default {
-  name: "Loading", // 定义的组件名称 使用时写法：loading
+  name: "Loading",
 };
 </script>
 <style  lang="less" scoped>
