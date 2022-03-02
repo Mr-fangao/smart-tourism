@@ -1,13 +1,13 @@
 <template>
   <div class="loading">
     <div class="load-4">
-      <p>Loading</p>
+      <p id="ploding">Loading...</p>
       <div class="ring-1"></div>
     </div>
   </div>
 </template>
 <script>
-import "../assets/css/loading.css";
+// import "../assets/css/loading.css";
 export default {
   name: "Loading", // 定义的组件名称 使用时写法：loading
 };
@@ -17,12 +17,66 @@ export default {
   position: fixed;
   left: 0;
   top: 0;
-  background-color: rgba(156, 187, 189, 0.486);
+  background-color: rgba(107, 120, 121, 0.486);
   width: 100%;
   height: 100%;
   z-index: 10;
-  .load-4{
-z-index: 100;
+  .load-4 {
+    z-index: 100;
   }
 }
+#ploding {
+  margin: 0;
+  margin-top: 30%;
+  padding: 10px 0;
+  color: #fff;
+}
+
+.load-wrapp {
+  float: left;
+  width: 100px;
+  height: 100px;
+  margin: 0 10px 10px 0;
+  padding: 20px 20px 20px;
+  border-radius: 5px;
+  text-align: center;
+  background-color: #d8d8d8;
+}
+
+.load-wrapp p {
+  padding: 0 0 20px;
+}
+
+.load-wrapp:last-child {
+  margin-right: 0;
+}
+
+.ring-1 {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto;
+  margin-top: -110px;
+  padding: 10px;
+  border: 7px dashed #038bf3;
+  border-radius: 100%;
+}
+
+.load-4 .ring-1 {
+  animation: loading 1.5s .3s cubic-bezier(.17, .37, .43, .67) infinite;
+}
+
+@keyframes loading {
+  0 {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(180deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 </style>

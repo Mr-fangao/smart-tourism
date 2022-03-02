@@ -204,8 +204,8 @@ export default {
   width: 100%;
   background: red;
   .control {
-      position: absolute;
-    right: 5px;
+    position: absolute;
+    left: -30px;
     top: 3%;
     width: 14%;
     height: 38%;
