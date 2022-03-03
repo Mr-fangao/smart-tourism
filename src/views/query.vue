@@ -17,10 +17,7 @@
                 size="mini"
                 v-model="search"
                 placeholder="输入关键字搜索"
-              /><el-button
-                size="mini"
-                id="button"
-                @click="Search(search)"
+              /><el-button size="mini" id="button" @click="Search(search)"
                 >查询</el-button
               >
               <el-table
@@ -80,9 +77,7 @@
                       @click.stop="flyToLocation(scope.row.x, scope.row.y)"
                       >定位</el-button
                     >
-                    <el-button
-                      type="text"
-                      @click.stop="getDetail(scope.row.id)"
+                    <el-button type="text" @click.stop="getDetail(scope.row.id)"
                       >详情</el-button
                     >
                   </template>
@@ -119,6 +114,8 @@
 </template>
 
 <script>
+import * as turf from "@turf/turf";
+import MapboxDraw from "@mapbox/mapbox-gl-draw";
 const mapboxgl = require("mapbox-gl");
 import request from "../utils/request";
 import Bus from "../assets/js/bus.js";
@@ -135,6 +132,7 @@ export default {
     // areaSelect,
     wordcloud,
     Bus,
+    MapboxDraw,
     detail,
     loading,
     // "dialog-bar": dialogBar,
@@ -142,7 +140,7 @@ export default {
   data() {
     return {
       //
-      isLoading: true,
+      isLoading: false,
       tableData: [],
       pagecount: 0,
       height: "",
@@ -159,7 +157,7 @@ export default {
   mounted() {
     this.getHeight();
     this.initmap();
-    this.load();
+    // this.load();
   },
   beforeCreate() {
     // this.load();
@@ -174,6 +172,36 @@ export default {
         center: [105, 35],
         zoom: 3.5,
       });
+      that.map.addControl(new mapboxgl.NavigationControl())
+      
+      // var draw = new MapboxDraw({
+      //   displayControlsDefault: false,
+      //   controls: {
+      //     polygon: true,
+      //     trash: true,
+      //   },
+      // });
+      // this.map.addControl(draw);
+
+      // this.map.on("draw.create", updateArea);
+      // this.map.on("draw.delete", updateArea);
+      // this.map.on("draw.update", updateArea);
+
+      // function updateArea(e) {
+      //   var data = draw.getAll();
+      //   var answer = document.getElementById("calculated-area");
+      //   if (data.features.length > 0) {
+      //     var area = turf.area(data);
+      //     // restrict to area to 2 decimal points
+      //     var rounded_area = Math.round(area * 100) / 100;
+      //     answer.innerHTML =
+      //       "<p><strong>" + rounded_area + "</strong></p><p>square meters</p>";
+      //   } else {
+      //     answer.innerHTML = "";
+      //     if (e.type !== "draw.delete")
+      //       alert("Use the draw tools to draw a polygon!");
+      //   }
+      // }
     },
     flyToLocation(x, y) {
       console.log(x, y);
@@ -209,7 +237,7 @@ export default {
     getHeight() {
       this.height = window.innerHeight - 230 + "px";
     },
-    //加载表格数据
+    // 加载表格数据
     load() {
       request
         .post("/api/data/queryScenic", {
@@ -225,7 +253,7 @@ export default {
           this.tableData[7].y = 26.619924752919862;
           this.pagecount = res.data.pages;
           this.total = res.data.total;
-          if (this.tableData != null) {
+          if (this.tableData == null) {
             this.isLoading = false;
           }
           // this.total = res.data.total;
@@ -434,11 +462,11 @@ export default {
     }
   }
 }
-  .detail {
-    position: relative;
-    z-index: 9999999999;
-    height: 100%;
-    width: 100%;
-    background: #0cf3f3;
-  }
+.detail {
+  position: relative;
+  z-index: 9999999999;
+  height: 100%;
+  width: 100%;
+  background: #0cf3f3;
+}
 </style>
