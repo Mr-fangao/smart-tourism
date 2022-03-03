@@ -237,14 +237,8 @@ export default {
     },
     clickData(row, event, column) {
       console.log(row, event, column);
-      this.porpID = row.id;
+      this.porpID = row.name;
       this.show = true;
-      console.log(row);
-    },
-    clickRow(row) {
-      this.porpID = val.id;
-      this.show = true;
-      console.log(row);
     },
   },
   watch: {},

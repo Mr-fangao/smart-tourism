@@ -27,7 +27,7 @@
             slot="dropdown"
             style="background: #62b6cf; border: #a5e5f6"
           >
-            <el-dropdown-item @click.native="showPop(1111111111)"
+            <el-dropdown-item @click.native="showPop('1111111111')"
               >个人中心</el-dropdown-item
             >
             <el-dropdown-item @click.native="routerjump"
@@ -59,6 +59,7 @@ export default {
       time: "2020年08月31日 10:29",
       index: 1,
       show: false,
+      porpID:'',
     };
   },
   mounted() {

@@ -33,7 +33,7 @@ export default {
     modalVisible: false,
     areaSelect,
     wordcloud,
-    poppage,
+    // poppage,
     // dialogPage,
     "dialog-bar": dialogBar,
   },
