@@ -21,9 +21,9 @@
                 >查询</el-button
               >
               <el-table
+                @row-click="clickData"
                 :row-style="getRowClass"
                 :header-row-style="getRowClass"
-                @row-click="clickRow"
                 :header-cell-style="getRowClass"
                 :height="height"
                 style="width: 100%; align: center"
@@ -84,6 +84,14 @@
                 </el-pagination>
               </div>
             </el-card>
+            <poppage
+              :show="show"
+              :porpID="porpID"
+              @hideModal="hideModal"
+              @submit="submit"
+            >
+              <p>这里放弹窗的内容</p>
+            </poppage>
           </div>
         </div>
       </div>
@@ -97,7 +105,7 @@ import request from "../utils/request";
 // import areaSelect from "../components/areaSelect.vue";
 import wordcloud from "../assets/js/echarts-wordcloud-master/index";
 // import dialogBar from "../components/dialog.vue";
-// import poppage from "../components/poppage.vue";
+import poppage from "../components/poppage.vue";
 import loading from "../components/loading.vue";
 // import dialogPage from "./dialogPage.vue";
 export default {
@@ -106,7 +114,7 @@ export default {
     // modalVisible: false,
     // areaSelect,
     wordcloud,
-    // poppage,
+    poppage,
     loading,
     // "dialog-bar": dialogBar,
   },
@@ -121,6 +129,8 @@ export default {
       total: 0,
       pageSize: 11,
       location: [],
+      show: false,
+      porpID: "",
     };
   },
   mounted() {
@@ -198,6 +208,15 @@ export default {
           // this.total = res.data.total;
         });
     },
+    hideModal() {
+      // 取消弹窗回调
+      this.show = false;
+    },
+
+    submit() {
+      // 确认弹窗回调
+      this.show = false;
+    },
     // loading() {
     //   this.bus.$emit("loading", true);
     // },
@@ -216,7 +235,15 @@ export default {
           this.total = res.data.total;
         });
     },
+    clickData(row, event, column) {
+      console.log(row, event, column);
+      this.porpID = row.id;
+      this.show = true;
+      console.log(row);
+    },
     clickRow(row) {
+      this.porpID = val.id;
+      this.show = true;
       console.log(row);
     },
   },

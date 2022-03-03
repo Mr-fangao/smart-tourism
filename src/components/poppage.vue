@@ -6,9 +6,9 @@
               <div class="close-btn" @click="hideModal"><i class="fa fa-times" aria-hidden="true" style="color:red;"></i></div>
       </div>
       <div class="modal-main">
-        <!-- <div class="ptChart">
+        <div class="ptChart">
           {{ porpID }}
-        </div> -->
+        </div>
       </div>
       <!-- <div class="modal-footer">
         <button @click="hideModal">取消</button>
