@@ -17,7 +17,10 @@
                 size="mini"
                 v-model="search"
                 placeholder="输入关键字搜索"
-              /><el-button size="mini" id="button" @click="Search(search)"
+              /><el-button
+                size="mini"
+                id="button"
+                @click="Search(search)"
                 >查询</el-button
               >
               <el-table
@@ -32,19 +35,35 @@
                 <el-table-column
                   prop="name"
                   label="名称"
-                  width="120"
+                  width="130"
                   :show-overflow-tooltip="true"
                 >
                 </el-table-column>
                 <el-table-column
-                  prop="address"
+                  prop="city"
+                  label="城市"
+                  width="60"
+                  :show-overflow-tooltip="true"
+                >
+                </el-table-column>
+                <el-table-column
+                  prop="score"
+                  label="评分"
+                  width="50"
+                  :show-overflow-tooltip="true"
+                >
+                </el-table-column>
+                <el-table-column
+                  prop="hot"
+                  label="热度"
+                  width="50"
+                  :show-overflow-tooltip="true"
+                >
+                </el-table-column>
+                <el-table-column
+                  prop="adress"
                   label="地址"
-                  :show-overflow-tooltip="true"
-                >
-                </el-table-column>
-                <el-table-column
-                  prop="message"
-                  label="相关信息"
+                  width="50"
                   :show-overflow-tooltip="true"
                 >
                 </el-table-column>
@@ -54,7 +73,7 @@
                 </el-table-column>
                 <el-table-column type="id" label="id" v-if="false">
                 </el-table-column>
-                <el-table-column prop="detail" label="操作" width="120">
+                <el-table-column prop="detail" label="操作" width="100">
                   <template slot-scope="scope">
                     <el-button
                       type="text"
@@ -63,7 +82,7 @@
                     >
                     <el-button
                       type="text"
-                      @click.stop="flyToLocation(scope.row.x, scope.row.y)"
+                      @click.stop="getDetail(scope.row.id)"
                       >详情</el-button
                     >
                   </template>
@@ -84,14 +103,14 @@
                 </el-pagination>
               </div>
             </el-card>
-            <poppage
+            <!-- <poppage
               :show="show"
               :porpID="porpID"
               @hideModal="hideModal"
               @submit="submit"
             >
               <p>这里放弹窗的内容</p>
-            </poppage>
+            </poppage> -->
           </div>
         </div>
       </div>
@@ -102,10 +121,11 @@
 <script>
 const mapboxgl = require("mapbox-gl");
 import request from "../utils/request";
+import Bus from "../assets/js/bus.js";
 // import areaSelect from "../components/areaSelect.vue";
 import wordcloud from "../assets/js/echarts-wordcloud-master/index";
 // import dialogBar from "../components/dialog.vue";
-import poppage from "../components/poppage.vue";
+import detail from "../components/detail.vue";
 import loading from "../components/loading.vue";
 // import dialogPage from "./dialogPage.vue";
 export default {
@@ -114,12 +134,14 @@ export default {
     // modalVisible: false,
     // areaSelect,
     wordcloud,
-    poppage,
+    Bus,
+    detail,
     loading,
     // "dialog-bar": dialogBar,
   },
   data() {
     return {
+      //
       isLoading: true,
       tableData: [],
       pagecount: 0,
@@ -129,8 +151,9 @@ export default {
       total: 0,
       pageSize: 11,
       location: [],
-      show: false,
-      porpID: "",
+      //弹窗字段
+      // show: false,
+      // porpID: "",
     };
   },
   mounted() {
@@ -235,9 +258,12 @@ export default {
           this.total = res.data.total;
         });
     },
-    clickData(row, event, column) {
-      console.log(row, event, column);
-      this.porpID = row.name;
+    clickData(row) {
+      console.log(row.name);
+      this.isShow = true;
+    },
+    getDetail(val) {
+      this.porpID = val.name;
       this.show = true;
     },
   },
@@ -289,7 +315,7 @@ export default {
   left: 0.5%;
   bottom: 0px;
   height: 92%;
-  width: 30%;
+  width: 33%;
   float: left;
   display: flex;
   flex-direction: column;
@@ -408,4 +434,11 @@ export default {
     }
   }
 }
+  .detail {
+    position: relative;
+    z-index: 9999999999;
+    height: 100%;
+    width: 100%;
+    background: #0cf3f3;
+  }
 </style>

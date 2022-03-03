@@ -22,7 +22,8 @@
     "mapbox-gl": "^2.6.1",
     "moment": "^2.29.1",
     "vue": "^2.5.2",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vue-seamless-scroll": "^1.1.23"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

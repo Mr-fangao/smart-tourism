@@ -4,7 +4,7 @@
       <ul>
         <li id="u1">
           <router-link to="/recommend" exact>智能推荐</router-link>
-          <router-link to="/query" exact>景点查询</router-link>
+          <router-link to="/query" exact >景点查询</router-link>
           <router-link to="/thememap" exact>专题地图</router-link>
           <router-link to="/sensation" exact>形象感知</router-link>
         </li>
