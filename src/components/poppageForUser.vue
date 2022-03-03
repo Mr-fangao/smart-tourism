@@ -73,7 +73,7 @@
       <div class="modal-foot">
         <div class="part" id="pt1">
           <div class="pttitle"><p>历史浏览记录</p></div>
-          <div class="content">
+          <div class="content1">
             <div class="alarm-content">
               <ul>
                 <li class="title1">
@@ -86,35 +86,35 @@
                     </li>
                   </ul>
                 </li>
-                <li class="content">
-                  <vue-seamless-scroll
-                    :data="listData"
-                    :class-option="classOption"
-                    class="warp"
-                  >
-                    <ul class="item">
-                      <li v-for="(item, index) in listData" :key="index">
-                        <span class="row">{{ item.name }}</span>
-                        <span class="row">{{ item.sex }}</span>
-                        <span class="row">{{ item.gesture }}</span>
-                        <span class="row handle">{{ item.handle }}</span>
-                      </li>
-                    </ul>
-                  </vue-seamless-scroll>
-                </li>
               </ul>
+            </div>
+            <div class="content">
+              <vue-seamless-scroll
+                :data="listData"
+                :class-option="classOption"
+                class="warp"
+              >
+                <ul class="item">
+                  <li v-for="(item, index) in listData" :key="index">
+                    <span class="row">{{ item.name }}</span>
+                    <span class="row">{{ item.sex }}</span>
+                    <span class="row">{{ item.gesture }}</span>
+                    <span class="row handle">{{ item.handle }}</span>
+                  </li>
+                </ul>
+              </vue-seamless-scroll>
             </div>
           </div>
         </div>
-        <div class="part" id="pt1">
+        <div class="part" id="pt2">
           <div class="pttitle">
             <p>取向偏好分析</p>
-            <div class="content">
-              <div
-                id="myChart"
-                :style="{ width: '300px', height: '300px' }"
-              ></div>
-            </div>
+          </div>
+          <div class="content1">
+            <div
+              id="myChart"
+              :style="{ width: '300px', height: '300px' }"
+            ></div>
           </div>
         </div>
       </div>
@@ -391,24 +391,24 @@ height: 22%;
   padding: 0px 0;
   background-color: #24bff390;
 }
-.warp {
-    height: 270px;
-    width: 360px;
-    margin: 0 auto;
-    overflow: hidden;
-    ul {
-      list-style: none;
-      padding: 0;
-      margin: 0 auto;
-      li,
-      a {
-        display: block;
-        height: 30px;
-        line-height: 30px;
-        display: flex;
-        justify-content: space-between;
-        font-size: 15px;
-      }
-    }
-  }
+// .warp {
+//     height: 270px;
+//     width: 360px;
+//     margin: 0 auto;
+//     overflow: hidden;
+//     ul {
+//       list-style: none;
+//       padding: 0;
+//       margin: 0 auto;
+//       li,
+//       a {
+//         display: block;
+//         height: 30px;
+//         line-height: 30px;
+//         display: flex;
+//         justify-content: space-between;
+//         font-size: 15px;
+//       }
+//     }
+//   }
 </style>
