@@ -49,13 +49,13 @@ export default {
   width: 100%;
   height: 100%;
 }
-.content {
-  position: absolute;
-  top: 0;
-  z-index: 9999;
-  height: 100%;
-  width: 100%;
-}
+// .content {
+//   position: absolute;
+//   top: 0;
+//   z-index: 9999;
+//   height: 100%;
+//   width: 100%;
+// }
 .aside {
   height: 100%;
   z-index: 999999;
@@ -78,34 +78,6 @@ export default {
   }
   .el-menu-item:hover {
     background: transparent;
-  }
-  ul {
-    height: 100%;
-    list-style-type: none; /*消除黑点*/
-    text-align: center;
-    .beforestyle,
-    li {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      img {
-        height: 32px;
-      }
-      p {
-        color: aqua;
-        font-size: 12px;
-        font-family: Microsoft YaHei;
-        // font-weight: bold;
-        text-decoration: none; /*消除下划线*/
-        border-radius: 5px;
-        padding-bottom: 20px;
-      }
-      // .changeSelectAll {
-      //   border-right: 2px dashed #f00;
-      // }
-    }
   }
 }
 </style>
