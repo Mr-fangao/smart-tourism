@@ -11,8 +11,8 @@
         <el-row :gutter="20">
           <el-col :span="4"
             ><div class="grid-content bg-purple">
-              <span class="text">
-                用户名称:</span></div></el-col
+              <p>
+                用户名称:</p></div></el-col
           >
           <el-col :span="8"><div class="grid-content bg-purple"></div></el-col>
         </el-row>
@@ -145,15 +145,14 @@ export default {
   border-radius: 0px;
   min-height: 36px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-
+  p{
+    font-size: 18px;
+  }
 }
 .row-bg {
   padding: 5px 0;
   background-color: #f9fafc;
-}
-.text{
-  width: 100%;
-  height: 100%;
 }
 </style>
