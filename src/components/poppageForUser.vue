@@ -79,27 +79,25 @@
                 <li class="title1">
                   <ul>
                     <li>
-                      <span class="row">姓名</span>
-                      <span class="row">性别</span>
-                      <span class="row">姿态</span>
-                      <span class="row">处理情况</span>
+                      <span class="row">名称</span>
+                      <span class="row">城市</span>
+                      <span class="row">景点特征</span>
+                      <span class="row">浏览次数</span>
+                      <span class="row">浏览时间</span>
                     </li>
                   </ul>
                 </li>
               </ul>
             </div>
             <div class="content">
-              <vue-seamless-scroll
-                :data="listData"
-                :class-option="classOption"
-                class="warp"
-              >
+              <vue-seamless-scroll :data="listData" :class-option="classOption">
                 <ul class="item">
                   <li v-for="(item, index) in listData" :key="index">
                     <span class="row">{{ item.name }}</span>
-                    <span class="row">{{ item.sex }}</span>
-                    <span class="row">{{ item.gesture }}</span>
-                    <span class="row handle">{{ item.handle }}</span>
+                    <span class="row">{{ item.city }}</span>
+                    <span class="row">{{ item.features }}</span>
+                    <span class="row">{{ item.frequency }}</span>
+                    <span class="row handle">{{ item.time }}</span>
                   </li>
                 </ul>
               </vue-seamless-scroll>
@@ -143,52 +141,88 @@ export default {
       },
       listData: [
         {
-          name: "李花",
-          sex: "女",
-          gesture: "摔倒",
-          handle: "已处理",
+          name: "云冈石窟",
+          city: "山西大同",
+          features: "石雕艺术宝库",
+          frequency: "1",
+          time: "2022-03-03",
         },
         {
-          name: "李花",
-          sex: "女",
-          gesture: "摔倒",
-          handle: "已处理",
+          name: "平遥古城",
+          city: "山西晋中",
+          features: "历史文化名城",
+          frequency: "1",
+          time: "2022-03-03",
         },
         {
-          name: "李花",
-          sex: "女",
-          gesture: "摔倒",
-          handle: "已处理",
+          name: "黄山风景区",
+          city: "安徽黄山",
+          features: "奇山",
+          frequency: "2",
+          time: "2022-03-03",
         },
         {
-          name: "李花",
-          sex: "女",
-          gesture: "摔倒",
-          handle: "已处理",
+          name: "厦门市鼓浪屿",
+          city: "福建厦门",
+          features: "万国建筑博览",
+          frequency: "2",
+          time: "2022-03-03",
         },
         {
-          name: "李花",
-          sex: "女",
-          gesture: "摔倒",
-          handle: "已处理",
+          name: "路南石林",
+          city: "云南石林彝族自治县",
+          features: "喀斯特地貌",
+          frequency: "1",
+          time: "2022-03-03",
         },
         {
-          name: "李花",
-          sex: "女",
-          gesture: "摔倒",
-          handle: "已处理",
+          name: "庐山",
+          city: "江西庐山",
+          features: "避暑游览胜地",
+          frequency: "3",
+          time: "2022-03-02",
         },
         {
-          name: "李花",
-          sex: "女",
-          gesture: "摔倒",
-          handle: "已处理",
+          name: "井冈山",
+          city: "天然氧吧",
+          features: "江西吉安",
+          frequency: "2",
+          time: "2022-03-02",
         },
         {
-          name: "李花",
-          sex: "女",
-          gesture: "摔倒",
-          handle: "已处理",
+          name: "蓬莱阁",
+          city: "山东烟台",
+          features: "古代四大名楼",
+          frequency: "1",
+          time: "2022-03-02",
+        },
+        {
+          name: "秦始皇陵",
+          city: "陕西西安",
+          features: "帝王陵墓",
+          frequency: "1",
+          time: "2022-03-02",
+        },
+        {
+          name: "华山",
+          city: "陕西渭南",
+          features: "五岳之首",
+          frequency: "1",
+          time: "2022-03-02",
+        },
+        {
+          name: "拙政园",
+          city: "江苏苏州",
+          features: "古典山水园林",
+          frequency: "1",
+          time: "2022-03-02",
+        },
+        {
+          name: "张家界国家森林公园",
+          city: "湖南张家界",
+          features: "世界地质公园",
+          frequency: "1",
+          time: "2022-03-02",
         },
       ],
     };
@@ -321,7 +355,8 @@ height: 22%;
     >p{
       position: absolute;
       left: 55px;
-          top: 15.5%;
+      top: 15.5%;
+      text-shadow: 0 0 10px #fff, 0 0 20px #999696, 0 0 30px #fff, 0 0 40px #eefffe, 0 0 70px #404646;
     }
 }
 .modal-main {
@@ -359,7 +394,23 @@ height: 22%;
     position: relative;
     left: -26%;
     top: 15.5%;
+        text-shadow: 0 0 10px #fff, 0 0 20px #999696, 0 0 30px #fff, 0 0 40px #eefffe, 0 0 70px #404646;
     }
+    }
+    .content1{
+      color: #fff;
+      width: 370px;
+      margin: 0 auto;
+      .title1{
+        ul{
+          li{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+                
+          }
+        }
+      }
     }
   }
 }
@@ -383,7 +434,7 @@ height: 22%;
   flex-direction: column;
   justify-content: center;
   p {
-    color: rgb(59, 223, 235);
+    color: #fff;
     font-size: 18px;
   }
 }
@@ -391,23 +442,22 @@ height: 22%;
   padding: 0px 0;
   background-color: #24bff390;
 }
-.warp {
-    height: 270px;
-    width: 360px;
-    margin: 0 auto;
-    overflow: hidden;
-    ul {
+.content {
+  width: 100%;
+  height: 90%;
+  overflow: hidden;
+    .item {
       list-style: none;
       padding: 0;
       margin: 0 auto;
-      li,
-      a {
+      li{
         display: block;
         height: 30px;
         line-height: 30px;
         display: flex;
         justify-content: space-between;
         font-size: 15px;
+        color: #fff;
       }
     }
   }
