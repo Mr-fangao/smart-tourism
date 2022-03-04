@@ -197,7 +197,7 @@ export default {
       function updateArea(e) {
         var data = draw.getAll();
         if (data.features.length > 0) {
-          console.log(data);
+          console.log(data.features[0].geometry.coordinates[0]);
         } else {
           console.log("no data");
         }
