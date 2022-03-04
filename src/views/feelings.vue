@@ -73,11 +73,15 @@ export default {
     border: none;
   }
   .el-menu-item.is-active {
-    color: #15abc5;
-    background: #06fafa;
+    color: #06fafa;
+    background: transparent
   }
   .el-menu-item:hover {
     background: transparent;
   }
+}
+.tab {
+  height: 38%;
+  line-height: 40px;
 }
 </style>

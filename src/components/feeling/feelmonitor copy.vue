@@ -125,22 +125,56 @@ export default {
           0 0 30px #38e9e0, 0 0 40px #0cf3f3;
       }
     }
-    .crawling {
+  }
+}
+.aside {
+  height: 100%;
+  z-index: 999999;
+  position: absolute;
+  width: 3%;
+  top: 0;
+  right: 0;
+  background-color: rgba(2, 25, 31, 0.8);
+  .el-menu {
+    top: 25%;
+    width: 100%;
+    height: 8%;
+    right: 0%;
+    background: transparent;
+    border: none;
+  }
+  .el-menu-item.is-active {
+    color: #15abc5;
+    border-right: 5px solid #0cf3f3;
+    background: transparent;
+  }
+  .el-menu-item {
+    color: #fff;
+  }
+  .el-menu-item:hover {
+    background: transparent;
+  }
+  .span {
+    color: aliceblue;
+  }
+  ul {
+    height: 100%;
+    list-style-type: none; /*消除黑点*/
+    text-align: center;
+    li {
+      height: 100%;
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       align-items: center;
-      padding: 10px;
-      .el-select {
-        padding-right: 10px;
-      }
-    }
-    .query {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      padding: 10px;
-      .el-input {
-        padding-right: 10px;
+      justify-content: center;
+      p {
+        color: aqua;
+        font-size: 12px;
+        font-family: Microsoft YaHei;
+        // font-weight: bold;
+        text-decoration: none; /*消除下划线*/
+        border-radius: 5px;
+        padding-bottom: 20px;
       }
     }
   }

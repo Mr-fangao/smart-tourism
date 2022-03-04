@@ -192,7 +192,6 @@ export default {
           trash: true,
         },
       });
-      window.Draw = draw;
       this.map.addControl(draw, "top-right");
       this.map.on("draw.create", updateArea);
       function updateArea(e) {
