@@ -1,7 +1,10 @@
 <template>
   <div class="com">
     <div class="left">
-      <div class="title">景点热搜Top5</div>
+      <div class="title">
+        <img src="../../assets/img/panelIcon.png" alt="" />
+        <span>景点热搜Top5</span>
+      </div>
       <div class="content">
         <el-timeline hide-timestamp="false">
           <el-timeline-item>
@@ -41,19 +44,25 @@
       <div class="header"></div>
       <div class="maincontent">
         <el-row>
-          <div class="echartsTitle">11</div>
+          <div class="echartsTitle">
+            <img src="../../assets/img/panelIcon.png" alt="" />
+            <span>高频热词分布</span>
+          </div>
           <div class="echartsContent"></div>
         </el-row>
-        <el-row> </el-row>
-        <el-row style="margin-left: 1px; margin-right: 1px">
+        <el-row>
           <div class="echartbottom" id="btmChart1"></div>
-                    <div class="echartbottom" id="btmChart1"></div>
-                              <div class="echartbottom" id="btmChart1"></div>
+          <div class="echartbottom" id="btmChart1"></div>
+          <div class="echartbottom" id="btmChart1"></div>
         </el-row>
+        <el-row style="margin-left: 1px; margin-right: 1px"> </el-row>
       </div>
     </div>
     <div class="right">
-      <div class="title">城市热搜Top10</div>
+      <div class="title">
+        <img src="../../assets/img/panelIcon.png" alt="" />
+        <span>城市热搜Top5</span>
+      </div>
       <div class="content">
         <el-timeline hide-timestamp="false">
           <el-timeline-item>
@@ -113,6 +122,20 @@ export default {
   .title {
     color: aliceblue;
     height: 6%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    > img {
+      height: 70%;
+      width: 10%;
+      margin-left: 5%;
+    }
+    > span {
+      color: rgb(115, 215, 228);
+      font-size: 12pt;
+    }
+    // background: url("../../assets/img/panelIcon.png") no-repeat;
+    // text-align: center;
   }
   .content {
     width: 100%;
@@ -134,11 +157,12 @@ export default {
       .el-row {
         margin-bottom: 10px;
         height: 29.5%;
-        background-color: #99a9bf;
+        // background-color: #99a9bf;
         &:last-child {
           margin-bottom: 0;
         }
-        .echartbottom{
+        .echartbottom {
+          float: left;
           width: 33.3%;
           height: 100%;
         }
@@ -147,12 +171,24 @@ export default {
         .echartsTitle {
           height: 15%;
           width: 100%;
-          background-color: aqua;
+          color: aliceblue;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          > img {
+            height: 90%;
+            width: 4%;
+            margin-left: 2%;
+          }
+          > span {
+            color: rgb(115, 215, 228);
+            font-size: 12pt;
+          }
         }
         .echartsContent {
           height: 85%;
           width: 100%;
-          background-color: antiquewhite;
+          // background-color: antiquewhite;
         }
       }
       .el-col {
@@ -189,8 +225,20 @@ export default {
   padding: 0px;
   height: 20%;
   height: 105px;
+  background: url("../../assets/img/buttonbg.png") no-repeat;
+  background-size: 100% 100%;
+  color: #d3dce6;
+  // background: rgba(202, 73, 73, 0.185);
+  border: none;
 }
 /deep/.el-timeline-item__wrapper {
+  right: 4px;
+}
+/deep/.el-card.is-always-shadow {
+  background: transparent;
+  border: none;
+}
+/deep/.el-timeline-item__tail{
   right: 4px;
 }
 </style>
