@@ -114,9 +114,11 @@
 </template>
 
 <script>
-import * as turf from "@turf/turf";
+// import * as turf from "@turf/turf";
 import MapboxDraw from "@mapbox/mapbox-gl-draw";
 const mapboxgl = require("mapbox-gl");
+import "@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css";
+import "mapbox-gl/dist/mapbox-gl.css";
 import request from "../utils/request";
 import Bus from "../assets/js/bus.js";
 // import areaSelect from "../components/areaSelect.vue";
@@ -176,14 +178,7 @@ export default {
         center: [105, 35],
         zoom: 3.5,
       });
-      this.map.on("click", function (e) {
-        // console.log(JSON.stringify(e.lngLat));
-        // this.pointsdata.push(e.lngLat);
-        // this.pointsdata.lat=(e.lngLat.lat);
-        // console.log(this.pointsdata)
-        // this.points[this.pointsflag].lng=pointsdata.lng;
-        // this.points[this.pointsflag++].lat=pointsdata.lat;
-      });
+      this.map.on("click", function (e) {});
       var nav = new mapboxgl.NavigationControl();
       this.map.addControl(nav, "top-right");
       var draw = new MapboxDraw({
@@ -193,7 +188,8 @@ export default {
           trash: true,
         },
       });
-      this.map.addControl(draw);
+      window.Draw = draw;
+      this.map.addControl(draw, "top-right");
       this.map.on("draw.create", updateArea);
       function updateArea(e) {
         var data = draw.getAll();
@@ -296,13 +292,16 @@ export default {
       this.porpID = val.name;
       this.show = true;
     },
+    // startDraw(){
+    //   draw.changeMode('draw_point')
+    // },
   },
   watch: {},
 };
 </script>
 
 <style scoped lang="less">
-@import url("https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.css");
+// @import url("https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.css");
 #query {
   position: fixed;
   width: 100%;
@@ -322,6 +321,10 @@ export default {
   flex: 1;
   //  background-size: 100% 100%;
   // background: url(../assets/img/titlebg.png) no-repeat;
+}
+.draw {
+  width: 50px;
+  height: 50px;
 }
 .head {
   height: 5%;
@@ -471,5 +474,8 @@ export default {
   height: 100%;
   width: 100%;
   background: #0cf3f3;
+}
+/deep/.mapboxgl-ctrl-group:not(:empty) {
+  background: #8fcef1;
 }
 </style>

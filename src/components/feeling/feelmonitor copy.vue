@@ -6,7 +6,28 @@
         <div class="title">
           <span>区域情感分析</span>
         </div>
-        
+        <div class="crawling">
+          <el-select v-model="value" placeholder="数据来源">
+            <el-option
+              v-for="item in options"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            >
+            </el-option>
+          </el-select>
+          <el-date-picker v-model="date" type="date" placeholder="选择日期">
+          </el-date-picker>
+        </div>
+        <el-button>一键爬取</el-button>
+        <div class="space"></div>
+        <div class="query">
+          <el-input placeholder="请输入关键词" v-model="input" clearable>
+          </el-input>
+          <el-button>查询</el-button>
+          <!-- <i slot="prefix" class="el-input__icon el-icon-search"></i> -->
+        </div>
+        <el-button>重置</el-button>
       </div>
     </div>
   </div>
