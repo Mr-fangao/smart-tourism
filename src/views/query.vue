@@ -58,7 +58,7 @@
                 >
                 </el-table-column>
                 <el-table-column
-                  prop="adress"
+                  prop="address"
                   label="地址"
                   width="50"
                   :show-overflow-tooltip="true"
@@ -152,18 +152,22 @@ export default {
       //弹窗字段
       // show: false,
       // porpID: "",
+      points: [{ lng: "10", lat: "10" }],
+      pointsdata: [{ lng: "0", lat: "0" }],
+      pointsflag: 0,
     };
   },
   mounted() {
     this.getHeight();
     this.initmap();
-    // this.load();
+    this.load();
   },
   beforeCreate() {
     // this.load();
   },
   methods: {
     initmap() {
+      var that = this;
       this.$mapboxgl.accessToken =
         "pk.eyJ1IjoiY2hlbmpxIiwiYSI6ImNrcWFmdWt2bjBtZGsybmxjb29oYmRzZzEifQ.mnpiwx7_cBEyi8YiJiMRZg";
       this.map = new mapboxgl.Map({
@@ -172,36 +176,33 @@ export default {
         center: [105, 35],
         zoom: 3.5,
       });
-      that.map.addControl(new mapboxgl.NavigationControl())
-      
-      // var draw = new MapboxDraw({
-      //   displayControlsDefault: false,
-      //   controls: {
-      //     polygon: true,
-      //     trash: true,
-      //   },
-      // });
-      // this.map.addControl(draw);
-
-      // this.map.on("draw.create", updateArea);
-      // this.map.on("draw.delete", updateArea);
-      // this.map.on("draw.update", updateArea);
-
-      // function updateArea(e) {
-      //   var data = draw.getAll();
-      //   var answer = document.getElementById("calculated-area");
-      //   if (data.features.length > 0) {
-      //     var area = turf.area(data);
-      //     // restrict to area to 2 decimal points
-      //     var rounded_area = Math.round(area * 100) / 100;
-      //     answer.innerHTML =
-      //       "<p><strong>" + rounded_area + "</strong></p><p>square meters</p>";
-      //   } else {
-      //     answer.innerHTML = "";
-      //     if (e.type !== "draw.delete")
-      //       alert("Use the draw tools to draw a polygon!");
-      //   }
-      // }
+      this.map.on("click", function (e) {
+        // console.log(JSON.stringify(e.lngLat));
+        // this.pointsdata.push(e.lngLat);
+        // this.pointsdata.lat=(e.lngLat.lat);
+        // console.log(this.pointsdata)
+        // this.points[this.pointsflag].lng=pointsdata.lng;
+        // this.points[this.pointsflag++].lat=pointsdata.lat;
+      });
+      var nav = new mapboxgl.NavigationControl();
+      this.map.addControl(nav, "top-right");
+      var draw = new MapboxDraw({
+        displayControlsDefault: false,
+        controls: {
+          polygon: true,
+          trash: true,
+        },
+      });
+      this.map.addControl(draw);
+      this.map.on("draw.create", updateArea);
+      function updateArea(e) {
+        var data = draw.getAll();
+        if (data.features.length > 0) {
+          console.log(data);
+        } else {
+          console.log("no data");
+        }
+      }
     },
     flyToLocation(x, y) {
       console.log(x, y);
@@ -272,6 +273,7 @@ export default {
     //   this.bus.$emit("loading", true);
     // },
     Search() {
+      console.log(this.points);
       this.currentPage = 1;
       request
         .post("/api/data/searchScenic", {
@@ -300,6 +302,7 @@ export default {
 </script>
 
 <style scoped lang="less">
+@import url("https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.css");
 #query {
   position: fixed;
   width: 100%;
