@@ -110,6 +110,10 @@
         </div>
       </div>
     </div>
+    <div class="text">
+      <span class="text1">区域查询</span>
+      <span>清除查询</span>
+    </div>
   </div>
 </template>
 
@@ -179,8 +183,8 @@ export default {
         zoom: 3.5,
       });
       this.map.on("click", function (e) {});
-      var nav = new mapboxgl.NavigationControl();
-      this.map.addControl(nav, "top-right");
+      // var nav = new mapboxgl.NavigationControl();
+      // this.map.addControl(nav, "top-right");
       var draw = new MapboxDraw({
         displayControlsDefault: false,
         controls: {
@@ -306,6 +310,21 @@ export default {
   position: fixed;
   width: 100%;
   height: 100%;
+  .text {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 70px;
+    height: 60px;
+    width: 70px;
+    bottom: 82.6%;
+    left: 34.3%;
+    z-index: 0;
+    color: #fff;
+    .text1 {
+      margin-bottom: 20px;
+    }
+  }
 }
 #map {
   position: relative;
@@ -477,5 +496,29 @@ export default {
 }
 /deep/.mapboxgl-ctrl-group:not(:empty) {
   background: #8fcef1;
+}
+/deep/.mapbox-gl-draw_ctrl-draw-btn {
+  width: 100px;
+  height: 40px;
+  // background-color: #225e81e3;
+  // border:1px solid #1edaeb;
+  // background-repeat: no-repeat;
+  // background-position: center;
+  background: url(../assets/img/框.png) no-repeat;
+  background-size: 100% 100%;
+  z-index: 0;
+}
+/deep/.mapboxgl-ctrl-group:not(:empty) {
+  background: transparent;
+  box-shadow: none;
+  z-index: 0;
+}
+
+/deep/.mapboxgl-ctrl-top-right .mapboxgl-ctrl {
+  margin: 120px 10px 0 0;
+  position: relative;
+  display: block;
+  right: 830%;
+  z-index: 0;
 }
 </style>
