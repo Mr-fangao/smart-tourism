@@ -162,19 +162,19 @@ export default {
           time: "2022-03-03",
         },
         {
-          name: "厦门市鼓浪屿",
+          name: "鼓浪屿",
           city: "福建厦门",
           features: "万国建筑博览",
           frequency: "2",
           time: "2022-03-03",
         },
-        {
-          name: "路南石林",
-          city: "云南石林彝族自治县",
-          features: "喀斯特地貌",
-          frequency: "1",
-          time: "2022-03-03",
-        },
+        // {
+        //   name: "路南石林",
+        //   city: "云南石林彝族自治县",
+        //   features: "喀斯特地貌",
+        //   frequency: "1",
+        //   time: "2022-03-03",
+        // },
         {
           name: "庐山",
           city: "江西庐山",
@@ -217,13 +217,13 @@ export default {
           frequency: "1",
           time: "2022-03-02",
         },
-        {
-          name: "张家界国家森林公园",
-          city: "湖南张家界",
-          features: "世界地质公园",
-          frequency: "1",
-          time: "2022-03-02",
-        },
+        // {
+        //   name: "张家界国家森林公园",
+        //   city: "湖南张家界",
+        //   features: "世界地质公园",
+        //   frequency: "1",
+        //   time: "2022-03-02",
+        // },
       ],
     };
   },
@@ -257,12 +257,12 @@ export default {
         radar: {
           // shape: 'circle',
           indicator: [
-            { name: "Sales", max: 6500 },
-            { name: "Administration", max: 16000 },
-            { name: "Information Technology", max: 30000 },
-            { name: "Customer Support", max: 38000 },
-            { name: "Development", max: 52000 },
-            { name: "Marketing", max: 25000 },
+            { name: "山岳", max: 52000 },
+            { name: "历史", max: 16000 },
+            { name: "园林", max: 30000 },
+            { name: "公园", max: 6500 },
+            { name: "古城", max: 38000 },
+            { name: "艺术", max: 25000 },
           ],
         },
         series: [
@@ -345,7 +345,7 @@ export default {
     margin-right: -86% !important;
   }
 }
-.title{
+.title{  
 color: aliceblue;
 font-size: 14pt;
     width: 50%;
@@ -399,15 +399,18 @@ height: 22%;
     }
     .content1{
       color: #fff;
-      width: 370px;
-      margin: 0 auto;
+          width: 91%;
+    margin-left: 45px;
       .title1{
         ul{
           li{
             display: flex;
             flex-direction: row;
-            justify-content: space-between;
-                
+            margin: 10px 0px;
+            // justify-content: space-between;
+                span{
+                  width: 25%;
+                }
           }
         }
       }
@@ -446,18 +449,23 @@ height: 22%;
   width: 100%;
   height: 90%;
   overflow: hidden;
+  
     .item {
       list-style: none;
       padding: 0;
-      margin: 0 auto;
+      // margin: 0 auto;
       li{
         display: block;
         height: 30px;
         line-height: 30px;
         display: flex;
-        justify-content: space-between;
+        // justify-content: space-between;
+        // margin-right: 10px;
         font-size: 15px;
         color: #fff;
+        span{
+          width: 25%;
+        }
       }
     }
   }
