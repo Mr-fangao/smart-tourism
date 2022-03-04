@@ -51,9 +51,27 @@
           <div class="echartsContent"></div>
         </el-row>
         <el-row>
-          <div class="echartbottom" id="btmChart1"></div>
-          <div class="echartbottom" id="btmChart1"></div>
-          <div class="echartbottom" id="btmChart1"></div>
+          <div class="echartbottom">
+            <div class="echartbottomTitle">
+              <img src="../../assets/img/panelIcon.png" alt="" />
+              <span>高频热词分布</span>
+            </div>
+            <div class="btmCht" id="btmChart1"></div>
+          </div>
+          <div class="echartbottom">
+            <div class="echartbottomTitle">
+              <img src="../../assets/img/panelIcon.png" alt="" />
+              <span>高频热词分布</span>
+            </div>
+            <div class="btmCht" id="btmChart2"></div>
+          </div>
+          <div class="echartbottom">
+            <div class="echartbottomTitle">
+              <img src="../../assets/img/panelIcon.png" alt="" />
+              <span>高频热词分布</span>
+            </div>
+            <div class="btmCht" id="btmChart3"></div>
+          </div>
         </el-row>
         <el-row style="margin-left: 1px; margin-right: 1px"> </el-row>
       </div>
@@ -134,8 +152,6 @@ export default {
       color: rgb(115, 215, 228);
       font-size: 12pt;
     }
-    // background: url("../../assets/img/panelIcon.png") no-repeat;
-    // text-align: center;
   }
   .content {
     width: 100%;
@@ -161,11 +177,6 @@ export default {
         &:last-child {
           margin-bottom: 0;
         }
-        .echartbottom {
-          float: left;
-          width: 33.3%;
-          height: 100%;
-        }
       }
       .el-row:nth-child(1) {
         .echartsTitle {
@@ -185,10 +196,33 @@ export default {
             font-size: 12pt;
           }
         }
-        .echartsContent {
+      }
+      .el-row:nth-child(2) {
+        display: flex;
+        .echartbottom {
+          width: 100%;
+          height: 100%;
+        }
+        .echartbottomTitle {
+          height: 15%;
+          width: 100%;
+          color: aliceblue;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          > img {
+            height: 90%;
+            width: 12%;
+            margin-left: 7%;
+          }
+          > span {
+            color: rgb(115, 215, 228);
+            font-size: 12pt;
+          }
+        }
+        .echartbottom {
           height: 85%;
           width: 100%;
-          // background-color: antiquewhite;
         }
       }
       .el-col {
@@ -220,7 +254,6 @@ export default {
     background-size: 100% 93%;
   }
 }
-
 /deep/.el-card__body {
   padding: 0px;
   height: 20%;
@@ -238,7 +271,7 @@ export default {
   background: transparent;
   border: none;
 }
-/deep/.el-timeline-item__tail{
+/deep/.el-timeline-item__tail {
   right: 4px;
 }
 </style>
