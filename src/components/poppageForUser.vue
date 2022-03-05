@@ -111,7 +111,7 @@
           <div class="content1">
             <div
               id="myChart"
-              :style="{ width: '300px', height: '300px' }"
+              :style="{ width: '400px', height: '340px' }"
             ></div>
           </div>
         </div>
@@ -346,32 +346,53 @@ export default {
     drawEchaets() {
       let myChart = this.$echarts.init(document.getElementById("myChart"));
       myChart.setOption({
+        color: ["rgb(30, 215, 228)", "rgb(10, 236, 112)"],
         legend: {
-          data: ["Allocated Budget", "Actual Spending"],
+          data: ["2021年频次", "2020年频次"],
+          textStyle: {
+            //图例文字的样式
+            color: "#fff",
+            fontSize: 12,
+          },
+          x:'right',
+          y:'top',
+          orient: 'vertical',
         },
         radar: {
           // shape: 'circle',
           indicator: [
-            { name: "山岳", max: 52000 },
-            { name: "历史", max: 16000 },
-            { name: "园林", max: 30000 },
-            { name: "公园", max: 6500 },
-            { name: "古城", max: 38000 },
-            { name: "艺术", max: 25000 },
+            { name: "山岳", max: 4 },
+            { name: "历史", max: 4 },
+            { name: "园林", max: 4 },
+            { name: "建筑", max: 4 },
+            { name: "古城", max: 4 },
+            { name: "艺术", max: 4 },
           ],
+          axisLine: {
+            lineStyle: {
+              color: " #fff",
+            },
+          },
         },
+
         series: [
           {
             name: "Budget vs spending",
             type: "radar",
             data: [
               {
-                value: [4200, 3000, 20000, 35000, 50000, 18000],
-                name: "Allocated Budget",
+                value: [4, 2, 1, 2, 1, 2],
+                name: "2021年频次",
+                lineStyle: {
+                  color: "rgb(30, 215, 228)",
+                },
               },
               {
-                value: [5000, 14000, 28000, 26000, 42000, 21000],
-                name: "Actual Spending",
+                value: [2, 3, 1, 1, 2, 2],
+                name: "2020年频次",
+                lineStyle: {
+                  color: "rgb(10, 236, 100)",
+                },
               },
             ],
           },
@@ -464,7 +485,7 @@ font-size: 14pt;
   flex: auto;
 }
 .modal-foot{
-  // color: rgb(226, 33, 33);
+  // color: rgb(10, 236, 112);
   // background: #0cf3f3;
   margin-top: 1%;
   display: flex;
