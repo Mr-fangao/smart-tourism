@@ -1,6 +1,6 @@
 <template>
   <div id="skAnalysis">
-    <div class="aside">
+    <div class="skAnalysis-aside">
       <el-menu>
         <el-menu-item
           index="1"
@@ -54,7 +54,7 @@ import feelmonitor from "../components/feeling/feelmonitor.vue";
 import cold from "../components/Skanalysis/cold.vue";
 import odfx from "../components/Skanalysis/odfx.vue";
 export default {
-  components: { feelmonitor, deviationellipse ,cold,odfx},
+  components: { feelmonitor, deviationellipse, cold, odfx },
   name: "skAnalysis",
   data() {
     return {
@@ -81,14 +81,14 @@ export default {
   width: 100%;
   height: 100%;
 }
-  .skAnalysis-content {
+.skAnalysis-content {
   position: absolute;
   top: 0;
   z-index: 9999;
   height: 100%;
   width: 100%;
 }
-.aside {
+.skAnalysis-aside {
   height: 100%;
   z-index: 999999;
   position: absolute;
@@ -103,6 +103,10 @@ export default {
     right: 0%;
     background: transparent;
     border: none;
+    .tab {
+      height: 38%;
+      line-height: 40px;
+    }
   }
   .el-menu-item.is-active {
     color: #15abc5;
@@ -138,9 +142,5 @@ export default {
       }
     }
   }
-}
-.tab {
-  height: 38%;
-  line-height: 40px;
 }
 </style>

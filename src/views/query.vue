@@ -17,8 +17,11 @@
                 size="mini"
                 v-model="search"
                 placeholder="输入关键字搜索"
-              /><el-button size="mini" id="button" @click="Search(search)"
+              /><el-button size="mini" id="button1" @click="Search(search)"
                 >查询</el-button
+              >
+              <el-button size="mini" id="button2" @click="Realize()"
+                >清除搜索</el-button
               >
               <el-table
                 @row-click="clickData"
@@ -46,21 +49,21 @@
                 <el-table-column
                   prop="score"
                   label="评分"
-                  width="50"
+                  width="60"
                   :show-overflow-tooltip="true"
                 >
                 </el-table-column>
                 <el-table-column
                   prop="hot"
                   label="热度"
-                  width="50"
+                  width="60"
                   :show-overflow-tooltip="true"
                 >
                 </el-table-column>
                 <el-table-column
                   prop="address"
                   label="地址"
-                  width="50"
+                  width="65"
                   :show-overflow-tooltip="true"
                 >
                 </el-table-column>
@@ -214,16 +217,31 @@ export default {
     handleCurrentChange(val) {
       this.currentPage = val;
       console.log(val);
-      request
-        .post("/api/data/queryScenic", {
-          pageNum: val,
-          count: this.pageSize,
-        })
-        .then((res) => {
-          console.log(res, val);
-          this.tableData = res.data.scInfo;
-          this.pagecount = res.data.pages;
-        });
+      if (this.search != null) {
+        request
+          .post("/api/data/searchScenic", {
+            pageNum: this.currentPage,
+            count: this.pageSize,
+            search: this.search,
+          })
+          .then((res) => {
+            console.log(res);
+            this.tableData = res.data.scInfo;
+            this.pagecount = res.data.pages;
+            this.total = res.data.total;
+          });
+      } else {
+        request
+          .post("/api/data/queryScenic", {
+            pageNum: val,
+            count: this.pageSize,
+          })
+          .then((res) => {
+            console.log(res, val);
+            this.tableData = res.data.scInfo;
+            this.pagecount = res.data.pages;
+          });
+      }
     },
     getRowClass({ row, column, rowIndex, columnIndex }) {
       return "background:#3f5c6d2c;color:#FFF;";
@@ -272,7 +290,6 @@ export default {
     //   this.bus.$emit("loading", true);
     // },
     Search() {
-      console.log(this.points);
       this.currentPage = 1;
       request
         .post("/api/data/searchScenic", {
@@ -294,6 +311,10 @@ export default {
     getDetail(val) {
       this.porpID = val.name;
       this.show = true;
+    },
+    Realize() {
+      this.search = "";
+      this.load();
     },
     // startDraw(){
     //   draw.changeMode('draw_point')
@@ -389,7 +410,13 @@ export default {
         background-color: transparent;
         height: 100%;
         border: none;
-        #button {
+        #button1 {
+          background-color: #225e81e3;
+          border-color: #1edaeb;
+          color: #fff;
+        }
+        #button2 {
+          margin-left: 16%;
           background-color: #225e81e3;
           border-color: #1edaeb;
           color: #fff;
