@@ -1,137 +1,114 @@
 <template>
-  <div id="recommend">
-    <div id="map" />
-    <div class="container">
-      <div class="left-part">
-        <div class="pt pt1">
-          <div class="head title">
-            <span>111</span>
-          </div>
-        </div>
-        <div class="pt pt2"></div>
-        <div class="pt pt3"></div>
-      </div>
-      <div class="right-part">
-        <div class="pt pt4"></div>
-        <div class="pt pt5"></div>
-        <div class="pt pt6"></div>
-      </div>
-    </div>
+  <div style="position: absolute;width: 100%;height: 100%">
+    <div id="MapSanJ1"></div>
+    <div id="MapSanJ2"></div>
   </div>
+
 </template>
 
 <script>
-import areaSelect from "../components/areaSelect.vue";
-import echarts from "echarts";
-import wordcloud from "../assets/js/echarts-wordcloud-master/index";
-import dialogBar from "../components/dialog.vue";
-// import poppage from "../components/poppage.vue";
-// import dialogPage from "./dialogPage.vue";
+import {loadModules} from 'esri-loader';
+
 export default {
-  name: "recommend",
-  components: {
-    modalVisible: false,
-    areaSelect,
-    wordcloud,
-    // poppage,
-    // dialogPage,
-    "dialog-bar": dialogBar,
-  },
+  name: "GWR",
   data() {
-    return {};
+    return {
+      MapSanJ1: null,
+      MapSanJ2: null
+      }
   },
   mounted() {
-    this.initmap();
+    this._Init()
   },
   methods: {
-    initmap() {
-      this.$mapboxgl.accessToken =
-        "pk.eyJ1IjoiY2hlbmpxIiwiYSI6ImNrcWFmdWt2bjBtZGsybmxjb29oYmRzZzEifQ.mnpiwx7_cBEyi8YiJiMRZg";
-      var map = new this.$mapboxgl.Map({
-        container: "map",
-        style: "mapbox://styles/chenjq/cl010ychv001214pdpa5xyq5a",
-        center: [105, 35],
-        zoom: 3.5,
-      });
+    _Init: function () {
+      const _self = this;
+      const option = {
+        url: 'http://js.arcgis.com/4.18/dojo/dojo.js',
+        css: 'https://js.arcgis.com/4.18/esri/themes/dark-blue/main.css',
+      };
+      //通过loadModules来做衔接
+      loadModules(
+        [
+          'esri/layers/TileLayer',
+          "esri/Map",
+          "esri/views/MapView",
+          "esri/Basemap",
+          "esri/views/SceneView",
+          "esri/Camera",
+          'esri/layers/FeatureLayer',
+          "esri/widgets/Legend",
+          "esri/widgets/Sketch/SketchViewModel",
+          "esri/layers/GraphicsLayer",
+          "dgrid/OnDemandGrid",
+          "dgrid/extensions/ColumnHider",
+          "dgrid/Selection",
+          "esri/layers/MapImageLayer",
+        ],
+        option
+      ).then(([TileLayer, Map, MapView, Basemap, SceneView, Camera, FeatureLayer, Legend, SketchViewModel, GraphicsLayer, OnDemandGrid, ColumnHider,Selection,MapImageLayer]) => {
+
+        const layer = new TileLayer({
+          url:
+            "http://map.geoq.cn/arcgis/rest/services/ChinaOnlineStreetPurplishBlue/MapServer"
+        });
+        const customBasemap = new Basemap({
+          baseLayers: [layer],
+          title: "Custom Basemap",
+          id: "myBasemap"
+        });
+
+        var WH_Water = new FeatureLayer({
+        //   url: 'http://114.98.239.36:6080/arcgis/rest/services/CIDW/MapServer'
+            url: 'http://114.98.239.36:6080/arcgis/rest/services/BZCTY/BZCTY1/MapServer'
+        })
+
+        var WH_Water2 = new FeatureLayer({
+          url: 'http://114.98.239.36:6080/arcgis/rest/services/COVID/WuHan_Water/MapServer/0'
+        })
+
+        _self.MapSanJ1 = new Map({
+          basemap: customBasemap,
+          layers: [WH_Water]
+        });
+
+        _self.MapSanJ2 = new Map({
+          basemap: customBasemap,
+          layers: [WH_Water2]
+        });
+
+        var view = new MapView({
+          container: 'MapSanJ1',
+          map: _self.MapSanJ1,
+          zoom: 8,
+          center: [114.31,30.52]
+        });
+
+        var view2 = new MapView({
+          container: 'MapSanJ2',
+          map: _self.MapSanJ2,
+          zoom: 8,
+          center: [114.31,30.52]
+        });
+        _self.MapSanJ1.layers.items[0].visible = true;
+
+        _self.MapSanJ2.layers.items[0].visible = true;
+      })
     },
-  },
-};
+  }
+}
 </script>
 
-<style scoped lang="less">
-#recommend {
-  position: fixed;
-  width: 100%;
+<style scoped>
+#MapSanJ1  {
+  float: left;
+  width: 53%;
   height: 100%;
 }
-#map {
-  position: relative;
-  width: 100%;
+
+#MapSanJ2 {
+  float: left;
+  width: 47%;
   height: 100%;
-  z-index: 0;
-}
-.pt {
-  flex: 1;
-  //  background-size: 100% 100%;
-  // background: url(../assets/img/titlebg.png) no-repeat;
-}
-.head {
-  height: 20%;
-  width: 100%;
-  position: relative;
-  left: 2%;
-  background: url(../assets/img/titlebg.png) no-repeat;
-  background-size: 70% 70%;
-  > span {
-    float: left;
-    margin-left: 18%;
-    font-size: 16pt;
-    line-height: 30px;
-    color: aliceblue;
-    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #38e9e0,
-      0 0 70px #0cf3f3;
-  }
-}
-.left-part {
-  position: absolute;
-  top: 3px;
-  left: 0.5%;
-  bottom: 0px;
-  height: 92%;
-  width: 22%;
-  float: left;
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  background: url(../assets/img/side.png) no-repeat;
-  opacity: 1;
-  background-size: 100% 100%;
-  .pt1 {
-  }
-  .pt2 {
-  }
-  .pt3 {
-  }
-}
-.right-part {
-  position: absolute;
-  top: 3px;
-  right: 0.5%;
-  bottom: 0px;
-  height: 92%;
-  width: 22%;
-  float: left;
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  background: url(../assets/img/side.png) no-repeat;
-  opacity: 1;
-  background-size: 100% 100%;
-  .pt4 {
-  }
-  .pt5 {
-  }
-  .pt6 {
-  }
 }
 </style>

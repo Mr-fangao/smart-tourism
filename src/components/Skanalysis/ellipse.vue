@@ -27,23 +27,6 @@
         <div class="bottompart"></div>
       </div>
     </div>
-    <!-- <div id="map" /> -->
-    <!-- <div class="mapTool1">
-      <div class="IDW">标准差椭圆分析</div>
-      <div class="DayPicContainer">
-        <div class="DayPicTitle">数据日期</div>
-        <el-date-picker
-          class="DayPic"
-          v-model="DateValue"
-          type="date"
-          placeholder="选择日期"
-        ></el-date-picker>
-      </div>
-      <div class="IDWtoolContainer">
-        <div class="GetMapValue1">请求数据</div>
-        <div class="AnaMapValue2">开始分析</div>
-      </div>
-    </div> -->
   </div>
 </template>
 <script>
@@ -52,7 +35,7 @@ export default {
   data() {
     return {
       DateValue: new Date(),
-      value1:'',
+      value1: "",
     };
   },
   mounted() {
@@ -68,6 +51,27 @@ export default {
         center: [105, 35],
         zoom: 3.5,
       });
+      // map.addLayer({
+      //   id: "ArcGIS_WMTS",
+      //   type: "raster", //这里要用raster ，因为切片得到的是图片
+      //   source: {
+      //     type: "raster", //切片地图使用png 所以这里设置为raster
+
+      //     tiles: [
+      //       //切片服务的地址,这里可以使用数组的形式，最终呈现效果是各个服务的叠加，z是切片的层级、x是切片的列，y是切片的行
+      //       //模板
+      //       "http://114.98.239.36:6080/arcgis/rest/services/BZCTY/TestMapService/MapServer?layer=topp%3Astates&style=&tilematrixset=EPSG%3A4326&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=EPSG%3A4326%3A5&TileCol=12&TileRow=8"
+      //       //  kvp 方式
+      //       //"http://地图服务地址/WMTS
+      //       //restfull方式
+      //       // "http://地图服务地址WMTS/tile/1.0.0/MyM/default/default028mm/{z}/{y}/{x}.png"
+      //     ],
+      //     //切片的图片大小
+      //     tileSize: 256,
+      //     //切片请求的范围，不在这个范围的话  就不进行切片请求
+      //     bounds: [106.61304, -85, 120, 85],
+      //   },
+      // });
     },
   },
 };
