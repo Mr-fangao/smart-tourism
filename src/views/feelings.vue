@@ -3,12 +3,12 @@
     <div class="aside">
       <el-menu>
         <el-menu-item index="1" @click="show(1)" :class="index === 1 ? 'active' : ''" plain>
-          <i class="el-icon-menu"></i>
-          <span slot="title">导航一</span>
+          <i class="fa fa-bar-chart fa-lg"></i>
+          <span slot="title">监测</span>
         </el-menu-item>
         <el-menu-item index="2" @click="show(2)" :class="index === 2 ? 'active' : ''" plain>
-          <i class="el-icon-menu"></i>
-          <span slot="title">导航二</span>
+          <i class="fa fa-search fa-lg"></i>
+          <span slot="title">查询</span>
         </el-menu-item>
       </el-menu>
     </div>
@@ -29,7 +29,7 @@ export default {
   data() {
     return {
       index: 1,
-      comp: "feelmonitor",
+      comp: "feelanalysis",
       isShow: true,
     };
   },

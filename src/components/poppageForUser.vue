@@ -90,9 +90,9 @@
               </ul>
             </div>
             <div class="content">
-              <vue-seamless-scroll :data="listData" :class-option="classOption">
+              <vue-seamless-scroll :data="list" :class-option="optionSetting">
                 <ul class="item">
-                  <li v-for="(item, index) in listData" :key="index">
+                  <li v-for="(item, index) in list" :key="index">
                     <span class="row">{{ item.name }}</span>
                     <span class="row">{{ item.city }}</span>
                     <span class="row">{{ item.features }}</span>
@@ -139,7 +139,118 @@ export default {
         //历史收藏景点
         uliked: "",
       },
-      listData: [
+      list: [],
+      // listData: [
+      //   {
+      //     name: "云冈石窟",
+      //     city: "山西大同",
+      //     features: "石雕艺术宝库",
+      //     frequency: "1",
+      //     time: "2022-03-03",
+      //   },
+      //   {
+      //     name: "平遥古城",
+      //     city: "山西晋中",
+      //     features: "历史文化名城",
+      //     frequency: "1",
+      //     time: "2022-03-03",
+      //   },
+      //   {
+      //     name: "黄山风景区",
+      //     city: "安徽黄山",
+      //     features: "奇山",
+      //     frequency: "2",
+      //     time: "2022-03-03",
+      //   },
+      //   {
+      //     name: "鼓浪屿",
+      //     city: "福建厦门",
+      //     features: "万国建筑博览",
+      //     frequency: "2",
+      //     time: "2022-03-03",
+      //   },
+      //   // {
+      //   //   name: "路南石林",
+      //   //   city: "云南石林彝族自治县",
+      //   //   features: "喀斯特地貌",
+      //   //   frequency: "1",
+      //   //   time: "2022-03-03",
+      //   // },
+      //   {
+      //     name: "庐山",
+      //     city: "江西庐山",
+      //     features: "避暑游览胜地",
+      //     frequency: "3",
+      //     time: "2022-03-02",
+      //   },
+      //   {
+      //     name: "井冈山",
+      //     city: "天然氧吧",
+      //     features: "江西吉安",
+      //     frequency: "2",
+      //     time: "2022-03-02",
+      //   },
+      //   {
+      //     name: "蓬莱阁",
+      //     city: "山东烟台",
+      //     features: "古代四大名楼",
+      //     frequency: "1",
+      //     time: "2022-03-02",
+      //   },
+      //   {
+      //     name: "秦始皇陵",
+      //     city: "陕西西安",
+      //     features: "帝王陵墓",
+      //     frequency: "1",
+      //     time: "2022-03-02",
+      //   },
+      //   {
+      //     name: "华山",
+      //     city: "陕西渭南",
+      //     features: "五岳之首",
+      //     frequency: "1",
+      //     time: "2022-03-02",
+      //   },
+      //   {
+      //     name: "拙政园",
+      //     city: "江苏苏州",
+      //     features: "古典山水园林",
+      //     frequency: "1",
+      //     time: "2022-03-02",
+      //   },
+      //   // {
+      //   //   name: "张家界国家森林公园",
+      //   //   city: "湖南张家界",
+      //   //   features: "世界地质公园",
+      //   //   frequency: "1",
+      //   //   time: "2022-03-02",
+      //   // },
+      // ],
+    };
+  },
+  props: {
+    show: {
+      type: Boolean,
+      default: false,
+    },
+    porpID: {
+      type: String,
+      default: "",
+    },
+  },
+  mounted() {
+    this.loadList();
+    this.drawEchaets();
+  },
+  methods: {
+    hideModal() {
+      this.$emit("hideModal");
+    },
+    submit() {
+      this.$emit("submit");
+    },
+    loadList() {
+      let list = [
         {
           name: "云冈石窟",
           city: "山西大同",
@@ -217,36 +328,20 @@ export default {
           frequency: "1",
           time: "2022-03-02",
         },
-        // {
-        //   name: "张家界国家森林公园",
-        //   city: "湖南张家界",
-        //   features: "世界地质公园",
-        //   frequency: "1",
-        //   time: "2022-03-02",
-        // },
-      ],
-    };
-  },
-  props: {
-    show: {
-      type: Boolean,
-      default: false,
-    },
-    porpID: {
-      type: String,
-      default: "",
-    },
-  },
-  mounted() {
-    this.drawEchaets();
-  },
-  methods: {
-    hideModal() {
-      this.$emit("hideModal");
-    },
-
-    submit() {
-      this.$emit("submit");
+      ];
+      for (let a = 0; a < 10; a++) {
+        for (let i = 0; i < list.length; i++) {
+          let j = {
+            name: list[i].name,
+            city: list[i].city,
+            features: list[i].features,
+            frequency: list[i].frequency,
+            time: list[i].time,
+            // time: utilDate.dateFtt(new Date()),
+          };
+          this.list.push(j);
+        }
+      }
     },
     drawEchaets() {
       let myChart = this.$echarts.init(document.getElementById("myChart"));
@@ -285,13 +380,13 @@ export default {
     },
   },
   computed: {
-    classOption() {
+    optionSetting() {
       return {
-        step: 0.2, // 数值越大速度滚动越快
-        limitMoveNum: 2, // 开始无缝滚动的数据量 this.dataList.length
-        hoverStop: true, // 是否开启鼠标悬停stop
+        step: 0.4, // 数值越大速度滚动越快
+        limitMoveNum: 10, // 开始无缝滚动的数据量 this.dataList.length
+        hoverStop: false, // 是否开启鼠标悬停stop
         direction: 1, // 0向下 1向上 2向左 3向右
-        openWatch: true, // 开启数据实时监控刷新dom
+        openWatch: false, // 开启数据实时监控刷新dom
         singleHeight: 0, // 单步运动停止的高度(默认值0是无缝不停止的滚动) direction => 0/1
         singleWidth: 0, // 单步运动停止的宽度(默认值0是无缝不停止的滚动) direction => 2/3
         waitTime: 1000, // 单步运动停止的时间(默认值1000ms)
@@ -345,18 +440,18 @@ export default {
     margin-right: -86% !important;
   }
 }
-.title{  
+.title{
 color: aliceblue;
 font-size: 14pt;
     width: 50%;
-height: 22%;
+    height: 20%;
     margin-bottom: 0%;
           border-left: 5px solid #0cf3f3;
     >p{
       position: absolute;
       left: 55px;
       top: 15.5%;
-      text-shadow: 0 0 10px #fff, 0 0 20px #999696, 0 0 30px #fff, 0 0 40px #eefffe, 0 0 70px #404646;
+      // text-shadow: 0 0 10px #fff, 0 0 20px #999696, 0 0 30px #fff, 0 0 40px #eefffe, 0 0 70px #404646;
     }
 }
 .modal-main {
@@ -385,7 +480,7 @@ height: 22%;
     color: aliceblue;
     font-size: 14pt;
     width: 50%;
-    height: 9%;
+    height: 8%;
     /* left: 1%; */
     margin-left: 8%;
     margin-bottom: 0%;
@@ -394,7 +489,7 @@ height: 22%;
     position: relative;
     left: -26%;
     top: 15.5%;
-        text-shadow: 0 0 10px #fff, 0 0 20px #999696, 0 0 30px #fff, 0 0 40px #eefffe, 0 0 70px #404646;
+        // text-shadow: 0 0 10px #fff, 0 0 20px #999696, 0 0 30px #fff, 0 0 40px #eefffe, 0 0 70px #404646;
     }
     }
     .content1{
@@ -406,10 +501,13 @@ height: 22%;
           li{
             display: flex;
             flex-direction: row;
-            margin: 10px 0px;
+    margin: 5px 0px;
             // justify-content: space-between;
                 span{
                   width: 25%;
+    border-left: 1px solid #1c7f9b;
+    border-right: 1px solid #1c7f9b;
+    background-color: #8bc7ea73;
                 }
           }
         }
