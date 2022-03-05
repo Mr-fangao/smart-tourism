@@ -79,7 +79,7 @@
               <img src="../../assets/img/panelIcon.png" alt="" />
               <span>景点关注度年变化图</span>
             </div>
-            <div class="btmCht" id="btmChart4"></div>
+            <div class="btmCht" id="btmChart5" ref="chart5"></div>
           </div>
           <div class="echartbottom">
             <div class="echartbottomTitle">
@@ -88,9 +88,9 @@
                 src="../../assets/img/panelIcon.png"
                 alt=""
               />
-              <span>旅游负面情感热搜</span>
+              <span>地区评价情感分布</span>
             </div>
-            <div class="btmCht" id="btmChart5"></div>
+            <div class="btmCht" id="btmChart6"></div>
           </div>
         </el-row>
       </div>
@@ -141,9 +141,121 @@
 export default {
   name: "feelanalysis",
   data() {
-    return {};
+    return {
+      option5: {
+        // title: {
+        //   x: "150", // 水平安放位置，默认为左对齐，可选为：
+        //   // 'center' ¦ 'left' ¦ 'right'
+        //   // ¦ {number}（x坐标，单位px）
+        //   y: "top",
+        //   //textAlign: null
+        //   backgroundColor: "rgba(0,0,0,0)",
+        //   borderColor: "#ccc", // 标题边框颜色
+        //   borderWidth: 0, // 标题边框线宽，单位px，默认为0（无边框）
+        //   padding: 5, // 标题内边距，单位px，默认各方向内边距为5，
+        //   itemGap: 10, // 主副标题纵向间隔，单位px，默认为10，
+        //   textStyle: {
+        //     fontSize: 18,
+        //     fontWeight: "bolder",
+        //     color: "#ff6666", // 主标题文字颜色
+        //   },
+        //   text: "全省大中修资金统计",
+        // },
+        color: [
+          "#ff7f50",
+          "#87cefa",
+          "#da70d6",
+          "#32cd32",
+          "#6495ed",
+          "#ff69b4",
+          "#ba55d3",
+          "#cd5c5c",
+          "#ffa500",
+          "#40e0d0",
+        ],
+        tooltip: { trigger: "axis" },
+        //图例--折线提示提示
+        legend: {
+          x: "center",
+          y: "30",
+          borderColor: "#6699FF", //边框颜色
+          textStyle: {
+            color: "#1e90ff", // 图例文字颜色
+          },
+          data: ["大修金额", "中修沥青砼金额", "预防性养护金额", "金额总计"],
+        },
+        calculable: true,
+        xAxis: {
+          data: [],
+        },
+        yAxis: [
+          {
+            type: "value",
+            name: "单位:万元",
+            min: "0",
+            max: "",
+            splitNumber: 20,
+          },
+        ],
+        series: [
+          {
+            type: "line",
+            name: "大修金额",
+            data: [],
+          },
+          {
+            type: "line",
+            name: "中修沥青砼金额",
+            data: [],
+          },
+          {
+            type: "line",
+            name: "预防性养护金额",
+            data: [],
+          },
+          {
+            type: "line",
+            name: "金额总计",
+            data: [],
+          },
+        ],
+      },
+      plan_table: [
+        {
+          xxx: "1",
+          d: "200",
+          z: "300",
+          y: "400",
+          sum: "500",
+        },
+        {
+          xxx: "2",
+          d: "100",
+          z: "400",
+          y: "50",
+          sum: "500",
+        },
+        {
+          xxx: "3",
+          d: "150",
+          z: "410",
+          y: "250",
+          sum: "500",
+        },
+        {
+          xxx: "4",
+          d: "200",
+          z: "450",
+          y: "350",
+          sum: "500",
+        },
+      ],
+    };
   },
   mounted() {
+    this.initChart5();
+    let myChart5 = this.$echarts.init(this.$refs.chart5);
+    myChart5.setOption(this.option5);
     let myChart1 = this.$echarts.init(document.getElementById("chart1"));
     myChart1.setOption({
       title: {
@@ -572,7 +684,23 @@ export default {
       ],
     });
   },
-  methods() {},
+  methods: {
+    initChart5() {
+      for (var i = 0; i < this.plan_table.length; i++) {
+        this.option5.xAxis.data.push(this.plan_table[i].xxx);
+        //大修金额总计
+        this.option5.series[0].data.push(this.plan_table[i].d);
+        //中修金额
+        this.option5.series[1].data.push(this.plan_table[i].z);
+        //预防性养护金额合计
+        this.option5.series[2].data.push(this.plan_table[i].y);
+        //金额总计
+        this.option5.series[3].data.push(this.plan_table[i].sum);
+        //Y轴最大值的设置：向上取整并家500
+        this.option5.yAxis[0].max = Math.ceil(this.plan_table[0].sum) + 500;
+      }
+    },
+  },
 };
 </script>
 
@@ -744,6 +872,10 @@ export default {
   height: 92%;
   width: 12%;
   margin-left: 8%;
+}
+#btmChart5{
+  height: 100%;
+  width: 100%;
 }
 /deep/.el-card__body {
   padding: 0px;
