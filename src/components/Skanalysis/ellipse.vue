@@ -53,19 +53,6 @@ export default {
         center: [105, 35],
         zoom: 3.5,
       });
-<<<<<<< Updated upstream
-      map.on('load', function loaded() {
-      map.addLayer({
-        id: "ArcGIS_WMTS",
-        type: "raster", //这里要用raster ，因为切片得到的是图片
-          source: {
-                    type: "raster",
-                    tiles: ["http://114.98.239.36:6080/arcgis/rest/services/BZCTY/mapserveTest/MapServer/WMTS/tile/1.0.0/MyM/default/default028mm/{z}/{y}/{x}.png"],
-                    tileSize: 256,
-                    bounds: [106.61304, -85, 120, 85],
-                },
-  
-=======
       map.on("load", function loaded() {
         map.addLayer({
           id: "ArcGIS_WMTS",
@@ -78,7 +65,6 @@ export default {
             tileSize: 256,
             bounds: [20.61304, -85, 140, 85],
           },
->>>>>>> Stashed changes
         });
       });
     },

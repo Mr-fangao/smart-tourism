@@ -5,14 +5,6 @@
     </div>
     <div class="city-content">
       <el-row>
-<<<<<<< Updated upstream
-        <el-col :span="24"
-          ><div class="grid-content bg-purple-dark"></div
-        ></el-col>
-        <el-col :span="24"
-          ><div class="grid-content bg-purple-dark"></div
-        ></el-col>
-=======
         <el-col :span="24">
           <div class="col-content">
             <div class="row1title">
@@ -42,7 +34,6 @@
           <div class="col-content"></div>
           <div class="col-content"></div>
         </el-col>
->>>>>>> Stashed changes
         <el-col :span="24"
           ><div class="grid-content bg-purple-dark"></div
         ></el-col>
@@ -51,17 +42,17 @@
         <div class="travels-title"></div>
         <div class="travels-content">
           <span></span>
-          <div class="travels-text" style="font-size:20pt">{{test}}</div>
+          <div class="travels-text">{{ test }}</div>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
+import wordcloud from "../../assets/js/echarts-wordcloud-master/index";
+import echarts from "echarts";
 export default {
   name: "city",
-<<<<<<< Updated upstream
-=======
   components: {
     wordcloud,
   },
@@ -198,8 +189,9 @@ export default {
           },
         ],
       },
-      test:"大，导致一条弄堂里，和张方敏年纪相仿的男女有六七个之多，他们念过同一所小学，如今分道扬镳，散落到高中、职校和技校。人的未来大致由学校决定，张家爸妈心里是不大看得起弄堂其他小孩的。张方敏读的是区重点，明年肯定能考上一所好大学。张方敏没有此类等级观念，她最好的玩伴是住在九号的程勉。程勉比她大三岁，因为念书晚又复读过，只比她高一级，刚从职校毕业。她过了拐角来到九号门口的时候，程勉的姨婆正在楼下厨房炒菜。九号的一楼大半属于另一户人家，房主将其租给饭店，店门开在后马路上。程家的厨房和饭店后厨只隔一道薄墙，在夏季热如火炉，张方敏很佩服程勉姨婆不怕热地站在这里。刺激的香气钻进张方敏的鼻孔，她看见锅里翻炒的 […]"
-    +"",
+      test:
+        "大，导致一条弄堂里，和张方敏年纪相仿的男女有六七个之多，他们念过同一所小学，如今分道扬镳，散落到高中、职校和技校。人的未来大致由学校决定，张家爸妈心里是不大看得起弄堂其他小孩的。张方敏读的是区重点，明年肯定能考上一所好大学。张方敏没有此类等级观念，她最好的玩伴是住在九号的程勉。程勉比她大三岁，因为念书晚又复读过，只比她高一级，刚从职校毕业。她过了拐角来到九号门口的时候，程勉的姨婆正在楼下厨房炒菜。九号的一楼大半属于另一户人家，房主将其租给饭店，店门开在后马路上。程家的厨房和饭店后厨只隔一道薄墙，在夏季热如火炉，张方敏很佩服程勉姨婆不怕热地站在这里。刺激的香气钻进张方敏的鼻孔，她看见锅里翻炒的 […]" +
+        "年纪相仿的男女有六七个之多，他们念过同一所小学，如今分道扬镳，散落到高中、职校和技校。人的未来大致由学校决定，张家爸妈心里是不大看得起弄堂其他小孩的。张方敏读的是区重点，明年肯定能考上一所好大学。张方敏没有此类等级观念，她最好的玩伴是住在九号的程勉。程勉比她大三岁，因为念书晚又复读过，只比她高一级，刚从职校毕业。她过了拐角来到九号门口的时候，程勉的姨婆正在楼下厨房炒菜。九号的一楼大半属于另一户人家，房主将其租给饭店，店门开在后马路上。程家的厨房和饭店后厨只隔一道薄墙，在夏季热如火炉，张方敏很佩服程勉姨婆不怕热地站在这里。刺激的香气钻进张方敏的鼻孔，她看见锅里翻炒",
     };
   },
   mounted() {
@@ -271,7 +263,6 @@ export default {
       myChart.setOption(option);
     },
   },
->>>>>>> Stashed changes
 };
 </script>
 
@@ -333,11 +324,9 @@ export default {
     height: 91%;
     width: 70%;
     top: 1%;
-    .el-col{
+    .el-col {
       height: 33.3%;
       width: 100%;
-<<<<<<< Updated upstream
-=======
       padding: 5px;
     }
     .imgBK {
@@ -399,15 +388,42 @@ export default {
           width: 100%;
         }
       }
->>>>>>> Stashed changes
     }
   }
   .travels {
     width: 30%;
     height: 100%;
     // background-color:#38e9e0;
-    .travels-title{
+    .travels-title {
       height: 8%;
+    }
+    .travels-content {
+      height: 90%;
+      > span {
+        color: #fff;
+      }
+      .travels-text {
+        font-size: 20pt;
+        height: 90%;
+        overflow-y: auto;
+        padding: 10px;
+      }
+      ::-webkit-scrollbar {
+        width: 5px; /*高宽分别对应横竖滚动条的尺寸 */
+        height: 5px;
+        background-color: rgba(135, 175, 221, 0.055);
+      }
+
+      /* 滚动槽的轨道 */
+      ::-webkit-scrollbar-track {
+        border-radius: 30px;
+      }
+
+      /* 滚动条的小滑块 */
+      ::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background: lightskyblue;
+      }
     }
   }
 }
