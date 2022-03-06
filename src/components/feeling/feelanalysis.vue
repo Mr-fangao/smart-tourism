@@ -9,32 +9,32 @@
         <el-timeline hide-timestamp="false">
           <el-timeline-item>
             <el-card>
-              <h4>更新 Github 模板</h4>
-              <p>王小虎 提交于 2018/4/12 20:46</p>
+              <h4>{{ leftdata[0].name }}</h4>
+              <p>{{ leftdata[0].content }}</p>
             </el-card>
           </el-timeline-item>
           <el-timeline-item>
             <el-card>
-              <h4>更新 Github 模板</h4>
-              <p>王小虎 提交于 2018/4/3 20:46</p>
+              <h4>{{ leftdata[1].name }}</h4>
+              <p>{{ leftdata[1].content }}</p>
             </el-card>
           </el-timeline-item>
           <el-timeline-item>
             <el-card>
-              <h4>更新 Github 模板</h4>
-              <p>王小虎 提交于 2018/4/2 20:46</p>
+              <h4>{{ leftdata[2].name }}</h4>
+              <p>{{ leftdata[2].content }}</p>
             </el-card>
           </el-timeline-item>
           <el-timeline-item>
             <el-card>
-              <h4>更新 Github 模板</h4>
-              <p>王小虎 提交于 2018/4/2 20:46</p>
+              <h4>{{ leftdata[3].name }}</h4>
+              <p>{{ leftdata[3].content }}</p>
             </el-card>
           </el-timeline-item>
           <el-timeline-item>
             <el-card>
-              <h4>更新 Github 模板</h4>
-              <p>王小虎 提交于 2018/4/2 20:46</p>
+              <h4>{{ leftdata[4].name }}</h4>
+              <p>{{ leftdata[4].content }}</p>
             </el-card>
           </el-timeline-item>
         </el-timeline>
@@ -104,32 +104,32 @@
         <el-timeline hide-timestamp="false">
           <el-timeline-item>
             <el-card>
-              <h4>更新 Github 模板</h4>
-              <p>王小虎 提交于 2018/4/12 20:46</p>
+              <h4>{{ rightdata[0].name }}</h4>
+              <p>{{ rightdata[0].content }}</p>
             </el-card>
           </el-timeline-item>
           <el-timeline-item>
             <el-card>
-              <h4>更新 Github 模板</h4>
-              <p>王小虎 提交于 2018/4/3 20:46</p>
+              <h4>{{ rightdata[1].name }}</h4>
+              <p>{{ rightdata[1].content }}</p>
             </el-card>
           </el-timeline-item>
           <el-timeline-item>
             <el-card>
-              <h4>更新 Github 模板</h4>
-              <p>王小虎 提交于 2018/4/2 20:46</p>
+              <h4>{{ rightdata[2].name }}</h4>
+              <p>{{ rightdata[2].content }}</p>
             </el-card>
           </el-timeline-item>
           <el-timeline-item>
             <el-card>
-              <h4>更新 Github 模板</h4>
-              <p>王小虎 提交于 2018/4/2 20:46</p>
+              <h4>{{ rightdata[3].name }}</h4>
+              <p>{{ rightdata[3].content }}</p>
             </el-card>
           </el-timeline-item>
           <el-timeline-item>
             <el-card>
-              <h4>更新 Github 模板</h4>
-              <p>王小虎 提交于 2018/4/2 20:46</p>
+              <h4>{{ rightdata[4].name }}</h4>
+              <p>{{ rightdata[4].content }}</p>
             </el-card>
           </el-timeline-item>
         </el-timeline>
@@ -142,6 +142,60 @@ export default {
   name: "feelanalysis",
   data() {
     return {
+      leftdata: [
+        {
+          name: "#10万多株樱花沿路浪漫盛放#",
+          content:
+            "春意渐浓，福建漳平茶园樱花盛开，10万多株樱花沿路绽放，“花墙”淡粉，花瓣飘落，景象唯美烂漫。",
+        },
+        {
+          name: "#2021年全年国内游客32.5亿人次#",
+          content:
+            "国家统计局28日发布的中华人民共和国#2021年国民经济和社会发展统计公报#显示，2021年末全国文化和旅游系统共有艺术表演团体2044个，博物馆3671个。全国共有公共图书馆3217个，总流通72898万人次；文化馆3317个。全年全国规模以上文化及相关产业企业营业收入119064亿元，按可比口径计算，比2020年增长16.0%。全年国内游客32.5亿人次，比2020年增长12.8%。其中，城镇居民游客23.4亿人次，增长13.4%；农村居民游客9.0亿人次，增长11.1%。国内旅游收入29191亿元，增长31.0%。其中，城镇居民游客花费23644亿元，增长31.6%；农村居民游客花费5547亿元，增长28.4%。",
+        },
+        {
+          name: "#乐山大佛#",
+          content:
+            "【为什么乐山大佛以前免费现在要门票了？】大家有没有发现，相隔百年，四川乐山大佛越活越年轻了，不过还有一个大变化，大家发现了吗？就是以前进去不要门票，现在要门票了。还有一个区别是，以前眼睛原来是圆的，现在是修长的，以前是天然形成的，现在是人造的，就是化妆了。以前那个才是古人的遗迹，现在是为了旅游和美观做的整形，去翻翻书，历史上的乐山大佛根本不是这样的 。以前没化妆是素妆，现在是化妆美颜了，这也是与时俱进，化妆品涨价了，所以现在值钱了，就要收费了。",
+        },
+        {
+          name: "#南京七大赏梅地美如仙境#",
+          content:
+            "近日，南京梅花山、梅岗、梅花岛、梅花隧道、梅岭等7大赏梅胜地的梅花全面盛放，漫山遍野，灿若云霞。放眼望去，花海如潮，浪漫至极。",
+        },
+        {
+          name: "#焦作青天河#",
+          content:
+            "焦作青天河位于河南省焦作市西北部博爱县境内，系世界地质公园、国家重点风景名胜区、国家AAAAA级旅游区、国家水利风景区、太行山国家级猕猴自然保护区、中国青少年科学考察探险基地、河南省最具魅力的十佳风景名胜区、河南省十大旅游热点景区。",
+        },
+      ],
+      rightdata: [
+        {
+          name: "#哈尔滨旅行#",
+          content:
+            "寒冬的时候去一次东北，对于南方人而言是一种完全不同的人生体验。无论是寒冷，还是遥远，我们都怀揣一个关于冰雪的梦想。哈尔滨是这个冬天去过最冷的城市。酒店里的空间是温暖富足而充实的，酒店外的世界是寒冷空旷而安静的。好像拥有了全世界。",
+        },
+        {
+          name: "#接下来的三月南京市这样的#",
+          content:
+            "近日，大地回暖，万物复苏，南京的大街小巷即将充满春天的气息。接下来的三月，一起看看鸡鸣寺的樱花、吹吹玄武湖的晚风、走走颐和路的老街……感受一下人间春天里的恣意与浪漫。不到南京，不知金陵美。",
+        },
+        {
+          name: "#春意融融！“赏花经济”带火乡村旅游#",
+          content:
+            "踏青赏花是春季出游的热点，眼下成都周边的多个村镇，也迎来了赏花旺季，由此衍生的“赏花经济”也逐渐成为了旅游产业的亮丽名片与促进乡村振兴的重要抓手。今天，大伙儿就跟着咱们的记者一起来赏花！",
+        },
+        {
+          name: "#上海旅游#",
+          content:
+            "早春的上海天微冷，正是赏梅好时节。白的，粉的，红的，黄的……在沪郊的很多公园、景区，“梅”好如期而至，暗香浮动，沁人心脾。",
+        },
+        {
+          name: "#北京旅游#",
+          content:
+            "【颐和园昆明湖变身“天鹅湖”】浅山如黛，碧波粼粼，几十只白色天鹅悠然飞翔。眼下正是候鸟迁徙季节，优雅的天鹅翩翩降临颐和园昆明湖，与黑天鹅同框呈现别样风景。 ​",
+        },
+      ],
       option5: {
         // title: {
         //   x: "150", // 水平安放位置，默认为左对齐，可选为：
@@ -869,12 +923,21 @@ export default {
     background-size: 100% 93%;
   }
 }
+h4 {
+  text-align: left;
+}
+p {
+  text-indent: 10%;
+  text-align: left;
+  // overflow: hidden; /*超出隐藏*/
+  // text-overflow: ellipsis; /*隐藏后添加省略号*/
+}
 #fifthTitle {
   height: 92%;
   width: 12%;
   margin-left: 8%;
 }
-#btmChart5{
+#btmChart5 {
   height: 100%;
   width: 100%;
 }
