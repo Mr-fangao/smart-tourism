@@ -30,6 +30,8 @@
   </div>
 </template>
 <script>
+import '@cgcs2000/mapbox-gl/dist/mapbox-gl.css'
+import mapboxgl from '@cgcs2000/mapbox-gl';
 export default {
   name: "deviationellipse",
   data() {
@@ -51,27 +53,59 @@ export default {
         center: [105, 35],
         zoom: 3.5,
       });
-      // map.addLayer({
-      //   id: "ArcGIS_WMTS",
-      //   type: "raster", //这里要用raster ，因为切片得到的是图片
-      //   source: {
-      //     type: "raster", //切片地图使用png 所以这里设置为raster
+      map.on('load', function loaded() {
+  //添加geoserver矢量切片
+// 	map.addSource('custom-go-vector-tile-source', {
+// 		type: 'vector',
+// 		scheme: 'tms',
+// 		tiles: ['http://114.98.239.36:6080/arcgis/rest/services/BZCTY/TestMapService/MapServer?layer=topp%3Astates&style=&tilematrixset=EPSG%3A4326&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=EPSG%3A4326%3A5&TileCol=12&TileRow=8'], //GeoServer发布的矢量切片地图
+// 		zoomOffset: -1
+// 	});
+// //配置矢量切片图层样式
+// 	map.addLayer({
+// 		"id": "custom-go-vector-tile-layer",
+// 		"type": "circle",       // 符号化样式 [fill,line,symbol,circle,heatmap]
+// 		"source": "custom-go-vector-tile-source",
+// 		"source-layer": "county",  //添加矢量图层名
+// 		"minzoom": 5,
+// 		"maxzoom": 13,
+// 		 paint: {
+// 			'circle-radius': 1,
+// 			'circle-color': "#000000",
+// 			'circle-opacity': 0.8
+// 		}
+// 	});
 
-      //     tiles: [
-      //       //切片服务的地址,这里可以使用数组的形式，最终呈现效果是各个服务的叠加，z是切片的层级、x是切片的列，y是切片的行
-      //       //模板
-      //       "http://114.98.239.36:6080/arcgis/rest/services/BZCTY/TestMapService/MapServer?layer=topp%3Astates&style=&tilematrixset=EPSG%3A4326&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=EPSG%3A4326%3A5&TileCol=12&TileRow=8"
-      //       //  kvp 方式
-      //       //"http://地图服务地址/WMTS
-      //       //restfull方式
-      //       // "http://地图服务地址WMTS/tile/1.0.0/MyM/default/default028mm/{z}/{y}/{x}.png"
-      //     ],
-      //     //切片的图片大小
-      //     tileSize: 256,
-      //     //切片请求的范围，不在这个范围的话  就不进行切片请求
-      //     bounds: [106.61304, -85, 120, 85],
-      //   },
-      // });
+      map.addLayer({
+        id: "ArcGIS_WMTS",
+        type: "raster", //这里要用raster ，因为切片得到的是图片
+          source: {
+                    type: "raster",
+                    tiles: ["http://114.98.239.36:6080/arcgis/rest/services/BZCTY/mapserveTest/MapServer/WMTS/tile/1.0.0/MyM/default/default028mm/{z}/{y}/{x}.png"],
+                    tileSize: 256,
+                    bounds: [106.61304, -85, 120, 85],
+                },
+               
+        // source: {
+        //   type: "raster", //切片地图使用png 所以这里设置为raster
+
+        //   tiles: [
+        //     //切片服务的地址,这里可以使用数组的形式，最终呈现效果是各个服务的叠加，z是切片的层级、x是切片的列，y是切片的行
+        //     //模板
+        //     "http://114.98.239.36:6080/arcgis/rest/services/BZCTY/mapserveTest/MapServer/tile/1.0.0/MyM/default/default028mm/{z}/{y}/{x}.png"
+
+        //     //  kvp 方式
+        //     //"http://地图服务地址/WMTS
+        //     //restfull方式
+        //     // "http://地图服务地址WMTS/tile/1.0.0/MyM/default/default028mm/{z}/{y}/{x}.png"
+        //   ],
+        //   //切片的图片大小
+        //   tileSize: 256,
+        //   //切片请求的范围，不在这个范围的话  就不进行切片请求
+        //   bounds: [106.61304, -85, 120, 85],
+        // },
+        });
+      });
     },
   },
 };
