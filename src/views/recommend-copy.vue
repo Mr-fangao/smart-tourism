@@ -191,7 +191,6 @@ import echarts from "echarts";
 import wordcloud from "../assets/js/echarts-wordcloud-master/index";
 import dialogBar from "../components/dialog.vue";
 // import poppage from "../components/poppage.vue";
-
 // import dialogPage from "./dialogPage.vue";
 export default {
   name: "recommend",
@@ -199,7 +198,7 @@ export default {
     modalVisible: false,
     areaSelect,
     wordcloud,
-    poppage,
+    // poppage,
     // dialogPage,
     "dialog-bar": dialogBar,
   },
