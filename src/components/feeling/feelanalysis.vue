@@ -190,6 +190,7 @@ export default {
         },
         yAxis: [
           {
+            splitLine: { show: false },
             type: "value",
             name: "单位:万元",
             min: "0",

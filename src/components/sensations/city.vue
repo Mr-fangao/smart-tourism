@@ -22,9 +22,18 @@
             <div class="row1chartcontent" id="chart2" ref="chart2"></div>
           </div>
         </el-col>
-        <el-col :span="24"
-          ><div class="grid-content bg-purple-dark"></div
-        ></el-col>
+        <el-col :span="24">
+          <div class="col-content">
+            <div class="row2title">
+              <!-- <img src="../../assets/img/panelIcon.png" alt="" /> -->
+              <div class="imgBK"></div>
+              <span>城市景点类型分布雷达图</span>
+            </div>
+            <div class="row1chartcontent" id="chart3"></div>
+          </div>
+          <div class="col-content"></div>
+          <div class="col-content"></div>
+        </el-col>
         <el-col :span="24"
           ><div class="grid-content bg-purple-dark"></div
         ></el-col>
@@ -56,6 +65,31 @@ export default {
         { value: 33, name: "测试6" },
         { value: 13, name: "测试7" },
         { value: 543, name: "测试8" },
+        { value: 66, name: "测试9" },
+        { value: 666, name: "测试10" },
+        { value: 1000, name: "文字" },
+        { value: 400, name: "图片" },
+        { value: 333, name: "参" },
+        { value: 855, name: "视频" },
+        { value: 343, name: "新媒体" },
+        { value: 343, name: "测试1" },
+        { value: 43, name: "测试2" },
+        { value: 543, name: "试3" },
+        { value: 333, name: "测试4" },
+        { value: 323, name: "测试" },
+        { value: 33, name: "试6" },
+        { value: 13, name: "试7" },
+        { value: 543, name: "测8" },
+        { value: 66, name: "测试9" },
+        { value: 666, name: "测试10" },
+        { value: 343, name: "测试1" },
+        { value: 43, name: "测试2" },
+        { value: 543, name: "试3" },
+        { value: 333, name: "测试4" },
+        { value: 323, name: "测试" },
+        { value: 33, name: "试6" },
+        { value: 13, name: "试7" },
+        { value: 543, name: "测8" },
         { value: 66, name: "测试9" },
         { value: 666, name: "测试10" },
       ],
@@ -205,14 +239,14 @@ export default {
           {
             name: "热词",
             type: "wordCloud",
-            sizeRange: [10, 30],
+            sizeRange: [10, 35],
             rotationRange: [-20, 20],
             shape: "circle",
             left: "center",
             top: "center",
             width: "100%",
             height: "100%",
-            gridSize: 3,
+            gridSize: 7,
             textPadding: 0,
             autoSize: {
               enable: true,
@@ -304,8 +338,10 @@ export default {
       height: 33.3%;
       width: 100%;
       padding: 5px;
-      // background: url("../../assets/img/buttonbg.png") no-repeat;
-      // background-size: 100% 100%;
+    }
+    .imgBK {
+      background: url("../../assets/img/panelIcon.png") no-repeat;
+      background-size: 100% 100%;
     }
     .el-col:nth-child(1) {
       .col-content {
@@ -320,11 +356,37 @@ export default {
           justify-content: flex-start;
           align-items: center;
           .imgBK {
+            height: 89%;
+            width: 5%;
+            margin-left: 2%;
+          }
+          > span {
+            color: rgb(115, 215, 228);
+            font-size: 12pt;
+          }
+        }
+        .row1chartcontent {
+          height: 100%;
+          width: 100%;
+        }
+      }
+    }
+    .el-col:nth-child(2) {
+      .col-content {
+        height: 100%;
+        width: 33.3%;
+        float: left;
+        .row2title {
+          height: 15%;
+          width: 100%;
+          color: aliceblue;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          .imgBK {
             height: 90%;
             width: 7%;
-            margin-left: 1%;
-            background: url("../../assets/img/panelIcon.png") no-repeat;
-            background-size: 100% 100%;
+            margin-left: 2%;
           }
           > span {
             color: rgb(115, 215, 228);
