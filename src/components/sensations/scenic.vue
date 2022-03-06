@@ -1,20 +1,7 @@
 <template>
-  <div id="com-city">
-    <div class="city-left">
+  <div id="com-scenic">
+    <div class="city-scenic">
       <div class="title"><span>城市形象感知分析</span></div>
-    </div>
-    <div class="city-content">
-      <el-row>
-        <el-col :span="24"
-          ><div class="grid-content bg-purple-dark"></div
-        ></el-col>
-        <el-col :span="24"
-          ><div class="grid-content bg-purple-dark"></div
-        ></el-col>
-        <el-col :span="24"
-          ><div class="grid-content bg-purple-dark"></div
-        ></el-col>
-      </el-row>
     </div>
   </div>
 </template>
@@ -30,11 +17,8 @@ export default {
   position: fixed;
   width: 100%;
   height: 100%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
 }
-.city-left {
+.city-scenic {
   height: 100%;
   width: 20%;
   margin-left: 0.5%;
@@ -51,10 +35,10 @@ export default {
     height: 4%;
     width: 100%;
     position: relative;
-    left: 0%;
+    left: 4%;
     background: url(../../assets/img/titlebg.png) no-repeat;
-    background-size: 57% 93%;
-    background-position: 9% 100%;
+    background-size: 67% 95%;
+    background-position: 6% 100%;
     font-size: 16pt;
     > span {
       float: left;
@@ -64,22 +48,6 @@ export default {
       color: aliceblue;
       text-shadow: 0 0 10px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #38e9e0,
         0 0 25px #0cf3f3;
-    }
-  }
-}
-.city-content {
-  height: 100%;
-  width: 76.5%;
-  position: relative;
-  right: 0%;
-  .el-row {
-    margin-bottom: 0;
-    margin-bottom: 0;
-    height: 91%;
-    top: 1%;
-    .el-col{
-      height: 33.3%;
-      width: 100%;
     }
   }
 }

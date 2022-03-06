@@ -120,5 +120,7 @@ export default {
   z-index: 9999;
   height: 100%;
   width: 100%;
+  background: url("../assets/img/banner.png") no-repeat;
+  background-size: 100% 100%;
 }
 </style>
