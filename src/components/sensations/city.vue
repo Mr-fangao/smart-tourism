@@ -29,7 +29,7 @@
               <div class="imgBK"></div>
               <span>城市风光一览</span>
             </div>
-            <div class="row1chartcontent" id="chart4">
+            <div class="row1chartcontent" id="chart3">
               <el-carousel :interval="4000" type="card" height="200px">
                 <el-carousel-item v-for="item in 6" :key="item">
                   <h3 class="medium">{{ item }}</h3>
@@ -43,7 +43,7 @@
               <div class="imgBK"></div>
               <span>游客评论文本IPA分析图</span>
             </div>
-            <div class="row1chartcontent" id="chart5"></div>
+            <div class="row1chartcontent" id="chart4"></div>
           </div>
         </el-col>
         <el-col :span="24">
@@ -51,7 +51,7 @@
             <div class="row3title">
               <!-- <img src="../../assets/img/panelIcon.png" alt="" /> -->
               <div class="imgBK"></div>
-              <span>网络评论关注度</span>
+              <span>网络评论关注点</span>
             </div>
             <div class="row3chartcontent" id="chart5"></div>
           </div>
@@ -59,7 +59,7 @@
             <div class="row3title">
               <!-- <img src="../../assets/img/panelIcon.png" alt="" /> -->
               <div class="imgBK"></div>
-              <span>网络文本词性分布</span>
+              <span>景点网络口碑</span>
             </div>
             <div class="row3chartcontent" id="chart6"></div>
           </div>
@@ -159,6 +159,7 @@ export default {
         },
         legend: {
           data: ["城市形象", "全国平均水平"],
+          color:'#FFFF'
         },
         xAxis: [
           {
@@ -202,6 +203,7 @@ export default {
           {
             name: "城市形象",
             type: "bar",
+            barWidth:20,
             /*设置柱状图颜色*/
             itemStyle: {
               normal: {
@@ -251,16 +253,28 @@ export default {
         ],
       },
       dataBJ: [
-        [9.21, 2.66, "自然景观"],
-        [9.32, 1.66, "人文景观"],
-        [8.81, 3.8, "植物状况"],
-        [8.68, 4.8, "生态环境"],
+        [4.95, 3.08, "自然景观"],
+        [2.56, 2.85, "人文景观"],
+        [6.51, 2.43, "植物状况"],
+        [11.25, 2.39, "生态环境"],
       ],
       dataGZ: [
-        [4.36, 3.13, "公园设施"],
-        [0.37, 2.63, "标识系统"],
-        [1.8, 2.91, "服务水平"],
-        [1.18, 2.76, "管理治安"],
+        [15.1, 1.82, "公园设施"],
+        [1.5, 2.24, "标识系统"],
+        [2.9, 2.74, "服务水平"],
+        [21.5, 1.8, "管理治安"],
+      ],
+      data03: [
+        [13.11, 2.52, "情感体验"],
+        [6.12, 2.64, "拥挤感知"],
+        [2.73, 2.5, "亲情体验"],
+        [7.32, 2.87, "游憩活动"],
+      ],
+      data04: [
+        [7, 1.82, "内部交通"],
+        [3.2, 1.65, "外部交通"],
+        [3.1, 1.98, "游览成本"],
+        [1.21, 1.59, "餐饮消费"],
       ],
       itemStyle: {
         opacity: 0.8,
@@ -268,72 +282,6 @@ export default {
         shadowOffsetX: 0,
         shadowOffsetY: 0,
         shadowColor: "rgba(0,0,0,0.3)",
-      },
-      option4: {
-        color: ["#dd4444", "#fec42c", "#dd4444", "#fec42c"],
-        legend: {
-          top: 10,
-          data: ["1", "2"],
-          textStyle: {
-            fontSize: 16,
-          },
-        },
-        label: {
-          show: true,
-          position: "right",
-          formatter: "{@value}", // 点旁边显示label，这里使用name: '横坐标'这样写也可以，鼠标移入出现提示。
-        },
-        grid: {
-          left: "10%",
-          right: 150,
-          top: "18%",
-          bottom: "10%",
-        },
-        xAxis: {
-          type: "value",
-          name: "日期",
-          nameGap: 16,
-          nameTextStyle: {
-            fontSize: 16,
-          },
-          max: 31,
-          splitLine: {
-            show: false,
-          },
-        },
-
-        yAxis: {
-          type: "value",
-          name: "AQI指数",
-          nameLocation: "end",
-          nameGap: 20,
-          axisLine: {
-            lineStyle: {
-              color: "#0087ED",
-              width: 1, //这里是为了突出显示加上的
-            },
-          },
-          nameTextStyle: {
-            fontSize: 16,
-          },
-          splitLine: {
-            show: false,
-          },
-        },
-        series: [
-          {
-            name: "1",
-            type: "scatter",
-            itemStyle: this.itemStyle,
-            data: this.dataBJ,
-          },
-          {
-            name: "2",
-            type: "scatter",
-            itemStyle: this.itemStyle,
-            data: this.dataGZ,
-          },
-        ],
       },
       city: "拉萨",
       travelsdata: {
@@ -343,15 +291,123 @@ export default {
         title: "",
         cost: "",
       },
-      test:
-        "大，导致一条弄堂里，和张方敏年纪相仿的男女有六七个之多，他们念过同一所小学，如今分道扬镳，散落到高中、职校和技校。人的未来大致由学校决定，张家爸妈心里是不大看得起弄堂其他小孩的。张方敏读的是区重点，明年肯定能考上一所好大学。张方敏没有此类等级观念，她最好的玩伴是住在九号的程勉。程勉比她大三岁，因为念书晚又复读过，只比她高一级，刚从职校毕业。她过了拐角来到九号门口的时候，程勉的姨婆正在楼下厨房炒菜。九号的一楼大半属于另一户人家，房主将其租给饭店，店门开在后马路上。程家的厨房和饭店后厨只隔一道薄墙，在夏季热如火炉，张方敏很佩服程勉姨婆不怕热地站在这里。刺激的香气钻进张方敏的鼻孔，她看见锅里翻炒的 […]" +
-        "年纪相仿的男女有六七个之多，他们念过同一所小学，如今分道扬镳，散落到高中、职校和技校。人的未来大致由学校决定，张家爸妈心里是不大看得起弄堂其他小孩的。张方敏读的是区重点，明年肯定能考上一所好大学。张方敏没有此类等级观念，她最好的玩伴是住在九号的程勉。程勉比她大三岁，因为念书晚又复读过，只比她高一级，刚从职校毕业。她过了拐角来到九号门口的时候，程勉的姨婆正在楼下厨房炒菜。九号的一楼大半属于另一户人家，房主将其租给饭店，店门开在后马路上。程家的厨房和饭店后厨只隔一道薄墙，在夏季热如火炉，张方敏很佩服程勉姨婆不怕热地站在这里。刺激的香气钻进张方敏的鼻孔，她看见锅里翻炒",
+      option5: {
+        tooltip: {
+          trigger: "item",
+        },
+        color: ["#0C7BE3", "#5BA1E3", "#88B7E3"],
+        series: [
+          {
+            name: "Access From",
+            type: "pie",
+            radius: ["40%", "70%"],
+            data: [
+              { value: 1048, name: "Search Engine" },
+              { value: 735, name: "Direct" },
+              { value: 580, name: "Email" },
+            ],
+            labelLine: {
+              normal: {
+                show: true,
+                length: 5,
+                length2: 10,
+                lineStyle: {
+                  color: "#808080",
+                },
+              },
+            },
+          },
+        ],
+      },
+      option6: {
+        tooltip: {
+          trigger: "axis",
+          axisPointer: {
+            type: "shadow",
+          },
+        },
+        grid: {
+          x: 45,
+          y: 5,
+          x2: 0,
+          y2: 40,
+          // containLabel: true,
+        },
+        xAxis: {
+          type: "value",
+          splitLine: {
+            show: false,
+          },
+          axisLine: {
+            //这是x轴文字颜色
+            lineStyle: {
+              color: " #999999",
+            },
+          },
+          boundaryGap: [0, 0.01],
+        },
+        yAxis: {
+          type: "category",
+          axisLine: {
+            //这是x轴文字颜色
+            lineStyle: {
+              color: " #999999",
+            },
+          },
+          data: ["Brazil", "Indonesia", "USA", "India", "China", "World"],
+        },
+        series: [
+          {
+            barWidth: 10,
+            name: "2011",
+            type: "bar",
+            data: [18203, 23489, 29034, 104970, 131744, 630230],
+          },
+        ],
+      },
+      option7: {
+        tooltip: {
+          trigger: "item",
+        },
+        series: [
+          {
+            name: "Access From",
+            type: "pie",
+            radius: "70%",
+            center: ["50%", "50%"],
+            data: [
+              { value: 335, name: "Direct" },
+              { value: 310, name: "Email" },
+              { value: 274, name: "Union Ads" },
+              { value: 235, name: "Video Ads" },
+              { value: 400, name: "Search Engine" },
+            ].sort(function (a, b) {
+              return a.value - b.value;
+            }),
+            roseType: "radius",
+            label: {
+              color: "rgba(255, 255, 255, 0.3)",
+            },
+            labelLine: {
+              lineStyle: {
+                color: "rgba(255, 255, 255, 0.3)",
+              },
+              smooth: 0.2,
+              length: 5,
+              length2: 5,
+            },
+          },
+        ],
+      },
     };
   },
   mounted() {
     this.wordCloudInti(this.$refs.cloudEl, this.cloudData);
     this.initChart2();
     this.initChart4();
+    this.initChart5();
+    this.initChart6();
+    this.initChart7();
     this.$nextTick(() => {
       window.addEventListener("resize", () => {
         this.handleResize();
@@ -368,15 +424,20 @@ export default {
       myChart2.setOption(option);
     },
     initChart4() {
-      let myChart4 = this.$echarts.init(document.getElementById("chart5"));
+      let myChart4 = this.$echarts.init(document.getElementById("chart4"));
       // 指定图表的配置项和数据
       var option4 = {
-        color: ["#dd4444", "#fec42c"],
+        color: ["#91cc75", "#fec42c", "#ee6666", "#fc8452"],
         legend: {
           top: 10,
-          data: ["1", "2"],
+          right:30,
+          itemHeight: 8,
+itemWidth: 8,
+          orient:"vertical",
+          data: ["1", "2","3","4"],
           textStyle: {
-            fontSize: 16,
+            color:'#F5FDFD80',
+            fontSize: 12,
           },
         },
         label: {
@@ -385,17 +446,17 @@ export default {
           formatter: "{@value}", // 点旁边显示label，这里使用name: '横坐标'这样写也可以，鼠标移入出现提示。
         },
         grid: {
-          left: "10%",
-          right: 150,
-          top: "18%",
-          bottom: "10%",
+          left: "15%",
+          right: 30,
+          top: "10%",
+          bottom: "15%",
         },
         xAxis: {
           type: "value",
           name: "日期",
-          nameGap: 16,
+          nameGap: 0,
           nameTextStyle: {
-            fontSize: 16,
+            fontSize: 12,
           },
           axisLine: {
             //这是x轴文字颜色
@@ -412,12 +473,12 @@ export default {
           type: "value",
           name: "AQI指数",
           nameLocation: "end",
-          nameGap: 20,
+          nameGap: 10,
           scale: true,
           nameTextStyle: {
-            fontSize: 16,
+            fontSize: 12,
           },
-          max: 3.8,
+          max: 3.1,
           splitLine: {
             show: false,
           },
@@ -445,18 +506,39 @@ export default {
             name: "3",
             type: "scatter",
             itemStyle: this.itemStyle,
-            data: this.dataGZ,
+            data: this.data03,
           },
           {
             name: "4",
             type: "scatter",
             itemStyle: this.itemStyle,
-            data: this.dataGZ,
+            data: this.data04,
           },
         ],
       };
       // 使用刚指定的配置项和数据显示图表。
       myChart4.setOption(option4);
+    },
+    initChart5() {
+      let myChart5 = this.$echarts.init(document.getElementById("chart5"));
+      // 指定图表的配置项和数据
+      let option = this.option5;
+      // 使用刚指定的配置项和数据显示图表。
+      myChart5.setOption(option);
+    },
+    initChart6() {
+      let myChart6 = this.$echarts.init(document.getElementById("chart6"));
+      // 指定图表的配置项和数据
+      let option = this.option6;
+      // 使用刚指定的配置项和数据显示图表。
+      myChart6.setOption(option);
+    },
+    initChart7() {
+      let myChart7 = this.$echarts.init(document.getElementById("chart7"));
+      // 指定图表的配置项和数据
+      let option = this.option7;
+      // 使用刚指定的配置项和数据显示图表。
+      myChart7.setOption(option);
     },
     handleResize() {
       this.myChart2 && this.myChart2.resize();
