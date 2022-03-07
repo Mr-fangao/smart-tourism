@@ -27,25 +27,70 @@
             <div class="row2title">
               <!-- <img src="../../assets/img/panelIcon.png" alt="" /> -->
               <div class="imgBK"></div>
-              <span>城市景点类型分布雷达图</span>
+              <span>城市风光一览</span>
             </div>
-            <div class="row1chartcontent" id="chart4"></div>
+            <div class="row1chartcontent" id="chart4">
+              <el-carousel :interval="4000" type="card" height="200px">
+                <el-carousel-item v-for="item in 6" :key="item">
+                  <h3 class="medium">{{ item }}</h3>
+                </el-carousel-item>
+              </el-carousel>
+            </div>
           </div>
-          <div class="col-content"></div>
-          <div class="col-content"></div>
+          <div class="col-content">
+            <div class="row2title">
+              <!-- <img src="../../assets/img/panelIcon.png" alt="" /> -->
+              <div class="imgBK"></div>
+              <span>游客评论文本IPA分析图</span>
+            </div>
+            <div class="row1chartcontent" id="chart5"></div>
+          </div>
         </el-col>
-        <el-col :span="24"
-          ><div class="grid-content bg-purple-dark"></div
+        <el-col :span="24">
+          <div class="col-content">
+            <div class="row3title">
+              <!-- <img src="../../assets/img/panelIcon.png" alt="" /> -->
+              <div class="imgBK"></div>
+              <span>网络评论关注度</span>
+            </div>
+            <div class="row3chartcontent" id="chart5"></div>
+          </div>
+          <div class="col-content">
+            <div class="row3title">
+              <!-- <img src="../../assets/img/panelIcon.png" alt="" /> -->
+              <div class="imgBK"></div>
+              <span>网络文本词性分布</span>
+            </div>
+            <div class="row3chartcontent" id="chart6"></div>
+          </div>
+          <div class="col-content">
+            <div class="row3title">
+              <!-- <img src="../../assets/img/panelIcon.png" alt="" /> -->
+              <div class="imgBK"></div>
+              <span>关键词分布雷达图</span>
+            </div>
+            <div class="row3chartcontent" id="chart7"></div></div
         ></el-col>
       </el-row>
       <div class="travels">
         <div class="travels-title">
           <div class="imgBK"></div>
           <span>历史游记</span>
+          <button class="nextp" @click="getTravels()">下一条</button>
         </div>
         <div class="travels-content">
-          <div class="travels-name">11</div>
-          <div class="travels-text">{{ test }}</div>
+          <div class="travels-name">
+            <div class="title">
+              {{ travelsdata.title }}
+            </div>
+            <div class="descriptions">
+              <!-- <span>用户名称:{{ travelsdata.title }}</span> -->
+              <span>游玩天数:{{ travelsdata.daycount }}</span>
+              <span>出游形式:{{ travelsdata.figure }}</span>
+              <span>累计费用:{{ travelsdata.cost }}</span>
+            </div>
+          </div>
+          <div class="travels-text">{{ travelsdata.content }}</div>
         </div>
       </div>
     </div>
@@ -54,6 +99,7 @@
 <script>
 import wordcloud from "../../assets/js/echarts-wordcloud-master/index";
 import echarts from "echarts";
+import request from "../../utils/request";
 export default {
   name: "city",
   components: {
@@ -95,7 +141,7 @@ export default {
         { value: 25, name: "限速" },
         { value: 13, name: "距离" },
       ],
-      option: {
+      option2: {
         tooltip: {
           trigger: "axis",
           formatter: (params) => {
@@ -117,6 +163,12 @@ export default {
         xAxis: [
           {
             type: "category",
+            axisLine: {
+              //这是x轴文字颜色
+              lineStyle: {
+                color: " #999999",
+              },
+            },
             data: [
               "交通",
               "住宿",
@@ -137,6 +189,12 @@ export default {
             interval: 50,
             axisLabel: {
               formatter: "{value} ",
+            },
+            axisLine: {
+              //这是x轴文字颜色
+              lineStyle: {
+                color: " #999999",
+              },
             },
           },
         ],
@@ -192,6 +250,99 @@ export default {
           },
         ],
       },
+      dataBJ: [
+        [9.21, 2.66, "自然景观"],
+        [9.32, 1.66, "人文景观"],
+        [8.81, 3.8, "植物状况"],
+        [8.68, 4.8, "生态环境"],
+      ],
+      dataGZ: [
+        [4.36, 3.13, "公园设施"],
+        [0.37, 2.63, "标识系统"],
+        [1.8, 2.91, "服务水平"],
+        [1.18, 2.76, "管理治安"],
+      ],
+      itemStyle: {
+        opacity: 0.8,
+        shadowBlur: 10,
+        shadowOffsetX: 0,
+        shadowOffsetY: 0,
+        shadowColor: "rgba(0,0,0,0.3)",
+      },
+      option4: {
+        color: ["#dd4444", "#fec42c", "#dd4444", "#fec42c"],
+        legend: {
+          top: 10,
+          data: ["1", "2"],
+          textStyle: {
+            fontSize: 16,
+          },
+        },
+        label: {
+          show: true,
+          position: "right",
+          formatter: "{@value}", // 点旁边显示label，这里使用name: '横坐标'这样写也可以，鼠标移入出现提示。
+        },
+        grid: {
+          left: "10%",
+          right: 150,
+          top: "18%",
+          bottom: "10%",
+        },
+        xAxis: {
+          type: "value",
+          name: "日期",
+          nameGap: 16,
+          nameTextStyle: {
+            fontSize: 16,
+          },
+          max: 31,
+          splitLine: {
+            show: false,
+          },
+        },
+
+        yAxis: {
+          type: "value",
+          name: "AQI指数",
+          nameLocation: "end",
+          nameGap: 20,
+          axisLine: {
+            lineStyle: {
+              color: "#0087ED",
+              width: 1, //这里是为了突出显示加上的
+            },
+          },
+          nameTextStyle: {
+            fontSize: 16,
+          },
+          splitLine: {
+            show: false,
+          },
+        },
+        series: [
+          {
+            name: "1",
+            type: "scatter",
+            itemStyle: this.itemStyle,
+            data: this.dataBJ,
+          },
+          {
+            name: "2",
+            type: "scatter",
+            itemStyle: this.itemStyle,
+            data: this.dataGZ,
+          },
+        ],
+      },
+      city: "拉萨",
+      travelsdata: {
+        figure: "",
+        daycount: "",
+        content: "",
+        title: "",
+        cost: "",
+      },
       test:
         "大，导致一条弄堂里，和张方敏年纪相仿的男女有六七个之多，他们念过同一所小学，如今分道扬镳，散落到高中、职校和技校。人的未来大致由学校决定，张家爸妈心里是不大看得起弄堂其他小孩的。张方敏读的是区重点，明年肯定能考上一所好大学。张方敏没有此类等级观念，她最好的玩伴是住在九号的程勉。程勉比她大三岁，因为念书晚又复读过，只比她高一级，刚从职校毕业。她过了拐角来到九号门口的时候，程勉的姨婆正在楼下厨房炒菜。九号的一楼大半属于另一户人家，房主将其租给饭店，店门开在后马路上。程家的厨房和饭店后厨只隔一道薄墙，在夏季热如火炉，张方敏很佩服程勉姨婆不怕热地站在这里。刺激的香气钻进张方敏的鼻孔，她看见锅里翻炒的 […]" +
         "年纪相仿的男女有六七个之多，他们念过同一所小学，如今分道扬镳，散落到高中、职校和技校。人的未来大致由学校决定，张家爸妈心里是不大看得起弄堂其他小孩的。张方敏读的是区重点，明年肯定能考上一所好大学。张方敏没有此类等级观念，她最好的玩伴是住在九号的程勉。程勉比她大三岁，因为念书晚又复读过，只比她高一级，刚从职校毕业。她过了拐角来到九号门口的时候，程勉的姨婆正在楼下厨房炒菜。九号的一楼大半属于另一户人家，房主将其租给饭店，店门开在后马路上。程家的厨房和饭店后厨只隔一道薄墙，在夏季热如火炉，张方敏很佩服程勉姨婆不怕热地站在这里。刺激的香气钻进张方敏的鼻孔，她看见锅里翻炒",
@@ -200,19 +351,112 @@ export default {
   mounted() {
     this.wordCloudInti(this.$refs.cloudEl, this.cloudData);
     this.initChart2();
+    this.initChart4();
     this.$nextTick(() => {
       window.addEventListener("resize", () => {
         this.handleResize();
       });
     });
+    this.getTravels();
   },
   methods: {
     initChart2() {
-      this.myChart2 = this.$echarts.init(document.getElementById("chart2"));
+      let myChart2 = this.$echarts.init(document.getElementById("chart2"));
       // 指定图表的配置项和数据
-      let option = this.option;
+      let option = this.option2;
       // 使用刚指定的配置项和数据显示图表。
-      this.myChart2.setOption(option);
+      myChart2.setOption(option);
+    },
+    initChart4() {
+      let myChart4 = this.$echarts.init(document.getElementById("chart5"));
+      // 指定图表的配置项和数据
+      var option4 = {
+        color: ["#dd4444", "#fec42c"],
+        legend: {
+          top: 10,
+          data: ["1", "2"],
+          textStyle: {
+            fontSize: 16,
+          },
+        },
+        label: {
+          show: true,
+          position: "right",
+          formatter: "{@value}", // 点旁边显示label，这里使用name: '横坐标'这样写也可以，鼠标移入出现提示。
+        },
+        grid: {
+          left: "10%",
+          right: 150,
+          top: "18%",
+          bottom: "10%",
+        },
+        xAxis: {
+          type: "value",
+          name: "日期",
+          nameGap: 16,
+          nameTextStyle: {
+            fontSize: 16,
+          },
+          axisLine: {
+            //这是x轴文字颜色
+            lineStyle: {
+              color: " #F5FDFD80",
+            },
+          },
+          max: 22,
+          splitLine: {
+            show: false,
+          },
+        },
+        yAxis: {
+          type: "value",
+          name: "AQI指数",
+          nameLocation: "end",
+          nameGap: 20,
+          scale: true,
+          nameTextStyle: {
+            fontSize: 16,
+          },
+          max: 3.8,
+          splitLine: {
+            show: false,
+          },
+          axisLine: {
+            //这是x轴文字颜色
+            lineStyle: {
+              color: " #F5FDFD80",
+            },
+          },
+        },
+        series: [
+          {
+            name: "1",
+            type: "scatter",
+            itemStyle: this.itemStyle,
+            data: this.dataBJ,
+          },
+          {
+            name: "2",
+            type: "scatter",
+            itemStyle: this.itemStyle,
+            data: this.dataGZ,
+          },
+          {
+            name: "3",
+            type: "scatter",
+            itemStyle: this.itemStyle,
+            data: this.dataGZ,
+          },
+          {
+            name: "4",
+            type: "scatter",
+            itemStyle: this.itemStyle,
+            data: this.dataGZ,
+          },
+        ],
+      };
+      // 使用刚指定的配置项和数据显示图表。
+      myChart4.setOption(option4);
     },
     handleResize() {
       this.myChart2 && this.myChart2.resize();
@@ -264,6 +508,21 @@ export default {
         ],
       };
       myChart.setOption(option);
+    },
+    getTravels() {
+      request
+        .post("/api/data/cityTravel", {
+          count: "100",
+          city: this.city,
+        })
+        .then((res) => {
+          console.log(res);
+          this.travelsdata.title = res.data.title;
+          this.travelsdata.content = res.data.content;
+          this.travelsdata.daycount = res.data.daycount;
+          this.travelsdata.figure = res.data.figure;
+          this.travelsdata.cost = res.data.price;
+        });
     },
   },
 };
@@ -366,7 +625,7 @@ export default {
     .el-col:nth-child(2) {
       .col-content {
         height: 100%;
-        width: 33.3%;
+        width: 50%;
         float: left;
         .row2title {
           height: 15%;
@@ -391,6 +650,40 @@ export default {
         }
       }
     }
+    .el-col:nth-child(3) {
+      .col-content {
+        height: 100%;
+        width: 33.3%;
+        float: left;
+        .row3title {
+          height: 15%;
+          width: 100%;
+          color: aliceblue;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          .imgBK {
+            height: 90%;
+            width: 11%;
+            margin-left: 2%;
+          }
+          > span {
+            color: rgb(115, 215, 228);
+            font-size: 12pt;
+          }
+        }
+        .row3chartcontent {
+          height: 100%;
+          width: 100%;
+        }
+      }
+      // .col-content:nth-child(1){
+      //   width: 33.3%;
+      // }
+      // .col-content:nth-child(2){
+      //   width: 66.6%;
+      // }
+    }
   }
   .travels {
     width: 30%;
@@ -414,19 +707,54 @@ export default {
         color: rgb(115, 215, 228);
         font-size: 12pt;
       }
+      .nextp {
+        color: #8fece8;
+        font-size: 10pt;
+        width: 20%;
+        height: 70%;
+        margin-left: 45%;
+        background: url("../../assets/img/框.png") no-repeat;
+        background-size: 100% 100%;
+        border: none;
+        cursor: pointer;
+      }
     }
     .travels-content {
       height: 84%;
+      width: 100%;
       .travels-name {
         height: 8%;
         color: #fff;
+        font-size: 12pt;
+        .title {
+          height: 60%;
+          width: 100%;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          padding: 0 10%;
+        }
+        .descriptions {
+          height: 70%;
+          width: 100%;
+          padding-left: 9%;
+          > span {
+            width: 50%;
+            float: left;
+            color: #89c4eb9a;
+            font-size: 10pt;
+            text-align: left;
+          }
+        }
       }
       .travels-text {
         color: rgb(141, 141, 141);
-        font-size: 20pt;
+        font-size: 12pt;
         height: 90%;
         overflow-y: auto;
         padding: 10px;
+        width: 100%;
+        text-indent: 2em;
       }
       ::-webkit-scrollbar {
         width: 5px; /*高宽分别对应横竖滚动条的尺寸 */
@@ -446,5 +774,25 @@ export default {
       }
     }
   }
+}
+.el-carousel__item h3 {
+  color: #475669;
+  font-size: 14px;
+  opacity: 0.75;
+  line-height: 200px;
+  margin: 0;
+}
+
+.el-carousel__item:nth-child(2n) {
+  background-color: #99a9bf;
+}
+
+.el-carousel__item:nth-child(2n + 1) {
+  background-color: #d3dce6;
+}
+/deep/.el-carousel__container {
+  margin-top: 4%;
+  margin-bottom: 2%;
+  height: 150px !important;
 }
 </style>

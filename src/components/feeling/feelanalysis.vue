@@ -155,7 +155,7 @@
           <el-timeline-item>
             <el-card>
               <h4>{{ rightdata[3].name }}</h4>
-              <p>{{ rightdata[3].content }}</p>
+              <p style="text-indent: 2em">{{ rightdata[3].content }}</p>
             </el-card>
           </el-timeline-item>
           <el-timeline-item>
@@ -955,6 +955,9 @@ export default {
   color: #d3dce6;
   // background: rgba(202, 73, 73, 0.185);
   border: none;
+  .p {
+    text-indent: 2em;
+  }
 }
 /deep/.el-timeline-item__wrapper {
   right: 4px;
@@ -965,5 +968,29 @@ export default {
 }
 /deep/.el-timeline-item__tail {
   right: 4px;
+}
+/deep/.el-card__body {
+  p {
+    text-indent: 2em;
+    text-align: left;
+    padding: 1% 3%;
+    font-size: 10pt;
+    color: #d3dce6;
+    height: 74%;
+    overflow-x: hidden;
+  }
+  ::-webkit-scrollbar {
+    width: 0px; /*高宽分别对应横竖滚动条的尺寸 */
+    height: 0px;
+    background-color: rgba(135, 175, 221, 0.055);
+  }
+}
+/deep/.el-card__body {
+  h4 {
+    text-align: left;
+    padding: 0.9%;
+    font-size: 10pt;
+    color: #99b6d8c0;
+  }
 }
 </style>
