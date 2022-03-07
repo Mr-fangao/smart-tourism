@@ -39,9 +39,12 @@
         ></el-col>
       </el-row>
       <div class="travels">
-        <div class="travels-title"></div>
+        <div class="travels-title">
+          <div class="imgBK"></div>
+          <span>历史游记</span>
+        </div>
         <div class="travels-content">
-          <span></span>
+          <div class="travels-name">11</div>
           <div class="travels-text">{{ test }}</div>
         </div>
       </div>
@@ -348,7 +351,6 @@ export default {
           .imgBK {
             height: 90%;
             width: 7%;
-            margin-left: 2%;
           }
           > span {
             color: rgb(115, 215, 228);
@@ -395,14 +397,32 @@ export default {
     height: 100%;
     // background-color:#38e9e0;
     .travels-title {
-      height: 8%;
+      height: 4%;
+      width: 100%;
+      margin-top: 4%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      .imgBK {
+        height: 90%;
+        width: 7%;
+        margin-left: 2%;
+        background: url("../../assets/img/panelIcon.png") no-repeat;
+        background-size: 100% 100%;
+      }
+      > span {
+        color: rgb(115, 215, 228);
+        font-size: 12pt;
+      }
     }
     .travels-content {
-      height: 90%;
-      > span {
+      height: 84%;
+      .travels-name {
+        height: 8%;
         color: #fff;
       }
       .travels-text {
+        color: rgb(141, 141, 141);
         font-size: 20pt;
         height: 90%;
         overflow-y: auto;
