@@ -159,7 +159,11 @@ export default {
         },
         legend: {
           data: ["城市形象", "全国平均水平"],
-          color:'#FFFF'
+          textStyle: {
+            //图例文字的样式
+            color: "#fff",
+            fontSize: 16,
+          },
         },
         xAxis: [
           {
@@ -203,7 +207,7 @@ export default {
           {
             name: "城市形象",
             type: "bar",
-            barWidth:20,
+            barWidth: 20,
             /*设置柱状图颜色*/
             itemStyle: {
               normal: {
@@ -430,13 +434,13 @@ export default {
         color: ["#91cc75", "#fec42c", "#ee6666", "#fc8452"],
         legend: {
           top: 10,
-          right:30,
+          right: 30,
           itemHeight: 8,
-itemWidth: 8,
-          orient:"vertical",
-          data: ["1", "2","3","4"],
+          itemWidth: 8,
+          orient: "vertical",
+          data: ["1", "2", "3", "4"],
           textStyle: {
-            color:'#F5FDFD80',
+            color: "#F5FDFD80",
             fontSize: 12,
           },
         },

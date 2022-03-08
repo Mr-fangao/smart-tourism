@@ -4,16 +4,17 @@
       <ul>
         <li id="u1">
           <router-link to="/recommend" exact>智能推荐</router-link>
-          <router-link to="/query" exact >景点查询</router-link>
-          <router-link to="/thememap" exact>专题地图</router-link>
-          <router-link to="/sensation" exact>形象感知</router-link>
+          <router-link to="/query" exact>景点查询</router-link>
+          <router-link to="/skAnalysis" exact>时空分析</router-link>
+          <!-- <router-link to="/thememap" exact>专题地图</router-link> -->
+          <!-- <router-link to="/sensation" exact>形象感知</router-link> -->
         </li>
       </ul>
-      <h1>中国景点智能分析与推荐系统</h1>
+      <h1>旅游景点智能分析与推荐系统</h1>
       <ul>
         <li id="u2">
-          <router-link to="/skAnalysis" exact>时空分析</router-link>
           <router-link to="/odAnalysis" exact>客流分析</router-link>
+          <router-link to="/sensation" exact>形象感知</router-link>
           <router-link to="/feelings" exact>情感分析</router-link>
         </li>
       </ul>
@@ -59,7 +60,7 @@ export default {
       time: "2020年08月31日 10:29",
       index: 1,
       show: false,
-      porpID:'',
+      porpID: "",
     };
   },
   mounted() {
@@ -113,7 +114,6 @@ nav {
   flex-direction: row;
   align-items: center;
   align-content: normal;
-  justify-content: flex-start;
   height: 50px;
   background: url(../assets/img/BG.png);
   background-size: 78% 140%;
@@ -142,6 +142,7 @@ nav {
       width: 93%;
       display: flex;
       flex-direction: row;
+      justify-content: flex-end;
       // justify-content: space-evenly;
       align-items: center;
       a {
