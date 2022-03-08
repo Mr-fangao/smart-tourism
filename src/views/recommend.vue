@@ -6,33 +6,78 @@
         <div class="title">
           <span>个性化选择</span>
         </div>
-        <span>数据时间:</span>
-        <el-date-picker
-          v-model="value1"
-          type="daterange"
-          range-separator="-"
-          size="small"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
-        >
-        </el-date-picker>
-        <div class="maptool">
-          <el-button>请求数据</el-button>
-          <el-button>开始分析</el-button>
-        </div>
+        <el-row :gutter="20"> </el-row>
+        <el-row :gutter="20">
+          <el-col :span="10"
+            ><div class="grid-content select">推荐尺度</div></el-col
+          >
+          <el-col :span="10"
+            ><div class="grid-content col1">
+              <el-radio @click.native="getRange(1)" v-model="radio" label="1"
+                >全国</el-radio
+              >
+              <el-radio @click.native="getRange(2)" v-model="radio" label="2"
+                >特定城市</el-radio
+              >
+            </div></el-col
+          >
+        </el-row>
+        <el-row :gutter="20">
+          <el-col :span="10"
+            ><div class="grid-content select">{{ changename }}</div></el-col
+          >
+          <el-col :span="10"><div class="grid-content bg-purple"></div></el-col>
+        </el-row>
+        <el-row :gutter="20">
+          <el-col :span="10"
+            ><div class="grid-content select">旅游时间</div></el-col
+          >
+          <el-col :span="10">
+            <el-date-picker
+              v-model="value1"
+              type="daterange"
+              range-separator="-"
+              size="small"
+              start-placeholder="开始日期"
+              end-placeholder="结束日期"
+            >
+            </el-date-picker>
+          </el-col>
+        </el-row>
+        <el-row :gutter="20">
+          <el-col :span="10"
+            ><div class="grid-content select">数据源</div></el-col
+          >
+          <el-col :span="10"><div class="grid-content bg-purple"></div></el-col>
+        </el-row>
+        <!-- <span>数据时间:</span>
+     -->
       </div>
-      <div class="toppart"></div>
+      <div class="toppart">
+        <div class="buttoncontent">
+          <el-button class="startbutton">更新数据</el-button>
+          <el-button class="startbutton">开始推荐</el-button>
+          </div>
+      </div>
       <div class="bottompart"></div>
     </div>
     <div class="recommend-content right">
       <div class="con">
         <div class="title">
-          <span>北京--旅游主题特征词云</span>
+          <span>景点排行</span>
         </div>
       </div>
       <div class="bottompart"></div>
     </div>
-    <div class="recommend-bottom"></div>
+    <div class="recommend-bottom">
+      <div class="content-bottom">
+        <div class="title"><span>城市热门榜及特征分析</span></div>
+        <div class="content"></div>
+      </div>
+      <div class="content-bottom">
+        <div class="content"></div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -40,7 +85,34 @@
 export default {
   name: "recommend",
   data() {
-    return {};
+    return {
+      value1: "",
+      changename: "景点特征",
+      radio: "1",
+      options: [
+        {
+          value: "选项1",
+          label: "黄金糕",
+        },
+        {
+          value: "选项2",
+          label: "双皮奶",
+        },
+        {
+          value: "选项3",
+          label: "蚵仔煎",
+        },
+        {
+          value: "选项4",
+          label: "龙须面",
+        },
+        {
+          value: "选项5",
+          label: "北京烤鸭",
+        },
+      ],
+      value: "",
+    };
   },
   mounted() {
     this.initmap();
@@ -55,6 +127,14 @@ export default {
         center: [105, 35],
         zoom: 3.5,
       });
+    },
+    getRange(val) {
+      console.log(val);
+      if (val == 1) {
+        this.changename = "景点特征";
+      } else if (val == 2) {
+        this.changename = "城市选择";
+      }
     },
   },
 };
@@ -93,6 +173,12 @@ export default {
     top: 0%;
     height: 33.3%;
     width: 100%;
+    .select {
+      // border-left: 5px solid #0cf3f3;
+      color: #cfe2e1;
+      margin-left: 30%;
+      line-height: 40px;
+    }
     > span {
       width: 33%;
       height: 10%;
@@ -106,8 +192,32 @@ export default {
     }
     .maptool {
       position: absolute;
-      top: 25%;
-      left: 13%;
+      top: 85%;
+      left: 30%;
+    }
+    .el-row {
+      color: #dcdfe6;
+      font-size: 12pt;
+      text-align: left;
+      margin-left: 0% !important;
+      margin-right: 0% !important;
+      margin-bottom: 0px;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+    /deep/.el-col {
+      border-radius: 4px;
+      padding-left: 0% !important;
+      padding-right: 0% !important;
+    }
+    .grid-content {
+      border-radius: 4px;
+      min-height: 36px;
+    }
+    .row-bg {
+      padding: 0px 0;
+      background-color: #f9fafc;
     }
   }
   .toppart {
@@ -115,21 +225,14 @@ export default {
     top: 33.3%;
     width: 100%;
     height: 33.3%;
-    > span {
-      width: 33%;
-      height: 10%;
-      margin-left: -44%;
-      margin-top: 2%;
-      border-left: 5px solid #0cf3f3;
-      font-size: 12pt;
-      line-height: 22px;
-      color: aliceblue;
-      position: absolute;
-    }
-    .maptool {
-      position: absolute;
-      top: 25%;
-      left: 13%;
+    .buttoncontent{
+      height: 20%;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
     }
   }
   .bottompart {
@@ -150,6 +253,41 @@ export default {
   background: url("../assets/img/长方形.png") no-repeat;
   background-position: 100% 10%;
   background-size: 100% 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  .content-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .title {
+      flex: 1;
+      width: 100%;
+      background-size: 52% 80%;
+    }
+    .content {
+      flex: 6;
+      width: 100%;
+    }
+  }
+  .content-bottom:nth-child(2) {
+    flex: 1;
+    height: 100%;
+  }
+  .content-bottom:nth-child(1) {
+    flex: 2;
+    height: 100%;
+    .title {
+      flex: 1;
+      width: 100%;
+      background-size: 25% 80%;
+      margin-left: -12%;
+      > span {
+        margin-left: 15.5%;
+      }
+    }
+  }
 }
 .left {
   margin-left: 0.2%;
@@ -158,6 +296,9 @@ export default {
 .right {
   margin-right: 0.2%;
   right: 0;
+}
+.col1 {
+  display: flex;
 }
 /deep/.el-input__inner {
   left: 20%;
@@ -172,8 +313,8 @@ export default {
   color: rgba(220, 225, 227, 0.96);
   // display: inline-block;
   font-size: inherit;
-  height: 40px;
-  line-height: 33px;
+  height: 44px;
+  line-height: 36px;
   width: 100%;
   padding: 0 0 0 35px;
 }
@@ -205,6 +346,7 @@ export default {
 }
 /deep/.el-date-editor .el-range-input {
   width: 30%;
+  color: rgb(171, 180, 180);
   height: 60%;
   background: rgba(82, 173, 209, 0.3);
 }
@@ -217,11 +359,16 @@ export default {
   padding: 12px 20px;
   font-size: 14px;
   border-radius: 5px;
+  width:40%;
 }
 /deep/.el-button:focus,
 .el-button:hover {
   color: #75f8ed;
   border-color: #c6e2ff;
   background-color: #ecf5ff;
+}
+/deep/.el-radio {
+  color: #aaacb1;
+  line-height: 40px;
 }
 </style>
