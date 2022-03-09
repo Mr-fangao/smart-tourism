@@ -101,14 +101,14 @@
                 </el-pagination>
               </div>
             </el-card>
-            <!-- <poppage
+            <detail
               :show="show"
               :porpID="porpID"
               @hideModal="hideModal"
               @submit="submit"
             >
               <p>这里放弹窗的内容</p>
-            </poppage> -->
+            </detail>
           </div>
         </div>
       </div>
@@ -140,7 +140,6 @@ export default {
     // modalVisible: false,
     // areaSelect,
     wordcloud,
-    Bus,
     MapboxDraw,
     detail,
     loading,
@@ -159,8 +158,8 @@ export default {
       pageSize: 11,
       location: [],
       //弹窗字段
-      // show: false,
-      // porpID: "",
+      show: false,
+      porpID: "",
       points: [{ lng: "10", lat: "10" }],
       pointsdata: [{ lng: "0", lat: "0" }],
       pointsflag: 0,
@@ -304,12 +303,12 @@ export default {
           this.total = res.data.total;
         });
     },
-    clickData(row) {
-      console.log(row.name);
-      this.isShow = true;
+    clickData(val) {
+      Bus.$emit('myevent',val.id);
+      this.$router.push({ name: "details" });
     },
     getDetail(val) {
-      this.porpID = val.name;
+      this.porpID = val;
       this.show = true;
     },
     Realize() {

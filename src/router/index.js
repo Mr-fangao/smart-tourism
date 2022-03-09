@@ -23,6 +23,14 @@ export default new Router({
     }
   },
   {
+    path: '/details',
+    name: 'details',
+    component: () => import("@/views/details"),
+    meta: {
+      keepAlive: true
+    }
+  },
+  {
     path: '/recommend',
     name: 'recommend',
     component: () => import("@/views/recommend"),

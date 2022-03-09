@@ -43,7 +43,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .modal-bg {
-        position:absolute;
+  position:absolute;
   top: 0;
   left: 0;
   width: 100%;

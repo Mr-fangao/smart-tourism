@@ -466,7 +466,7 @@ export default {
   }
   /deep/.el-tabs__nav-scroll {
     background: transparent;
-    width: 68%;
+    width: 59%;
     background: url(../assets/img/buttonbg.png) no-repeat;
     background-size: 100% 100%;
   }
