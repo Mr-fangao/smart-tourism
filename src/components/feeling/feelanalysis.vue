@@ -106,7 +106,7 @@
           </div>
         </el-row>
         <el-row style="margin-left: 1px; margin-right: 1px">
-          <div class="echartbottom">
+          <div class="echartbottom" style="  background-position: 60% 10%;   background-size: 98% 95%;">
             <div class="echartbottomTitle">
               <img src="../../assets/img/panelIcon.png" alt="" />
               <span>景点关注度年变化图</span>
@@ -945,6 +945,11 @@ export default {
 #btmChart5 {
   height: 100%;
   width: 100%;
+}
+.echartbottom{
+  background: url("../../assets/img/buttonbg.png") no-repeat;
+  background-size: 95% 95%;
+  background-position: 64% 10%;
 }
 /deep/.el-card__body {
   padding: 0px;

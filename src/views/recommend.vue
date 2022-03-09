@@ -52,22 +52,22 @@
         </el-row>
         <!-- <span>数据时间:</span>
      -->
-      </div>
-      <div class="toppart">
         <div class="buttoncontent">
           <el-button class="startbutton">更新数据</el-button>
           <el-button class="startbutton">开始推荐</el-button>
-          </div>
+        </div>
       </div>
+      <div class="toppart"></div>
       <div class="bottompart"></div>
     </div>
     <div class="recommend-content right">
-      <div class="con">
-        <div class="title">
-          <span>景点排行</span>
-        </div>
+      <div class="righttop">
+        <el-tabs v-model="activeName" type="border-card">
+          <el-tab-pane label="第一个tab" name="recommendTab"> </el-tab-pane>
+          <el-tab-pane label="第二个tab" name="hotTab"> </el-tab-pane>
+        </el-tabs>
       </div>
-      <div class="bottompart"></div>
+      <div class="rightbottom"></div>
     </div>
     <div class="recommend-bottom">
       <div class="content-bottom">
@@ -80,7 +80,6 @@
     </div>
   </div>
 </template>
-
 <script>
 export default {
   name: "recommend",
@@ -89,6 +88,7 @@ export default {
       value1: "",
       changename: "景点特征",
       radio: "1",
+      activeName: "first",
       options: [
         {
           value: "选项1",
@@ -127,6 +127,10 @@ export default {
         center: [105, 35],
         zoom: 3.5,
       });
+    },
+    checked(index) {
+      const _this = this;
+      _this.isActive = index;
     },
     getRange(val) {
       console.log(val);
@@ -195,6 +199,15 @@ export default {
       top: 85%;
       left: 30%;
     }
+    .buttoncontent {
+      height: 20%;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: space-around;
+      align-items: center;
+    }
     .el-row {
       color: #dcdfe6;
       font-size: 12pt;
@@ -225,15 +238,6 @@ export default {
     top: 33.3%;
     width: 100%;
     height: 33.3%;
-    .buttoncontent{
-      height: 20%;
-      width: 100%;
-      display: flex;
-      flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-around;
-    align-items: center;
-    }
   }
   .bottompart {
     position: absolute;
@@ -296,10 +300,69 @@ export default {
 .right {
   margin-right: 0.2%;
   right: 0;
+  display: flex;
+  .righttop {
+    flex: 2;
+    width: 100%;
+    /*  tab样式 */
+    .tab_nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 2%;
+      height: 8%;
+      margin-top: 2%;
+    }
+
+    .tab_nav .navTitle {
+      height: 90px;
+      line-height: 90px;
+      width: 100%;
+      text-align: center;
+      font-size: 16px;
+      font-family: Alibaba PuHuiTi;
+      color: #333;
+      background-color: #db7093;
+      margin-right: 10px;
+    }
+
+    /* 让最后一个标题没有margin */
+    .navTitle:last-child {
+      margin-right: 0;
+    }
+
+    .active {
+      position: relative;
+      color: #ffffff;
+    }
+
+    .active::after {
+      content: "";
+      position: absolute;
+      width: 100rpx;
+      height: 4rpx;
+      background-color: #1f75fe;
+      left: 0px;
+      right: 0px;
+      bottom: 0px;
+      margin: auto;
+    }
+
+    .nav_item {
+      padding: 20px;
+      background-color: rgb(211 206 206);
+      color: #ffffff;
+    }
+  }
+  .rightbottom {
+    flex: 1;
+    width: 100%;
+  }
 }
 .col1 {
   display: flex;
 }
+
 /deep/.el-input__inner {
   left: 20%;
   position: absolute;
@@ -318,6 +381,7 @@ export default {
   width: 100%;
   padding: 0 0 0 35px;
 }
+
 .title {
   // flex: 0.5;
   margin-top: 1%;
@@ -359,7 +423,7 @@ export default {
   padding: 12px 20px;
   font-size: 14px;
   border-radius: 5px;
-  width:40%;
+  width: 40%;
 }
 /deep/.el-button:focus,
 .el-button:hover {
@@ -370,5 +434,8 @@ export default {
 /deep/.el-radio {
   color: #aaacb1;
   line-height: 40px;
+}
+/deep/.el-tabs--border-card{
+  height: 100%;
 }
 </style>
