@@ -63,7 +63,9 @@
     <div class="recommend-content right">
       <div class="righttop">
         <el-tabs v-model="activeName" type="border-card">
-          <el-tab-pane label="第一个tab" name="recommendTab"> </el-tab-pane>
+          <el-tab-pane label="第一个tab" name="recommendTab">
+            111111111</el-tab-pane
+          >
           <el-tab-pane label="第二个tab" name="hotTab"> </el-tab-pane>
         </el-tabs>
       </div>
@@ -88,7 +90,7 @@ export default {
       value1: "",
       changename: "景点特征",
       radio: "1",
-      activeName: "first",
+      activeName: "recommendTab",
       options: [
         {
           value: "选项1",
@@ -435,7 +437,48 @@ export default {
   color: #aaacb1;
   line-height: 40px;
 }
-/deep/.el-tabs--border-card{
+/deep/.el-tabs--border-card {
   height: 100%;
+  margin: 2%;
+  background: transparent;
+  border: none;
+}
+.el-tabs--border-card > .el-tabs__content {
+  padding: 0;
+  height: 92%;
+}
+/deep/.el-tabs--border-card > .el-tabs__header {
+  background: transparent;
+  border: none;
+}
+/deep/.el-tabs__item {
+  padding: 0;
+  width: 70%;
+  border: none;
+  //   background: url(../assets/img/tab.png)no-repeat;
+  //   background-size: 100% 100%;
+}
+/deep/.el-tabs--top.el-tabs--border-card
+  > .el-tabs__header
+  .el-tabs__item:last-child {
+  padding: 0;
+}
+/deep/.el-tabs__nav-scroll {
+  background: transparent;
+  width: 68%;
+  background: url(../assets/img/buttonbg.png) no-repeat;
+  background-size: 100% 100%;
+}
+/deep/.el-tabs--border-card > .el-tabs__header .el-tabs__item {
+  border-left:  none;
+    border-right:  none;
+}
+/deep/.el-tabs--border-card > .el-tabs__header .el-tabs__item.is-active {
+  background: #1cbde62c;
+  color: #dcdfe6;
+  border-left:  none;
+    border-right:  none;
+  border-top: 2px solid #0cf3f3;
+  border-bottom: 2px solid #0cf3f3;
 }
 </style>
