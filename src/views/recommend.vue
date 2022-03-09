@@ -407,78 +407,80 @@ export default {
       0 0 40px #0cf3f3;
   }
 }
-/deep/.el-range-editor--small .el-range__icon {
-  color: transparent !important;
-}
-/deep/.el-date-editor .el-range-input {
-  width: 30%;
-  color: rgb(171, 180, 180);
-  height: 60%;
-  background: rgba(82, 173, 209, 0.3);
-}
-/deep/.el-button {
-  background: url("../assets/img/框.png");
-  background-size: 100% 100%;
-  // background: #24bff390;
-  border: 0px solid #d80d4a;
-  color: #ffffff;
-  padding: 12px 20px;
-  font-size: 14px;
-  border-radius: 5px;
-  width: 40%;
-}
-/deep/.el-button:focus,
-.el-button:hover {
-  color: #75f8ed;
-  border-color: #c6e2ff;
-  background-color: #ecf5ff;
-}
-/deep/.el-radio {
-  color: #aaacb1;
-  line-height: 40px;
-}
-/deep/.el-tabs--border-card {
-  height: 100%;
-  margin: 2%;
-  background: transparent;
-  border: none;
-}
-.el-tabs--border-card > .el-tabs__content {
-  padding: 0;
-  height: 92%;
-}
-/deep/.el-tabs--border-card > .el-tabs__header {
-  background: transparent;
-  border: none;
-}
-/deep/.el-tabs__item {
-  padding: 0;
-  width: 70%;
-  border: none;
-  //   background: url(../assets/img/tab.png)no-repeat;
-  //   background-size: 100% 100%;
-}
-/deep/.el-tabs--top.el-tabs--border-card
-  > .el-tabs__header
-  .el-tabs__item:last-child {
-  padding: 0;
-}
-/deep/.el-tabs__nav-scroll {
-  background: transparent;
-  width: 68%;
-  background: url(../assets/img/buttonbg.png) no-repeat;
-  background-size: 100% 100%;
-}
-/deep/.el-tabs--border-card > .el-tabs__header .el-tabs__item {
-  border-left:  none;
-    border-right:  none;
-}
-/deep/.el-tabs--border-card > .el-tabs__header .el-tabs__item.is-active {
-  background: #1cbde62c;
-  color: #dcdfe6;
-  border-left:  none;
-    border-right:  none;
-  border-top: 2px solid #0cf3f3;
-  border-bottom: 2px solid #0cf3f3;
+.recommend-content {
+  /deep/.el-range-editor--small .el-range__icon {
+    color: transparent !important;
+  }
+  /deep/.el-date-editor .el-range-input {
+    width: 30%;
+    color: rgb(171, 180, 180);
+    height: 60%;
+    background: rgba(82, 173, 209, 0.3);
+  }
+  /deep/.el-button {
+    background: url("../assets/img/框.png");
+    background-size: 100% 100%;
+    // background: #24bff390;
+    border: 0px solid #d80d4a;
+    color: #ffffff;
+    padding: 12px 20px;
+    font-size: 14px;
+    border-radius: 5px;
+    width: 40%;
+  }
+  /deep/.el-button:focus,
+  .el-button:hover {
+    color: #75f8ed;
+    border-color: #c6e2ff;
+    background-color: #ecf5ff;
+  }
+  /deep/.el-radio {
+    color: #aaacb1;
+    line-height: 40px;
+  }
+  /deep/.el-tabs--border-card {
+    height: 100%;
+    margin: 2%;
+    background: transparent;
+    border: none;
+  }
+  .el-tabs--border-card > .el-tabs__content {
+    padding: 0;
+    height: 92%;
+  }
+  /deep/.el-tabs--border-card > .el-tabs__header {
+    background: transparent;
+    border: none;
+  }
+  /deep/.el-tabs__item {
+    padding: 0;
+    width: 70%;
+    border: none;
+    //   background: url(../assets/img/tab.png)no-repeat;
+    //   background-size: 100% 100%;
+  }
+  /deep/.el-tabs--top.el-tabs--border-card
+    > .el-tabs__header
+    .el-tabs__item:last-child {
+    padding: 0;
+  }
+  /deep/.el-tabs__nav-scroll {
+    background: transparent;
+    width: 68%;
+    background: url(../assets/img/buttonbg.png) no-repeat;
+    background-size: 100% 100%;
+  }
+  /deep/.el-tabs--border-card > .el-tabs__header .el-tabs__item {
+    border-left: none;
+    border-right: none;
+  }
+  /deep/.el-tabs--border-card > .el-tabs__header .el-tabs__item.is-active {
+    background: #1cbde62c;
+    color: #dcdfe6;
+    border-left: none;
+    border-right: none;
+    border-top: 2px solid #0cf3f3;
+    border-bottom: 2px solid #0cf3f3;
+  }
 }
 </style>

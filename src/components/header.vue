@@ -108,106 +108,109 @@ export default {
 <style scoped lang="less">
 .backcolor {
   background-color: #02191f;
-}
-nav {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  align-content: normal;
-  height: 50px;
-  background: url(../assets/img/BG.png);
-  background-size: 78% 140%;
-  background-position-x: 50%;
-  padding: 0px;
-  h1 {
-    font-size: 25px;
-    color: #39fcff;
-    font-family: Microsoft YaHei;
-    // font-weight: bold;
-  }
-  .times {
-    margin-right: 10px;
-    float: right;
-    font-family: Microsoft YaHei;
-    font-weight: bold;
-  }
-  ul {
-    flex: 1;
-    height: 100%;
-    width: 100%;
-    list-style-type: none; /*消除黑点*/
-    text-align: center;
-    li {
+  nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: normal;
+    height: 50px;
+    background: url(../assets/img/BG.png);
+    background-size: 78% 140%;
+    background-position-x: 50%;
+    padding: 0px;
+    h1 {
+      font-size: 25px;
+      color: #39fcff;
+      font-family: Microsoft YaHei;
+      flex: 0.6;
+      // font-weight: bold;
+    }
+    .times {
+      margin-right: 10px;
+      float: right;
+      font-family: Microsoft YaHei;
+      font-weight: bold;
+    }
+    ul {
+      flex: 1;
       height: 100%;
-      width: 93%;
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-end;
-      // justify-content: space-evenly;
-      align-items: center;
-      a {
-        font-size: 16px;
-        width: 25%;
-        color: #528c8c; /*设置字体颜色*/
-        font-family: Microsoft YaHei;
-        font-weight: bold;
-        text-decoration: none; /*消除下划线*/
-        border-radius: 0px;
-        margin: 0px 0px -10px 0px;
-        line-height: 30px;
-        background: url(../assets/img/button.png) no-repeat;
-        background-size: 100% 90%;
-        background-position: 100% 100%;
+      width: 100%;
+      list-style-type: none; /*消除黑点*/
+      text-align: center;
+      li {
+        height: 100%;
+        width: 93%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        // justify-content: space-evenly;
+        align-items: center;
+        a {
+          font-size: 16px;
+          width: 25%;
+          color: #528c8c; /*设置字体颜色*/
+          font-family: Microsoft YaHei;
+          font-weight: bold;
+          text-decoration: none; /*消除下划线*/
+          border-radius: 0px;
+          margin: 0px 0px -10px 0px;
+          line-height: 30px;
+          background: url(../assets/img/button.png) no-repeat;
+          background-size: 100% 90%;
+          background-position: 100% 100%;
+        }
       }
     }
   }
-  #u1 {
-    margin-left: 0%;
-  }
-  #u2 {
-    justify-content: center;
-    a {
-      background: url(../assets/img/rightbutton.png) no-repeat;
-      background-size: 100% 90%;
-      background-position: 100% 100%;
-    }
-    a:nth-child(1) {
-      margin-left: -60px;
-    }
-    .router-link-active {
-      background: url(../assets/img/rightbuttonative.png) no-repeat;
-      margin: 0px 0px -12px 0px;
-      line-height: 30px;
-      background-size: 113% 157%;
-      background-position: 114% 0%;
+  .user {
+    position: absolute;
+    margin-right: 0%;
+    float: right;
+    right: 0;
+    width: 9%;
+    height: 6%;
+    background-color: transparent;
+    .userpng {
+      height: 100%;
+      width: 30%;
+      background: url(../assets/img/userBG.png) no-repeat;
+      background-size: 80% 70%;
+      background-position: 100% 85%;
+      float: left;
     }
   }
-}
-.user {
-  position: absolute;
-  margin-right: 0%;
-  float: right;
-  right: 0;
-  width: 9%;
-  height: 6%;
-  background-color: transparent;
-  .userpng {
-    height: 100%;
-    width: 30%;
-    background: url(../assets/img/userBG.png) no-repeat;
-    background-size: 80% 70%;
-    background-position: 100% 85%;
-    float: left;
+  /*选中则发生一些变化*/
+  .router-link-active {
+    color: #e0fbff;
+    background: url(../assets/img/buttonative.png) no-repeat;
+    margin: 0px 0px -12px 0px;
+    line-height: 30px;
+    background-size: 105% 160%;
+    background-position: -85% 0%;
   }
 }
-/*选中则发生一些变化*/
-.router-link-active {
-  color: #e0fbff;
-  background: url(../assets/img/buttonative.png) no-repeat;
-  margin: 0px 0px -12px 0px;
-  line-height: 30px;
-  background-size: 105% 160%;
-  background-position: -85% 0%;
+
+#u1 {
+  // margin-left: -4%;
+}
+#u2 {
+  // margin-left: 4%;
+  justify-content: center;
+  a {
+    background: url(../assets/img/rightbutton.png) no-repeat;
+    background-size: 100% 90%;
+    background-position: 100% 100%;
+  }
+  a:nth-child(1) {
+    margin-left: -60px;
+  }
+  .router-link-active {
+    background: url(../assets/img/rightbuttonative.png) no-repeat;
+    margin: 0px 0px -12px 0px;
+    line-height: 30px;
+    background-size: 113% 157%;
+    background-position: 114% 0%;
+  }
 }
 /deep/.el-dropdown {
   display: inline-block;
