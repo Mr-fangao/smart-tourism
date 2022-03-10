@@ -6,10 +6,10 @@
         <div class="title">
           <span>个性化选择</span>
         </div>
-        <el-row :gutter="20"> </el-row>
+        <!-- <el-row :gutter="20"> </el-row> -->
         <el-row :gutter="20">
           <el-col :span="10"
-            ><div class="grid-content select">推荐尺度</div></el-col
+            ><div class="grid-content select">推荐范围</div></el-col
           >
           <el-col :span="10"
             ><div class="grid-content col1">
@@ -17,7 +17,7 @@
                 >全国</el-radio
               >
               <el-radio @click.native="getRange(2)" v-model="radio" label="2"
-                >特定城市</el-radio
+                >自定义城市</el-radio
               >
             </div></el-col
           >
@@ -26,11 +26,19 @@
           <el-col :span="10"
             ><div class="grid-content select">{{ changename }}</div></el-col
           >
-          <el-col :span="10"><div class="grid-content bg-purple"></div></el-col>
+          <el-col :span="10">
+            <div class="grid-content bg-specially">
+              <div v-if="activeNameflag" class="tab1">
+                <el-input v-model="input" placeholder="请输入内容"></el-input>
+                <span>示例:历史、巍峨、海滨等</span>
+              </div>
+              <div v-if="!activeNameflag" class="tab2"></div>
+            </div>
+          </el-col>
         </el-row>
         <el-row :gutter="20">
           <el-col :span="10"
-            ><div class="grid-content select">旅游时间</div></el-col
+            ><div class="grid-content select">出游时间</div></el-col
           >
           <el-col :span="10">
             <el-date-picker
@@ -48,7 +56,19 @@
           <el-col :span="10"
             ><div class="grid-content select">数据源</div></el-col
           >
-          <el-col :span="10"><div class="grid-content bg-purple"></div></el-col>
+          <el-col :span="10">
+            <div class="datasorce">
+              <el-select v-model="value1" multiple placeholder="请选择">
+                <el-option
+                  v-for="item in options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                >
+                </el-option>
+              </el-select>
+            </div>
+          </el-col>
         </el-row>
         <!-- <span>数据时间:</span>
      -->
@@ -91,6 +111,9 @@ export default {
       changename: "景点特征",
       radio: "1",
       activeName: "recommendTab",
+      activeNameflag: "true",
+      input1: "",
+      checkList: ["选中且禁用", "复选框 A"],
       options: [
         {
           value: "选项1",
@@ -177,7 +200,7 @@ export default {
   .con {
     position: absolute;
     top: 0%;
-    height: 33.3%;
+    height: 40.3%;
     width: 100%;
     .select {
       // border-left: 5px solid #0cf3f3;
@@ -237,9 +260,9 @@ export default {
   }
   .toppart {
     position: absolute;
-    top: 33.3%;
+    top: 40.3%;
     width: 100%;
-    height: 33.3%;
+    height: 25%;
   }
   .bottompart {
     position: absolute;
@@ -407,7 +430,55 @@ export default {
       0 0 40px #0cf3f3;
   }
 }
+.checkbox {
+  width: 100%;
+  height: 100%;
+  margin-left: 10%;
+}
 .recommend-content {
+  .bg-specially {
+    height: 100%;
+    width: 100%;
+  }
+  .tab1 {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+    > span {
+      position: absolute;
+      top: 64%;
+      left: 39%;
+      color: #a7c7c7f0;
+      font-size: 10pt;
+    }
+
+    /deep/.el-input__inner {
+      left: -10%;
+      position: absolute;
+      display: inline-block;
+      -webkit-appearance: none;
+      background: #c3e3e72b;
+      border-radius: 4px;
+      border: 1px solid #3eb7c738;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      color: rgba(220, 225, 227, 0.96);
+      font-size: inherit;
+      height: 30px;
+      line-height: 90px;
+      width: 125%;
+      padding: 0 0 0 10px;
+    }
+  }
+  /deep/.el-row {
+    height: 17%;
+  }
+  /deep/.el-row:nth-child(1) {
+    height: 0%;
+  }
   /deep/.el-range-editor--small .el-range__icon {
     color: transparent !important;
   }

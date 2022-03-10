@@ -140,7 +140,7 @@ export default {
         > span {
           color: rgb(178, 228, 228);
           position: absolute;
-          left: 4%;
+          left: 78.8%;
           line-height: 28px;
           font-size: 11pt;
         }
