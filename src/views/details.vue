@@ -20,11 +20,28 @@
         <div class="con"></div>
       </div>
     </div>
-    <div class="details-mid part"></div>
+    <div class="details-mid part">
+      <div class="middle">
+        <div class="middle-top">
+          <div class="middle-top-left">
+            <div class="rowfirst row"></div>
+            <div class="rowsecond row"></div>
+            <div class="rowthird row"></div>
+          </div>
+          <div class="middle-top-right"></div>
+        </div>
+        <div class="middle-bottom">
+          <div class="title">
+            <span>实时评论</span>
+          </div>
+          <div class="middle-bottom-content"></div>
+        </div>
+      </div>
+    </div>
     <div class="details-righ part">
       <div class="content">
         <div class="title">
-          <span>精选图片</span>
+          <span>词云分析</span>
         </div>
         <div class="con"></div>
       </div>
@@ -36,7 +53,7 @@
       </div>
       <div class="content">
         <div class="title">
-          <span>游客月变化图</span>
+          <span>口碑月变化图</span>
         </div>
         <div class="con"></div>
       </div>
@@ -148,6 +165,65 @@ export default {
       .con {
         flex: 6;
         width: 100%;
+      }
+    }
+  }
+  .middle {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    .middle-top {
+      width: 100%;
+      flex: 2;
+      display: flex;
+      .middle-top-left {
+        padding-bottom: 5%;
+        flex: 4;
+        display: flex;
+        flex-direction: column;
+        .rowfirst {
+          flex: 1;
+        }
+        .rowsecond {
+          flex: 2;
+        }
+        .rowthird {
+          flex: 2;
+        }
+      }
+      .middle-top-right {
+        padding-bottom: 5%;
+        flex: 3;
+      }
+    }
+    .middle-bottom {
+      width: 100%;
+      margin-top: -5%;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      background: url("../assets/img/长方形.png") no-repeat;
+      .title {
+        flex: 1;
+        margin-top: 1%;
+        height: 20%;
+        width: 45%;
+        background: url("../assets/img/titlebg.png") no-repeat;
+        background-size: 50% 80%;
+        background-position-x: 6%;
+        > span {
+          color: rgb(178, 228, 228);
+          position: absolute;
+          left: 29.5%;
+          line-height: 28px;
+          font-size: 11pt;
+        }
+      }
+      .middle-bottom-content {
+        flex: 6;
       }
     }
   }
