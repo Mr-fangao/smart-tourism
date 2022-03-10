@@ -8,10 +8,10 @@
         </div>
         <!-- <el-row :gutter="20"> </el-row> -->
         <el-row :gutter="20">
-          <el-col :span="10"
+          <el-col :span="8"
             ><div class="grid-content select">推荐范围</div></el-col
           >
-          <el-col :span="10"
+          <el-col :span="16"
             ><div class="grid-content col1">
               <el-radio @click.native="getRange(1)" v-model="radio" label="1"
                 >全国</el-radio
@@ -23,10 +23,10 @@
           >
         </el-row>
         <el-row :gutter="20">
-          <el-col :span="10"
+          <el-col :span="8"
             ><div class="grid-content select">{{ changename }}</div></el-col
           >
-          <el-col :span="10">
+          <el-col :span="16">
             <div class="grid-content bg-specially">
               <div v-if="activeNameflag" class="tab1">
                 <el-input v-model="input" placeholder="请输入内容"></el-input>
@@ -37,10 +37,10 @@
           </el-col>
         </el-row>
         <el-row :gutter="20">
-          <el-col :span="10"
+          <el-col :span="8"
             ><div class="grid-content select">出游时间</div></el-col
           >
-          <el-col :span="10">
+          <el-col :span="16">
             <el-date-picker
               v-model="value1"
               type="daterange"
@@ -53,10 +53,10 @@
           </el-col>
         </el-row>
         <el-row :gutter="20">
-          <el-col :span="10"
+          <el-col :span="8"
             ><div class="grid-content select">数据源</div></el-col
           >
-          <el-col :span="10">
+          <el-col :span="16">
             <div class="datasorce">
               <el-select v-model="value1" multiple placeholder="请选择">
                 <el-option
@@ -107,7 +107,7 @@ export default {
   name: "recommend",
   data() {
     return {
-      value1: "",
+      value1: [],
       changename: "景点特征",
       radio: "1",
       activeName: "recommendTab",
@@ -205,7 +205,7 @@ export default {
     .select {
       // border-left: 5px solid #0cf3f3;
       color: #cfe2e1;
-      margin-left: 30%;
+      // margin-left: 30%;
       line-height: 40px;
     }
     > span {
@@ -233,10 +233,12 @@ export default {
       justify-content: space-around;
       align-items: center;
     }
-    .el-row {
+    /deep/.el-row {
+      width: 100%;
       color: #dcdfe6;
       font-size: 12pt;
-      text-align: left;
+      text-align: center;
+      flex-direction: row;
       margin-left: 0% !important;
       margin-right: 0% !important;
       margin-bottom: 0px;
@@ -406,7 +408,16 @@ export default {
   width: 100%;
   padding: 0 0 0 35px;
 }
+// /deep/.el-select > .el-input__inner {
+//   position: fixed;
+//   padding: 0%;
+//   width: 10%;
+//   left: 0%;
+// }
+// /deep/.el-select {
+//   width: 100%;
 
+// }
 .title {
   // flex: 0.5;
   margin-top: 1%;
@@ -435,10 +446,33 @@ export default {
   height: 100%;
   margin-left: 10%;
 }
+.datasorce {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  /deep/.el-input__inner {
+      left: 0%;
+      position: relative;
+      display: inline-block;
+      -webkit-appearance: none;
+      background: #c3e3e72b;
+      border-radius: 4px;
+      border: 1px solid #3eb7c738;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      color: rgba(220, 225, 227, 0.96);
+      font-size: inherit;
+      height: 30px;
+      line-height: 60px;
+      // height: 80%;
+      width: 100%;
+      padding: 0px;
+    }
+}
 .recommend-content {
   .bg-specially {
     height: 100%;
-    width: 100%;
+    // width: 60%;
   }
   .tab1 {
     height: 100%;
@@ -456,8 +490,8 @@ export default {
     }
 
     /deep/.el-input__inner {
-      left: -10%;
-      position: absolute;
+      left: 0%;
+      position: relative;
       display: inline-block;
       -webkit-appearance: none;
       background: #c3e3e72b;
@@ -469,8 +503,8 @@ export default {
       font-size: inherit;
       height: 30px;
       line-height: 90px;
-      width: 125%;
-      padding: 0 0 0 10px;
+      width: 100%;
+      padding: 0px;
     }
   }
   /deep/.el-row {
