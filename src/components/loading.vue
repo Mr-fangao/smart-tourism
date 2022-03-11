@@ -19,7 +19,7 @@ export default {
   background-color: rgba(107, 120, 121, 0.486);
   width: 100%;
   height: 100%;
-  z-index: 10;
+  z-index: 100000000000000000000;
   .load-4 {
     z-index: 100;
   }

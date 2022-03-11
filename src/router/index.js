@@ -42,7 +42,8 @@ export default new Router({
   {
     path: '/sensation',
     name: 'sensation',
-    component: () => import("@/views/sensation"),
+    // component: () => import("@/views/sensation"),
+    component: () => import("@/views/theme"),
     meta: {
       keepAlive: true
     }

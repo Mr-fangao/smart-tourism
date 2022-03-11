@@ -187,6 +187,9 @@ export default {
       });
     },
   },
+  // destroyed(){
+  //   this.map.removeLayer("")
+  // }
 };
 </script>
 
@@ -205,8 +208,8 @@ export default {
   background: red;
   .control {
     position: absolute;
-    left: -30px;
-    top: 3%;
+    left: 69%;
+    top: 49%;
     width: 14%;
     height: 38%;
     // #button1 {

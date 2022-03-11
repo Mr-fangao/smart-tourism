@@ -1,6 +1,10 @@
 <template>
   <div class="backcolor">
     <nav>
+      <div class="times">
+        <i class="fa fa-sign-out fa-rotate-180 fa-lg"></i>
+        <!-- <span>{{time}}</span> -->
+      </div>
       <ul>
         <li id="u1">
           <router-link to="/recommend" exact>智能推荐</router-link>
@@ -57,18 +61,43 @@ export default {
   },
   data() {
     return {
-      time: "2020年08月31日 10:29",
+      time: "",
+      date: "",
       index: 1,
       show: false,
       porpID: "",
     };
   },
   mounted() {
-    this.currentTime();
+    this.getTime();
   },
   methods: {
     currentTime() {
       setInterval(this.getTime, 500);
+    },
+    getTime() {
+      let date = new Date();
+      let year = date.getFullYear(); // 年
+      let month = date.getMonth() + 1; // 月
+      let day = date.getDate(); // 日
+      let week = date.getDay(); // 星期
+      let weekArr = [
+        "星期日",
+        "星期一",
+        "星期二",
+        "星期三",
+        "星期四",
+        "星期五",
+        "星期六",
+      ];
+      let hour = date.getHours(); // 时
+      hour = hour < 10 ? "0" + hour : hour; // 如果只有一位，则前面补零
+      let minute = date.getMinutes(); // 分
+      minute = minute < 10 ? "0" + minute : minute; // 如果只有一位，则前面补零
+      let second = date.getSeconds(); // 秒
+      second = second < 10 ? "0" + second : second; // 如果只有一位，则前面补零
+      this.date = `${year}/${month}/${day}`;
+      this.time = ` ${hour}:${minute}:${second} ${weekArr[week]}`;
     },
     hideModal() {
       // 取消弹窗回调
@@ -85,22 +114,11 @@ export default {
     routerjump(index) {
       if (index != null) this.$router.push({ name: "Login" });
     },
-    getTime() {
-      let yy = new Date().getFullYear();
-      let mm = new Date().getMonth() + 1;
-      let dd = new Date().getDate();
-      let hh = new Date().getHours();
-      let mf =
-        new Date().getMinutes() < 10
-          ? "0" + new Date().getMinutes()
-          : new Date().getMinutes();
-      let ss =
-        new Date().getSeconds() < 10
-          ? "0" + new Date().getSeconds()
-          : new Date().getSeconds();
-      this.time =
-        yy + "年 " + mm + "月" + dd + "日 " + hh + ":" + mf + ":" + ss;
-    },
+  },
+  beforeDestroy() {
+    if (this.formatDate) {
+      clearInterval(this.formatDate); // 在Vue实例销毁前，清除时间定时器
+    }
   },
 };
 </script>
@@ -108,6 +126,13 @@ export default {
 <style scoped lang="less">
 .backcolor {
   background-color: #02191f;
+  .times {
+    position: absolute;
+    display: flex;
+    font-size: 14pt;
+    margin-left: 1%;
+    color: #b8c1c8a1;
+  }
   nav {
     display: flex;
     flex-direction: row;
@@ -125,12 +150,12 @@ export default {
       flex: 0.6;
       // font-weight: bold;
     }
-    .times {
-      margin-right: 10px;
-      float: right;
-      font-family: Microsoft YaHei;
-      font-weight: bold;
-    }
+    // .times {
+    //   margin-right: 10px;
+    //   float: right;
+    //   font-family: Microsoft YaHei;
+    //   font-weight: bold;
+    // }
     ul {
       flex: 1;
       height: 100%;

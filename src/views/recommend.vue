@@ -1,6 +1,14 @@
 <template>
   <div id="recommend">
-    <div id="map" />
+    <!-- <div id="map" /> -->
+    <transition name="fade">
+      <loading v-if="isLoading"></loading>
+    </transition>
+    <div class="mapcontent">
+      <keep-alive>
+        <component :is="comp" v-show="isShow"></component>
+      </keep-alive>
+    </div>
     <div class="citychoose" @click="getCity()">
       <div class="iconcontent"><i class="fa fa-map-marker fa-lg"></i></div>
       <div class="cityname">{{ cityname }}</div>
@@ -29,10 +37,14 @@
                   placeholder="      请输入内容"
                 ></el-input>
                 <div class="labelcontent">
-                  <span>示例:</span>
-                  <div class="chooselabel">111</div>
-                  <div class="chooselabel">111</div>
-                  <div class="chooselabel">111</div>
+                  <span>输入示例:</span>
+                  <div class="chooselabel">山岳</div>
+                  <div class="chooselabel">海滨</div>
+                  <div class="chooselabel">历史</div>
+                  <div class="chooselabel">革命老区</div>
+                  <div class="chooselabel">商业街</div>
+                  <div class="chooselabel">划船</div>
+                  <!-- <div class="chooselabel">文物</div> -->
                 </div>
               </div>
               <div v-if="!activeNameflag" class="tab2"></div>
@@ -59,14 +71,16 @@
           <div class="sorcelabel">数据源</div>
           <div class="datasorce">
             <el-checkbox-group v-model="checkList">
-              <el-checkbox label="复选A"></el-checkbox>
-              <el-checkbox label="复1"></el-checkbox>
-              <el-checkbox label="复2"></el-checkbox>
+              <el-checkbox label="途游"></el-checkbox>
+              <el-checkbox label="去哪儿"></el-checkbox>
+              <el-checkbox label="马蜂窝"></el-checkbox>
             </el-checkbox-group>
           </div>
         </div>
         <div class="buttoncontent">
-          <el-button class="startbutton">更新数据</el-button>
+          <el-button class="startbutton" @click="refeashData()"
+            >更新数据</el-button
+          >
           <el-button class="startbutton">开始推荐</el-button>
         </div>
       </div>
@@ -141,9 +155,24 @@
       <div class="rightbottom">
         <div class="title"><span>专题地图选择</span></div>
         <div class="rightbottom-content">
-          <div class="mapchange"></div>
-          <div class="mapchange"></div>
-          <div class="mapchange"></div>
+          <div
+            class="mapchange"
+            index="1"
+            @click="showmap(1)"
+            :class="index === 1 ? 'active' : ''"
+          ></div>
+          <div
+            class="mapchange"
+            index="2"
+            @click="showmap(2)"
+            :class="index === 2 ? 'active' : ''"
+          ></div>
+          <div
+            class="mapchange"
+            index="3"
+            @click="showmap(3)"
+            :class="index === 3 ? 'active' : ''"
+          ></div>
           <div class="mapchange"></div>
           <div class="mapchange"></div>
           <div class="mapchange"></div>
@@ -153,7 +182,36 @@
     <div class="recommend-bottom">
       <div class="content-bottom">
         <div class="title"><span>城市热门榜及特征分析</span></div>
-        <div class="content"></div>
+        <div class="content">
+          <el-table
+            :data="tableData"
+            height="120px"
+            stripe
+            class="“customer-table”"
+          >
+            <el-table-column
+              prop="date"
+              label="日期"
+              width="60"
+              :show-overflow-tooltip="true"
+            >
+            </el-table-column>
+            <el-table-column
+              prop="name"
+              label="姓名"
+              width="60"
+              :show-overflow-tooltip="true"
+            >
+            </el-table-column>
+            <el-table-column
+              prop="address"
+              label="地址"
+              width="60"
+              :show-overflow-tooltip="true"
+            >
+            </el-table-column>
+          </el-table>
+        </div>
       </div>
       <div class="content-bottom">
         <div class="content"></div>
@@ -164,13 +222,32 @@
 <script>
 import Bus from "../assets/js/bus.js";
 import poppage from "../components/poppageForCity.vue";
+
+import gradedcolormap from "../components/thememap/gradedcolormap.vue";
+import pointgather from "../components/thememap/pointgather.vue";
+import heatmap from "../components/thememap/heatmap.vue";
+import timemap from "../components/thememap/timemap.vue";
+import multimap from "../components/thememap/multimap.vue";
+
+import loading from "../components/loading.vue";
 export default {
   name: "recommend",
   components: {
     poppage,
+    gradedcolormap,
+    pointgather,
+    heatmap,
+    timemap,
+    multimap,
+    loading,
   },
   data() {
     return {
+      isLoading: false,
+      //地图切换
+      index: 1,
+      comp: "pointgather",
+      isShow: true,
       tableData: [
         {
           date: "2016-05-02",
@@ -240,19 +317,19 @@ export default {
     };
   },
   mounted() {
-    this.initmap();
+    // this.initmap();
   },
   methods: {
-    initmap() {
-      this.$mapboxgl.accessToken =
-        "pk.eyJ1IjoiY2hlbmpxIiwiYSI6ImNrcWFmdWt2bjBtZGsybmxjb29oYmRzZzEifQ.mnpiwx7_cBEyi8YiJiMRZg";
-      var map = new this.$mapboxgl.Map({
-        container: "map",
-        style: "mapbox://styles/chenjq/cl010ychv001214pdpa5xyq5a",
-        center: [105, 35],
-        zoom: 3.5,
-      });
-    },
+    // initmap() {
+    //   this.$mapboxgl.accessToken =
+    //     "pk.eyJ1IjoiY2hlbmpxIiwiYSI6ImNrcWFmdWt2bjBtZGsybmxjb29oYmRzZzEifQ.mnpiwx7_cBEyi8YiJiMRZg";
+    //   var map = new this.$mapboxgl.Map({
+    //     container: "map",
+    //     style: "mapbox://styles/chenjq/cl010ychv001214pdpa5xyq5a",
+    //     center: [105, 35],
+    //     zoom: 3.5,
+    //   });
+    // },
     hideModal() {
       // 取消弹窗回调
       this.show = false;
@@ -272,6 +349,23 @@ export default {
       this.show = true;
       // this.cityname = "22";
     },
+    showmap(value) {
+      console.log(value);
+      if (value === 1) this.comp = "pointgather";
+      else if (value === 2) this.comp = "gradedcolormap";
+      else if (value === 3) this.comp = "heatmap";
+      else if (value === 4) this.comp = "multimap";
+      else if (value === 5) this.comp = "timemap";
+      //   else if (value === 3) this.comp = "density";
+    },
+    refeashData() {
+      console.log(111);
+      (this.isLoading = true),
+        // this.getrealtime();
+        setTimeout(() => {
+          this.isLoading = false;
+        }, 1200);
+    },
   },
 };
 </script>
@@ -290,6 +384,12 @@ export default {
   width: 100%;
   height: 100%;
   z-index: 0;
+}
+.mapcontent {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  width: 100%;
 }
 .citychoose {
   position: absolute;
@@ -428,6 +528,11 @@ export default {
       flex: 1;
       width: 100%;
       background-size: 52% 80%;
+      margin-top: 0%;
+      margin-bottom: 0%;
+      > span {
+        line-height: 38px;
+      }
     }
     .content {
       flex: 6;
@@ -580,13 +685,15 @@ export default {
       width: 100%;
       padding-top: 3%;
       padding-bottom: 3%;
+      flex-wrap: wrap;
       > span {
         font-size: 12pt;
         color: #c5d4e6;
+        // margin-left: -19%;
       }
       .chooselabel {
         background: #8ae5e54a;
-        margin-left: 6%;
+        margin-left: 2%;
         border: 1px solid #ffffff40;
         font-size: 11pt;
         border-radius: 5px;
@@ -625,6 +732,7 @@ export default {
       line-height: 90px;
       width: 100%;
       padding: 0px;
+      margin-top: 2%;
     }
   }
   /deep/.el-row {
@@ -773,6 +881,140 @@ export default {
   }
   /deep/.el-table .el-table__body tr:hover > td {
     background-color: #0d1f34 !important;
+  }
+}
+.recommend-bottom {
+  border: none;
+  .el-table--fit {
+    background: transparent;
+  }
+  /deep/.el-table .el-table__header-wrapper tr th {
+    background-color: #025166 !important;
+    color: rgb(255, 255, 255);
+    // border-bottom: 1px solid #0cf3f3;
+  }
+  //奇数行背景
+  /deep/.el-table tr {
+    background: rgba(2, 73, 94, 0.432);
+    // border-bottom: 1px solid #0cf3f3;
+  }
+  /deep/.el-table .el-table__row {
+    background: #023f54;
+    color: rgb(255, 255, 255);
+  }
+  /deep/.el-table .el-table__row--striped {
+    background: #023649;
+    color: rgb(255, 255, 255);
+  }
+  /deep/.el-table td.el-table__cell {
+    border: none;
+  }
+  // /deep/.el-table--enable-row-hover
+  //   .el-table__body
+  //   tr:hover
+  //   > td.el-table__cell {
+  //   background: rgb(18, 47, 92)!important
+  //     }
+  /deep/.el-table--striped
+    .el-table__body
+    tr.el-table__row--striped
+    td.el-table__cell {
+    background: transparent;
+  }
+  //头高、行高
+  /deep/.el-table__header tr,
+  .el-table__header th {
+    height: 30px;
+    padding: 0;
+  }
+  /deep/.el-table__body tr,
+  .el-table__body td {
+    height: 35px;
+    padding: 0;
+  }
+  /deep/.el-table .el-table__cell {
+    padding: 0;
+  }
+  /deep/.el-table th.el-table__cell > .cell {
+    padding: 0;
+    text-align: center;
+  }
+  /deep/.el-table .el-table__body tr.current-row > td {
+    background-color: #0d1f34 !important;
+  }
+  /deep/.el-table .el-table__body tr:hover > td {
+    background-color: #0d1f34 !important;
+  }
+  /deep/.el-table--scrollable-y .el-table__body-wrapper {
+    border: none;
+  }
+  /* 消除表格标题的下划线 */
+  /deep/ .el-table td.el-table__cell {
+    border-bottom: 0px transparent !important;
+  }
+  /* 消除表格内部的下划线 */
+  /deep/ .el-table th.el-table__cell.is-leaf {
+    border-bottom: 0px transparent !important;
+  }
+  /deep/ .el-table {
+    border-bottom: 0px transparent !important;
+  }
+  /deep/.el-table--scrollable-y ::-webkit-scrollbar {
+    display: none;
+  }
+  /deep/.el-table__body-wrapper::-webkit-scrollbar {
+    /*width: 0;宽度为0隐藏*/
+    width: 0px;
+  }
+  /deep/.el-table__body-wrapper::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    height: 50px;
+    background: #eee;
+  }
+  /deep/.el-table__body-wrapper::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    border-radius: 2px;
+    background: rgba(0, 0, 0, 0.4);
+  }
+  /deep/.el-table__row > td {
+    border: none;
+  }
+  /deep/.el-table::before {
+    height: 0px;
+  }
+  .customer-table th {
+    border: none;
+  }
+  .customer-table td,
+  .customer-table th.is-leaf {
+    border: none;
+  }
+
+  .el-table--border,
+  .el-table--group {
+    border: none;
+  }
+
+  .customer-table thead tr th.is-leaf {
+    border-right: none;
+  }
+  .customer-table thead tr th:nth-last-of-type(2) {
+  }
+
+  .el-table--border::after,
+  .el-table--group::after {
+    width: 0;
+  }
+  .customer-table::before {
+    width: 0;
+  }
+  .customer-table .el-table__fixed-right::before,
+  .el-table__fixed::before {
+    width: 0;
+  }
+
+  .el-table--border th.gutter:last-of-type {
+    border-left: none;
   }
 }
 </style>

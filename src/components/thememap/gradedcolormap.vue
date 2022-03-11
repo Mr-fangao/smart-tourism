@@ -209,7 +209,7 @@ h2 {
 }
 
 .state-legend div {
-    margin-left: 20%;
+  margin-left: 20%;
   float: left;
   // line-height: 40px;
   // margin-left: 15%;
