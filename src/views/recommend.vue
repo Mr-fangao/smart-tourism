@@ -1,27 +1,22 @@
 <template>
   <div id="recommend">
     <div id="map" />
+    <div class="citychoose" @click="getCity()">
+      <div class="iconcontent"><i class="fa fa-map-marker fa-lg"></i></div>
+      <div class="cityname">{{ cityname }}</div>
+    </div>
+    <poppage
+      :show="show"
+      :cityname="cityname"
+      @hideModal="hideModal"
+      @submit="submit"
+    >
+    </poppage>
     <div class="recommend-content left">
       <div class="con">
         <div class="title">
           <span>个性化选择</span>
         </div>
-        <!-- <el-row :gutter="20"> </el-row> -->
-        <el-row :gutter="20">
-          <el-col :span="8"
-            ><div class="grid-content select">推荐范围</div></el-col
-          >
-          <el-col :span="16"
-            ><div class="grid-content col1">
-              <el-radio @click.native="getRange(1)" v-model="radio" label="1"
-                >全国</el-radio
-              >
-              <el-radio @click.native="getRange(2)" v-model="radio" label="2"
-                >自定义城市</el-radio
-              >
-            </div></el-col
-          >
-        </el-row>
         <el-row :gutter="20">
           <el-col :span="8"
             ><div class="grid-content select">{{ changename }}</div></el-col
@@ -29,8 +24,16 @@
           <el-col :span="16">
             <div class="grid-content bg-specially">
               <div v-if="activeNameflag" class="tab1">
-                <el-input v-model="input" placeholder="请输入内容"></el-input>
-                <span>示例:历史、巍峨、海滨等</span>
+                <el-input
+                  v-model="input"
+                  placeholder="      请输入内容"
+                ></el-input>
+                <div class="labelcontent">
+                  <span>示例:</span>
+                  <div class="chooselabel">111</div>
+                  <div class="chooselabel">111</div>
+                  <div class="chooselabel">111</div>
+                </div>
               </div>
               <div v-if="!activeNameflag" class="tab2"></div>
             </div>
@@ -52,26 +55,16 @@
             </el-date-picker>
           </el-col>
         </el-row>
-        <el-row :gutter="20">
-          <el-col :span="8"
-            ><div class="grid-content select">数据源</div></el-col
-          >
-          <el-col :span="16">
-            <div class="datasorce">
-              <el-select v-model="value1" multiple placeholder="请选择">
-                <el-option
-                  v-for="item in options"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
-                >
-                </el-option>
-              </el-select>
-            </div>
-          </el-col>
-        </el-row>
-        <!-- <span>数据时间:</span>
-     -->
+        <div class="myrow">
+          <div class="sorcelabel">数据源</div>
+          <div class="datasorce">
+            <el-checkbox-group v-model="checkList">
+              <el-checkbox label="复选A"></el-checkbox>
+              <el-checkbox label="复1"></el-checkbox>
+              <el-checkbox label="复2"></el-checkbox>
+            </el-checkbox-group>
+          </div>
+        </div>
         <div class="buttoncontent">
           <el-button class="startbutton">更新数据</el-button>
           <el-button class="startbutton">开始推荐</el-button>
@@ -83,13 +76,79 @@
     <div class="recommend-content right">
       <div class="righttop">
         <el-tabs v-model="activeName" type="border-card">
-          <el-tab-pane label="第一个tab" name="recommendTab">
-            111111111</el-tab-pane
-          >
-          <el-tab-pane label="第二个tab" name="hotTab"> </el-tab-pane>
+          <el-tab-pane label="景点综合排行" name="recommendTab">
+            <el-table
+              :data="tableData"
+              height="420px"
+              stripe
+              style="width: 100%"
+            >
+              <el-table-column
+                prop="date"
+                label="日期"
+                width="60"
+                :show-overflow-tooltip="true"
+              >
+              </el-table-column>
+              <el-table-column
+                prop="name"
+                label="姓名"
+                width="60"
+                :show-overflow-tooltip="true"
+              >
+              </el-table-column>
+              <el-table-column
+                prop="address"
+                label="地址"
+                width="60"
+                :show-overflow-tooltip="true"
+              >
+              </el-table-column>
+            </el-table>
+          </el-tab-pane>
+          <el-tab-pane label="景点推荐" name="hotTab">
+            <el-table
+              :data="tableData"
+              height="420px"
+              stripe
+              style="width: 100%"
+            >
+              <el-table-column
+                prop="date"
+                label="日期"
+                width="60"
+                :show-overflow-tooltip="true"
+              >
+              </el-table-column>
+              <el-table-column
+                prop="name"
+                label="姓名"
+                width="60"
+                :show-overflow-tooltip="true"
+              >
+              </el-table-column>
+              <el-table-column
+                prop="address"
+                label="地址"
+                width="60"
+                :show-overflow-tooltip="true"
+              >
+              </el-table-column>
+            </el-table>
+          </el-tab-pane>
         </el-tabs>
       </div>
-      <div class="rightbottom"></div>
+      <div class="rightbottom">
+        <div class="title"><span>专题地图选择</span></div>
+        <div class="rightbottom-content">
+          <div class="mapchange"></div>
+          <div class="mapchange"></div>
+          <div class="mapchange"></div>
+          <div class="mapchange"></div>
+          <div class="mapchange"></div>
+          <div class="mapchange"></div>
+        </div>
+      </div>
     </div>
     <div class="recommend-bottom">
       <div class="content-bottom">
@@ -103,17 +162,58 @@
   </div>
 </template>
 <script>
+import Bus from "../assets/js/bus.js";
+import poppage from "../components/poppageForCity.vue";
 export default {
   name: "recommend",
+  components: {
+    poppage,
+  },
   data() {
     return {
+      tableData: [
+        {
+          date: "2016-05-02",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1518 弄",
+        },
+        {
+          date: "2016-05-04",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1517 弄",
+        },
+        {
+          date: "2016-05-01",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1519 弄",
+        },
+        {
+          date: "2016-05-03",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1516 弄",
+        },
+        {
+          date: "2016-05-03",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1516 弄",
+        },
+        {
+          date: "2016-05-03",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1516 弄",
+        },
+      ],
       value1: [],
+      input: "",
       changename: "景点特征",
       radio: "1",
       activeName: "recommendTab",
       activeNameflag: "true",
       input1: "",
-      checkList: ["选中且禁用", "复选框 A"],
+      checkList: ["复选框 A"],
+      //弹窗
+      show: false,
+      cityname: "城市选择",
       options: [
         {
           value: "选项1",
@@ -153,17 +253,24 @@ export default {
         zoom: 3.5,
       });
     },
+    hideModal() {
+      // 取消弹窗回调
+      this.show = false;
+      Bus.$on("sendCityname", (val) => {
+        this.cityname = val;
+      });
+    },
+    submit() {
+      // 确认弹窗回调
+      this.show = false;
+    },
     checked(index) {
       const _this = this;
       _this.isActive = index;
     },
-    getRange(val) {
-      console.log(val);
-      if (val == 1) {
-        this.changename = "景点特征";
-      } else if (val == 2) {
-        this.changename = "城市选择";
-      }
+    getCity() {
+      this.show = true;
+      // this.cityname = "22";
     },
   },
 };
@@ -183,6 +290,31 @@ export default {
   width: 100%;
   height: 100%;
   z-index: 0;
+}
+.citychoose {
+  position: absolute;
+  height: 6%;
+  width: 9%;
+  top: 1%;
+  left: 20.5%;
+  background: url("../assets/img/矩形1718.png") no-repeat;
+  opacity: 0.7;
+  background-size: 100% 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: center;
+  .iconcontent {
+    flex: 2;
+    color: rgb(92, 235, 216);
+    text-align: right;
+  }
+  .cityname {
+    flex: 6;
+    color: #fafafa;
+    // text-align: left;
+  }
 }
 .recommend-content {
   position: absolute;
@@ -331,59 +463,33 @@ export default {
   .righttop {
     flex: 2;
     width: 100%;
-    /*  tab样式 */
-    .tab_nav {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 2%;
-      height: 8%;
-      margin-top: 2%;
-    }
-
-    .tab_nav .navTitle {
-      height: 90px;
-      line-height: 90px;
-      width: 100%;
-      text-align: center;
-      font-size: 16px;
-      font-family: Alibaba PuHuiTi;
-      color: #333;
-      background-color: #db7093;
-      margin-right: 10px;
-    }
-
-    /* 让最后一个标题没有margin */
-    .navTitle:last-child {
-      margin-right: 0;
-    }
-
-    .active {
-      position: relative;
-      color: #ffffff;
-    }
-
-    .active::after {
-      content: "";
-      position: absolute;
-      width: 100rpx;
-      height: 4rpx;
-      background-color: #1f75fe;
-      left: 0px;
-      right: 0px;
-      bottom: 0px;
-      margin: auto;
-    }
-
-    .nav_item {
-      padding: 20px;
-      background-color: rgb(211 206 206);
-      color: #ffffff;
-    }
   }
   .rightbottom {
     flex: 1;
     width: 100%;
+    .title {
+      margin-top: -5%;
+      margin-bottom: 0%;
+      height: 15%;
+      > span {
+        line-height: 40px;
+      }
+    }
+    .rightbottom-content {
+      height: 80%;
+      width: 100%;
+      margin-bottom: 0%;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      align-items: center;
+      .mapchange {
+        width: 31%;
+        height: 31%;
+        background: #158cad;
+      }
+    }
   }
 }
 .col1 {
@@ -391,7 +497,7 @@ export default {
 }
 
 /deep/.el-input__inner {
-  left: 20%;
+  left: 15%;
   position: absolute;
   display: inline-block;
   -webkit-appearance: none;
@@ -408,33 +514,37 @@ export default {
   width: 100%;
   padding: 0 0 0 35px;
 }
-// /deep/.el-select > .el-input__inner {
-//   position: fixed;
-//   padding: 0%;
-//   width: 10%;
-//   left: 0%;
-// }
-// /deep/.el-select {
-//   width: 100%;
-
-// }
+.myrow {
+  height: 20%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  .sorcelabel {
+    flex: 1;
+    color: #cfe2e1;
+    margin-left: 5%;
+  }
+}
 .title {
   // flex: 0.5;
   margin-top: 1%;
-  height: 12%;
+  height: 11%;
   width: 80%;
   position: relative;
   left: 0%;
   background: url(../assets/img/titlebg.png) no-repeat;
-  background-size: 60% 92%;
+  background-size: 60% 85%;
   background-position: 12% 70%;
+  margin-bottom: 4%;
   // background-size: 57% 93%;
   // background-position: 9% 100%;
   font-size: 10pt;
   > span {
     float: left;
     margin-left: 18%;
-    font-size: 12pt;
+    font-size: 10pt;
     line-height: 30px;
     color: aliceblue;
     text-shadow: 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #fff, 0 0 30px #38e9e0,
@@ -449,30 +559,40 @@ export default {
 .datasorce {
   height: 100%;
   width: 100%;
+  flex: 4;
   position: relative;
-  /deep/.el-input__inner {
-      left: 0%;
-      position: relative;
-      display: inline-block;
-      -webkit-appearance: none;
-      background: #c3e3e72b;
-      border-radius: 4px;
-      border: 1px solid #3eb7c738;
-      -webkit-box-sizing: border-box;
-      box-sizing: border-box;
-      color: rgba(220, 225, 227, 0.96);
-      font-size: inherit;
-      height: 30px;
-      line-height: 60px;
-      // height: 80%;
-      width: 100%;
-      padding: 0px;
-    }
+  .el-checkbox {
+    margin-right: 7px;
+    color: #c5d4e6;
+  }
+  .el-checkbox-group {
+    margin-top: 8%;
+    font-size: 12pt;
+  }
 }
 .recommend-content {
   .bg-specially {
     height: 100%;
     // width: 60%;
+    .labelcontent {
+      display: flex;
+      height: 20%;
+      width: 100%;
+      padding-top: 3%;
+      padding-bottom: 3%;
+      > span {
+        font-size: 12pt;
+        color: #c5d4e6;
+      }
+      .chooselabel {
+        background: #8ae5e54a;
+        margin-left: 6%;
+        border: 1px solid #ffffff40;
+        font-size: 11pt;
+        border-radius: 5px;
+        // margin: 1% 1% 1% 1% ;
+      }
+    }
   }
   .tab1 {
     height: 100%;
@@ -544,8 +664,8 @@ export default {
     line-height: 40px;
   }
   /deep/.el-tabs--border-card {
-    height: 100%;
-    margin: 2%;
+    height: 96%;
+    margin: 1%;
     background: transparent;
     border: none;
   }
@@ -556,6 +676,7 @@ export default {
   /deep/.el-tabs--border-card > .el-tabs__header {
     background: transparent;
     border: none;
+    margin: 2%;
   }
   /deep/.el-tabs__item {
     padding: 0;
@@ -571,7 +692,7 @@ export default {
   }
   /deep/.el-tabs__nav-scroll {
     background: transparent;
-    width: 59%;
+    width: 67%;
     background: url(../assets/img/buttonbg.png) no-repeat;
     background-size: 100% 100%;
   }
@@ -586,6 +707,72 @@ export default {
     border-right: none;
     border-top: 2px solid #0cf3f3;
     border-bottom: 2px solid #0cf3f3;
+  }
+  /deep/.el-tabs--border-card > .el-tabs__content {
+    padding: 1%;
+    height: 90%;
+    width: 100%;
+    margin-top: 2%;
+  }
+  .el-table--fit {
+    background: transparent;
+  }
+  /deep/.el-table .el-table__header-wrapper tr th {
+    background-color: #025166 !important;
+    color: rgb(255, 255, 255);
+    border-bottom: 1px solid #0cf3f3;
+  }
+  //奇数行背景
+  /deep/.el-table tr {
+    background: rgba(2, 73, 94, 0.432);
+    border-bottom: 1px solid #0cf3f3;
+  }
+  /deep/.el-table .el-table__row {
+    background: #023f54;
+    color: rgb(255, 255, 255);
+  }
+  /deep/.el-table .el-table__row--striped {
+    background: #023649;
+    color: rgb(255, 255, 255);
+  }
+  /deep/.el-table td.el-table__cell {
+    border: none;
+  }
+  // /deep/.el-table--enable-row-hover
+  //   .el-table__body
+  //   tr:hover
+  //   > td.el-table__cell {
+  //   background: rgb(18, 47, 92)!important
+  //     }
+  /deep/.el-table--striped
+    .el-table__body
+    tr.el-table__row--striped
+    td.el-table__cell {
+    background: transparent;
+  }
+  //头高、行高
+  /deep/.el-table__header tr,
+  .el-table__header th {
+    height: 30px;
+    padding: 0;
+  }
+  /deep/.el-table__body tr,
+  .el-table__body td {
+    height: 35px;
+    padding: 0;
+  }
+  /deep/.el-table .el-table__cell {
+    padding: 0;
+  }
+  /deep/.el-table th.el-table__cell > .cell {
+    padding: 0;
+    text-align: center;
+  }
+  /deep/.el-table .el-table__body tr.current-row > td {
+    background-color: #0d1f34 !important;
+  }
+  /deep/.el-table .el-table__body tr:hover > td {
+    background-color: #0d1f34 !important;
   }
 }
 </style>

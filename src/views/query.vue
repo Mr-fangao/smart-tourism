@@ -432,10 +432,6 @@ export default {
       .el-table__expanded-cell {
         margin-top: 3%;
         background: #3f5c6d2c;
-        // background: linear-gradient(
-        //   rgba(2, 89, 113, 0.9),
-        //   rgba(2, 62, 82, 0.4)
-        // );
       }
       /deep/ .el-button--mini,
       .el-button--mini.is-round {
@@ -527,12 +523,6 @@ export default {
   height: 40px;
   margin-bottom: 8%;
   border: none;
-  // background-color: #042d42;
-  // background-repeat: no-repeat;
-  // background-position: center;
-  // background-image: none;
-  // background: url(../assets/img/qc.png) no-repeat;
-  // background-size: 100% 100%;
   z-index: 0;
 }
 

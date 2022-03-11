@@ -9,17 +9,14 @@
       </div>
       <div class="modal-main">
         <div class="ptChart">
-          {{ porpID }}
+          {{ cityname }}
         </div>
       </div>
-      <!-- <div class="modal-footer">
-        <button @click="hideModal">取消</button>
-        <button @click="submit">确认</button>
-      </div> -->
     </div>
   </div>
 </template>
 <script>
+import Bus from "../assets/js/bus.js";
 export default {
   name: "poppage",
   props: {
@@ -27,7 +24,7 @@ export default {
       type: Boolean,
       default: false,
     },
-    porpID: {
+    cityname: {
       type: String,
       default: "",
     },
@@ -35,6 +32,7 @@ export default {
   methods: {
     hideModal() {
       this.$emit("hideModal");
+       Bus.$emit('sendCityname','1234');
     },
 
     submit() {
@@ -51,14 +49,15 @@ export default {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
-  z-index: 10;
+  z-index: 1000000;
 }
 .modal-container {
-  background: #fff;
-  border-radius: 10px;
+  background: url("../assets/img/buttonbg.png");
+  background-size: 100% 100%;
+  // border-radius: 3%;
   overflow: hidden;
   position: fixed;
-  width: 50%;
+  width: 70%;
   height: 80%;
   top: 50%;
   left: 50%;
@@ -66,7 +65,7 @@ export default {
 }
 .modal-header {
   height: 56px;
-  background: #ffffff;
+  background: transparent;
   color: rgb(0, 0, 0);
   display: flex;
   align-items: center;
