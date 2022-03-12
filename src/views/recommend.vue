@@ -2,7 +2,7 @@
   <div id="recommend">
     <!-- <div id="map" /> -->
     <transition name="fade">
-      <loading v-if="isLoading"></loading>
+      <loading v-if="isLoading" :state="state"></loading>
     </transition>
     <div class="mapcontent">
       <keep-alive>
@@ -34,28 +34,27 @@
               <div v-if="activeNameflag" class="tab1">
                 <el-input
                   v-model="input"
-                  placeholder="      请输入内容"
+                  placeholder=" 输入内容或点击标签"
                 ></el-input>
                 <div class="labelcontent">
                   <span>输入示例:</span>
-                  <div class="chooselabel">山岳</div>
-                  <div class="chooselabel">海滨</div>
-                  <div class="chooselabel">历史</div>
-                  <div class="chooselabel">革命老区</div>
-                  <div class="chooselabel">商业街</div>
-                  <div class="chooselabel">划船</div>
-                  <!-- <div class="chooselabel">文物</div> -->
+                  <div
+                    class="chooselabel"
+                    v-for="(item, i) in labellist"
+                    :key="i"
+                    @click="getLabel(item.name)"
+                  >
+                    {{ item.name }}
+                  </div>
                 </div>
               </div>
               <div v-if="!activeNameflag" class="tab2"></div>
             </div>
           </el-col>
         </el-row>
-        <el-row :gutter="20">
-          <el-col :span="8"
-            ><div class="grid-content select">出游时间</div></el-col
-          >
-          <el-col :span="16">
+        <div class="row2">
+          <div class="row2-select">出游时间</div>
+          <div class="date-picker">
             <el-date-picker
               v-model="value1"
               type="daterange"
@@ -65,8 +64,8 @@
               end-placeholder="结束日期"
             >
             </el-date-picker>
-          </el-col>
-        </el-row>
+          </div>
+        </div>
         <div class="myrow">
           <div class="sorcelabel">数据源</div>
           <div class="datasorce">
@@ -143,7 +142,10 @@
             index="1"
             @click="showmap(1)"
             :class="index === 1 ? 'active' : ''"
-          ></div>
+          >
+            <img src="../assets/img/theme/聚合.png" alt="" />
+            <span>点聚合图</span>
+          </div>
           <div
             class="mapchange"
             index="2"
@@ -239,6 +241,8 @@ export default {
   },
   data() {
     return {
+      //动画加载
+      state: "",
       isLoading: false,
       //地图切换
       index: 1,
@@ -279,6 +283,15 @@ export default {
         { value: 13, name: "距离" },
       ],
       tableRankData: "",
+      labellist: [
+        { id: 1, name: "山岳" },
+        { id: 2, name: "海滨" },
+        { id: 3, name: "历史" },
+        { id: 4, name: "革命老区" },
+        { id: 5, name: "商业街" },
+        { id: 6, name: "划船" },
+        { id: 7, name: "文物" },
+      ],
       tableCityData: [
         {
           mycity: "北京",
@@ -433,6 +446,10 @@ export default {
         }
       });
     },
+    getLabel(val) {
+      let label = val;
+      this.input = this.input + label + "、";
+    },
     getCity() {
       this.show = true;
       // this.cityname = "22";
@@ -448,6 +465,7 @@ export default {
     },
     //更新数据动画
     refeashData() {
+      this.state = "加载数据中......请稍后";
       console.log(111);
       (this.isLoading = true),
         // this.getrealtime();
@@ -739,8 +757,19 @@ export default {
       align-items: center;
       .mapchange {
         width: 31%;
-        height: 31%;
-        background: #158cad;
+        height: 39%;
+        background: url("../assets/img/bubg.png") no-repeat;
+        background-size: 100% 100%;
+
+      >img{
+        height: 45%;
+        width: 30%;
+        margin-left: 31%;
+        background-size: 100% 100%;
+      }
+      >span{
+        color: #c5d4e6;
+      }
       }
     }
   }
@@ -751,6 +780,7 @@ export default {
 
 /deep/.el-input__inner {
   left: 15%;
+  top: 51%;
   position: absolute;
   display: inline-block;
   -webkit-appearance: none;
@@ -766,6 +796,22 @@ export default {
   line-height: 36px;
   width: 100%;
   padding: 0 0 0 35px;
+}
+.row2 {
+  height: 20%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  .row2-select {
+    flex: 1;
+    color: #cfe2e1;
+    margin-left: -11%;
+  }
+  .date-picker {
+    flex: 1;
+  }
 }
 .myrow {
   height: 20%;
@@ -845,6 +891,7 @@ export default {
         border: 1px solid #ffffff40;
         font-size: 11pt;
         border-radius: 5px;
+        cursor: pointer;
         // margin: 1% 1% 1% 1% ;
       }
     }
@@ -966,8 +1013,8 @@ export default {
     color: #dcdfe6;
     border-left: none;
     border-right: none;
-    border-top: 2px solid #0cf3f3;
-    border-bottom: 2px solid #0cf3f3;
+    border-top: 3px solid #0cf3f3;
+    // border-bottom: 2px solid #0cf3f3;
   }
   /deep/.el-tabs--border-card > .el-tabs__content {
     padding: 1%;

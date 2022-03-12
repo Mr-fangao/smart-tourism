@@ -1,7 +1,7 @@
 <template>
   <div class="loading">
     <div class="load-4">
-      <p id="ploding">Loading...</p>
+      <p id="ploding">{{state}}</p>
       <div class="ring-1"></div>
     </div>
   </div>
@@ -9,6 +9,18 @@
 <script>
 export default {
   name: "Loading",
+  props: {
+    show: {
+      type: Boolean,
+      default: false,
+    },
+    state: {
+      type: String,
+      default: "",
+    },
+  },
+  methods: {
+  },
 };
 </script>
 <style  lang="less" scoped>

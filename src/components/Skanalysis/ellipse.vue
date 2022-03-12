@@ -38,6 +38,8 @@ export default {
     return {
       DateValue: new Date(),
       value1: "",
+      mapurl:
+        "http://114.98.239.36:6080/arcgis/rest/services/BZCTY/mapserveTest/MapServer/WMTS/tile/1.0.0/MyM/default/default028mm/{z}/{y}/{x}.png",
     };
   },
   mounted() {
@@ -45,6 +47,7 @@ export default {
   },
   methods: {
     initmap() {
+      var that =this;
       this.$mapboxgl.accessToken =
         "pk.eyJ1IjoiY2hlbmpxIiwiYSI6ImNrcWFmdWt2bjBtZGsybmxjb29oYmRzZzEifQ.mnpiwx7_cBEyi8YiJiMRZg";
       var map = new this.$mapboxgl.Map({
@@ -59,9 +62,10 @@ export default {
           type: "raster", //这里要用raster ，因为切片得到的是图片
           source: {
             type: "raster",
-            tiles: [
-              "http://114.98.239.36:6080/arcgis/rest/services/BZCTY/mapserveTest/MapServer/WMTS/tile/1.0.0/MyM/default/default028mm/{z}/{y}/{x}.png",
-            ],
+            // tiles: [
+            //   "http://114.98.239.36:6080/arcgis/rest/services/BZCTY/mapserveTest/MapServer/WMTS/tile/1.0.0/MyM/default/default028mm/{z}/{y}/{x}.png",
+            // ],
+            tiles: [that.mapurl],
             tileSize: 256,
             bounds: [20.61304, -85, 140, 85],
           },

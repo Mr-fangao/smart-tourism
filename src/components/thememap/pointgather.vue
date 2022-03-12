@@ -13,6 +13,7 @@
   </div>
 </template>
 <script>
+import heatMapData from "../../assets/json/heatMapData.json";
 export default {
   name: "pointgather",
   mounted() {
@@ -71,7 +72,7 @@ export default {
           type: "geojson",
           //指向GeoJSON数据。这个例子显示了所有的M1.0+地震
           // 15年12月22日至16年1月21日。
-          data: "https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson",
+          data: heatMapData,
           cluster: true,
           clusterMaxZoom: 14, // Max zoom to cluster points on
           clusterRadius: 50, //每个集群点的半径(默认为50)
@@ -155,35 +156,6 @@ export default {
                 zoom: zoom,
               });
             });
-        });
-
-        //聚合图层鼠标移入样式
-        map.on("mouseenter", "clusters", function () {
-          map.getCanvas().style.cursor = "pointer";
-        });
-        //聚合图层鼠标移出鼠标样式
-        map.on("mouseleave", "clusters", function () {
-          map.getCanvas().style.cursor = "";
-        });
-        let popup = new mapboxgl.Popup({ className: "my-class" });
-        // 未聚合图层鼠标移入pop框显示
-        map.on("mouseenter", "unclustered-point", function (e) {
-          console.log(e);
-          // 改变鼠标样式
-          map.getCanvas().style.cursor = "pointer";
-          let features = e.features[0].properties;
-          popup.setLngLat(e.lngLat);
-          popup.setHTML(
-            `<h3>id: ${features.id}</h3><h3>time: ${features.time}</h3>`
-          );
-          popup.setMaxWidth("300px");
-          popup.addTo(map);
-        });
-        // 未聚合图层鼠标移出pop框隐藏
-        map.on("mouseleave", "unclustered-point", function () {
-          // 改变鼠标样式
-          map.getCanvas().style.cursor = "";
-          popup.remove();
         });
       });
     },
