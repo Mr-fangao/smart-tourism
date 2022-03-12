@@ -181,7 +181,7 @@
     </div>
     <div class="recommend-bottom">
       <div class="content-bottom">
-        <div class="title"><span>城市热门榜及特征分析</span></div>
+        <div class="title"><span>热门城市榜及特征分析</span></div>
         <div class="content">
           <el-table
             :data="tableData"
@@ -392,6 +392,7 @@ export default {
   width: 100%;
 }
 .citychoose {
+  z-index: 9999;
   position: absolute;
   height: 6%;
   width: 9%;

@@ -1,8 +1,8 @@
 <template>
   <div class="backcolor">
     <nav>
-      <div class="times">
-        <i class="fa fa-sign-out fa-rotate-180 fa-lg"></i>
+      <div class="times" @click="quit()">
+        <i class="fa fa-sign-out fa-rotate-180 fa-lg" @click="quit()"></i>
         <!-- <span>{{time}}</span> -->
       </div>
       <ul>
@@ -114,6 +114,9 @@ export default {
     routerjump(index) {
       if (index != null) this.$router.push({ name: "Login" });
     },
+    quit(){
+      this.$router.push({ name: "Login" });
+    }
   },
   beforeDestroy() {
     if (this.formatDate) {
@@ -132,6 +135,9 @@ export default {
     font-size: 14pt;
     margin-left: 1%;
     color: #b8c1c8a1;
+  }
+  .times:hover{
+    color: #2fa9ce;
   }
   nav {
     display: flex;
