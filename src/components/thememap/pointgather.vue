@@ -9,6 +9,7 @@
         <el-button id="button2">执行聚类</el-button>
       </div>
     </div>
+    <div class="my-class"></div>
   </div>
 </template>
 <script>
@@ -44,23 +45,23 @@ export default {
         map.setLayoutProperty("cluster-count", "visibility", "none");
         map.setLayoutProperty("unclustered-point", "visibility", "none");
         //添加数据
-        map.addSource("earthquake", {
-          type: "geojson",
-          //指向GeoJSON数据。这个例子显示了所有的M1.0+地震
-          // 15年12月22日至16年1月21日。
-          data: "https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson",
-        });
+        // map.addSource("earthquake", {
+        //   type: "geojson",
+        //   //指向GeoJSON数据。这个例子显示了所有的M1.0+地震
+        //   // 15年12月22日至16年1月21日。
+        //   data: "https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson",
+        // });
 
-        //添加点图层
-        map.addLayer({
-          id: "points",
-          type: "circle" /* symbol类型layer，一般用来绘制点*/,
-          source: "earthquake",
-          paint: {
-            "circle-radius": 2,
-            "circle-color": "#080",
-          },
-        });
+        // //添加点图层
+        // map.addLayer({
+        //   id: "points",
+        //   type: "circle" /* symbol类型layer，一般用来绘制点*/,
+        //   source: "earthquake",
+        //   paint: {
+        //     "circle-radius": 2,
+        //     "circle-color": "#080",
+        //   },
+        // });
       });
 
       map.on("load", function () {
@@ -205,7 +206,7 @@ export default {
   z-index: 10;
   height: 100%;
   width: 100%;
-  background: red;
+  background: transparent;
   .control {
     position: absolute;
     left: 69%;

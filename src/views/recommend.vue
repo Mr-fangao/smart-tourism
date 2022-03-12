@@ -92,64 +92,47 @@
         <el-tabs v-model="activeName" type="border-card">
           <el-tab-pane label="景点综合排行" name="recommendTab">
             <el-table
-              :data="tableData"
+              :data="tableRankData"
               height="420px"
               stripe
               style="width: 100%"
             >
               <el-table-column
-                prop="date"
-                label="日期"
-                width="60"
-                :show-overflow-tooltip="true"
-              >
-              </el-table-column>
+                prop="rank"
+                label="序号"
+                width="40"
+              ></el-table-column>
               <el-table-column
                 prop="name"
-                label="姓名"
+                label="景点"
+                width="80"
+                :show-overflow-tooltip="true"
+              >
+              </el-table-column>
+              <el-table-column
+                prop="city"
+                label="城市"
+                width="50"
+                :show-overflow-tooltip="true"
+              >
+              </el-table-column>
+              <el-table-column
+                prop="hot"
+                label="热度"
                 width="60"
                 :show-overflow-tooltip="true"
               >
               </el-table-column>
               <el-table-column
-                prop="address"
-                label="地址"
+                prop="score"
+                label="分数"
                 width="60"
                 :show-overflow-tooltip="true"
               >
               </el-table-column>
             </el-table>
           </el-tab-pane>
-          <el-tab-pane label="景点推荐" name="hotTab">
-            <el-table
-              :data="tableData"
-              height="420px"
-              stripe
-              style="width: 100%"
-            >
-              <el-table-column
-                prop="date"
-                label="日期"
-                width="60"
-                :show-overflow-tooltip="true"
-              >
-              </el-table-column>
-              <el-table-column
-                prop="name"
-                label="姓名"
-                width="60"
-                :show-overflow-tooltip="true"
-              >
-              </el-table-column>
-              <el-table-column
-                prop="address"
-                label="地址"
-                width="60"
-                :show-overflow-tooltip="true"
-              >
-              </el-table-column>
-            </el-table>
-          </el-tab-pane>
+          <el-tab-pane label="景点推荐" name="hotTab"> </el-tab-pane>
         </el-tabs>
       </div>
       <div class="rightbottom">
@@ -184,29 +167,33 @@
         <div class="title"><span>热门城市榜及特征分析</span></div>
         <div class="content">
           <el-table
-            :data="tableData"
-            height="120px"
+            ref="interfaceTable"
+            :data="tableCityData"
+            @row-click="clickData"
+            height="170px"
+            style="padding: 2.5%; margin-left: 3%"
             stripe
+            highlight-current-row
             class="“customer-table”"
           >
             <el-table-column
-              prop="date"
-              label="日期"
-              width="60"
+              prop="mycity"
+              label="城市"
+              width="100"
               :show-overflow-tooltip="true"
             >
             </el-table-column>
             <el-table-column
-              prop="name"
-              label="姓名"
-              width="60"
+              prop="conunt"
+              label="景点数目"
+              width="100"
               :show-overflow-tooltip="true"
             >
             </el-table-column>
             <el-table-column
-              prop="address"
-              label="地址"
-              width="60"
+              prop="hot"
+              label="热度"
+              width="100"
               :show-overflow-tooltip="true"
             >
             </el-table-column>
@@ -216,12 +203,17 @@
       <div class="content-bottom">
         <div class="content"></div>
       </div>
+      <div class="content-bottom">
+        <div class="content" id="wordcloud" ref="wordcloud"></div>
+      </div>
     </div>
   </div>
 </template>
 <script>
 import Bus from "../assets/js/bus.js";
 import poppage from "../components/poppageForCity.vue";
+
+import request from "../utils/request";
 
 import gradedcolormap from "../components/thememap/gradedcolormap.vue";
 import pointgather from "../components/thememap/pointgather.vue";
@@ -230,6 +222,9 @@ import timemap from "../components/thememap/timemap.vue";
 import multimap from "../components/thememap/multimap.vue";
 
 import loading from "../components/loading.vue";
+
+import wordcloud from "../assets/js/echarts-wordcloud-master/index";
+import echarts from "echarts";
 export default {
   name: "recommend",
   components: {
@@ -240,6 +235,7 @@ export default {
     timemap,
     multimap,
     loading,
+    wordcloud,
   },
   data() {
     return {
@@ -248,6 +244,91 @@ export default {
       index: 1,
       comp: "pointgather",
       isShow: true,
+      cloudData: [
+        { value: 1800, name: "纳木措" },
+        { value: 1200, name: "西藏" },
+        { value: 1000, name: "海拔" },
+        { value: 900, name: "景色" },
+        { value: 700, name: "湖水" },
+        { value: 650, name: "雪山" },
+        { value: 630, name: "值得" },
+        { value: 610, name: "没有" },
+        { value: 600, name: "地方" },
+        { value: 543, name: "风景" },
+        { value: 523, name: "景区" },
+        { value: 500, name: "感觉" },
+        { value: 500, name: "高原" },
+        { value: 490, name: "湖面" },
+        { value: 490, name: "圣湖" },
+        { value: 490, name: "小时" },
+        { value: 430, name: "湖泊" },
+        { value: 430, name: "大圣" },
+        { value: 430, name: "美丽" },
+        { value: 380, name: "景点" },
+        { value: 380, name: "牦牛" },
+        { value: 340, name: "时间" },
+        { value: 280, name: "咸水湖" },
+        { value: 260, name: "天湖" },
+        { value: 260, name: "藏民" },
+        { value: 200, name: "朋友" },
+        { value: 200, name: "蓝天白云" },
+        { value: 100, name: "开车" },
+        { value: 50, name: "神圣" },
+        { value: 40, name: "推荐" },
+        { value: 25, name: "限速" },
+        { value: 13, name: "距离" },
+      ],
+      tableRankData: "",
+      tableCityData: [
+        {
+          mycity: "北京",
+          conunt: "100",
+          hot: "97%",
+          evaluate: "4.7",
+        },
+        {
+          mycity: "北京",
+          conunt: "100",
+          hot: "97%",
+          evaluate: "4.7",
+        },
+        {
+          mycity: "北京",
+          conunt: "100",
+          hot: "97%",
+          evaluate: "4.7",
+        },
+        {
+          mycity: "北京",
+          conunt: "100",
+          hot: "97%",
+          evaluate: "4.7",
+        },
+        {
+          mycity: "北京",
+          conunt: "100",
+          hot: "97%",
+          evaluate: "4.7",
+        },
+        {
+          mycity: "北京",
+          conunt: "100",
+          hot: "97%",
+          evaluate: "4.7",
+        },
+        {
+          mycity: "北京",
+          conunt: "100",
+          hot: "97%",
+          evaluate: "4.7",
+        },
+        {
+          mycity: "北京",
+          conunt: "1111",
+          hot: "97%",
+          evaluate: "4.7",
+        },
+      ],
       tableData: [
         {
           date: "2016-05-02",
@@ -286,8 +367,7 @@ export default {
       radio: "1",
       activeName: "recommendTab",
       activeNameflag: "true",
-      input1: "",
-      checkList: ["复选框 A"],
+      checkList: ["途游"],
       //弹窗
       show: false,
       cityname: "城市选择",
@@ -313,23 +393,19 @@ export default {
           label: "北京烤鸭",
         },
       ],
-      value: "",
+      currentRow: null,
     };
   },
   mounted() {
     // this.initmap();
+    this.getRankTable(),
+      this.clickRow(),
+      this.wordCloudInti(this.$refs.wordcloud, this.cloudData);
   },
   methods: {
-    // initmap() {
-    //   this.$mapboxgl.accessToken =
-    //     "pk.eyJ1IjoiY2hlbmpxIiwiYSI6ImNrcWFmdWt2bjBtZGsybmxjb29oYmRzZzEifQ.mnpiwx7_cBEyi8YiJiMRZg";
-    //   var map = new this.$mapboxgl.Map({
-    //     container: "map",
-    //     style: "mapbox://styles/chenjq/cl010ychv001214pdpa5xyq5a",
-    //     center: [105, 35],
-    //     zoom: 3.5,
-    //   });
-    // },
+    clickData(val) {
+      console.log(val);
+    },
     hideModal() {
       // 取消弹窗回调
       this.show = false;
@@ -341,9 +417,21 @@ export default {
       // 确认弹窗回调
       this.show = false;
     },
-    checked(index) {
-      const _this = this;
-      _this.isActive = index;
+    indexMethod(index) {
+      return (this.currentPage - 1) * this.intPageSize + index + 1;
+    },
+    getRankTable() {
+      request.get("/api/data/scenicRank").then((res) => {
+        console.log(res);
+        console.log(res.data.name);
+        this.tableRankData = res.data;
+        for (let i = 1; i <= res.data.length; i++) {
+          this.tableRankData[i - 1].rank = i;
+          this.tableRankData[i - 1].score = parseFloat(
+            this.tableRankData[i - 1].score
+          ).toFixed(2);
+        }
+      });
     },
     getCity() {
       this.show = true;
@@ -358,6 +446,7 @@ export default {
       else if (value === 5) this.comp = "timemap";
       //   else if (value === 3) this.comp = "density";
     },
+    //更新数据动画
     refeashData() {
       console.log(111);
       (this.isLoading = true),
@@ -365,6 +454,60 @@ export default {
         setTimeout(() => {
           this.isLoading = false;
         }, 1200);
+    },
+    clickRow() {
+      this.$nextTick(function () {
+        this.$refs.interfaceTable.setCurrentRow(this.tableCityData[0]);
+      });
+    },
+    //词云
+    wordCloudInti(wrapEl, data) {
+      let myChart = echarts.init(wrapEl);
+      var option = {
+        tooltip: {
+          show: true,
+        },
+        series: [
+          {
+            name: "热词",
+            type: "wordCloud",
+            sizeRange: [10, 35],
+            rotationRange: [-20, 20],
+            shape: "rectangle",
+            left: "center",
+            top: "center",
+            width: "100%",
+            height: "100%",
+            gridSize: 7,
+            textPadding: 0,
+            autoSize: {
+              enable: true,
+              minSize: 4,
+            },
+            textStyle: {
+              normal: {
+                color: function () {
+                  return (
+                    "rgb(" +
+                    [
+                      Math.round(Math.random() * 250),
+                      Math.round(Math.random() * 250),
+                      Math.round(Math.random() * 250),
+                    ].join(",") +
+                    ")"
+                  );
+                },
+              },
+              emphasis: {
+                shadowBlur: 10,
+                shadowColor: "#333",
+              },
+            },
+            data: data,
+          },
+        ],
+      };
+      myChart.setOption(option);
     },
   },
 };
@@ -545,7 +688,7 @@ export default {
     height: 100%;
   }
   .content-bottom:nth-child(1) {
-    flex: 2;
+    flex: 1;
     height: 100%;
     .title {
       flex: 1;
@@ -556,6 +699,10 @@ export default {
         margin-left: 15.5%;
       }
     }
+  }
+  .content-bottom:nth-child(3) {
+    flex: 1;
+    height: 100%;
   }
 }
 .left {
@@ -799,6 +946,11 @@ export default {
     .el-tabs__item:last-child {
     padding: 0;
   }
+  /deep/.el-table .cell {
+    padding-left: 0%;
+    padding-right: 0%;
+    text-align: center;
+  }
   /deep/.el-tabs__nav-scroll {
     background: transparent;
     width: 67%;
@@ -827,9 +979,14 @@ export default {
     background: transparent;
   }
   /deep/.el-table .el-table__header-wrapper tr th {
-    background-color: #025166 !important;
+    background-image: linear-gradient(
+      -180deg,
+      #bdd9e017 4%,
+      #9fdae565 100%
+    ) !important;
+    background: transparent;
     color: rgb(255, 255, 255);
-    border-bottom: 1px solid #0cf3f3;
+    border-bottom: 1px solid #1faacd;
   }
   //奇数行背景
   /deep/.el-table tr {
@@ -837,11 +994,11 @@ export default {
     border-bottom: 1px solid #0cf3f3;
   }
   /deep/.el-table .el-table__row {
-    background: #023f54;
+    background: #023f5441;
     color: rgb(255, 255, 255);
   }
   /deep/.el-table .el-table__row--striped {
-    background: #023649;
+    background: #023f54ce;
     color: rgb(255, 255, 255);
   }
   /deep/.el-table td.el-table__cell {
@@ -878,10 +1035,10 @@ export default {
     text-align: center;
   }
   /deep/.el-table .el-table__body tr.current-row > td {
-    background-color: #0d1f34 !important;
+    background-color: #fafafa !important;
   }
   /deep/.el-table .el-table__body tr:hover > td {
-    background-color: #0d1f34 !important;
+    background-color: #dfdfdf !important;
   }
 }
 .recommend-bottom {
@@ -890,25 +1047,37 @@ export default {
     background: transparent;
   }
   /deep/.el-table .el-table__header-wrapper tr th {
-    background-color: #025166 !important;
+    background-image: linear-gradient(
+      -180deg,
+      #bdd9e017 4%,
+      #9fdae565 100%
+    ) !important;
+    background: transparent;
     color: rgb(255, 255, 255);
-    // border-bottom: 1px solid #0cf3f3;
+    border-bottom: 1px solid #1faacd;
   }
   //奇数行背景
   /deep/.el-table tr {
     background: rgba(2, 73, 94, 0.432);
-    // border-bottom: 1px solid #0cf3f3;
+    border-bottom: 1px solid #0cf3f3;
   }
   /deep/.el-table .el-table__row {
-    background: #023f54;
+    background: #023f5441;
     color: rgb(255, 255, 255);
   }
   /deep/.el-table .el-table__row--striped {
-    background: #023649;
+    background: #023f54ce;
     color: rgb(255, 255, 255);
   }
   /deep/.el-table td.el-table__cell {
     border: none;
+    padding-left: 0%;
+    padding-right: 0%;
+  }
+  /deep/.el-table .cell {
+    padding-left: 0%;
+    padding-right: 0%;
+    text-align: center;
   }
   // /deep/.el-table--enable-row-hover
   //   .el-table__body
@@ -941,10 +1110,10 @@ export default {
     text-align: center;
   }
   /deep/.el-table .el-table__body tr.current-row > td {
-    background-color: #0d1f34 !important;
+    background-color: #84e6e485 !important;
   }
   /deep/.el-table .el-table__body tr:hover > td {
-    background-color: #0d1f34 !important;
+    background-color: #8eabcc !important;
   }
   /deep/.el-table--scrollable-y .el-table__body-wrapper {
     border: none;
@@ -999,9 +1168,6 @@ export default {
   .customer-table thead tr th.is-leaf {
     border-right: none;
   }
-  .customer-table thead tr th:nth-last-of-type(2) {
-  }
-
   .el-table--border::after,
   .el-table--group::after {
     width: 0;
