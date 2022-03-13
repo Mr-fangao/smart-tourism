@@ -1,24 +1,31 @@
 <template>
   <div class="modal-bg" v-show="show">
-    <div class="modal-container">
-      <div class="modal-header">
-        <span class="text">个人面板</span>
-        <div class="close-btn" @click="hideModal">
-          <i class="fa fa-times" aria-hidden="true" style="color: red"></i>
-        </div>
+    <div class="title">
+      <span class="text">个人面板</span>
+    </div>
+    <div class="hotcity">
+      <ul>
+        <li></li>
+      </ul>
+    </div>
+    <div class="city" v-for="item in city.provinces" :key="item">
+      <div class="p" v-for="(item, index) in city.provinces" :key="index">
+        <span>{{ item.name }}</span>
       </div>
-      <div class="modal-main">
-        <div class="ptChart">
-          {{ cityname }}
-        </div>
+      <div class="c">
+        <li v-for="(item, index) in item.cities" :key="index">
+          <span>{{ item.cities.name }}</span>
+        </li>
       </div>
     </div>
   </div>
 </template>
 <script>
 import Bus from "../assets/js/bus.js";
+import city from "../assets/js/city";
 export default {
   name: "poppage",
+
   props: {
     show: {
       type: Boolean,
@@ -32,12 +39,17 @@ export default {
   methods: {
     hideModal() {
       this.$emit("hideModal");
-       Bus.$emit('sendCityname','1234');
+      Bus.$emit("sendCityname", "1234");
+      console.log(city.provinces);
     },
 
     submit() {
       this.$emit("submit");
     },
+
+  },
+  mounted() {
+
   },
 };
 </script>
@@ -51,35 +63,35 @@ export default {
   background: rgba(0, 0, 0, 0.5);
   z-index: 1000000;
 }
-.modal-container {
-  background: url("../assets/img/buttonbg.png");
-  background-size: 100% 100%;
-  // border-radius: 3%;
-  overflow: hidden;
-  position: fixed;
-  width: 70%;
-  height: 80%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-.modal-header {
-  height: 56px;
-  background: transparent;
-  color: rgb(0, 0, 0);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: move;
-  .text {
-    position: absolute inherit;
-    text-align: center;
-  }
-  .close-btn {
-    position: absolute;
-    margin-right: -90% !important;
-  }
-}
+// .modal-container {
+//   background: url("../assets/img/buttonbg.png");
+//   background-size: 100% 100%;
+//   // border-radius: 3%;
+//   overflow: hidden;
+//   position: fixed;
+//   width: 70%;
+//   height: 80%;
+//   top: 50%;
+//   left: 50%;
+//   transform: translate(-50%, -50%);
+// }
+// .modal-header {
+//   height: 56px;
+//   background: transparent;
+//   color: rgb(0, 0, 0);
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   cursor: move;
+//   .text {
+//     position: absolute inherit;
+//     text-align: center;
+//   }
+//   .close-btn {
+//     position: absolute;
+//     margin-right: -90% !important;
+//   }
+// }
 // .modal-footer {
 //   display: flex;
 //   align-items: center;
@@ -90,12 +102,12 @@ export default {
 // .modal-footer button {
 //   width: 100px;
 // }
-.modal-main {
-  height: 50%;
-  padding: 15px 40px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  flex: auto;
-}
+// .modal-main {
+//   height: 50%;
+//   padding: 15px 40px;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: space-around;
+//   flex: auto;
+// }
 </style>
