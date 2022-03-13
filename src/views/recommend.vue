@@ -131,7 +131,48 @@
               </el-table-column>
             </el-table>
           </el-tab-pane>
-          <el-tab-pane label="景点推荐" name="hotTab"> </el-tab-pane>
+          <el-tab-pane label="景点推荐" name="hotTab">
+            <el-table
+              :data="tableRankData"
+              height="420px"
+              stripe
+              style="width: 100%"
+            >
+              <el-table-column
+                prop="rank"
+                label="序号"
+                width="40"
+              ></el-table-column>
+              <el-table-column
+                prop="name"
+                label="景点"
+                width="80"
+                :show-overflow-tooltip="true"
+              >
+              </el-table-column>
+              <el-table-column
+                prop="city"
+                label="城市"
+                width="50"
+                :show-overflow-tooltip="true"
+              >
+              </el-table-column>
+              <el-table-column
+                prop="hot"
+                label="热度"
+                width="60"
+                :show-overflow-tooltip="true"
+              >
+              </el-table-column>
+              <el-table-column
+                prop="score"
+                label="分数"
+                width="60"
+                :show-overflow-tooltip="true"
+              >
+              </el-table-column>
+            </el-table>
+          </el-tab-pane>
         </el-tabs>
       </div>
       <div class="rightbottom">
@@ -760,16 +801,19 @@ export default {
         height: 39%;
         background: url("../assets/img/bubg.png") no-repeat;
         background-size: 100% 100%;
-
-      >img{
-        height: 45%;
-        width: 30%;
-        margin-left: 31%;
-        background-size: 100% 100%;
-      }
-      >span{
-        color: #c5d4e6;
-      }
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: space-around;
+        > img {
+          height: 45%;
+          width: 30%;
+          margin-left: 31%;
+          background-size: 100% 100%;
+        }
+        > span {
+          color: #c5d4e6;
+        }
       }
     }
   }
