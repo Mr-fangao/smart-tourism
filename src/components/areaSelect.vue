@@ -22,7 +22,6 @@
       >
       </el-option>
     </el-select>
-    <el-button @click="btnClick">查询</el-button>
   </div>
 </template>
 

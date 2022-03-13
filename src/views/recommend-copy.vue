@@ -171,14 +171,6 @@
               >
               </el-table-column>
             </el-table>
-            <poppage
-              :show="show"
-              :porpID="porpID"
-              @hideModal="hideModal"
-              @submit="submit"
-            >
-              <p>这里放弹窗的内容</p>
-            </poppage>
           </div>
         </div>
       </div>
@@ -199,7 +191,6 @@ export default {
     modalVisible: false,
     areaSelect,
     wordcloud,
-    poppage,
     // dialogPage,
     "dialog-bar": dialogBar,
   },

@@ -2,6 +2,9 @@
   <div id="com-city">
     <div class="city-left">
       <div class="title"><span>城市形象感知分析</span></div>
+      <div class="city-left-bottom">
+                    <areaSelect></areaSelect>
+      </div>
     </div>
     <div class="city-content">
       <el-row>
@@ -100,10 +103,13 @@
 import wordcloud from "../../assets/js/echarts-wordcloud-master/index";
 import echarts from "echarts";
 import request from "../../utils/request";
+
+import areaSelect from "../../components/areaSelect.vue";
 export default {
   name: "city",
   components: {
     wordcloud,
+    areaSelect,
   },
   data() {
     return {
@@ -655,6 +661,10 @@ export default {
       text-shadow: 0 0 10px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #38e9e0,
         0 0 25px #0cf3f3;
     }
+  }
+  .city-left-bottom {
+    height: 85%;
+    width: 100%;
   }
 }
 .city-content {

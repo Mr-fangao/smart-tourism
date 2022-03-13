@@ -34,7 +34,7 @@ export default new Router({
       path: '/recommend',
       name: 'recommend',
       component: () => import("@/views/recommend"),
-      // component: () => import("@/components/areaSelect"),
+      // component: () => import("@/views/recommend-copy"),
       meta: {
         keepAlive: true
       }
