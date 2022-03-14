@@ -2,7 +2,7 @@
   <div class="modal-bg" v-show="show">
     <div class="modal-container">
       <div class="modal-header">
-        <span class="text">个人面板</span>
+        <span class="text">城市选择</span>
         <div class="close-btn" @click="hideModal">
           <i class="fa fa-times" aria-hidden="true" style="color: red"></i>
         </div>
@@ -109,6 +109,7 @@ export default {
   justify-content: center;
   cursor: move;
   .text {
+    color: rgb(245, 241, 241);
     position: absolute inherit;
     text-align: center;
   }
@@ -149,7 +150,8 @@ export default {
         justify-content: flex-start;
         margin-bottom: 3%;
         .provincesname {
-          flex: 1;
+          flex:3;
+                   font-size: 15pt;
           // padding: 7%;
         }
         .citycontent {
@@ -157,6 +159,7 @@ export default {
           display: flex;
           flex-wrap: wrap;
           .citylist {
+            font-size: 12pt;
             color: rgb(241, 241, 241);
             margin-bottom: 1%;
             margin-left: 1%;

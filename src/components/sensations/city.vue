@@ -3,7 +3,7 @@
     <div class="city-left">
       <div class="title"><span>城市形象感知分析</span></div>
       <div class="city-left-bottom">
-                    <areaSelect></areaSelect>
+        <areaSelect></areaSelect>
       </div>
     </div>
     <div class="city-content">

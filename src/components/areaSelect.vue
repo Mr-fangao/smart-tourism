@@ -79,9 +79,7 @@ export default {
         this.countryChange();
       }
     },
-    btnClick(){
-
-    },
+    btnClick() {},
     handleArea() {
       this.provinceOptions = [];
       this.provinceValue = "";
@@ -174,7 +172,7 @@ export default {
 <style lang="less" scoped>
 .areaSelect-wrap {
   position: absolute;
-  top: 38%;
+  top: 12%;
   left: 1%;
   .el-select {
     position: relative;
@@ -182,8 +180,8 @@ export default {
     margin-right: 2%;
     float: left;
     height: 20%;
-    width:35%;
-    z-index:9
+    width: 35%;
+    z-index: 9;
   }
 }
 </style>
