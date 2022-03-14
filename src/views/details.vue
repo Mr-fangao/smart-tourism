@@ -67,7 +67,9 @@ import Bus from "../assets/js/bus.js";
 export default {
   components: {},
   data() {
-    return {};
+    return {
+      tableData: {},
+    };
   },
   mounted() {
     this.getAllData();
@@ -77,6 +79,15 @@ export default {
       Bus.$on("myevent", (val) => {
         console.log(val);
       });
+      // request
+      //   .post("/api/data/queryScenic", {
+      //     pageNum: 8,
+      //     count: 4,
+      //   })
+      //   .then((res) => {
+      //     this.tableData = res.data.scInfo;
+      //     console.log( this.tableData);
+      //   });
     },
   },
 };

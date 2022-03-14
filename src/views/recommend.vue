@@ -70,7 +70,6 @@
           <div class="sorcelabel">数据源</div>
           <div class="datasorce">
             <el-checkbox-group v-model="checkList">
-              <el-checkbox label="途游"></el-checkbox>
               <el-checkbox label="去哪儿"></el-checkbox>
               <el-checkbox label="马蜂窝"></el-checkbox>
             </el-checkbox-group>
@@ -220,23 +219,37 @@
             class="“customer-table”"
           >
             <el-table-column
-              prop="mycity"
+              prop="hotrank"
+              label="排名"
+              width="40"
+              :show-overflow-tooltip="true"
+            >
+            </el-table-column>
+            <el-table-column
+              prop="city"
               label="城市"
-              width="100"
+              width="60"
               :show-overflow-tooltip="true"
             >
             </el-table-column>
             <el-table-column
-              prop="conunt"
+              prop="sccount"
               label="景点数目"
-              width="100"
+              width="60"
               :show-overflow-tooltip="true"
             >
             </el-table-column>
             <el-table-column
-              prop="hot"
+              prop="comcount"
               label="热度"
-              width="100"
+              width="50"
+              :show-overflow-tooltip="true"
+            >
+            </el-table-column>
+            <el-table-column
+              prop="scscore"
+              label="分数"
+              width="50"
               :show-overflow-tooltip="true"
             >
             </el-table-column>
@@ -244,7 +257,19 @@
         </div>
       </div>
       <div class="content-bottom">
-        <div class="content"></div>
+        <div class="content carouselcontent">
+          <!-- <el-carousel
+             indicator-position="outside"
+            loop="true"
+            height="180px"
+            interval="3000"
+            trigger="click"
+          >
+            <el-carousel-item v-for="item in cityimages" :key="item">
+              <img :src="item.url" alt="无图片" style="background-size:100% 100%;" display:block; />
+            </el-carousel-item>
+          </el-carousel> -->
+        </div>
       </div>
       <div class="content-bottom">
         <div class="content" id="wordcloud" ref="wordcloud"></div>
@@ -323,6 +348,11 @@ export default {
         { value: 25, name: "限速" },
         { value: 13, name: "距离" },
       ],
+      // cityimages: [
+      //   { url: require("../assets/img/login/1.jpg") },
+      //   { url: require("../assets/img/login/2.jpg") },
+      //   { url: require("../assets/img/login/3.jpg") },
+      // ],
       tableRankData: "",
       labellist: [
         { id: 1, name: "山岳" },
@@ -333,56 +363,7 @@ export default {
         { id: 6, name: "划船" },
         { id: 7, name: "文物" },
       ],
-      tableCityData: [
-        {
-          mycity: "北京",
-          conunt: "100",
-          hot: "97%",
-          evaluate: "4.7",
-        },
-        {
-          mycity: "北京",
-          conunt: "100",
-          hot: "97%",
-          evaluate: "4.7",
-        },
-        {
-          mycity: "北京",
-          conunt: "100",
-          hot: "97%",
-          evaluate: "4.7",
-        },
-        {
-          mycity: "北京",
-          conunt: "100",
-          hot: "97%",
-          evaluate: "4.7",
-        },
-        {
-          mycity: "北京",
-          conunt: "100",
-          hot: "97%",
-          evaluate: "4.7",
-        },
-        {
-          mycity: "北京",
-          conunt: "100",
-          hot: "97%",
-          evaluate: "4.7",
-        },
-        {
-          mycity: "北京",
-          conunt: "100",
-          hot: "97%",
-          evaluate: "4.7",
-        },
-        {
-          mycity: "北京",
-          conunt: "1111",
-          hot: "97%",
-          evaluate: "4.7",
-        },
-      ],
+      tableCityData: [],
       tableData: [
         {
           date: "2016-05-02",
@@ -453,6 +434,7 @@ export default {
   mounted() {
     // this.initmap();
     this.getRankTable(),
+      this.getCityRank(),
       this.clickRow(),
       this.wordCloudInti(this.$refs.wordcloud, this.cloudData);
   },
@@ -474,6 +456,17 @@ export default {
     indexMethod(index) {
       return (this.currentPage - 1) * this.intPageSize + index + 1;
     },
+    getCityRank() {
+      request.get("/api/data/cityRank").then((res) => {
+        console.log(res);
+        this.tableCityData = res.data;
+        for (let i = 0; i <= res.data.length; i++) {
+          this.tableCityData[i].scscore = parseFloat(
+            this.tableCityData[i].scscore
+          ).toFixed(2);
+        }
+      });
+    },
     getRankTable() {
       request.get("/api/data/scenicRank").then((res) => {
         console.log(res);
@@ -493,7 +486,6 @@ export default {
     },
     getCity() {
       this.show = true;
-      // this.cityname = "22";
     },
     showmap(value) {
       console.log(value);
@@ -740,6 +732,11 @@ export default {
     .content {
       flex: 6;
       width: 100%;
+    }
+    .carouselcontent{
+      margin-top: 6%;
+      height: 90%;
+      width: 90%;
     }
   }
   .content-bottom:nth-child(2) {
@@ -1145,7 +1142,7 @@ export default {
     ) !important;
     background: transparent;
     color: rgb(255, 255, 255);
-    border-bottom: 1px solid #1faacd;
+    border-bottom: 0px solid #1faacd;
   }
   //奇数行背景
   /deep/.el-table tr {

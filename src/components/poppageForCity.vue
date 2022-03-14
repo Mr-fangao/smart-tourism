@@ -9,12 +9,26 @@
       </div>
       <div class="modal-main">
         <div class="cityselect">
-          <div class="provinces" v-for="(item1, i) in provinces" :key="i">
-            {{ item1.name }}
-            <div class="cities" v-for="(item2, i) in provinces.cites" :key="i">
-              {{item2.name}}
+          <div class="provinces" style="overflow-y: scroll; height: 82%">
+            <div class="provinceslist" v-for="(item1, i) in provinces" :key="i">
+              <span class="provincesname">{{ item1.name }}</span>
+              <div class="citycontent">
+                <div
+                  class="citylist"
+                  v-for="(item2, i) in item1.cities"
+                  :key="i"
+                  @click="hideModal(item2.name)"
+                >
+                  {{ item2.name }}
+                </div>
+              </div>
             </div>
           </div>
+          <!-- <div class="cities">
+            <div class="citylist" v-for="(item2, i) in citylist" :key="i">
+              <div class="citylist" v-for="(item3, i) in item2" :key="i"></div>
+            </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -41,27 +55,26 @@ export default {
       default: "",
     },
   },
+  mounted() {
+    this.getData();
+  },
   methods: {
-    hideModal() {
+    hideModal(val) {
       this.$emit("hideModal");
-      Bus.$emit("sendCityname", "1234");
+      Bus.$emit("sendCityname", val);
       // console.log(city.provinces);
     },
     submit() {
       this.$emit("submit");
     },
     getData() {
-      this.provinces = city;
+      this.provinces = city.provinces;
       console.log(this.provinces);
-      // for(let i=1;i<=34;i++)
-      // {
-      //   this.citylist[i]=this.provinces[i].cities
-      // }
-      // console.log(this.citylist);
+      for (var i = 0; i < 34; i++) {
+        this.citylist[i] = this.provinces[i].cities;
+      }
+      console.log(this.citylist);
     },
-  },
-  mounted() {
-    this.getData();
   },
 };
 </script>
@@ -115,19 +128,46 @@ export default {
   width: 100px;
 }
 .modal-main {
-  height: 50%;
+  height: 100%;
   padding: 15px 40px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   flex: auto;
-  .cityselect{
-    .provinces{
+  .cityselect {
+    height: 100%;
+    .provinces {
+      display: flex;
+      flex-direction: column;
       float: left;
       color: #ddd;
-      .cities{
-        float: left;
-        color: antiquewhite;
+      .provinceslist {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: flex-start;
+        margin-bottom: 3%;
+        .provincesname {
+          flex: 1;
+          // padding: 7%;
+        }
+        .citycontent {
+          flex: 7;
+          display: flex;
+          flex-wrap: wrap;
+          .citylist {
+            color: rgb(241, 241, 241);
+            margin-bottom: 1%;
+            margin-left: 1%;
+            width: 25%;
+            height: 20%;
+            cursor: pointer;
+            background: rgba(150, 217, 219, 0.747);
+            border: 1px solid rgb(4, 152, 238);
+            // margin: auto auto;
+          }
+        }
       }
     }
   }
