@@ -193,16 +193,28 @@
             index="2"
             @click="showmap(2)"
             :class="index === 2 ? 'active' : ''"
-          ></div>
+          >
+            <img src="../assets/img/theme/分级.png" alt="" />
+            <span>分级色彩</span>
+          </div>
           <div
             class="mapchange"
             index="3"
             @click="showmap(3)"
             :class="index === 3 ? 'active' : ''"
-          ></div>
-          <div class="mapchange" index="4"
+          >
+            <img src="../assets/img/theme/热力图.png" alt="" />
+            <span>热力图</span>
+          </div>
+          <div
+            class="mapchange"
+            index="4"
             @click="showmap(4)"
-            :class="index === 4 ? 'active' : ''"></div>
+            :class="index === 4 ? 'active' : ''"
+          >
+            <img src="../assets/img/theme/时间.png" alt="" />
+            <span>时序图</span>
+          </div>
           <div class="mapchange"></div>
           <div class="mapchange"></div>
         </div>
@@ -813,6 +825,9 @@ export default {
         > span {
           color: #c5d4e6;
         }
+      }
+      .mapchange:active{
+        color: #0cf3f3;
       }
     }
   }
