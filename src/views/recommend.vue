@@ -345,40 +345,7 @@ export default {
       index: 1,
       comp: "pointgather",
       isShow: true,
-      cloudData: [
-        { value: 1800, name: "纳木措" },
-        { value: 1200, name: "西藏" },
-        { value: 1000, name: "海拔" },
-        { value: 900, name: "景色" },
-        { value: 700, name: "湖水" },
-        { value: 650, name: "雪山" },
-        { value: 630, name: "值得" },
-        { value: 610, name: "没有" },
-        { value: 600, name: "地方" },
-        { value: 543, name: "风景" },
-        { value: 523, name: "景区" },
-        { value: 500, name: "感觉" },
-        { value: 500, name: "高原" },
-        { value: 490, name: "湖面" },
-        { value: 490, name: "圣湖" },
-        { value: 490, name: "小时" },
-        { value: 430, name: "湖泊" },
-        { value: 430, name: "大圣" },
-        { value: 430, name: "美丽" },
-        { value: 380, name: "景点" },
-        { value: 380, name: "牦牛" },
-        { value: 340, name: "时间" },
-        { value: 280, name: "咸水湖" },
-        { value: 260, name: "天湖" },
-        { value: 260, name: "藏民" },
-        { value: 200, name: "朋友" },
-        { value: 200, name: "蓝天白云" },
-        { value: 100, name: "开车" },
-        { value: 50, name: "神圣" },
-        { value: 40, name: "推荐" },
-        { value: 25, name: "限速" },
-        { value: 13, name: "距离" },
-      ],
+      mycloudData: [],
       beijingData: [
         { value: 773, name: "故宫" },
         { value: 502, name: "长城" },
@@ -548,11 +515,13 @@ export default {
       this.clickRow(),
       // this.wordCloudInti(this.$refs.wordcloud, this.cloudData);
       // this.wordCloudInti(this.$refs.wordcloud, this.beijingData);
-      this.wordCloudInti(this.$refs.wordcloud, this.sanyaData);
+      this.wordCloudInti(this.$refs.wordcloud, this.beijingData);
   },
   methods: {
     clickData(val) {
       this.chosencity = val.city;
+      // this.mycloudData=this.sanyaData
+      this.wordCloudInti(this.$refs.wordcloud, this.sanyaData);
       console.log(city);
     },
     hideModal() {
