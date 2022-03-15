@@ -200,7 +200,9 @@
             @click="showmap(3)"
             :class="index === 3 ? 'active' : ''"
           ></div>
-          <div class="mapchange"></div>
+          <div class="mapchange" index="4"
+            @click="showmap(4)"
+            :class="index === 4 ? 'active' : ''"></div>
           <div class="mapchange"></div>
           <div class="mapchange"></div>
         </div>
@@ -265,7 +267,7 @@
             indicator-position="outside"
             loop="true"
             height="180px"
-            interval="3000"
+            interval="2000"
             trigger="click"
           >
             <el-carousel-item v-for="(item, index) in cityimages" :key="index">
@@ -478,8 +480,8 @@ export default {
       if (value === 1) this.comp = "pointgather";
       else if (value === 2) this.comp = "gradedcolormap";
       else if (value === 3) this.comp = "heatmap";
-      else if (value === 4) this.comp = "multimap";
-      else if (value === 5) this.comp = "timemap";
+      else if (value === 4) this.comp = "timemap";
+      else if (value === 5) this.comp = "multimap";
       //   else if (value === 3) this.comp = "density";
     },
     //更新数据动画
