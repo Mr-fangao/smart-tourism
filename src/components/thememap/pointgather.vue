@@ -37,8 +37,8 @@ export default {
         map.setLayoutProperty("cluster-count", "visibility", "visible");
         map.setLayoutProperty("unclustered-point", "visibility", "visible");
         map.fitBounds([
-          [25, -8], // 边界的西南角
-          [-97, 67], // 边界的东北角
+          [90, 45], // 边界的西南角
+          [120, 30], // 边界的东北角
         ]);
       });
       document.getElementById("button1").addEventListener("click", () => {
@@ -47,23 +47,23 @@ export default {
         map.setLayoutProperty("cluster-count", "visibility", "none");
         map.setLayoutProperty("unclustered-point", "visibility", "none");
         //添加数据
-        // map.addSource("earthquake", {
-        //   type: "geojson",
-        //   //指向GeoJSON数据。这个例子显示了所有的M1.0+地震
-        //   // 15年12月22日至16年1月21日。
-        //   data: "https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson",
-        // });
+        map.addSource("earthquake", {
+          type: "geojson",
+          //指向GeoJSON数据。这个例子显示了所有的M1.0+地震
+          // 15年12月22日至16年1月21日。
+         data: heatMapData,
+        });
 
-        // //添加点图层
-        // map.addLayer({
-        //   id: "points",
-        //   type: "circle" /* symbol类型layer，一般用来绘制点*/,
-        //   source: "earthquake",
-        //   paint: {
-        //     "circle-radius": 2,
-        //     "circle-color": "#080",
-        //   },
-        // });
+        //添加点图层
+        map.addLayer({
+          id: "points",
+          type: "circle" /* symbol类型layer，一般用来绘制点*/,
+          source: "earthquake",
+          paint: {
+            "circle-radius": 2,
+            "circle-color": "#080",
+          },
+        });
       });
 
       map.on("load", function () {
