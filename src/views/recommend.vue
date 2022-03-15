@@ -79,7 +79,9 @@
           <el-button class="startbutton" @click="refeashData()"
             >更新数据</el-button
           >
-          <el-button class="startbutton">开始推荐</el-button>
+          <el-button class="startbutton" @click="getRecommend()"
+            >开始推荐</el-button
+          >
         </div>
       </div>
       <div class="toppart"></div>
@@ -191,14 +193,28 @@
             index="2"
             @click="showmap(2)"
             :class="index === 2 ? 'active' : ''"
-          ></div>
+          >
+            <img src="../assets/img/theme/分级.png" alt="" />
+            <span>分级色彩</span>
+          </div>
           <div
             class="mapchange"
             index="3"
             @click="showmap(3)"
             :class="index === 3 ? 'active' : ''"
-          ></div>
-          <div class="mapchange"></div>
+          >
+            <img src="../assets/img/theme/热力图.png" alt="" />
+            <span>热力图</span>
+          </div>
+          <div
+            class="mapchange"
+            index="4"
+            @click="showmap(4)"
+            :class="index === 4 ? 'active' : ''"
+          >
+            <img src="../assets/img/theme/时间.png" alt="" />
+            <span>时序图</span>
+          </div>
           <div class="mapchange"></div>
           <div class="mapchange"></div>
         </div>
@@ -212,7 +228,7 @@
             ref="interfaceTable"
             :data="tableCityData"
             @row-click="clickData"
-            height="170px"
+            height="211px"
             style="padding: 2.5%; margin-left: 3%"
             stripe
             highlight-current-row
@@ -257,21 +273,30 @@
         </div>
       </div>
       <div class="content-bottom">
+        <span class="mytitle">{{ chosencity }}-评论图片</span>
         <div class="content carouselcontent">
-          <!-- <el-carousel
-             indicator-position="outside"
+          <el-carousel
+            indicator-position="outside"
             loop="true"
             height="180px"
-            interval="3000"
+            interval="2000"
             trigger="click"
           >
-            <el-carousel-item v-for="item in cityimages" :key="item">
-              <img :src="item.url" alt="无图片" style="background-size:100% 100%;" display:block; />
+            <el-carousel-item v-for="(item, index) in cityimages" :key="index">
+              <img
+                :src="item.url"
+                alt="无图片"
+                style="background-size: 100% 100%; witdh: 150px; height: 200px"
+              />
             </el-carousel-item>
-          </el-carousel> -->
+            <!-- <el-carousel-item v-for="item in cityimages" :key="item">
+              <img :src="item.url" alt="无图片" style="background-size:100% 100%;" display:block; />
+            </el-carousel-item> -->
+          </el-carousel>
         </div>
       </div>
       <div class="content-bottom">
+        <span class="mytitle">{{ chosencity }}-特征词云</span>
         <div class="content" id="wordcloud" ref="wordcloud"></div>
       </div>
     </div>
@@ -307,6 +332,8 @@ export default {
   },
   data() {
     return {
+      //下方的城市名
+      chosencity: "北京市",
       //动画加载
       state: "",
       isLoading: false,
@@ -348,11 +375,15 @@ export default {
         { value: 25, name: "限速" },
         { value: 13, name: "距离" },
       ],
-      // cityimages: [
-      //   { url: require("../assets/img/login/1.jpg") },
-      //   { url: require("../assets/img/login/2.jpg") },
-      //   { url: require("../assets/img/login/3.jpg") },
-      // ],
+      cityimages: [
+        { url: require("../assets/img/city/1.jpg") },
+        { url: require("../assets/img/city/201111424880.jpg") },
+        // { url: require("../assets/img/login/3.jpg") },
+      ],
+      BJ: [
+        // { url: require("../assets/city/BJ/BJ1.webp") },
+        // { url: require("../assets/img/login/3.jpg") },
+      ],
       tableRankData: "",
       labellist: [
         { id: 1, name: "山岳" },
@@ -364,38 +395,6 @@ export default {
         { id: 7, name: "文物" },
       ],
       tableCityData: [],
-      tableData: [
-        {
-          date: "2016-05-02",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄",
-        },
-        {
-          date: "2016-05-04",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1517 弄",
-        },
-        {
-          date: "2016-05-01",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1519 弄",
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1516 弄",
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1516 弄",
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1516 弄",
-        },
-      ],
       value1: [],
       input: "",
       changename: "景点特征",
@@ -440,7 +439,8 @@ export default {
   },
   methods: {
     clickData(val) {
-      console.log(val);
+      this.chosencity = val.city;
+      console.log(city);
     },
     hideModal() {
       // 取消弹窗回调
@@ -492,8 +492,8 @@ export default {
       if (value === 1) this.comp = "pointgather";
       else if (value === 2) this.comp = "gradedcolormap";
       else if (value === 3) this.comp = "heatmap";
-      else if (value === 4) this.comp = "multimap";
-      else if (value === 5) this.comp = "timemap";
+      else if (value === 4) this.comp = "timemap";
+      else if (value === 5) this.comp = "multimap";
       //   else if (value === 3) this.comp = "density";
     },
     //更新数据动画
@@ -505,6 +505,9 @@ export default {
         setTimeout(() => {
           this.isLoading = false;
         }, 1200);
+    },
+    getRecommend() {
+      this.activeName = "hotTab";
     },
     clickRow() {
       this.$nextTick(function () {
@@ -704,7 +707,7 @@ export default {
   position: absolute;
   z-index: 100;
   bottom: 7.5%;
-  height: 30%;
+  height: 33%;
   width: 59%;
   left: 20.5%;
   background: #38e9e0;
@@ -729,12 +732,23 @@ export default {
         line-height: 38px;
       }
     }
+    .mytitle {
+      float: left;
+      margin-left: -45%;
+      text-align: left;
+      margin-bottom: 0%;
+      margin-top: 4%;
+      border-left: 5px solid #0cf3f3;
+      color: white;
+      text-indent: 0.8em;
+      font-size: 11pt;
+    }
     .content {
       flex: 6;
       width: 100%;
     }
-    .carouselcontent{
-      margin-top: 6%;
+    .carouselcontent {
+      margin-top: 4%;
       height: 90%;
       width: 90%;
     }
@@ -749,7 +763,7 @@ export default {
     .title {
       flex: 1;
       width: 100%;
-      background-size: 25% 80%;
+      background-size: 40% 80%;
       margin-left: -12%;
       > span {
         margin-left: 15.5%;
@@ -811,6 +825,9 @@ export default {
         > span {
           color: #c5d4e6;
         }
+      }
+      .mapchange:active{
+        color: #0cf3f3;
       }
     }
   }
@@ -880,7 +897,7 @@ export default {
   margin-bottom: 4%;
   // background-size: 57% 93%;
   // background-position: 9% 100%;
-  font-size: 10pt;
+  font-size: 11pt;
   > span {
     float: left;
     margin-left: 18%;
