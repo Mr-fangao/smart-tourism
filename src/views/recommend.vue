@@ -183,7 +183,7 @@
             class="mapchange"
             index="1"
             @click="showmap(1)"
-            :class="index === 1 ? 'active' : ''"
+            :class="activeClass == index ? 'active' : ' '"
           >
             <img src="../assets/img/theme/聚合.png" alt="" />
             <span>点聚合图</span>
@@ -192,7 +192,7 @@
             class="mapchange"
             index="2"
             @click="showmap(2)"
-            :class="index === 2 ? 'active' : ''"
+            :class="activeClass == index ? 'active' : ''"
           >
             <img src="../assets/img/theme/分级.png" alt="" />
             <span>分级色彩</span>
@@ -201,7 +201,7 @@
             class="mapchange"
             index="3"
             @click="showmap(3)"
-            :class="index === 3 ? 'active' : ''"
+            :class="activeClass == index ? 'active' : ''"
           >
             <img src="../assets/img/theme/热力图.png" alt="" />
             <span>热力图</span>
@@ -277,9 +277,8 @@
         <div class="content carouselcontent">
           <el-carousel
             indicator-position="outside"
-            loop="true"
             height="180px"
-            interval="2000"
+            
             trigger="click"
           >
             <el-carousel-item v-for="(item, index) in cityimages" :key="index">
@@ -308,6 +307,8 @@ import poppage from "../components/poppageForCity.vue";
 
 import request from "../utils/request";
 
+import recommendCity from "../assets/js/global_variable";
+
 import gradedcolormap from "../components/thememap/gradedcolormap.vue";
 import pointgather from "../components/thememap/pointgather.vue";
 import heatmap from "../components/thememap/heatmap.vue";
@@ -332,6 +333,7 @@ export default {
   },
   data() {
     return {
+      activeClass: "1",
       //下方的城市名
       chosencity: "北京市",
       //动画加载
@@ -447,6 +449,7 @@ export default {
       this.show = false;
       Bus.$on("sendCityname", (val) => {
         this.cityname = val;
+        this.recommendCity=val
       });
     },
     submit() {
@@ -489,6 +492,7 @@ export default {
     },
     showmap(value) {
       console.log(value);
+      this.activeClass = value;
       if (value === 1) this.comp = "pointgather";
       else if (value === 2) this.comp = "gradedcolormap";
       else if (value === 3) this.comp = "heatmap";
@@ -815,19 +819,22 @@ export default {
         display: flex;
         flex-direction: column;
         flex-wrap: nowrap;
-        justify-content: space-around;
+        // justify-content: space-around;
+        cursor: pointer;
+        .active {
+          color: #0cf3f3;
+        }
         > img {
-          height: 45%;
-          width: 30%;
-          margin-left: 31%;
+          height: 52%;
+          width: 37%;
+          margin-left: 30%;
+          margin-top: 5%;
           background-size: 100% 100%;
         }
         > span {
           color: #c5d4e6;
+          padding-top: 5%;
         }
-      }
-      .mapchange:active{
-        color: #0cf3f3;
       }
     }
   }

@@ -10,7 +10,6 @@
       </div>
     </div>
     <div class="my-class"></div>
-     
   </div>
 </template>
 <script>
@@ -51,7 +50,7 @@ export default {
           type: "geojson",
           //指向GeoJSON数据。这个例子显示了所有的M1.0+地震
           // 15年12月22日至16年1月21日。
-         data: heatMapData,
+          data: heatMapData,
         });
 
         //添加点图层
@@ -65,7 +64,6 @@ export default {
           },
         });
       });
-
       map.on("load", function () {
         //从我们的GeoJSON数据中添加一个新的数据源，并设置
         // 'cluster'选项为true。GL-JS将向源数据添加point_count属性。
@@ -141,51 +139,49 @@ export default {
           },
           //"source-layer": "button2"
         });
-        
-   map.on('load', () => {
-                 jsonCallback
+
+        map.on("load", () => {
+          jsonCallback;
         });
-        
+
         function jsonCallback(err, data) {
-            if (err) {
-                throw err;
-            }
-              data.features = data.features.map((d) => {
-                d.properties.month = new Date(d.properties.time).getMonth();
-                // d.properties.coordinates = new location(d.properties.geometry).getElementById("coordinates");
-                return d;
-            });
-            }
-            
-            map.on('click', 'unclustered-point', (e) => {
-                // Copy coordinates array.
-                const coordinates = e.features[0].geometry.coordinates.slice();
-                const AVG_SALARY = e.features[0].properties.AVG_SALARY;
+          if (err) {
+            throw err;
+          }
+          data.features = data.features.map((d) => {
+            d.properties.month = new Date(d.properties.time).getMonth();
+            // d.properties.coordinates = new location(d.properties.geometry).getElementById("coordinates");
+            return d;
+          });
+        }
 
-                // Ensure that if the map is zoomed out such that multiple
-                // copies of the feature are visible, the popup appears
-                // over the copy being pointed to.
-                while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-                    coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-                }
-              
-                new mapboxgl.Popup()
-                    .setLngLat(coordinates)
-                    .setHTML(AVG_SALARY)
-                    .addTo(map);
+        map.on("click", "unclustered-point", (e) => {
+          // Copy coordinates array.
+          const coordinates = e.features[0].geometry.coordinates.slice();
+          const AVG_SALARY = e.features[0].properties.AVG_SALARY;
 
-            });
-             // Change the cursor to a pointer when the mouse is over the places layer.
-            map.on('mouseenter', 'unclustered-point', () => {
-                map.getCanvas().style.cursor = 'pointer';
-            });
+          // Ensure that if the map is zoomed out such that multiple
+          // copies of the feature are visible, the popup appears
+          // over the copy being pointed to.
+          while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+          }
 
-            // Change it back to a pointer when it leaves.
-            map.on('mouseleave', 'unclustered-point', () => {
-                map.getCanvas().style.cursor = '';
-            });
-          
-      
+          new mapboxgl.Popup()
+            .setLngLat(coordinates)
+            .setHTML(AVG_SALARY)
+            .addTo(map);
+        });
+        // Change the cursor to a pointer when the mouse is over the places layer.
+        map.on("mouseenter", "unclustered-point", () => {
+          map.getCanvas().style.cursor = "pointer";
+        });
+
+        // Change it back to a pointer when it leaves.
+        map.on("mouseleave", "unclustered-point", () => {
+          map.getCanvas().style.cursor = "";
+        });
+
         //检查集群单击（点击聚合图层地图级别中心点变化）
         map.on("click", "clusters", function (e) {
           var features = map.queryRenderedFeatures(e.point, {
@@ -254,9 +250,8 @@ export default {
   color: #75f8ed;
   border-color: #c6e2ff;
   background-color: #ecf5ff;
-   
 }
 .mapboxgl-popup {
-            max-width: 200px;
-        }
+  max-width: 200px;
+}
 </style>
