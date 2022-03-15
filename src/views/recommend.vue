@@ -56,7 +56,7 @@
           <div class="row2-select">出游时间</div>
           <div class="date-picker">
             <el-date-picker
-              v-model="value1"
+              v-model="timevalue"
               type="daterange"
               range-separator="-"
               size="small"
@@ -278,7 +278,6 @@
           <el-carousel
             indicator-position="outside"
             height="180px"
-            
             trigger="click"
           >
             <el-carousel-item v-for="(item, index) in cityimages" :key="index">
@@ -333,6 +332,9 @@ export default {
   },
   data() {
     return {
+      //推荐
+
+      //专题图切换
       activeClass: "1",
       //下方的城市名
       chosencity: "北京市",
@@ -397,7 +399,8 @@ export default {
         { id: 7, name: "文物" },
       ],
       tableCityData: [],
-      value1: [],
+      timevalue: [],
+      //景点特征
       input: "",
       changename: "景点特征",
       radio: "1",
@@ -449,7 +452,7 @@ export default {
       this.show = false;
       Bus.$on("sendCityname", (val) => {
         this.cityname = val;
-        this.recommendCity=val
+        this.recommendCity = val;
       });
     },
     submit() {
@@ -512,6 +515,10 @@ export default {
     },
     getRecommend() {
       this.activeName = "hotTab";
+      console.log(this.timevalue);
+      console.log(this.input);
+      console.log(this.checkList);
+      console.log(this.cityname);
     },
     clickRow() {
       this.$nextTick(function () {

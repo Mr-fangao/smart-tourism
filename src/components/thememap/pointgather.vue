@@ -14,6 +14,7 @@
 </template>
 <script>
 import heatMapData from "../../assets/json/heatMapData.json";
+import testjson from "../../assets/json/point.json";
 export default {
   name: "pointgather",
   mounted() {
@@ -46,18 +47,18 @@ export default {
         map.setLayoutProperty("cluster-count", "visibility", "none");
         map.setLayoutProperty("unclustered-point", "visibility", "none");
         //添加数据
-        map.addSource("earthquake", {
+        map.addSource("testjson", {
           type: "geojson",
           //指向GeoJSON数据。这个例子显示了所有的M1.0+地震
           // 15年12月22日至16年1月21日。
-          data: heatMapData,
+          data: testjson,
         });
 
         //添加点图层
         map.addLayer({
           id: "points",
           type: "circle" /* symbol类型layer，一般用来绘制点*/,
-          source: "earthquake",
+          source: "testjson",
           paint: {
             "circle-radius": 2,
             "circle-color": "#080",
@@ -67,11 +68,11 @@ export default {
       map.on("load", function () {
         //从我们的GeoJSON数据中添加一个新的数据源，并设置
         // 'cluster'选项为true。GL-JS将向源数据添加point_count属性。
-        map.addSource("earthquakes", {
+        map.addSource("testjson", {
           type: "geojson",
           //指向GeoJSON数据。这个例子显示了所有的M1.0+地震
           // 15年12月22日至16年1月21日。
-          data: heatMapData,
+          data: testjson,
           cluster: true,
           clusterMaxZoom: 14, // Max zoom to cluster points on
           clusterRadius: 50, //每个集群点的半径(默认为50)
@@ -81,7 +82,7 @@ export default {
         map.addLayer({
           id: "clusters",
           type: "circle",
-          source: "earthquakes",
+          source: "testjson",
           filter: ["has", "point_count"],
           paint: {
             //使用步骤表达式(https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-step)
@@ -115,7 +116,7 @@ export default {
         map.addLayer({
           id: "cluster-count",
           type: "symbol",
-          source: "earthquakes",
+          source: "testjson",
           filter: ["has", "point_count"],
           layout: {
             "text-field": "{point_count_abbreviated}",
@@ -129,7 +130,7 @@ export default {
         map.addLayer({
           id: "unclustered-point",
           type: "circle",
-          source: "earthquakes",
+          source: "testjson",
           filter: ["!", ["has", "point_count"]],
           paint: {
             "circle-color": "#11b4da",
@@ -158,7 +159,7 @@ export default {
         map.on("click", "unclustered-point", (e) => {
           // Copy coordinates array.
           const coordinates = e.features[0].geometry.coordinates.slice();
-          const AVG_SALARY = e.features[0].properties.AVG_SALARY;
+          const name = e.features[0].properties.name;
 
           // Ensure that if the map is zoomed out such that multiple
           // copies of the feature are visible, the popup appears
@@ -167,10 +168,7 @@ export default {
             coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
           }
 
-          new mapboxgl.Popup()
-            .setLngLat(coordinates)
-            .setHTML(AVG_SALARY)
-            .addTo(map);
+          new mapboxgl.Popup().setLngLat(coordinates).setHTML(name).addTo(map);
         });
         // Change the cursor to a pointer when the mouse is over the places layer.
         map.on("mouseenter", "unclustered-point", () => {
