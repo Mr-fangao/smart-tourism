@@ -47,7 +47,7 @@ export default {
         map.setLayoutProperty("cluster-count", "visibility", "none");
         map.setLayoutProperty("unclustered-point", "visibility", "none");
         //添加数据
-        map.addSource("sensicjson", {
+        map.addSource("sensicjson1", {
           type: "geojson",
           data: testjson,
         });
@@ -56,7 +56,7 @@ export default {
         map.addLayer({
           id: "points",
           type: "circle" /* symbol类型layer，一般用来绘制点*/,
-          source: "sensicjson",
+          source: "sensicjson1",
           paint: {
             "circle-radius": 2,
             "circle-color": "#080",
