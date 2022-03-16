@@ -293,6 +293,9 @@
               width="50"
               :show-overflow-tooltip="true"
             >
+              <template slot-scope="scope">
+                <span>{{ scope.row.scscore | rounding }}</span>
+              </template>
             </el-table-column>
           </el-table>
         </div>
@@ -484,12 +487,15 @@ export default {
   },
   created() {},
   mounted() {
-    // this.initmap();
-    this.getRankTable(),
-      this.getCityRank(),
-      this.clickRow(),
-      this.initChart1(this.chart1data);
+    this.getRankTable();
+    this.getCityRank();
+    this.initChart1(this.chart1data);
     this.wordCloudInti(this.$refs.wordcloud, this.beijingData);
+  },
+  filters: {
+    rounding(value) {
+      return value.toFixed(2);
+    },
   },
   methods: {
     clickData(val) {
@@ -520,14 +526,13 @@ export default {
       return (this.currentPage - 1) * this.intPageSize + index + 1;
     },
     getCityRank() {
+      var that = this;
       request.get("/api/data/cityRank").then((res) => {
         console.log(res);
         this.tableCityData = res.data;
-        for (let i = 0; i <= res.data.length; i++) {
-          this.tableCityData[i].scscore = parseFloat(
-            this.tableCityData[i].scscore
-          ).toFixed(2);
-        }
+        that.$nextTick(() => {
+          that.$refs.interfaceTable.setCurrentRow(that.tableCityData[0]);
+        });
       });
     },
     getRankTable() {
@@ -576,11 +581,6 @@ export default {
       console.log(this.input);
       console.log(this.checkList);
       console.log(this.cityname);
-    },
-    clickRow() {
-      this.$nextTick(() => {
-        this.$refs.interfaceTable.setCurrentRow(this.tableCityData[0]);
-      });
     },
     initChart1(data) {
       let myChart1 = this.$echarts.init(document.getElementById("chart1"));
