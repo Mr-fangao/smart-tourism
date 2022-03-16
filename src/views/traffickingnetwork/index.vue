@@ -51,6 +51,8 @@
   </div>
 </template>
 <script>
+import "../../../node_modules/cesium/Build/Cesium/widgets/widgets.css";
+
 import Zoning from './components/zoning' // 区划
 import TurnOut from './components/turnOut' // 拐出
 import TurnIn from './components/turnIn' // 拐入
