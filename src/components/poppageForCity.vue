@@ -107,7 +107,6 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: move;
   .text {
     color: rgb(245, 241, 241);
     position: absolute inherit;

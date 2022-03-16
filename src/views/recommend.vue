@@ -419,54 +419,21 @@ export default {
         { value: 29, name: "石梅湾" },
       ],
       nanjingData: [
-        { value: 1800, name: "纳木措" },
-        { value: 1200, name: "西藏" },
-        { value: 1000, name: "海拔" },
-        { value: 900, name: "景色" },
-        { value: 700, name: "湖水" },
-        { value: 650, name: "雪山" },
-        { value: 630, name: "值得" },
-        { value: 610, name: "没有" },
-        { value: 600, name: "地方" },
-        { value: 543, name: "风景" },
-        { value: 523, name: "景区" },
-        { value: 500, name: "感觉" },
-        { value: 500, name: "高原" },
-        { value: 490, name: "湖面" },
-        { value: 490, name: "圣湖" },
-        { value: 490, name: "小时" },
-        { value: 430, name: "湖泊" },
-        { value: 430, name: "大圣" },
-        { value: 430, name: "美丽" },
-        { value: 380, name: "景点" },
-        { value: 380, name: "牦牛" },
-        { value: 340, name: "时间" },
-        { value: 280, name: "咸水湖" },
-        { value: 260, name: "天湖" },
-        { value: 260, name: "藏民" },
-        { value: 200, name: "朋友" },
-        { value: 200, name: "蓝天白云" },
-        { value: 100, name: "开车" },
-        { value: 50, name: "神圣" },
-        { value: 40, name: "推荐" },
-        { value: 25, name: "限速" },
-        { value: 13, name: "距离" },
       ],
       cityimages: [
         { url: require("../assets/img/city/1.jpg") },
         { url: require("../assets/img/city/201111424880.jpg") },
-        // { url: require("../assets/img/login/3.jpg") },
       ],
-      BJ: [
-        // { url: require("../assets/city/BJ/BJ1.webp") },
-        // { url: require("../assets/img/login/3.jpg") },
+      beijingimages: [
+      ],
+      sanyaimages: [
       ],
       tableRankData: "",
       labellist: [
         { id: 1, name: "山岳" },
         { id: 2, name: "海滨" },
         { id: 3, name: "历史" },
-        { id: 4, name: "革命老区" },
+        { id: 4, name: "革命老区"},
         { id: 5, name: "商业街" },
         { id: 6, name: "划船" },
         { id: 7, name: "文物" },
@@ -479,32 +446,10 @@ export default {
       radio: "1",
       activeName: "recommendTab",
       activeNameflag: "true",
-      checkList: ["途游"],
+      checkList: [""],
       //弹窗
       show: false,
       cityname: "城市选择",
-      options: [
-        {
-          value: "选项1",
-          label: "黄金糕",
-        },
-        {
-          value: "选项2",
-          label: "双皮奶",
-        },
-        {
-          value: "选项3",
-          label: "蚵仔煎",
-        },
-        {
-          value: "选项4",
-          label: "龙须面",
-        },
-        {
-          value: "选项5",
-          label: "北京烤鸭",
-        },
-      ],
       currentRow: null,
     };
   },
@@ -513,16 +458,22 @@ export default {
     this.getRankTable(),
       this.getCityRank(),
       this.clickRow(),
-      // this.wordCloudInti(this.$refs.wordcloud, this.cloudData);
-      // this.wordCloudInti(this.$refs.wordcloud, this.beijingData);
       this.wordCloudInti(this.$refs.wordcloud, this.beijingData);
   },
   methods: {
     clickData(val) {
       this.chosencity = val.city;
-      // this.mycloudData=this.sanyaData
-      this.wordCloudInti(this.$refs.wordcloud, this.sanyaData);
-      console.log(city);
+      let cityname=val.city;
+      if( cityname=='北京'){
+        this.mycloudData=this.beijingData;
+         this.wordCloudInti(this.$refs.wordcloud, this.mycloudData);
+      }
+      else if(cityname=='三亚')
+      {
+        this.mycloudData=this.sanyaData;
+         this.wordCloudInti(this.$refs.wordcloud, this.mycloudData);
+      }
+      console.log(cityname);
     },
     hideModal() {
       // 取消弹窗回调

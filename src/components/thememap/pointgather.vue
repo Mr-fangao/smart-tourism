@@ -47,10 +47,8 @@ export default {
         map.setLayoutProperty("cluster-count", "visibility", "none");
         map.setLayoutProperty("unclustered-point", "visibility", "none");
         //添加数据
-        map.addSource("testjson", {
+        map.addSource("sensicjson", {
           type: "geojson",
-          //指向GeoJSON数据。这个例子显示了所有的M1.0+地震
-          // 15年12月22日至16年1月21日。
           data: testjson,
         });
 
@@ -58,7 +56,7 @@ export default {
         map.addLayer({
           id: "points",
           type: "circle" /* symbol类型layer，一般用来绘制点*/,
-          source: "testjson",
+          source: "sensicjson",
           paint: {
             "circle-radius": 2,
             "circle-color": "#080",
@@ -68,7 +66,7 @@ export default {
       map.on("load", function () {
         //从我们的GeoJSON数据中添加一个新的数据源，并设置
         // 'cluster'选项为true。GL-JS将向源数据添加point_count属性。
-        map.addSource("testjson", {
+        map.addSource("sensicjson", {
           type: "geojson",
           //指向GeoJSON数据。这个例子显示了所有的M1.0+地震
           // 15年12月22日至16年1月21日。
@@ -82,7 +80,7 @@ export default {
         map.addLayer({
           id: "clusters",
           type: "circle",
-          source: "testjson",
+          source: "sensicjson",
           filter: ["has", "point_count"],
           paint: {
             //使用步骤表达式(https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-step)
@@ -116,7 +114,7 @@ export default {
         map.addLayer({
           id: "cluster-count",
           type: "symbol",
-          source: "testjson",
+          source: "sensicjson",
           filter: ["has", "point_count"],
           layout: {
             "text-field": "{point_count_abbreviated}",
@@ -130,7 +128,7 @@ export default {
         map.addLayer({
           id: "unclustered-point",
           type: "circle",
-          source: "testjson",
+          source: "sensicjson",
           filter: ["!", ["has", "point_count"]],
           paint: {
             "circle-color": "#11b4da",
@@ -187,7 +185,7 @@ export default {
           });
           var clusterId = features[0].properties.cluster_id;
           map
-            .getSource("earthquakes")
+            .getSource("sensicjson")
             .getClusterExpansionZoom(clusterId, function (err, zoom) {
               if (err) return;
               map.easeTo({

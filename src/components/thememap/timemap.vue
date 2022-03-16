@@ -69,7 +69,6 @@ export default {
             if (err) {
                 throw err;
             }
-
             // Create a month property value based on time
             // used to filter against.
             data.features = data.features.map((d) => {
