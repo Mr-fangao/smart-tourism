@@ -84,8 +84,34 @@
           >
         </div>
       </div>
-      <div class="toppart"></div>
-      <div class="bottompart"></div>
+      <div class="toppart">
+        <div class="title">
+          <span>旅游数据总览</span>
+        </div>
+        <div class="toppart-content">
+          <div class="Lpart toppart-part">
+            <div class="partimg"></div>
+            <span class="partname"></span>
+            <span class="partnumber"></span>
+          </div>
+          <div class="Mpart toppart-part">
+            <div class="partimg"></div>
+            <span class="partname"></span>
+            <span class="partnumber"></span>
+          </div>
+          <div class="Rpart toppart-part">
+            <div class="partimg"></div>
+            <span class="partname"></span>
+            <span class="partnumber"></span>
+          </div>
+        </div>
+      </div>
+      <div class="bottompart">
+        <div class="title">
+          <span>景点类型分布</span>
+        </div>
+        <div class="chartcontent" id="chart1"></div>
+      </div>
     </div>
     <div class="recommend-content right">
       <div class="righttop">
@@ -232,7 +258,6 @@
             style="padding: 2.5%; margin-left: 3%"
             stripe
             highlight-current-row
-            class="“customer-table”"
           >
             <el-table-column
               prop="hotrank"
@@ -337,7 +362,7 @@ export default {
       //专题图切换
       activeClass: "1",
       //下方的城市名
-      chosencity: "北京市",
+      chosencity: "北京",
       //动画加载
       state: "",
       isLoading: false,
@@ -345,6 +370,13 @@ export default {
       index: 1,
       comp: "pointgather",
       isShow: true,
+      chart1data: [
+        { value: 1048, name: "Search Engine" },
+        { value: 735, name: "Direct" },
+        { value: 580, name: "Email" },
+        { value: 484, name: "Union Ads" },
+        { value: 300, name: "Video Ads" },
+      ],
       mycloudData: [],
       beijingData: [
         { value: 773, name: "故宫" },
@@ -418,22 +450,19 @@ export default {
         { value: 29, name: "陵水" },
         { value: 29, name: "石梅湾" },
       ],
-      nanjingData: [
-      ],
+      nanjingData: [],
       cityimages: [
         { url: require("../assets/img/city/1.jpg") },
         { url: require("../assets/img/city/201111424880.jpg") },
       ],
-      beijingimages: [
-      ],
-      sanyaimages: [
-      ],
+      beijingimages: [],
+      sanyaimages: [],
       tableRankData: "",
       labellist: [
         { id: 1, name: "山岳" },
         { id: 2, name: "海滨" },
         { id: 3, name: "历史" },
-        { id: 4, name: "革命老区"},
+        { id: 4, name: "革命老区" },
         { id: 5, name: "商业街" },
         { id: 6, name: "划船" },
         { id: 7, name: "文物" },
@@ -453,25 +482,25 @@ export default {
       currentRow: null,
     };
   },
+  created() {},
   mounted() {
     // this.initmap();
     this.getRankTable(),
       this.getCityRank(),
       this.clickRow(),
-      this.wordCloudInti(this.$refs.wordcloud, this.beijingData);
+      this.initChart1(this.chart1data);
+    this.wordCloudInti(this.$refs.wordcloud, this.beijingData);
   },
   methods: {
     clickData(val) {
       this.chosencity = val.city;
-      let cityname=val.city;
-      if( cityname=='北京'){
-        this.mycloudData=this.beijingData;
-         this.wordCloudInti(this.$refs.wordcloud, this.mycloudData);
-      }
-      else if(cityname=='三亚')
-      {
-        this.mycloudData=this.sanyaData;
-         this.wordCloudInti(this.$refs.wordcloud, this.mycloudData);
+      let cityname = val.city;
+      if (cityname == "北京") {
+        this.mycloudData = this.beijingData;
+        this.wordCloudInti(this.$refs.wordcloud, this.mycloudData);
+      } else if (cityname == "三亚") {
+        this.mycloudData = this.sanyaData;
+        this.wordCloudInti(this.$refs.wordcloud, this.mycloudData);
       }
       console.log(cityname);
     },
@@ -549,9 +578,44 @@ export default {
       console.log(this.cityname);
     },
     clickRow() {
-      this.$nextTick(function () {
+      this.$nextTick(() => {
         this.$refs.interfaceTable.setCurrentRow(this.tableCityData[0]);
       });
+    },
+    initChart1(data) {
+      let myChart1 = this.$echarts.init(document.getElementById("chart1"));
+      var option = {
+        legend: {
+          orient: "vertical",
+          left: "left",
+        },
+        series: [
+          {
+            name: "Access From",
+            type: "pie",
+            radius: "50%",
+            data: data,
+            itemStyle: {
+              normal: {
+                label: {
+                  show: false,
+                },
+                labelLine: {
+                  show: false,
+                },
+              },
+            },
+            // data: [
+            //   { value: 1048, name: 'Search Engine' },
+            //   { value: 735, name: 'Direct' },
+            //   { value: 580, name: 'Email' },
+            //   { value: 484, name: 'Union Ads' },
+            //   { value: 300, name: 'Video Ads' }
+            // ],
+          },
+        ],
+      };
+      myChart1.setOption(option);
     },
     //词云
     wordCloudInti(wrapEl, data) {
@@ -668,14 +732,19 @@ export default {
   justify-content: flex-start;
   .con {
     position: absolute;
-    top: 0%;
-    height: 40.3%;
+    top: 62%;
+    height: 39.3%;
     width: 100%;
     .select {
       // border-left: 5px solid #0cf3f3;
       color: #cfe2e1;
       // margin-left: 30%;
       line-height: 40px;
+    }
+    .title {
+      margin-top: 0%;
+      height: 10%;
+      margin-bottom: 1%;
     }
     > span {
       width: 33%;
@@ -688,6 +757,7 @@ export default {
       color: aliceblue;
       position: absolute;
     }
+
     .maptool {
       position: absolute;
       top: 85%;
@@ -731,15 +801,66 @@ export default {
   }
   .toppart {
     position: absolute;
-    top: 40.3%;
+    top: 0.3%;
     width: 100%;
-    height: 25%;
+    height: 30%;
+    .title {
+      margin-top: 0%;
+      height: 12%;
+      margin-bottom: 1%;
+    }
+    .toppart-content {
+      height: 87%;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      align-items: center;
+      .toppart-part {
+        background: url("../assets/img/组144.png") no-repeat;
+        background-size: 100% 100%;
+        height: 80%;
+        width: 30%;
+        display: flex;
+        flex-direction: column;
+        // margin-bottom: 4%;
+        .partname {
+          flex: 1;
+          color: #0cf3f3;
+          display: block;
+        }
+        .partnumber {
+          color: rgb(235, 2, 2);
+          display: block;
+          flex: 1;
+        }
+        .partimg {
+          flex: 3;
+        }
+      }
+      .Lpart {
+      }
+      .Mpart {
+      }
+      .Rpart {
+      }
+    }
   }
   .bottompart {
     position: absolute;
-    bottom: 0%;
+    /* bottom: 0%; */
+    top: 32%;
     width: 100%;
-    height: 33.3%;
+    height: 30.3%;
+    .title {
+      margin-top: 0%;
+      height: 12%;
+      margin-bottom: 1%;
+    }
+    .chartcontent {
+      height: 85%;
+      width: 100%;
+    }
   }
 }
 .recommend-bottom {
@@ -880,7 +1001,7 @@ export default {
 
 /deep/.el-input__inner {
   left: 15%;
-  top: 51%;
+  top: 41%;
   position: absolute;
   display: inline-block;
   -webkit-appearance: none;
@@ -908,14 +1029,16 @@ export default {
     flex: 1;
     color: #cfe2e1;
     margin-left: -11%;
+    margin-top: -11%;
   }
   .date-picker {
     flex: 1;
   }
 }
 .myrow {
-  height: 20%;
+  height: 17%;
   width: 100%;
+  margin-top: -9%;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -965,7 +1088,7 @@ export default {
     color: #c5d4e6;
   }
   .el-checkbox-group {
-    margin-top: 8%;
+    margin-top: 5%;
     font-size: 12pt;
   }
 }
