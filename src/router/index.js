@@ -17,7 +17,7 @@ export default new Router({
     {
       path: '/odAnalysis',
       name: 'odAnalysis',
-      component: () => import("@/views/odAnalysis"),
+      component: () => import("@/views/traffickingnetwork/index.vue"),
       meta: {
         keepAlive: true
       }

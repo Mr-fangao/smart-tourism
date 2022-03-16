@@ -20,6 +20,7 @@ export default {
 <style lang="less">
 
 .page {
+  position: fixed;
   width: 100%;
   height: 100%;
 }
