@@ -12,7 +12,6 @@ import 'jquery'
 // 引入echarts
 import * as echarts from 'echarts';
 import 'echarts-gl'
-
 Vue.prototype.$echarts = echarts
 
 import mapBoxGl from 'mapbox-gl'

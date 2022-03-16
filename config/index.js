@@ -9,7 +9,7 @@ module.exports = {
 
     // Paths
     assetsSubDirectory: 'static',
-    assetsPublicPath: '',
+    assetsPublicPath: '/',
     proxyTable: {
       '/api': {
         // target: 'http://47.96.186.60:6060/', //你要跨域的网址 比如 'http://news.baidu.com',
