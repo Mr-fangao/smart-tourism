@@ -8,6 +8,12 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import 'font-awesome/css/font-awesome.min.css';
 
+// import 'cesium/Source/Widgets/widgets.css'
+// import Cesium from '../node_modules/cesium/Build/Cesium'
+// import Cesium from 'cesium/Source/Cesium'
+// Vue.prototype.Cesium = Cesium
+
+
 import 'jquery'
 // 引入echarts
 import * as echarts from 'echarts';
