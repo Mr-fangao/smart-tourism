@@ -33,7 +33,7 @@ export default new Router({
     {
       path: '/recommend',
       name: 'recommend',
-      component: () => import("@/views/recommend"),
+      component: () => import("@/views/recommend1"),
       // component: () => import("@/views/recommend-copy"),
       meta: {
         keepAlive: true

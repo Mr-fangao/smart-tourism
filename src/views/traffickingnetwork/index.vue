@@ -69,6 +69,7 @@
   </div>
 </template>
 <script>
+// import Cesium from'../../../static/include-cesium-local';
 import Zoning from "./components/zoning"; // 区划
 import TurnOut from "./components/turnOut"; // 拐出
 import TurnIn from "./components/turnIn"; // 拐入
