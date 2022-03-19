@@ -204,7 +204,21 @@
       </div>
       <div class="sensicrecommend">
         <div id="recommend-title" class="title">
-          <span>旅游数据总览</span>
+          <span>景点推荐</span>
+        </div>
+        <div class="recommend">
+          <div class="timepick">
+            <div class="name"></div>
+            <div class="timepickcontent"></div>
+          </div>
+          <div class="prefer">
+            <div class="name"></div>
+            <div class="prefercontent"></div>
+          </div>
+                    <div class="exampleinput">
+            <div class="name"></div>
+            <div class="exampellabel"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -267,7 +281,7 @@ export default {
       //数据源选择
       checkList: ["复选A"],
       //数据
-      tableRankData: "",
+      tableRankData: [],
       //tab切换
       activeName: "recommendTab",
       comp: "pointgather",
@@ -1044,7 +1058,7 @@ export default {
     flex: 2;
     // background-color: rgba(240, 248, 255, 0.178);
     .datasource {
-      height: 20%;
+      height: 24%;
       width: 100%;
       display: flex;
       align-items: center;
@@ -1344,6 +1358,39 @@ export default {
     flex: 5;
     .title {
       height: 5% !important;
+    }
+    .recommend {
+      height: 93%;
+      width: 100%;
+      .name{
+        width: 40%;
+        height: 100%;
+        float: left;
+      }
+      .timepick{
+        height: 10%;
+        .timepickcontent{
+          width: 60%;
+          height: 100%;
+          float: left;
+        }
+      }
+      .prefer{
+        height: 10%;
+        .prefercontent{
+          width: 60%;
+          height: 100%;
+          float: left;
+        }
+      }
+      .exampleinput{
+        height: 8%;
+        .exampellabel{
+           width: 60%;
+          height: 100%;
+          float: left;
+        }
+      }
     }
   }
 }
