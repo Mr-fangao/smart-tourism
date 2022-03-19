@@ -12,6 +12,10 @@
       <div class="iconcontent"><i class="fa fa-map-marker fa-lg"></i></div>
       <div class="cityname">{{ cityname }}</div>
     </div> -->
+    <div class="mapcontral">
+      <div class="mapselect"></div>
+      <div class="dataselect"></div>
+    </div>
     <div class="recommend-left pt">
       <div class="sourceselect">
         <div id="recommend-title">
@@ -191,7 +195,19 @@
         </div>
       </div>
     </div>
-    <div class="recommend-right pt"></div>
+    <div class="recommend-right pt">
+      <div class="chinahot">
+        <div id="recommend-title" class="title">
+          <span>中国旅游景点印象词云</span>
+        </div>
+        <div class="wordcontent" ref="chartword2"></div>
+      </div>
+      <div class="sensicrecommend">
+        <div id="recommend-title" class="title">
+          <span>旅游数据总览</span>
+        </div>
+      </div>
+    </div>
     <div class="recommend-bottom">
       <div class="chartcontent">
         <div id="recommend-title" class="title">
@@ -508,11 +524,11 @@ export default {
         },
       ],
       chartdata2: [
-        { value: 1048, name: "Search Engine" },
-        { value: 735, name: "Direct" },
-        { value: 580, name: "Email" },
-        { value: 484, name: "Union Ads" },
-        { value: 300, name: "Video Ads" },
+        { value: 1048, name: "河北" },
+        { value: 735, name: "安徽" },
+        { value: 580, name: "广东" },
+        { value: 484, name: "河南" },
+        { value: 300, name: "湖北" },
       ],
     };
     // return {
@@ -646,6 +662,7 @@ export default {
     this.getCityRank();
     this.initChart1(this.chartdata1);
     this.initChart2(this.chartdata2);
+    this.wordCloudInti2(this.$refs.chartword2, this.wordclouddata);
     this.wordCloudInti(this.$refs.chartword, this.wordclouddata);
   },
   filters: {
@@ -826,23 +843,31 @@ export default {
     initChart2(data) {
       let myChart1 = this.$echarts.init(document.getElementById("chart2"));
       var option = {
+        color: [
+          "#5470c6",
+          "#91cc75",
+          "#fac858",
+          "#ee6666",
+          "#73c0de",
+          "#3ba272",
+        ],
         legend: {
-          orient: "vertical",
-          left: "top",
+          show: false,
         },
         series: [
           {
             name: "Access From",
             type: "pie",
-            radius: "50%",
+            radius: "70%",
             data: data,
             itemStyle: {
               normal: {
-                label: {
-                  show: false,
-                },
                 labelLine: {
-                  show: false,
+                  //指示线状态
+                  show: true,
+                  smooth: 0.2,
+                  length: 5,
+                  length2: 10,
                 },
               },
             },
@@ -862,6 +887,54 @@ export default {
       }
     },
     wordCloudInti(wrapEl, data) {
+      let myChart = echarts.init(wrapEl);
+      var option = {
+        tooltip: {
+          show: true,
+        },
+        series: [
+          {
+            name: "热词",
+            type: "wordCloud",
+            sizeRange: [10, 40],
+            rotationRange: [-20, 20],
+            shape: "rectangle",
+            left: "center",
+            top: "center",
+            width: "100%",
+            height: "100%",
+            gridSize: 7,
+            textPadding: 0,
+            autoSize: {
+              enable: true,
+              minSize: 4,
+            },
+            textStyle: {
+              normal: {
+                color: function () {
+                  return (
+                    "rgb(" +
+                    [
+                      Math.round(Math.random() * 250),
+                      Math.round(Math.random() * 250),
+                      Math.round(Math.random() * 250),
+                    ].join(",") +
+                    ")"
+                  );
+                },
+              },
+              emphasis: {
+                shadowBlur: 10,
+                shadowColor: "#333",
+              },
+            },
+            data: data,
+          },
+        ],
+      };
+      myChart.setOption(option);
+    },
+    wordCloudInti2(wrapEl, data) {
       let myChart = echarts.init(wrapEl);
       var option = {
         tooltip: {
@@ -943,6 +1016,14 @@ export default {
     text-shadow: 0 0 8px #fff, 0 0 12px #fff,
       0 0 15px rgba(128, 189, 189, 0.712), 0 0 20px #38e9e0bd, 0 0 25px #0cf3f3;
   }
+}
+.mapcontral {
+  position: absolute;
+  z-index: 1;
+  width: 49%;
+  height: 12%;
+  bottom: 38%;
+  left: 25.6%;
 }
 .pt {
   position: absolute;
@@ -1246,6 +1327,25 @@ export default {
   margin-right: 0.4%;
   background: url("../assets/img/side.png") no-repeat;
   background-size: 100% 100%;
+  display: flex;
+  .chinahot {
+    width: 100%;
+    flex: 2;
+    .title {
+      height: 12% !important;
+    }
+    .wordcontent {
+      width: 100%;
+      height: 87%;
+    }
+  }
+  .sensicrecommend {
+    width: 100%;
+    flex: 5;
+    .title {
+      height: 5% !important;
+    }
+  }
 }
 .recommend-bottom {
   width: 49%;
