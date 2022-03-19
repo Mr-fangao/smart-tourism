@@ -106,7 +106,10 @@
           </div>
         </el-row>
         <el-row style="margin-left: 1px; margin-right: 1px">
-          <div class="echartbottom" style="  background-position: 60% 10%;   background-size: 98% 95%;">
+          <div
+            class="echartbottom"
+            style="background-position: 60% 10%; background-size: 98% 95%"
+          >
             <div class="echartbottomTitle">
               <img src="../../assets/img/panelIcon.png" alt="" />
               <span>景点关注度年变化图</span>
@@ -326,6 +329,7 @@ export default {
     let myChart5 = this.$echarts.init(this.$refs.chart5);
     myChart5.setOption(this.option5);
     let myChart1 = this.$echarts.init(document.getElementById("chart1"));
+    // myChart1.on("click", this.clickFun);
     myChart1.setOption({
       title: {
         text: "    总评率随热词分布中,最高为肺炎,最低为症状",
@@ -754,6 +758,14 @@ export default {
     });
   },
   methods: {
+    //     clickFun(param) {
+    //     if (typeof param.seriesIndex == 'undefined') {
+    //         return;
+    //     }
+    //     if (param.type == 'click') {
+    //         alert(param.name);
+    //     }
+    // },
     initChart5() {
       for (var i = 0; i < this.plan_table.length; i++) {
         this.option5.xAxis.data.push(this.plan_table[i].xxx);
@@ -946,7 +958,7 @@ export default {
   height: 100%;
   width: 100%;
 }
-.echartbottom{
+.echartbottom {
   background: url("../../assets/img/buttonbg.png") no-repeat;
   background-size: 95% 95%;
   background-position: 64% 10%;
