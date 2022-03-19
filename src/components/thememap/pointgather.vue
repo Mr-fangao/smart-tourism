@@ -221,6 +221,7 @@ export default {
     left: 69%;
     top: 49%;
     width: 14%;
+       z-index: 9999;
     height: 38%;
     // #button1 {
     //   background: url("../../assets/img/框.png");

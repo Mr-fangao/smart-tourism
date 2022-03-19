@@ -1,6 +1,5 @@
 <template>
   <div id="recommend">
-    <div id="map" />
     <!-- <transition name="fade">
       <loading v-if="isLoading" :state="state"></loading>
     </transition> -->
@@ -887,7 +886,7 @@ export default {
   background: url("../assets/img/banner.png") no-repeat;
   background-size: 100% 100%;
 }
-#map {
+.mapcontent {
   position: relative;
   width: 100%;
   height: 100%;
