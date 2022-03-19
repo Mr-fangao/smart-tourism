@@ -507,6 +507,13 @@ export default {
           value: 0.98,
         },
       ],
+      chartdata2: [
+        { value: 1048, name: "Search Engine" },
+        { value: 735, name: "Direct" },
+        { value: 580, name: "Email" },
+        { value: 484, name: "Union Ads" },
+        { value: 300, name: "Video Ads" },
+      ],
     };
     // return {
     //   //推荐
@@ -638,6 +645,7 @@ export default {
     this.getRankTable();
     this.getCityRank();
     this.initChart1(this.chartdata1);
+    this.initChart2(this.chartdata2);
     this.wordCloudInti(this.$refs.chartword, this.wordclouddata);
   },
   filters: {
@@ -814,6 +822,34 @@ export default {
           },
         ],
       });
+    },
+    initChart2(data) {
+      let myChart1 = this.$echarts.init(document.getElementById("chart2"));
+      var option = {
+        legend: {
+          orient: "vertical",
+          left: "top",
+        },
+        series: [
+          {
+            name: "Access From",
+            type: "pie",
+            radius: "50%",
+            data: data,
+            itemStyle: {
+              normal: {
+                label: {
+                  show: false,
+                },
+                labelLine: {
+                  show: false,
+                },
+              },
+            },
+          },
+        ],
+      };
+      myChart1.setOption(option);
     },
     //矩形树图点击事件
     clickFun(param) {
@@ -1228,7 +1264,7 @@ export default {
     height: 100%;
     width: 33.3%;
     .title {
-      margin-top: 1% !important;
+      margin-top: 2% !important;
     }
     .content {
       width: 100%;
