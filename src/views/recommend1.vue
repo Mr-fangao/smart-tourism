@@ -12,6 +12,10 @@
       <div class="iconcontent"><i class="fa fa-map-marker fa-lg"></i></div>
       <div class="cityname">{{ cityname }}</div>
     </div> -->
+    <div class="mapcontral">
+      <div class="mapselect"></div>
+      <div class="dataselect"></div>
+    </div>
     <div class="recommend-left pt">
       <div class="sourceselect">
         <div id="recommend-title">
@@ -191,7 +195,36 @@
         </div>
       </div>
     </div>
-    <div class="recommend-right pt"></div>
+    <div class="recommend-right pt">
+      <div class="chinahot">
+        <div id="recommend-title" class="title">
+          <span>中国旅游景点印象词云</span>
+        </div>
+        <div class="wordcontent" ref="chartword2"></div>
+      </div>
+      <div class="sensicrecommend">
+        <div id="recommend-title" class="title">
+          <span>景点推荐</span>
+        </div>
+        <div class="recommend">
+          <div class="timepick">
+            <div class="name"></div>
+            <div class="timepickcontent"></div>
+          </div>
+          <div class="prefer">
+            <div class="name"></div>
+            <div class="prefercontent"></div>
+          </div>
+          <div class="exampleinput">
+            <div class="name"></div>
+            <div class="exampellabel"></div>
+          </div>
+          <div class="hotandscore"></div>
+          <div class="distance"></div>
+          <div class="season"></div>
+        </div>
+      </div>
+    </div>
     <div class="recommend-bottom">
       <div class="chartcontent">
         <div id="recommend-title" class="title">
@@ -251,7 +284,7 @@ export default {
       //数据源选择
       checkList: ["复选A"],
       //数据
-      tableRankData: "",
+      tableRankData: [],
       //tab切换
       activeName: "recommendTab",
       comp: "pointgather",
@@ -507,6 +540,13 @@ export default {
           value: 0.98,
         },
       ],
+      chartdata2: [
+        { value: 1048, name: "河北" },
+        { value: 735, name: "安徽" },
+        { value: 580, name: "广东" },
+        { value: 484, name: "河南" },
+        { value: 300, name: "湖北" },
+      ],
     };
     // return {
     //   //推荐
@@ -638,6 +678,8 @@ export default {
     this.getRankTable();
     this.getCityRank();
     this.initChart1(this.chartdata1);
+    this.initChart2(this.chartdata2);
+    this.wordCloudInti2(this.$refs.chartword2, this.wordclouddata);
     this.wordCloudInti(this.$refs.chartword, this.wordclouddata);
   },
   filters: {
@@ -815,6 +857,42 @@ export default {
         ],
       });
     },
+    initChart2(data) {
+      let myChart1 = this.$echarts.init(document.getElementById("chart2"));
+      var option = {
+        color: [
+          "#5470c6",
+          "#91cc75",
+          "#fac858",
+          "#ee6666",
+          "#73c0de",
+          "#3ba272",
+        ],
+        legend: {
+          show: false,
+        },
+        series: [
+          {
+            name: "Access From",
+            type: "pie",
+            radius: "70%",
+            data: data,
+            itemStyle: {
+              normal: {
+                labelLine: {
+                  //指示线状态
+                  show: true,
+                  smooth: 0.2,
+                  length: 5,
+                  length2: 10,
+                },
+              },
+            },
+          },
+        ],
+      };
+      myChart1.setOption(option);
+    },
     //矩形树图点击事件
     clickFun(param) {
       if (typeof param.seriesIndex == "undefined") {
@@ -826,6 +904,54 @@ export default {
       }
     },
     wordCloudInti(wrapEl, data) {
+      let myChart = echarts.init(wrapEl);
+      var option = {
+        tooltip: {
+          show: true,
+        },
+        series: [
+          {
+            name: "热词",
+            type: "wordCloud",
+            sizeRange: [10, 40],
+            rotationRange: [-20, 20],
+            shape: "rectangle",
+            left: "center",
+            top: "center",
+            width: "100%",
+            height: "100%",
+            gridSize: 7,
+            textPadding: 0,
+            autoSize: {
+              enable: true,
+              minSize: 4,
+            },
+            textStyle: {
+              normal: {
+                color: function () {
+                  return (
+                    "rgb(" +
+                    [
+                      Math.round(Math.random() * 250),
+                      Math.round(Math.random() * 250),
+                      Math.round(Math.random() * 250),
+                    ].join(",") +
+                    ")"
+                  );
+                },
+              },
+              emphasis: {
+                shadowBlur: 10,
+                shadowColor: "#333",
+              },
+            },
+            data: data,
+          },
+        ],
+      };
+      myChart.setOption(option);
+    },
+    wordCloudInti2(wrapEl, data) {
       let myChart = echarts.init(wrapEl);
       var option = {
         tooltip: {
@@ -908,6 +1034,14 @@ export default {
       0 0 15px rgba(128, 189, 189, 0.712), 0 0 20px #38e9e0bd, 0 0 25px #0cf3f3;
   }
 }
+.mapcontral {
+  position: absolute;
+  z-index: 1;
+  width: 49%;
+  height: 12%;
+  bottom: 38%;
+  left: 25.6%;
+}
 .pt {
   position: absolute;
   top: 1.2%;
@@ -927,7 +1061,7 @@ export default {
     flex: 2;
     // background-color: rgba(240, 248, 255, 0.178);
     .datasource {
-      height: 20%;
+      height: 24%;
       width: 100%;
       display: flex;
       align-items: center;
@@ -1210,6 +1344,70 @@ export default {
   margin-right: 0.4%;
   background: url("../assets/img/side.png") no-repeat;
   background-size: 100% 100%;
+  display: flex;
+  .chinahot {
+    width: 100%;
+    flex: 2;
+    .title {
+      height: 12% !important;
+    }
+    .wordcontent {
+      width: 100%;
+      height: 87%;
+    }
+  }
+  .sensicrecommend {
+    width: 100%;
+    flex: 5;
+    .title {
+      height: 5% !important;
+    }
+    .recommend {
+      height: 93%;
+      width: 100%;
+      .name {
+        width: 40%;
+        height: 100%;
+        float: left;
+      }
+      .timepick {
+        height: 8%;
+        .timepickcontent {
+          width: 60%;
+          height: 100%;
+          float: left;
+        }
+      }
+      .prefer {
+        height: 8%;
+        .prefercontent {
+          width: 60%;
+          height: 100%;
+          float: left;
+        }
+      }
+      .exampleinput {
+        height: 8%;
+        .exampellabel {
+          width: 60%;
+          height: 100%;
+          float: left;
+        }
+      }
+      .hotandscore {
+        height: 8%;
+        width: 100%;
+      }
+      .distance {
+        height: 8%;
+        width: 100%;
+      }
+      .seasons {
+        width: 100%;
+        height: 8%;
+      }
+    }
+  }
 }
 .recommend-bottom {
   width: 49%;
@@ -1228,7 +1426,7 @@ export default {
     height: 100%;
     width: 33.3%;
     .title {
-      margin-top: 1% !important;
+      margin-top: 2% !important;
     }
     .content {
       width: 100%;
