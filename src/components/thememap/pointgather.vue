@@ -8,6 +8,15 @@
       <div style="padding-top: 10px">
         <el-button id="button2">执行聚类</el-button>
       </div>
+      <div style="padding-top: 10px">
+        <el-button id="button3">调用数据源1</el-button>
+      </div>
+       <div style="padding-top: 10px">
+        <el-button id="button4">调用数据源2</el-button>
+      </div>
+      <div style="padding-top: 10px">
+        <el-button id="button5">调用数据源3</el-button>
+      </div>
     </div>
     <div class="my-class"></div>
   </div>
@@ -30,8 +39,75 @@ export default {
         center: [110, 40],
         zoom: 5,
       });
+      //添加数据源1
+     document.getElementById("backbutton3").addEventListener("click",()=>{
+      map.addSource("earthquake", {
+        type: "geojson",
+        data: "https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson",
+        // cluster: true,
+        // clusterMaxZoom: 14, //最大缩放到群集点
+        // clusterRadius: 50 
+      });
+      map.addSource("earthquake1", {
+        type: "geojson",
+        data: "https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson",
+        cluster: true,
+        clusterMaxZoom: 14, //最大缩放到群集点
+        clusterRadius: 50 
+      });
+      map.addSource("earthquake2", {
+        type: "geojson",
+        data: "./json/china.json",
+      });
+    });
+      //添加数据源类型2
+      document.getElementById("backbutton4").addEventListener("click",()=>{
+      map.addSource("earthquake", {
+        type: "geojson",
+        data: "https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson",
+      });
+      map.addSource("earthquake1", {
+        type: "geojson",
+        data: "https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson",
+        cluster: true,//聚合图的数据源需要添加样式
+        clusterMaxZoom: 14, 
+        clusterRadius: 50 
+      });
+      map.addSource("earthquake2", {
+        type: "geojson",
+        data: "./json/china.json",
+      });
+    });
+       //添加数据源类型3
+      document.getElementById("backbutton5").addEventListener("click",()=>{
+      map.addSource("earthquake", {
+        type: "geojson",
+        data: "https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson",
+        // cluster: true,
+        // clusterMaxZoom: 14, //最大缩放到群集点
+        // clusterRadius: 50 
+      });
+      map.addSource("earthquake1", {
+        type: "geojson",
+        data: "https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson",
+        cluster: true,
+        clusterMaxZoom: 14, //最大缩放到群集点
+        clusterRadius: 50 
+      });
+      map.addSource("earthquake2", {
+        type: "geojson",
+        data: "./json/china.json",
+      });
+    });
+       
 
       document.getElementById("button2").addEventListener("click", () => {
+        //加载图层前需要清除所有图层，防止图层加载重叠。
+      if (map.getLayer('points')) map.removeLayer('points');
+      if (map.getLayer('clusters')) map.removeLayer('clusters');
+      if (map.getLayer('points')) map.removeLayer('points');//填写需要清除图层的ID，每次只能清除一个。有几个图层就使用几次。
+      if (map.getLayer('testdatalayer')) map.removeLayer('testdatalayer');
+
         map.setLayoutProperty("points", "visibility", "none");
         map.setLayoutProperty("clusters", "visibility", "visible");
         map.setLayoutProperty("cluster-count", "visibility", "visible");
