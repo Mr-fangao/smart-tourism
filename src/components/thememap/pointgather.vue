@@ -41,28 +41,64 @@ export default {
       });
       //添加数据源1
      document.getElementById("button3").addEventListener("click",()=>{
-     map.addSource("sensicjson", {
+     //加载前先移除图层  
+    if (map.getLayer('points')) map.removeLayer('points');
+    if (map.getLayer('clusters')) map.removeLayer('clusters');
+    if (map.getLayer('cluster-count')) map.removeLayer('cluster-count');
+  
+    if (map.getSource('sensicjson')){
+        const geojsonSource = map.getSource('sensicjson');
+        geojsonSource.setData(testjson);
+        const geojsonSource1 = map.getSource('sensicjson1');
+        geojsonSource1.setData(testjson);
+         }
+         else{
+       map.addSource("sensicjson", {
           type: "geojson",
           data: testjson,
            cluster: true, //聚合图的数据源需要添加样式
           clusterMaxZoom: 14, //最大缩放到群集点
          clusterRadius: 50 
         });
+        
       map.addSource("sensicjson1", {
         type: "geojson",
         data: testjson,
-       
       });
+         }
     });
       //添加数据源类型2
       document.getElementById("button4").addEventListener("click",()=>{
-   
+     //加载前先移除图层 
+    if (map.getLayer('points')) map.removeLayer('points');
+    if (map.getLayer('clusters')) map.removeLayer('clusters');
+    if (map.getLayer('cluster-count')) map.removeLayer('cluster-count');
+    // if(map.getSource('testjson'))map.setData('heatMapData');
+    // if(map.getSource('testjson'))map.removeSouce('testjson'); debugger;
+      //首先判断数据源是否存在，存在的使用setdata方法
+      if (map.getSource('sensicjson')){
+        const geojsonSource = map.getSource('sensicjson');
+        geojsonSource.setData(heatMapData);
+        const geojsonSource1 = map.getSource('sensicjson1');
+        geojsonSource1.setData(heatMapData);
+      }//不存在使用addSource方法
+      else{
+       map.addSource("sensicjson", {
+          type: "geojson",
+          data: heatMapData,
+           cluster: true, //聚合图的数据源需要添加样式
+          clusterMaxZoom: 14, //最大缩放到群集点
+         clusterRadius: 50 
+        });
+      map.addSource("sensicjson1", {
+        type: "geojson",
+        data: heatMapData,
+      });
+      }
     });
        //添加数据源类型3
       document.getElementById("button5").addEventListener("click",()=>{
-    
     });
-       
 
       document.getElementById("button2").addEventListener("click", () => {
         //加载图层前需要清除所有图层，防止图层加载重叠。
@@ -241,7 +277,7 @@ export default {
   .control {
     position: absolute;
     left: 49%;
-    top: 29%;
+    top: 19%;
     width: 14%;
        z-index: 9999;
     height: 38%;
