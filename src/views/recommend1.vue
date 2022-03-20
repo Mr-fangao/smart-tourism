@@ -215,10 +215,13 @@
             <div class="name"></div>
             <div class="prefercontent"></div>
           </div>
-                    <div class="exampleinput">
+          <div class="exampleinput">
             <div class="name"></div>
             <div class="exampellabel"></div>
           </div>
+          <div class="hotandscore"></div>
+          <div class="distance"></div>
+          <div class="season"></div>
         </div>
       </div>
     </div>
@@ -1362,34 +1365,46 @@ export default {
     .recommend {
       height: 93%;
       width: 100%;
-      .name{
+      .name {
         width: 40%;
         height: 100%;
         float: left;
       }
-      .timepick{
-        height: 10%;
-        .timepickcontent{
-          width: 60%;
-          height: 100%;
-          float: left;
-        }
-      }
-      .prefer{
-        height: 10%;
-        .prefercontent{
-          width: 60%;
-          height: 100%;
-          float: left;
-        }
-      }
-      .exampleinput{
+      .timepick {
         height: 8%;
-        .exampellabel{
-           width: 60%;
+        .timepickcontent {
+          width: 60%;
           height: 100%;
           float: left;
         }
+      }
+      .prefer {
+        height: 8%;
+        .prefercontent {
+          width: 60%;
+          height: 100%;
+          float: left;
+        }
+      }
+      .exampleinput {
+        height: 8%;
+        .exampellabel {
+          width: 60%;
+          height: 100%;
+          float: left;
+        }
+      }
+      .hotandscore {
+        height: 8%;
+        width: 100%;
+      }
+      .distance {
+        height: 8%;
+        width: 100%;
+      }
+      .seasons {
+        width: 100%;
+        height: 8%;
       }
     }
   }
