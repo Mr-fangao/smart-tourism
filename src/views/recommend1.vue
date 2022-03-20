@@ -208,20 +208,72 @@
         </div>
         <div class="recommend">
           <div class="timepick">
-            <div class="name"></div>
-            <div class="timepickcontent"></div>
+            <div class="name">旅游时间:</div>
+            <div class="timepickcontent">
+              <el-date-picker
+                v-model="timevalue"
+                type="daterange"
+                range-separator="-"
+                start-placeholder="开始日期"
+                end-placeholder="结束日期"
+              >
+              </el-date-picker>
+            </div>
           </div>
           <div class="prefer">
-            <div class="name"></div>
-            <div class="prefercontent"></div>
+            <div class="name">景点偏好:</div>
+            <div class="prefercontent">
+              <el-input
+                v-model="input"
+                placeholder=" 输入内容或点击标签"
+              ></el-input>
+            </div>
           </div>
           <div class="exampleinput">
             <div class="name"></div>
-            <div class="exampellabel"></div>
+            <div class="exampellabel">
+              <div class="labelcontent">
+                <span>输入示例:</span>
+                <div
+                  class="chooselabel"
+                  v-for="(item, i) in labellist"
+                  :key="i"
+                  @click="getLabel(item.name)"
+                >
+                  {{ item.name }}
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="hotandscore"></div>
+          <div class="hotandscore">
+            <div class="name">数据偏好</div>
+            <div class="content">
+              <el-radio v-model="radio" label="1">备选项</el-radio>
+              <el-radio v-model="radio" label="2">备选项</el-radio>
+            </div>
+          </div>
           <div class="distance"></div>
           <div class="season"></div>
+          <div class="ageandsex">
+            <div class="agept">
+              <div class="person-name"></div>
+              <div class="person-inputcontent"></div>
+            </div>
+            <div class="sexpt">
+              <div class="person-name"></div>
+              <div class="person-inputcontent"></div>
+            </div>
+          </div>
+          <div class="occupationandincome">
+            <div class="occupationpt">
+              <div class="person-name"></div>
+              <div class="person-inputcontent"></div>
+            </div>
+            <div class="incomept">
+              <div class="person-name"></div>
+              <div class="person-inputcontent"></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -281,6 +333,19 @@ export default {
     return {
       isShow: true,
 
+      //推荐项目
+      input: "",
+      timevalue: "",
+      radio: "1",
+      labellist: [
+        { id: 1, name: "山岳" },
+        { id: 2, name: "海滨" },
+        { id: 3, name: "历史" },
+        { id: 4, name: "革命老区" },
+        { id: 5, name: "商业街" },
+        { id: 6, name: "划船" },
+        { id: 7, name: "文物" },
+      ],
       //数据源选择
       checkList: ["复选A"],
       //数据
@@ -1042,16 +1107,7 @@ export default {
   bottom: 38%;
   left: 25.6%;
 }
-.pt {
-  position: absolute;
-  top: 1.2%;
-  z-index: 1;
-  width: 25%;
-  height: 91%;
-  flex-direction: column;
-  flex-wrap: wrap;
-  display: flex;
-}
+
 .recommend-left {
   float: left;
   margin-left: 0.4%;
@@ -1366,48 +1422,180 @@ export default {
       height: 93%;
       width: 100%;
       .name {
-        width: 40%;
+        color: #1faacd;
+        font-size: 11pt;
+        width: 30%;
         height: 100%;
         float: left;
+        line-height: 36px;
+        text-align: right;
+        padding-right: 4%;
       }
       .timepick {
         height: 8%;
+        margin-bottom: 2%;
         .timepickcontent {
           width: 60%;
           height: 100%;
           float: left;
+          /deep/.el-date-editor--daterange.el-input,
+          .el-date-editor--daterange.el-input__inner,
+          .el-date-editor--timerange.el-input,
+          .el-date-editor--timerange.el-input__inner {
+            border: none;
+            width: 200px !important;
+          }
+          .el-input__inner {
+            background-color: transparent;
+          }
+          .el-range-editor.el-input__inner {
+            padding: 5px 0px;
+          }
+          .el-date-editor .el-range-separator {
+            width: 0%;
+          }
+          /deep/.el-date-editor .el-range-input {
+            font-size: 11pt;
+            color: #eff1f4;
+            background-color: #81cfd25e;
+          }
+          /deep/.el-date-editor .el-range-input,
+          .el-date-editor .el-range-separator {
+            font-size: 11pt;
+          }
         }
       }
       .prefer {
         height: 8%;
+        margin-bottom: 1%;
         .prefercontent {
           width: 60%;
           height: 100%;
           float: left;
+          .el-input {
+            height: 100%;
+          }
+          /deep/.el-input__inner {
+            // display: inline-block;
+            -webkit-appearance: none;
+            background: transparent;
+            border-radius: 4px;
+            border: 1px solid #76c6d187;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            color: rgba(220, 225, 227, 0.96);
+            font-size: inherit;
+            height: 32px;
+            line-height: 36px;
+            width: 95%;
+
+            float: left;
+            margin-top: 1%;
+            padding-left: 3%;
+            margin-left: 6%;
+          }
         }
       }
       .exampleinput {
         height: 8%;
         .exampellabel {
+          color: #1faacd;
           width: 60%;
           height: 100%;
           float: left;
+          padding-left: 3%;
+          .labelcontent {
+            display: flex;
+            height: 100%;
+            width: 100%;
+            flex-wrap: wrap;
+            > span {
+              font-size: 11pt;
+              color: #c5d4e6;
+              // margin-left: -19%;
+            }
+            .chooselabel {
+              background: #8ae5e54a;
+              margin-left: 2%;
+              /* border: 1px solid #ffffff40; */
+              font-size: 10pt;
+              border-radius: 5px;
+              cursor: pointer;
+              // margin: 1% 1% 1% 1% ;
+            }
+          }
         }
       }
       .hotandscore {
         height: 8%;
         width: 100%;
+        .content {
+          width: 60%;
+          height: 100%;
+          float: left;
+          display: flex;
+          align-items: center;
+          justify-content: space-evenly;
+        }
       }
       .distance {
         height: 8%;
         width: 100%;
       }
-      .seasons {
+      .season {
         width: 100%;
         height: 8%;
       }
+      .occupationandincome {
+        width: 100%;
+        height: 8%;
+        .incomept {
+          width: 50%;
+          height: 100%;
+          float: left;
+        }
+        .occupationpt {
+          width: 50%;
+          height: 100%;
+          float: left;
+        }
+      }
+      .ageandsex {
+        width: 100%;
+        height: 8%;
+        .agept {
+          width: 50%;
+          height: 100%;
+          float: left;
+        }
+        .sexpt {
+          width: 50%;
+          height: 100%;
+          float: left;
+        }
+      }
     }
   }
+}
+.pt {
+  position: absolute;
+  top: 1.2%;
+  z-index: 1;
+  width: 25%;
+  height: 91%;
+  flex-direction: column;
+  flex-wrap: wrap;
+  display: flex;
+}
+.person-name {
+  width: 50%;
+  height: 100%;
+  float: left;
+}
+.person-inputcontent {
+  width: 50%;
+  height: 100%;
+  float: left;
 }
 .recommend-bottom {
   width: 49%;
