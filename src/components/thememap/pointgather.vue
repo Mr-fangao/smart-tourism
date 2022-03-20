@@ -40,118 +40,39 @@ export default {
         zoom: 5,
       });
       //添加数据源1
-     document.getElementById("backbutton3").addEventListener("click",()=>{
-      map.addSource("earthquake", {
+     document.getElementById("button3").addEventListener("click",()=>{
+     map.addSource("sensicjson", {
+          type: "geojson",
+          data: testjson,
+           cluster: true, //聚合图的数据源需要添加样式
+          clusterMaxZoom: 14, //最大缩放到群集点
+         clusterRadius: 50 
+        });
+      map.addSource("sensicjson1", {
         type: "geojson",
-        data: "https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson",
-        // cluster: true,
-        // clusterMaxZoom: 14, //最大缩放到群集点
-        // clusterRadius: 50 
-      });
-      map.addSource("earthquake1", {
-        type: "geojson",
-        data: "https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson",
-        cluster: true,
-        clusterMaxZoom: 14, //最大缩放到群集点
-        clusterRadius: 50 
-      });
-      map.addSource("earthquake2", {
-        type: "geojson",
-        data: "./json/china.json",
+        data: testjson,
+       
       });
     });
       //添加数据源类型2
-      document.getElementById("backbutton4").addEventListener("click",()=>{
-      map.addSource("earthquake", {
-        type: "geojson",
-        data: "https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson",
-      });
-      map.addSource("earthquake1", {
-        type: "geojson",
-        data: "https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson",
-        cluster: true,//聚合图的数据源需要添加样式
-        clusterMaxZoom: 14, 
-        clusterRadius: 50 
-      });
-      map.addSource("earthquake2", {
-        type: "geojson",
-        data: "./json/china.json",
-      });
+      document.getElementById("button4").addEventListener("click",()=>{
+   
     });
        //添加数据源类型3
-      document.getElementById("backbutton5").addEventListener("click",()=>{
-      map.addSource("earthquake", {
-        type: "geojson",
-        data: "https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson",
-        // cluster: true,
-        // clusterMaxZoom: 14, //最大缩放到群集点
-        // clusterRadius: 50 
-      });
-      map.addSource("earthquake1", {
-        type: "geojson",
-        data: "https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson",
-        cluster: true,
-        clusterMaxZoom: 14, //最大缩放到群集点
-        clusterRadius: 50 
-      });
-      map.addSource("earthquake2", {
-        type: "geojson",
-        data: "./json/china.json",
-      });
+      document.getElementById("button5").addEventListener("click",()=>{
+    
     });
        
 
       document.getElementById("button2").addEventListener("click", () => {
         //加载图层前需要清除所有图层，防止图层加载重叠。
-      if (map.getLayer('points')) map.removeLayer('points');
-      if (map.getLayer('clusters')) map.removeLayer('clusters');
       if (map.getLayer('points')) map.removeLayer('points');//填写需要清除图层的ID，每次只能清除一个。有几个图层就使用几次。
-      if (map.getLayer('testdatalayer')) map.removeLayer('testdatalayer');
 
         map.setLayoutProperty("points", "visibility", "none");
         map.setLayoutProperty("clusters", "visibility", "visible");
         map.setLayoutProperty("cluster-count", "visibility", "visible");
         map.setLayoutProperty("unclustered-point", "visibility", "visible");
-        map.fitBounds([
-          [90, 45], // 边界的西南角
-          [120, 30], // 边界的东北角
-        ]);
-      });
-      document.getElementById("button1").addEventListener("click", () => {
-        map.setLayoutProperty("points", "visibility", "visible");
-        map.setLayoutProperty("clusters", "visibility", "none");
-        map.setLayoutProperty("cluster-count", "visibility", "none");
-        map.setLayoutProperty("unclustered-point", "visibility", "none");
-        //添加数据
-        map.addSource("sensicjson1", {
-          type: "geojson",
-          data: testjson,
-        });
-
-        //添加点图层
-        map.addLayer({
-          id: "points",
-          type: "circle" /* symbol类型layer，一般用来绘制点*/,
-          source: "sensicjson1",
-          paint: {
-            "circle-radius": 2,
-            "circle-color": "#080",
-          },
-        });
-      });
-      map.on("load", function () {
-        //从我们的GeoJSON数据中添加一个新的数据源，并设置
-        // 'cluster'选项为true。GL-JS将向源数据添加point_count属性。
-        map.addSource("sensicjson", {
-          type: "geojson",
-          //指向GeoJSON数据。这个例子显示了所有的M1.0+地震
-          // 15年12月22日至16年1月21日。
-          data: testjson,
-          cluster: true,
-          clusterMaxZoom: 14, // Max zoom to cluster points on
-          clusterRadius: 50, //每个集群点的半径(默认为50)
-        });
-
+      
         //添加圆形聚合图层
         map.addLayer({
           id: "clusters",
@@ -214,11 +135,36 @@ export default {
           },
           //"source-layer": "button2"
         });
+        map.fitBounds([
+          [90, 45], // 边界的西南角
+          [120, 30], // 边界的东北角
+        ]);
+      });
 
+      document.getElementById("button1").addEventListener("click", () => {
+        map.setLayoutProperty("points", "visibility", "visible");
+        map.setLayoutProperty("clusters", "visibility", "none");
+        map.setLayoutProperty("cluster-count", "visibility", "none");
+        map.setLayoutProperty("unclustered-point", "visibility", "none");
+        //添加数据
+        //添加点图层
+        map.addLayer({
+          id: "points",
+          type: "circle" /* symbol类型layer，一般用来绘制点*/,
+          source: "sensicjson1",
+          paint: {
+            "circle-radius": 2,
+            "circle-color": "#080",
+          },
+        });
+      });
+
+      map.on("load", function () {
+        //从我们的GeoJSON数据中添加一个新的数据源，并设置
+        // 'cluster'选项为true。GL-JS将向源数据添加point_count属性。
         map.on("load", () => {
           jsonCallback;
         });
-
         function jsonCallback(err, data) {
           if (err) {
             throw err;
@@ -294,8 +240,8 @@ export default {
   background: transparent;
   .control {
     position: absolute;
-    left: 69%;
-    top: 49%;
+    left: 49%;
+    top: 29%;
     width: 14%;
        z-index: 9999;
     height: 38%;
