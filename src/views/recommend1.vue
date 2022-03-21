@@ -65,7 +65,7 @@
         </div>
         <div class="ranktable-content">
           <el-tabs v-model="activeName" type="border-card">
-            <el-tab-pane label="景点综合排行" name="recommendTab">
+            <el-tab-pane label="好评榜" name="recommendTab">
               <el-table
                 :data="tableRankData"
                 height="328px"
@@ -107,7 +107,7 @@
                 </el-table-column>
               </el-table>
             </el-tab-pane>
-            <el-tab-pane label="景点推荐" name="hotTab">
+            <el-tab-pane label="热度榜" name="hotTab">
               <el-table
                 :data="tableRankData"
                 height="328px"
@@ -149,7 +149,7 @@
                 </el-table-column>
               </el-table>
             </el-tab-pane>
-            <el-tab-pane label="景点1推荐" name="myTab">
+            <el-tab-pane label="推荐榜" name="myTab">
               <el-table
                 :data="tableRankData"
                 height="328px"
@@ -248,30 +248,60 @@
           <div class="hotandscore">
             <div class="name">数据偏好</div>
             <div class="content">
-              <el-radio v-model="radio" label="1">备选项</el-radio>
-              <el-radio v-model="radio" label="2">备选项</el-radio>
+              <el-radio v-model="radio" label="1">评分优先</el-radio>
+              <el-radio v-model="radio" label="2">热度优先</el-radio>
             </div>
           </div>
-          <div class="distance"></div>
-          <div class="season"></div>
+          <div class="distance">
+            <div class="name">
+              <el-checkbox v-model="distancechecked" @click="addDistance()"
+                >距离</el-checkbox
+              >
+            </div>
+            <div class="distanceselect">
+              <el-radio v-model="distancerange" label="1">本市</el-radio>
+              <el-radio v-model="distancerange" label="2">本省</el-radio>
+              <el-radio v-model="distancerange" label="3">邻省</el-radio>
+            </div>
+          </div>
+          <div class="season">
+            <div class="name">
+              <el-checkbox v-model="seasonchecked">季节</el-checkbox>
+            </div>
+            <div class="distanceselect">
+              <el-radio v-model="seasonrange" label="1">春</el-radio>
+              <el-radio v-model="seasonrange" label="2">夏</el-radio>
+              <el-radio v-model="seasonrange" label="3">秋</el-radio>
+              <el-radio v-model="seasonrange" label="4">东</el-radio>
+            </div>
+          </div>
           <div class="ageandsex">
             <div class="agept">
-              <div class="person-name"></div>
-              <div class="person-inputcontent"></div>
+              <div class="person-name">年龄:</div>
+              <div class="person-inputcontent">
+                <input class="ageinput" type="text" />
+              </div>
             </div>
             <div class="sexpt">
-              <div class="person-name"></div>
-              <div class="person-inputcontent"></div>
+              <div class="person-name">性别:</div>
+              <div class="person-inputcontent">
+                <el-radio v-model="sexselect" label="1">男</el-radio>
+                <el-radio v-model="sexselect" label="2">女</el-radio>
+              </div>
             </div>
           </div>
           <div class="occupationandincome">
             <div class="occupationpt">
-              <div class="person-name"></div>
-              <div class="person-inputcontent"></div>
+              <div class="person-name">年龄:</div>
+              <div class="person-inputcontent">
+                <input class="ageinput" type="text" />
+              </div>
             </div>
             <div class="incomept">
-              <div class="person-name"></div>
-              <div class="person-inputcontent"></div>
+              <div class="person-name">年龄:</div>
+              <div class="person-inputcontent">
+                <input class="ageinput" type="text" />
+              </div>
             </div>
           </div>
         </div>
@@ -335,8 +365,13 @@ export default {
 
       //推荐项目
       input: "",
+      distancechecked: false,
+      seasonchecked: false,
       timevalue: "",
-      radio: "1",
+      radio: "",
+      sexselect: "",
+      distancerange: "",
+      seasonrange: "",
       labellist: [
         { id: 1, name: "山岳" },
         { id: 2, name: "海滨" },
@@ -398,6 +433,40 @@ export default {
         { value: 31, name: "游艇" },
         { value: 29, name: "陵水" },
         { value: 29, name: "石梅湾" },
+      ],
+      wordcloudchina: [
+        { value: 29434, name: "酒店" },
+        { value: 21500, name: "公园" },
+        { value: 20010, name: "中国" },
+        { value: 17380, name: "旅游" },
+        { value: 16933, name: "文化" },
+        { value: 16792, name: "博物馆" },
+        { value: 16409, name: "历史" },
+        { value: 16259, name: "古镇" },
+        { value: 13814, name: "风景区" },
+        { value: 13705, name: "门票" },
+        { value: 13371, name: "城市" },
+        { value: 10335, name: "广场" },
+        { value: 8753, name: "草原" },
+        { value: 8288, name: "拍照" },
+        { value: 7507, name: "北京" },
+        { value: 6881, name: "自驾游" },
+        { value: 6844, name: "自然" },
+        { value: 6752, name: "黄河" },
+        { value: 6538, name: "瀑布" },
+        { value: 5922, name: "成都" },
+        { value: 5568, name: "温泉" },
+        { value: 5564, name: "湿地" },
+        { value: 5249, name: "遗址" },
+        { value: 5034, name: "重庆" },
+        { value: 4946, name: "新疆" },
+        { value: 4923, name: "峡谷" },
+        { value: 4493, name: "西安" },
+        { value: 4287, name: "老街" },
+        { value: 4229, name: "广州" },
+        { value: 4075, name: "国家森林公园" },
+        { value: 4070, name: "地质公园" },
+        { value: 3995, name: "沙漠" },
       ],
       chartdata1: [
         {
@@ -744,8 +813,17 @@ export default {
     this.getCityRank();
     this.initChart1(this.chartdata1);
     this.initChart2(this.chartdata2);
-    this.wordCloudInti2(this.$refs.chartword2, this.wordclouddata);
+    this.wordCloudInti2(this.$refs.chartword2, this.wordcloudchina);
     this.wordCloudInti(this.$refs.chartword, this.wordclouddata);
+    // $(".el-checkbox").change(() => {
+    //   console.log("呵呵");
+    //   if ($(".el-checkbox[type='checkbox']").is(":checked") == true) {
+    //     console.log("选中");
+    //     this.disa = true;
+    //   } else {
+    //     console.log("没选中");
+    //   }
+    // });
   },
   filters: {
     rounding(value) {
@@ -1256,7 +1334,7 @@ export default {
       }
       /deep/.el-tabs__item {
         padding: 0;
-        width: 49%;
+        width: 60%;
         border: none;
         //   background: url(../assets/img/tab.png)no-repeat;
         //   background-size: 100% 100%;
@@ -1273,7 +1351,7 @@ export default {
       }
       /deep/.el-tabs__nav-scroll {
         background: transparent;
-        width: 80%;
+        width: 60%;
         background: url(../assets/img/buttonbg.png) no-repeat;
         background-size: 100% 100%;
       }
@@ -1422,7 +1500,7 @@ export default {
       height: 93%;
       width: 100%;
       .name {
-        color: #1faacd;
+        color: #e6eef0;
         font-size: 11pt;
         width: 30%;
         height: 100%;
@@ -1536,15 +1614,91 @@ export default {
           display: flex;
           align-items: center;
           justify-content: space-evenly;
+          .el-radio {
+            color: rgb(190, 218, 218);
+          }
+          /deep/.el-radio__input.is-checked + .el-radio__label {
+            color: #42e0e0;
+          }
+          /deep/.el-radio__input.is-checked .el-radio__inner {
+            border-color: #94b2bb;
+            background: #3fb0d3;
+          }
         }
       }
       .distance {
         height: 8%;
         width: 100%;
+        .name {
+          .el-checkbox {
+            color: #e6eef0 !important;
+          }
+          .el-checkbox__inner {
+            width: 12px;
+            height: 12px;
+          }
+          .el-checkbox__label {
+            padding-left: 14px;
+          }
+        }
+        .distanceselect {
+          width: 60%;
+          height: 100%;
+          float: left;
+          display: flex;
+          flex-direction: row;
+          flex-wrap: nowrap;
+          justify-content: space-evenly;
+          align-items: center;
+          .el-radio {
+            color: rgb(190, 218, 218);
+            margin-right: 4px;
+          }
+          /deep/.el-radio__input.is-checked + .el-radio__label {
+            color: #42e0e0;
+          }
+          /deep/.el-radio__input.is-checked .el-radio__inner {
+            border-color: #94b2bb;
+            background: #3fb0d3;
+          }
+        }
       }
       .season {
         width: 100%;
         height: 8%;
+        .name {
+          .el-checkbox {
+            color: #e6eef0 !important;
+          }
+          .el-checkbox__inner {
+            width: 12px;
+            height: 12px;
+          }
+          .el-checkbox__label {
+            padding-left: 14px;
+          }
+        }
+        .distanceselect {
+          width: 60%;
+          height: 100%;
+          float: left;
+          display: flex;
+          flex-direction: row;
+          flex-wrap: nowrap;
+          justify-content: space-evenly;
+          align-items: center;
+          .el-radio {
+            color: rgb(190, 218, 218);
+            margin-right: 4px;
+          }
+          /deep/.el-radio__input.is-checked + .el-radio__label {
+            color: #42e0e0;
+          }
+          /deep/.el-radio__input.is-checked .el-radio__inner {
+            border-color: #94b2bb;
+            background: #3fb0d3;
+          }
+        }
       }
       .occupationandincome {
         width: 100%;
@@ -1553,6 +1707,9 @@ export default {
           width: 50%;
           height: 100%;
           float: left;
+          .person-name {
+            width: 28%;
+          }
         }
         .occupationpt {
           width: 50%;
@@ -1572,6 +1729,19 @@ export default {
           width: 50%;
           height: 100%;
           float: left;
+          .person-name {
+            width: 28%;
+          }
+          .el-radio {
+            color: rgb(190, 218, 218);
+          }
+          /deep/.el-radio__input.is-checked + .el-radio__label {
+            color: #42e0e0;
+          }
+          /deep/.el-radio__input.is-checked .el-radio__inner {
+            border-color: #94b2bb;
+            background: #3fb0d3;
+          }
         }
       }
     }
@@ -1591,11 +1761,27 @@ export default {
   width: 50%;
   height: 100%;
   float: left;
+  text-align: right;
+  font-size: 11pt;
+  color: aliceblue;
+  font-size: 11pt;
+  display: flex;
+  color: aliceblue;
+  align-items: center;
+  flex-direction: row-reverse;
 }
 .person-inputcontent {
   width: 50%;
   height: 100%;
   float: left;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  padding-left: 6%;
+  .ageinput {
+    width: 100%;
+    height: 60%;
+  }
 }
 .recommend-bottom {
   width: 49%;
