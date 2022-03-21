@@ -1,6 +1,46 @@
 <template>
   <div class="com-pointgather">
     <div id="map"></div>
+    <div class="mapcontral">
+      <div class="dataselect">
+        <el-menu>
+          <el-menu-item
+            style="padding: 1%"
+            index="1"
+            @click="show(1)"
+            :class="index === 1 ? 'active' : ''"
+            plain
+          >
+            <span class="tab" slot="title">椭圆</span>
+          </el-menu-item>
+          <el-menu-item
+            index="2"
+            @click="show(2)"
+            :class="index === 2 ? 'active' : ''"
+            plain
+          >
+            <span class="tab" slot="title">客流</span>
+          </el-menu-item>
+          <el-menu-item
+            index="3"
+            @click="show(3)"
+            :class="index === 3 ? 'active' : ''"
+            plain
+          >
+            <span class="tab" slot="title">冷热</span>
+          </el-menu-item>
+          <el-menu-item
+            index="4"
+            @click="show(4)"
+            :class="index === 4 ? 'active' : ''"
+            plain
+          >
+            <span class="tab" slot="title">导航二</span>
+          </el-menu-item>
+        </el-menu>
+      </div>
+      <div class="creatmap"></div>
+    </div>
     <div class="control">
       <div style="padding-top: 10px">
         <el-button id="button1">取消聚类</el-button>
@@ -11,7 +51,7 @@
       <div style="padding-top: 10px">
         <el-button id="button3">调用数据源1</el-button>
       </div>
-       <div style="padding-top: 10px">
+      <div style="padding-top: 10px">
         <el-button id="button4">调用数据源2</el-button>
       </div>
       <div style="padding-top: 10px">
@@ -40,75 +80,73 @@ export default {
         zoom: 5,
       });
       //添加数据源1
-     document.getElementById("button3").addEventListener("click",()=>{
-     //加载前先移除图层  
-    if (map.getLayer('points')) map.removeLayer('points');
-    if (map.getLayer('clusters')) map.removeLayer('clusters');
-    if (map.getLayer('cluster-count')) map.removeLayer('cluster-count');
-  
-    if (map.getSource('sensicjson')){
-        const geojsonSource = map.getSource('sensicjson');
-        geojsonSource.setData(testjson);
-        const geojsonSource1 = map.getSource('sensicjson1');
-        geojsonSource1.setData(testjson);
-         }
-         else{
-       map.addSource("sensicjson", {
-          type: "geojson",
-          data: testjson,
-           cluster: true, //聚合图的数据源需要添加样式
-          clusterMaxZoom: 14, //最大缩放到群集点
-         clusterRadius: 50 
-        });
-        
-      map.addSource("sensicjson1", {
-        type: "geojson",
-        data: testjson,
+      document.getElementById("button3").addEventListener("click", () => {
+        //加载前先移除图层
+        if (map.getLayer("points")) map.removeLayer("points");
+        if (map.getLayer("clusters")) map.removeLayer("clusters");
+        if (map.getLayer("cluster-count")) map.removeLayer("cluster-count");
+
+        if (map.getSource("sensicjson")) {
+          const geojsonSource = map.getSource("sensicjson");
+          geojsonSource.setData(testjson);
+          const geojsonSource1 = map.getSource("sensicjson1");
+          geojsonSource1.setData(testjson);
+        } else {
+          map.addSource("sensicjson", {
+            type: "geojson",
+            data: testjson,
+            cluster: true, //聚合图的数据源需要添加样式
+            clusterMaxZoom: 14, //最大缩放到群集点
+            clusterRadius: 50,
+          });
+
+          map.addSource("sensicjson1", {
+            type: "geojson",
+            data: testjson,
+          });
+        }
       });
-         }
-    });
       //添加数据源类型2
-      document.getElementById("button4").addEventListener("click",()=>{
-     //加载前先移除图层 
-    if (map.getLayer('points')) map.removeLayer('points');
-    if (map.getLayer('clusters')) map.removeLayer('clusters');
-    if (map.getLayer('cluster-count')) map.removeLayer('cluster-count');
-    // if(map.getSource('testjson'))map.setData('heatMapData');
-    // if(map.getSource('testjson'))map.removeSouce('testjson'); debugger;
-      //首先判断数据源是否存在，存在的使用setdata方法
-      if (map.getSource('sensicjson')){
-        const geojsonSource = map.getSource('sensicjson');
-        geojsonSource.setData(heatMapData);
-        const geojsonSource1 = map.getSource('sensicjson1');
-        geojsonSource1.setData(heatMapData);
-      }//不存在使用addSource方法
-      else{
-       map.addSource("sensicjson", {
-          type: "geojson",
-          data: heatMapData,
-           cluster: true, //聚合图的数据源需要添加样式
-          clusterMaxZoom: 14, //最大缩放到群集点
-         clusterRadius: 50 
-        });
-      map.addSource("sensicjson1", {
-        type: "geojson",
-        data: heatMapData,
+      document.getElementById("button4").addEventListener("click", () => {
+        //加载前先移除图层
+        if (map.getLayer("points")) map.removeLayer("points");
+        if (map.getLayer("clusters")) map.removeLayer("clusters");
+        if (map.getLayer("cluster-count")) map.removeLayer("cluster-count");
+        // if(map.getSource('testjson'))map.setData('heatMapData');
+        // if(map.getSource('testjson'))map.removeSouce('testjson'); debugger;
+        //首先判断数据源是否存在，存在的使用setdata方法
+        if (map.getSource("sensicjson")) {
+          const geojsonSource = map.getSource("sensicjson");
+          geojsonSource.setData(heatMapData);
+          const geojsonSource1 = map.getSource("sensicjson1");
+          geojsonSource1.setData(heatMapData);
+        } //不存在使用addSource方法
+        else {
+          map.addSource("sensicjson", {
+            type: "geojson",
+            data: heatMapData,
+            cluster: true, //聚合图的数据源需要添加样式
+            clusterMaxZoom: 14, //最大缩放到群集点
+            clusterRadius: 50,
+          });
+          map.addSource("sensicjson1", {
+            type: "geojson",
+            data: heatMapData,
+          });
+        }
       });
-      }
-    });
-       //添加数据源类型3
-      document.getElementById("button5").addEventListener("click",()=>{
-    });
+      //添加数据源类型3
+      document.getElementById("button5").addEventListener("click", () => {});
 
       document.getElementById("button2").addEventListener("click", () => {
         //加载图层前需要清除所有图层，防止图层加载重叠。
-      if (map.getLayer('points')) map.removeLayer('points');//填写需要清除图层的ID，每次只能清除一个。有几个图层就使用几次。
+        if (map.getLayer("points")) map.removeLayer("points"); //填写需要清除图层的ID，每次只能清除一个。有几个图层就使用几次。
 
         map.setLayoutProperty("points", "visibility", "none");
         map.setLayoutProperty("clusters", "visibility", "visible");
         map.setLayoutProperty("cluster-count", "visibility", "visible");
         map.setLayoutProperty("unclustered-point", "visibility", "visible");
-      
+
         //添加圆形聚合图层
         map.addLayer({
           id: "clusters",
@@ -268,6 +306,78 @@ export default {
   height: 100%;
   z-index: 0;
 }
+.mapcontral {
+  position: absolute;
+  z-index: 1;
+  width: 40%;
+  height: 6%;
+  bottom: 38.5%;
+  left: 25.6%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  background-color: #4796aa67;
+  .dataselect {
+    height: 100%;
+    width: 60%;
+    .el-menu {
+      width: 100%;
+      height: 100%;
+      right: 0%;
+      background: transparent;
+      border: none;
+      display: flex;
+      .tab {
+        height: 100%;
+        width: 100%;
+        display: flex;
+            align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+      }
+    }
+    .el-menu-item.is-active {
+      color: #15abc5;
+      background: transparent;
+    }
+    .el-menu-item {
+      width: 20%;
+      color: #fff;
+    }
+    .el-menu-item:hover {
+      background: transparent;
+    }
+    .span {
+      color: aliceblue;
+    }
+    ul {
+      height: 100%;
+      list-style-type: none; /*消除黑点*/
+      text-align: center;
+      li {
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        p {
+          color: aqua;
+          font-size: 12px;
+          font-family: Microsoft YaHei;
+          // font-weight: bold;
+          text-decoration: none; /*消除下划线*/
+          border-radius: 5px;
+          padding-bottom: 20px;
+        }
+      }
+    }
+  }
+  .creatmap {
+    height: 100%;
+    width: 40%;
+  }
+}
 .com-pointgather {
   position: relative;
   z-index: 10;
@@ -279,7 +389,7 @@ export default {
     left: 49%;
     top: 19%;
     width: 14%;
-       z-index: 9999;
+    z-index: 9999;
     height: 38%;
     // #button1 {
     //   background: url("../../assets/img/框.png");

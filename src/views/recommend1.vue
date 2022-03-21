@@ -12,10 +12,10 @@
       <div class="iconcontent"><i class="fa fa-map-marker fa-lg"></i></div>
       <div class="cityname">{{ cityname }}</div>
     </div> -->
-    <div class="mapcontral">
+    <!-- <div class="mapcontral">
       <div class="mapselect"></div>
       <div class="dataselect"></div>
-    </div>
+    </div> -->
     <div class="recommend-left pt">
       <div class="sourceselect">
         <div id="recommend-title">
@@ -303,6 +303,14 @@
                 <input class="ageinput" type="text" />
               </div>
             </div>
+          </div>
+          <div class="buttoncontent">
+            <el-button class="startbutton" @click="refeashData()"
+              >更新数据</el-button
+            >
+            <el-button class="startbutton" @click="getRecommend()"
+              >开始推荐</el-button
+            >
           </div>
         </div>
       </div>
@@ -682,129 +690,6 @@ export default {
         { value: 300, name: "湖北" },
       ],
     };
-    // return {
-    //   //推荐
-
-    //   //专题图切换
-    //   activeClass: "1",
-    //   //下方的城市名
-    //   chosencity: "北京",
-    //   //动画加载
-    //   state: "",
-    //   isLoading: false,
-    //   //地图切换
-    //   index: 1,
-    //   chart1data: [
-    //     { value: 1048, name: "Search Engine" },
-    //     { value: 735, name: "Direct" },
-    //     { value: 580, name: "Email" },
-    //     { value: 484, name: "Union Ads" },
-    //     { value: 300, name: "Video Ads" },
-    //   ],
-    //   mycloudData: [],
-    //   beijingData: [
-    //     { value: 773, name: "故宫" },
-    //     { value: 502, name: "长城" },
-    //     { value: 270, name: "建筑" },
-    //     { value: 212, name: "胡同" },
-    //     { value: 192, name: "天安门" },
-    //     { value: 182, name: "颐和园" },
-    //     { value: 170, name: "博物馆" },
-    //     { value: 158, name: "环球" },
-    //     { value: 154, name: "历史" },
-    //     { value: 138, name: "八达岭" },
-    //     { value: 112, name: "天坛" },
-    //     { value: 105, name: "度假" },
-    //     { value: 104, name: "清华" },
-    //     { value: 100, name: "银杏" },
-    //     { value: 96, name: "北海" },
-    //     { value: 94, name: "王府" },
-    //     { value: 94, name: "皇帝" },
-    //     { value: 93, name: "慕田峪" },
-    //     { value: 92, name: "大学" },
-    //     { value: 88, name: "乾隆" },
-    //     { value: 87, name: "景山公园" },
-    //     { value: 86, name: "八达岭长城" },
-    //     { value: 84, name: "南锣鼓巷" },
-    //     { value: 79, name: "紫禁城" },
-    //     { value: 79, name: "地坛" },
-    //     { value: 75, name: "慕田峪长城" },
-    //   ],
-    //   sanyaData: [
-    //     { value: 327, name: "亚龙湾" },
-    //     { value: 278, name: "海南" },
-    //     { value: 250, name: "海鲜" },
-    //     { value: 231, name: "海口" },
-    //     { value: 215, name: "三亚湾" },
-    //     { value: 158, name: "沙滩" },
-    //     { value: 137, name: "东海" },
-    //     { value: 134, name: "海棠" },
-    //     { value: 130, name: "西岛" },
-    //     { value: 128, name: "椰子" },
-    //     { value: 117, name: "大东海" },
-    //     { value: 104, name: "天涯海角" },
-    //     { value: 101, name: "大海" },
-    //     { value: 98, name: "海边" },
-    //     { value: 91, name: "热带" },
-    //     { value: 84, name: "海滩" },
-    //     { value: 72, name: "蜈支洲岛" },
-    //     { value: 71, name: "骑楼" },
-    //     { value: 67, name: "鹿回头" },
-    //     { value: 63, name: "老街" },
-    //     { value: 59, name: "千古" },
-    //     { value: 53, name: "椰梦" },
-    //     { value: 52, name: "南山" },
-    //     { value: 51, name: "半岛" },
-    //     { value: 50, name: "森林公园" },
-    //     { value: 50, name: "海景" },
-    //     { value: 44, name: "海岛" },
-    //     { value: 44, name: "帆船" },
-    //     { value: 43, name: "潜水" },
-    //     { value: 40, name: "珊瑚" },
-    //     { value: 38, name: "半山" },
-    //     { value: 37, name: "亚特兰蒂斯" },
-    //     { value: 36, name: "雨林" },
-    //     { value: 35, name: "红树林" },
-    //     { value: 37, name: "椰林" },
-    //     { value: 34, name: "水族馆" },
-    //     { value: 33, name: "渔村" },
-    //     { value: 33, name: "木兰" },
-    //     { value: 32, name: "索菲特" },
-    //     { value: 31, name: "游艇" },
-    //     { value: 29, name: "陵水" },
-    //     { value: 29, name: "石梅湾" },
-    //   ],
-    //   nanjingData: [],
-    //   cityimages: [
-    //     { url: require("../assets/img/city/1.jpg") },
-    //     { url: require("../assets/img/city/201111424880.jpg") },
-    //   ],
-    //   beijingimages: [],
-    //   sanyaimages: [],
-    //   tableRankData: "",
-    //   labellist: [
-    //     { id: 1, name: "山岳" },
-    //     { id: 2, name: "海滨" },
-    //     { id: 3, name: "历史" },
-    //     { id: 4, name: "革命老区" },
-    //     { id: 5, name: "商业街" },
-    //     { id: 6, name: "划船" },
-    //     { id: 7, name: "文物" },
-    //   ],
-    //   tableCityData: [],
-    //   timevalue: [],
-    //   //景点特征
-    //   input: "",
-    //   changename: "景点特征",
-    //   radio: "1",
-    //   activeName: "recommendTab",
-    //   activeNameflag: "true",
-    //   checkList: [""],
-    //   //弹窗
-    //   show: false,
-    //   cityname: "城市选择",
-    //   currentRow: null,
-    // };
   },
   created() {},
   mounted() {
@@ -831,25 +716,9 @@ export default {
     },
   },
   methods: {
-    // clickData(val) {
-    //   this.chosencity = val.city;
-    //   let cityname = val.city;
-    //   if (cityname == "北京") {
-    //     this.mycloudData = this.beijingData;
-    //     this.wordCloudInti(this.$refs.wordcloud, this.mycloudData);
-    //   } else if (cityname == "三亚") {
-    //     this.mycloudData = this.sanyaData;
-    //     this.wordCloudInti(this.$refs.wordcloud, this.mycloudData);
-    //   }
-    //   console.log(cityname);
-    // },
     hideModal() {
       // 取消弹窗回调
       this.show = false;
-      // Bus.$on("sendCityname", (val) => {
-      //   this.cityname = val;
-      //   this.recommendCity = val;
-      // });
     },
     submit() {
       // 确认弹窗回调
@@ -908,13 +777,13 @@ export default {
           this.isLoading = false;
         }, 1200);
     },
-    // getRecommend() {
-    //   this.activeName = "hotTab";
-    //   console.log(this.timevalue);
-    //   console.log(this.input);
-    //   console.log(this.checkList);
-    //   console.log(this.cityname);
-    // },
+    getRecommend() {
+      this.activeName = "hotTab";
+      console.log(this.timevalue);
+      console.log(this.input);
+      console.log(this.checkList);
+      console.log(this.cityname);
+    },
     // initChart1(data) {
     //   let myChart1 = this.$echarts.init(document.getElementById("chart1"));
     //   var option = {
@@ -1576,6 +1445,7 @@ export default {
       }
       .exampleinput {
         height: 8%;
+        margin-bottom: 2%;
         .exampellabel {
           color: #1faacd;
           width: 60%;
@@ -1595,7 +1465,7 @@ export default {
             .chooselabel {
               background: #8ae5e54a;
               margin-left: 2%;
-              /* border: 1px solid #ffffff40; */
+              border: 1px solid #ffffff40;
               font-size: 10pt;
               border-radius: 5px;
               cursor: pointer;
@@ -1715,6 +1585,27 @@ export default {
           width: 50%;
           height: 100%;
           float: left;
+        }
+      }
+      .buttoncontent {
+        height: 20%;
+        width: 70%;
+        margin: auto;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-around;
+        align-items: center;
+        /deep/.el-button {
+          background: url("../assets/img/框.png");
+          background-size: 100% 100%;
+          // background: #24bff390;
+          border: 0px solid #d80d4a;
+          color: #ffffff;
+          padding: 12px 20px;
+          font-size: 14px;
+          border-radius: 5px;
+          width: 40%;
         }
       }
       .ageandsex {
