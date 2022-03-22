@@ -12,10 +12,43 @@
       <div class="iconcontent"><i class="fa fa-map-marker fa-lg"></i></div>
       <div class="cityname">{{ cityname }}</div>
     </div> -->
-    <!-- <div class="mapcontral">
-      <div class="mapselect"></div>
-      <div class="dataselect"></div>
-    </div> -->
+    <div class="mapcontral">
+      <el-menu>
+        <el-menu-item
+          style="padding: 1%"
+          index="1"
+          @click="showmap(1)"
+          :class="index === 1 ? 'active' : ''"
+          plain
+        >
+          <span class="tab" slot="title">聚合图</span>
+        </el-menu-item>
+        <el-menu-item
+          index="2"
+          @click="showmap(2)"
+          :class="index === 2 ? 'active' : ''"
+          plain
+        >
+          <span class="tab" slot="title">分级图</span>
+        </el-menu-item>
+        <el-menu-item
+          index="3"
+          @click="showmap(3)"
+          :class="index === 3 ? 'active' : ''"
+          plain
+        >
+          <span class="tab" slot="title">热力图</span>
+        </el-menu-item>
+        <el-menu-item
+          index="4"
+          @click="showmap(4)"
+          :class="index === 4 ? 'active' : ''"
+          plain
+        >
+          <span class="tab" slot="title">时序图</span>
+        </el-menu-item>
+      </el-menu>
+    </div>
     <div class="recommend-left pt">
       <div class="sourceselect">
         <div id="recommend-title">
@@ -25,12 +58,12 @@
           <div class="leftpt">数据源选择:</div>
           <div class="rightpt">
             <el-checkbox-group v-model="checkList">
-              <el-checkbox label="复选A"></el-checkbox>
-              <el-checkbox label="复选B"></el-checkbox>
-              <el-checkbox label="复选C"></el-checkbox>
-              <el-checkbox label="复选A"></el-checkbox>
-              <el-checkbox label="复选B"></el-checkbox>
-              <el-checkbox label="复选C"></el-checkbox>
+              <el-checkbox label="去哪儿"></el-checkbox>
+              <el-checkbox label="马蜂窝"></el-checkbox>
+              <el-checkbox label="携程"></el-checkbox>
+              <el-checkbox label="途牛"></el-checkbox>
+              <el-checkbox label="艺龙"></el-checkbox>
+              <el-checkbox label="飞猪"></el-checkbox>
             </el-checkbox-group>
           </div>
         </div>
@@ -80,7 +113,7 @@
                 <el-table-column
                   prop="name"
                   label="景点"
-                  width="120"
+                  width="180"
                   :show-overflow-tooltip="true"
                 >
                 </el-table-column>
@@ -92,18 +125,14 @@
                 >
                 </el-table-column>
                 <el-table-column
-                  prop="hot"
-                  label="热度"
-                  width="60"
-                  :show-overflow-tooltip="true"
-                >
-                </el-table-column>
-                <el-table-column
                   prop="score"
                   label="分数"
                   width="60"
                   :show-overflow-tooltip="true"
                 >
+                  <template slot-scope="scope">
+                    <span>{{ scope.row.score | rounding }}</span>
+                  </template>
                 </el-table-column>
               </el-table>
             </el-tab-pane>
@@ -122,7 +151,7 @@
                 <el-table-column
                   prop="name"
                   label="景点"
-                  width="120"
+                  width="180"
                   :show-overflow-tooltip="true"
                 >
                 </el-table-column>
@@ -137,13 +166,6 @@
                   prop="hot"
                   label="热度"
                   width="80"
-                  :show-overflow-tooltip="true"
-                >
-                </el-table-column>
-                <el-table-column
-                  prop="score"
-                  label="分数"
-                  width="60"
                   :show-overflow-tooltip="true"
                 >
                 </el-table-column>
@@ -188,6 +210,56 @@
                   width="60"
                   :show-overflow-tooltip="true"
                 >
+                  <template slot-scope="scope">
+                    <span>{{ scope.row.score | rounding }}</span>
+                  </template>
+                </el-table-column>
+              </el-table>
+            </el-tab-pane>
+            <el-tab-pane label="城市榜" name="cityTab">
+              <el-table
+                :data="tableCityData"
+                height="328px"
+                stripe
+                style="width: 100%"
+              >
+                <el-table-column
+                  prop="hotrank"
+                  label="排名"
+                  width="50"
+                  :show-overflow-tooltip="true"
+                >
+                </el-table-column>
+                <el-table-column
+                  prop="city"
+                  label="城市"
+                  width="100"
+                  :show-overflow-tooltip="true"
+                >
+                </el-table-column>
+                <el-table-column
+                  prop="sccount"
+                  label="景点数目"
+                  width="70"
+                  :show-overflow-tooltip="true"
+                >
+                </el-table-column>
+                <el-table-column
+                  prop="comcount"
+                  label="热度"
+                  width="70"
+                  :show-overflow-tooltip="true"
+                >
+                </el-table-column>
+                <el-table-column
+                  prop="scscore"
+                  label="分数"
+                  width="60"
+                  :show-overflow-tooltip="true"
+                >
+                  <template slot-scope="scope">
+                    <span>{{ scope.row.scscore | rounding }}</span>
+                  </template>
                 </el-table-column>
               </el-table>
             </el-tab-pane>
@@ -292,15 +364,25 @@
           </div>
           <div class="occupationandincome">
             <div class="occupationpt">
-              <div class="person-name">年龄:</div>
+              <div class="person-name">职业:</div>
               <div class="person-inputcontent">
-                <input class="ageinput" type="text" />
+                <input
+                  class="ageinput"
+                  type="text"
+                  v-model="occupationpt"
+                  placeholder="edit me"
+                />
               </div>
             </div>
             <div class="incomept">
-              <div class="person-name">年龄:</div>
+              <div class="person-name">收入:</div>
               <div class="person-inputcontent">
-                <input class="ageinput" type="text" />
+                <input
+                  class="ageinput"
+                  type="text"
+                  v-model="incomept"
+                  placeholder="edit me"
+                />
               </div>
             </div>
           </div>
@@ -335,6 +417,7 @@
         <div class="content" id="chart2"></div>
       </div>
     </div>
+         <selectRegion />
   </div>
 </template>
 <script>
@@ -350,11 +433,15 @@ import pointgather from "../components/thememap/pointgather.vue";
 import heatmap from "../components/thememap/heatmap.vue";
 import timemap from "../components/thememap/timemap.vue";
 import multimap from "../components/thememap/multimap.vue";
+import locmap from "../components/location.vue";
 
 import loading from "../components/loading.vue";
 
 import wordcloud from "../assets/js/echarts-wordcloud-master/index";
 import echarts from "echarts";
+
+import eventBum from '../views/traffickingnetwork/public/js/EvebtBus'
+import SelectRegion from "../views/traffickingnetwork/components/selectRegion.vue";
 export default {
   name: "recommend",
   components: {
@@ -364,13 +451,19 @@ export default {
     heatmap,
     timemap,
     multimap,
+    locmap,
     loading,
     wordcloud,
+    SelectRegion,
   },
   data() {
     return {
       isShow: true,
-
+      //区域选择
+      selectcity:{
+        name: '中国',
+        level: 0
+      },
       //推荐项目
       input: "",
       distancechecked: false,
@@ -380,6 +473,8 @@ export default {
       sexselect: "",
       distancerange: "",
       seasonrange: "",
+      incomept: "",
+      occupationpt: "",
       labellist: [
         { id: 1, name: "山岳" },
         { id: 2, name: "海滨" },
@@ -390,7 +485,7 @@ export default {
         { id: 7, name: "文物" },
       ],
       //数据源选择
-      checkList: ["复选A"],
+      checkList: ["飞猪", "艺龙", "途牛", "携程", "马蜂窝", "去哪儿"],
       //数据
       tableRankData: [],
       //tab切换
@@ -478,208 +573,44 @@ export default {
       ],
       chartdata1: [
         {
-          name: "肺炎",
-          value: 9.06,
+          name: "北京",
+          value: 139687,
         },
         {
-          name: "疫情",
-          value: 7.74,
+          name: "三亚",
+          value: 108024,
         },
         {
-          name: "微博",
-          value: 7.25,
+          name: "杭州",
+          value: 106646,
         },
         {
-          name: "病例",
-          value: 6.95,
+          name: "郑州",
+          value: 91186,
         },
         {
-          name: "新冠",
-          value: 6.88,
+          name: "洛阳",
+          value: 58379,
         },
         {
-          name: "确诊",
-          value: 6.59,
+          name: "上海",
+          value: 53431,
         },
         {
-          name: "武汉",
-          value: 5.2,
+          name: "广州",
+          value: 53078,
         },
         {
-          name: "视频",
-          value: 4.86,
+          name: "南京",
+          value: 52042,
         },
         {
-          name: "冠状病毒",
-          value: 4.34,
+          name: "海口",
+          value: 46654,
         },
         {
-          name: "口罩",
-          value: 4.28,
-        },
-        {
-          name: "新型",
-          value: 3.49,
-        },
-        {
-          name: "患者",
-          value: 3.05,
-        },
-        {
-          name: "防控",
-          value: 2.92,
-        },
-        {
-          name: "感染",
-          value: 2.81,
-        },
-        {
-          name: "医院",
-          value: 2.73,
-        },
-        {
-          name: "新增",
-          value: 2.43,
-        },
-        {
-          name: "隔离",
-          value: 2.19,
-        },
-        {
-          name: "出院",
-          value: 2.17,
-        },
-        {
-          name: "湖北",
-          value: 2.1,
-        },
-        {
-          name: "病毒",
-          value: 1.79,
-        },
-        {
-          name: "累计",
-          value: 1.79,
-        },
-        {
-          name: "加油",
-          value: 1.6,
-        },
-        {
-          name: "哈哈哈",
-          value: 1.53,
-        },
-        {
-          name: "韩国",
-          value: 1.39,
-        },
-        {
-          name: "医护人员",
-          value: 1.35,
-        },
-        {
-          name: "治愈",
-          value: 1.3,
-        },
-        {
-          name: "人员",
-          value: 1.28,
-        },
-        {
-          name: "死亡",
-          value: 1.23,
-        },
-        {
-          name: "投票",
-          value: 1.2,
-        },
-        {
-          name: "武汉市",
-          value: 1.19,
-        },
-        {
-          name: "工作",
-          value: 1.18,
-        },
-        {
-          name: "科比",
-          value: 1.39,
-        },
-        {
-          name: "复工",
-          value: 1.17,
-        },
-        {
-          name: "密切接触者",
-          value: 1.16,
-        },
-        {
-          name: "抗疫",
-          value: 1.15,
-        },
-        {
-          name: "疑似病例",
-          value: 1.14,
-        },
-        {
-          name: "中国",
-          value: 1.23,
-        },
-        {
-          name: "防疫",
-          value: 1.13,
-        },
-        {
-          name: "治疗",
-          value: 1.12,
-        },
-        {
-          name: "检测",
-          value: 1.1,
-        },
-        {
-          name: "目前",
-          value: 1.09,
-        },
-        {
-          name: "物资",
-          value: 1.08,
-        },
-        {
-          name: "医学观察",
-          value: 1.07,
-        },
-        {
-          name: "例新冠状",
-          value: 1.06,
-        },
-        {
-          name: "发热",
-          value: 1.05,
-        },
-        {
-          name: "时间",
-          value: 1.04,
-        },
-        {
-          name: "大家",
-          value: 1.03,
-        },
-        {
-          name: "一线工作者",
-          value: 1.02,
-        },
-        {
-          name: "央视",
-          value: 1.01,
-        },
-        {
-          name: "医疗",
-          value: 1.0,
-        },
-        {
-          name: "在家",
-          value: 0.98,
+          name: "开封",
+          value: 44206,
         },
       ],
       chartdata2: [
@@ -700,6 +631,14 @@ export default {
     this.initChart2(this.chartdata2);
     this.wordCloudInti2(this.$refs.chartword2, this.wordcloudchina);
     this.wordCloudInti(this.$refs.chartword, this.wordclouddata);
+     eventBum.$on("json", (json) => {
+      this.selectcity.name = json.name;
+      this.selectcity.level = json.where;
+      console.log(this.selectcity)
+      if(this.selectcity.name !=undefined){
+        this.showmap(6);
+      }
+    });
     // $(".el-checkbox").change(() => {
     //   console.log("呵呵");
     //   if ($(".el-checkbox[type='checkbox']").is(":checked") == true) {
@@ -728,7 +667,6 @@ export default {
       return (this.currentPage - 1) * this.intPageSize + index + 1;
     },
     getCityRank() {
-      var that = this;
       request.get("/api/data/cityRank").then((res) => {
         console.log(res);
         this.tableCityData = res.data;
@@ -744,9 +682,6 @@ export default {
         this.tableRankData = res.data;
         for (let i = 1; i <= res.data.length; i++) {
           this.tableRankData[i - 1].rank = i;
-          this.tableRankData[i - 1].score = parseFloat(
-            this.tableRankData[i - 1].score
-          ).toFixed(2);
         }
       });
     },
@@ -765,6 +700,7 @@ export default {
       else if (value === 3) this.comp = "heatmap";
       else if (value === 4) this.comp = "timemap";
       else if (value === 5) this.comp = "multimap";
+      else if (value === 6) this.comp = "locmap";
       //   else if (value === 3) this.comp = "density";
     },
     //更新数据动画
@@ -784,48 +720,13 @@ export default {
       console.log(this.checkList);
       console.log(this.cityname);
     },
-    // initChart1(data) {
-    //   let myChart1 = this.$echarts.init(document.getElementById("chart1"));
-    //   var option = {
-    //     legend: {
-    //       orient: "vertical",
-    //       left: "left",
-    //     },
-    //     series: [
-    //       {
-    //         name: "Access From",
-    //         type: "pie",
-    //         radius: "50%",
-    //         data: data,
-    //         itemStyle: {
-    //           normal: {
-    //             label: {
-    //               show: false,
-    //             },
-    //             labelLine: {
-    //               show: false,
-    //             },
-    //           },
-    //         },
-    //         // data: [
-    //         //   { value: 1048, name: 'Search Engine' },
-    //         //   { value: 735, name: 'Direct' },
-    //         //   { value: 580, name: 'Email' },
-    //         //   { value: 484, name: 'Union Ads' },
-    //         //   { value: 300, name: 'Video Ads' }
-    //         // ],
-    //       },
-    //     ],
-    //   };
-    //   myChart1.setOption(option);
-    // },
     //矩形树图
     initChart1(data) {
       let myChart1 = this.$echarts.init(document.getElementById("chart1"));
       myChart1.on("click", this.clickFun);
       myChart1.setOption({
         title: {
-          text: "  总评率随热词分布中",
+          text: "   城市热度树图",
           textStyle: {
             color: "rgba(255, 255, 255, .8)",
             fontSize: 12,
@@ -833,7 +734,7 @@ export default {
         },
         tooltip: {
           trigger: "item",
-          formatter: "{b}: {c}%",
+          formatter: "{b}" + "热度" + ": {c}",
         },
         grid: {
           top: "0%", //距上边距
@@ -853,7 +754,7 @@ export default {
               normal: {
                 label: {
                   show: true,
-                  formatter: "{b}:{c}%",
+                  formatter: "{b}" + ": {c}",
                   fontSize: 10,
                 },
                 borderWidth: 0,
@@ -907,11 +808,9 @@ export default {
     },
     //矩形树图点击事件
     clickFun(param) {
-      if (typeof param.seriesIndex == "undefined") {
-        return;
-      }
       if (param.type == "click") {
         this.chartname = param.name;
+
         // alert(param.name);
       }
     },
@@ -1030,6 +929,11 @@ export default {
   height: 100%;
   z-index: 0;
 }
+.ageinput {
+  color: #ffffff;
+  background-color: #59c0c0a1;
+  border: none;
+}
 #recommend-title {
   height: 9%;
   background: url(../assets/img/titlebg.png) no-repeat;
@@ -1049,10 +953,66 @@ export default {
 .mapcontral {
   position: absolute;
   z-index: 1;
-  width: 49%;
-  height: 12%;
-  bottom: 38%;
+  width: 28%;
+  height: 6%;
+  bottom: 38.5%;
   left: 25.6%;
+  background-color: #12526ea9;
+  .el-menu {
+    width: 100%;
+    height: 100%;
+    right: 0%;
+    background: url("../assets/img/buttonbg.png") no-repeat;
+    background-size: 100% 100%;
+    border: none;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    .tab {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      flex-direction: row;
+    }
+  }
+  .el-menu-item.is-active {
+    color: #15c5c5;
+    background: transparent;
+    border-bottom: 3px solid #c6e2ff;
+  }
+  .el-menu-item {
+    width: 20%;
+    color: #fff;
+  }
+  .el-menu-item:hover {
+    background: transparent;
+  }
+  .span {
+    color: aliceblue;
+  }
+  ul {
+    height: 100%;
+    list-style-type: none; /*消除黑点*/
+    text-align: center;
+    li {
+      height: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      p {
+        color: aqua;
+        font-size: 12px;
+        font-family: Microsoft YaHei;
+        // font-weight: bold;
+        text-decoration: none; /*消除下划线*/
+        border-radius: 5px;
+        padding-bottom: 20px;
+      }
+    }
+  }
 }
 
 .recommend-left {
@@ -1203,7 +1163,7 @@ export default {
       }
       /deep/.el-tabs__item {
         padding: 0;
-        width: 60%;
+        width: 51%;
         border: none;
         //   background: url(../assets/img/tab.png)no-repeat;
         //   background-size: 100% 100%;
@@ -1220,7 +1180,7 @@ export default {
       }
       /deep/.el-tabs__nav-scroll {
         background: transparent;
-        width: 60%;
+        width: 90%;
         background: url(../assets/img/buttonbg.png) no-repeat;
         background-size: 100% 100%;
       }
@@ -1444,8 +1404,8 @@ export default {
         }
       }
       .exampleinput {
-        height: 8%;
-        margin-bottom: 2%;
+        height: 10%;
+        margin-bottom: 1%;
         .exampellabel {
           color: #1faacd;
           width: 60%;
@@ -1469,6 +1429,7 @@ export default {
               font-size: 10pt;
               border-radius: 5px;
               cursor: pointer;
+              margin: 1%;
               // margin: 1% 1% 1% 1% ;
             }
           }
@@ -1669,6 +1630,9 @@ export default {
   align-items: center;
   flex-direction: row;
   padding-left: 6%;
+  .el-radio {
+    margin-right: 20%;
+  }
   .ageinput {
     width: 100%;
     height: 60%;

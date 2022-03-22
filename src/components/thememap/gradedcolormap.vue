@@ -171,8 +171,8 @@ h2 {
 #features {
   background: url("../../assets/img/theme/themeBG.png") no-repeat;
   background-size: 100% 100%;
-  top: 48%;
-  left: 20.5%;
+  top: 41%;
+  left: 25.5%;
   height: 14%;
   width: 15%;
 }
@@ -185,7 +185,7 @@ h2 {
   line-height: 18px;
   height: 26%;
   margin-bottom: 19%;
-  margin-right: 21%;
+  margin-right: 26%;
   width: 10%;
 }
 .state-legend {

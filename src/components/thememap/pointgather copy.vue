@@ -5,33 +5,33 @@
       <div class="dataselect">
         <el-menu>
           <el-menu-item
-            id="button3"
             style="padding: 1%"
             index="1"
+            @click="show(1)"
             :class="index === 1 ? 'active' : ''"
             plain
           >
             <span class="tab" slot="title">景点数据</span>
           </el-menu-item>
           <el-menu-item
-            id="button4"
             index="2"
+            @click="show(2)"
             :class="index === 2 ? 'active' : ''"
             plain
           >
             <span class="tab" slot="title">评论数据</span>
           </el-menu-item>
           <el-menu-item
-            id="button5"
             index="3"
+            @click="show(3)"
             :class="index === 3 ? 'active' : ''"
             plain
           >
             <span class="tab" slot="title">游记数据</span>
           </el-menu-item>
           <el-menu-item
-            id="button6"
             index="4"
+            @click="show(4)"
             :class="index === 4 ? 'active' : ''"
             plain
           >
@@ -39,9 +39,9 @@
           </el-menu-item>
         </el-menu>
       </div>
-      <div class="creatmap">
-        <!-- <el-button id="button2">开始制图</el-button> -->
-      </div>
+      <!-- <div class="creatmap">
+          <el-button id="button2">开始制图</el-button>
+      </div> -->
     </div>
     <div class="control">
       <div style="padding-top: 10px">
@@ -49,6 +49,15 @@
       </div>
       <div style="padding-top: 10px">
         <el-button id="button2">执行聚类</el-button>
+      </div>
+      <div style="padding-top: 10px">
+        <el-button id="button3">调用数据源1</el-button>
+      </div>
+      <div style="padding-top: 10px">
+        <el-button id="button4">调用数据源2</el-button>
+      </div>
+      <div style="padding-top: 10px">
+        <el-button id="button5">调用数据源3</el-button>
       </div>
     </div>
     <div class="my-class"></div>
@@ -304,7 +313,7 @@ export default {
   z-index: 1;
   width: 40%;
   height: 6%;
-  bottom: 45%;
+  bottom: 38.5%;
   left: 25.6%;
   display: flex;
   flex-direction: row;
@@ -313,8 +322,8 @@ export default {
 
   .dataselect {
     height: 100%;
-    width: 93%;
-    background-color: #12526ea9;
+    width: 90%;
+    background-color: #5b8b9767;
     .el-menu {
       width: 100%;
       height: 100%;
@@ -384,11 +393,11 @@ export default {
   background: transparent;
   .control {
     position: absolute;
-    left: 54%;
-    top: 48%;
-    width: 8%;
+    left: 49%;
+    top: 19%;
+    width: 14%;
     z-index: 9999;
-    height: 14%;
+    height: 38%;
     // #button1 {
     //   background: url("../../assets/img/框.png");
     //   z-index: 9999;

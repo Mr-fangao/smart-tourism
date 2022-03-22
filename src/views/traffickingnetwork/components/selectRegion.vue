@@ -7,9 +7,9 @@
           <span @click="shrink()"><i :class="ioc" /></span>
           <span id="wen" @click="cityChoice()">{{ json.name }}</span>
         </li>
-        <li>
+        <!-- <li>
           <icon-svg icon-class="icon-chengshi" class="img" />
-        </li>
+        </li> -->
       </ul>
     </div>
     <!-- 弹出框 -->
@@ -270,7 +270,7 @@ export default {
   top: 5px;
   right: 385px;
   border: 1px solid rgba(25, 186, 139, 0.2);
-  background-color: rgba(40, 43, 57, 0.8);
+    background-color: rgb(22 100 125 / 61%);
   color: #fff;
   font-family: KuHei;
   font-size: 14px;
@@ -324,7 +324,7 @@ export default {
   width: 1000px;
   height: 655px;
   border: 1px solid rgba(25, 186, 139, 0.2);
-  background-color: rgba(40, 43, 57, 1);
+    background-color: rgb(22 100 125 / 61%);
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);

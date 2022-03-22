@@ -152,7 +152,7 @@ export default {
     eventBum.$on("json", (json) => {
       this.json.name = json.name;
       this.json.where = json.where;
-      this.scaleChange();
+      // this.scaleChange();
       // 地图定位
     });
   },

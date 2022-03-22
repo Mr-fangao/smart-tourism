@@ -117,6 +117,7 @@
       <span class="text1">区域查询</span>
       <span>清除查询</span>
     </div> -->
+
   </div>
 </template>
 
@@ -164,6 +165,11 @@ export default {
       pointsdata: [{ lng: "0", lat: "0" }],
       pointsflag: 0,
     };
+  },
+    filters: {
+    rounding(value) {
+      return value.toFixed(2);
+    },
   },
   mounted() {
     this.getHeight();
