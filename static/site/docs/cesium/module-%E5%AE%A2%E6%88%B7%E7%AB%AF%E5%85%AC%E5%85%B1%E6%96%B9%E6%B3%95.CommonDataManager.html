@@ -1,0 +1,3316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> CommonDataManager</title>
+
+  <script src="../cdn/run_prettify.js"></script>
+  <script src="../cdn/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="../cdn/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="../cdn/googleapis.css" rel="stylesheet">
+  <link href="../cdn/prettify.css" rel="stylesheet">
+  <link rel="stylesheet" href="../cdn/all.css" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="../cdn/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="../cdn/mapgis.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="../cdn/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+             
+                <a class="image" href="/">
+                    <img class="mapgis-webclient-logo" src="../image/mapgis_blue.png" alt="logo">
+                </a>
+            
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API
+                </a>
+                <div class="dropdown is-hoverable is-right">
+                    <a class="dropdown-trigger link">
+                        帮助向导
+                    </a>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-content">
+                        
+                            
+                                <a class="dropdown-item" href="tutorial-1.快速入门.html">
+                                    1.快速入门
+                                </a>
+                            
+                        
+                        </div>
+                    </div>
+                </div>
+                 
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/cesium/index.html"
+                        >
+                            Cesium
+                        </a>
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/mapboxgl/index.html"
+                        >
+                            MapboxGL
+                        </a>
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/leaflet/index.html"
+                        >
+                            Leaflet
+                        </a>
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/openlayers/index.html"
+                        >
+                            OpenLayers
+                        </a>
+                    
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            <div>
+                <span class="mapgis-api-document-span"><a href="index.html">API文档</a></span>
+            </div>
+            
+                <div class="search-wrapper">
+                    <input id="search" type="text" placeholder="搜索文档..." class="input">
+                </div>
+            
+            <nav>
+                
+                    <div class="category"><div class="mapgis-menu-span">模块</div><ul class="mapgis-sidebar-menus"><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E4%25BA%258B%25E4%25BB%25B6%25E7%25AE%25A1%25E7%2590%2586.html">客户端事件管理</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%2585%25AC%25E5%2585%25B1%25E6%2596%25B9%25E6%25B3%2595.html">客户端公共方法</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.html">客户端可视化</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596%25E5%2588%2586%25E6%259E%2590.html">客户端可视化分析</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.html">客户端数据服务</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%25B8%25B2%25E6%259F%2593.html">客户端渲染</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E8%25A7%2586%25E5%259B%25BE%25E7%25AE%25A1%25E7%2590%2586.html">客户端视图管理</a></li><li><a href="module-%25E6%259C%258D%25E5%258A%25A1%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259F%25A5%25E8%25AF%25A2.html">服务端数据查询</a></li><li><a href="module-%25E7%2594%25A8%25E6%2588%25B7%25E7%2595%258C%25E9%259D%25A2.html">用户界面</a></li></ul><div class="mapgis-menu-span">类名</div><ul class="mapgis-sidebar-menus"><li><a href="BaseLayer%2520%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1%25E5%259F%25BA%25E7%25B1%25BB.html">BaseLayer 数据服务基类</a></li><li><a href="CesiumSelectionIndicator.html">CesiumSelectionIndicator</a></li><li><a href="MapGIS2dDocProvider.html">MapGIS2dDocProvider</a></li><li><a href="module.exports_module.exports.html">exports</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E4%25BA%258B%25E4%25BB%25B6%25E7%25AE%25A1%25E7%2590%2586.MouseEventManager.html">MouseEventManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%2585%25AC%25E5%2585%25B1%25E6%2596%25B9%25E6%25B3%2595.CommonDataManager.html">CommonDataManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%2585%25AC%25E5%2585%25B1%25E6%2596%25B9%25E6%25B3%2595.CommonFuncManager.html">CommonFuncManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.EchartsLayer.html">EchartsLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.EntityController.html">EntityController</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.LabelLayer.html">LabelLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.MapVLayer.html">MapVLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.PopupController.html">PopupController</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.PopupLayer.html">PopupLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596%25E5%2588%2586%25E6%259E%2590.AdvancedAnalysisManager.html">AdvancedAnalysisManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596%25E5%2588%2586%25E6%259E%2590.AnalysisManager.html">AnalysisManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.LayerManager.html">LayerManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.M3DLayer.html">M3DLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.OGCLayer.html">OGCLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.TerrainLayer.html">TerrainLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.ThirdPartyLayer.html">ThirdPartyLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.TilesLayer.html">TilesLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%25B8%25B2%25E6%259F%2593.VectorTileLayer.html">VectorTileLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E8%25A7%2586%25E5%259B%25BE%25E7%25AE%25A1%25E7%2590%2586.SceneManager.html">SceneManager</a></li><li><a href="module-%25E6%259C%258D%25E5%258A%25A1%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259F%25A5%25E8%25AF%25A2.G3DDocQuery.html">G3DDocQuery</a></li><li><a href="module-%25E6%259C%258D%25E5%258A%25A1%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259F%25A5%25E8%25AF%25A2.MapDocQuery.html">MapDocQuery</a></li><li><a href="PopupElement.html">PopupElement</a></li><li><a href="WmtsTileProvider.html">WmtsTileProvider</a></li></ul><div class="mapgis-menu-span">全局</div><ul class="mapgis-sidebar-menus"><li><a href="global.html#addGridInfo">addGridInfo</a></li><li><a href="global.html#addImageLayer">addImageLayer</a></li><li><a href="global.html#calAngleOf3Pnt">calAngleOf3Pnt</a></li><li><a href="global.html#LayerType">LayerType</a></li><li><a href="global.html#removeAllEntities">removeAllEntities</a></li><li><a href="global.html#removeAllImageLayers">removeAllImageLayers</a></li><li><a href="global.html#removeAllPrimitives">removeAllPrimitives</a></li><li><a href="global.html#removeDocs">removeDocs</a></li><li><a href="global.html#removeEntity">removeEntity</a></li><li><a href="global.html#removeGridInfo">removeGridInfo</a></li><li><a href="global.html#removeImageLayer">removeImageLayer</a></li><li><a href="global.html#removeM3dLayer">removeM3dLayer</a></li><li><a href="global.html#removePrimitive">removePrimitive</a></li><li><a href="global.html#removeTerrain">removeTerrain</a></li><li><a href="global.html#updataPopupPosition">updataPopupPosition</a></li><li><a href="global.html#zoomToM3dLayer">zoomToM3dLayer</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <span class="page-title-sub">CommonDataManager</span>
+                    <span class="page-title-main">Class</span>
+                </header>
+                
+
+
+
+
+<section>
+
+<header>
+    
+        <h2><span class="attribs"><span class="type-signature"></span></span>
+            <span class="ancestors"><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%2585%25AC%25E5%2585%25B1%25E6%2596%25B9%25E6%25B3%2595.html">客户端公共方法</a>.</span>CommonDataManager<span class="signature">()</span><span class="type-signature"></span></h2>
+        
+            <div class="class-description"><p>通用数据管理类</p></div>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class='vertical-section'>
+                <div class="members">
+                    <div class="member">
+                        <div class=name>
+                            <span class="mapgis-api-function">Fx</span><span class="mapgis-api-function-title">构造函数</span>
+                        </div>
+                        
+
+
+    
+    <h4 class="name" id="CommonDataManager">
+        <a class="href-link" href="#CommonDataManager">#</a>
+        
+        <span class="code-name">
+            
+                new CommonDataManager<span class="signature">()</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>该类实现了通用数据的添加与删除功能</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>参数:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>名称</th>
+            
+
+            <th>类型</th>
+
+            
+
+            
+
+            <th class="last">描述</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>option.viewer</code></td>
+  
+
+  <td class="type">
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>视图</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">作者:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>三维基础平台研发中心·冯桂英</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="manager_CommonDataManager.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="manager_CommonDataManager.js.html">manager/CommonDataManager.js</a>, <a href="manager_CommonDataManager.js.html#line4">line 4</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        
+    
+    </div>
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class='vertical-section'>
+            <h1>方法</h1>
+            <div class="members">
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="append3DTile">
+        <a class="href-link" href="#append3DTile">#</a>
+        
+        <span class="code-name">
+            
+                append3DTile<span class="signature">(url, onsuccess, options)</span><span class="type-signature"> &rarr; {Object}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>通过路径添加3DTile数据</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>参数:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>名称</th>
+            
+
+            <th>类型</th>
+
+            
+
+            
+
+            <th class="last">描述</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>url</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">String</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>路径</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>onsuccess</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">function</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>成功回调</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>options</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Object</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>扩展参数</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://cesium.com/docs/cesiumjs-ref-doc/Cesium3DTileset.html">https://cesium.com/docs/cesiumjs-ref-doc/Cesium3DTileset.html</a></li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="manager_CommonDataManager.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="manager_CommonDataManager.js.html">manager/CommonDataManager.js</a>, <a href="manager_CommonDataManager.js.html#line55">line 55</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>返回值:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>kml数据对象</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">Object</span>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+    <h5>Example</h5>
+    
+    
+        <pre class="prettyprint"><code>function load(layer) {
+                viewer.flyTo(layer);
+                console.log("这是一个加载成功回调");
+            }
+        tiles = cesiumFun.append3DTile('../../../../../../static/data/BatchedTilesets/tileset.json', load);</code></pre>
+    
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="appendCZML">
+        <a class="href-link" href="#appendCZML">#</a>
+        
+        <span class="code-name">
+            
+                appendCZML<span class="signature">(url, successCall)</span><span class="type-signature"> &rarr; {CzmlDataSource}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>添加czml文件</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>参数:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>名称</th>
+            
+
+            <th>类型</th>
+
+            
+
+            
+
+            <th class="last">描述</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>url</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">String</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>文件地址</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>successCall</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">function</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>成功后的回调</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="manager_CommonDataManager.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="manager_CommonDataManager.js.html">manager/CommonDataManager.js</a>, <a href="manager_CommonDataManager.js.html#line208">line 208</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>返回值:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>czml 对象</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">CzmlDataSource</span>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+    <h5>Example</h5>
+    
+    
+        <pre class="prettyprint"><code>var czml = cesiumFun.addCZML('SampleData/model.czml');</code></pre>
+    
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="appendGeoJson">
+        <a class="href-link" href="#appendGeoJson">#</a>
+        
+        <span class="code-name">
+            
+                appendGeoJson<span class="signature">(url)</span><span class="type-signature"> &rarr; {GeoJsonDataSource}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>添加GeoJson文件</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>参数:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>名称</th>
+            
+
+            <th>类型</th>
+
+            
+
+            
+
+            <th class="last">描述</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>url</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">String</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>文件地址</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="manager_CommonDataManager.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="manager_CommonDataManager.js.html">manager/CommonDataManager.js</a>, <a href="manager_CommonDataManager.js.html#line228">line 228</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>返回值:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>数据对象</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">GeoJsonDataSource</span>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+    <h5>Example</h5>
+    
+    
+        <pre class="prettyprint"><code>let geoJson = cesiumFun.appendGeoJson('SampleData/china.topojson');</code></pre>
+    
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="appendImageByUrl">
+        <a class="href-link" href="#appendImageByUrl">#</a>
+        
+        <span class="code-name">
+            
+                appendImageByUrl<span class="signature">(url, west, south, east, north, options)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>通过地址添加图片，包括本地图片和网络图片</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>参数:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>名称</th>
+            
+
+            <th>类型</th>
+
+            
+
+            
+
+            <th class="last">描述</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>url</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">String</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>图片地址</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>west</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Number</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>西经</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>south</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Number</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>南纬</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>east</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Number</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>东经</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>north</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Number</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>北纬</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>options</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Object</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>扩展参数</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="manager_CommonDataManager.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="manager_CommonDataManager.js.html">manager/CommonDataManager.js</a>, <a href="manager_CommonDataManager.js.html#line18">line 18</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    
+        <pre class="prettyprint"><code>let cesiumFun = new CommonDataManager({viewer:viewer});let singleImage = cesiumFun.appendImageByUrl('.../../../../../../../../static/libs/Cesium/MapGIS/image/2.5D2.png',110,20,114,30);</code></pre>
+    
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="appendKml">
+        <a class="href-link" href="#appendKml">#</a>
+        
+        <span class="code-name">
+            
+                appendKml<span class="signature">(url, options)</span><span class="type-signature"> &rarr; {KmlDataSource}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>加载Kml、kmz数据</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>参数:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>名称</th>
+            
+
+            <th>类型</th>
+
+            
+
+            
+
+            <th class="last">描述</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>url</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">String</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>路径</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>options</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Object</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>参数</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://cesium.com/docs/cesiumjs-ref-doc/KmlDataSource.html">https://cesium.com/docs/cesiumjs-ref-doc/KmlDataSource.html</a></li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="manager_CommonDataManager.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="manager_CommonDataManager.js.html">manager/CommonDataManager.js</a>, <a href="manager_CommonDataManager.js.html#line179">line 179</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>返回值:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>kml数据对象</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">KmlDataSource</span>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="appendModel">
+        <a class="href-link" href="#appendModel">#</a>
+        
+        <span class="code-name">
+            
+                appendModel<span class="signature">(id, url, lon, lat, height, scale, options)</span><span class="type-signature"> &rarr; {Object}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>添加模型（gltf文件）</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>参数:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>名称</th>
+            
+
+            <th>类型</th>
+
+            
+            <th>属性</th>
+            
+
+            
+
+            <th class="last">描述</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>id</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Number</span>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+
+      
+
+      
+      </td>
+  
+
+  
+
+  <td class="description last"><p>模型id</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>url</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">String</span>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+
+      
+
+      
+      </td>
+  
+
+  
+
+  <td class="description last"><p>模型url路径</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>lon</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Number</span>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+
+      
+
+      
+      </td>
+  
+
+  
+
+  <td class="description last"><p>模型所在经度</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>lat</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Number</span>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+
+      
+
+      
+      </td>
+  
+
+  
+
+  <td class="description last"><p>模型坐在纬度</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>height</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Number</span>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+
+      
+
+      
+      </td>
+  
+
+  
+
+  <td class="description last"><p>高度</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>scale</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Number</span>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+
+      
+
+      
+      </td>
+  
+
+  
+
+  <td class="description last"><p>缩放比</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>options</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Object</span>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+
+      
+
+      
+      </td>
+  
+
+  
+
+  <td class="description last"><p>包含以下参数</p></td>
+</tr>
+
+  
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>color</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Color</span>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
+
+      
+
+      
+      </td>
+  
+
+  
+
+  <td class="description last"><p>颜色</p></td>
+</tr>
+
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>colorBlendMode</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">ColorBlendMode</span>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
+
+      
+
+      
+      </td>
+  
+
+  
+
+  <td class="description last"><p>颜色混合模式 Cesium.ColorBlendMode.MIX</p></td>
+</tr>
+
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>colorBlendAmount</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Number</span>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
+
+      
+
+      
+      </td>
+  
+
+  
+
+  <td class="description last"><p>颜色混合程度</p></td>
+</tr>
+
+  
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="manager_CommonDataManager.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="manager_CommonDataManager.js.html">manager/CommonDataManager.js</a>, <a href="manager_CommonDataManager.js.html#line98">line 98</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>返回值:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>model 移除通过 removeModel()</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">Object</span>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+    <h5>Example</h5>
+    
+    
+        <pre class="prettyprint"><code>let modelUrl = '../../../../../../static/data/CesiumAir/Cesium_Air.gltf';
+            cesiumFun.appendModels('1', modelUrl, 114, 28, 200, 100000, {
+                color: Cesium.Color.RED,
+                colorBlendMode: Cesium.ColorBlendMode.MIX,//  MIX是混合 Cesium.ColorBlendMode.HIGHLIGHT, HIGHLIGHT是高亮
+                colorBlendAmount: 0.4 //这个是程度
+            });</code></pre>
+    
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="appendModels">
+        <a class="href-link" href="#appendModels">#</a>
+        
+        <span class="code-name">
+            
+                appendModels<span class="signature">(modelsString, successCall)</span><span class="type-signature"> &rarr; {Object}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>批量添加模型</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>参数:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>名称</th>
+            
+
+            <th>类型</th>
+
+            
+
+            
+
+            <th class="last">描述</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>modelsString</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">String</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>模型组织</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>successCall</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">function</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>成功后的回调</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="manager_CommonDataManager.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="manager_CommonDataManager.js.html">manager/CommonDataManager.js</a>, <a href="manager_CommonDataManager.js.html#line143">line 143</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>返回值:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>模型层对象</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">Object</span>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="appendModels">
+        <a class="href-link" href="#appendModels">#</a>
+        
+        <span class="code-name">
+            
+                appendModels<span class="signature">(filePath, successCall)</span><span class="type-signature"> &rarr; {Object}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>通过文件批量添加模型</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>参数:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>名称</th>
+            
+
+            <th>类型</th>
+
+            
+
+            
+
+            <th class="last">描述</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>filePath</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">String</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>模型组织文件</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>successCall</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">function</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>成功后的回调</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="manager_CommonDataManager.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="manager_CommonDataManager.js.html">manager/CommonDataManager.js</a>, <a href="manager_CommonDataManager.js.html#line161">line 161</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>返回值:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>模型层对象</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">Object</span>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="remove3DTile">
+        <a class="href-link" href="#remove3DTile">#</a>
+        
+        <span class="code-name">
+            
+                remove3DTile<span class="signature">(tileset)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>移除3dTile对象</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>参数:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>名称</th>
+            
+
+            <th>类型</th>
+
+            
+
+            
+
+            <th class="last">描述</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>tileset</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Object</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>3dTile对象</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="manager_CommonDataManager.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="manager_CommonDataManager.js.html">manager/CommonDataManager.js</a>, <a href="manager_CommonDataManager.js.html#line89">line 89</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="removeAllDataSource">
+        <a class="href-link" href="#removeAllDataSource">#</a>
+        
+        <span class="code-name">
+            
+                removeAllDataSource<span class="signature">(isDestroy)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>删除所有数据源：与以上几个接口配合使用</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>参数:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>名称</th>
+            
+
+            <th>类型</th>
+
+            
+
+            
+
+            <th class="last">描述</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>isDestroy</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Boolean</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>是否销毁</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="manager_CommonDataManager.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="manager_CommonDataManager.js.html">manager/CommonDataManager.js</a>, <a href="manager_CommonDataManager.js.html#line288">line 288</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="removeDataSource">
+        <a class="href-link" href="#removeDataSource">#</a>
+        
+        <span class="code-name">
+            
+                removeDataSource<span class="signature">(datasource, isDestroy)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>移除数据对象</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>参数:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>名称</th>
+            
+
+            <th>类型</th>
+
+            
+
+            
+
+            <th class="last">描述</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>datasource</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">DataSource</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>模型组织</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>isDestroy</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Boolean</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>是否销毁</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="manager_CommonDataManager.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="manager_CommonDataManager.js.html">manager/CommonDataManager.js</a>, <a href="manager_CommonDataManager.js.html#line274">line 274</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="removeImage">
+        <a class="href-link" href="#removeImage">#</a>
+        
+        <span class="code-name">
+            
+                removeImage<span class="signature">(imageryLayer, isDestroy)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>移除添加的图片</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>参数:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>名称</th>
+            
+
+            <th>类型</th>
+
+            
+
+            
+
+            <th class="last">描述</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>imageryLayer</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Object</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>添加的图片对象</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>isDestroy</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Boolean</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>是否销毁图片对象</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="manager_CommonDataManager.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="manager_CommonDataManager.js.html">manager/CommonDataManager.js</a>, <a href="manager_CommonDataManager.js.html#line43">line 43</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="removeModel">
+        <a class="href-link" href="#removeModel">#</a>
+        
+        <span class="code-name">
+            
+                removeModel<span class="signature">(model)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>移除模型</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>参数:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>名称</th>
+            
+
+            <th>类型</th>
+
+            
+
+            
+
+            <th class="last">描述</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>model</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Model</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>模型对象</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="manager_CommonDataManager.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="manager_CommonDataManager.js.html">manager/CommonDataManager.js</a>, <a href="manager_CommonDataManager.js.html#line255">line 255</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="removeModels">
+        <a class="href-link" href="#removeModels">#</a>
+        
+        <span class="code-name">
+            
+                removeModels<span class="signature">(models)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>移除通过appendModelsByFile()和appendModels()添加的模型</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>参数:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>名称</th>
+            
+
+            <th>类型</th>
+
+            
+
+            
+
+            <th class="last">描述</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>models</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">DataSource</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>模型组织</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="manager_CommonDataManager.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="manager_CommonDataManager.js.html">manager/CommonDataManager.js</a>, <a href="manager_CommonDataManager.js.html#line265">line 265</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+            </div>
+        </div>
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>文档生成<a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://www.smaryun.com" target="_blank">司马云</a> <span>© 2020 云生态圈</span>
+                        <a href="http://develop.smaryun.com:8899/" target="_blank">MapGIS Client for JavaScript</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+<script src="scripts/search.js"> </script>
+
+</body>
+</html>

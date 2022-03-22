@@ -1,0 +1,1888 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> MapVLayer</title>
+
+  <script src="../cdn/run_prettify.js"></script>
+  <script src="../cdn/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="../cdn/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="../cdn/googleapis.css" rel="stylesheet">
+  <link href="../cdn/prettify.css" rel="stylesheet">
+  <link rel="stylesheet" href="../cdn/all.css" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="../cdn/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="../cdn/mapgis.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="../cdn/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+             
+                <a class="image" href="/">
+                    <img class="mapgis-webclient-logo" src="../image/mapgis_blue.png" alt="logo">
+                </a>
+            
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API
+                </a>
+                <div class="dropdown is-hoverable is-right">
+                    <a class="dropdown-trigger link">
+                        帮助向导
+                    </a>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-content">
+                        
+                            
+                                <a class="dropdown-item" href="tutorial-1.快速入门.html">
+                                    1.快速入门
+                                </a>
+                            
+                        
+                        </div>
+                    </div>
+                </div>
+                 
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/cesium/index.html"
+                        >
+                            Cesium
+                        </a>
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/mapboxgl/index.html"
+                        >
+                            MapboxGL
+                        </a>
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/leaflet/index.html"
+                        >
+                            Leaflet
+                        </a>
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/openlayers/index.html"
+                        >
+                            OpenLayers
+                        </a>
+                    
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            <div>
+                <span class="mapgis-api-document-span"><a href="index.html">API文档</a></span>
+            </div>
+            
+                <div class="search-wrapper">
+                    <input id="search" type="text" placeholder="搜索文档..." class="input">
+                </div>
+            
+            <nav>
+                
+                    <div class="category"><div class="mapgis-menu-span">模块</div><ul class="mapgis-sidebar-menus"><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E4%25BA%258B%25E4%25BB%25B6%25E7%25AE%25A1%25E7%2590%2586.html">客户端事件管理</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%2585%25AC%25E5%2585%25B1%25E6%2596%25B9%25E6%25B3%2595.html">客户端公共方法</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.html">客户端可视化</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596%25E5%2588%2586%25E6%259E%2590.html">客户端可视化分析</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.html">客户端数据服务</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%25B8%25B2%25E6%259F%2593.html">客户端渲染</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E8%25A7%2586%25E5%259B%25BE%25E7%25AE%25A1%25E7%2590%2586.html">客户端视图管理</a></li><li><a href="module-%25E6%259C%258D%25E5%258A%25A1%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259F%25A5%25E8%25AF%25A2.html">服务端数据查询</a></li><li><a href="module-%25E7%2594%25A8%25E6%2588%25B7%25E7%2595%258C%25E9%259D%25A2.html">用户界面</a></li></ul><div class="mapgis-menu-span">类名</div><ul class="mapgis-sidebar-menus"><li><a href="BaseLayer%2520%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1%25E5%259F%25BA%25E7%25B1%25BB.html">BaseLayer 数据服务基类</a></li><li><a href="CesiumSelectionIndicator.html">CesiumSelectionIndicator</a></li><li><a href="MapGIS2dDocProvider.html">MapGIS2dDocProvider</a></li><li><a href="module.exports_module.exports.html">exports</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E4%25BA%258B%25E4%25BB%25B6%25E7%25AE%25A1%25E7%2590%2586.MouseEventManager.html">MouseEventManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%2585%25AC%25E5%2585%25B1%25E6%2596%25B9%25E6%25B3%2595.CommonDataManager.html">CommonDataManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%2585%25AC%25E5%2585%25B1%25E6%2596%25B9%25E6%25B3%2595.CommonFuncManager.html">CommonFuncManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.EchartsLayer.html">EchartsLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.EntityController.html">EntityController</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.LabelLayer.html">LabelLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.MapVLayer.html">MapVLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.PopupController.html">PopupController</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.PopupLayer.html">PopupLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596%25E5%2588%2586%25E6%259E%2590.AdvancedAnalysisManager.html">AdvancedAnalysisManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596%25E5%2588%2586%25E6%259E%2590.AnalysisManager.html">AnalysisManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.LayerManager.html">LayerManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.M3DLayer.html">M3DLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.OGCLayer.html">OGCLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.TerrainLayer.html">TerrainLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.ThirdPartyLayer.html">ThirdPartyLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.TilesLayer.html">TilesLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%25B8%25B2%25E6%259F%2593.VectorTileLayer.html">VectorTileLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E8%25A7%2586%25E5%259B%25BE%25E7%25AE%25A1%25E7%2590%2586.SceneManager.html">SceneManager</a></li><li><a href="module-%25E6%259C%258D%25E5%258A%25A1%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259F%25A5%25E8%25AF%25A2.G3DDocQuery.html">G3DDocQuery</a></li><li><a href="module-%25E6%259C%258D%25E5%258A%25A1%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259F%25A5%25E8%25AF%25A2.MapDocQuery.html">MapDocQuery</a></li><li><a href="PopupElement.html">PopupElement</a></li><li><a href="WmtsTileProvider.html">WmtsTileProvider</a></li></ul><div class="mapgis-menu-span">全局</div><ul class="mapgis-sidebar-menus"><li><a href="global.html#addGridInfo">addGridInfo</a></li><li><a href="global.html#addImageLayer">addImageLayer</a></li><li><a href="global.html#calAngleOf3Pnt">calAngleOf3Pnt</a></li><li><a href="global.html#LayerType">LayerType</a></li><li><a href="global.html#removeAllEntities">removeAllEntities</a></li><li><a href="global.html#removeAllImageLayers">removeAllImageLayers</a></li><li><a href="global.html#removeAllPrimitives">removeAllPrimitives</a></li><li><a href="global.html#removeDocs">removeDocs</a></li><li><a href="global.html#removeEntity">removeEntity</a></li><li><a href="global.html#removeGridInfo">removeGridInfo</a></li><li><a href="global.html#removeImageLayer">removeImageLayer</a></li><li><a href="global.html#removeM3dLayer">removeM3dLayer</a></li><li><a href="global.html#removePrimitive">removePrimitive</a></li><li><a href="global.html#removeTerrain">removeTerrain</a></li><li><a href="global.html#updataPopupPosition">updataPopupPosition</a></li><li><a href="global.html#zoomToM3dLayer">zoomToM3dLayer</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <span class="page-title-sub">MapVLayer</span>
+                    <span class="page-title-main">Class</span>
+                </header>
+                
+
+
+
+
+<section>
+
+<header>
+    
+        <h2><span class="attribs"><span class="type-signature"></span></span>
+            <span class="ancestors"><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.html">客户端可视化</a>.</span>MapVLayer<span class="signature">(map, dataset, mapVOptions, container)</span><span class="type-signature"></span></h2>
+        
+            <div class="class-description"><p>Mapv图表图层</p></div>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class='vertical-section'>
+                <div class="members">
+                    <div class="member">
+                        <div class=name>
+                            <span class="mapgis-api-function">Fx</span><span class="mapgis-api-function-title">构造函数</span>
+                        </div>
+                        
+
+
+    
+    <h4 class="name" id="MapVLayer">
+        <a class="href-link" href="#MapVLayer">#</a>
+        
+        <span class="code-name">
+            
+                new MapVLayer<span class="signature">(map, dataset, mapVOptions, container)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>CesiumZondy.Overlayer.MapVLayer 基于新建立的Html Element嵌入mapv</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>参数:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>名称</th>
+            
+
+            <th>类型</th>
+
+            
+            <th>属性</th>
+            
+
+            
+            <th>默认值</th>
+            
+
+            <th class="last">描述</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>map</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Object</span>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+
+      
+
+      
+      </td>
+  
+
+  
+      <td class="default">
+      
+      </td>
+  
+
+  <td class="description last"><p>传入的cesium的地图对象Viewer</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>dataset</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">MapvDataSet</span>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+
+      
+
+      
+      </td>
+  
+
+  
+      <td class="default">
+      
+      </td>
+  
+
+  <td class="description last"><p>传入的mapv的属性</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>mapVOptions</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">MapvOption</span>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+
+      
+
+      
+      </td>
+  
+
+  
+      <td class="default">
+      
+      </td>
+  
+
+  <td class="description last"><p>可选参数。https://github.com/huiyan-fe/mapv/blob/master/API.md</p></td>
+</tr>
+
+  
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>cesium</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Object</span>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
+
+      
+
+      
+      </td>
+  
+
+  
+      <td class="default">
+      
+      </td>
+  
+
+  <td class="description last"><p>cesium的渲染模式</p></td>
+</tr>
+
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>cesium.postRender</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Boolean</span>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
+
+      
+
+      
+      </td>
+  
+
+  
+      <td class="default">
+      
+          false
+      
+      </td>
+  
+
+  <td class="description last"><p>是否实时渲染</p></td>
+</tr>
+
+  
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>mapVOptionscesium.cesium.postRenderFrame</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Boolean</span>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
+
+      
+
+      
+      </td>
+  
+
+  
+      <td class="default">
+      
+          30
+      
+      </td>
+  
+
+  <td class="description last"><p>每间隔多少帧渲染一次</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>container</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Element</span>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+
+      
+
+      
+      </td>
+  
+
+  
+      <td class="default">
+      
+      </td>
+  
+
+  <td class="description last"><p>外部传入的div;外接的方式使用mapv</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">作者:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>基础平台/创新中心 潘卓然 ParnDeedlit</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="overlay_MapvLayer.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="overlay_MapvLayer.js.html">overlay/MapvLayer.js</a>, <a href="overlay_MapvLayer.js.html#line6">line 6</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    
+        <pre class="prettyprint"><code>// 构建对应的dataset
+    var dataSet = new mapv.DataSet(data);
+
+    // 设置对应的参数
+    // https://github.com/huiyan-fe/mapv/blob/master/API.md
+    var options = {
+    context: '2d',    //cesium必须设置画布为2d
+    postRender: false,
+    postRenderFrame: 5,
+    //fillStyle: 'rgba(255, 250, 50, 0.7)',
+    label: {
+        show: true,
+        fillStyle: 'white',
+        shadowColor: 'yellow',
+        font: '15px Arial',
+        shadowBlur: 10
+    },
+    size: 30,
+    gradient: {
+        0: "rgba(49, 54, 149, 0)",
+        0.2: "rgba(69,117,180, 0.7)",
+        0.3: "rgba(116,173,209, 0.7)",
+        0.4: "rgba(171,217,233, 0.7)",
+        0.5: "rgba(224,243,248, 0.7)",
+        0.6: "rgba(254,224,144,0.7)",
+        0.7: "rgba(253,174,97,0.7)",
+        0.8: "rgba(244,109,67,0.8)",
+        0.9: "rgba(215,48,39,0.8)",
+        0.95: "rgba(165, 0, 38,0.8)"
+    },
+    max: 100,
+    draw: 'honeycomb'   // 绘制蜂窝图
+    }
+    // 声明cesium的mapv图层并将其显示到三维球上
+    var mapvLayer = new CesiumZondy.Overlayer.MapvLayer(map, dataSet, options);</code></pre>
+    
+
+
+
+                    </div>
+                </div>
+            </div>
+        
+    
+    </div>
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class='vertical-section'>
+            <h1>方法</h1>
+            <div class="members">
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="addData">
+        <a class="href-link" href="#addData">#</a>
+        
+        <span class="code-name">
+            
+                addData<span class="signature">(data, options)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>增加数据</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>参数:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>名称</th>
+            
+
+            <th>类型</th>
+
+            
+
+            
+
+            <th class="last">描述</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>data</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Array</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>数据.</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>options</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Object</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>只做额外增加的字段作用</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://github.com/huiyan-fe/mapv/blob/master/API.md">https://github.com/huiyan-fe/mapv/blob/master/API.md</a></li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="overlay_MapvLayer.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="overlay_MapvLayer.js.html">overlay/MapvLayer.js</a>, <a href="overlay_MapvLayer.js.html#line189">line 189</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="destroy">
+        <a class="href-link" href="#destroy">#</a>
+        
+        <span class="code-name">
+            
+                destroy<span class="signature">()</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>销毁图层-实际调用remove，为了接口保持一致</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="overlay_MapvLayer.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="overlay_MapvLayer.js.html">overlay/MapvLayer.js</a>, <a href="overlay_MapvLayer.js.html#line328">line 328</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="draw">
+        <a class="href-link" href="#draw">#</a>
+        
+        <span class="code-name">
+            
+                draw<span class="signature">()</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>强制重回图层</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="overlay_MapvLayer.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="overlay_MapvLayer.js.html">overlay/MapvLayer.js</a>, <a href="overlay_MapvLayer.js.html#line305">line 305</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="getData">
+        <a class="href-link" href="#getData">#</a>
+        
+        <span class="code-name">
+            
+                getData<span class="signature">(data, options)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>获取数据</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>参数:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>名称</th>
+            
+
+            <th>类型</th>
+
+            
+
+            
+
+            <th class="last">描述</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>data</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Array</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>数据.</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>options</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Object</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>只做额外增加的字段作用</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://github.com/huiyan-fe/mapv/blob/master/API.md">https://github.com/huiyan-fe/mapv/blob/master/API.md</a></li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="overlay_MapvLayer.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="overlay_MapvLayer.js.html">overlay/MapvLayer.js</a>, <a href="overlay_MapvLayer.js.html#line215">line 215</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="hide">
+        <a class="href-link" href="#hide">#</a>
+        
+        <span class="code-name">
+            
+                hide<span class="signature">()</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>隐藏图层</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="overlay_MapvLayer.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="overlay_MapvLayer.js.html">overlay/MapvLayer.js</a>, <a href="overlay_MapvLayer.js.html#line320">line 320</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="remove">
+        <a class="href-link" href="#remove">#</a>
+        
+        <span class="code-name">
+            
+                remove<span class="signature">()</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>销毁图层</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="overlay_MapvLayer.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="overlay_MapvLayer.js.html">overlay/MapvLayer.js</a>, <a href="overlay_MapvLayer.js.html#line336">line 336</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="removeAllData">
+        <a class="href-link" href="#removeAllData">#</a>
+        
+        <span class="code-name">
+            
+                removeAllData<span class="signature">()</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>删除数据</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="overlay_MapvLayer.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="overlay_MapvLayer.js.html">overlay/MapvLayer.js</a>, <a href="overlay_MapvLayer.js.html#line235">line 235</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="show">
+        <a class="href-link" href="#show">#</a>
+        
+        <span class="code-name">
+            
+                show<span class="signature">()</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>显示图层</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="overlay_MapvLayer.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="overlay_MapvLayer.js.html">overlay/MapvLayer.js</a>, <a href="overlay_MapvLayer.js.html#line313">line 313</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="update">
+        <a class="href-link" href="#update">#</a>
+        
+        <span class="code-name">
+            
+                update<span class="signature">()</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>更新图层</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="overlay_MapvLayer.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="overlay_MapvLayer.js.html">overlay/MapvLayer.js</a>, <a href="overlay_MapvLayer.js.html#line350">line 350</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="updateData">
+        <a class="href-link" href="#updateData">#</a>
+        
+        <span class="code-name">
+            
+                updateData<span class="signature">(data, options)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>更新数据</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>参数:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>名称</th>
+            
+
+            <th>类型</th>
+
+            
+
+            
+
+            <th class="last">描述</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>data</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Array</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>数据.</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>options</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Object</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>只做额外增加的字段作用</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://github.com/huiyan-fe/mapv/blob/master/API.md">https://github.com/huiyan-fe/mapv/blob/master/API.md</a></li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="overlay_MapvLayer.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="overlay_MapvLayer.js.html">overlay/MapvLayer.js</a>, <a href="overlay_MapvLayer.js.html#line202">line 202</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+            </div>
+        </div>
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>文档生成<a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://www.smaryun.com" target="_blank">司马云</a> <span>© 2020 云生态圈</span>
+                        <a href="http://develop.smaryun.com:8899/" target="_blank">MapGIS Client for JavaScript</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+<script src="scripts/search.js"> </script>
+
+</body>
+</html>

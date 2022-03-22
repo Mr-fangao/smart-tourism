@@ -1,0 +1,643 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> overlay/EchartsLayer.js</title>
+
+  <script src="../cdn/run_prettify.js"></script>
+  <script src="../cdn/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="../cdn/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="../cdn/googleapis.css" rel="stylesheet">
+  <link href="../cdn/prettify.css" rel="stylesheet">
+  <link rel="stylesheet" href="../cdn/all.css" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="../cdn/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="../cdn/mapgis.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="../cdn/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+             
+                <a class="image" href="/">
+                    <img class="mapgis-webclient-logo" src="../image/mapgis_blue.png" alt="logo">
+                </a>
+            
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API
+                </a>
+                <div class="dropdown is-hoverable is-right">
+                    <a class="dropdown-trigger link">
+                        帮助向导
+                    </a>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-content">
+                        
+                            
+                                <a class="dropdown-item" href="tutorial-1.快速入门.html">
+                                    1.快速入门
+                                </a>
+                            
+                        
+                        </div>
+                    </div>
+                </div>
+                 
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/cesium/index.html"
+                        >
+                            Cesium
+                        </a>
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/mapboxgl/index.html"
+                        >
+                            MapboxGL
+                        </a>
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/leaflet/index.html"
+                        >
+                            Leaflet
+                        </a>
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/openlayers/index.html"
+                        >
+                            OpenLayers
+                        </a>
+                    
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            <div>
+                <span class="mapgis-api-document-span"><a href="index.html">API文档</a></span>
+            </div>
+            
+                <div class="search-wrapper">
+                    <input id="search" type="text" placeholder="搜索文档..." class="input">
+                </div>
+            
+            <nav>
+                
+                    <div class="category"><div class="mapgis-menu-span">模块</div><ul class="mapgis-sidebar-menus"><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E4%25BA%258B%25E4%25BB%25B6%25E7%25AE%25A1%25E7%2590%2586.html">客户端事件管理</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%2585%25AC%25E5%2585%25B1%25E6%2596%25B9%25E6%25B3%2595.html">客户端公共方法</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.html">客户端可视化</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596%25E5%2588%2586%25E6%259E%2590.html">客户端可视化分析</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.html">客户端数据服务</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%25B8%25B2%25E6%259F%2593.html">客户端渲染</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E8%25A7%2586%25E5%259B%25BE%25E7%25AE%25A1%25E7%2590%2586.html">客户端视图管理</a></li><li><a href="module-%25E6%259C%258D%25E5%258A%25A1%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259F%25A5%25E8%25AF%25A2.html">服务端数据查询</a></li><li><a href="module-%25E7%2594%25A8%25E6%2588%25B7%25E7%2595%258C%25E9%259D%25A2.html">用户界面</a></li></ul><div class="mapgis-menu-span">类名</div><ul class="mapgis-sidebar-menus"><li><a href="BaseLayer%2520%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1%25E5%259F%25BA%25E7%25B1%25BB.html">BaseLayer 数据服务基类</a></li><li><a href="CesiumSelectionIndicator.html">CesiumSelectionIndicator</a></li><li><a href="MapGIS2dDocProvider.html">MapGIS2dDocProvider</a></li><li><a href="module.exports_module.exports.html">exports</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E4%25BA%258B%25E4%25BB%25B6%25E7%25AE%25A1%25E7%2590%2586.MouseEventManager.html">MouseEventManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%2585%25AC%25E5%2585%25B1%25E6%2596%25B9%25E6%25B3%2595.CommonDataManager.html">CommonDataManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%2585%25AC%25E5%2585%25B1%25E6%2596%25B9%25E6%25B3%2595.CommonFuncManager.html">CommonFuncManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.EchartsLayer.html">EchartsLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.EntityController.html">EntityController</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.LabelLayer.html">LabelLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.MapVLayer.html">MapVLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.PopupController.html">PopupController</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.PopupLayer.html">PopupLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596%25E5%2588%2586%25E6%259E%2590.AdvancedAnalysisManager.html">AdvancedAnalysisManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596%25E5%2588%2586%25E6%259E%2590.AnalysisManager.html">AnalysisManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.LayerManager.html">LayerManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.M3DLayer.html">M3DLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.OGCLayer.html">OGCLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.TerrainLayer.html">TerrainLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.ThirdPartyLayer.html">ThirdPartyLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.TilesLayer.html">TilesLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%25B8%25B2%25E6%259F%2593.VectorTileLayer.html">VectorTileLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E8%25A7%2586%25E5%259B%25BE%25E7%25AE%25A1%25E7%2590%2586.SceneManager.html">SceneManager</a></li><li><a href="module-%25E6%259C%258D%25E5%258A%25A1%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259F%25A5%25E8%25AF%25A2.G3DDocQuery.html">G3DDocQuery</a></li><li><a href="module-%25E6%259C%258D%25E5%258A%25A1%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259F%25A5%25E8%25AF%25A2.MapDocQuery.html">MapDocQuery</a></li><li><a href="PopupElement.html">PopupElement</a></li><li><a href="WmtsTileProvider.html">WmtsTileProvider</a></li></ul><div class="mapgis-menu-span">全局</div><ul class="mapgis-sidebar-menus"><li><a href="global.html#addGridInfo">addGridInfo</a></li><li><a href="global.html#addImageLayer">addImageLayer</a></li><li><a href="global.html#calAngleOf3Pnt">calAngleOf3Pnt</a></li><li><a href="global.html#LayerType">LayerType</a></li><li><a href="global.html#removeAllEntities">removeAllEntities</a></li><li><a href="global.html#removeAllImageLayers">removeAllImageLayers</a></li><li><a href="global.html#removeAllPrimitives">removeAllPrimitives</a></li><li><a href="global.html#removeDocs">removeDocs</a></li><li><a href="global.html#removeEntity">removeEntity</a></li><li><a href="global.html#removeGridInfo">removeGridInfo</a></li><li><a href="global.html#removeImageLayer">removeImageLayer</a></li><li><a href="global.html#removeM3dLayer">removeM3dLayer</a></li><li><a href="global.html#removePrimitive">removePrimitive</a></li><li><a href="global.html#removeTerrain">removeTerrain</a></li><li><a href="global.html#updataPopupPosition">updataPopupPosition</a></li><li><a href="global.html#zoomToM3dLayer">zoomToM3dLayer</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <span class="page-title-sub">overlay/EchartsLayer.js</span>
+                    <span class="page-title-main">Source</span>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import echarts from 'echarts';
+
+import {
+    CesiumZondy
+} from '../core/Base';
+
+import {
+    MapCoordSys
+} from './echarts/MapCoordSys';
+
+// import Cesium from '../../../node_modules/cesium/Source/Cesium';
+
+var echartsIdIndex = 0;
+
+/** 
+ * @author 基础平台/创新中心 潘卓然
+ * @class module:客户端可视化.EchartsLayer
+ * @classdesc Echarts图表图层
+ * @description cesium的echars 4.0的实现。请详细参考echarts源码,CesiumZondy.Overlayer.EchartsLayer
+ * @see http://echarts.baidu.com/api.html#echarts
+ * @example 这里唯一要注意的是我们中地数码的ceisum的右键事件不是放大缩小而是旋转视角
+ * option = {
+        title: {
+            text: '全国主要城市空气质量 - 百度地图提供数据',
+            textStyle: {
+                color: '#eee'
+            },
+            subtext: 'data from PM25.in',
+            sublink: 'http://www.pm25.in',
+            left: 'center'
+        },
+        legend: {
+            orient: 'vertical',
+            y: 'top',
+            x: 'left',
+            data: ['pm2.5'],
+            textStyle: {
+                color: '#fff'
+            }
+        },
+        tooltip: {
+            trigger: 'item'
+        },
+        cesium: {
+            roam: true
+        },
+        series: [{
+                name: 'pm2.5',
+                type: 'scatter',
+                coordinateSystem: 'cesium',
+                data: convertData(data),
+                symbolSize: function (val) {
+                    return val[2] / 10;
+                },
+                showEffectOn: 'render',
+                rippleEffect: {
+                    brushType: 'stroke'
+                },
+                hoverAnimation: true,
+                label: {
+                    normal: {
+                        formatter: '{b}',
+                        position: 'right',
+                        show: false
+                    },
+                    emphasis: {
+                        show: true
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: '#ddb926'
+                    }
+                },
+                zlevel: 1
+            },
+            {
+                name: 'Top 5',
+                type: 'effectScatter',
+                coordinateSystem: 'cesium',
+                data: convertData(data.sort(function (a, b) {
+                    return b.value - a.value;
+                }).slice(0, 6)),
+                symbolSize: function (val) {
+                    return val[2] / 10;
+                },
+                showEffectOn: 'render',
+                rippleEffect: {
+                    brushType: 'stroke'
+                },
+                hoverAnimation: true,
+                label: {
+                    normal: {
+                        formatter: '{b}',
+                        position: 'right',
+                        show: true
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: '#f4e925',
+                        shadowBlur: 10,
+                        shadowColor: '#333'
+                    }
+                },
+                zlevel: 1
+            }
+        ]
+    }
+    layer = new CesiumZondy.Overlayer.EchartsLayer(map, option).addTo(map);
+ */
+export default class EchartsLayer {
+
+    /**
+     * @param {Cesium.Viewer} map Cesium.Viewer
+     * @param {*} options 百度EchartsOptions https://echarts.apache.org/zh/option.html#title
+     * @param {Boolean} [options.postRender=false] 是否实时渲染
+     * @param {HTMLElement} [container] 传递给echarts绘制canvas的元素，如不传内部自动建立一个画布元素,外接的方式使用请MapvLayer
+     */
+    constructor(map, options, container) {
+        this.map = map;
+        this.scene = map.scene;
+        this.options = options;
+        this.initStats = false;
+
+        this.handler = undefined;
+        this.moveEndEvent = undefined;
+        this.postEvent = undefined;
+        this.postStartEvent = undefined;
+        this.postEndEvent = undefined;
+
+        this.layerId = options.layerId || ("echarts" + echartsIdIndex++);
+        this.layerClass = options.layerClass || "echartlayerdefaultclass";
+
+        this.initDevicePixelRatio();
+
+        this.visible = true;
+        this.canvas = this._createCanvas();
+        this.postRenderTime = 0;
+        this.postRenderFrame = options.postRenderFrame || 30;
+
+/*         this.container = map.container;
+        this.addInnerContainer(); */
+        if (container != undefined) {
+            this.container = container;
+            container.appendChild(this.canvas);
+        } else {
+            var parents = document.getElementsByClassName('cesium-widget');
+            var parent = parents.length > 0 ? parents[0] : map.container;
+            this.container = parent;
+            this.addInnerContainer();
+        }
+
+        this.chart = echarts.init(this.canvas);
+
+        this.initEcharts();
+        this._resizeCanvas();
+
+        this.resize();
+        return this;
+    }
+
+    initDevicePixelRatio() {
+        this.devicePixelRatio = window.devicePixelRatio || 1;
+    }
+
+    addInnerContainer() {
+        this.container.appendChild(this.canvas);
+    }
+
+    initEcharts() {
+        echarts.cesiumMap = this.map;
+
+        echarts.registerCoordinateSystem('cesium', MapCoordSys);
+
+        echarts.extendComponentModel({
+            type: 'cesium',
+            getBMap: function () {
+                return this.__cesium;
+            },
+            defaultOption: {
+                roam: false
+            }
+        });
+
+        echarts.registerAction({
+                type: 'CesiumRoma',
+                event: 'CesiumRoma',
+                update: 'updateLayout'
+            },
+            function (payload, ecModel) {
+
+            }
+        );
+
+        return this;
+    }
+
+    _createCanvas() {
+        var canvas = document.createElement('div');
+        /*         canvas.setAttribute('id', this.layerId);
+                canvas.setAttribute('class', this.layerClass); */
+        //canvas.id = this.layerId;
+        canvas.className = 'cesium-echarts-layer';
+        canvas.setAttribute('class', 'cesium-echarts-layer');
+        
+        canvas.style.position = 'absolute';
+        canvas.style.top = "0px";
+        canvas.style.left = "0px";
+
+        canvas.style.pointerEvents = "none"; //屏蔽鼠标事件
+        canvas.style.zIndex = this.options.zIndex || 100;
+
+        var width = parseInt(this.map.canvas.width) + "px";
+        var height = parseInt(this.map.canvas.height) + "px";
+
+        canvas.width = width;
+        canvas.height = height
+        canvas.style.width = width;
+        canvas.style.height = height;
+
+        //这段可以先不不放开
+        /* var devicePixelRatio = this.devicePixelRatio;
+        if (this.mapVOptions.context == '2d') {
+            canvas.getContext(this.mapVOptions.context).scale(devicePixelRatio, devicePixelRatio);
+        } */
+
+        // console.log('_creteWidgetCanvas', this.map.canvas, devicePixelRatio, this);
+        return canvas;
+    }
+
+    _resizeCanvas() {
+        const self = this;
+
+        window.onresize = function () {
+            var canvas = self.canvas;
+            var map = self.map;
+
+            canvas.style.position = 'absolute';
+            canvas.style.top = "0px";
+            canvas.style.left = "0px";
+
+            var width = parseInt(map.canvas.width) + "px";
+            var height = parseInt(map.canvas.height) + "px";
+    
+            canvas.width = width;
+            canvas.height = height
+            canvas.style.width = width;
+            canvas.style.height = height;
+
+            self.chart.resize();
+        };
+
+        //this.mapContainer.style.perspective = this.map.transform.cameraToCenterDistance + 'px';
+
+    }
+
+    _visible() {
+        this.visible = true;
+        this.canvas.style.visibility = "visible";
+    }
+
+    _unvisible() {
+        this.visible = false;
+        this.canvas.style.visibility = "hidden";
+    }
+
+    /**
+     * @description 将图层添加到三维球上
+     * @function module:客户端可视化.EchartsLayer.prototype.addTo
+     * @param {Cesium.Viewer} map 
+     */
+    addTo(map) {
+        var self = this;
+        echarts.extendComponentView({
+            type: 'cesium',
+
+            render: function (mapModel, ecModel, api) {
+                var rendering = true
+
+                var cesiumMap = echarts.cesiumMap
+
+                var viewportRoot = api.getZr().painter.getViewportRoot()
+                var coordSys = mapModel.coordinateSystem
+                var moveHandler = function (type, target) {
+                    if (rendering  || !self.map || !self.visible) {
+                        return
+                    }
+                    self._unvisible();
+                    var offsetEl = self.map.canvas;
+
+                    var mapOffset = [-parseInt(offsetEl.style.left, 10) || 0, -parseInt(offsetEl.style.top, 10) || 0]
+                    viewportRoot.style.left = mapOffset[0] + 'px'
+                    viewportRoot.style.top = mapOffset[1] + 'px'
+
+                    coordSys.setMapOffset(mapOffset)
+                    
+                    mapModel.__mapOffset = mapOffset
+                    //mapModel.__mapViewRect = cesiumMap.scene.camera.computeViewRectangle();
+
+                    api.dispatchAction({
+                        type: 'CesiumRoma'
+                    })
+                }
+
+                var moveEndHandler = function (type, target) {
+                    if (rendering || !self.map) {
+                        return
+                    }
+
+                    self._visible();
+                    var offsetEl = self.map.canvas;
+
+                    var mapOffset = [-parseInt(offsetEl.style.left, 10) || 0, -parseInt(offsetEl.style.top, 10) || 0]
+                    viewportRoot.style.left = mapOffset[0] + 'px'
+                    viewportRoot.style.top = mapOffset[1] + 'px'
+
+                    coordSys.setMapOffset(mapOffset)
+                    mapModel.__mapOffset = mapOffset
+
+                    api.dispatchAction({
+                        type: 'CesiumRoma'
+                    })
+                }
+
+                self.moveEndEvent = moveEndHandler;
+
+                function zoomStartHandler() {
+                    self._unvisible();
+                    if (rendering) {
+                        return
+                    }
+                    api.dispatchAction({
+                        type: 'CesiumRoma'
+                    })
+                }
+
+                function zoomEndHandler() {
+                    if (rendering) {
+                        return
+                    }
+                    self._visible();
+                    api.dispatchAction({
+                        type: 'CesiumRoma'
+                    })
+                }
+
+                var postHandle = function () {
+                    // self.moveEndEvent();
+                    zoomEndHandler();
+                }
+
+                var postStartHandle = function () {
+                    self.scene.postRender.addEventListener(postHandle);
+                    // self._visible();
+                }
+
+                self.postStartEvent = postStartHandle.bind(self);
+            
+                var postEndHandle = function () {
+                    self.scene.postRender.removeEventListener(postHandle);
+                    self.resize();
+                    self._visible();
+                }
+
+                self.postEndEvent = postEndHandle.bind(self);             
+
+                self.handler = new Cesium.ScreenSpaceEventHandler(self.scene.canvas);
+                
+                if (self.initStats == false) {
+                    self.initStats = true;    
+                    if (self.options.postRender) {
+                        self.scene.camera.moveStart.addEventListener(self.postStartEvent, self);
+                        self.scene.camera.moveEnd.addEventListener(self.postEndEvent, self);
+                    } else {
+                        // self.handler.setInputAction(zoomStartHandler, Cesium.ScreenSpaceEventType.WHEEL);
+                        self.handler.setInputAction(moveHandler, Cesium.ScreenSpaceEventType.LEFT_DOWN);
+                        self.handler.setInputAction(moveEndHandler, Cesium.ScreenSpaceEventType.LEFT_UP);
+                        self.handler.setInputAction(moveHandler, Cesium.ScreenSpaceEventType.RIGHT_DOWN);
+                        self.handler.setInputAction(moveEndHandler, Cesium.ScreenSpaceEventType.RIGHT_UP);
+                        self.map.scene.camera.moveEnd.addEventListener(function(){
+                            //获取当前相机高度
+                            self.moveEndEvent();
+                        });
+                    }
+                }
+
+                this._oldMoveHandler = moveHandler
+                this._oldZoomEndHandler = zoomEndHandler
+
+                var roam = mapModel.get('roam')
+                if (roam &amp;&amp; roam !== 'scale') {
+                    // todo 允许拖拽
+                } else {
+                    // todo 不允许拖拽
+                }
+                if (roam &amp;&amp; roam !== 'move') {
+                    // todo 允许移动
+                } else {
+                    // todo 不允许允许移动
+                }
+
+                rendering = false
+            }
+        });
+
+        this.chart.setOption(this.options);
+        return this;
+    }
+
+    /**
+     * @description 显示图层
+     * @function module:客户端可视化.EchartsLayer.prototype.show
+     */
+    show() {
+        this._visible();
+    }
+
+    /**
+     * @description 隐藏图层
+     * @function module:客户端可视化.EchartsLayer.prototype.hide
+     */
+    hide() {
+        this._unvisible();
+    }
+
+    /**
+     * 重置图层大小
+     * @function module:客户端可视化.EchartsLayer.prototype. resize
+     */
+    resize() {
+        if (this.canvas == undefined || this.canvas == null) return;
+        var canvas = this.canvas;
+        canvas.style.position = 'absolute';
+        canvas.style.top = "0px";
+        canvas.style.left = "0px";
+        canvas.width = parseInt(this.map.canvas.width);
+        canvas.height = parseInt(this.map.canvas.height);
+        canvas.style.width = this.map.canvas.style.width;
+        canvas.style.height = this.map.canvas.style.height;
+    }
+
+    /**
+     * 删除图层
+     * @function module:客户端可视化.EchartsLayer.prototype.remove
+     */
+    remove() {
+        var self = this;
+        this.chart.clear();
+        if (self.options.postRender) {
+            this.scene.camera.moveStart.removeEventListener(this.postStartEvent, this);
+            this.scene.camera.moveEnd.removeEventListener(this.postEndEvent, this);
+        } else {
+            this.map.scene.camera.moveEnd.removeEventListener(function(){
+                self.moveEndEvent();
+            });
+            this.handler.destroy();    
+        }
+
+        if (this.canvas.parentElement)
+            this.canvas.parentElement.removeChild(this.canvas);
+        this.map = undefined;
+        
+        return this;
+    }
+}
+
+CesiumZondy.Overlayer.EchartsLayer = EchartsLayer;</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>文档生成<a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://www.smaryun.com" target="_blank">司马云</a> <span>© 2020 云生态圈</span>
+                        <a href="http://develop.smaryun.com:8899/" target="_blank">MapGIS Client for JavaScript</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+<script src="scripts/search.js"> </script>
+
+</body>
+</html>

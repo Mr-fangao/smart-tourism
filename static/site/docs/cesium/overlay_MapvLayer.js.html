@@ -1,0 +1,564 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> overlay/MapvLayer.js</title>
+
+  <script src="../cdn/run_prettify.js"></script>
+  <script src="../cdn/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="../cdn/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="../cdn/googleapis.css" rel="stylesheet">
+  <link href="../cdn/prettify.css" rel="stylesheet">
+  <link rel="stylesheet" href="../cdn/all.css" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="../cdn/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="../cdn/mapgis.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="../cdn/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+             
+                <a class="image" href="/">
+                    <img class="mapgis-webclient-logo" src="../image/mapgis_blue.png" alt="logo">
+                </a>
+            
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API
+                </a>
+                <div class="dropdown is-hoverable is-right">
+                    <a class="dropdown-trigger link">
+                        帮助向导
+                    </a>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-content">
+                        
+                            
+                                <a class="dropdown-item" href="tutorial-1.快速入门.html">
+                                    1.快速入门
+                                </a>
+                            
+                        
+                        </div>
+                    </div>
+                </div>
+                 
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/cesium/index.html"
+                        >
+                            Cesium
+                        </a>
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/mapboxgl/index.html"
+                        >
+                            MapboxGL
+                        </a>
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/leaflet/index.html"
+                        >
+                            Leaflet
+                        </a>
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/openlayers/index.html"
+                        >
+                            OpenLayers
+                        </a>
+                    
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            <div>
+                <span class="mapgis-api-document-span"><a href="index.html">API文档</a></span>
+            </div>
+            
+                <div class="search-wrapper">
+                    <input id="search" type="text" placeholder="搜索文档..." class="input">
+                </div>
+            
+            <nav>
+                
+                    <div class="category"><div class="mapgis-menu-span">模块</div><ul class="mapgis-sidebar-menus"><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E4%25BA%258B%25E4%25BB%25B6%25E7%25AE%25A1%25E7%2590%2586.html">客户端事件管理</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%2585%25AC%25E5%2585%25B1%25E6%2596%25B9%25E6%25B3%2595.html">客户端公共方法</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.html">客户端可视化</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596%25E5%2588%2586%25E6%259E%2590.html">客户端可视化分析</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.html">客户端数据服务</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%25B8%25B2%25E6%259F%2593.html">客户端渲染</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E8%25A7%2586%25E5%259B%25BE%25E7%25AE%25A1%25E7%2590%2586.html">客户端视图管理</a></li><li><a href="module-%25E6%259C%258D%25E5%258A%25A1%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259F%25A5%25E8%25AF%25A2.html">服务端数据查询</a></li><li><a href="module-%25E7%2594%25A8%25E6%2588%25B7%25E7%2595%258C%25E9%259D%25A2.html">用户界面</a></li></ul><div class="mapgis-menu-span">类名</div><ul class="mapgis-sidebar-menus"><li><a href="BaseLayer%2520%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1%25E5%259F%25BA%25E7%25B1%25BB.html">BaseLayer 数据服务基类</a></li><li><a href="CesiumSelectionIndicator.html">CesiumSelectionIndicator</a></li><li><a href="MapGIS2dDocProvider.html">MapGIS2dDocProvider</a></li><li><a href="module.exports_module.exports.html">exports</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E4%25BA%258B%25E4%25BB%25B6%25E7%25AE%25A1%25E7%2590%2586.MouseEventManager.html">MouseEventManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%2585%25AC%25E5%2585%25B1%25E6%2596%25B9%25E6%25B3%2595.CommonDataManager.html">CommonDataManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%2585%25AC%25E5%2585%25B1%25E6%2596%25B9%25E6%25B3%2595.CommonFuncManager.html">CommonFuncManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.EchartsLayer.html">EchartsLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.EntityController.html">EntityController</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.LabelLayer.html">LabelLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.MapVLayer.html">MapVLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.PopupController.html">PopupController</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.PopupLayer.html">PopupLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596%25E5%2588%2586%25E6%259E%2590.AdvancedAnalysisManager.html">AdvancedAnalysisManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596%25E5%2588%2586%25E6%259E%2590.AnalysisManager.html">AnalysisManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.LayerManager.html">LayerManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.M3DLayer.html">M3DLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.OGCLayer.html">OGCLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.TerrainLayer.html">TerrainLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.ThirdPartyLayer.html">ThirdPartyLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.TilesLayer.html">TilesLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%25B8%25B2%25E6%259F%2593.VectorTileLayer.html">VectorTileLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E8%25A7%2586%25E5%259B%25BE%25E7%25AE%25A1%25E7%2590%2586.SceneManager.html">SceneManager</a></li><li><a href="module-%25E6%259C%258D%25E5%258A%25A1%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259F%25A5%25E8%25AF%25A2.G3DDocQuery.html">G3DDocQuery</a></li><li><a href="module-%25E6%259C%258D%25E5%258A%25A1%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259F%25A5%25E8%25AF%25A2.MapDocQuery.html">MapDocQuery</a></li><li><a href="PopupElement.html">PopupElement</a></li><li><a href="WmtsTileProvider.html">WmtsTileProvider</a></li></ul><div class="mapgis-menu-span">全局</div><ul class="mapgis-sidebar-menus"><li><a href="global.html#addGridInfo">addGridInfo</a></li><li><a href="global.html#addImageLayer">addImageLayer</a></li><li><a href="global.html#calAngleOf3Pnt">calAngleOf3Pnt</a></li><li><a href="global.html#LayerType">LayerType</a></li><li><a href="global.html#removeAllEntities">removeAllEntities</a></li><li><a href="global.html#removeAllImageLayers">removeAllImageLayers</a></li><li><a href="global.html#removeAllPrimitives">removeAllPrimitives</a></li><li><a href="global.html#removeDocs">removeDocs</a></li><li><a href="global.html#removeEntity">removeEntity</a></li><li><a href="global.html#removeGridInfo">removeGridInfo</a></li><li><a href="global.html#removeImageLayer">removeImageLayer</a></li><li><a href="global.html#removeM3dLayer">removeM3dLayer</a></li><li><a href="global.html#removePrimitive">removePrimitive</a></li><li><a href="global.html#removeTerrain">removeTerrain</a></li><li><a href="global.html#updataPopupPosition">updataPopupPosition</a></li><li><a href="global.html#zoomToM3dLayer">zoomToM3dLayer</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <span class="page-title-sub">overlay/MapvLayer.js</span>
+                    <span class="page-title-main">Source</span>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { CesiumZondy } from '../core/Base';
+import { MapvBaseLayer } from './mapv/MapvBaseLayer';
+
+var idIndex = 0;
+
+/**
+ * @author 基础平台/创新中心 潘卓然 ParnDeedlit
+ * @class  module:客户端可视化.MapVLayer
+ * @classdesc  Mapv图表图层
+ * @description CesiumZondy.Overlayer.MapVLayer 基于新建立的Html Element嵌入mapv
+ * @param map - {Object} 传入的cesium的地图对象Viewer
+ * @param dataset - {MapvDataSet} 传入的mapv的属性
+ * @param mapVOptions - {MapvOption} 可选参数。https://github.com/huiyan-fe/mapv/blob/master/API.md
+ * @param {Object} [mapVOptions.cesium] cesium的渲染模式
+ * @param {Boolean} [mapVOptions.cesium.postRender=false] 是否实时渲染
+ * @param {Boolean} [mapVOptionscesium.cesium.postRenderFrame=30] 每间隔多少帧渲染一次
+ * @param container - {Element} 外部传入的div;外接的方式使用mapv
+ * @example 
+ *  // 构建对应的dataset
+    var dataSet = new mapv.DataSet(data);
+
+    // 设置对应的参数
+    // https://github.com/huiyan-fe/mapv/blob/master/API.md
+    var options = {
+    context: '2d',    //cesium必须设置画布为2d
+    postRender: false,
+    postRenderFrame: 5,
+    //fillStyle: 'rgba(255, 250, 50, 0.7)',
+    label: {
+        show: true,
+        fillStyle: 'white',
+        shadowColor: 'yellow',
+        font: '15px Arial',
+        shadowBlur: 10
+    },
+    size: 30,
+    gradient: {
+        0: "rgba(49, 54, 149, 0)",
+        0.2: "rgba(69,117,180, 0.7)",
+        0.3: "rgba(116,173,209, 0.7)",
+        0.4: "rgba(171,217,233, 0.7)",
+        0.5: "rgba(224,243,248, 0.7)",
+        0.6: "rgba(254,224,144,0.7)",
+        0.7: "rgba(253,174,97,0.7)",
+        0.8: "rgba(244,109,67,0.8)",
+        0.9: "rgba(215,48,39,0.8)",
+        0.95: "rgba(165, 0, 38,0.8)"
+    },
+    max: 100,
+    draw: 'honeycomb'   // 绘制蜂窝图
+    }
+    // 声明cesium的mapv图层并将其显示到三维球上
+    var mapvLayer = new CesiumZondy.Overlayer.MapvLayer(map, dataSet, options);
+ */
+export default class MapvLayer {
+    constructor(map, dataSet, mapVOptions, container) {
+        this.map = map;
+        this.scene = map.scene;
+
+        this.mapvBaseLayer = new MapvBaseLayer(map, dataSet, mapVOptions, this);
+        this.mapVOptions = mapVOptions;
+
+        this.initDevicePixelRatio();
+
+        this.canvas = this._creteWidgetCanvas(); //this._createCanvas();
+
+        this.render = this.render.bind(this);
+        this.postRenderTime = 0;
+
+        let cesiumOpt = mapVOptions.cesium;
+        if (cesiumOpt) {
+            this.postRender = cesiumOpt.postRender || false;
+            this.postRenderFrame = cesiumOpt.postRenderFrame || 30;
+        }
+
+        if (container != undefined) {
+            this.container = container;
+            container.appendChild(this.canvas);
+        } else {
+            var parents = document.getElementsByClassName('cesium-widget');
+            var parent = parents.length > 0 ? parents[0] : map.container;
+            this.container = parent;
+            this.addInnerContainer();
+        }
+
+        this.bindEvent();
+
+        this._reset();
+    }
+
+    initDevicePixelRatio() {
+        this.devicePixelRatio = window.devicePixelRatio || 1;
+    }
+
+    addInnerContainer() {
+        //var container = document.createElement('div');
+        this.container.appendChild(this.canvas);
+        //container.appendChild(this.canvas);
+        //return container;
+    }
+
+    bindEvent() {
+        let self = this;
+        var map = this.map;
+        //下面几个是cesium专属事件,clickEvent和mousemoveEvent是mapv内部自带的方法不放出来
+        this.innerMoveStart = this.moveStartEvent.bind(this);
+        this.innerMoveEnd = this.moveEndEvent.bind(this);
+
+        this.innnerZoomStart = this.zoomStartEvent.bind(this);
+        this.innnerZoomEnd = this.zoomEndEvent.bind(this);
+
+        this.postEventHandle = this.postEvent.bind(this);
+        this.postStartEvent = this.postStartEvent.bind(this);
+        this.postEndEvent = this.postEndEvent.bind(this);
+
+        var handler = new Cesium.ScreenSpaceEventHandler(this.scene.canvas);
+        //handler.setInputAction(this.innerMoveEnd, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+        if (this.postRender) {
+            // this.scene.postRender.addEventListener(this.postEventHandle);
+            this.scene.camera.moveStart.addEventListener(this.postStartEvent, this);
+            this.scene.camera.moveEnd.addEventListener(this.postEndEvent, this);
+        } else {
+            handler.setInputAction(this.innerMoveEnd, Cesium.ScreenSpaceEventType.WHEEL);
+            handler.setInputAction(this.innerMoveStart, Cesium.ScreenSpaceEventType.LEFT_DOWN);
+            handler.setInputAction(this.innerMoveEnd, Cesium.ScreenSpaceEventType.LEFT_UP);
+            handler.setInputAction(this.innerMoveStart, Cesium.ScreenSpaceEventType.RIGHT_DOWN);
+            handler.setInputAction(this.innerMoveEnd, Cesium.ScreenSpaceEventType.RIGHT_UP);
+
+            map.scene.camera.moveEnd.addEventListener(function () {
+                //获取当前相机高度
+                self.innerMoveEnd();
+            });
+        }
+    }
+
+    unbindEvent() {
+        if (this.postRender) {
+            this.scene.camera.moveStart.removeEventListener(this.postStartEvent, this);
+            this.scene.camera.moveEnd.removeEventListener(this.postEndEvent, this);
+        }
+    }
+
+    postStartEvent() {
+        if (this.mapvBaseLayer) {
+            this.mapvBaseLayer.animatorMovestartEvent();
+            this.scene.postRender.addEventListener(this._reset, this);
+        }
+        this._visiable();
+    }
+
+    postEndEvent() {
+        if (this.mapvBaseLayer) {
+            this.mapvBaseLayer.animatorMoveendEvent();
+            this.scene.postRender.removeEventListener(this._reset, this);
+        }
+        this._reset();
+        this._visiable();
+    }
+
+    moveStartEvent() {
+        if (this.mapvBaseLayer) {
+            this.mapvBaseLayer.animatorMovestartEvent();
+        }
+        this._unvisiable();
+    }
+
+    moveEndEvent() {
+        if (this.mapvBaseLayer) {
+            this.mapvBaseLayer.animatorMoveendEvent();
+        }
+        this._reset();
+        this._visiable();
+    }
+
+    zoomStartEvent() {
+        this._unvisiable();
+    }
+    zoomEndEvent() {
+        this._unvisiable();
+    }
+
+    postEvent() {
+        this.postRenderTime++;
+        if (this.postRenderTime % this.postRenderFrame === 0) this.moveEndEvent();
+    }
+
+    //-----------------------------------Start Data Operation---------------------------------
+
+    /**
+     * 增加数据
+     * @function module:客户端可视化.MapVLayer.prototype.addData
+     *
+     * @param data - {Array} 数据.
+     * @param options - {Object} 只做额外增加的字段作用
+     * @see https://github.com/huiyan-fe/mapv/blob/master/API.md
+     */
+    addData(data, options) {
+        if (this.mapvBaseLayer == undefined) return;
+        this.mapvBaseLayer.addData(data, options);
+    }
+
+    /**
+     * 更新数据
+     * @function module:客户端可视化.MapVLayer.prototype.updateData
+     *
+     * @param data - {Array} 数据.
+     * @param options - {Object} 只做额外增加的字段作用
+     * @see https://github.com/huiyan-fe/mapv/blob/master/API.md
+     */
+    updateData(data, options) {
+        if (this.mapvBaseLayer == undefined) return;
+        this.mapvBaseLayer.updateData(data, options);
+    }
+
+    /**
+     * 获取数据
+     * @function module:客户端可视化.MapVLayer.prototype.getData
+     *
+     * @param data - {Array} 数据.
+     * @param options - {Object} 只做额外增加的字段作用
+     * @see https://github.com/huiyan-fe/mapv/blob/master/API.md
+     */
+    getData() {
+        if (this.mapvBaseLayer) {
+            this.dataSet = this.mapvBaseLayer.getData();
+        }
+        return this.dataSet;
+    }
+
+    removeData(filter) {
+        if (this.mapvBaseLayer == undefined) return;
+        this.mapvBaseLayer &amp;&amp; this.mapvBaseLayer.removeData(filter);
+    }
+
+    /**
+     * 删除数据
+     * @function module:客户端可视化.MapVLayer.prototype.removeAllData
+     */
+    removeAllData() {
+        if (this.mapvBaseLayer == undefined) return;
+        this.mapvBaseLayer.clearData();
+    }
+    //-----------------------------------End Data Operation---------------------------------
+    _visiable() {
+        this.canvas.style.display = 'block';
+        return this;
+    }
+
+    _unvisiable() {
+        this.canvas.style.display = 'none';
+        return this;
+    }
+
+    _createCanvas() {
+        var canvas = document.createElement('canvas');
+        canvas.id = this.mapVOptions.layerid || 'mapv' + idIndex++;
+        canvas.style.position = 'absolute';
+        canvas.style.top = '0px';
+        canvas.style.left = '0px';
+
+        canvas.style.pointerEvents = 'none';
+        canvas.style.zIndex = this.mapVOptions.zIndex || 100;
+
+        canvas.width = parseInt(this.map.canvas.width);
+        canvas.height = parseInt(this.map.canvas.height);
+        canvas.style.width = this.map.canvas.style.width;
+        canvas.style.height = this.map.canvas.style.height;
+        var devicePixelRatio = this.devicePixelRatio;
+        if (this.mapVOptions.context == '2d') {
+            canvas.getContext(this.mapVOptions.context).scale(devicePixelRatio, devicePixelRatio);
+        }
+        return canvas;
+    }
+
+    _creteWidgetCanvas() {
+        var canvas = document.createElement('canvas');
+
+        canvas.id = this.mapVOptions.layerid || 'mapv' + idIndex++;
+        canvas.style.position = 'absolute';
+        canvas.style.top = '0px';
+        canvas.style.left = '0px';
+
+        canvas.style.pointerEvents = 'none';
+        canvas.style.zIndex = this.mapVOptions.zIndex || 100;
+
+        canvas.width = parseInt(this.map.canvas.width);
+        canvas.height = parseInt(this.map.canvas.height);
+        canvas.style.width = this.map.canvas.style.width;
+        canvas.style.height = this.map.canvas.style.height;
+        var devicePixelRatio = this.devicePixelRatio;
+        if (this.mapVOptions.context == '2d') {
+            canvas.getContext('2d').scale(devicePixelRatio, devicePixelRatio);
+        }
+
+        return canvas;
+    }
+
+    _reset() {
+        this.resizeCanvas();
+        this.fixPosition();
+        this.onResize();
+        this.render();
+    }
+
+    /**
+     * 强制重回图层
+     * @function module:客户端可视化.MapVLayer.prototype.draw
+     */
+    draw() {
+        this._reset();
+    }
+
+    /**
+     * 显示图层
+     * @function module:客户端可视化.MapVLayer.prototype.show
+     */
+    show() {
+        this._visiable();
+    }
+    /**
+     * 隐藏图层
+     * @function module:客户端可视化.MapVLayer.prototype.hide
+     */
+    hide() {
+        this._unvisiable();
+    }
+
+    /**
+     * 销毁图层-实际调用remove，为了接口保持一致
+     * @function module:客户端可视化.MapVLayer.prototype.destroy
+     */
+    destroy() {
+        this.remove();
+    }
+
+    /**
+     * 销毁图层
+     * @function module:客户端可视化.MapVLayer.prototype.remove
+     */
+    remove() {
+        if (this.mapvBaseLayer == undefined) return;
+        this.removeAllData();
+        this.unbindEvent();
+        this.mapvBaseLayer.clear(this.mapvBaseLayer.getContext());
+        this.mapvBaseLayer = undefined;
+        var parent = this.canvas.parentElement;
+        parent.removeChild(this.canvas);
+    }
+
+    /**
+     * 更新图层
+     * @function module:客户端可视化.MapVLayer.prototype.update
+     */
+    update(opt) {
+        if (opt == undefined) {
+            return;
+        }
+        this.updateData(opt.data, opt.options);
+    }
+
+    resizeCanvas() {
+        //this.mapContainer.style.perspective = this.map.transform.cameraToCenterDistance + 'px';
+        if (this.canvas == undefined || this.canvas == null) return;
+        var canvas = this.canvas;
+        canvas.style.position = 'absolute';
+        canvas.style.top = '0px';
+        canvas.style.left = '0px';
+        canvas.width = parseInt(this.map.canvas.width);
+        canvas.height = parseInt(this.map.canvas.height);
+        //canvas.style.width = this.map.canvas.style.width;
+        //canvas.style.height = this.map.canvas.style.height;
+        var devicePixelRatio = this.devicePixelRatio;
+        if (this.mapVOptions.context == '2d') {
+            canvas.getContext('2d').scale(devicePixelRatio, devicePixelRatio);
+        }
+    }
+
+    fixPosition() {}
+
+    onResize() {}
+
+    render() {
+        if (this.mapvBaseLayer == undefined) return;
+        this.mapvBaseLayer._canvasUpdate();
+    }
+}
+
+CesiumZondy.Overlayer.MapvLayer = MapvLayer;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>文档生成<a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://www.smaryun.com" target="_blank">司马云</a> <span>© 2020 云生态圈</span>
+                        <a href="http://develop.smaryun.com:8899/" target="_blank">MapGIS Client for JavaScript</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+<script src="scripts/search.js"> </script>
+
+</body>
+</html>

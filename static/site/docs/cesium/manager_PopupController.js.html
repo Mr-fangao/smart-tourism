@@ -1,0 +1,494 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> manager/PopupController.js</title>
+
+  <script src="../cdn/run_prettify.js"></script>
+  <script src="../cdn/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="../cdn/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="../cdn/googleapis.css" rel="stylesheet">
+  <link href="../cdn/prettify.css" rel="stylesheet">
+  <link rel="stylesheet" href="../cdn/all.css" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="../cdn/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="../cdn/mapgis.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="../cdn/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+             
+                <a class="image" href="/">
+                    <img class="mapgis-webclient-logo" src="../image/mapgis_blue.png" alt="logo">
+                </a>
+            
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API
+                </a>
+                <div class="dropdown is-hoverable is-right">
+                    <a class="dropdown-trigger link">
+                        帮助向导
+                    </a>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-content">
+                        
+                            
+                                <a class="dropdown-item" href="tutorial-1.快速入门.html">
+                                    1.快速入门
+                                </a>
+                            
+                        
+                        </div>
+                    </div>
+                </div>
+                 
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/cesium/index.html"
+                        >
+                            Cesium
+                        </a>
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/mapboxgl/index.html"
+                        >
+                            MapboxGL
+                        </a>
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/leaflet/index.html"
+                        >
+                            Leaflet
+                        </a>
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/openlayers/index.html"
+                        >
+                            OpenLayers
+                        </a>
+                    
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            <div>
+                <span class="mapgis-api-document-span"><a href="index.html">API文档</a></span>
+            </div>
+            
+                <div class="search-wrapper">
+                    <input id="search" type="text" placeholder="搜索文档..." class="input">
+                </div>
+            
+            <nav>
+                
+                    <div class="category"><div class="mapgis-menu-span">模块</div><ul class="mapgis-sidebar-menus"><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E4%25BA%258B%25E4%25BB%25B6%25E7%25AE%25A1%25E7%2590%2586.html">客户端事件管理</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%2585%25AC%25E5%2585%25B1%25E6%2596%25B9%25E6%25B3%2595.html">客户端公共方法</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.html">客户端可视化</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596%25E5%2588%2586%25E6%259E%2590.html">客户端可视化分析</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.html">客户端数据服务</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%25B8%25B2%25E6%259F%2593.html">客户端渲染</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E8%25A7%2586%25E5%259B%25BE%25E7%25AE%25A1%25E7%2590%2586.html">客户端视图管理</a></li><li><a href="module-%25E6%259C%258D%25E5%258A%25A1%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259F%25A5%25E8%25AF%25A2.html">服务端数据查询</a></li><li><a href="module-%25E7%2594%25A8%25E6%2588%25B7%25E7%2595%258C%25E9%259D%25A2.html">用户界面</a></li></ul><div class="mapgis-menu-span">类名</div><ul class="mapgis-sidebar-menus"><li><a href="BaseLayer%2520%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1%25E5%259F%25BA%25E7%25B1%25BB.html">BaseLayer 数据服务基类</a></li><li><a href="CesiumSelectionIndicator.html">CesiumSelectionIndicator</a></li><li><a href="MapGIS2dDocProvider.html">MapGIS2dDocProvider</a></li><li><a href="module.exports_module.exports.html">exports</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E4%25BA%258B%25E4%25BB%25B6%25E7%25AE%25A1%25E7%2590%2586.MouseEventManager.html">MouseEventManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%2585%25AC%25E5%2585%25B1%25E6%2596%25B9%25E6%25B3%2595.CommonDataManager.html">CommonDataManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%2585%25AC%25E5%2585%25B1%25E6%2596%25B9%25E6%25B3%2595.CommonFuncManager.html">CommonFuncManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.EchartsLayer.html">EchartsLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.EntityController.html">EntityController</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.LabelLayer.html">LabelLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.MapVLayer.html">MapVLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.PopupController.html">PopupController</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.PopupLayer.html">PopupLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596%25E5%2588%2586%25E6%259E%2590.AdvancedAnalysisManager.html">AdvancedAnalysisManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596%25E5%2588%2586%25E6%259E%2590.AnalysisManager.html">AnalysisManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.LayerManager.html">LayerManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.M3DLayer.html">M3DLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.OGCLayer.html">OGCLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.TerrainLayer.html">TerrainLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.ThirdPartyLayer.html">ThirdPartyLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.TilesLayer.html">TilesLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%25B8%25B2%25E6%259F%2593.VectorTileLayer.html">VectorTileLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E8%25A7%2586%25E5%259B%25BE%25E7%25AE%25A1%25E7%2590%2586.SceneManager.html">SceneManager</a></li><li><a href="module-%25E6%259C%258D%25E5%258A%25A1%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259F%25A5%25E8%25AF%25A2.G3DDocQuery.html">G3DDocQuery</a></li><li><a href="module-%25E6%259C%258D%25E5%258A%25A1%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259F%25A5%25E8%25AF%25A2.MapDocQuery.html">MapDocQuery</a></li><li><a href="PopupElement.html">PopupElement</a></li><li><a href="WmtsTileProvider.html">WmtsTileProvider</a></li></ul><div class="mapgis-menu-span">全局</div><ul class="mapgis-sidebar-menus"><li><a href="global.html#addGridInfo">addGridInfo</a></li><li><a href="global.html#addImageLayer">addImageLayer</a></li><li><a href="global.html#calAngleOf3Pnt">calAngleOf3Pnt</a></li><li><a href="global.html#LayerType">LayerType</a></li><li><a href="global.html#removeAllEntities">removeAllEntities</a></li><li><a href="global.html#removeAllImageLayers">removeAllImageLayers</a></li><li><a href="global.html#removeAllPrimitives">removeAllPrimitives</a></li><li><a href="global.html#removeDocs">removeDocs</a></li><li><a href="global.html#removeEntity">removeEntity</a></li><li><a href="global.html#removeGridInfo">removeGridInfo</a></li><li><a href="global.html#removeImageLayer">removeImageLayer</a></li><li><a href="global.html#removeM3dLayer">removeM3dLayer</a></li><li><a href="global.html#removePrimitive">removePrimitive</a></li><li><a href="global.html#removeTerrain">removeTerrain</a></li><li><a href="global.html#updataPopupPosition">updataPopupPosition</a></li><li><a href="global.html#zoomToM3dLayer">zoomToM3dLayer</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <span class="page-title-sub">manager/PopupController.js</span>
+                    <span class="page-title-main">Source</span>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { CesiumZondy } from '../core/Base';
+
+import BaseLayer from '../layer/BaseLayer';
+import CommonFuncManager from './CommonFuncManager';
+import PopupElement from './PopupElement';
+
+function calcaluteGrade(curValue, stdNearFar) {
+    let curPara = -1;
+    if (curValue &lt;= stdNearFar.near) {
+        curPara = stdNearFar.nearValue;
+    } else if (curValue >= stdNearFar.far) {
+        curPara = stdNearFar.farValue;
+    } else {
+        const totalGrade = Math.ceil(Math.log(stdNearFar.far / stdNearFar.near) / Math.log(2));
+        const curGrade = Math.round(Math.log(curValue / stdNearFar.near) / Math.log(2));
+        curPara = stdNearFar.nearValue + ((stdNearFar.farValue - stdNearFar.nearValue) * curGrade) / totalGrade;
+    }
+    return curPara;
+}
+
+/**
+ * @author 基础平台研发中心·冯桂英
+ * @class module:客户端可视化.PopupController
+ * @category BaseLayer.PopupController
+ * @classdesc PopupController  标绘类
+ * @description 标绘管理类,实现标绘相关操作
+ * @param option.viewer 场景视窗
+ */
+export default class PopupController extends BaseLayer {
+    constructor(option) {
+        super(option);
+        this._popupContain = [];
+    }
+
+    /**
+     *  popUp容器
+     * @memberof PopupController.protype
+     * @type {popupContain}
+     * @readonly
+     *
+     */
+    get popupContain() {
+        return this._popupContain;
+    }
+
+    /**
+     * @private
+     */
+    get commFun() {
+        return this._commonFun;
+    }
+
+    /**
+     * 添加PopUP:需考虑相机的高度对PopUp大小、透明度、偏移值的影响
+     * @function module:客户端可视化.PopupController.prototype.appendPopup
+     * @param {String} containID 容器的div id（注意该容器不能放在球容器中）
+     * @param {String} content popup的内容，可以为带html标签的字符串
+     * @param {Cartesian3} position  popup的位置（地图单位）
+     * @param {Array} offset [x,y]偏移值，像素单位
+     * @param {Function} closeCallback popup的close按钮点击回调函数
+     * @param {Object} options 扩展参数
+     * @param {Number} [options.scaleByDistance=cameraHeight] options.scaleByDistance = new Cesium.NearFarScalar(1.5e2, 1.5, 8.0e6, 0.0)
+     * 基于距摄像机距离指定广告牌比例
+     * @param {Number} [options.translucencyByDistance=cameraHeight] options.translucencyByDistance = new Cesium.NearFarScalar(1.5e2, 1.5, 8.0e6, 0.0)
+     * 基于距摄像机的距离来指定广告牌的透明度
+     * @param {Number} [options.pixelOffsetScaleByDistance=cameraHeight] options.pixelOffsetScaleByDistance = new Cesium.NearFarScalar(1.5e2, 0.0, 8.0e6, 10.0)
+     * 基于距摄像机的距离指定广告牌像素偏移
+     * @example
+     *  let popup = appendPopup('aaa','这是一个测试pop&lt;br/>测试pop&lt;br/>',entity._position._value,[95,0],removePopup)
+     */
+    appendPopup(containID, content, posion, offsetParam, closeCallback, options) {
+        if (this.popupContain !== null &amp;&amp; this.popupContain.length > 0) {
+            for (let i = 0; i &lt; this.popupContain.length; i += 1) {
+                const conPostion = this.popupContain[i].position;
+                if (conPostion.x === posion.x &amp;&amp; conPostion.y === posion.y &amp;&amp; conPostion.z === posion.z) {
+                    return undefined;
+                }
+            }
+        }
+        let containDiv = document.getElementById(containID);
+        if (containDiv === null || containDiv === undefined) {
+            containDiv = document.createElement('div');
+            containDiv.id = 'popup';
+            document.body.appendChild(containDiv);
+        }
+        const randID = CommonFuncManager.generateRandom();
+        const rootContentDiv = document.createElement('div');
+        rootContentDiv.setAttribute('id', `popup_${randID}`);
+        rootContentDiv.setAttribute('class', 'mapgis-popup');
+        rootContentDiv.setAttribute('style', 'top:5px;left:0;');
+        const closeDiv = document.createElement('a');
+        closeDiv.setAttribute('class', 'mapgis-popup-close-button');
+        // closeDiv.setAttribute('href', '#');
+        closeDiv.innerHTML = '×';
+        const webControl = this;
+        if (typeof closeCallback === 'function') {
+            closeDiv.onclick = () => {
+                closeCallback(`popup_${randID}`, webControl);
+            };
+        }
+        rootContentDiv.appendChild(closeDiv);
+
+        const contentDiv = document.createElement('div');
+        contentDiv.setAttribute('class', 'mapgis-popup-content-wrapper');
+        const contentLinkDiv = document.createElement('div');
+        contentLinkDiv.setAttribute('class', 'mapgis-popup-content');
+        contentLinkDiv.setAttribute('style', 'max-width: 300px;');
+        contentLinkDiv.innerHTML = content;
+        contentDiv.appendChild(contentLinkDiv);
+        rootContentDiv.appendChild(contentDiv);
+
+        const tipContainDiv = document.createElement('div');
+        tipContainDiv.setAttribute('class', 'mapgis-popup-tip-container');
+        const tipDiv = document.createElement('div');
+        tipDiv.setAttribute('class', 'mapgis-popup-tip');
+        tipContainDiv.appendChild(tipDiv);
+        rootContentDiv.appendChild(tipContainDiv);
+
+        containDiv.appendChild(rootContentDiv);
+        const wposion = Cesium.SceneTransforms.wgs84ToWindowCoordinates(this.viewer.scene, posion);
+        wposion.x = Math.round(wposion.x);
+        wposion.y = Math.round(wposion.y);
+        const offset = Cesium.defaultValue(offsetParam, [0, 0]);
+
+        // 根据相机高度计算偏移值和比例及透明度（opacity ）
+        const cameraHeight = Math.ceil(this.viewer.camera.positionCartographic.height);
+        let scaleSize = -1;
+        let opacity = -1;
+        let pixelOffsetScale = -1;
+
+        if (Cesium.defined(options)) {
+            if (Cesium.defined(options.scaleByDistance)) {
+                scaleSize = calcaluteGrade(cameraHeight, options.scaleByDistance);
+            }
+
+            if (Cesium.defined(options.translucencyByDistance)) {
+                opacity = calcaluteGrade(cameraHeight, options.translucencyByDistance);
+            }
+            if (Cesium.defined(options.pixelOffsetScaleByDistance)) {
+                pixelOffsetScale = calcaluteGrade(cameraHeight, options.pixelOffsetScaleByDistance);
+            }
+        }
+        pixelOffsetScale = pixelOffsetScale > 0 ? pixelOffsetScale : 1;
+        opacity = opacity >= 0 ? opacity : 1;
+
+        rootContentDiv.style.transformOrigin = 'left top';
+        let x = 0;
+        let y = 0;
+        if (scaleSize > 0) {
+            x = wposion.x - (rootContentDiv.offsetWidth * scaleSize) / 2 + offset[0] * pixelOffsetScale * scaleSize;
+            y = wposion.y - rootContentDiv.offsetHeight * scaleSize + offset[1] * pixelOffsetScale * scaleSize;
+            rootContentDiv.style.transform = `translate3d(${x}px, ${y}px, 0)  scale(${scaleSize}, ${scaleSize}) `;
+        } else {
+            x = wposion.x - rootContentDiv.offsetWidth / 2 + offset[0] * pixelOffsetScale;
+            y = wposion.y - rootContentDiv.offsetHeight + offset[1] * pixelOffsetScale;
+            rootContentDiv.style.transform = `translate3d(${x}px, ${y}px, 0) `;
+        }
+        if (opacity >= 0) {
+            rootContentDiv.style.opacity = opacity;
+        }
+        if (Cesium.defined(options)) {
+            this.popupContain.push(
+                new PopupElement({
+                    id: `popup_${randID}`,
+                    containID,
+                    position: posion,
+                    element: rootContentDiv,
+                    offset,
+                    scaleByDistance: options.scaleByDistance,
+                    translucencyByDistance: options.translucencyByDistance,
+                    pixelOffsetScaleByDistance: options.pixelOffsetScaleByDistance
+                })
+            );
+        } else {
+            this.popupContain.push(
+                new PopupElement({
+                    id: `popup_${randID}`,
+                    containID,
+                    position: posion,
+                    element: rootContentDiv,
+                    wPosition: wposion,
+                    offset
+                })
+            );
+        }
+        return `popup_${randID}`;
+    }
+
+    /**
+     * 添加popup更新事件
+     * @function module:客户端可视化.PopupController.prototype.refreshPopups
+     */
+    refreshPopups() {
+        this.viewer.camera.percentageChanged = 0.01;
+        this.viewer.camera.changed.addEventListener(this.updatePopups, this);
+    }
+
+    /**
+     * @private
+     */
+    updatePopups() {
+        const popupArray = this.popupContain;
+        if (popupArray !== null &amp;&amp; popupArray.length > 0) {
+            const cameraHeight = Math.ceil(this.viewer.camera.positionCartographic.height);
+            for (let i = 0; i &lt; popupArray.length; i += 1) {
+                const popEle = popupArray[i];
+                let scaleSize = -1;
+                let opacity = -1;
+                let pixelOffsetScale = -1;
+                if (Cesium.defined(popEle.scaleByDistance)) {
+                    scaleSize = calcaluteGrade(cameraHeight, popEle.scaleByDistance);
+                }
+
+                if (Cesium.defined(popEle.translucencyByDistance)) {
+                    opacity = calcaluteGrade(cameraHeight, popEle.translucencyByDistance);
+                }
+                if (Cesium.defined(popEle.pixelOffsetScaleByDistance)) {
+                    pixelOffsetScale = calcaluteGrade(cameraHeight, popEle.pixelOffsetScaleByDistance);
+                }
+                pixelOffsetScale = pixelOffsetScale > 0 ? pixelOffsetScale : 1;
+                opacity = opacity >= 0 ? opacity : 1;
+
+                if (opacity >= 0) {
+                    popEle.element.style.opacity = opacity;
+                }
+
+                const curWp = Cesium.SceneTransforms.wgs84ToWindowCoordinates(this.viewer.scene, popEle.position);
+                if (curWp === undefined) {
+                    return;
+                }
+
+                curWp.x = Math.round(curWp.x);
+                curWp.y = Math.round(curWp.y);
+
+                popEle.element.style.transformOrigin = 'left top';
+
+                let x = 0;
+                let y = 0;
+
+                if (scaleSize > 0) {
+                    x = Math.round(curWp.x - (popEle.element.offsetWidth * scaleSize) / 2 + popEle.offset[0] * pixelOffsetScale * scaleSize);
+                    y = Math.round(curWp.y - popEle.element.offsetHeight * scaleSize + popEle.offset[1] * pixelOffsetScale * scaleSize);
+                    popEle.element.style.transform = `translate3d(${x}px, ${y}px, 0)  scale(${scaleSize}, ${scaleSize}) `;
+                } else {
+                    x = Math.round(curWp.x - popEle.element.offsetWidth / 2 + popEle.offset[0] * pixelOffsetScale);
+                    y = Math.round(curWp.y - popEle.element.offsetHeight + popEle.offset[1] * pixelOffsetScale);
+                    popEle.element.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+                }
+            }
+        }
+    }
+
+    /**
+     * 删除PopuP
+     * @function module:客户端可视化.PopupController.prototype.removePopup
+     * @param {String} popID popup的div id 添加popup返回值
+     * @param {Object} popupOwner 所有者
+     * @param {Object} options 扩展参数
+     * @param {Boolean} options.removeDiv = false 是否移除div
+     * @example
+     *   popupControl.removePopup(popup, null, { removeDiv: false });
+     */
+    removePopup(popID, popupOwner, options) {
+        const owner = Cesium.defaultValue(popupOwner, this);
+        const popDiv = document.getElementById(popID);
+        const op = Cesium.defaultValue(options, {});
+        if (popDiv === null || popDiv === undefined) {
+            return;
+        }
+        while (popDiv.hasChildNodes()) {
+            popDiv.removeChild(popDiv.firstChild);
+        }
+        const removeDiv = Cesium.defaultValue(op.removeDiv, false);
+        if (removeDiv &amp;&amp; popDiv.parentNode !== null) {
+            popDiv.parentNode.removeChild(popDiv);
+        }
+        if (Cesium.defined(owner.popupContain) &amp;&amp; owner.popupContain.length > 0) {
+            for (let i = 0, n = 0; i &lt; owner.popupContain.length; i += 1) {
+                if (owner.popupContain[i].id !== popID) {
+                    owner.popupContain[(n += 1)] = owner.popupContain[i];
+                }
+            }
+            owner.popupContain.length -= 1;
+        }
+        if (Cesium.defined(owner.popupContain) &amp;&amp; owner.popupContain.length &lt;= 0) {
+            owner.viewer.camera.percentageChanged = 0.5;
+            owner.viewer.camera.changed.removeEventListener(this.updatePopups, this);
+        }
+    }
+
+    /**
+     * 清空所有的PopuP
+     * @function module:客户端可视化.PopupController.prototype.clearPopups
+     */
+    clearPopups() {
+        if (this.popupContain !== null &amp;&amp; this.popupContain.length > 0) {
+            for (let i = 0; i &lt; this.popupContain.length; i += 1) {
+                const popID = this.popupContain[i].id;
+                if (popID !== null) {
+                    const popDiv = document.getElementById(popID);
+                    while (popDiv.hasChildNodes()) {
+                        popDiv.removeChild(popDiv.firstChild);
+                    }
+                    if (popDiv.parentNode !== null) {
+                        popDiv.parentNode.removeChild(popDiv);
+                    }
+                }
+            }
+            this.popupContain.length = 0;
+        }
+        if (this.popupContain.length &lt;= 0) {
+            this.viewer.camera.percentageChanged = 0.5;
+            this.viewer.camera.changed.removeEventListener(this.updatePopups, this);
+        }
+    }
+}
+
+CesiumZondy.Manager.PopupController = PopupController;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>文档生成<a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://www.smaryun.com" target="_blank">司马云</a> <span>© 2020 云生态圈</span>
+                        <a href="http://develop.smaryun.com:8899/" target="_blank">MapGIS Client for JavaScript</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+<script src="scripts/search.js"> </script>
+
+</body>
+</html>

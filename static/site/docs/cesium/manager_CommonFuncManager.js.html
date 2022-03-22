@@ -1,0 +1,897 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> manager/CommonFuncManager.js</title>
+
+  <script src="../cdn/run_prettify.js"></script>
+  <script src="../cdn/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="../cdn/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="../cdn/googleapis.css" rel="stylesheet">
+  <link href="../cdn/prettify.css" rel="stylesheet">
+  <link rel="stylesheet" href="../cdn/all.css" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="../cdn/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="../cdn/mapgis.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="../cdn/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+             
+                <a class="image" href="/">
+                    <img class="mapgis-webclient-logo" src="../image/mapgis_blue.png" alt="logo">
+                </a>
+            
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API
+                </a>
+                <div class="dropdown is-hoverable is-right">
+                    <a class="dropdown-trigger link">
+                        帮助向导
+                    </a>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-content">
+                        
+                            
+                                <a class="dropdown-item" href="tutorial-1.快速入门.html">
+                                    1.快速入门
+                                </a>
+                            
+                        
+                        </div>
+                    </div>
+                </div>
+                 
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/cesium/index.html"
+                        >
+                            Cesium
+                        </a>
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/mapboxgl/index.html"
+                        >
+                            MapboxGL
+                        </a>
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/leaflet/index.html"
+                        >
+                            Leaflet
+                        </a>
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/openlayers/index.html"
+                        >
+                            OpenLayers
+                        </a>
+                    
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            <div>
+                <span class="mapgis-api-document-span"><a href="index.html">API文档</a></span>
+            </div>
+            
+                <div class="search-wrapper">
+                    <input id="search" type="text" placeholder="搜索文档..." class="input">
+                </div>
+            
+            <nav>
+                
+                    <div class="category"><div class="mapgis-menu-span">模块</div><ul class="mapgis-sidebar-menus"><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E4%25BA%258B%25E4%25BB%25B6%25E7%25AE%25A1%25E7%2590%2586.html">客户端事件管理</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%2585%25AC%25E5%2585%25B1%25E6%2596%25B9%25E6%25B3%2595.html">客户端公共方法</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.html">客户端可视化</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596%25E5%2588%2586%25E6%259E%2590.html">客户端可视化分析</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.html">客户端数据服务</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%25B8%25B2%25E6%259F%2593.html">客户端渲染</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E8%25A7%2586%25E5%259B%25BE%25E7%25AE%25A1%25E7%2590%2586.html">客户端视图管理</a></li><li><a href="module-%25E6%259C%258D%25E5%258A%25A1%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259F%25A5%25E8%25AF%25A2.html">服务端数据查询</a></li><li><a href="module-%25E7%2594%25A8%25E6%2588%25B7%25E7%2595%258C%25E9%259D%25A2.html">用户界面</a></li></ul><div class="mapgis-menu-span">类名</div><ul class="mapgis-sidebar-menus"><li><a href="BaseLayer%2520%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1%25E5%259F%25BA%25E7%25B1%25BB.html">BaseLayer 数据服务基类</a></li><li><a href="CesiumSelectionIndicator.html">CesiumSelectionIndicator</a></li><li><a href="MapGIS2dDocProvider.html">MapGIS2dDocProvider</a></li><li><a href="module.exports_module.exports.html">exports</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E4%25BA%258B%25E4%25BB%25B6%25E7%25AE%25A1%25E7%2590%2586.MouseEventManager.html">MouseEventManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%2585%25AC%25E5%2585%25B1%25E6%2596%25B9%25E6%25B3%2595.CommonDataManager.html">CommonDataManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%2585%25AC%25E5%2585%25B1%25E6%2596%25B9%25E6%25B3%2595.CommonFuncManager.html">CommonFuncManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.EchartsLayer.html">EchartsLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.EntityController.html">EntityController</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.LabelLayer.html">LabelLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.MapVLayer.html">MapVLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.PopupController.html">PopupController</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.PopupLayer.html">PopupLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596%25E5%2588%2586%25E6%259E%2590.AdvancedAnalysisManager.html">AdvancedAnalysisManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596%25E5%2588%2586%25E6%259E%2590.AnalysisManager.html">AnalysisManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.LayerManager.html">LayerManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.M3DLayer.html">M3DLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.OGCLayer.html">OGCLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.TerrainLayer.html">TerrainLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.ThirdPartyLayer.html">ThirdPartyLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.TilesLayer.html">TilesLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%25B8%25B2%25E6%259F%2593.VectorTileLayer.html">VectorTileLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E8%25A7%2586%25E5%259B%25BE%25E7%25AE%25A1%25E7%2590%2586.SceneManager.html">SceneManager</a></li><li><a href="module-%25E6%259C%258D%25E5%258A%25A1%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259F%25A5%25E8%25AF%25A2.G3DDocQuery.html">G3DDocQuery</a></li><li><a href="module-%25E6%259C%258D%25E5%258A%25A1%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259F%25A5%25E8%25AF%25A2.MapDocQuery.html">MapDocQuery</a></li><li><a href="PopupElement.html">PopupElement</a></li><li><a href="WmtsTileProvider.html">WmtsTileProvider</a></li></ul><div class="mapgis-menu-span">全局</div><ul class="mapgis-sidebar-menus"><li><a href="global.html#addGridInfo">addGridInfo</a></li><li><a href="global.html#addImageLayer">addImageLayer</a></li><li><a href="global.html#calAngleOf3Pnt">calAngleOf3Pnt</a></li><li><a href="global.html#LayerType">LayerType</a></li><li><a href="global.html#removeAllEntities">removeAllEntities</a></li><li><a href="global.html#removeAllImageLayers">removeAllImageLayers</a></li><li><a href="global.html#removeAllPrimitives">removeAllPrimitives</a></li><li><a href="global.html#removeDocs">removeDocs</a></li><li><a href="global.html#removeEntity">removeEntity</a></li><li><a href="global.html#removeGridInfo">removeGridInfo</a></li><li><a href="global.html#removeImageLayer">removeImageLayer</a></li><li><a href="global.html#removeM3dLayer">removeM3dLayer</a></li><li><a href="global.html#removePrimitive">removePrimitive</a></li><li><a href="global.html#removeTerrain">removeTerrain</a></li><li><a href="global.html#updataPopupPosition">updataPopupPosition</a></li><li><a href="global.html#zoomToM3dLayer">zoomToM3dLayer</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <span class="page-title-sub">manager/CommonFuncManager.js</span>
+                    <span class="page-title-main">Source</span>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { CesiumZondy } from '../core/Base';
+
+/**
+ * 计算三点的角度（0-180之间）
+ * @param {Array} p1 第一个点
+ * @param {Array} p2 第二个点
+ * @param {Array} p3 第三个点
+ * @returns {Number} 角度值
+ */
+function calAngleOf3Pnt(p1, p2, p3) {
+    const p = (p1[0] - p2[0]) * (p3[0] - p2[0]) + (p1[1] - p2[1]) * (p3[1] - p2[1]) + (p1[2] - p2[2]) * (p3[2] - p2[2]);
+    const a = Math.sqrt((p2[0] - p1[0]) ** 2 + (p2[1] - p1[1]) ** 2 + (p2[2] - p1[2]) ** 2);
+    const b = Math.sqrt((p3[0] - p2[0]) ** 2 + (p3[1] - p2[1]) ** 2 + (p3[2] - p2[2]) ** 2);
+    const angle = Math.acos(p / (a * b));
+    return (angle * 180) / Math.PI;
+}
+
+/**
+ * @author 三维基础平台研发中心·冯桂英
+ * @class module:客户端公共方法.CommonFuncManager
+ * @category CommonFuncManager
+ * @classdesc 通用辅助计算类
+ * @description 该类实提供例如加密点等辅助计算函数
+ * @param optionsParam.viewer 场景视窗
+ */
+export default class CommonFuncManager {
+    constructor(optionsParam) {
+        const options = optionsParam;
+        this._viewer = Cesium.defaultValue(options.viewer, undefined);
+        if (this._viewer) {
+            this._scene = Cesium.defaultValue(this._viewer.scene, undefined);
+            this._shouldAnimate = this.viewer.clock.shouldAnimate;
+        }
+    }
+
+    /**
+     *  当前椭球
+     * @memberof CommonFuncManager.protype
+     * @type {Ellipsoid}
+     * @readonly
+     *
+     */
+    get ellipsoid() {
+        return this._viewer.scene.globe.ellipsoid;
+    }
+
+    /**
+     * 视图
+     * @memberof CommonFuncManager.prototype
+     * @type {Viewer}
+     * @readonly
+     */
+    get viewer() {
+        return this._viewer;
+    }
+
+    /**
+     * 场景
+     * @memberof CommonFuncManager.prototype
+     * @readonly
+     * @type {Scene}
+     */
+    get scene() {
+        return this._scene;
+    }
+
+    /**
+     * 是否允许动画
+     * @memberof CommonFuncManager.protype
+     * @type {ShouldAnimate}
+     * @readonly
+     *
+     */
+    get shouldAnimate() {
+        return this._shouldAnimate;
+    }
+
+    /**
+     * 屏幕坐标转为经纬度坐标
+     * @function module:客户端公共方法.CommonFuncManager.prototype.screenPositionToCartographic
+     * @param {Position} position 屏幕坐标点
+     * @returns {Position} 三维经纬度坐标点(单位弧度)
+     * @example
+     * let result = commfun.screenPositionToCartographic(position);
+     * let lng=Cesium.Math.toDegrees(result.longitude);//转为经度值
+     * let lat=Cesium.Math.toDegrees(result.latitude);//转为纬度值
+     */
+    screenPositionToCartographic(position) {
+        let cartesianPosition;
+        let cartographicPosition = null;
+        if (position) {
+            if (this.scene._mode === Cesium.SceneMode.SCENE3D) {
+                const ray = this.viewer.camera.getPickRay(position);
+                cartesianPosition = this.scene.globe.pick(ray, this.scene);
+            } else {
+                cartesianPosition = this.viewer.camera.pickEllipsoid(position, this.ellipsoid);
+            }
+            if (Cesium.defined(cartesianPosition)) {
+                cartographicPosition = this.ellipsoid.cartesianToCartographic(cartesianPosition);
+            }
+        }
+        return cartographicPosition;
+    }
+
+    /**
+     * 屏幕坐标转为笛卡尔坐标
+     * @function module:客户端公共方法.CommonFuncManager.prototype.screenPositionToCartesian
+     * @param {Position} position 屏幕坐标点
+     * @returns {Position} 三维笛卡尔坐标点
+     * @example
+     * let result = commfun.screenPositionToCartesian(movement.position);
+     */
+    screenPositionToCartesian(position) {
+        let cartesianPosition = null;
+        if (position) {
+            if (this.scene._mode === Cesium.SceneMode.SCENE3D) {
+                const ray = this.viewer.camera.getPickRay(position);
+                cartesianPosition = this.scene.globe.pick(ray, this.scene);
+            } else {
+                cartesianPosition = this.viewer.camera.pickEllipsoid(position, this.ellipsoid);
+            }
+        }
+        return cartesianPosition;
+    }
+
+    /**
+     * 输出屏幕截图对象，可保存为不同类型图片
+     * @function module:客户端公共方法.CommonFuncManager.prototype.outputImageObj
+     * @returns {Object} 图片对象
+     * @example
+     * let res = comm.outputImageObj();
+     * res.downloadPng(name);
+     * //res.toImg();
+     * //res.toBase64();
+     * //res.downloadPng(name);
+     * //res.toCanvas();
+     * //res.toJpeg();
+     * //res.toPng();
+     */
+    outputImageObj() {
+        this.viewer.render();
+        return Cesium.reimg.fromCanvas(this.viewer.canvas);
+    }
+
+    /**
+     * 屏幕截图输出为图片
+     * @function module:客户端公共方法.CommonFuncManager.prototype.outputImageFile
+     * @param {String} fileName 输出图片名称
+     * @example
+     * res.outputImageFile(name);
+     * commfun.outputImageFile('output'); //不指定后缀默认是png格式
+     * //commfun.outputImageFile('output.jpg');
+     */
+    outputImageFile(fileName) {
+        this.viewer.render();
+        Cesium.reimg.fromCanvas(this.viewer.canvas).downloadPng(fileName);
+    }
+
+    /**
+     * 根据经纬度计算高度值
+     * @function module:客户端公共方法.CommonFuncManager.prototype.getHeightFromDegrees
+     * @param {Number} longitude 经度值
+     * @param {Number} latitude 纬度值
+     * @returns {Number} 计算的高度值
+     * @example
+     * let res = commfun.getHeightFromDegrees(120.0,23.0)
+     */
+    getHeightFromDegrees(longitude, latitude) {
+        let position;
+        let height = 0;
+        if (longitude &amp;&amp; latitude) {
+            position = Cesium.Cartographic.fromDegrees(longitude, latitude);
+            height = this.viewer.scene.globe.getHeight(position);
+        }
+        return height;
+    }
+
+    /**
+     * 获取颜色
+     * @function module:客户端公共方法.CommonFuncManager.prototype.getColor
+     * @param {Number} red 红色分量（0-1.0）
+     * @param {Number} green 绿色分量（0-1.0）
+     * @param {Number} blue 蓝色分量（0-1.0）
+     * @param {Number} alpha 透明度 (0-1.0）
+     * @returns {Color} 颜色对象
+     * @example
+     * let res = CommonFun.getColor(0.3, 0.4, 0.1, 1.0);
+     */
+    static getColor(red, green, blue, alpha) {
+        return new Cesium.Color(red, green, blue, alpha);
+    }
+
+    /**
+     * 计算场景的二维范围
+     * @function module:客户端公共方法.CommonFuncManager.prototype.getSceneRange
+     * @param {String} 视图元素ID
+     * @returns {Array[]} 场景范围（单位：经纬度）Array&lt;[lon,lat]>
+     */
+    getSceneRange(elementID) {
+        const controlDiv = document.getElementById(elementID);
+        if (Cesium.defined(controlDiv)) {
+            const h = controlDiv.offsetHeight; // 高度
+            const w = controlDiv.offsetWidth; // 宽度
+            const ua = navigator.userAgent.toLowerCase();
+
+            const isOpera = ua.indexOf('opera') !== -1;
+            const isIE = ua.indexOf('msie') !== -1 &amp;&amp; !isOpera;
+
+            if (controlDiv.parentNode === null || controlDiv.style.display === 'none') {
+                return undefined;
+            }
+            let parent = null;
+            let pos = [];
+            let box;
+            let x;
+            let y;
+            if (isIE) {
+                box = controlDiv.getBoundingClientRect();
+                const scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop);
+                const scrollLeft = Math.max(document.documentElement.scrollLeft, document.body.scrollLeft);
+                x = box.left + scrollLeft;
+                y = box.top + scrollTop;
+            } else if (document.getBoxObjectFor) {
+                box = document.getBoxObjectFor(controlDiv);
+                const borderLeft = controlDiv.style.borderLeftWidth ? parseInt(controlDiv.style.borderLeftWidth, 10) : 0;
+                const borderTop = controlDiv.style.borderTopWidth ? parseInt(controlDiv.style.borderTopWidth, 10) : 0;
+                pos = [box.x - borderLeft, box.y - borderTop];
+            } // safari &amp; opera
+            else {
+                pos = [controlDiv.offsetLeft, controlDiv.offsetTop];
+                parent = controlDiv.offsetParent;
+                if (parent !== controlDiv) {
+                    while (parent) {
+                        pos[0] += parent.offsetLeft;
+                        pos[1] += parent.offsetTop;
+                        parent = parent.offsetParent;
+                    }
+                }
+                if (ua.indexOf('opera') !== -1 || (ua.indexOf('safari') !== -1 &amp;&amp; controlDiv.style.position === 'absolute')) {
+                    pos[0] -= document.body.offsetLeft;
+                    pos[1] -= document.body.offsetTop;
+                }
+            }
+
+            if (controlDiv.parentNode) {
+                parent = controlDiv.parentNode;
+            } else {
+                parent = null;
+            }
+            while (parent &amp;&amp; parent.tagName !== 'BODY' &amp;&amp; parent.tagName !== 'HTML') {
+                pos[0] -= parent.scrollLeft;
+                pos[1] -= parent.scrollTop;
+                if (parent.parentNode) {
+                    parent = parent.parentNode;
+                } else {
+                    parent = null;
+                }
+            }
+            const { 0: posx, 1: posy } = pos;
+            x = posx;
+            y = posy;
+
+            const position1 = new Cesium.Cartesian2(x, y);
+            const position2 = new Cesium.Cartesian2(x + w, y + h);
+            const { viewer } = this;
+            let pick1;
+            let pick2;
+
+            if (this.scene.mode === Cesium.SceneMode.SCENE3D) {
+                pick1 = this.scene.globe.pick(viewer.camera.getPickRay(position1), this.scene);
+                pick2 = this.scene.globe.pick(viewer.camera.getPickRay(position2), this.scene);
+            } else {
+                pick1 = viewer.camera.pickEllipsoid(position1, this.ellipsoid);
+                pick2 = viewer.camera.pickEllipsoid(position2, this.ellipsoid);
+            }
+            if (pick1 === undefined || pick2 === undefined) {
+                return undefined;
+            }
+            // 将三维坐标转成地理坐标
+            const geoPt1 = viewer.scene.globe.ellipsoid.cartesianToCartographic(pick1);
+            const geoPt2 = viewer.scene.globe.ellipsoid.cartesianToCartographic(pick2);
+
+            // 地理坐标转换为经纬度坐标
+            const point1 = [(geoPt1.longitude / Math.PI) * 180, (geoPt2.latitude / Math.PI) * 180];
+            const point2 = [(geoPt2.longitude / Math.PI) * 180, (geoPt1.latitude / Math.PI) * 180];
+            return [point1, point2];
+        }
+        return undefined;
+    }
+
+    /**
+     * 绕点旋转 相机绕点飞行一周 或者相机绕自身旋转一周
+     * @function module:客户端公共方法.CommonFuncManager.prototype.rotationView
+     * @param {String} [type='rotationAroundPos'] 旋转类型  默认绕相机自身旋转
+     * @param {Object} [optionsParam] 附加参数系信息
+     * @param {Cartesian3} [optionsParam.position] 要进行围绕旋转的点
+     * @param {Number} [optionsParam.pitch=-30] 相机的俯仰角   单位（度）
+     * @param {Number} [optionsParam.distance=500000] 相机距离点的距离 单位（米）
+     * @param {Number} [optionsParam.duration=10] 绕点飞行一周所用的时间  单位（秒）
+     * @param {Number} [optionsParam.ClockRange=Cesium.ClockRange.CLAMPED] 循环方式
+     * @returns {Event} 绕点旋转事件
+     * @example
+     * let opt ={
+     *   position:Cesium.Cartesian3.fromDegrees(110,20,100),
+     *   pitch:-30,
+     *   distance:500000,
+     *   duration:10,
+     *   ClockRange:Cesium.ClockRange.CLAMPED
+     * };
+     * let update = commfun.rotationView('rotationAroundPos',opt) ;
+     *
+     */
+    rotationView(type, optionsParam) {
+        if (!Cesium.defined(type)) {
+            return new Cesium.DeveloperError('必须指定旋转类型');
+        }
+        const options = Cesium.defaultValue(optionsParam, {});
+        const { position } = options;
+        if (type === 'rotationAroundPos' &amp;&amp; !Cesium.defined(position)) {
+            return new Cesium.DeveloperError('必须指定旋转点');
+        }
+        const pitch = Cesium.Math.toRadians(Cesium.defaultValue(options.pitch, -30));
+        const distance = Cesium.defaultValue(options.distance, 5000);
+        const duration = Cesium.defaultValue(options.duration, 8);
+        const angle = 360.0 / duration;
+        const startTime = Cesium.JulianDate.fromDate(new Date());
+        const stopTime = Cesium.JulianDate.addSeconds(startTime, duration, new Cesium.JulianDate());
+        this.viewer.clock.startTime = startTime.clone();
+        this.viewer.clock.stopTime = stopTime.clone();
+        this.viewer.clock.currentTime = startTime.clone();
+        this.viewer.clock.clockRange = Cesium.ClockRange.CLAMPED;
+        this.viewer.clock.clockStep = Cesium.ClockStep.SYSTEM_CLOCK;
+        const currentHeading = this.viewer.camera.heading;
+        const update = () => {
+            const delTime = Cesium.JulianDate.secondsDifference(this.viewer.clock.currentTime, this.viewer.clock.startTime);
+            const heading = -Cesium.Math.toRadians(delTime * angle) + currentHeading;
+            let nowPostion = this.scene.camera.position;
+            if (type === 'rotationAroundPos' &amp;&amp; Cesium.defined(position)) {
+                nowPostion = position;
+            }
+            this.scene.camera.setView({
+                destination: nowPostion,
+                orientation: {
+                    heading,
+                    pitch
+                }
+            });
+            this.scene.camera.moveBackward(distance);
+            if (Cesium.JulianDate.compare(this.viewer.clock.currentTime, this.viewer.clock.stopTime) >= 0) {
+                this.viewer.clock.onTick.removeEventListener(update);
+            }
+        };
+        this.viewer.clock.shouldAnimate = true;
+        this.viewer.clock.onTick.addEventListener(update);
+        return update;
+    }
+
+    /**
+     * 移除绕点自旋转事件
+     * @function module:客户端公共方法.CommonFuncManager.prototype.removeRotationView
+     * @param {Event} event 绕点旋转事件
+     * @example
+     * let opt ={
+     *   position:Cesium.Cartesian3.fromDegrees(110,20,100),
+     *   pitch:-30,
+     *   distance:500000,
+     *   duration:10,
+     *   ClockRange:Cesium.ClockRange.CLAMPED
+     * };
+     * let update = commfun.rotationView('rotationAroundPos',opt) ;
+     * commfun.removeRotationView(update);
+     */
+    removeRotationView(event) {
+        if (Cesium.defined(event)) {
+            this.viewer.clock.onTick.removeEventListener(event);
+            this.viewer.clock.shouldAnimate = this.shouldAnimate;
+        }
+    }
+
+    /**
+     * 暂停围绕旋转
+     * @function module:客户端公共方法.CommonFuncManager.prototype.pauseRotationView
+     * @example
+     * //let opt ={
+     * //    position:Cesium.Cartesian3.fromDegrees(110,20,100),
+     * //    pitch:-30,
+     * //    distance:500000,
+     * //    duration:10,
+     * //    ClockRange:Cesium.ClockRange.CLAMPED
+     * //   };
+     * //let update = commfun.rotationView('rotationAroundPos',opt) ;
+     * commfun.pauseRotationView();
+     */
+    pauseRotationView() {
+        this.viewer.clock.shouldAnimate = false;
+    }
+
+    /**
+     * 开始围绕旋转 与暂停配合使用
+     * @function module:客户端公共方法.CommonFuncManager.prototype.startRotationAroundPos
+     * @example
+     * //let opt ={
+     * //    position:Cesium.Cartesian3.fromDegrees(110,20,100),
+     * //    pitch:-30,
+     * //    distance:500000,
+     * //    duration:10,
+     * //    ClockRange:Cesium.ClockRange.CLAMPED
+     * //   };
+     * //let update = commfun.rotationView('rotationAroundPos',opt) ;
+     * //commfun.pauseRotationView();
+     * commfun.startRotationAroundPos(update);
+     */
+    startRotationAroundPos() {
+        this.viewer.clock.shouldAnimate = true;
+    }
+
+    /**
+     * 计算两点间的heading 航向角
+     * @function module:客户端公共方法.CommonFuncManager.prototype.caculHeadingFromCartographic
+     * @param {Cartographic} center 中心点 （第一个点） 坐标为弧度
+     * @param {Cartographic} target 目标点 （第二个点）坐标为弧度
+     * @returns {Number} heading 
+     * @example 
+     *      let center = new Cesium.Cartographic(113, 23, 200);
+            let target = new Cesium.Cartographic(114, 24, 200);
+            let res = commfun.caculHeadingFromCartographic(source,target);
+     */
+    caculHeadingFromCartographic(center, target) {
+        const centerCar3 = Cesium.Cartesian3.fromRadians(center.longitude, center.latitude, center.height, this.ellipsoid, new Cesium.Cartesian3());
+        const targetCar3 = Cesium.Cartesian3.fromRadians(target.longitude, target.latitude, target.height, this.ellipsoid, new Cesium.Cartesian3());
+        return this.getHeadingFromCartesian3(centerCar3, targetCar3);
+    }
+
+    /**
+     * @private
+     * 计算两点间的heading 航向角
+     * @param {Cartesian3} center 中心点 世界坐标（第一个点）
+     * @param {Cartesian3} target 目标点 世界坐标（第二个点）
+     * @returns {Number} heading
+     */
+    getHeadingFromCartesian3(center, target) {
+        let carCenter = new Cesium.Cartographic();
+        carCenter = Cesium.Cartographic.fromCartesian(center, this.ellipsoid, carCenter);
+        carCenter.height = 0;
+        const centerUse = Cesium.Cartesian3.fromRadians(carCenter.longitude, carCenter.latitude, carCenter.height, this.ellipsoid, new Cesium.Cartesian3());
+        const centerUseEx = Cesium.Cartesian3.fromRadians(carCenter.longitude, carCenter.latitude + 0.1, carCenter.height, this.ellipsoid, new Cesium.Cartesian3());
+        let tempdir = Cesium.Cartesian3.subtract(centerUseEx, centerUse, new Cesium.Cartesian3());
+        tempdir = Cesium.Cartesian3.normalize(tempdir, tempdir);
+
+        let carTarget = new Cesium.Cartographic();
+        carTarget = Cesium.Cartographic.fromCartesian(target, this.ellipsoid, carTarget);
+        carTarget.height = 0;
+        const targetUse = Cesium.Cartesian3.fromRadians(carTarget.longitude, carTarget.latitude, carTarget.height, this.ellipsoid, new Cesium.Cartesian3());
+
+        let tarDir = Cesium.Cartesian3.subtract(targetUse, centerUse, new Cesium.Cartesian3());
+        tarDir = Cesium.Cartesian3.normalize(tarDir, tarDir);
+        let heading = Cesium.Cartesian3.angleBetween(tempdir, tarDir);
+        if (carTarget.longitude &lt; carCenter.longitude) {
+            heading = 2 * Math.PI - heading;
+        }
+
+        return heading;
+    }
+
+    /**
+     * @private
+     * 深度拷贝对象
+     * @param  {Object} o 被拷贝对象
+     * @returns {Object} 拷贝结果
+     */
+    deepCopy(o) {
+        if (o instanceof Array) {
+            const n = [];
+            for (let i = 0; i &lt; o.length; i += 1) {
+                n[i] = this.deepCopy(o[i]);
+            }
+            return n;
+        }
+        if (o instanceof Object) {
+            const n = {};
+            Object.keys(o).forEach((key) => {
+                n[key] = this.deepCopy(o[key]);
+            });
+            return n;
+        }
+        return o;
+    }
+
+    /**
+     * 化简抽稀(用于折线路绘制)
+     * @function module:客户端公共方法.CommonFuncManager.prototype.simplifyLine
+     * @param  {Array&lt;Cartesian3>} positions 坐标点序列
+     * @returns {Array&lt;Cartesian3>} 抽稀后的坐标点序列
+     * @example
+     * let polyline;
+     * let drawElement = new Cesium.DrawElement(viewer);
+     * let commfun = new CommonFun({viewer:viewer});
+     * drawElement.startDrawingPolyline({
+     *               callback: function(positions){
+     *                   let simplify = commfun.simplifyLine(positions);
+     *                   polyline = new Cesium.DrawElement.PolylinePrimitive({
+     *                       positions: simplify,
+     *                       width: 1,
+     *                       geodesic: true
+     *                   });
+     *                  viewer.scene.primitives.add(polyline);
+     *               }
+     *           });
+     */
+    simplifyLine(positions) {
+        // 该抽稀对于三点之间夹角>175度则删除，如果是高程拐点则必须保留，高程没有赋值的也需删除（因为可能没取到地形数据）
+        if (positions !== null &amp;&amp; positions.length >= 3) {
+            let posCopy = this.deepCopy(positions);
+            // 先删除高程值有异常坐标
+            const len = posCopy.length;
+            for (let j = 0; j &lt; len; j += 1) {
+                if (posCopy[j].z === undefined || posCopy[j].z === null) {
+                    posCopy = posCopy.slice(0, j).concat(posCopy.slice(j + 1));
+                }
+            }
+            for (let i = 0; i &lt;= posCopy.length - 3; i += 1) {
+                const isVertice = !((posCopy[i].z - posCopy[i + 1].z) * (posCopy[i + 1].z - posCopy[i + 2].z) > 0);
+                const angle = calAngleOf3Pnt([posCopy[i].x, posCopy[i].y, posCopy[i].z], [posCopy[i + 1].x, posCopy[i + 1].y, posCopy[i + 1].z], [posCopy[i + 2].x, posCopy[i + 2].y, posCopy[i + 2].z]);
+
+                if (angle > 175 &amp;&amp; !isVertice) {
+                    posCopy = posCopy.slice(0, i + 1).concat(posCopy.slice(i + 2));
+                }
+            }
+            return posCopy;
+        }
+        return null;
+    }
+
+    /**
+     * 按照分段加密
+     * @function module:客户端公共方法.CommonFuncManager.prototype.calcParabola
+     * @param {Object} options 参数
+     * @param {Array} [options.position] 经纬度点数组
+     * @param {Number} [options.height] 高度
+     * @param {Number} [options.num] 数量
+     * @returns {Array} 点数组结果
+     * @example
+     * let opt = {
+                num: 5,
+                heigtht: 500,
+                position1: {
+                    lon: 112, lat: 30
+                },
+                position2: {
+                    lon: 113, lat: 32
+                }
+            }
+            let res = CommonFun.calcParabola(opt);
+     */
+    static calcParabola(options) {
+        // 方程 y=-(4h/L^2)*x^2+h h:顶点高度 L：横纵间距较大者
+        const h = options.height &amp;&amp; options.height > 5000 ? options.height : 5000;
+        const L = Math.abs(options.position1.lon - options.position2.lon) > Math.abs(options.position1.lat - options.position2.lat) ? Math.abs(options.position1.lon - options.position2.lon) : Math.abs(options.position1.lat - options.position2.lat);
+        const num = options.num &amp;&amp; options.num > 50 ? options.num : 50;
+        const result = [];
+        let dlt = L / num;
+        if (Math.abs(options.position1.lon - options.position2.lon) > Math.abs(options.position1.lat - options.position2.lat)) {
+            // 以lon为基准
+            const delLat = (options.position2.lat - options.position1.lat) / num;
+            if (options.position1.lon - options.position2.lon > 0) {
+                dlt = -dlt;
+            }
+            for (let i = 0; i &lt; num; i += 1) {
+                const tempH = h - ((-0.5 * L + Math.abs(dlt) * i) ** 2 * 4 * h) / L ** 2;
+                const lon = options.position1.lon + dlt * i;
+                const lat = options.position1.lat + delLat * i;
+                result.push([lon, lat, tempH]);
+            }
+        } else {
+            // 以lat为基准
+            const delLon = (options.position2.lon - options.position1.lon) / num;
+            if (options.position1.lat - options.position2.lat > 0) {
+                dlt = -dlt;
+            }
+            for (let j = 0; j &lt; num; j += 1) {
+                const tempH2 = h - ((-0.5 * L + Math.abs(dlt) * j) ** 2 * 4 * h) / L ** 2;
+                const lon2 = options.position1.lon + delLon * j;
+                const lat2 = options.position1.lat + dlt * j;
+                result.push([lon2, lat2, tempH2]);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * 线性插值（二维坐标）
+     * @function module:客户端公共方法.CommonFuncManager.prototype.linearInterpolate
+     * @param {Array&lt;Cartesian2>} positions 坐标点序列
+     * @param {Number} step 步长
+     * @returns {Array&lt;Cartesian2>} 插值后的坐标点序列
+     */
+    static linearInterpolate(positions, step) {
+        const pnts = [];
+        const len = positions.length - 1;
+        for (let m = 0; m &lt; len; m += 1) {
+            const pntS = positions[m];
+            const pntE = positions[m + 1];
+            if (m === 0) {
+                pnts.push(pntS);
+            }
+            const dis = Math.sqrt((pntE.x - pntS.x) ** 2 + (pntE.y - pntS.y) ** 2);
+            if (dis > step) {
+                const n = dis / step;
+                for (let i = 1; i &lt; n; i += 1) {
+                    const x = (pntE.x - pntS.x) * ((i * step) / dis) + pntS.x;
+                    const y = (pntE.y - pntS.y) * ((i * step) / dis) + pntS.y;
+                    pnts.push(new Cesium.Cartesian2(x, y));
+                }
+            }
+            pnts.push(pntE);
+        }
+        return pnts;
+    }
+
+    /**
+     * 线性插值(三维坐标)
+     * @function module:客户端公共方法.CommonFuncManager.prototype.linearInterpolate3D
+     * @param {Array&lt;Cartesian3>} positions 坐标点序列
+     * @param {Number} step 步长
+     * @returns {Array&lt;Cartesian3>} 插值后的坐标点序列
+     */
+    static linearInterpolate3D(positions, step) {
+        const pnts = [];
+        for (let m = 0; m &lt; positions.length - 1; m += 1) {
+            const pntS = positions[m];
+            const pntE = positions[m + 1];
+            if (m === 0) {
+                pnts.push(pntS);
+            }
+            const dis = Math.sqrt((pntE.x - pntS.x) ** 2 + (pntE.y - pntS.y) ** 2);
+            if (dis > step) {
+                const n = dis / step;
+                for (let i = 1; i &lt; n; i += 11) {
+                    const x = (pntE.x - pntS.x) * ((i * step) / dis) + pntS.x;
+                    const y = (pntE.y - pntS.y) * ((i * step) / dis) + pntS.y;
+                    const z = (pntE.z - pntS.z) * ((i * step) / dis) + pntS.z;
+                    pnts.push(new Cesium.Cartesian3(x, y, z));
+                }
+            }
+            pnts.push(pntE);
+        }
+        return pnts;
+    }
+
+    /**
+     * 生成随机数
+     * @function module:客户端公共方法.CommonFuncManager.prototype.generateRandom
+     */
+    static generateRandom() {
+        let guid = '';
+        for (let i = 1; i &lt;= 32; i += 1) {
+            const n = Math.floor(Math.random() * 16.0).toString(16);
+            guid += n;
+            if (i === 8 || i === 12 || i === 16 || i === 20) guid += '-';
+        }
+        return guid;
+    }
+
+    /**
+     * 根据地形设置二维坐标的高程值
+     * @function module:客户端公共方法.CommonFuncManager.prototype.setZValueByTerrain
+     * @param {CesiumTerrainProvider} TerrainProvider 地形
+     * @param {Number} level 以地形的级数为基准
+     * @param {Array&lt;Cartesian2>} positions 需设置高程的二维坐标点序列
+     * @returns {Function} 设置成功后的回调
+     */
+    setZValueByTerrain(terrainProvider, level, positions, ellipsoid, callback) {
+        const cartographics = [];
+        if (positions != null &amp;&amp; positions.length > 0) {
+            for (let i = 0; i &lt; positions.length; i += 1) {
+                const cartographic = ellipsoid.cartesianToCartographic(Cesium.Cartesian3.fromDegrees(positions[i].x, positions[i].y, 0, ellipsoid));
+                cartographics.push(cartographic);
+            }
+        }
+
+        Cesium.sampleTerrain(terrainProvider, level, cartographics).then((updatedPositions) => {
+            const cartesianPositions = this.ellipsoid.cartographicArrayToCartesianArray(updatedPositions);
+            if (typeof callback === 'function') {
+                callback(cartesianPositions);
+            }
+        });
+    }
+
+    /**
+     * 创建导航控件
+     * @function module:客户端公共方法.CommonFuncManager.prototype.createNavigationTool
+     * @param  {object} options 导航控件参数
+     * let options = {};
+     * //用于在使用重置导航重置地图视图时设置默认视图控制。接受的值是Cesium.Cartographic 和 Cesium.Rectangle
+     * options.defaultResetView = Cesium.Rectangle.fromDegrees(71, 3, 90, 14);
+     * //用于启用或禁用罗盘
+     * options.enableCompass= true;
+     * //用于启用或禁用缩放控件
+     * options.enableZoomControls= false;
+     * //用于启用或禁用距离图例
+     * options.enableDistanceLegend= false;
+     * //用于启用或禁用指南针外环
+     * options.enableCompassOuterRing= true;
+     * @returns {Object} 导航控件对象
+     * @example 
+     * let commfun = new CommonFun({viewer:viewer});
+     * let navigation = commfun.createNavigationTool({
+                enableCompass: true,
+                enableZoomControls: true,
+                enableDistanceLegend: true,
+                enableCompassOuterRing: true,
+                defaultResetView: Cesium.Rectangle.fromDegrees(110, 30, 121, 31)
+            });
+     */
+    createNavigationTool(options) {
+        this.viewer.extend(Cesium.viewerCesiumNavigationMixin, options);
+        return this.viewer.cesiumNavigation;
+    }
+}
+
+CesiumZondy.Manager.CommonFuncManager = CommonFuncManager;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>文档生成<a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://www.smaryun.com" target="_blank">司马云</a> <span>© 2020 云生态圈</span>
+                        <a href="http://develop.smaryun.com:8899/" target="_blank">MapGIS Client for JavaScript</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+<script src="scripts/search.js"> </script>
+
+</body>
+</html>

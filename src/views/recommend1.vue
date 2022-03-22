@@ -1189,7 +1189,7 @@ export default {
         border-right: none;
       }
       /deep/.el-tabs--border-card > .el-tabs__header .el-tabs__item.is-active {
-        background: #1cbde62c;
+        background: #2baccd6e;
         color: #dcdfe6;
         border-left: none;
         border-right: none;

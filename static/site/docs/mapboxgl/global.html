@@ -1,0 +1,10405 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Client for JavaScript Global</title>
+
+  <script src="../cdn/run_prettify.js"></script>
+  <script src="../cdn/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="../cdn/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="../cdn/googleapis.css" rel="stylesheet">
+  <link href="../cdn/prettify.css" rel="stylesheet">
+  <link rel="stylesheet" href="../cdn/all.css" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="../cdn/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="../cdn/mapgis.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="../cdn/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+             
+                <a class="image" href="/">
+                    <img class="mapgis-webclient-logo" src="../image/mapgis_blue.png" alt="logo">
+                </a>
+            
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API
+                </a>
+                <div class="dropdown is-hoverable is-right">
+                    <a class="dropdown-trigger link">
+                        帮助向导
+                    </a>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-content">
+                        
+                            
+                                <a class="dropdown-item" href="tutorial-1.快速入门.html">
+                                    1.快速入门
+                                </a>
+                            
+                        
+                        </div>
+                    </div>
+                </div>
+                 
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/cesium/index.html"
+                        >
+                            Cesium
+                        </a>
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/mapboxgl/index.html"
+                        >
+                            MapboxGL
+                        </a>
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/leaflet/index.html"
+                        >
+                            Leaflet
+                        </a>
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/openlayers/index.html"
+                        >
+                            OpenLayers
+                        </a>
+                    
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            <div>
+                <span class="mapgis-api-document-span"><a href="index.html">API文档</a></span>
+            </div>
+            
+                <div class="search-wrapper">
+                    <input id="search" type="text" placeholder="搜索文档..." class="input">
+                </div>
+            
+            <nav>
+                
+                    <div class="category"><div class="mapgis-menu-span">模块</div><ul class="mapgis-sidebar-menus"><li><a href="module-ArcGis.html">ArcGis</a></li><li><a href="module-CloudDisk.html">CloudDisk</a></li><li><a href="module-DataStore.html">DataStore</a></li><li><a href="module-IGServerX.html">IGServerX</a></li><li><a href="module-OGC%25E6%259C%258D%25E5%258A%25A1.html">OGC服务</a></li><li><a href="module-OpenGeospatialConsortium%25E6%259C%258D%25E5%258A%25A1.html">OpenGeospatialConsortium服务</a></li><li><a href="module-PostGIS.html">PostGIS</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.html">专题图服务</a></li><li><a href="module-%25E5%2587%25A0%25E4%25BD%2595%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.html">几何分析服务</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.html">分析服务</a></li><li><a href="module-%25E5%259C%25B0%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.html">地图服务</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.html">客户端可视化</a></li><li><a href="module-%25E5%25BC%25B9%25E6%2580%25A7%25E6%2590%259C%25E7%25B4%25A2%25E6%259C%258D%25E5%258A%25A1.html">弹性搜索服务</a></li><li><a href="module-%25E7%259B%25AE%25E5%25BD%2595%25E6%259C%258D%25E5%258A%25A1.html">目录服务</a></li><li><a href="module-%25E7%259F%25A2%25E9%2587%258F%25E5%25A4%25A7%25E6%2595%25B0%25E6%258D%25AE.html">矢量大数据</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.html">要素服务</a></li></ul><div class="mapgis-menu-span">类名</div><ul class="mapgis-sidebar-menus"><li><a href="Circle.html">Circle</a></li><li><a href="CoordinateElpTrans.html">CoordinateElpTrans</a></li><li><a href="ElsCubeLayer_ElsCubeLayer.html">ElsCubeLayer</a></li><li><a href="FunctionWareService.html">FunctionWareService</a></li><li><a href="GeojsonStreamLayer.html">GeojsonStreamLayer</a></li><li><a href="ISocketService.html">ISocketService</a></li><li><a href="L.zondy.StreamLayer.html">StreamLayer</a></li><li><a href="mapboxgl.zondy.CubeLayer.html">CubeLayer</a></li><li><a href="mapboxgl.zondy.DeckglLayer.html">DeckglLayer</a></li><li><a href="mapboxgl.zondy.Graphic.html">Graphic</a></li><li><a href="mapboxgl.Zondy.Map.ArcGISLayer.html">ArcGISLayer</a></li><li><a href="mapboxgl.Zondy.Map.MapDocLayer.html">MapDocLayer</a></li><li><a href="mapboxgl.Zondy.Map.MapTileLayer.html">MapTileLayer</a></li><li><a href="mapboxgl.Zondy.Map.MapVectorLayer.html">MapVectorLayer</a></li><li><a href="mapboxgl.Zondy.Map.MapWmsLayer.html">MapWmsLayer</a></li><li><a href="mapboxgl.Zondy.Map.MapWMTSLayer.html">MapWMTSLayer</a></li><li><a href="mapboxgl.Zondy.Map.TDTLayer.html">TDTLayer</a></li><li><a href="mapboxgl.zondy.UniqueTheme3DLayer.html">UniqueTheme3DLayer</a></li><li><a href="mapboxgl.zondy.Util.html">Util</a></li><li><a href="MapvStreamLayer.html">MapvStreamLayer</a></li><li><a href="module-ArcGis.ArcGisBaseParam.html">ArcGisBaseParam</a></li><li><a href="module-ArcGis.ArcGisExtent.html">ArcGisExtent</a></li><li><a href="module-ArcGis.ArcGisFeatureLayer.html">ArcGisFeatureLayer</a></li><li><a href="module-ArcGis.ArcGisFindTask.html">ArcGisFindTask</a></li><li><a href="module-ArcGis.ArcGisGraphic.html">ArcGisGraphic</a></li><li><a href="module-ArcGis.ArcGisIdentifyTask.html">ArcGisIdentifyTask</a></li><li><a href="module-ArcGis.ArcGisMultipoint.html">ArcGisMultipoint</a></li><li><a href="module-ArcGis.ArcGisPoint.html">ArcGisPoint</a></li><li><a href="module-ArcGis.ArcGisPolygon.html">ArcGisPolygon</a></li><li><a href="module-ArcGis.ArcGisPolyline.html">ArcGisPolyline</a></li><li><a href="module-ArcGis.ArcGisQuery.html">ArcGisQuery</a></li><li><a href="module-ArcGis.ArcGisServiceBase.html">ArcGisServiceBase</a></li><li><a href="module-ArcGis.ArcGisSpatialReference.html">ArcGisSpatialReference</a></li><li><a href="module-CloudDisk.CalculateModelService.html">CalculateModelService</a></li><li><a href="module-CloudDisk.CloudDiskService.html">CloudDiskService</a></li><li><a href="module-CloudDisk.GeoDatasetService.html">GeoDatasetService</a></li><li><a href="module-CloudDisk.GisCore.FileService.html">FileService</a></li><li><a href="module-CloudDisk.ToolsService.html">ToolsService</a></li><li><a href="module-CloudDisk.UserService.html">UserService</a></li><li><a href="module-DataStore.DataStoreService.html">DataStoreService</a></li><li><a href="module-DataStore.ServiceParameter.html">ServiceParameter</a></li><li><a href="module-IGServerX.IGServerXService.html">IGServerXService</a></li><li><a href="module-OGC%2525E6%25259C%25258D%2525E5%25258A%2525A1.OGCService.html">OGCService</a></li><li><a href="module-OGC%25E6%259C%258D%25E5%258A%25A1.OGCWMSInfo.html">OGCWMSInfo</a></li><li><a href="module-OGC%25E6%259C%258D%25E5%258A%25A1.OGCWMTSInfo.html">OGCWMTSInfo</a></li><li><a href="module-OGC%25E6%259C%258D%25E5%258A%25A1.WMS.html">WMS</a></li><li><a href="module-PostGIS.PostgisCatlogService.html">PostgisCatlogService</a></li><li><a href="module-PostGIS.PostgisCustomQueryService.html">PostgisCustomQueryService</a></li><li><a href="module-PostGIS.PostgisQueryService.html">PostgisQueryService</a></li><li><a href="module-PostGIS.PostgisTableService.html">PostgisTableService</a></li><li><a href="module-PostGIS.PostgisVectorTileService.html">PostgisVectorTileService</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CAllOtherDataItemInfoSource.html">CAllOtherDataItemInfoSource</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CAnnInfo.html">CAnnInfo</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CChartLabelFormat.html">CChartLabelFormat</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CChartTheme.html">CChartTheme</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CChartThemeInfo.html">CChartThemeInfo</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CChartThemeRepresentInfo.html">CChartThemeRepresentInfo</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CChartType.html">CChartType</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CDotDensityTheme.html">CDotDensityTheme</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CFourColorTheme.html">CFourColorTheme</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CGraduatedSymbolTheme.html">CGraduatedSymbolTheme</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CLinInfo.html">CLinInfo</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CMultiClassTheme.html">CMultiClassTheme</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CPntInfo.html">CPntInfo</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CRandomTheme.html">CRandomTheme</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CRangeTheme.html">CRangeTheme</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CRangeThemeInfo.html">CRangeThemeInfo</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CRegInfo.html">CRegInfo</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CSimpleTheme.html">CSimpleTheme</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CTheme.html">CTheme</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CThemeInfo.html">CThemeInfo</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CUniqueTheme.html">CUniqueTheme</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CUniqueThemeInfo.html">CUniqueThemeInfo</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.ExpInfo.html">ExpInfo</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.FolderInfo.html">FolderInfo</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.FolderInfoAttribute.html">FolderInfoAttribute</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.ItemValue.html">ItemValue</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.ThemeOper.html">ThemeOper</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.ThemesInfo.html">ThemesInfo</a></li><li><a href="module-%25E5%2587%25A0%25E4%25BD%2595%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.CalArea.html">CalArea</a></li><li><a href="module-%25E5%2587%25A0%25E4%25BD%2595%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.CalPolyLineLength.html">CalPolyLineLength</a></li><li><a href="module-%25E5%2587%25A0%25E4%25BD%2595%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.CalServiceBase.html">CalServiceBase</a></li><li><a href="module-%25E5%2587%25A0%25E4%25BD%2595%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.CProjectBySRSID.html">CProjectBySRSID</a></li><li><a href="module-%25E5%2587%25A0%25E4%25BD%2595%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.CProjectParam.html">CProjectParam</a></li><li><a href="module-%25E5%2587%25A0%25E4%25BD%2595%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.GeometryAnalysisBase.html">GeometryAnalysisBase</a></li><li><a href="module-%25E5%2587%25A0%25E4%25BD%2595%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ProjectDots.html">ProjectDots</a></li><li><a href="module-%25E5%2587%25A0%25E4%25BD%2595%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ProjectRang.html">ProjectRang</a></li><li><a href="module-%25E5%2587%25A0%25E4%25BD%2595%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.Smooth.html">Smooth</a></li><li><a href="module-%25E5%2587%25A0%25E4%25BD%2595%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.TopAnalysis.html">TopAnalysis</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.AnalysisBase.html">AnalysisBase</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ClassBufferBase.html">ClassBufferBase</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ClassBufferByMultiplyRing.html">ClassBufferByMultiplyRing</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ClassBufferBySingleRing.html">ClassBufferBySingleRing</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ClipBase.html">ClipBase</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ClipByCircle.html">ClipByCircle</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ClipByLayer.html">ClipByLayer</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ClipByPolygon.html">ClipByPolygon</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ContourAnalyse.html">ContourAnalyse</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.FeatureBuffBase.html">FeatureBuffBase</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.FeatureBuffByMultiplyRing.html">FeatureBuffByMultiplyRing</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.FeatureBuffBySingleRing.html">FeatureBuffBySingleRing</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.NetAnalysis.html">NetAnalysis</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.OverlayBase.html">OverlayBase</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.OverlayByLayer.html">OverlayByLayer</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.OverlayByPolygon.html">OverlayByPolygon</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ProjectBase.html">ProjectBase</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ProjectByLayer.html">ProjectByLayer</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ProjectBySRID.html">ProjectBySRID</a></li><li><a href="module-%25E5%259C%25B0%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.GetDocImageService.html">GetDocImageService</a></li><li><a href="module-%25E5%259C%25B0%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.GetLayerImageService.html">GetLayerImageService</a></li><li><a href="module-%25E5%259C%25B0%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.GetMapImageService.html">GetMapImageService</a></li><li><a href="module-%25E5%259C%25B0%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.GetMapInfoService.html">GetMapInfoService</a></li><li><a href="module-%25E5%259C%25B0%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.GetTileImageService.html">GetTileImageService</a></li><li><a href="module-%25E5%259C%25B0%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.MapServiceBase.html">MapServiceBase</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.EchartsLayer.html">EchartsLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.MapvLayer.html">MapvLayer</a></li><li><a href="module-%25E5%25BC%25B9%25E6%2580%25A7%25E6%2590%259C%25E7%25B4%25A2%25E6%259C%258D%25E5%258A%25A1.EsCatlogService.html">EsCatlogService</a></li><li><a href="module-%25E5%25BC%25B9%25E6%2580%25A7%25E6%2590%259C%25E7%25B4%25A2%25E6%259C%258D%25E5%258A%25A1.ESGeoCode.html">ESGeoCode</a></li><li><a href="module-%25E5%25BC%25B9%25E6%2580%25A7%25E6%2590%259C%25E7%25B4%25A2%25E6%259C%258D%25E5%258A%25A1.EsGeocodeParameter.html">EsGeocodeParameter</a></li><li><a href="module-%25E5%25BC%25B9%25E6%2580%25A7%25E6%2590%259C%25E7%25B4%25A2%25E6%259C%258D%25E5%258A%25A1.EsGeocodeService.html">EsGeocodeService</a></li><li><a href="module-%25E5%25BC%25B9%25E6%2580%25A7%25E6%2590%259C%25E7%25B4%25A2%25E6%259C%258D%25E5%258A%25A1.ESGeoDecode.html">ESGeoDecode</a></li><li><a href="module-%25E5%25BC%25B9%25E6%2580%25A7%25E6%2590%259C%25E7%25B4%25A2%25E6%259C%258D%25E5%258A%25A1.ESQueryStats.html">ESQueryStats</a></li><li><a href="module-%25E5%25BC%25B9%25E6%2580%25A7%25E6%2590%259C%25E7%25B4%25A2%25E6%259C%258D%25E5%258A%25A1.EsSpaceTimeQueryByAgg.html">EsSpaceTimeQueryByAgg</a></li><li><a href="module-%25E5%25BC%25B9%25E6%2580%25A7%25E6%2590%259C%25E7%25B4%25A2%25E6%259C%258D%25E5%258A%25A1.EsTableService.html">EsTableService</a></li><li><a href="module-%25E7%259B%25AE%25E5%25BD%2595%25E6%259C%258D%25E5%258A%25A1.CatalogService.html">CatalogService</a></li><li><a href="module-%25E7%259B%25AE%25E5%25BD%2595%25E6%259C%258D%25E5%258A%25A1.ColorInfo.html">ColorInfo</a></li><li><a href="module-%25E7%259B%25AE%25E5%25BD%2595%25E6%259C%258D%25E5%258A%25A1.GDBInfo.html">GDBInfo</a></li><li><a href="module-%25E7%259B%25AE%25E5%25BD%2595%25E6%259C%258D%25E5%258A%25A1.MapDoc.html">MapDoc</a></li><li><a href="module-%25E7%259B%25AE%25E5%25BD%2595%25E6%259C%258D%25E5%258A%25A1.SystomInfo.html">SystomInfo</a></li><li><a href="module-%25E7%259B%25AE%25E5%25BD%2595%25E6%259C%258D%25E5%258A%25A1.TileLayer.html">TileLayer</a></li><li><a href="module-%25E7%259B%25AE%25E5%25BD%2595%25E6%259C%258D%25E5%258A%25A1.VectorLayer.html">VectorLayer</a></li><li><a href="module-%25E7%259F%25A2%25E9%2587%258F%25E5%25A4%25A7%25E6%2595%25B0%25E6%258D%25AE.SparkBufferService.html">SparkBufferService</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.EditDocFeature.html">EditDocFeature</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.EditLayerFeature.html">EditLayerFeature</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.EditServiceBase.html">EditServiceBase</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.MultiGeoQuery.html">MultiGeoQuery</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.MultiGeoQueryParameter.html">MultiGeoQueryParameter</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.ObjClsQuery.html">ObjClsQuery</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.ObjClsQueryParameter.html">ObjClsQueryParameter</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.QueryByLayerParameter.html">QueryByLayerParameter</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.QueryDocFeature.html">QueryDocFeature</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.QueryFeatureRule.html">QueryFeatureRule</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.QueryFeatureStruct.html">QueryFeatureStruct</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.QueryLayerFeature.html">QueryLayerFeature</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.QueryParameter.html">QueryParameter</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.QueryParameterBase.html">QueryParameterBase</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.QueryServiceBase.html">QueryServiceBase</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.QueryUnifyFeature.html">QueryUnifyFeature</a></li><li><a href="module=ArcGis.ArcGisFindParameters.html">ArcGisFindParameters</a></li><li><a href="module=ArcGis.ArcGisIdentifyParameters.html">ArcGisIdentifyParameters</a></li><li><a href="RangeTheme3DLayer.html">RangeTheme3DLayer</a></li><li><a href="SocketService.html">SocketService</a></li><li><a href="Theme3DLayer.html">Theme3DLayer</a></li><li><a href="TimeSpaceCubeLayer_TimeSpaceCubeLayer.html">TimeSpaceCubeLayer</a></li><li><a href="Zondy.Catalog.G3DMapDoc.html">G3DMapDoc</a></li><li><a href="Zondy.Catalog.G3DMapDoc_GetFeature.html">GetFeature</a></li><li><a href="Zondy.Catalog.G3DService.html">G3DService</a></li><li><a href="Zondy.Catalog.SystomInfo.html#GetSystemLibrary">GetSystemLibrary</a></li><li><a href="Zondy.Format.WMSCapabilities.html">WMSCapabilities</a></li><li><a href="Zondy.Format.WMTSCapabilities.html">WMTSCapabilities</a></li><li><a href="Zondy.Map.GeoFeatureThemeLayer.html">GeoFeatureThemeLayer</a></li><li><a href="Zondy.Map.graphThemeLayer.html">graphThemeLayer</a></li><li><a href="Zondy.Map.randomThemeLayer.html">randomThemeLayer</a></li><li><a href="Zondy.Map.rangeThemeLayer.html">rangeThemeLayer</a></li><li><a href="Zondy.Map.rankSymbolThemeLayer.html">rankSymbolThemeLayer</a></li><li><a href="Zondy.Map.simpleThemeLayer.html">simpleThemeLayer</a></li><li><a href="Zondy.Map.ThemeLayer.html">ThemeLayer</a></li><li><a href="Zondy.Map.ThemeStyle.html">ThemeStyle</a></li><li><a href="Zondy.Map.uniqueThemeLayer.html">uniqueThemeLayer</a></li><li><a href="Zondy.Object.AnyLine.html">AnyLine</a></li><li><a href="Zondy.Object.Arc.html">Arc</a></li><li><a href="Zondy.Object.CAttDataRow.html">CAttDataRow</a></li><li><a href="Zondy.Object.CAttStruct.html">CAttStruct</a></li><li><a href="Zondy.Object.CDisplayStyle.html">CDisplayStyle</a></li><li><a href="Zondy.Object.CDisplayStyleExtend.html">CDisplayStyleExtend</a></li><li><a href="Zondy.Object.CDynNoteInfo.html">CDynNoteInfo</a></li><li><a href="Zondy.Object.Circle.html">Circle</a></li><li><a href="Zondy.Object.CLineInfo.html">CLineInfo</a></li><li><a href="Zondy.Object.ContourAnalyse.ContourParam.html">ContourParam</a></li><li><a href="Zondy.Object.ContourAnalyse.MeshingParam.html">MeshingParam</a></li><li><a href="Zondy.Object.ContourAnalyse.SlopLineParam.html">SlopLineParam</a></li><li><a href="Zondy.Object.CPointInfo.html">CPointInfo</a></li><li><a href="Zondy.Object.CRegionInfo.html">CRegionInfo</a></li><li><a href="Zondy.Object.DynNoteLableType.html">DynNoteLableType</a></li><li><a href="Zondy.Object.DynShowStyle.html">DynShowStyle</a></li><li><a href="Zondy.Object.Feature.html">Feature</a></li><li><a href="Zondy.Object.FeatureGeometry.html">FeatureGeometry</a></li><li><a href="Zondy.Object.FeatureGraphicBase.html">FeatureGraphicBase</a></li><li><a href="Zondy.Object.FeatureSet.html">FeatureSet</a></li><li><a href="Zondy.Object.GLine.html">GLine</a></li><li><a href="Zondy.Object.GPoint.html">GPoint</a></li><li><a href="Zondy.Object.GRegion.html">GRegion</a></li><li><a href="Zondy.Object.LabelLinInfo.html">LabelLinInfo</a></li><li><a href="Zondy.Object.LabelRegInfo.html">LabelRegInfo</a></li><li><a href="Zondy.Object.LablePntInfo.html">LablePntInfo</a></li><li><a href="Zondy.Object.MultiPolygon.html">MultiPolygon</a></li><li><a href="Zondy.Object.Point2D.html">Point2D</a></li><li><a href="Zondy.Object.Polygon.html">Polygon</a></li><li><a href="Zondy.Object.PolyLine.html">PolyLine</a></li><li><a href="Zondy.Object.Rectangle.html">Rectangle</a></li><li><a href="Zondy.Object.Tangram.html">Tangram</a></li><li><a href="Zondy.Object.VectCls.html">VectCls</a></li><li><a href="Zondy.Object.WebGraphicsInfo.html">WebGraphicsInfo</a></li><li><a href="Zondy.Service.ServiceBase.html">ServiceBase</a></li></ul><div class="mapgis-menu-span">事件</div><ul class="mapgis-sidebar-menus"><li><a href="Zondy.Map.GeoFeatureThemeLayer.html#event:changelayer">changelayer</a></li><li><a href="Zondy.Map.GeoFeatureThemeLayer.html#event:featuresremoved">featuresremoved</a></li><li><a href="Zondy.Map.graphThemeLayer.html#event:changelayer">changelayer</a></li><li><a href="Zondy.Map.graphThemeLayer.html#event:featuresremoved">featuresremoved</a></li><li><a href="Zondy.Map.randomThemeLayer.html#event:changelayer">changelayer</a></li><li><a href="Zondy.Map.randomThemeLayer.html#event:featuresremoved">featuresremoved</a></li><li><a href="Zondy.Map.rangeThemeLayer.html#event:changelayer">changelayer</a></li><li><a href="Zondy.Map.rangeThemeLayer.html#event:featuresremoved">featuresremoved</a></li><li><a href="Zondy.Map.simpleThemeLayer.html#event:changelayer">changelayer</a></li><li><a href="Zondy.Map.simpleThemeLayer.html#event:featuresremoved">featuresremoved</a></li><li><a href="Zondy.Map.ThemeLayer.html#event:changelayer">changelayer</a></li><li><a href="Zondy.Map.ThemeLayer.html#event:featuresremoved">featuresremoved</a></li><li><a href="Zondy.Map.uniqueThemeLayer.html#event:changelayer">changelayer</a></li><li><a href="Zondy.Map.uniqueThemeLayer.html#event:featuresremoved">featuresremoved</a></li></ul><div class="mapgis-menu-span">全局</div><ul class="mapgis-sidebar-menus"><li><a href="global.html#addFeatures">addFeatures</a></li><li><a href="global.html#addTo">addTo</a></li><li><a href="global.html#appendUrl">appendUrl</a></li><li><a href="global.html#base">base</a></li><li><a href="global.html#baseHeightField">baseHeightField</a></li><li><a href="global.html#BroadcastEvent">BroadcastEvent</a></li><li><a href="global.html#CItemType">CItemType</a></li><li><a href="global.html#CLinAdjustType">CLinAdjustType</a></li><li><a href="global.html#CLinHeadType">CLinHeadType</a></li><li><a href="global.html#CLinJointType">CLinJointType</a></li><li><a href="global.html#CLinStyleMakeType">CLinStyleMakeType</a></li><li><a href="global.html#colorStops">colorStops</a></li><li><a href="global.html#copyProperties">copyProperties</a></li><li><a href="global.html#EightDirType">EightDirType</a></li><li><a href="global.html#enableHighlight">enableHighlight</a></li><li><a href="global.html#EsCatlogName">EsCatlogName</a></li><li><a href="global.html#EsCatlogType">EsCatlogType</a></li><li><a href="global.html#EsGeoHashType">EsGeoHashType</a></li><li><a href="global.html#extend">extend</a></li><li><a href="global.html#FeatureType">FeatureType</a></li><li><a href="global.html#FontShape">FontShape</a></li><li><a href="global.html#getData">getData</a></li><li><a href="global.html#getHighlightStyleOptions">getHighlightStyleOptions</a></li><li><a href="global.html#getLayerStyleOptions">getLayerStyleOptions</a></li><li><a href="global.html#height">height</a></li><li><a href="global.html#heightField">heightField</a></li><li><a href="global.html#heightStops">heightStops</a></li><li><a href="global.html#highlight">highlight</a></li><li><a href="global.html#id">id</a></li><li><a href="global.html#interpolateLagrange">interpolateLagrange</a></li><li><a href="global.html#ISShowArc">ISShowArc</a></li><li><a href="global.html#LabelLinType">LabelLinType</a></li><li><a href="global.html#LabelPntType">LabelPntType</a></li><li><a href="global.html#LabelRegType">LabelRegType</a></li><li><a href="global.html#LabelSpreadType">LabelSpreadType</a></li><li><a href="global.html#LayerEvent">LayerEvent</a></li><li><a href="global.html#LayerStatusType">LayerStatusType</a></li><li><a href="global.html#legendOrientation">legendOrientation</a></li><li><a href="global.html#legendPosition">legendPosition</a></li><li><a href="global.html#legendRatio">legendRatio</a></li><li><a href="global.html#legendTheme">legendTheme</a></li><li><a href="global.html#legendTitle">legendTitle</a></li><li><a href="global.html#LineConstrain">LineConstrain</a></li><li><a href="global.html#map">map</a></li><li><a href="global.html#MapType">MapType</a></li><li><a href="global.html#mix">mix</a></li><li><a href="global.html#NetAnalyType">NetAnalyType</a></li><li><a href="global.html#NetElemType">NetElemType</a></li><li><a href="global.html#objectStack%255Bundefined%255D">objectStack[undefined]</a></li><li><a href="global.html#opacity">opacity</a></li><li><a href="global.html#PARAM_BRACKET_LEFT">PARAM_BRACKET_LEFT</a></li><li><a href="global.html#PARAM_BRACKET_RIGHT">PARAM_BRACKET_RIGHT</a></li><li><a href="global.html#PARAM_COMMA">PARAM_COMMA</a></li><li><a href="global.html#PARAM_SPACE">PARAM_SPACE</a></li><li><a href="global.html#PARAM_SPLIT">PARAM_SPLIT</a></li><li><a href="global.html#PARAM_SUB">PARAM_SUB</a></li><li><a href="global.html#parseNumber">parseNumber</a></li><li><a href="global.html#remove">remove</a></li><li><a href="global.html#RepeatType">RepeatType</a></li><li><a href="global.html#setData">setData</a></li><li><a href="global.html#setLayerOptions">setLayerOptions</a></li><li><a href="global.html#show">show</a></li><li><a href="global.html#showLegend">showLegend</a></li><li><a href="global.html#SPACE_ENUM_POLYGON">SPACE_ENUM_POLYGON</a></li><li><a href="global.html#SubscribeEvent">SubscribeEvent</a></li><li><a href="global.html#themeField">themeField</a></li><li><a href="global.html#TotalCount">TotalCount</a></li><li><a href="global.html#VectClsType">VectClsType</a></li><li><a href="global.html#XClsType">XClsType</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <span class="page-title-sub">Global</span>
+                    <span class="page-title-main">Title</span>
+                </header>
+                
+
+
+
+
+<section>
+
+<header>
+    
+        <h2></h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+        
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class='vertical-section'>
+            <h1>成员变量</h1>
+            <div class="members">
+            
+                <div class="member">
+
+<h4 class="name" id="appendUrl">
+    <a class="href-link" href="#appendUrl">#</a>
+    
+    <span class="code-name">
+        appendUrl
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>给url追加参数。</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="mapboxgl_util_Util.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="mapboxgl_util_Util.js.html">mapboxgl/util/Util.js</a>, <a href="mapboxgl_util_Util.js.html#line58">line 58</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">number</span>
+
+
+    </span>
+
+<h4 class="name" id="base">
+    <a class="href-link" href="#base">#</a>
+    
+    <span class="code-name">
+        base
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>数据分段线性增量</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="mapboxgl_theme_RangeTheme3DLayer.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="mapboxgl_theme_RangeTheme3DLayer.js.html">mapboxgl/theme/RangeTheme3DLayer.js</a>, <a href="mapboxgl_theme_RangeTheme3DLayer.js.html#line43">line 43</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">string</span>
+
+
+    </span>
+
+<h4 class="name" id="baseHeightField">
+    <a class="href-link" href="#baseHeightField">#</a>
+    
+    <span class="code-name">
+        baseHeightField
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>数据中表示基础高度的字段</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="mapboxgl_theme_Theme3DLayer.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="mapboxgl_theme_Theme3DLayer.js.html">mapboxgl/theme/Theme3DLayer.js</a>, <a href="mapboxgl_theme_Theme3DLayer.js.html#line59">line 59</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">String</span>
+
+
+    </span>
+
+<h4 class="name" id="BroadcastEvent">
+    <a class="href-link" href="#BroadcastEvent">#</a>
+    
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        BroadcastEvent
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>BroadcastEvent WebSocket消息广播通信事件流程</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="service_common_SocketEvent.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="service_common_SocketEvent.js.html">service/common/SocketEvent.js</a>, <a href="service_common_SocketEvent.js.html#line29">line 29</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">String</span>
+
+
+    </span>
+
+<h4 class="name" id="BroadcastEvent">
+    <a class="href-link" href="#BroadcastEvent">#</a>
+    
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        BroadcastEvent
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>BroadcastEvent WebSocket消息广播通信事件流程</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="mapboxgl_service_socket_SocketEvent.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="mapboxgl_service_socket_SocketEvent.js.html">mapboxgl/service/socket/SocketEvent.js</a>, <a href="mapboxgl_service_socket_SocketEvent.js.html#line27">line 27</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">Number</span>
+
+
+    </span>
+
+<h4 class="name" id="CItemType">
+    <a class="href-link" href="#CItemType">#</a>
+    
+        
+            <span class='tag'>readonly</span>
+        
+    
+    <span class="code-name">
+        CItemType
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>统计分段类型</p>
+</div>
+
+
+
+
+
+    <h5 class="subsection-title">属性:</h5>
+
+    
+<div class="table-container">
+    <table class="props table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>Unknown</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>未知类型</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>UniqueTheme</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>唯一值</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>RangeTheme</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>范围</p></td>
+</tr>
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="service_common_EnumComm.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="service_common_EnumComm.js.html">service/common/EnumComm.js</a>, <a href="service_common_EnumComm.js.html#line402">line 402</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">Number</span>
+
+
+    </span>
+
+<h4 class="name" id="CLinAdjustType">
+    <a class="href-link" href="#CLinAdjustType">#</a>
+    
+        
+            <span class='tag'>readonly</span>
+        
+    
+    <span class="code-name">
+        CLinAdjustType
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>线型调整方法枚举</p>
+</div>
+
+
+
+
+
+    <h5 class="subsection-title">属性:</h5>
+
+    
+<div class="table-container">
+    <table class="props table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>Adjust</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>调整</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>NoAdjust</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>不调整</p></td>
+</tr>
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="service_common_EnumComm.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="service_common_EnumComm.js.html">service/common/EnumComm.js</a>, <a href="service_common_EnumComm.js.html#line333">line 333</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">Number</span>
+
+
+    </span>
+
+<h4 class="name" id="CLinHeadType">
+    <a class="href-link" href="#CLinHeadType">#</a>
+    
+        
+            <span class='tag'>readonly</span>
+        
+    
+    <span class="code-name">
+        CLinHeadType
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>线头类型枚举定义</p>
+</div>
+
+
+
+
+
+    <h5 class="subsection-title">属性:</h5>
+
+    
+<div class="table-container">
+    <table class="props table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>Round</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>圆头</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>Square</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>平头</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>Butt</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>尖头</p></td>
+</tr>
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="service_common_EnumComm.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="service_common_EnumComm.js.html">service/common/EnumComm.js</a>, <a href="service_common_EnumComm.js.html#line350">line 350</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">Number</span>
+
+
+    </span>
+
+<h4 class="name" id="CLinJointType">
+    <a class="href-link" href="#CLinJointType">#</a>
+    
+        
+            <span class='tag'>readonly</span>
+        
+    
+    <span class="code-name">
+        CLinJointType
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>线拐角类型枚举</p>
+</div>
+
+
+
+
+
+    <h5 class="subsection-title">属性:</h5>
+
+    
+<div class="table-container">
+    <table class="props table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>Round</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>圆角</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>Square</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>平角</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>Butt</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>尖角</p></td>
+</tr>
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="service_common_EnumComm.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="service_common_EnumComm.js.html">service/common/EnumComm.js</a>, <a href="service_common_EnumComm.js.html#line368">line 368</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">Number</span>
+
+
+    </span>
+
+<h4 class="name" id="CLinStyleMakeType">
+    <a class="href-link" href="#CLinStyleMakeType">#</a>
+    
+        
+            <span class='tag'>readonly</span>
+        
+    
+    <span class="code-name">
+        CLinStyleMakeType
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>线型生成方法</p>
+</div>
+
+
+
+
+
+    <h5 class="subsection-title">属性:</h5>
+
+    
+<div class="table-container">
+    <table class="props table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>Byrule</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>规律性生成线型</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>Bypoint</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>按控制点生成线型</p></td>
+</tr>
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="service_common_EnumComm.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="service_common_EnumComm.js.html">service/common/EnumComm.js</a>, <a href="service_common_EnumComm.js.html#line386">line 386</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">Array</span>
+
+
+    </span>
+
+<h4 class="name" id="colorStops">
+    <a class="href-link" href="#colorStops">#</a>
+    
+    <span class="code-name">
+        colorStops
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>数据颜色分段数组</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="mapboxgl_theme_RangeTheme3DLayer.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="mapboxgl_theme_RangeTheme3DLayer.js.html">mapboxgl/theme/RangeTheme3DLayer.js</a>, <a href="mapboxgl_theme_RangeTheme3DLayer.js.html#line38">line 38</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">Number</span>
+
+
+    </span>
+
+<h4 class="name" id="EightDirType">
+    <a class="href-link" href="#EightDirType">#</a>
+    
+        
+            <span class='tag'>readonly</span>
+        
+    
+    <span class="code-name">
+        EightDirType
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>点八方位注记类型</p>
+</div>
+
+
+
+
+
+    <h5 class="subsection-title">属性:</h5>
+
+    
+<div class="table-container">
+    <table class="props table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>East</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>东</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>North</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>北</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>NorthEast</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>东北</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>NorthWest</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>西北</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>South</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>南</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>SouthEast</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>东南</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>SouthWest</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>西南</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>West</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>西</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>NoDir</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>无方位</p></td>
+</tr>
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="service_common_EnumComm.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="service_common_EnumComm.js.html">service/common/EnumComm.js</a>, <a href="service_common_EnumComm.js.html#line216">line 216</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">boolean</span>
+
+
+    </span>
+
+<h4 class="name" id="enableHighlight">
+    <a class="href-link" href="#enableHighlight">#</a>
+    
+    <span class="code-name">
+        enableHighlight
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>是否开启高亮,默认false</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="mapboxgl_theme_Theme3DLayer.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="mapboxgl_theme_Theme3DLayer.js.html">mapboxgl/theme/Theme3DLayer.js</a>, <a href="mapboxgl_theme_Theme3DLayer.js.html#line47">line 47</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">String</span>
+
+
+    </span>
+
+<h4 class="name" id="EsCatlogName">
+    <a class="href-link" href="#EsCatlogName">#</a>
+    
+        
+            <span class='tag'>readonly</span>
+        
+    
+    <span class="code-name">
+        EsCatlogName
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>ElasticSearch数据库名称</p>
+</div>
+
+
+
+
+
+    <h5 class="subsection-title">属性:</h5>
+
+    
+<div class="table-container">
+    <table class="props table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>SpaceTime</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">String</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>时空库</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>Addredd</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">String</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>地址库</p></td>
+</tr>
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">作者:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>基础平台-潘卓然</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="service_datastore_elasticsearch_Enum.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="service_datastore_elasticsearch_Enum.js.html">service/datastore/elasticsearch/Enum.js</a>, <a href="service_datastore_elasticsearch_Enum.js.html#line22">line 22</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">String</span>
+
+
+    </span>
+
+<h4 class="name" id="EsCatlogType">
+    <a class="href-link" href="#EsCatlogType">#</a>
+    
+        
+            <span class='tag'>readonly</span>
+        
+    
+    <span class="code-name">
+        EsCatlogType
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>ElasticSearch数据库类型</p>
+</div>
+
+
+
+
+
+    <h5 class="subsection-title">属性:</h5>
+
+    
+<div class="table-container">
+    <table class="props table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>SpaceTime</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">String</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>时空库</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>Addredd</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">String</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>地址库</p></td>
+</tr>
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">作者:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>基础平台-潘卓然</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="service_datastore_elasticsearch_Enum.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="service_datastore_elasticsearch_Enum.js.html">service/datastore/elasticsearch/Enum.js</a>, <a href="service_datastore_elasticsearch_Enum.js.html#line8">line 8</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">String</span>
+
+
+    </span>
+
+<h4 class="name" id="EsGeoHashType">
+    <a class="href-link" href="#EsGeoHashType">#</a>
+    
+        
+            <span class='tag'>readonly</span>
+        
+    
+    <span class="code-name">
+        EsGeoHashType
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>ElasticSearch-GeoHash聚合返回类型</p>
+</div>
+
+
+
+
+
+    <h5 class="subsection-title">属性:</h5>
+
+    
+<div class="table-container">
+    <table class="props table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>Point</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">String</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>点类型</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>Polygon</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">String</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>区类型</p></td>
+</tr>
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">作者:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>基础平台-潘卓然</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="service_datastore_elasticsearch_Enum.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="service_datastore_elasticsearch_Enum.js.html">service/datastore/elasticsearch/Enum.js</a>, <a href="service_datastore_elasticsearch_Enum.js.html#line36">line 36</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+<h4 class="name" id="extend">
+    <a class="href-link" href="#extend">#</a>
+    
+    <span class="code-name">
+        extend
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>复制源对象的所有属性到目标对象上，源对象上的没有定义的属性在目标对象上也不会被设置。</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="mapboxgl_util_Util.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="mapboxgl_util_Util.js.html">mapboxgl/util/Util.js</a>, <a href="mapboxgl_util_Util.js.html#line16">line 16</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+    <h5>Example</h5>
+    
+    
+        <pre class="prettyprint"><code>要复制Zondy.Size对象的所有属性到自定义对象上，使用方法如下:    var size = new Zondy.Size(100, 100)    var obj = {}；    Zondy.Util.extend(obj, size)</code></pre>
+    
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">Number</span>
+
+
+    </span>
+
+<h4 class="name" id="FeatureType">
+    <a class="href-link" href="#FeatureType">#</a>
+    
+        
+            <span class='tag'>readonly</span>
+        
+    
+    <span class="code-name">
+        FeatureType
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>要素几何类型</p>
+</div>
+
+
+
+
+
+    <h5 class="subsection-title">属性:</h5>
+
+    
+<div class="table-container">
+    <table class="props table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>Unknown</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>未知类型</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>Pnt</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>点</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>Lin</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>线</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>Reg</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>区</p></td>
+</tr>
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="service_common_EnumComm.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="service_common_EnumComm.js.html">service/common/EnumComm.js</a>, <a href="service_common_EnumComm.js.html#line54">line 54</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">Number</span>
+
+
+    </span>
+
+<h4 class="name" id="FontShape">
+    <a class="href-link" href="#FontShape">#</a>
+    
+        
+            <span class='tag'>readonly</span>
+        
+    
+    <span class="code-name">
+        FontShape
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>动态注记字形的类型</p>
+</div>
+
+
+
+
+
+    <h5 class="subsection-title">属性:</h5>
+
+    
+<div class="table-container">
+    <table class="props table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>Positive</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>正体</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>LeftOblique</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>左斜</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>RightOblique</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>右斜</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>LeftTowering</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>左耸</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>RightTowering</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>右耸</p></td>
+</tr>
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="service_common_EnumComm.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="service_common_EnumComm.js.html">service/common/EnumComm.js</a>, <a href="service_common_EnumComm.js.html#line74">line 74</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">number</span>
+
+
+    </span>
+
+<h4 class="name" id="height">
+    <a class="href-link" href="#height">#</a>
+    
+    <span class="code-name">
+        height
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>高度。如果数据指定的heightField(默认height)没有可以表示高度的字段，可以为所有数据统一设置一个高度</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="mapboxgl_theme_Theme3DLayer.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="mapboxgl_theme_Theme3DLayer.js.html">mapboxgl/theme/Theme3DLayer.js</a>, <a href="mapboxgl_theme_Theme3DLayer.js.html#line65">line 65</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">string</span>
+
+
+    </span>
+
+<h4 class="name" id="heightField">
+    <a class="href-link" href="#heightField">#</a>
+    
+    <span class="code-name">
+        heightField
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>数据中表示高度的字段</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="mapboxgl_theme_Theme3DLayer.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="mapboxgl_theme_Theme3DLayer.js.html">mapboxgl/theme/Theme3DLayer.js</a>, <a href="mapboxgl_theme_Theme3DLayer.js.html#line71">line 71</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">Array</span>
+
+
+    </span>
+
+<h4 class="name" id="heightStops">
+    <a class="href-link" href="#heightStops">#</a>
+    
+    <span class="code-name">
+        heightStops
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>数据高度分段数组</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="mapboxgl_theme_RangeTheme3DLayer.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="mapboxgl_theme_RangeTheme3DLayer.js.html">mapboxgl/theme/RangeTheme3DLayer.js</a>, <a href="mapboxgl_theme_RangeTheme3DLayer.js.html#line32">line 32</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">Object</span>
+
+
+    </span>
+
+<h4 class="name" id="highlight">
+    <a class="href-link" href="#highlight">#</a>
+    
+    <span class="code-name">
+        highlight
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>高亮相关配置,默认null</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="mapboxgl_theme_Theme3DLayer.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="mapboxgl_theme_Theme3DLayer.js.html">mapboxgl/theme/Theme3DLayer.js</a>, <a href="mapboxgl_theme_Theme3DLayer.js.html#line53">line 53</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">string</span>
+
+
+    </span>
+
+<h4 class="name" id="id">
+    <a class="href-link" href="#id">#</a>
+    
+    <span class="code-name">
+        id
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>mapbox gl图层id</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="mapboxgl_theme_Theme3DLayer.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="mapboxgl_theme_Theme3DLayer.js.html">mapboxgl/theme/Theme3DLayer.js</a>, <a href="mapboxgl_theme_Theme3DLayer.js.html#line26">line 26</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">Number</span>
+
+
+    </span>
+
+<h4 class="name" id="ISShowArc">
+    <a class="href-link" href="#ISShowArc">#</a>
+    
+        
+            <span class='tag'>readonly</span>
+        
+    
+    <span class="code-name">
+        ISShowArc
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>是否显示弧段</p>
+</div>
+
+
+
+
+
+    <h5 class="subsection-title">属性:</h5>
+
+    
+<div class="table-container">
+    <table class="props table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>Reg</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>只显示填充区域</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>Arc</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>只显示弧段</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>All</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>两者都显示</p></td>
+</tr>
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="service_common_EnumComm.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="service_common_EnumComm.js.html">service/common/EnumComm.js</a>, <a href="service_common_EnumComm.js.html#line246">line 246</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">Number</span>
+
+
+    </span>
+
+<h4 class="name" id="LabelLinType">
+    <a class="href-link" href="#LabelLinType">#</a>
+    
+        
+            <span class='tag'>readonly</span>
+        
+    
+    <span class="code-name">
+        LabelLinType
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>线的动态注记的线方位类型</p>
+</div>
+
+
+
+
+
+    <h5 class="subsection-title">属性:</h5>
+
+    
+<div class="table-container">
+    <table class="props table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>Curved</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>弯曲注记</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>Forward</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>笔直注记</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>Horizontal</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>水平注记</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>Tangent</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>正交注记</p></td>
+</tr>
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="service_common_EnumComm.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="service_common_EnumComm.js.html">service/common/EnumComm.js</a>, <a href="service_common_EnumComm.js.html#line96">line 96</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">Number</span>
+
+
+    </span>
+
+<h4 class="name" id="LabelPntType">
+    <a class="href-link" href="#LabelPntType">#</a>
+    
+        
+            <span class='tag'>readonly</span>
+        
+    
+    <span class="code-name">
+        LabelPntType
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>点的动态注记的方位类型</p>
+</div>
+
+
+
+
+
+    <h5 class="subsection-title">属性:</h5>
+
+    
+<div class="table-container">
+    <table class="props table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>PntAnyDir</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>任意方位</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>PntEightDir</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>八方位</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>PntOnFea</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>压点</p></td>
+</tr>
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="service_common_EnumComm.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="service_common_EnumComm.js.html">service/common/EnumComm.js</a>, <a href="service_common_EnumComm.js.html#line138">line 138</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">Number</span>
+
+
+    </span>
+
+<h4 class="name" id="LabelRegType">
+    <a class="href-link" href="#LabelRegType">#</a>
+    
+        
+            <span class='tag'>readonly</span>
+        
+    
+    <span class="code-name">
+        LabelRegType
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>区的动态注记的区方位类型</p>
+</div>
+
+
+
+
+
+    <h5 class="subsection-title">属性:</h5>
+
+    
+<div class="table-container">
+    <table class="props table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>Curved</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>沿骨架线弯曲注记</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>Forward</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>沿骨架线笔直注记</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>Horizontal</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>水平注记</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>Boundray</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>边界线注记</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>Outside</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>区域外注记</p></td>
+</tr>
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="service_common_EnumComm.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="service_common_EnumComm.js.html">service/common/EnumComm.js</a>, <a href="service_common_EnumComm.js.html#line116">line 116</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">Number</span>
+
+
+    </span>
+
+<h4 class="name" id="LabelSpreadType">
+    <a class="href-link" href="#LabelSpreadType">#</a>
+    
+        
+            <span class='tag'>readonly</span>
+        
+    
+    <span class="code-name">
+        LabelSpreadType
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>注记分布的策略</p>
+</div>
+
+
+
+
+
+    <h5 class="subsection-title">属性:</h5>
+
+    
+<div class="table-container">
+    <table class="props table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>AutoSpread</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>自动分布策略（全是数字或字符采用集中注记方式，注记中带有汉字采用分散分布注记）</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>Centralization</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>字符集中分布</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>Decentralization</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>字符分散分布</p></td>
+</tr>
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="service_common_EnumComm.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="service_common_EnumComm.js.html">service/common/EnumComm.js</a>, <a href="service_common_EnumComm.js.html#line174">line 174</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">String</span>
+
+
+    </span>
+
+<h4 class="name" id="LayerEvent">
+    <a class="href-link" href="#LayerEvent">#</a>
+    
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        LayerEvent
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>BroadcastEvent WebSocket 图层事件，用户、二次开发一般关注这个事件</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="service_common_SocketEvent.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="service_common_SocketEvent.js.html">service/common/SocketEvent.js</a>, <a href="service_common_SocketEvent.js.html#line45">line 45</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">String</span>
+
+
+    </span>
+
+<h4 class="name" id="LayerEvent">
+    <a class="href-link" href="#LayerEvent">#</a>
+    
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        LayerEvent
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>BroadcastEvent WebSocket 图层事件，用户、二次开发一般关注这个事件</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="mapboxgl_service_socket_SocketEvent.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="mapboxgl_service_socket_SocketEvent.js.html">mapboxgl/service/socket/SocketEvent.js</a>, <a href="mapboxgl_service_socket_SocketEvent.js.html#line43">line 43</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">Zondy.Enum.Map.LayerStatusType</span>
+
+
+    </span>
+
+<h4 class="name" id="LayerStatusType">
+    <a class="href-link" href="#LayerStatusType">#</a>
+    
+        
+            <span class='tag'>readonly</span>
+        
+    
+    <span class="code-name">
+        LayerStatusType
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>图层状态类型</p>
+</div>
+
+
+
+
+
+    <h5 class="subsection-title">属性:</h5>
+
+    
+<div class="table-container">
+    <table class="props table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>Show</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Zondy.Enum.Map.LayerStatusType</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>仅仅显示指定了图层序号的图层</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>Hide</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Zondy.Enum.Map.LayerStatusType</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>显示除hide参数指定图层外所有的图层</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>Include</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Zondy.Enum.Map.LayerStatusType</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>除显示默认图层（地图文档内图层状态为可见的图层）外，另追加这些被指定的图层显示，追加的这些图层必须为地图中包含的图层。</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>Exclude</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Zondy.Enum.Map.LayerStatusType</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>从默认图层列表里删除这些被指定的图层后，进行显示</p></td>
+</tr>
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="service_common_EnumComm.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="service_common_EnumComm.js.html">service/common/EnumComm.js</a>, <a href="service_common_EnumComm.js.html#line438">line 438</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">string</span>
+
+
+    </span>
+
+<h4 class="name" id="legendOrientation">
+    <a class="href-link" href="#legendOrientation">#</a>
+    
+    <span class="code-name">
+        legendOrientation
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>图例方向，取值：'horizontal','vertical'，默认：'horizontal'</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-default">Default Value:</dt>
+    <dd class="tag-default"><ul class="dummy">
+            <li>'horizontal'</li>
+        </ul></dd>
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="mapboxgl_theme_Theme3DLayer.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="mapboxgl_theme_Theme3DLayer.js.html">mapboxgl/theme/Theme3DLayer.js</a>, <a href="mapboxgl_theme_Theme3DLayer.js.html#line102">line 102</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">string</span>
+
+
+    </span>
+
+<h4 class="name" id="legendPosition">
+    <a class="href-link" href="#legendPosition">#</a>
+    
+    <span class="code-name">
+        legendPosition
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>图例位置，取值：'top-right'|'top-left'|'bottom-left'|'bottom-right'</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-default">Default Value:</dt>
+    <dd class="tag-default"><ul class="dummy">
+            <li>'bottom-right'</li>
+        </ul></dd>
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="mapboxgl_theme_Theme3DLayer.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="mapboxgl_theme_Theme3DLayer.js.html">mapboxgl/theme/Theme3DLayer.js</a>, <a href="mapboxgl_theme_Theme3DLayer.js.html#line108">line 108</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">number</span>
+
+
+    </span>
+
+<h4 class="name" id="legendRatio">
+    <a class="href-link" href="#legendRatio">#</a>
+    
+    <span class="code-name">
+        legendRatio
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>图例数值扩大系数</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="mapboxgl_theme_RangeTheme3DLayer.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="mapboxgl_theme_RangeTheme3DLayer.js.html">mapboxgl/theme/RangeTheme3DLayer.js</a>, <a href="mapboxgl_theme_RangeTheme3DLayer.js.html#line49">line 49</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">string</span>
+
+
+    </span>
+
+<h4 class="name" id="legendTheme">
+    <a class="href-link" href="#legendTheme">#</a>
+    
+    <span class="code-name">
+        legendTheme
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>图例主题，取值：'light','dark'</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-default">Default Value:</dt>
+    <dd class="tag-default"><ul class="dummy">
+            <li>'light'</li>
+        </ul></dd>
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="mapboxgl_theme_Theme3DLayer.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="mapboxgl_theme_Theme3DLayer.js.html">mapboxgl/theme/Theme3DLayer.js</a>, <a href="mapboxgl_theme_Theme3DLayer.js.html#line95">line 95</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">string</span>
+
+
+    </span>
+
+<h4 class="name" id="legendTitle">
+    <a class="href-link" href="#legendTitle">#</a>
+    
+    <span class="code-name">
+        legendTitle
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>图例标题</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="mapboxgl_theme_Theme3DLayer.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="mapboxgl_theme_Theme3DLayer.js.html">mapboxgl/theme/Theme3DLayer.js</a>, <a href="mapboxgl_theme_Theme3DLayer.js.html#line89">line 89</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">Number</span>
+
+
+    </span>
+
+<h4 class="name" id="LineConstrain">
+    <a class="href-link" href="#LineConstrain">#</a>
+    
+        
+            <span class='tag'>readonly</span>
+        
+    
+    <span class="code-name">
+        LineConstrain
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>偏离线约束</p>
+</div>
+
+
+
+
+
+    <h5 class="subsection-title">属性:</h5>
+
+    
+<div class="table-container">
+    <table class="props table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>Left</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>注记在线的左边</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>Right</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>注记在线的右边</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>Above</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>注记在线的上方</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>Below</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>注记在线的下方</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>Both</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>注记在线的两边</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>NoRes</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>没有约束</p></td>
+</tr>
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="service_common_EnumComm.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="service_common_EnumComm.js.html">service/common/EnumComm.js</a>, <a href="service_common_EnumComm.js.html#line192">line 192</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">object</span>
+
+
+    </span>
+
+<h4 class="name" id="map">
+    <a class="href-link" href="#map">#</a>
+    
+    <span class="code-name">
+        map
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>mapbox gl地图对象</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="mapboxgl_theme_Theme3DLayer.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="mapboxgl_theme_Theme3DLayer.js.html">mapboxgl/theme/Theme3DLayer.js</a>, <a href="mapboxgl_theme_Theme3DLayer.js.html#line32">line 32</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">String</span>
+
+
+    </span>
+
+<h4 class="name" id="MapType">
+    <a class="href-link" href="#MapType">#</a>
+    
+        
+            <span class='tag'>readonly</span>
+        
+    
+    <span class="code-name">
+        MapType
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>地图类型</p>
+</div>
+
+
+
+
+
+    <h5 class="subsection-title">属性:</h5>
+
+    
+<div class="table-container">
+    <table class="props table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>Doc</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">String</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>发布的地图文档</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>Tile</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">String</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>发布的瓦片地图</p></td>
+</tr>
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="service_common_EnumComm.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="service_common_EnumComm.js.html">service/common/EnumComm.js</a>, <a href="service_common_EnumComm.js.html#line422">line 422</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">String</span>
+
+
+    </span>
+
+<h4 class="name" id="NetAnalyType">
+    <a class="href-link" href="#NetAnalyType">#</a>
+    
+        
+            <span class='tag'>readonly</span>
+        
+    
+    <span class="code-name">
+        NetAnalyType
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>网络分析类型</p>
+</div>
+
+
+
+
+
+    <h5 class="subsection-title">属性:</h5>
+
+    
+<div class="table-container">
+    <table class="props table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>UserMode</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">String</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>用户模式</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>SysModeCommwayPrefer</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">String</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>系统模式--普通公路优先</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>SysModeHighWayPrefer</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">String</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>系统模式--高速公路优先</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>SysModeMinCost</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">String</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>系统模式--最少花费</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>SysModeMinDis</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">String</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>系统模式--最短路径</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>SysModeMinDis</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">String</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>系统模式--最短时间</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>SysModeSysRecommend</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">String</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>系统模式--系统推荐</p></td>
+</tr>
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="service_common_EnumComm.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="service_common_EnumComm.js.html">service/common/EnumComm.js</a>, <a href="service_common_EnumComm.js.html#line267">line 267</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">Number</span>
+
+
+    </span>
+
+<h4 class="name" id="NetElemType">
+    <a class="href-link" href="#NetElemType">#</a>
+    
+        
+            <span class='tag'>readonly</span>
+        
+    
+    <span class="code-name">
+        NetElemType
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>网络元素类型</p>
+</div>
+
+
+
+
+
+    <h5 class="subsection-title">属性:</h5>
+
+    
+<div class="table-container">
+    <table class="props table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>Node</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>节点元素</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>Edge</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>边元素</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>CNode</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>复杂结点元素</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>Chain</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>链元素</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>Center</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>中心元素</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>Source</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>源</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>Sink</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>汇</p></td>
+</tr>
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="service_common_EnumComm.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="service_common_EnumComm.js.html">service/common/EnumComm.js</a>, <a href="service_common_EnumComm.js.html#line300">line 300</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">Array.&lt;*></span>
+
+
+    </span>
+
+<h4 class="name" id="objectStack%5Bundefined%5D">
+    <a class="href-link" href="#objectStack%5Bundefined%5D">#</a>
+    
+    <span class="code-name">
+        objectStack[undefined]
+    </span>
+    
+</h4>
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="service_OGC_util_base_xml.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="service_OGC_util_base_xml.js.html">service/OGC/util/base/xml.js</a>, <a href="service_OGC_util_base_xml.js.html#line150">line 150</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">Array.&lt;*></span>
+
+
+    </span>
+
+<h4 class="name" id="objectStack%5Bundefined%5D">
+    <a class="href-link" href="#objectStack%5Bundefined%5D">#</a>
+    
+    <span class="code-name">
+        objectStack[undefined]
+    </span>
+    
+</h4>
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="service_OGC_util_base_xml.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="service_OGC_util_base_xml.js.html">service/OGC/util/base/xml.js</a>, <a href="service_OGC_util_base_xml.js.html#line178">line 178</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">Object</span>
+
+
+    </span>
+
+<h4 class="name" id="objectStack%5Bundefined%5D">
+    <a class="href-link" href="#objectStack%5Bundefined%5D">#</a>
+    
+        
+            <span class='tag'>non-null</span>
+        
+    
+    <span class="code-name">
+        objectStack[undefined]
+    </span>
+    
+</h4>
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="service_OGC_util_base_xml.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="service_OGC_util_base_xml.js.html">service/OGC/util/base/xml.js</a>, <a href="service_OGC_util_base_xml.js.html#line232">line 232</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">Object</span>
+
+
+    </span>
+
+<h4 class="name" id="objectStack%5Bundefined%5D">
+    <a class="href-link" href="#objectStack%5Bundefined%5D">#</a>
+    
+        
+            <span class='tag'>non-null</span>
+        
+    
+    <span class="code-name">
+        objectStack[undefined]
+    </span>
+    
+</h4>
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="service_OGC_util_base_xml.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="service_OGC_util_base_xml.js.html">service/OGC/util/base/xml.js</a>, <a href="service_OGC_util_base_xml.js.html#line266">line 266</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">NodeStackItem</span>
+
+
+    </span>
+
+<h4 class="name" id="objectStack%5Bundefined%5D">
+    <a class="href-link" href="#objectStack%5Bundefined%5D">#</a>
+    
+    <span class="code-name">
+        objectStack[undefined]
+    </span>
+    
+</h4>
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="service_OGC_util_base_xml.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="service_OGC_util_base_xml.js.html">service/OGC/util/base/xml.js</a>, <a href="service_OGC_util_base_xml.js.html#line288">line 288</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">NodeStackItem</span>
+
+
+    </span>
+
+<h4 class="name" id="objectStack%5Bundefined%5D">
+    <a class="href-link" href="#objectStack%5Bundefined%5D">#</a>
+    
+    <span class="code-name">
+        objectStack[undefined]
+    </span>
+    
+</h4>
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="service_OGC_util_base_xml.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="service_OGC_util_base_xml.js.html">service/OGC/util/base/xml.js</a>, <a href="service_OGC_util_base_xml.js.html#line349">line 349</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">Object</span>
+
+
+    </span>
+
+<h4 class="name" id="objectStack%5Bundefined%5D">
+    <a class="href-link" href="#objectStack%5Bundefined%5D">#</a>
+    
+    <span class="code-name">
+        objectStack[undefined]
+    </span>
+    
+</h4>
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="service_OGC_util_OWS.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="service_OGC_util_OWS.js.html">service/OGC/util/OWS.js</a>, <a href="service_OGC_util_OWS.js.html#line339">line 339</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">number</span>
+
+
+    </span>
+
+<h4 class="name" id="opacity">
+    <a class="href-link" href="#opacity">#</a>
+    
+    <span class="code-name">
+        opacity
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>图层透明度，默认1</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="mapboxgl_theme_Theme3DLayer.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="mapboxgl_theme_Theme3DLayer.js.html">mapboxgl/theme/Theme3DLayer.js</a>, <a href="mapboxgl_theme_Theme3DLayer.js.html#line37">line 37</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">string</span>
+
+
+    </span>
+
+<h4 class="name" id="PARAM_BRACKET_LEFT">
+    <a class="href-link" href="#PARAM_BRACKET_LEFT">#</a>
+    
+    <span class="code-name">
+        PARAM_BRACKET_LEFT
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>参数括号左边</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="service_datastore_elasticsearch_BaseDefine.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="service_datastore_elasticsearch_BaseDefine.js.html">service/datastore/elasticsearch/BaseDefine.js</a>, <a href="service_datastore_elasticsearch_BaseDefine.js.html#line27">line 27</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">string</span>
+
+
+    </span>
+
+<h4 class="name" id="PARAM_BRACKET_RIGHT">
+    <a class="href-link" href="#PARAM_BRACKET_RIGHT">#</a>
+    
+    <span class="code-name">
+        PARAM_BRACKET_RIGHT
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>参数括号右边</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="service_datastore_elasticsearch_BaseDefine.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="service_datastore_elasticsearch_BaseDefine.js.html">service/datastore/elasticsearch/BaseDefine.js</a>, <a href="service_datastore_elasticsearch_BaseDefine.js.html#line33">line 33</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">String</span>
+
+
+    </span>
+
+<h4 class="name" id="PARAM_COMMA">
+    <a class="href-link" href="#PARAM_COMMA">#</a>
+    
+        
+            <span class='tag'>readonly</span>
+        
+    
+    <span class="code-name">
+        PARAM_COMMA
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>ElasticSearch的默认查询租佃参数</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-default">Default Value:</dt>
+    <dd class="tag-default"><ul class="dummy">
+            <li>queryField=</li>
+        </ul></dd>
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="service_datastore_elasticsearch_BaseDefine.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="service_datastore_elasticsearch_BaseDefine.js.html">service/datastore/elasticsearch/BaseDefine.js</a>, <a href="service_datastore_elasticsearch_BaseDefine.js.html#line15">line 15</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">string</span>
+
+
+    </span>
+
+<h4 class="name" id="PARAM_SPACE">
+    <a class="href-link" href="#PARAM_SPACE">#</a>
+    
+    <span class="code-name">
+        PARAM_SPACE
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>参数空格</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="service_datastore_elasticsearch_BaseDefine.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="service_datastore_elasticsearch_BaseDefine.js.html">service/datastore/elasticsearch/BaseDefine.js</a>, <a href="service_datastore_elasticsearch_BaseDefine.js.html#line21">line 21</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">String</span>
+
+
+    </span>
+
+<h4 class="name" id="PARAM_SPLIT">
+    <a class="href-link" href="#PARAM_SPLIT">#</a>
+    
+        
+            <span class='tag'>readonly</span>
+        
+    
+    <span class="code-name">
+        PARAM_SPLIT
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>ElasticSearch的默认分号</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-default">Default Value:</dt>
+    <dd class="tag-default"><ul class="dummy">
+            <li>;</li>
+        </ul></dd>
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="service_datastore_elasticsearch_BaseDefine.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="service_datastore_elasticsearch_BaseDefine.js.html">service/datastore/elasticsearch/BaseDefine.js</a>, <a href="service_datastore_elasticsearch_BaseDefine.js.html#line41">line 41</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">String</span>
+
+
+    </span>
+
+<h4 class="name" id="PARAM_SUB">
+    <a class="href-link" href="#PARAM_SUB">#</a>
+    
+        
+            <span class='tag'>readonly</span>
+        
+    
+    <span class="code-name">
+        PARAM_SUB
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>ElasticSearch的默认查询租佃参数</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-default">Default Value:</dt>
+    <dd class="tag-default"><ul class="dummy">
+            <li>queryField=</li>
+        </ul></dd>
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="service_datastore_elasticsearch_BaseDefine.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="service_datastore_elasticsearch_BaseDefine.js.html">service/datastore/elasticsearch/BaseDefine.js</a>, <a href="service_datastore_elasticsearch_BaseDefine.js.html#line8">line 8</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">boolean</span>
+
+
+    </span>
+
+<h4 class="name" id="parseNumber">
+    <a class="href-link" href="#parseNumber">#</a>
+    
+    <span class="code-name">
+        parseNumber
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>是否进行数据预处理,有些字段是string类型，需要转换为number</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="mapboxgl_theme_Theme3DLayer.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="mapboxgl_theme_Theme3DLayer.js.html">mapboxgl/theme/Theme3DLayer.js</a>, <a href="mapboxgl_theme_Theme3DLayer.js.html#line42">line 42</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">Number</span>
+
+
+    </span>
+
+<h4 class="name" id="RepeatType">
+    <a class="href-link" href="#RepeatType">#</a>
+    
+        
+            <span class='tag'>readonly</span>
+        
+    
+    <span class="code-name">
+        RepeatType
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>线重复注记策略</p>
+</div>
+
+
+
+
+
+    <h5 class="subsection-title">属性:</h5>
+
+    
+<div class="table-container">
+    <table class="props table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>Auto</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>自动重复注记（当线长度超过注记长度的2倍时重复注记，否则不重复注记）</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>NoRep</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>从不重复注记</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>OnStep</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>分段注记</p></td>
+</tr>
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="service_common_EnumComm.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="service_common_EnumComm.js.html">service/common/EnumComm.js</a>, <a href="service_common_EnumComm.js.html#line156">line 156</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">Boolean</span>
+
+
+    </span>
+
+<h4 class="name" id="showLegend">
+    <a class="href-link" href="#showLegend">#</a>
+    
+    <span class="code-name">
+        showLegend
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>是否显示图例</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="mapboxgl_theme_Theme3DLayer.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="mapboxgl_theme_Theme3DLayer.js.html">mapboxgl/theme/Theme3DLayer.js</a>, <a href="mapboxgl_theme_Theme3DLayer.js.html#line83">line 83</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">String</span>
+
+
+    </span>
+
+<h4 class="name" id="SPACE_ENUM_POLYGON">
+    <a class="href-link" href="#SPACE_ENUM_POLYGON">#</a>
+    
+        
+            <span class='tag'>readonly</span>
+        
+    
+    <span class="code-name">
+        SPACE_ENUM_POLYGON
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>ElasticSearch的空间-区类型</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-default">Default Value:</dt>
+    <dd class="tag-default"><ul class="dummy">
+            <li>polygon</li>
+        </ul></dd>
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="service_datastore_elasticsearch_BaseDefine.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="service_datastore_elasticsearch_BaseDefine.js.html">service/datastore/elasticsearch/BaseDefine.js</a>, <a href="service_datastore_elasticsearch_BaseDefine.js.html#line49">line 49</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">String</span>
+
+
+    </span>
+
+<h4 class="name" id="SubscribeEvent">
+    <a class="href-link" href="#SubscribeEvent">#</a>
+    
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        SubscribeEvent
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>SubscribeEvent WebSocket消息订阅通信事件流程</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="service_common_SocketEvent.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="service_common_SocketEvent.js.html">service/common/SocketEvent.js</a>, <a href="service_common_SocketEvent.js.html#line13">line 13</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">String</span>
+
+
+    </span>
+
+<h4 class="name" id="SubscribeEvent">
+    <a class="href-link" href="#SubscribeEvent">#</a>
+    
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        SubscribeEvent
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>SubscribeEvent WebSocket消息订阅通信事件流程</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="mapboxgl_service_socket_SocketEvent.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="mapboxgl_service_socket_SocketEvent.js.html">mapboxgl/service/socket/SocketEvent.js</a>, <a href="mapboxgl_service_socket_SocketEvent.js.html#line11">line 11</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">string</span>
+
+
+    </span>
+
+<h4 class="name" id="themeField">
+    <a class="href-link" href="#themeField">#</a>
+    
+    <span class="code-name">
+        themeField
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>专题展示的字段</p>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="mapboxgl_theme_Theme3DLayer.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="mapboxgl_theme_Theme3DLayer.js.html">mapboxgl/theme/Theme3DLayer.js</a>, <a href="mapboxgl_theme_Theme3DLayer.js.html#line77">line 77</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">Number</span>
+
+
+    </span>
+
+<h4 class="name" id="TotalCount">
+    <a class="href-link" href="#TotalCount">#</a>
+    
+        
+            <span class='tag'>readonly</span>
+        
+    
+    <span class="code-name">
+        TotalCount
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>一次查询的总要素个数，仅在做要素查询时有意义</p>
+</div>
+
+
+
+
+
+    <h5 class="subsection-title">属性:</h5>
+
+    
+<div class="table-container">
+    <table class="props table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>TotalCount</code></td>
+    
+
+    <td class="type">
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"></td>
+</tr>
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="service_common_FeatureSet.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="service_common_FeatureSet.js.html">service/common/FeatureSet.js</a>, <a href="service_common_FeatureSet.js.html#line33">line 33</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">Number</span>
+|
+
+<span class="param-type">String</span>
+
+
+    </span>
+
+<h4 class="name" id="VectClsType">
+    <a class="href-link" href="#VectClsType">#</a>
+    
+        
+            <span class='tag'>readonly</span>
+        
+    
+    <span class="code-name">
+        VectClsType
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>矢量数据类型</p>
+</div>
+
+
+
+
+
+    <h5 class="subsection-title">属性:</h5>
+
+    
+<div class="table-container">
+    <table class="props table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>Unknown</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+|
+
+<span class="param-type">String</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>未知类型</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>SFCls</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+|
+
+<span class="param-type">String</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>简单要素类</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>AnnoCls</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">Number</span>
+|
+
+<span class="param-type">String</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>注记类</p></td>
+</tr>
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="service_common_EnumComm.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="service_common_EnumComm.js.html">service/common/EnumComm.js</a>, <a href="service_common_EnumComm.js.html#line35">line 35</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>类型:</label>
+        
+<span class="param-type">String</span>
+
+
+    </span>
+
+<h4 class="name" id="XClsType">
+    <a class="href-link" href="#XClsType">#</a>
+    
+        
+            <span class='tag'>readonly</span>
+        
+    
+    <span class="code-name">
+        XClsType
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    <p>数据类型</p>
+</div>
+
+
+
+
+
+    <h5 class="subsection-title">属性:</h5>
+
+    
+<div class="table-container">
+    <table class="props table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>SFCls</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">String</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>简单要素类</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>OCls</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">String</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>对象类</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>ACls</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">String</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>注记类</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>GnetCls</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">String</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>网络类</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>RDS</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">String</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>栅格数据集</p></td>
+</tr>
+
+        
+            
+<tr class="deep-level-0">
+    
+        <td class="name"><code>SFClsInfo</code></td>
+    
+
+    <td class="type">
+    
+        
+<span class="param-type">String</span>
+
+
+    
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>简单要素类详细信息</p></td>
+</tr>
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="service_common_EnumComm.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="service_common_EnumComm.js.html">service/common/EnumComm.js</a>, <a href="service_common_EnumComm.js.html#line11">line 11</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+            </div>
+        </div>
+    
+
+    
+        <div class='vertical-section'>
+            <h1>方法</h1>
+            <div class="members">
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="addFeatures">
+        <a class="href-link" href="#addFeatures">#</a>
+        
+        <span class="code-name">
+            
+                addFeatures<span class="signature">(features)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>添加要素</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>参数:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>名称</th>
+            
+
+            <th>类型</th>
+
+            
+
+            
+
+            <th class="last">描述</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>features</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Object</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>只支持FeatureSet</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="mapboxgl_theme_GeoFeatureThemeLayer.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="mapboxgl_theme_GeoFeatureThemeLayer.js.html">mapboxgl/theme/GeoFeatureThemeLayer.js</a>, <a href="mapboxgl_theme_GeoFeatureThemeLayer.js.html#line82">line 82</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="addTo">
+        <a class="href-link" href="#addTo">#</a>
+        
+        <span class="code-name">
+            
+                addTo<span class="signature">(map)</span><span class="type-signature"> &rarr; {this}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>添加图层到地图上</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>参数:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>名称</th>
+            
+
+            <th>类型</th>
+
+            
+
+            
+
+            <th class="last">描述</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>map</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Object</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>mapboxgl 地图对象</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="mapboxgl_theme_Theme3DLayer.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="mapboxgl_theme_Theme3DLayer.js.html">mapboxgl/theme/Theme3DLayer.js</a>, <a href="mapboxgl_theme_Theme3DLayer.js.html#line250">line 250</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>返回值:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">this</span>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="copyProperties">
+        <a class="href-link" href="#copyProperties">#</a>
+        
+        <span class="code-name">
+            
+                copyProperties<span class="signature">(target, source)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>将要拷贝的源对象属性拷贝到对应的目标对象里面</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>参数:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>名称</th>
+            
+
+            <th>类型</th>
+
+            
+
+            
+
+            <th class="last">描述</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>target</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">*</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>目标对象</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>source</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">*</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>源对象</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="service_common_Mixin.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="service_common_Mixin.js.html">service/common/Mixin.js</a>, <a href="service_common_Mixin.js.html#line31">line 31</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="getData">
+        <a class="href-link" href="#getData">#</a>
+        
+        <span class="code-name">
+            
+                getData<span class="signature">()</span><span class="type-signature"> &rarr; {Object}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>获取数据，返回的数据格式为geojson</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="mapboxgl_theme_Theme3DLayer.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="mapboxgl_theme_Theme3DLayer.js.html">mapboxgl/theme/Theme3DLayer.js</a>, <a href="mapboxgl_theme_Theme3DLayer.js.html#line241">line 241</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>返回值:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">Object</span>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="getHighlightStyleOptions">
+        <a class="href-link" href="#getHighlightStyleOptions">#</a>
+        
+        <span class="code-name">
+            
+                getHighlightStyleOptions<span class="signature">()</span><span class="type-signature"> &rarr; {Object}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>获取高亮样式</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="mapboxgl_theme_RangeTheme3DLayer.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="mapboxgl_theme_RangeTheme3DLayer.js.html">mapboxgl/theme/RangeTheme3DLayer.js</a>, <a href="mapboxgl_theme_RangeTheme3DLayer.js.html#line100">line 100</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>返回值:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>mapbox gl样式对象</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">Object</span>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="getLayerStyleOptions">
+        <a class="href-link" href="#getLayerStyleOptions">#</a>
+        
+        <span class="code-name">
+            
+                getLayerStyleOptions<span class="signature">()</span><span class="type-signature"> &rarr; {Object}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>获取图层样式</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="mapboxgl_theme_RangeTheme3DLayer.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="mapboxgl_theme_RangeTheme3DLayer.js.html">mapboxgl/theme/RangeTheme3DLayer.js</a>, <a href="mapboxgl_theme_RangeTheme3DLayer.js.html#line58">line 58</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>返回值:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>mapbox gl样式对象</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">Object</span>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="getLayerStyleOptions">
+        <a class="href-link" href="#getLayerStyleOptions">#</a>
+        
+        <span class="code-name">
+            
+                getLayerStyleOptions<span class="signature">()</span><span class="type-signature"> &rarr; {Object}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>获取图层样式</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="mapboxgl_theme_Theme3DLayer.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="mapboxgl_theme_Theme3DLayer.js.html">mapboxgl/theme/Theme3DLayer.js</a>, <a href="mapboxgl_theme_Theme3DLayer.js.html#line326">line 326</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>返回值:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>mapbox gl样式对象</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">Object</span>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="interpolateLagrange">
+        <a class="href-link" href="#interpolateLagrange">#</a>
+        
+        <span class="code-name">
+            
+                interpolateLagrange<span class="signature">(points)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+
+
+
+
+
+
+
+
+
+    <h5>参数:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>名称</th>
+            
+
+            <th>类型</th>
+
+            
+
+            
+
+            <th class="last">描述</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>points</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">*</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>已有数据坐标集合</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">作者:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>基础平台/潘卓然</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li>请注意，返回的是个函数需要再主动传递一次X来进行求值</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="service_common_Interpolat.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="service_common_Interpolat.js.html">service/common/Interpolat.js</a>, <a href="service_common_Interpolat.js.html#line29">line 29</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>返回值:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>预测的下一个未来时间点/坐标系X下的的Y值的函数</p></div>
+    
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+    <h5>Example</h5>
+    
+    
+        <pre class="prettyprint"><code>var trues = [
+        [2011, 12131],  // 当前年份的产值
+        [2012, 13345],
+        [2013, 14532],
+        [2014, 15472],
+        [2015, 16945],
+    ];
+
+    f = interpolatingPolynomial(trues);
+
+    // 预测未来的
+    let futures2016 = f(2016);  // 预测未来的产值
+    let futures2017 = f(2017);
+    let futures2018 = f(2018);
+    let futures2019 = f(2019);
+
+    console.log(2016, futures2016);
+    console.log(2017, futures2017);
+    console.log(2018, futures2018);
+    console.log(2019, futures2019);</code></pre>
+    
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="mix">
+        <a class="href-link" href="#mix">#</a>
+        
+        <span class="code-name">
+            
+                mix<span class="signature">(&hellip;mixins)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+
+
+
+
+
+
+
+
+
+    <h5>参数:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>名称</th>
+            
+
+            <th>类型</th>
+
+            
+            <th>属性</th>
+            
+
+            
+
+            <th class="last">描述</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>mixins</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">any</span>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+
+      
+
+      
+          &lt;repeatable><br>
+      
+      </td>
+  
+
+  
+
+  <td class="description last"><p>混合的对象</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">作者:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>基础平台-潘卓然</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="service_common_Mixin.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="service_common_Mixin.js.html">service/common/Mixin.js</a>, <a href="service_common_Mixin.js.html#line9">line 9</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    
+        <pre class="prettyprint"><code>class DistributedEdit extends mix(Loggable, Serializable) {
+    // ...
+    }</code></pre>
+    
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="remove">
+        <a class="href-link" href="#remove">#</a>
+        
+        <span class="code-name">
+            
+                remove<span class="signature">()</span><span class="type-signature"> &rarr; {this}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>从地图上移除图层</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="mapboxgl_theme_Theme3DLayer.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="mapboxgl_theme_Theme3DLayer.js.html">mapboxgl/theme/Theme3DLayer.js</a>, <a href="mapboxgl_theme_Theme3DLayer.js.html#line287">line 287</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>返回值:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">this</span>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="setData">
+        <a class="href-link" href="#setData">#</a>
+        
+        <span class="code-name">
+            
+                setData<span class="signature">(data, parseNumber)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>设置数据，数据格式必须为geojson格式</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>参数:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>名称</th>
+            
+
+            <th>类型</th>
+
+            
+
+            
+
+            <th class="last">描述</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>data</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">object</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>geojson格式数据</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>parseNumber</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">object</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>是否进行数据预处理,有些字段是string类型，需要转换为number</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="mapboxgl_theme_Theme3DLayer.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="mapboxgl_theme_Theme3DLayer.js.html">mapboxgl/theme/Theme3DLayer.js</a>, <a href="mapboxgl_theme_Theme3DLayer.js.html#line153">line 153</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="setLayerOptions">
+        <a class="href-link" href="#setLayerOptions">#</a>
+        
+        <span class="code-name">
+            
+                setLayerOptions<span class="signature">(layerOptions)</span><span class="type-signature"> &rarr; {this}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>设置图层相关参数</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>参数:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>名称</th>
+            
+
+            <th>类型</th>
+
+            
+
+            
+
+            <th class="last">描述</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>layerOptions</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">object</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>该专题图图层相关参数<br></p>
+<ul>
+<li>
+<pre><code>     opacity -{number} 图层透明度，默认1&lt;br&gt;
+     parseNumber -{boolean} 是否预处理数据，将数据转换为number，默认false&lt;br&gt;
+     baseHeightField -{string} 数据中表示基础高度的字段&lt;br&gt;
+     height -{number} 高度。如果数据指定的heightField(默认height)没有可以表示高度的字段，可以为所有数据统一设置一个高度&lt;br&gt;
+     heightField -{string} 数据中表示高度的字段&lt;br&gt;
+     themeField -{string} 专题展示的字段&lt;br&gt;
+     showLegend -{boolean} 是否显示图例,默认显示&lt;br&gt;
+     legendTitle -{string} 图例标题&lt;br&gt;
+     legendTheme -{string} 图例主题，取值：'light','dark',默认：'light'&lt;br&gt;
+     legendOrientation -{string} 图例方向，取值：'horizontal','vertical'，默认：'horizontal'&lt;br&gt;
+     legendPosition -{string} 图例位置，取值：'top-right'|'top-left'|'bottom-left'|'bottom-right'&lt;br&gt;</code></pre>
+</li>
+</ul></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="mapboxgl_theme_Theme3DLayer.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="mapboxgl_theme_Theme3DLayer.js.html">mapboxgl/theme/Theme3DLayer.js</a>, <a href="mapboxgl_theme_Theme3DLayer.js.html#line118">line 118</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>返回值:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">this</span>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="show">
+        <a class="href-link" href="#show">#</a>
+        
+        <span class="code-name">
+            
+                show<span class="signature">(options)</span><span class="type-signature"> &rarr; {this}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>显示图层</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>参数:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>名称</th>
+            
+
+            <th>类型</th>
+
+            
+
+            
+
+            <th class="last">描述</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>options</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Object</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>图层配置项</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="mapboxgl_theme_Theme3DLayer.js.html" class="button">查看源代码</a>
+            <span>
+                <a href="mapboxgl_theme_Theme3DLayer.js.html">mapboxgl/theme/Theme3DLayer.js</a>, <a href="mapboxgl_theme_Theme3DLayer.js.html#line266">line 266</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>返回值:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">this</span>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+            </div>
+        </div>
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>文档生成<a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://www.smaryun.com" target="_blank">司马云</a> <span>© 2020 云生态圈</span>
+                        <a href="http://develop.smaryun.com:8899/" target="_blank">MapGIS Client for JavaScript</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+<script src="scripts/search.js"> </script>
+
+</body>
+</html>

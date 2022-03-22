@@ -1,0 +1,445 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> overlay/PopupLayer.js</title>
+
+  <script src="../cdn/run_prettify.js"></script>
+  <script src="../cdn/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="../cdn/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="../cdn/googleapis.css" rel="stylesheet">
+  <link href="../cdn/prettify.css" rel="stylesheet">
+  <link rel="stylesheet" href="../cdn/all.css" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="../cdn/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="../cdn/mapgis.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="../cdn/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+             
+                <a class="image" href="/">
+                    <img class="mapgis-webclient-logo" src="../image/mapgis_blue.png" alt="logo">
+                </a>
+            
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API
+                </a>
+                <div class="dropdown is-hoverable is-right">
+                    <a class="dropdown-trigger link">
+                        帮助向导
+                    </a>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-content">
+                        
+                            
+                                <a class="dropdown-item" href="tutorial-1.快速入门.html">
+                                    1.快速入门
+                                </a>
+                            
+                        
+                        </div>
+                    </div>
+                </div>
+                 
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/cesium/index.html"
+                        >
+                            Cesium
+                        </a>
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/mapboxgl/index.html"
+                        >
+                            MapboxGL
+                        </a>
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/leaflet/index.html"
+                        >
+                            Leaflet
+                        </a>
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/openlayers/index.html"
+                        >
+                            OpenLayers
+                        </a>
+                    
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            <div>
+                <span class="mapgis-api-document-span"><a href="index.html">API文档</a></span>
+            </div>
+            
+                <div class="search-wrapper">
+                    <input id="search" type="text" placeholder="搜索文档..." class="input">
+                </div>
+            
+            <nav>
+                
+                    <div class="category"><div class="mapgis-menu-span">模块</div><ul class="mapgis-sidebar-menus"><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E4%25BA%258B%25E4%25BB%25B6%25E7%25AE%25A1%25E7%2590%2586.html">客户端事件管理</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%2585%25AC%25E5%2585%25B1%25E6%2596%25B9%25E6%25B3%2595.html">客户端公共方法</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.html">客户端可视化</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596%25E5%2588%2586%25E6%259E%2590.html">客户端可视化分析</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.html">客户端数据服务</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%25B8%25B2%25E6%259F%2593.html">客户端渲染</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E8%25A7%2586%25E5%259B%25BE%25E7%25AE%25A1%25E7%2590%2586.html">客户端视图管理</a></li><li><a href="module-%25E6%259C%258D%25E5%258A%25A1%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259F%25A5%25E8%25AF%25A2.html">服务端数据查询</a></li><li><a href="module-%25E7%2594%25A8%25E6%2588%25B7%25E7%2595%258C%25E9%259D%25A2.html">用户界面</a></li></ul><div class="mapgis-menu-span">类名</div><ul class="mapgis-sidebar-menus"><li><a href="BaseLayer%2520%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1%25E5%259F%25BA%25E7%25B1%25BB.html">BaseLayer 数据服务基类</a></li><li><a href="CesiumSelectionIndicator.html">CesiumSelectionIndicator</a></li><li><a href="MapGIS2dDocProvider.html">MapGIS2dDocProvider</a></li><li><a href="module.exports_module.exports.html">exports</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E4%25BA%258B%25E4%25BB%25B6%25E7%25AE%25A1%25E7%2590%2586.MouseEventManager.html">MouseEventManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%2585%25AC%25E5%2585%25B1%25E6%2596%25B9%25E6%25B3%2595.CommonDataManager.html">CommonDataManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%2585%25AC%25E5%2585%25B1%25E6%2596%25B9%25E6%25B3%2595.CommonFuncManager.html">CommonFuncManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.EchartsLayer.html">EchartsLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.EntityController.html">EntityController</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.LabelLayer.html">LabelLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.MapVLayer.html">MapVLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.PopupController.html">PopupController</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.PopupLayer.html">PopupLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596%25E5%2588%2586%25E6%259E%2590.AdvancedAnalysisManager.html">AdvancedAnalysisManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596%25E5%2588%2586%25E6%259E%2590.AnalysisManager.html">AnalysisManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.LayerManager.html">LayerManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.M3DLayer.html">M3DLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.OGCLayer.html">OGCLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.TerrainLayer.html">TerrainLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.ThirdPartyLayer.html">ThirdPartyLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.TilesLayer.html">TilesLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%25B8%25B2%25E6%259F%2593.VectorTileLayer.html">VectorTileLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E8%25A7%2586%25E5%259B%25BE%25E7%25AE%25A1%25E7%2590%2586.SceneManager.html">SceneManager</a></li><li><a href="module-%25E6%259C%258D%25E5%258A%25A1%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259F%25A5%25E8%25AF%25A2.G3DDocQuery.html">G3DDocQuery</a></li><li><a href="module-%25E6%259C%258D%25E5%258A%25A1%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259F%25A5%25E8%25AF%25A2.MapDocQuery.html">MapDocQuery</a></li><li><a href="PopupElement.html">PopupElement</a></li><li><a href="WmtsTileProvider.html">WmtsTileProvider</a></li></ul><div class="mapgis-menu-span">全局</div><ul class="mapgis-sidebar-menus"><li><a href="global.html#addGridInfo">addGridInfo</a></li><li><a href="global.html#addImageLayer">addImageLayer</a></li><li><a href="global.html#calAngleOf3Pnt">calAngleOf3Pnt</a></li><li><a href="global.html#LayerType">LayerType</a></li><li><a href="global.html#removeAllEntities">removeAllEntities</a></li><li><a href="global.html#removeAllImageLayers">removeAllImageLayers</a></li><li><a href="global.html#removeAllPrimitives">removeAllPrimitives</a></li><li><a href="global.html#removeDocs">removeDocs</a></li><li><a href="global.html#removeEntity">removeEntity</a></li><li><a href="global.html#removeGridInfo">removeGridInfo</a></li><li><a href="global.html#removeImageLayer">removeImageLayer</a></li><li><a href="global.html#removeM3dLayer">removeM3dLayer</a></li><li><a href="global.html#removePrimitive">removePrimitive</a></li><li><a href="global.html#removeTerrain">removeTerrain</a></li><li><a href="global.html#updataPopupPosition">updataPopupPosition</a></li><li><a href="global.html#zoomToM3dLayer">zoomToM3dLayer</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <span class="page-title-sub">overlay/PopupLayer.js</span>
+                    <span class="page-title-main">Source</span>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { CesiumZondy } from '../core/Base';
+
+import { updataPopupPosition } from './popup/popup';
+import Cesium from '../../../node_modules/cesium/Source/Cesium';
+
+var popupsIdIndex = 0;
+
+/**
+ * @author 基础平台/创新中心 潘卓然
+ * @class module:客户端可视化.PopupLayer
+ * @classdesc 弹出窗图层
+ * @description CesiumZondy.zondy.PopupLayer cesium的popup的实现
+ * @param {Viewer} map 传入的cesium的地图对象viewer
+ * @param {Entity} [position.entity]  实体,内部获取坐标点cartesian, 输入此参数可忽略下面的，cartesian，longitude,latitude
+ * @param {Cartesian3} [position.cartesian] 笛卡尔积坐标点cartesian, 输入此参数可忽略下面的longitude,latitude
+ * @param {Number} [position.longitude] 经度, 先判断cartesian是否存在，存在忽略此参数
+ * @param {Number} [position.latitude] 纬度, 先判断cartesian是否存在，存在忽略此参数
+ * @param {Number}  [position.height] 高度, 可选 默认0
+ * @param {String} [options.popupId] 本次popup对应的唯一id,不传随机生成
+ * @param {String} [options.popupContentId] 本次popup对应的唯一内容id
+ * @param {Boolean} [options.postRender=true] 是否实时渲染
+ * @param {Boolean} [options.showClose=true]  是否显示关闭按钮
+ * @param {Object} [options.callback]
+ * @param {Function} [options.callback.onShow] 显示popup事件的回调
+ * @param {Function} [options.callback.onHide] 隐藏popup事件的回调
+ * @param {Element|String} container 外部传入的div的字符串描述方式，一般是文字或者echarts的div;
+ *
+ * @example 这里唯一要注意的是我们中地数码的ceisum的右键事件不是放大缩小而是旋转视角
+ * var cartesian1 = Cesium.Cartesian3.fromDegrees(
+          100.108861,
+          27.871516,
+          0
+        );
+        var cartesian2 = Cesium.Cartesian3.fromDegrees(
+          90.108861,
+          37.871516,
+          0
+        );
+        var cartesian3 = Cesium.Cartesian3.fromDegrees(
+          116.108861,
+          30.871516,
+          0
+        );
+        popups = [cartesian1, cartesian2, cartesian3].map((c) => {
+          const popup = new CesiumZondy.Overlayer.PopupLayer(
+            webGlobe.viewer,
+            {
+              cartesian: c,
+            },
+            {
+              popupId: "cesium-popup-id-1", //要保证唯一性
+              popupContentId: "cesium-popup-content-id-1", //要保证唯一性
+              postRender: true, //是否实时刷新
+              showClose: false,
+            },
+          '&lt;div id="echarts_id" style="height:100px;width:200px;color:#fff;">echats内容&lt;/div>'
+        );
+        return popup;
+      });
+ */
+export default class PopupLayer {
+    constructor(map, position, options, container) {
+        this.map = map;
+        this.scene = map.scene;
+
+        this.position = position;
+        this.options = options;
+        this.container = container;
+
+        this.popupId = options.popupId || 'cesium-popup-id-' + popupsIdIndex++;
+        this.popupClass = options.popupClass || 'cesium-popup';
+        this.popupContentId = options.popupContentId || 'cesium-popup-content-id-' + popupsIdIndex++;
+
+        this.options.postRender = this.options.postRender === undefined ? true : this.options.postRender;
+
+        this.scene = map.scene;
+        this.camera = map.camera;
+        this.isShow = true;
+
+        if (options.callback) {
+            const { onShow, onHide } = options.callback;
+            this.onShow = onShow;
+            this.onHide = onHide
+        }
+
+        let ScreenSpaceEventHandler = Cesium.ScreenSpaceEventHandler || window['Cesium'].ScreenSpaceEventHandler;
+
+        this.handler = new ScreenSpaceEventHandler(this.scene.canvas);
+
+        this.infoDiv = null;
+        // this.px_position = null;
+        if (position.entity) {
+            this.cartesian = position.entity.position._value;
+        }
+
+        this.cartesian =
+            this.cartesian ||
+            this.position.cartesian ||
+            Cesium.Cartesian3.fromDegrees(this.position.longitude, this.position.latitude, this.position.height);
+
+        let vc = this.map.container;
+        let cesumWidgetContainer = undefined;
+        if (vc.children &amp;&amp; vc.children.length > 0) {
+            if (vc.children[0].children &amp;&amp; vc.children[0].children.length > 0) {
+                if (vc.children[0].children[0].children &amp;&amp; vc.children[0].children[0].children.length > 0) {
+                    cesumWidgetContainer = vc.children[0].children[0].children[0];
+                }
+            }
+        }
+
+        if (!cesumWidgetContainer) {
+            let parents = document.getElementsByClassName('cesium-widget');
+            parent = parents.length > 0 ? parents[0] : map.container;
+            this.parent = parent;
+        } else {
+            this.parent = cesumWidgetContainer;
+        }
+
+        // this.initDevicePixelRatio();
+        this.showClose = options.showClose === undefined ? true : options.showClose;
+        this.popup = this._createPopup();
+
+        this.moveStart = this.eventMoveStart.bind(this);
+        this.moveEnd = this.eventMoveEnd.bind(this);
+        this.movement = this.movement.bind(this);
+        this.update = this.update.bind(this);
+
+        this.bindEvent();
+
+        return this;
+    }
+
+    _createPopup() {
+        const self = this;
+        this.hide = this.hide.bind(this);
+        let infoDiv = window.document.createElement('div');
+        infoDiv.id = this.popupId;
+        infoDiv.style.display = 'none';
+        infoDiv.innerHTML =
+            '&lt;div id="' +
+            this.popupContentId +
+            '" class="cesium-popup">' +
+            // '&lt;a class="cesium-popup-close-button" href="javascript:void(0)" onClick="function remove(){self.remove()}">×&lt;/a>' +
+            '&lt;div class="cesium-popup-content-wrapper">' +
+            this.container +
+            '&lt;/div>' +
+            '&lt;div class="cesium-popup-tip-container">' +
+            '&lt;div class="cesium-popup-tip" />' +
+            '&lt;/div>' +
+            '&lt;/div>';
+        let close = window.document.createElement('div');
+        close.className = 'cesium-popup-close-button';
+        close.addEventListener('click', () => self.hide());
+        close.innerText = 'x';
+        this.parent.appendChild(infoDiv);
+        // window.document.getElementById(this.popupId).style.display = 'block';
+        if (this.showClose) {
+            let parent = window.document.getElementById(this.popupContentId);
+            parent &amp;&amp; parent.appendChild(close);
+        }
+        this.infoDiv = infoDiv;
+    }
+
+    bindEvent() {
+        let self = this;
+        this.handler.setInputAction(this.movement, Cesium.ScreenSpaceEventType.LEFT_CLICK);
+        if (!this.map) {
+            return;
+        }
+
+        if (this.options.postRender) {
+            this.map.scene.postRender.addEventListener(() => self.update());
+        } else {
+            this.map.camera.changed.addEventListener(() => self.update());
+            this.handler.setInputAction(this.moveStart, Cesium.ScreenSpaceEventType.LEFT_DOWN);
+            this.handler.setInputAction(this.moveEnd, Cesium.ScreenSpaceEventType.LEFT_UP);
+            this.map.scene.camera.moveEnd.addEventListener(() => self.update());
+        }
+    }
+
+    unbindEvent() {
+        let self = this;
+        if (!this.map) {
+            return;
+        }
+
+        if (this.options.postRender) {
+            this.map.scene.postRender.removeEventListener(() => self.update());
+        } else {
+            this.map.camera.changed.removeEventListener(() => self.update());
+            this.map.scene.camera.moveEnd.removeEventListener(() => self.update());
+            this.handler.destroy();
+        }
+    }
+
+    movement(movement) {
+        var pickedPrimitive = this.map.scene.pick(movement.position);
+        var pickedEntity = Cesium.defined(pickedPrimitive) ? pickedPrimitive.id : undefined;
+        if (Cesium.defined(pickedEntity) /* &amp;&amp; Cesium.defined(pickedEntity.billboard) */) {
+            if (this.position &amp;&amp; this.position.entity) {
+                pickedPrimitive.id === this.position.entity.id;
+                this.show();
+            }
+        }
+    }
+
+    eventMoveStart(movement) {
+        this.hide();
+    }
+
+    eventMoveEnd() {
+        this.update();
+    }
+
+    update() {
+        if (this.cartesian &amp;&amp; this.isShow) {
+            updataPopupPosition(this.map, this.cartesian, this.popupId, this.popupContentId, this.options);
+        }
+    }
+
+    /**
+     * 显示图层
+     * @function module:客户端可视化.PopupLayer.prototype.show
+     */
+    show() {
+        this.isShow = true;
+        if (this.onShow) {
+            this.onShow(this.isShow);
+        }
+        let node = window.document.getElementById(this.popupId);
+        if (node &amp;&amp; node.style) {
+            node.style.display = 'block';
+        }
+    }
+
+    /**
+     * 隐藏图层
+     * @function module:客户端可视化.PopupLayer.prototype.hide
+     */
+    hide() {
+        this.isShow = false;
+        if (this.onHide) {
+            this.onHide(this.isShow);
+        }
+        let node = window.document.getElementById(this.popupId);
+        if (node &amp;&amp; node.style) {
+            node.style.display = 'none';
+        }
+    }
+
+    /**
+     * 删除图层
+     * @function module:客户端可视化.PopupLayer.prototype.remove
+     */
+    remove() {
+        this.unbindEvent();
+        let node = window.document.getElementById(this.popupId);
+        if (node) {
+            if (node.parentNode) {
+                node.parentNode.removeChild(node);
+            } else {
+                node.remove();
+            }
+        }
+        return this;
+    }
+}
+
+CesiumZondy.Overlayer.PopupLayer = PopupLayer;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>文档生成<a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://www.smaryun.com" target="_blank">司马云</a> <span>© 2020 云生态圈</span>
+                        <a href="http://develop.smaryun.com:8899/" target="_blank">MapGIS Client for JavaScript</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+<script src="scripts/search.js"> </script>
+
+</body>
+</html>

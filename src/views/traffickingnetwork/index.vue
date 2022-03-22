@@ -5,21 +5,10 @@
     <div id="Number">
       <ul>
         <li>
-          <span class="Tspan" style="background-color: #00bfff" />
+          <span class="Tspan" style="background-color: #f4978e;" />
           <p class="publis xunt">{{ numbersName }}</p>
           <div class="numbers">
-            {{ lose
-            }}<span
-              style="
-                font-size: 20px;
-                font-family: 'KuHei';
-                padding-left: 5px;
-                display: inline-block;
-                vertical-align: top;
-                color: rgb(180, 180, 180);
-              "
-              >人</span
-            >
+            {{ lose }}<span style="font-size: 20px;font-family: 'KuHei';padding-left:5px;display: inline-block;vertical-align: top;color: rgb(180, 180, 180);">人</span>
           </div>
         </li>
       </ul>
@@ -34,14 +23,7 @@
           :value="item.value"
         />
       </el-select> -->
-      <el-select
-        v-if="json.where > 0"
-        v-model="mode"
-        style=""
-        placeholder="请选择"
-        :popper-append-to-body="false"
-        @change="scaleChange"
-      >
+      <el-select v-if="json.where > 0" v-model="mode" style="" placeholder="请选择" :popper-append-to-body="false" @change="scaleChange">
         <el-option
           v-for="item in modeOptions"
           :key="item.value"
@@ -69,60 +51,52 @@
   </div>
 </template>
 <script>
-// import Cesium from'../../../static/include-cesium-local';
-import Zoning from "./components/zoning"; // 区划
-import TurnOut from "./components/turnOut"; // 拐出
-import TurnIn from "./components/turnIn"; // 拐入
-import Heat from "./components/heat"; // 拐入
-import shiline from "./public/js/shiLine.json";
-import shengline from "./public/js/shengLine.json";
-import SelectRegion from "./components/selectRegion";
-import eventBum from "./public/js/EvebtBus";
+import Zoning from './components/zoning' // 区划
+import TurnOut from './components/turnOut' // 拐出
+import TurnIn from './components/turnIn' // 拐入
+import Heat from './components/heat' // 拐入
+import shiline from './public/js/shiLine.json'
+import shengline from './public/js/shengLine.json'
+import SelectRegion from './components/selectRegion'
+import eventBum from './public/js/EvebtBus'
 export default {
-  name: "Traffickingnetwork",
+  name: 'Traffickingnetwork',
   components: {
     SelectRegion,
     Zoning,
     TurnOut,
     TurnIn,
-    Heat,
+    Heat
   },
   data() {
     return {
       json: {
-        name: "中国",
+        name: '中国',
         where: 0,
-        code: "",
+        code: ''
       },
-      numbersName: "各省拐卖网络丢失儿童数",
+      numbersName: '各省拐卖网络丢失儿童数',
       lose: 35854,
       // 尺度选择
-      options: [
-        {
-          value: "省际",
-          label: "省际",
-        },
-        {
-          value: "市际",
-          label: "市际",
-        },
-        {
-          value: "区县",
-          label: "区县",
-        },
-      ],
-      value: "省际",
-      mode: "拐出",
-      modeOptions: [
-        {
-          value: "拐出",
-          label: "拐出",
-        },
-        {
-          value: "拐入",
-          label: "拐入",
-        },
-      ],
+      options: [{
+        value: '省际',
+        label: '省际'
+      }, {
+        value: '市际',
+        label: '市际'
+      }, {
+        value: '区县',
+        label: '区县'
+      }],
+      value: '省际',
+      mode: '拐出',
+      modeOptions: [{
+        value: '拐出',
+        label: '拐出'
+      }, {
+        value: '拐入',
+        label: '拐入'
+      }],
       // 地图
       map: null,
       // 中国尺度线
@@ -134,428 +108,372 @@ export default {
       textDataSet: null,
       lineDataSet: null,
       pointDataSet: null,
-      timeDataSet: null,
-    };
+      timeDataSet: null
+    }
   },
   beforeDestroy() {
     // 关闭传值
-    eventBum.$off("json");
-    document.getElementById("network").style.display = "none";
+    eventBum.$off('json')
+    document.getElementById('network').style.display = 'none'
   },
   mounted() {
-    // const mapv = document.createElement("script");
-    // mapv.type = "text/javascript";
-    // mapv.src = "/src/assets/js/include-cesium-local.js";
-    // document.body.appendChild(mapv);
-    this.int();
+    this.int()
     // 城市名称
-    eventBum.$on("json", (json) => {
-      this.json.name = json.name;
-      this.json.where = json.where;
-      // this.scaleChange();
+    eventBum.$on('json', json => {
+      this.json.name = json.name
+      this.json.where = json.where
+      this.scaleChange()
       // 地图定位
-    });
+    })
   },
   methods: {
     int() {
-      var that = this;
-      var webGlobe = new Cesium.WebSceneControl("map1", {
-        terrainExaggeration: 1,
-      });
+      var that = this
+      var webGlobe = new Cesium.WebSceneControl('map1', {
+        terrainExaggeration: 1
+      })
       var blueImage = new Cesium.UrlTemplateImageryProvider({
-        url: "https://map.geoq.cn/arcgis/rest/services/SimpleFeature/ChinaBoundaryLine/MapServer/tile/{z}/{y}/{x}",
+        url:
+        'https://map.geoq.cn/arcgis/rest/services/ChinaOnlineStreetPurplishBlue/MapServer/tile/{z}/{y}/{x}',
         tilingScheme: new Cesium.WebMercatorTilingScheme(),
-        maximumLevel: 12,
-      });
-      webGlobe.viewer.imageryLayers.addImageryProvider(blueImage);
-      that.map = webGlobe.viewer;
-      var center = Cesium.Cartesian3.fromDegrees(114, 30, 8000000.0);
+        maximumLevel: 12
+      })
+      webGlobe.viewer.imageryLayers.addImageryProvider(blueImage)
+      that.map = webGlobe.viewer
+      var center = Cesium.Cartesian3.fromDegrees(114, 30, 8000000.0)
       that.map.scene.camera.setView({
-        destination: center,
-      });
-      that.addLayer(shengline);
-      this.echartsRight(shengline, 0);
+        destination: center
+      })
+      that.addLayer(shengline)
+      this.echartsRight(shengline, 0)
     },
     // 切换尺度
     scaleChange() {
-      var that = this;
-      var data = []; // 省市际数据
-      var qianxidata = []; // 最终数据
-      var middata = [];
-      this.destroy();
-      if (this.json.name === "中国") {
-        this.addLayer(data);
-        document.getElementsByClassName("mid")[0].style.width =
-          "calc(20% - 2px)";
-        document.getElementsByClassName("right")[0].style.width =
-          "calc(60% - 2px)";
+      var that = this
+      var data = [] // 省市际数据
+      var qianxidata = [] // 最终数据
+      var middata = []
+      this.destroy()
+      if (this.json.name === '中国') {
+        this.addLayer(data)
+        document.getElementsByClassName('mid')[0].style.width = 'calc(20% - 2px)'
+        document.getElementsByClassName('right')[0].style.width = 'calc(60% - 2px)'
       } else {
-        // document.getElementsByClassName('mid')[0].style.width = 'calc(40% - 2px)'
-        document.getElementsByClassName("mid")[0].style.width = "400px";
-        // document.getElementsByClassName('right')[0].style.width = 'calc(40% - 2px)'
-        document.getElementsByClassName("right")[0].style.width = "350px";
+        document.getElementsByClassName('mid')[0].style.width = 'calc(40% - 2px)'
+        document.getElementsByClassName('right')[0].style.width = 'calc(40% - 2px)'
       }
       if (this.json.where === 1) {
-        data = shengline;
-        if (that.mode === "拐出") {
+        data = shengline
+        if (that.mode === '拐出') {
           const map1 = data.reduce((result, item) => {
-            result[item.拐出省] = result[item.拐出省] || [];
-            result[item.拐出省].push(item);
-            return result;
-          }, {});
-          const result = Object.values(map1);
-          const name = [];
+            result[item.拐出省] = result[item.拐出省] || []
+            result[item.拐出省].push(item)
+            return result
+          }, {})
+          const result = Object.values(map1)
+          const name = []
           for (let index = 0; index < result.length; index++) {
-            const element = result[index][0].拐出省;
-            name.push(element);
+            const element = result[index][0].拐出省
+            name.push(element)
             if (element === that.json.name) {
-              middata = result[index];
+              middata = result[index]
               // break
             }
           }
         } else {
           const map1 = data.reduce((result, item) => {
-            result[item.拐入省] = result[item.拐入省] || [];
-            result[item.拐入省].push(item);
-            return result;
-          }, {});
-          const result = Object.values(map1);
+            result[item.拐入省] = result[item.拐入省] || []
+            result[item.拐入省].push(item)
+            return result
+          }, {})
+          const result = Object.values(map1)
           for (let index = 0; index < result.length; index++) {
-            const element = result[index][0].拐入省;
+            const element = result[index][0].拐入省
             if (element === that.json.name) {
-              middata = result[index];
-              break;
+              middata = result[index]
+              break
             }
           }
         }
         for (let i = 0; i < middata.length; i++) {
-          const element = middata[i];
-          qianxidata.push({
-            middata: element,
-            from: element.拐出省,
-            fromCenter: { lng: element.拐出经度, lat: element.拐出纬度 },
-            toCenter: { lng: element.拐入经度, lat: element.拐入纬度 },
-            count: element.数量,
-            to: element.拐入省,
-          });
+          const element = middata[i]
+          qianxidata.push({ middata: element, from: element.拐出省, fromCenter: { lng: element.拐出经度, lat: element.拐出纬度 }, toCenter: { lng: element.拐入经度, lat: element.拐入纬度 }, count: element.数量, to: element.拐入省 })
         }
       } else if (this.json.where === 2) {
-        data = shiline;
-        if (that.mode === "拐出") {
+        data = shiline
+        if (that.mode === '拐出') {
           const map1 = data.reduce((result, item) => {
-            result[item.拐出市] = result[item.拐出市] || [];
-            result[item.拐出市].push(item);
-            return result;
-          }, {});
-          const result = Object.values(map1);
+            result[item.拐出市] = result[item.拐出市] || []
+            result[item.拐出市].push(item)
+            return result
+          }, {})
+          const result = Object.values(map1)
           for (let index = 0; index < result.length; index++) {
-            const element = result[index][0].拐出市;
+            const element = result[index][0].拐出市
             if (element === that.json.name) {
-              middata = result[index];
-              break;
+              middata = result[index]
+              break
             }
           }
         } else {
           const map1 = data.reduce((result, item) => {
-            result[item.拐入市] = result[item.拐入市] || [];
-            result[item.拐入市].push(item);
-            return result;
-          }, {});
-          const result = Object.values(map1);
+            result[item.拐入市] = result[item.拐入市] || []
+            result[item.拐入市].push(item)
+            return result
+          }, {})
+          const result = Object.values(map1)
           for (let index = 0; index < result.length; index++) {
-            const element = result[index][0].拐入市;
+            const element = result[index][0].拐入市
             if (element === that.json.name) {
-              middata = result[index];
-              break;
+              middata = result[index]
+              break
             }
           }
         }
         for (let i = 0; i < middata.length; i++) {
-          const element = middata[i];
-          qianxidata.push({
-            middata: element,
-            from: element.拐出市,
-            fromCenter: { lng: element.拐出经度, lat: element.拐出纬度 },
-            toCenter: { lng: element.拐入经度, lat: element.拐入纬度 },
-            count: element.数量,
-            to: element.拐入市,
-          });
+          const element = middata[i]
+          qianxidata.push({ middata: element, from: element.拐出市, fromCenter: { lng: element.拐出经度, lat: element.拐出纬度 }, toCenter: { lng: element.拐入经度, lat: element.拐入纬度 }, count: element.数量, to: element.拐入市 })
         }
       } else if (this.json.where === 3) {
         this.$message({
-          message: "暂不支持该尺度！",
-          type: "warning",
-          showClose: true,
-        });
+          message: '暂不支持该尺度！',
+          type: 'warning',
+          showClose: true
+        })
       }
       // console.log(qianxidata)
       if (qianxidata === []) {
         this.$message({
-          message: "暂无数据！",
-          type: "warning",
-          showClose: true,
-        });
+          message: '暂无数据！',
+          type: 'warning',
+          showClose: true
+        })
       } else {
-        qianxidata.sort(function (a, b) {
-          return a.count - b.count;
-        });
-        this.addcurveLayer(qianxidata);
-        eventBum.$emit("right", [that.mode, qianxidata, this.json.where]);
+        qianxidata.sort(function(a, b) { return a.count - b.count })
+        this.addcurveLayer(qianxidata)
+        eventBum.$emit('right', [that.mode, qianxidata, this.json.where])
       }
-      var count = 0;
+      var count = 0
       for (let y = 0; y < qianxidata.length; y++) {
-        const element = qianxidata[y];
-        count += element.count;
+        const element = qianxidata[y]
+        count += element.count
       }
-      that.numbersName =
-        this.json.name.substring(0, 4) + that.mode + "丢失儿童数";
-      that.lose = count;
+      that.numbersName = this.json.name.substring(0, 4) + that.mode + '丢失儿童数'
+      that.lose = count
     },
     // 销毁图层
     destroy(e) {
       if (this.countryLineLayer !== null) {
-        this.countryLineLayer.destroy();
-        this.countryLineLayer = null;
-        this.MovingLayer.destroy();
-        this.MovingLayer = null;
+        this.countryLineLayer.destroy()
+        this.countryLineLayer = null
+        this.MovingLayer.destroy()
+        this.MovingLayer = null
       }
     },
     // 添加图层
     addLayer(datas) {
-      var that = this;
-      var data = [];
-      var timeData = [];
+      var that = this
+      var data = []
+      var timeData = []
 
       function curive(fromPoint, endPoint, n) {
-        var delLng = (endPoint.lng - fromPoint.lng) / n;
-        var delLat = (endPoint.lat - fromPoint.lat) / n;
+        var delLng = (endPoint.lng - fromPoint.lng) / n
+        var delLat = (endPoint.lat - fromPoint.lat) / n
 
         for (var i = 0; i < n; i++) {
-          var pointNLng = fromPoint.lng + delLng * i;
-          var pointNLat = fromPoint.lat + delLat * i;
+          var pointNLng = fromPoint.lng + delLng * i
+          var pointNLat = fromPoint.lat + delLat * i
           timeData.push({
             geometry: {
-              type: "Point",
-              coordinates: [pointNLng, pointNLat],
+              type: 'Point',
+              coordinates: [pointNLng, pointNLat]
             },
             count: 1,
-            time: i,
-          });
+            time: i
+          })
         }
       }
       for (let index = 0; index < datas.length; index++) {
-        const element = datas[index];
-        const cityCenter1 = { lng: element.拐出经度, lat: element.拐出纬度 };
-        const cityCenter2 = { lng: element.拐入经度, lat: element.拐入纬度 };
+        const element = datas[index]
+        const cityCenter1 = { lng: element.拐出经度, lat: element.拐出纬度 }
+        const cityCenter2 = { lng: element.拐入经度, lat: element.拐入纬度 }
         if (Math.random() > 0.7) {
-          curive(cityCenter2, cityCenter1, 50);
+          curive(cityCenter2, cityCenter1, 50)
         }
         data.push({
           geometry: {
-            type: "LineString",
+            type: 'LineString',
             coordinates: [
               [cityCenter1.lng, cityCenter1.lat],
-              [cityCenter2.lng, cityCenter2.lat],
-            ],
+              [cityCenter2.lng, cityCenter2.lat]
+            ]
           },
-          count: element.数量,
-        });
+          count: element.数量
+        })
       }
       if (that.countryLineLayer === null) {
-        var lineData = new mapv.DataSet(data);
+        var lineData = new mapv.DataSet(data)
         var options = {
           methods: {
-            click: function (item) {},
+            click: function(item) { }
           },
-          context: "2d",
+          context: '2d',
           gradient: {
-            0.1: "#0022c8",
-            0.2: "#2b1ca7",
-            0.3: "#551785",
-            0.4: "#801164",
-            0.5: "#aa0b43",
-            0.6: "#d50621",
-            0.7: "#ff0000",
-            0.8: "#ff3900",
-            0.9: "#ff7100",
-            1.0: "#ffaa00",
+            0.1: '#0022c8', 0.2: '#2b1ca7', 0.3: '#551785', 0.4: '#801164', 0.5: '#aa0b43', 0.6: '#d50621', 0.7: '#ff0000', 0.8: '#ff3900', 0.9: '#ff7100', 1.0: '#ffaa00'
           },
           lineWidth: 0.5,
           // max: 5,
-          draw: "intensity",
-        };
-        that.countryLineLayer = new CesiumZondy.Overlayer.MapvLayer(
-          that.map,
-          lineData,
-          options
-        );
-        var MovingData = new mapv.DataSet(timeData);
+          draw: 'intensity'
+        }
+        that.countryLineLayer = new CesiumZondy.Overlayer.MapvLayer(that.map, lineData, options)
+        var MovingData = new mapv.DataSet(timeData)
         var options1 = {
-          context: "2d", // cesium必须设置画布为2d
-          fillStyle: "rgba(255, 250, 250, 0.9)",
+          context: '2d', // cesium必须设置画布为2d
+          fillStyle: 'rgba(255, 250, 250, 0.9)',
           size: 0.5,
           animation: {
-            type: "time",
+            type: 'time',
             stepsRange: {
               start: 0,
-              end: 50,
+              end: 50
             },
             trails: 1,
-            duration: 5,
+            duration: 5
           },
-          draw: "simple",
-        };
-        that.MovingLayer = new CesiumZondy.Overlayer.MapvLayer(
-          that.map,
-          MovingData,
-          options1
-        );
+          draw: 'simple'
+        }
+        that.MovingLayer = new CesiumZondy.Overlayer.MapvLayer(that.map, MovingData, options1)
       }
     },
     // 省市拐卖线路
     addcurveLayer(datas) {
-      var that = this;
-      var qianxi = new mapv.DataSet(datas);
-      var qianxiData = qianxi.get();
-      var lineData = [];
-      var pointData = [];
-      var textData = [];
-      var timeData = [];
-      var citys = {};
+      var that = this
+      var qianxi = new mapv.DataSet(datas)
+      var qianxiData = qianxi.get()
+      var lineData = []
+      var pointData = []
+      var textData = []
+      var timeData = []
+      var citys = {}
       for (let i = 0; i < qianxiData.length; i++) {
-        var fromCenter = qianxiData[i].fromCenter;
-        var toCenter = qianxiData[i].toCenter;
+        var fromCenter = qianxiData[i].fromCenter
+        var toCenter = qianxiData[i].toCenter
         if (!fromCenter || !toCenter) {
-          continue;
+          continue
         }
-        citys[qianxiData[i].from] = qianxiData[i].count;
-        citys[qianxiData[i].to] = 100;
+        citys[qianxiData[i].from] = qianxiData[i].count
+        citys[qianxiData[i].to] = 100
         pointData.push({
           geometry: {
-            type: "Point",
-            coordinates: [fromCenter.lng, fromCenter.lat],
-          },
-        });
+            type: 'Point',
+            coordinates: [fromCenter.lng, fromCenter.lat]
+          }
+        })
         pointData.push({
           geometry: {
-            type: "Point",
-            coordinates: [toCenter.lng, toCenter.lat],
-          },
-        });
+            type: 'Point',
+            coordinates: [toCenter.lng, toCenter.lat]
+          }
+        })
         textData.push({
           geometry: {
-            type: "Point",
-            coordinates: [fromCenter.lng, fromCenter.lat],
+            type: 'Point',
+            coordinates: [fromCenter.lng, fromCenter.lat]
           },
-          text: qianxiData[i].from,
-        });
+          text: qianxiData[i].from
+        })
         textData.push({
           geometry: {
-            type: "Point",
-            coordinates: [toCenter.lng, toCenter.lat],
+            type: 'Point',
+            coordinates: [toCenter.lng, toCenter.lat]
           },
-          text: qianxiData[i].to,
-        });
+          text: qianxiData[i].to
+        })
 
-        var curve = mapv.utilCurve.getPoints([fromCenter, toCenter]);
+        var curve = mapv.utilCurve.getPoints([fromCenter, toCenter])
         for (let j = 0; j < curve.length; j++) {
           timeData.push({
             geometry: {
-              type: "Point",
-              coordinates: curve[j],
+              type: 'Point',
+              coordinates: curve[j]
             },
             count: 1,
-            time: j,
-          });
+            time: j
+          })
         }
         lineData.push({
           geometry: {
-            type: "LineString",
-            coordinates: curve,
+            type: 'LineString',
+            coordinates: curve
             // coordinates: [[fromCenter.lng, fromCenter.lat], [toCenter.lng, toCenter.lat]]
           },
-          count: 30 * Math.random(),
-        });
+          count: 30 * Math.random()
+        })
       }
       if (that.textDataSet === null) {
-        that.textDataSet = new mapv.DataSet(textData);
+        that.textDataSet = new mapv.DataSet(textData)
         var textOptions = {
-          context: "2d",
-          draw: "text",
-          font: "14px Arial",
-          fillStyle: "white",
-          shadowColor: "yellow",
+          context: '2d',
+          draw: 'text',
+          font: '14px Arial',
+          fillStyle: 'white',
+          shadowColor: 'yellow',
           shadowBlue: 10,
           zIndex: 11,
-          shadowBlur: 10,
-        };
-        new CesiumZondy.Overlayer.MapvLayer(
-          that.map,
-          that.textDataSet,
-          textOptions
-        );
-        that.lineDataSet = new mapv.DataSet(lineData);
+          shadowBlur: 10
+        }
+        new CesiumZondy.Overlayer.MapvLayer(that.map, that.textDataSet, textOptions)
+        that.lineDataSet = new mapv.DataSet(lineData)
         var lineOptions = {
-          context: "2d",
-          strokeStyle: "rgba(50,149,206)",
-          shadowColor: "rgba(50,149,206)",
+          context: '2d',
+          strokeStyle: 'rgba(255, 250, 50, 0.8)',
+          shadowColor: 'rgba(255, 250, 50, 1)',
           shadowBlur: 20,
           lineWidth: 2,
           zIndex: 100,
-          draw: "simple",
-        };
-        new CesiumZondy.Overlayer.MapvLayer(
-          that.map,
-          that.lineDataSet,
-          lineOptions
-        );
+          draw: 'simple'
+        }
+        new CesiumZondy.Overlayer.MapvLayer(that.map, that.lineDataSet, lineOptions)
         var pointOptions = {
-          context: "2d",
-          fillStyle: "rgba(50,149,206)",
-          shadowColor: "rgba(50,149,206)",
+          context: '2d',
+          fillStyle: 'rgba(254,175,3,0.7)',
+          shadowColor: 'rgba(55, 50, 250, 0.5)',
           shadowBlur: 10,
           size: 5,
           zIndex: 10,
-          draw: "simple",
-        };
-        that.pointDataSet = new mapv.DataSet(pointData);
-        new CesiumZondy.Overlayer.MapvLayer(
-          that.map,
-          that.pointDataSet,
-          pointOptions
-        );
-        that.timeDataSet = new mapv.DataSet(timeData);
+          draw: 'simple'
+        }
+        that.pointDataSet = new mapv.DataSet(pointData)
+        new CesiumZondy.Overlayer.MapvLayer(that.map, that.pointDataSet, pointOptions)
+        that.timeDataSet = new mapv.DataSet(timeData)
         var timeOptions = {
-          context: "2d",
-          fillStyle: "rgba(255, 250, 250, 0.5)",
+          context: '2d',
+          fillStyle: 'rgba(255, 250, 250, 0.5)',
           zIndex: 200,
           size: 2.5,
           animation: {
-            type: "time",
+            type: 'time',
             stepsRange: {
               start: 0,
-              end: 50,
+              end: 50
             },
             trails: 10,
-            duration: 2,
+            duration: 2
           },
-          draw: "simple",
-        };
-        new CesiumZondy.Overlayer.MapvLayer(
-          that.map,
-          that.timeDataSet,
-          timeOptions
-        );
+          draw: 'simple'
+        }
+        new CesiumZondy.Overlayer.MapvLayer(that.map, that.timeDataSet, timeOptions)
       } else {
-        that.timeDataSet.set(timeData);
-        that.textDataSet.set(textData);
-        that.lineDataSet.set(lineData);
-        that.pointDataSet.set(pointData);
+        that.timeDataSet.set(timeData)
+        that.textDataSet.set(textData)
+        that.lineDataSet.set(lineData)
+        that.pointDataSet.set(pointData)
       }
     },
-    echartsRight(datas, e) {},
-  },
-};
+    echartsRight(datas, e) {
+    }
+  }
+}
 </script>
 <style scoped>
 #network {
@@ -573,9 +491,9 @@ export default {
 #network .type {
   position: absolute;
   z-index: 10;
-  top: 58px;
+  top: 55px;
   width: 180px;
-  right: 387px;
+  right: 310px;
   font-family: KuHei;
   font-size: 14px;
 }
@@ -612,10 +530,9 @@ export default {
 /* 左侧数量 */
 #network #Number {
   position: absolute;
-  /* float: right; */
-  right: 376px;
-  top: 102px;
-  color: #fff;
+  left: 45px;
+  top: 5px;
+  color: rgb(180, 180, 180);
   width: 200px;
   height: 480px;
   text-align: center;
@@ -668,19 +585,17 @@ export default {
   right: 5px;
   z-index: 1;
   padding: 5px;
-  /* background-color: rgba(40, 43, 57, 0.1); */
-  /* border: 2px solid rgba(25, 186, 139, 0.2); */
-  width: calc(100% - 5px);
-  height: 220px;
+  background-color: rgba(40, 43, 57, 0.1);
+  border: 2px solid rgba(25, 186, 139, 0.2);
+  width: 300px;
+  height: calc(100% - 5px);
   color: #fff;
   font-family: KuHei;
   font-size: 14px;
-  /* border-radius: 2px; */
-  background: url("./public/img/ptbg.png") no-repeat center center;
-  background-size: 100% 100%;
-  filter: drop-shadow(0 0 0 rgb(25, 23, 23));
+  border-radius: 2px;
+  background: url("./public/img/bg.png") rgba(18, 18, 18, 0.4);
 }
-/* #network #right ::after,
+#network #right ::after,
 #network #monitor .left ::after,
 #network #monitor .mid ::after,
 #network #monitor .right ::after
@@ -712,7 +627,7 @@ export default {
   border-left: 2px solid #02a6b5;
   transition: all 1.5s;
   z-index: 0;
-} */
+}
 /* 下方 */
 /* 监测 */
 #network #monitor {
@@ -722,52 +637,41 @@ export default {
   bottom: 5px;
   height: 30%;
   font-family: KuHei;
-  /* background: url("./public/img/ptbg.png") no-repeat center center rgba(18, 18, 18, 0.4); */
   /* border: 1px solid rgba(25, 186, 139, 0.2); */
   /* background: url("./public/img/bg.png") rgba(255, 255, 255, 0.1); */
   /* background: url("./public/img/bg.png") rgba(18, 18, 18, 0.4); */
 }
-#network #monitor .left {
+#network #monitor .left{
   position: absolute;
-  width: 400px;
+  width: calc(20% - 2px);
   left: 0px;
-  bottom: 228%;
-  /* top: 50px; */
-  height: 205px;
+  bottom: 0px;
+  height: 100%;
   font-family: KuHei;
-  /* border: 1px solid rgba(25, 186, 139, 0.2); */
+  border: 1px solid rgba(25, 186, 139, 0.2);
   /* background: url("./public/img/bg.png") rgba(255, 255, 255, 0.1); */
-  background: url("./public/img/ptbg.png") no-repeat center center;
-  background-size: 100% 100%;
-  filter: drop-shadow(0 0 0 rgb(25, 23, 23));
+  background: url("./public/img/bg.png") rgba(18, 18, 18, 0.4);
 }
-#network #monitor .mid {
+#network #monitor .mid{
   position: absolute;
-  width: 400px;
-  /* left: calc(20% + 1px); */
-  left: 0px;
-  bottom: 124%;
-  /* top: 300px; */
-  height: 205px;
+  width: calc(20% - 2px);
+  left: calc(20% + 1px);
+  bottom: 0px;
+  height: 100%;
   font-family: KuHei;
-  /* border: 1px solid rgba(25, 186, 139, 0.2); */
+  border: 1px solid rgba(25, 186, 139, 0.2);
   /* background: url("./public/img/bg.png") rgba(255, 255, 255, 0.1); */
-  background: url("./public/img/ptbg.png") no-repeat center center;
-  background-size: 100% 100%;
-  filter: drop-shadow(0 0 0 rgb(25, 23, 23));
+  background: url("./public/img/bg.png") rgba(18, 18, 18, 0.4);
 }
-#network #monitor .right {
+#network #monitor .right{
   position: absolute;
-  width: 350px;
-  /* right: 0px; */
-  left: 1170px;
-  bottom: 115%;
-  height: 430px;
+  width: calc(60% - 2px);
+  right: 0;
+  bottom: 0px;
+  height: 100%;
   font-family: KuHei;
-  /* border: 1px solid rgba(25, 186, 139, 0.2); */
+  border: 1px solid rgba(25, 186, 139, 0.2);
   /* background: url("./public/img/bg.png") rgba(255, 255, 255, 0.1); */
-  background: url("./public/img/ptbg.png") no-repeat center center;
-  background-size: 100% 100%;
-  filter: drop-shadow(0 0 0 rgb(25, 23, 23));
+  background: url("./public/img/bg.png") rgba(18, 18, 18, 0.4);
 }
 </style>

@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>CesiumOgcWmtsLayer | 中地数码</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+    <script src="http://localhost:8081/static/libs/cdn/zondyclient/webclient-cesium-plugin.min.js"></script>
+    <meta name="description" content="@mapgis/webclient-vue-cesium">
+    
+    <link rel="preload" href="/assets/css/0.styles.a82920c8.css" as="style"><link rel="preload" href="/assets/js/app.7d9c90ad.js" as="script"><link rel="preload" href="/assets/js/3.d52de99d.js" as="script"><link rel="preload" href="/assets/js/28.c59d4789.js" as="script"><link rel="prefetch" href="/assets/js/10.5cd57f91.js"><link rel="prefetch" href="/assets/js/11.5db4d4a8.js"><link rel="prefetch" href="/assets/js/12.0df2d7a0.js"><link rel="prefetch" href="/assets/js/13.a3058117.js"><link rel="prefetch" href="/assets/js/14.1f45a011.js"><link rel="prefetch" href="/assets/js/15.f07d1d15.js"><link rel="prefetch" href="/assets/js/16.1366301e.js"><link rel="prefetch" href="/assets/js/17.d30d9e77.js"><link rel="prefetch" href="/assets/js/18.e6dd61fe.js"><link rel="prefetch" href="/assets/js/19.38765f57.js"><link rel="prefetch" href="/assets/js/20.4fb0a652.js"><link rel="prefetch" href="/assets/js/21.dd3a8b0c.js"><link rel="prefetch" href="/assets/js/22.c08cc5e6.js"><link rel="prefetch" href="/assets/js/23.c2642bf7.js"><link rel="prefetch" href="/assets/js/24.04df662e.js"><link rel="prefetch" href="/assets/js/25.aa582ea8.js"><link rel="prefetch" href="/assets/js/26.30ddeb25.js"><link rel="prefetch" href="/assets/js/27.a8fbea9a.js"><link rel="prefetch" href="/assets/js/29.1f66d0a5.js"><link rel="prefetch" href="/assets/js/30.c1bc872b.js"><link rel="prefetch" href="/assets/js/31.538afecf.js"><link rel="prefetch" href="/assets/js/32.4b41496c.js"><link rel="prefetch" href="/assets/js/33.a7f98e74.js"><link rel="prefetch" href="/assets/js/34.ff9c27e5.js"><link rel="prefetch" href="/assets/js/35.c852a351.js"><link rel="prefetch" href="/assets/js/36.952a8a68.js"><link rel="prefetch" href="/assets/js/37.a956f2d7.js"><link rel="prefetch" href="/assets/js/38.b3928fe8.js"><link rel="prefetch" href="/assets/js/39.c666de9b.js"><link rel="prefetch" href="/assets/js/4.18732dcc.js"><link rel="prefetch" href="/assets/js/40.b1f8d19b.js"><link rel="prefetch" href="/assets/js/5.9daa09d1.js"><link rel="prefetch" href="/assets/js/6.c702af68.js"><link rel="prefetch" href="/assets/js/7.f2a35a7a.js"><link rel="prefetch" href="/assets/js/8.e45192f4.js"><link rel="prefetch" href="/assets/js/9.d570e5c8.js"><link rel="prefetch" href="/assets/js/vendors~docsearch.21f21cd2.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.a82920c8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">中地数码</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/guide/" class="nav-link">
+  向导
+</a></div><div class="nav-item"><a href="/api/" class="nav-link router-link-active">
+  API
+</a></div><div class="nav-item"><a href="http://develop.smaryun.com" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  WebClient
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="https://github.com/MapGIS/WebClient-Vue" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  开源
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/guide/" class="nav-link">
+  向导
+</a></div><div class="nav-item"><a href="/api/" class="nav-link router-link-active">
+  API
+</a></div><div class="nav-item"><a href="http://develop.smaryun.com" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  WebClient
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="https://github.com/MapGIS/WebClient-Vue" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  开源
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>指南</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/guide/" class="sidebar-link">快速上手</a></li><li><a href="/guide/basemap.html" class="sidebar-link">基础地图</a></li><li><a href="/guide/wms&amp;map&amp;doc.html" class="sidebar-link">子图层控制</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>API</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/api/" aria-current="page" class="sidebar-link">地图场景</a></li><li><a href="/api/datasource/geojson.html" class="sidebar-link">GeoJSON</a></li><li><a href="/api/layer/IGServer/IgsVectorLayer.html" class="sidebar-link">IGS-二维矢量</a></li><li><a href="/api/layer/IGServer/IgsDocLayer.html" class="sidebar-link">IGS-Doc</a></li><li><a href="/api/layer/IGServer/IgsTileLayer.html" class="sidebar-link">IGS-Tile</a></li><li><a href="/api/layer/ArcGISServer/ArcGISMapLayer.html" class="sidebar-link">ArcGIS-Map</a></li><li><a href="/api/layer/ArcGISServer/ArcGISTileLayer.html" class="sidebar-link">ArcGIS-Tile</a></li><li><a href="/api/layer/OGC/CesiumOgcWmsLayer.html" class="sidebar-link">WMS</a></li><li><a href="/api/layer/OGC/CesiumOgcWmtsLayer.html" aria-current="page" class="active sidebar-link">WMTS</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/api/layer/OGC/CesiumOgcWmtsLayer.html#属性" class="sidebar-link">属性</a></li><li class="sidebar-sub-header"><a href="/api/layer/OGC/CesiumOgcWmtsLayer.html#事件" class="sidebar-link">事件</a></li><li class="sidebar-sub-header"><a href="/api/layer/OGC/CesiumOgcWmtsLayer.html#示例" class="sidebar-link">示例</a></li></ul></li><li><a href="/api/layer/vectortile/vectortile.html" class="sidebar-link">矢量瓦片</a></li><li><a href="/api/m3d/m3d.html" class="sidebar-link">M3D</a></li><li><a href="/api/analysis/Viewshed.html" class="sidebar-link">可视域分析</a></li><li><a href="/api/analysis/Sightline.html" class="sidebar-link">通视分析</a></li><li><a href="/api/analysis/Flood.html" class="sidebar-link">洪水淹没分析</a></li><li><a href="/api/ui/popup.html" class="sidebar-link">气泡</a></li><li><a href="/api/ui/compare.html" class="sidebar-link">卷帘</a></li><li><a href="/api/ui/link.html" class="sidebar-link">多屏联动</a></li><li><a href="/api/ui/legend.html" class="sidebar-link">图例</a></li><li><a href="/api/ui/table.html" class="sidebar-link">表格</a></li><li><a href="/api/ui/draw.html" class="sidebar-link">绘制</a></li><li><a href="/api/ui/measure.html" class="sidebar-link">量算</a></li><li><a href="/api/Overlay/Echarts.html" class="sidebar-link">Echarts</a></li><li><a href="/api/Overlay/Mapv.html" class="sidebar-link">MapV</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>组件开发</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/plugin_components/" class="sidebar-link">使用组件</a></li><li><a href="/plugin_components/plugin_components_development.html" class="sidebar-link">创建组件</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>版本</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/version/diff.html" class="sidebar-link">版本对比</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="cesiumogcwmtslayer"><a href="#cesiumogcwmtslayer" class="header-anchor">#</a> CesiumOgcWmtsLayer</h1> <h2 id="属性"><a href="#属性" class="header-anchor">#</a> 属性</h2> <h3 id="baseurl"><a href="#baseurl" class="header-anchor">#</a> <code>baseUrl</code></h3> <ul><li><strong>类型:</strong> <code>String</code></li> <li><strong>必传</strong></li> <li><strong>非侦听属性</strong></li> <li><strong>描述:</strong> 服务基地址
+<blockquote><p>igs 服务：
+http://{ip}:{port}/igs/rest/ogc/WMTSServer <br>
+arcgis 服务：
+http://219.142.81.85/arcgis/rest/services/20wanHT/MapServer/WMTS <br>
+天地图：
+http://t0.tianditu.gov.cn/vec_c/wmts</p></blockquote></li></ul> <h3 id="wmtslayer"><a href="#wmtslayer" class="header-anchor">#</a> <code>wmtsLayer</code></h3> <ul><li><strong>类型:</strong> <code>String</code></li> <li><strong>必传</strong></li> <li><strong>侦听属性</strong></li> <li><strong>描述:</strong> wmts 标准中的 layer 属性，即图层名称
+<blockquote><p>这里以司马云上发布的 WMTS 服务为例，ArcGis 同理，访问http://develop.smaryun.com:6163/igs/rest/ogc/beijing/WMTSServer?service=WMTS&amp;request=GetCapabilities，获取地图元信息
+这里得到的是一个 XML 文档。<br>
+... <br>
+&lt;Layer&gt; <br>
+&lt;ows:Title&gt;beijing&lt;/ows:Title&gt; <br>
+&lt;ows:Identifier&gt;beijing&lt;/ows:Identifier&gt;//这个值 beijing 就是 wmtsLayer 属性所需要的值 <br>
+... <br>
+&lt;/Layer&gt; <br>
+... <br>
+全文搜索&lt;Layer&gt;关键字，在 Layer 下找到&lt;ows:Identifier&gt;属性，里面的值&quot;beijing&quot;就是 wmtsLayer 属性所需要的</p></blockquote></li></ul> <h3 id="tilematrixset"><a href="#tilematrixset" class="header-anchor">#</a> <code>tileMatrixSet</code></h3> <ul><li><strong>类型:</strong> <code>String</code></li> <li><strong>必传</strong></li> <li><strong>侦听属性</strong></li> <li><strong>描述:</strong> wmts 标准中的 TileMatrixSet 属性，即地图矩阵集合
+<blockquote><p>这里以司马云上发布的 WMTS 服务为例，ArcGis 同理，访问http://develop.smaryun.com:6163/igs/rest/ogc/beijing/WMTSServer?service=WMTS&amp;request=GetCapabilities，获取地图元信息
+这里得到的是一个 XML 文档。<br>
+... <br>
+&lt;TileMatrixSet&gt; <br>
+&lt;ows:Title&gt;采用 arcgis 计算方式的瓦片块阵集&lt;/ows:Title&gt; <br>
+&lt;ows:Abstract&gt;该块阵集使用 arcgis 标准计算的比例尺&lt;/ows:Abstract&gt; <br>
+&lt;ows:Identifier&gt;EPSG:4326<em>北京市_arcgis_GB&lt;/ows:Identifier&gt;//这个值 EPSG:4326</em>北京市<em>arcgis_GB 就是 TileMatrixSet 属性所需要的值 <br>
+&lt;ows:SupportedCRS&gt;urn:ogc:def:crs:EPSG::4326&lt;/ows:SupportedCRS&gt; <br>
+&lt;WellKnownScaleSet&gt;urn:ogc:def:wkss:OGC:1.0:GoogleCRS84Quad&lt;/WellKnownScaleSet&gt; <br>
+... <br>
+&lt;TileMatrixSet&gt; <br>
+... <br>
+全文搜索&lt;TileMatrixSet&gt;关键字，在&lt;TileMatrixSet&gt;下找到&lt;ows:Identifier&gt;属性，里面的值&quot;EPSG:4326</em>北京市_arcgis_GB&quot;就是 tileMatrixSet 属性所需要的</p></blockquote></li></ul> <h3 id="format"><a href="#format" class="header-anchor">#</a> <code>format</code></h3> <ul><li><strong>类型:</strong> <code>String</code></li> <li><strong>必传</strong></li> <li><strong>非侦听属性</strong></li> <li><strong>描述:</strong> wmts 标准中的 format 属性，即请求的图片的返回格式
+<blockquote><p>这里以司马云上发布的 WMTS 服务为例，ArcGis 同理，访问http://develop.smaryun.com:6163/igs/rest/ogc/beijing/WMTSServer?service=WMTS&amp;request=GetCapabilities，获取地图元信息
+这里得到的是一个 XML 文档。 <br>
+... <br>
+&lt;Format&gt;image/png&lt;/Format&gt; <br>
+... <br>
+全文搜索&lt;Format&gt;关键字，里面的值&quot;image/png&quot;就是 format 属性所需要的</p></blockquote></li></ul> <h3 id="tilingscheme"><a href="#tilingscheme" class="header-anchor">#</a> <code>tilingScheme</code></h3> <ul><li><strong>类型:</strong> <code>String</code></li> <li><strong>必传</strong></li> <li><strong>侦听属性</strong></li> <li><strong>描述:</strong> Cesium 的瓦片切图方式，目前支持如下值：
+<blockquote><p>经纬度方式请填写:EPSG:4326 <br>
+web 墨卡托方式请填写:EPSG:3857</p></blockquote></li></ul> <h3 id="wmtsstyle"><a href="#wmtsstyle" class="header-anchor">#</a> <code>wmtsStyle</code></h3> <ul><li><strong>类型:</strong> <code>String</code></li> <li><strong>默认值:</strong> <code>default</code></li> <li><strong>必传</strong></li> <li><strong>侦听属性</strong></li> <li><strong>描述:</strong> wmts 标准中的 style 属性，即地图样式
+<blockquote><p>这里以司马云上发布的 WMTS 服务为例，ArcGis 同理，访问http://develop.smaryun.com:6163/igs/rest/ogc/beijing/WMTSServer?service=WMTS&amp;request=GetCapabilities，获取地图元信息
+这里得到的是一个 XML 文档。 <br>
+... <br>
+&lt;Style isDefault=&quot;true&quot;&gt; <br>
+&lt;ows:Title&gt;Default Style&lt;/ows:Title&gt; <br>
+&lt;ows:Identifier&gt;default&lt;/ows:Identifier&gt;//里面的&quot;default&quot;就是 wmtsStyle 的值 <br>
+&lt;/Style&gt; <br>
+... <br>
+全文搜索 Style 关键字，地图可以有多个 style，这里以 default，默认值为例，在&lt;Style isDefault=&quot;true&quot;&gt;下找到&lt;ows:Identifier&gt;属性，里面的&quot;default&quot;就是 wmtsStyle 的值</p></blockquote></li></ul> <h3 id="layerstyle"><a href="#layerstyle" class="header-anchor">#</a> <code>layerStyle</code></h3> <ul><li><strong>类型:</strong> <code>Object</code></li> <li><strong>可选</strong></li> <li><strong>侦听属性</strong></li> <li><strong>描述:</strong> 控制地图的显隐、透明度以及顺序，有如下值：
+<blockquote><p>visible Boolean 控制图层显示或隐藏，不会重新加载图层，true：显示图层、fales：隐藏图层 <br>
+opacity Number 控制图层透明度，会重新加载图层，0 - 1 之间的数字，0：隐藏，1：显示 <br>
+zIndex Number 控制图层顺序，会重新加载图层，类似 css 里面的 z-index，从 1 开始的数字 <br></p></blockquote></li></ul> <h3 id="id"><a href="#id" class="header-anchor">#</a> <code>id</code></h3> <ul><li><strong>类型:</strong> <code>String</code></li> <li><strong>可选</strong></li> <li><strong>侦听属性</strong></li> <li><strong>描述:</strong> 图层唯一标识符，如果不传，以 vueIndex 代替</li></ul> <h3 id="options"><a href="#options" class="header-anchor">#</a> <code>options</code></h3> <ul><li><strong>类型:</strong> <code>Object</code></li> <li><strong>可选</strong></li> <li><strong>侦听属性</strong></li> <li><strong>描述:</strong> Cesium 的进阶参数，另外不属于 cesium 的如下参数也在 options 中：
+<blockquote><p>vueKey String 默认值 default 该 key 的主要作用市用来记录 Cesium 的 Source,primitive, entity 的内存中的引用数组的引用，从而避免 vue 对 cesium 的内存劫持 <br>
+vueIndex String 默认值(Math.random() * 100000000).toFixed(0) 该 key 的主要作用市用来记录 Cesium 的 Source,primitive, entity 的内存中的引用数组的引用，从而避免 vue 对 cesium 的内存劫持</p></blockquote></li> <li><strong>参考:</strong> <br> <code>Cesium的WMTS参数</code> in <a href="http://develop.smaryun.com:8899/docs/other/mapgis-cesium/WebMapTileServiceImageryProvider.html?classFilter=web" target="_blank" rel="noopener noreferrer">WebMapTileServiceImageryProvider<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul> <h3 id="vuekey"><a href="#vuekey" class="header-anchor">#</a> <code>vueKey</code></h3> <ul><li><strong>类型:</strong> <code>String</code></li> <li><strong>可选</strong></li> <li><strong>非侦听属性</strong></li> <li><strong>默认值:</strong> <code>default</code></li> <li><strong>描述:</strong> <blockquote><p>mapgis-web-scene 组件的 ID，当使用多个 mapgis-web-scene 组件时，需要指定该值，来唯一标识 mapgis-web-scene 组件， <br>
+同时 mapgis-web-scene 插槽中的组件也需要传入相同的 vueKey，让组件知道应该作用于哪一个 mapgis-web-scene。</p></blockquote></li></ul> <h3 id="vueindex"><a href="#vueindex" class="header-anchor">#</a> <code>vueIndex</code></h3> <ul><li><strong>类型:</strong> <code>Number</code></li> <li><strong>可选</strong></li> <li><strong>非侦听属性</strong></li> <li><strong>描述:</strong> <blockquote><p>当 mapgis-web-scene 插槽中使用了多个相同组件时，例如多个 mapgis-3d-igs-doc-layer 组件，用来区分组件的标识符。</p></blockquote></li></ul> <h3 id="token"><a href="#token" class="header-anchor">#</a> <code>token</code></h3> <ul><li><strong>类型:</strong> <code>Object</code></li> <li><strong>可选</strong></li> <li><strong>非侦听属性</strong></li> <li><strong>描述:</strong> token 信息
+<blockquote><p>要传 token 时，请以如下方式传递 <br>
+天地图: <br>
+token:{ <br>
+key: &quot;tk&quot;, <br>
+value: &quot;9c157e9585486c02edf817d2ecbc7752&quot; <br>
+} <br>
+igs 以及其他: <br>
+token:{ <br>
+key: &quot;token&quot;, <br>
+value: &quot;9c157e9585486c02edf817d2ecbc7752&quot; <br>
+}</p></blockquote></li></ul> <h2 id="事件"><a href="#事件" class="header-anchor">#</a> 事件</h2> <h3 id="load"><a href="#load" class="header-anchor">#</a> <code>@load</code></h3> <ul><li><strong>描述:</strong> 图层加载完成事件</li> <li><strong>返回值</strong> <code>{ layer,vue }</code> <br> <code>layer</code> 图层对象 <br> <code>vue</code> vue 对象 <br></li></ul> <h3 id="unload"><a href="#unload" class="header-anchor">#</a> <code>@unload</code></h3> <ul><li><strong>描述:</strong> 图层注销事件</li> <li><strong>返回值</strong> <code>{ vue }</code> <br> <code>vue</code> vue 对象 <br></li></ul> <h2 id="示例"><a href="#示例" class="header-anchor">#</a> 示例</h2> <h3 id="加载-wmts-地图-igs-4326"><a href="#加载-wmts-地图-igs-4326" class="header-anchor">#</a> 加载 WMTS 地图 - IGS - 4326</h3> <div class="language-vue extra-class"><pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mapgis-web-scene</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mapgis-3d-ogc-wmts-layer</span>
+      <span class="token attr-name">:baseUrl</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>baseUrl<span class="token punctuation">&quot;</span></span>
+      <span class="token attr-name">:wmtsLayer</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wmtsLayer<span class="token punctuation">&quot;</span></span>
+      <span class="token attr-name">:tileMatrixSet</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>tileMatrixSet<span class="token punctuation">&quot;</span></span>
+      <span class="token attr-name">:tilingScheme</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>tilingScheme<span class="token punctuation">&quot;</span></span>
+      <span class="token attr-name">:format</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>format<span class="token punctuation">&quot;</span></span>
+    <span class="token punctuation">/&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>mapgis-web-scene</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  <span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span>
+      <span class="token comment">//服务基地址</span>
+      baseUrl<span class="token operator">:</span>
+        <span class="token string">&quot;http://develop.smaryun.com:6163/igs/rest/ogc/beijing/WMTSServer&quot;</span><span class="token punctuation">,</span>
+      <span class="token comment">//图层名称</span>
+      wmtsLayer<span class="token operator">:</span> <span class="token string">&quot;beijing&quot;</span><span class="token punctuation">,</span>
+      <span class="token comment">//地图的瓦片矩阵集合</span>
+      tileMatrixSet<span class="token operator">:</span> <span class="token string">&quot;EPSG:4326_北京市_028mm_GB&quot;</span><span class="token punctuation">,</span>
+      <span class="token comment">//Cesium的瓦片切图方式</span>
+      tilingScheme<span class="token operator">:</span> <span class="token string">&quot;EPSG:4326&quot;</span><span class="token punctuation">,</span>
+      <span class="token comment">//返回格式</span>
+      format<span class="token operator">:</span> <span class="token string">&quot;image/png&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>css<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token style"><span class="token language-css">
+<span class="token selector">.main</span> <span class="token punctuation">{</span>
+  <span class="token property">height</span><span class="token punctuation">:</span> 600px<span class="token punctuation">;</span>
+  <span class="token property">width</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><h3 id="加载-wmts-地图-arcgis-3857"><a href="#加载-wmts-地图-arcgis-3857" class="header-anchor">#</a> 加载 WMTS 地图 - ArcGis - 3857</h3> <div class="language-vue extra-class"><pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mapgis-web-scene</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mapgis-3d-ogc-wmts-layer</span>
+      <span class="token attr-name">:baseUrl</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>baseUrl<span class="token punctuation">&quot;</span></span>
+      <span class="token attr-name">:wmtsLayer</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wmtsLayer<span class="token punctuation">&quot;</span></span>
+      <span class="token attr-name">:tileMatrixSet</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>tileMatrixSet<span class="token punctuation">&quot;</span></span>
+      <span class="token attr-name">:tilingScheme</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>tilingScheme<span class="token punctuation">&quot;</span></span>
+      <span class="token attr-name">:format</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>format<span class="token punctuation">&quot;</span></span>
+    <span class="token punctuation">/&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>mapgis-web-scene</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  <span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span>
+      <span class="token comment">//服务基地址</span>
+      baseUrl<span class="token operator">:</span>
+        <span class="token string">&quot;http://219.142.81.85/arcgis/rest/services/矿产地数据库2019/ferrous_metal/MapServer/WMTS&quot;</span><span class="token punctuation">,</span>
+      <span class="token comment">//图层名称</span>
+      wmtsLayer<span class="token operator">:</span> <span class="token string">&quot;矿产地数据库2019_ferrous_metal&quot;</span><span class="token punctuation">,</span>
+      <span class="token comment">//地图的瓦片矩阵集合</span>
+      tileMatrixSet<span class="token operator">:</span> <span class="token string">&quot;default028mm&quot;</span><span class="token punctuation">,</span>
+      <span class="token comment">//Cesium的瓦片切图方式</span>
+      tilingScheme<span class="token operator">:</span> <span class="token string">&quot;EPSG:4326&quot;</span><span class="token punctuation">,</span>
+      <span class="token comment">//返回格式</span>
+      format<span class="token operator">:</span> <span class="token string">&quot;image/png&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>css<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token style"><span class="token language-css">
+<span class="token selector">.main</span> <span class="token punctuation">{</span>
+  <span class="token property">height</span><span class="token punctuation">:</span> 600px<span class="token punctuation">;</span>
+  <span class="token property">width</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><h3 id="控制可见性-控制透明度-以及改变图层顺序"><a href="#控制可见性-控制透明度-以及改变图层顺序" class="header-anchor">#</a> 控制可见性，控制透明度，以及改变图层顺序</h3> <div class="language-vue extra-class"><pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mapgis-web-scene</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mapgis-3d-ogc-wmts-layer</span>
+      <span class="token attr-name">:baseUrl</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>baseUrl<span class="token punctuation">&quot;</span></span>
+      <span class="token attr-name">:wmtsLayer</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wmtsLayer<span class="token punctuation">&quot;</span></span>
+      <span class="token attr-name">:tileMatrixSet</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>tileMatrixSet<span class="token punctuation">&quot;</span></span>
+      <span class="token attr-name">:tilingScheme</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>tilingScheme<span class="token punctuation">&quot;</span></span>
+      <span class="token attr-name">:format</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>format<span class="token punctuation">&quot;</span></span>
+    <span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mapgis-3d-ogc-wmts-layer</span>
+      <span class="token attr-name">:baseUrl</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>baseUrl2<span class="token punctuation">&quot;</span></span>
+      <span class="token attr-name">:wmtsLayer</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wmtsLayer2<span class="token punctuation">&quot;</span></span>
+      <span class="token attr-name">:tileMatrixSet</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>tileMatrixSet2<span class="token punctuation">&quot;</span></span>
+      <span class="token attr-name">:tilingScheme</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>tilingScheme2<span class="token punctuation">&quot;</span></span>
+      <span class="token attr-name">:format</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>format<span class="token punctuation">&quot;</span></span>
+      <span class="token attr-name">:layerStyle</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>layerStyle2<span class="token punctuation">&quot;</span></span>
+    <span class="token punctuation">/&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>mapgis-web-scene</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">@click</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>add<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>添加地图<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">@click</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>isShow<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>是否可见<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">@click</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>changeOpacity<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>改变透明度<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">@click</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>changeIndex<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>改变图层顺序<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  <span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span>
+      <span class="token comment">//服务基地址</span>
+      baseUrl<span class="token operator">:</span>
+        <span class="token string">&quot;http://develop.smaryun.com:6163/igs/rest/ogc/WORLDMKTTILE2/WMTSServer&quot;</span><span class="token punctuation">,</span>
+      <span class="token comment">//图层名称</span>
+      wmtsLayer<span class="token operator">:</span> <span class="token string">&quot;WORLDMKTTILE2&quot;</span><span class="token punctuation">,</span>
+      <span class="token comment">//地图的瓦片矩阵集合</span>
+      tileMatrixSet<span class="token operator">:</span> <span class="token string">&quot;GoogleMapsCompatible_GB&quot;</span><span class="token punctuation">,</span>
+      <span class="token comment">//返回格式</span>
+      format<span class="token operator">:</span> <span class="token string">&quot;image/png&quot;</span><span class="token punctuation">,</span>
+      <span class="token comment">//样式信息</span>
+      layerStyle<span class="token operator">:</span> <span class="token punctuation">{</span>
+        visible<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">//是否显示图层</span>
+        opacity<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token comment">//图层透明度</span>
+        zIndex<span class="token operator">:</span> <span class="token number">105</span> <span class="token comment">//图层zIndex，与css里的zIndex类似</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token comment">//服务基地址</span>
+      baseUrl2<span class="token operator">:</span>
+        <span class="token string">&quot;http://develop.smaryun.com:6163/igs/rest/ogc/beijing/WMTSServer&quot;</span><span class="token punctuation">,</span>
+      <span class="token comment">//图层名称</span>
+      wmtsLayer2<span class="token operator">:</span> <span class="token string">&quot;beijing&quot;</span><span class="token punctuation">,</span>
+      <span class="token comment">//地图的瓦片矩阵集合</span>
+      tileMatrixSet2<span class="token operator">:</span> <span class="token string">&quot;EPSG:4326_北京市_028mm_GB&quot;</span><span class="token punctuation">,</span>
+      <span class="token comment">//Cesium的瓦片切图方式</span>
+      tilingScheme<span class="token operator">:</span> <span class="token string">&quot;EPSG:4326&quot;</span><span class="token punctuation">,</span>
+      <span class="token comment">//样式信息</span>
+      layerStyle2<span class="token operator">:</span> <span class="token punctuation">{</span>
+        zIndex<span class="token operator">:</span> <span class="token number">50</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token comment">//是否显示图层</span>
+      show<span class="token operator">:</span> <span class="token boolean">false</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  methods<span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token function">add</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">//通过v-if方式添加一个地图</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>show <span class="token operator">=</span> <span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span>show<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token function">isShow</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">//地图的显示或隐藏，会重新加载地图</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>layerStyle<span class="token punctuation">.</span>visible <span class="token operator">=</span> <span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span>layerStyle<span class="token punctuation">.</span>visible<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token function">changeOpacity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">//地图的透明度选项，不会重新加载地图</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>layerStyle<span class="token punctuation">.</span>opacity <span class="token operator">=</span> <span class="token number">0.5</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token function">changeIndex</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">//更改地图顺序</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>layerStyle<span class="token punctuation">.</span>zIndex <span class="token operator">===</span> <span class="token number">105</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>layerStyle<span class="token punctuation">.</span>zIndex <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>layerStyle<span class="token punctuation">.</span>zIndex <span class="token operator">=</span> <span class="token number">105</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>css<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token style"><span class="token language-css">
+<span class="token selector">.main</span> <span class="token punctuation">{</span>
+  <span class="token property">height</span><span class="token punctuation">:</span> 600px<span class="token punctuation">;</span>
+  <span class="token property">width</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><h3 id="加载天地图"><a href="#加载天地图" class="header-anchor">#</a> 加载天地图</h3> <div class="language-vue extra-class"><pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mapgis-web-scene</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mapgis-3d-ogc-wmts-layer</span>
+      <span class="token attr-name">:baseUrl</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>baseUrl<span class="token punctuation">&quot;</span></span>
+      <span class="token attr-name">:wmtsLayer</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>wmtsLayer<span class="token punctuation">&quot;</span></span>
+      <span class="token attr-name">:tileMatrixSet</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>tileMatrixSet<span class="token punctuation">&quot;</span></span>
+      <span class="token attr-name">:tilingScheme</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>tilingScheme<span class="token punctuation">&quot;</span></span>
+      <span class="token attr-name">:format</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>format<span class="token punctuation">&quot;</span></span>
+      <span class="token attr-name">:token</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>token<span class="token punctuation">&quot;</span></span>
+    <span class="token punctuation">/&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>mapgis-web-scene</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  <span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span>
+      <span class="token comment">//天地图地址</span>
+      baseUrl<span class="token operator">:</span> <span class="token string">&quot;http://t0.tianditu.gov.cn/vec_c/wmts&quot;</span><span class="token punctuation">,</span>
+      <span class="token comment">//Cesium的瓦片切图方式</span>
+      tilingScheme<span class="token operator">:</span> <span class="token string">&quot;EPSG:4326&quot;</span><span class="token punctuation">,</span>
+      <span class="token comment">//地图的瓦片矩阵集合</span>
+      tileMatrixSet<span class="token operator">:</span> <span class="token string">&quot;c&quot;</span><span class="token punctuation">,</span>
+      <span class="token comment">//图层名称</span>
+      wmtsLayer<span class="token operator">:</span> <span class="token string">&quot;vec&quot;</span><span class="token punctuation">,</span>
+      <span class="token comment">//返回格式</span>
+      format<span class="token operator">:</span> <span class="token string">&quot;tiles&quot;</span><span class="token punctuation">,</span>
+      <span class="token comment">//token信息</span>
+      token<span class="token operator">:</span> <span class="token punctuation">{</span>
+        key<span class="token operator">:</span> <span class="token string">&quot;tk&quot;</span><span class="token punctuation">,</span>
+        value<span class="token operator">:</span> <span class="token string">&quot;9c157e9585486c02edf817d2ecbc7752&quot;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>css<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token style"><span class="token language-css">
+<span class="token selector">.main</span> <span class="token punctuation">{</span>
+  <span class="token property">height</span><span class="token punctuation">:</span> 600px<span class="token punctuation">;</span>
+  <span class="token property">width</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><h3 id="多个-mapgis-web-scene"><a href="#多个-mapgis-web-scene" class="header-anchor">#</a> 多个 mapgis-web-scene</h3> <div class="language-vue extra-class"><pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mapgis-web-scene</span> <span class="token attr-name">:vueKey</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>vueKey<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mapgis-3d-ogc-wmts-layer</span>
+      <span class="token attr-name">:baseUrl</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>urlWmts<span class="token punctuation">&quot;</span></span>
+      <span class="token attr-name">:wmtsLayer</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>layerWmts<span class="token punctuation">&quot;</span></span>
+      <span class="token attr-name">:tileMatrixSet</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>tileMatrixSetWmts<span class="token punctuation">&quot;</span></span>
+      <span class="token attr-name">:tilingScheme</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>tilingSchemeWmts<span class="token punctuation">&quot;</span></span>
+      <span class="token attr-name">:format</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>format<span class="token punctuation">&quot;</span></span>
+      <span class="token attr-name">:token</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>token<span class="token punctuation">&quot;</span></span>
+      <span class="token attr-name">:layerStyle</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>layerStyleWmts<span class="token punctuation">&quot;</span></span>
+      <span class="token attr-name">:vueKey</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>vueKey<span class="token punctuation">&quot;</span></span>
+    <span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mapgis-3d-igs-doc-layer</span>
+      <span class="token attr-name">:baseUrl</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>urlDoc<span class="token punctuation">&quot;</span></span>
+      <span class="token attr-name">:layers</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>layers<span class="token punctuation">&quot;</span></span>
+      <span class="token attr-name">:layerStyle</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>layerStyleDoc<span class="token punctuation">&quot;</span></span>
+      <span class="token attr-name">:vueKey</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>vueKey<span class="token punctuation">&quot;</span></span>
+    <span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">@click</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>changeIndex<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>改变图层顺序<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>mapgis-web-scene</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>mapgis-web-scene</span> <span class="token attr-name">:vueKey</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>vueKey2<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+  <span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span>
+      <span class="token comment">//要加载的url</span>
+      urlWmts<span class="token operator">:</span> <span class="token string">&quot;http://t0.tianditu.gov.cn/vec_c/wmts&quot;</span><span class="token punctuation">,</span>
+      <span class="token comment">//天地图就传空值</span>
+      layerWmts<span class="token operator">:</span> <span class="token string">&quot;vec&quot;</span><span class="token punctuation">,</span>
+      tileMatrixSetWmts<span class="token operator">:</span> <span class="token string">&quot;c&quot;</span><span class="token punctuation">,</span>
+      <span class="token comment">//空间参考系</span>
+      tilingSchemeWmts<span class="token operator">:</span> <span class="token string">&quot;EPSG:4326&quot;</span><span class="token punctuation">,</span>
+      <span class="token comment">//返回格式</span>
+      format<span class="token operator">:</span> <span class="token string">&quot;tiles&quot;</span><span class="token punctuation">,</span>
+      <span class="token comment">//token信息</span>
+      token<span class="token operator">:</span> <span class="token punctuation">{</span>
+        key<span class="token operator">:</span> <span class="token string">&quot;tk&quot;</span><span class="token punctuation">,</span>
+        value<span class="token operator">:</span> <span class="token string">&quot;9c157e9585486c02edf817d2ecbc7752&quot;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      layerStyleWmts<span class="token operator">:</span> <span class="token punctuation">{</span>
+        zIndex<span class="token operator">:</span> <span class="token number">100</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token comment">//要加载的url</span>
+      urlDoc<span class="token operator">:</span> <span class="token string">&quot;http://localhost:6163/igs/rest/mrms/docs/武汉_专题图_4328&quot;</span><span class="token punctuation">,</span>
+      <span class="token comment">//要显示的子图层</span>
+      layers<span class="token operator">:</span> <span class="token string">&quot;show:1,2&quot;</span><span class="token punctuation">,</span>
+      <span class="token comment">//mapgis-web-scene的Id，组件唯一标识，多个图层时用来查找webGlobe</span>
+      vueKey<span class="token operator">:</span> <span class="token string">&quot;vueKeyOne&quot;</span><span class="token punctuation">,</span>
+      vueKey2<span class="token operator">:</span> <span class="token string">&quot;vueKeyTwo&quot;</span><span class="token punctuation">,</span>
+      layerStyleDoc<span class="token operator">:</span> <span class="token punctuation">{</span>
+        zIndex<span class="token operator">:</span> <span class="token number">1000</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  methods<span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token function">changeIndex</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>layerStyleDoc<span class="token punctuation">.</span>zIndex <span class="token operator">===</span> <span class="token number">1000</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>layerStyleDoc<span class="token punctuation">.</span>zIndex <span class="token operator">=</span> <span class="token number">50</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>layerStyleDoc<span class="token punctuation">.</span>zIndex <span class="token operator">=</span> <span class="token number">1000</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/api/layer/OGC/CesiumOgcWmsLayer.html" class="prev">
+        WMS
+      </a></span> <span class="next"><a href="/api/layer/vectortile/vectortile.html">
+        矢量瓦片
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.7d9c90ad.js" defer></script><script src="/assets/js/3.d52de99d.js" defer></script><script src="/assets/js/28.c59d4789.js" defer></script>
+  </body>
+</html>

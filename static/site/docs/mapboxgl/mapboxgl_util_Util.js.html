@@ -1,0 +1,523 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Client for JavaScript mapboxgl/util/Util.js</title>
+
+  <script src="../cdn/run_prettify.js"></script>
+  <script src="../cdn/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="../cdn/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="../cdn/googleapis.css" rel="stylesheet">
+  <link href="../cdn/prettify.css" rel="stylesheet">
+  <link rel="stylesheet" href="../cdn/all.css" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="../cdn/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="../cdn/mapgis.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="../cdn/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+             
+                <a class="image" href="/">
+                    <img class="mapgis-webclient-logo" src="../image/mapgis_blue.png" alt="logo">
+                </a>
+            
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API
+                </a>
+                <div class="dropdown is-hoverable is-right">
+                    <a class="dropdown-trigger link">
+                        帮助向导
+                    </a>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-content">
+                        
+                            
+                                <a class="dropdown-item" href="tutorial-1.快速入门.html">
+                                    1.快速入门
+                                </a>
+                            
+                        
+                        </div>
+                    </div>
+                </div>
+                 
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/cesium/index.html"
+                        >
+                            Cesium
+                        </a>
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/mapboxgl/index.html"
+                        >
+                            MapboxGL
+                        </a>
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/leaflet/index.html"
+                        >
+                            Leaflet
+                        </a>
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/openlayers/index.html"
+                        >
+                            OpenLayers
+                        </a>
+                    
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            <div>
+                <span class="mapgis-api-document-span"><a href="index.html">API文档</a></span>
+            </div>
+            
+                <div class="search-wrapper">
+                    <input id="search" type="text" placeholder="搜索文档..." class="input">
+                </div>
+            
+            <nav>
+                
+                    <div class="category"><div class="mapgis-menu-span">模块</div><ul class="mapgis-sidebar-menus"><li><a href="module-ArcGis.html">ArcGis</a></li><li><a href="module-CloudDisk.html">CloudDisk</a></li><li><a href="module-DataStore.html">DataStore</a></li><li><a href="module-IGServerX.html">IGServerX</a></li><li><a href="module-OGC%25E6%259C%258D%25E5%258A%25A1.html">OGC服务</a></li><li><a href="module-OpenGeospatialConsortium%25E6%259C%258D%25E5%258A%25A1.html">OpenGeospatialConsortium服务</a></li><li><a href="module-PostGIS.html">PostGIS</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.html">专题图服务</a></li><li><a href="module-%25E5%2587%25A0%25E4%25BD%2595%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.html">几何分析服务</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.html">分析服务</a></li><li><a href="module-%25E5%259C%25B0%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.html">地图服务</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.html">客户端可视化</a></li><li><a href="module-%25E5%25BC%25B9%25E6%2580%25A7%25E6%2590%259C%25E7%25B4%25A2%25E6%259C%258D%25E5%258A%25A1.html">弹性搜索服务</a></li><li><a href="module-%25E7%259B%25AE%25E5%25BD%2595%25E6%259C%258D%25E5%258A%25A1.html">目录服务</a></li><li><a href="module-%25E7%259F%25A2%25E9%2587%258F%25E5%25A4%25A7%25E6%2595%25B0%25E6%258D%25AE.html">矢量大数据</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.html">要素服务</a></li></ul><div class="mapgis-menu-span">类名</div><ul class="mapgis-sidebar-menus"><li><a href="Circle.html">Circle</a></li><li><a href="CoordinateElpTrans.html">CoordinateElpTrans</a></li><li><a href="ElsCubeLayer_ElsCubeLayer.html">ElsCubeLayer</a></li><li><a href="FunctionWareService.html">FunctionWareService</a></li><li><a href="GeojsonStreamLayer.html">GeojsonStreamLayer</a></li><li><a href="ISocketService.html">ISocketService</a></li><li><a href="L.zondy.StreamLayer.html">StreamLayer</a></li><li><a href="mapboxgl.zondy.CubeLayer.html">CubeLayer</a></li><li><a href="mapboxgl.zondy.DeckglLayer.html">DeckglLayer</a></li><li><a href="mapboxgl.zondy.Graphic.html">Graphic</a></li><li><a href="mapboxgl.Zondy.Map.ArcGISLayer.html">ArcGISLayer</a></li><li><a href="mapboxgl.Zondy.Map.MapDocLayer.html">MapDocLayer</a></li><li><a href="mapboxgl.Zondy.Map.MapTileLayer.html">MapTileLayer</a></li><li><a href="mapboxgl.Zondy.Map.MapVectorLayer.html">MapVectorLayer</a></li><li><a href="mapboxgl.Zondy.Map.MapWmsLayer.html">MapWmsLayer</a></li><li><a href="mapboxgl.Zondy.Map.MapWMTSLayer.html">MapWMTSLayer</a></li><li><a href="mapboxgl.Zondy.Map.TDTLayer.html">TDTLayer</a></li><li><a href="mapboxgl.zondy.UniqueTheme3DLayer.html">UniqueTheme3DLayer</a></li><li><a href="mapboxgl.zondy.Util.html">Util</a></li><li><a href="MapvStreamLayer.html">MapvStreamLayer</a></li><li><a href="module-ArcGis.ArcGisBaseParam.html">ArcGisBaseParam</a></li><li><a href="module-ArcGis.ArcGisExtent.html">ArcGisExtent</a></li><li><a href="module-ArcGis.ArcGisFeatureLayer.html">ArcGisFeatureLayer</a></li><li><a href="module-ArcGis.ArcGisFindTask.html">ArcGisFindTask</a></li><li><a href="module-ArcGis.ArcGisGraphic.html">ArcGisGraphic</a></li><li><a href="module-ArcGis.ArcGisIdentifyTask.html">ArcGisIdentifyTask</a></li><li><a href="module-ArcGis.ArcGisMultipoint.html">ArcGisMultipoint</a></li><li><a href="module-ArcGis.ArcGisPoint.html">ArcGisPoint</a></li><li><a href="module-ArcGis.ArcGisPolygon.html">ArcGisPolygon</a></li><li><a href="module-ArcGis.ArcGisPolyline.html">ArcGisPolyline</a></li><li><a href="module-ArcGis.ArcGisQuery.html">ArcGisQuery</a></li><li><a href="module-ArcGis.ArcGisServiceBase.html">ArcGisServiceBase</a></li><li><a href="module-ArcGis.ArcGisSpatialReference.html">ArcGisSpatialReference</a></li><li><a href="module-CloudDisk.CalculateModelService.html">CalculateModelService</a></li><li><a href="module-CloudDisk.CloudDiskService.html">CloudDiskService</a></li><li><a href="module-CloudDisk.GeoDatasetService.html">GeoDatasetService</a></li><li><a href="module-CloudDisk.GisCore.FileService.html">FileService</a></li><li><a href="module-CloudDisk.ToolsService.html">ToolsService</a></li><li><a href="module-CloudDisk.UserService.html">UserService</a></li><li><a href="module-DataStore.DataStoreService.html">DataStoreService</a></li><li><a href="module-DataStore.ServiceParameter.html">ServiceParameter</a></li><li><a href="module-IGServerX.IGServerXService.html">IGServerXService</a></li><li><a href="module-OGC%2525E6%25259C%25258D%2525E5%25258A%2525A1.OGCService.html">OGCService</a></li><li><a href="module-OGC%25E6%259C%258D%25E5%258A%25A1.OGCWMSInfo.html">OGCWMSInfo</a></li><li><a href="module-OGC%25E6%259C%258D%25E5%258A%25A1.OGCWMTSInfo.html">OGCWMTSInfo</a></li><li><a href="module-OGC%25E6%259C%258D%25E5%258A%25A1.WMS.html">WMS</a></li><li><a href="module-PostGIS.PostgisCatlogService.html">PostgisCatlogService</a></li><li><a href="module-PostGIS.PostgisCustomQueryService.html">PostgisCustomQueryService</a></li><li><a href="module-PostGIS.PostgisQueryService.html">PostgisQueryService</a></li><li><a href="module-PostGIS.PostgisTableService.html">PostgisTableService</a></li><li><a href="module-PostGIS.PostgisVectorTileService.html">PostgisVectorTileService</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CAllOtherDataItemInfoSource.html">CAllOtherDataItemInfoSource</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CAnnInfo.html">CAnnInfo</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CChartLabelFormat.html">CChartLabelFormat</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CChartTheme.html">CChartTheme</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CChartThemeInfo.html">CChartThemeInfo</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CChartThemeRepresentInfo.html">CChartThemeRepresentInfo</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CChartType.html">CChartType</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CDotDensityTheme.html">CDotDensityTheme</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CFourColorTheme.html">CFourColorTheme</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CGraduatedSymbolTheme.html">CGraduatedSymbolTheme</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CLinInfo.html">CLinInfo</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CMultiClassTheme.html">CMultiClassTheme</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CPntInfo.html">CPntInfo</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CRandomTheme.html">CRandomTheme</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CRangeTheme.html">CRangeTheme</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CRangeThemeInfo.html">CRangeThemeInfo</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CRegInfo.html">CRegInfo</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CSimpleTheme.html">CSimpleTheme</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CTheme.html">CTheme</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CThemeInfo.html">CThemeInfo</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CUniqueTheme.html">CUniqueTheme</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CUniqueThemeInfo.html">CUniqueThemeInfo</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.ExpInfo.html">ExpInfo</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.FolderInfo.html">FolderInfo</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.FolderInfoAttribute.html">FolderInfoAttribute</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.ItemValue.html">ItemValue</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.ThemeOper.html">ThemeOper</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.ThemesInfo.html">ThemesInfo</a></li><li><a href="module-%25E5%2587%25A0%25E4%25BD%2595%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.CalArea.html">CalArea</a></li><li><a href="module-%25E5%2587%25A0%25E4%25BD%2595%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.CalPolyLineLength.html">CalPolyLineLength</a></li><li><a href="module-%25E5%2587%25A0%25E4%25BD%2595%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.CalServiceBase.html">CalServiceBase</a></li><li><a href="module-%25E5%2587%25A0%25E4%25BD%2595%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.CProjectBySRSID.html">CProjectBySRSID</a></li><li><a href="module-%25E5%2587%25A0%25E4%25BD%2595%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.CProjectParam.html">CProjectParam</a></li><li><a href="module-%25E5%2587%25A0%25E4%25BD%2595%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.GeometryAnalysisBase.html">GeometryAnalysisBase</a></li><li><a href="module-%25E5%2587%25A0%25E4%25BD%2595%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ProjectDots.html">ProjectDots</a></li><li><a href="module-%25E5%2587%25A0%25E4%25BD%2595%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ProjectRang.html">ProjectRang</a></li><li><a href="module-%25E5%2587%25A0%25E4%25BD%2595%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.Smooth.html">Smooth</a></li><li><a href="module-%25E5%2587%25A0%25E4%25BD%2595%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.TopAnalysis.html">TopAnalysis</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.AnalysisBase.html">AnalysisBase</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ClassBufferBase.html">ClassBufferBase</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ClassBufferByMultiplyRing.html">ClassBufferByMultiplyRing</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ClassBufferBySingleRing.html">ClassBufferBySingleRing</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ClipBase.html">ClipBase</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ClipByCircle.html">ClipByCircle</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ClipByLayer.html">ClipByLayer</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ClipByPolygon.html">ClipByPolygon</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ContourAnalyse.html">ContourAnalyse</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.FeatureBuffBase.html">FeatureBuffBase</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.FeatureBuffByMultiplyRing.html">FeatureBuffByMultiplyRing</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.FeatureBuffBySingleRing.html">FeatureBuffBySingleRing</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.NetAnalysis.html">NetAnalysis</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.OverlayBase.html">OverlayBase</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.OverlayByLayer.html">OverlayByLayer</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.OverlayByPolygon.html">OverlayByPolygon</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ProjectBase.html">ProjectBase</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ProjectByLayer.html">ProjectByLayer</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ProjectBySRID.html">ProjectBySRID</a></li><li><a href="module-%25E5%259C%25B0%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.GetDocImageService.html">GetDocImageService</a></li><li><a href="module-%25E5%259C%25B0%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.GetLayerImageService.html">GetLayerImageService</a></li><li><a href="module-%25E5%259C%25B0%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.GetMapImageService.html">GetMapImageService</a></li><li><a href="module-%25E5%259C%25B0%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.GetMapInfoService.html">GetMapInfoService</a></li><li><a href="module-%25E5%259C%25B0%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.GetTileImageService.html">GetTileImageService</a></li><li><a href="module-%25E5%259C%25B0%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.MapServiceBase.html">MapServiceBase</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.EchartsLayer.html">EchartsLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.MapvLayer.html">MapvLayer</a></li><li><a href="module-%25E5%25BC%25B9%25E6%2580%25A7%25E6%2590%259C%25E7%25B4%25A2%25E6%259C%258D%25E5%258A%25A1.EsCatlogService.html">EsCatlogService</a></li><li><a href="module-%25E5%25BC%25B9%25E6%2580%25A7%25E6%2590%259C%25E7%25B4%25A2%25E6%259C%258D%25E5%258A%25A1.ESGeoCode.html">ESGeoCode</a></li><li><a href="module-%25E5%25BC%25B9%25E6%2580%25A7%25E6%2590%259C%25E7%25B4%25A2%25E6%259C%258D%25E5%258A%25A1.EsGeocodeParameter.html">EsGeocodeParameter</a></li><li><a href="module-%25E5%25BC%25B9%25E6%2580%25A7%25E6%2590%259C%25E7%25B4%25A2%25E6%259C%258D%25E5%258A%25A1.EsGeocodeService.html">EsGeocodeService</a></li><li><a href="module-%25E5%25BC%25B9%25E6%2580%25A7%25E6%2590%259C%25E7%25B4%25A2%25E6%259C%258D%25E5%258A%25A1.ESGeoDecode.html">ESGeoDecode</a></li><li><a href="module-%25E5%25BC%25B9%25E6%2580%25A7%25E6%2590%259C%25E7%25B4%25A2%25E6%259C%258D%25E5%258A%25A1.ESQueryStats.html">ESQueryStats</a></li><li><a href="module-%25E5%25BC%25B9%25E6%2580%25A7%25E6%2590%259C%25E7%25B4%25A2%25E6%259C%258D%25E5%258A%25A1.EsSpaceTimeQueryByAgg.html">EsSpaceTimeQueryByAgg</a></li><li><a href="module-%25E5%25BC%25B9%25E6%2580%25A7%25E6%2590%259C%25E7%25B4%25A2%25E6%259C%258D%25E5%258A%25A1.EsTableService.html">EsTableService</a></li><li><a href="module-%25E7%259B%25AE%25E5%25BD%2595%25E6%259C%258D%25E5%258A%25A1.CatalogService.html">CatalogService</a></li><li><a href="module-%25E7%259B%25AE%25E5%25BD%2595%25E6%259C%258D%25E5%258A%25A1.ColorInfo.html">ColorInfo</a></li><li><a href="module-%25E7%259B%25AE%25E5%25BD%2595%25E6%259C%258D%25E5%258A%25A1.GDBInfo.html">GDBInfo</a></li><li><a href="module-%25E7%259B%25AE%25E5%25BD%2595%25E6%259C%258D%25E5%258A%25A1.MapDoc.html">MapDoc</a></li><li><a href="module-%25E7%259B%25AE%25E5%25BD%2595%25E6%259C%258D%25E5%258A%25A1.SystomInfo.html">SystomInfo</a></li><li><a href="module-%25E7%259B%25AE%25E5%25BD%2595%25E6%259C%258D%25E5%258A%25A1.TileLayer.html">TileLayer</a></li><li><a href="module-%25E7%259B%25AE%25E5%25BD%2595%25E6%259C%258D%25E5%258A%25A1.VectorLayer.html">VectorLayer</a></li><li><a href="module-%25E7%259F%25A2%25E9%2587%258F%25E5%25A4%25A7%25E6%2595%25B0%25E6%258D%25AE.SparkBufferService.html">SparkBufferService</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.EditDocFeature.html">EditDocFeature</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.EditLayerFeature.html">EditLayerFeature</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.EditServiceBase.html">EditServiceBase</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.MultiGeoQuery.html">MultiGeoQuery</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.MultiGeoQueryParameter.html">MultiGeoQueryParameter</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.ObjClsQuery.html">ObjClsQuery</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.ObjClsQueryParameter.html">ObjClsQueryParameter</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.QueryByLayerParameter.html">QueryByLayerParameter</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.QueryDocFeature.html">QueryDocFeature</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.QueryFeatureRule.html">QueryFeatureRule</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.QueryFeatureStruct.html">QueryFeatureStruct</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.QueryLayerFeature.html">QueryLayerFeature</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.QueryParameter.html">QueryParameter</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.QueryParameterBase.html">QueryParameterBase</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.QueryServiceBase.html">QueryServiceBase</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.QueryUnifyFeature.html">QueryUnifyFeature</a></li><li><a href="module=ArcGis.ArcGisFindParameters.html">ArcGisFindParameters</a></li><li><a href="module=ArcGis.ArcGisIdentifyParameters.html">ArcGisIdentifyParameters</a></li><li><a href="RangeTheme3DLayer.html">RangeTheme3DLayer</a></li><li><a href="SocketService.html">SocketService</a></li><li><a href="Theme3DLayer.html">Theme3DLayer</a></li><li><a href="TimeSpaceCubeLayer_TimeSpaceCubeLayer.html">TimeSpaceCubeLayer</a></li><li><a href="Zondy.Catalog.G3DMapDoc.html">G3DMapDoc</a></li><li><a href="Zondy.Catalog.G3DMapDoc_GetFeature.html">GetFeature</a></li><li><a href="Zondy.Catalog.G3DService.html">G3DService</a></li><li><a href="Zondy.Catalog.SystomInfo.html#GetSystemLibrary">GetSystemLibrary</a></li><li><a href="Zondy.Format.WMSCapabilities.html">WMSCapabilities</a></li><li><a href="Zondy.Format.WMTSCapabilities.html">WMTSCapabilities</a></li><li><a href="Zondy.Map.GeoFeatureThemeLayer.html">GeoFeatureThemeLayer</a></li><li><a href="Zondy.Map.graphThemeLayer.html">graphThemeLayer</a></li><li><a href="Zondy.Map.randomThemeLayer.html">randomThemeLayer</a></li><li><a href="Zondy.Map.rangeThemeLayer.html">rangeThemeLayer</a></li><li><a href="Zondy.Map.rankSymbolThemeLayer.html">rankSymbolThemeLayer</a></li><li><a href="Zondy.Map.simpleThemeLayer.html">simpleThemeLayer</a></li><li><a href="Zondy.Map.ThemeLayer.html">ThemeLayer</a></li><li><a href="Zondy.Map.ThemeStyle.html">ThemeStyle</a></li><li><a href="Zondy.Map.uniqueThemeLayer.html">uniqueThemeLayer</a></li><li><a href="Zondy.Object.AnyLine.html">AnyLine</a></li><li><a href="Zondy.Object.Arc.html">Arc</a></li><li><a href="Zondy.Object.CAttDataRow.html">CAttDataRow</a></li><li><a href="Zondy.Object.CAttStruct.html">CAttStruct</a></li><li><a href="Zondy.Object.CDisplayStyle.html">CDisplayStyle</a></li><li><a href="Zondy.Object.CDisplayStyleExtend.html">CDisplayStyleExtend</a></li><li><a href="Zondy.Object.CDynNoteInfo.html">CDynNoteInfo</a></li><li><a href="Zondy.Object.Circle.html">Circle</a></li><li><a href="Zondy.Object.CLineInfo.html">CLineInfo</a></li><li><a href="Zondy.Object.ContourAnalyse.ContourParam.html">ContourParam</a></li><li><a href="Zondy.Object.ContourAnalyse.MeshingParam.html">MeshingParam</a></li><li><a href="Zondy.Object.ContourAnalyse.SlopLineParam.html">SlopLineParam</a></li><li><a href="Zondy.Object.CPointInfo.html">CPointInfo</a></li><li><a href="Zondy.Object.CRegionInfo.html">CRegionInfo</a></li><li><a href="Zondy.Object.DynNoteLableType.html">DynNoteLableType</a></li><li><a href="Zondy.Object.DynShowStyle.html">DynShowStyle</a></li><li><a href="Zondy.Object.Feature.html">Feature</a></li><li><a href="Zondy.Object.FeatureGeometry.html">FeatureGeometry</a></li><li><a href="Zondy.Object.FeatureGraphicBase.html">FeatureGraphicBase</a></li><li><a href="Zondy.Object.FeatureSet.html">FeatureSet</a></li><li><a href="Zondy.Object.GLine.html">GLine</a></li><li><a href="Zondy.Object.GPoint.html">GPoint</a></li><li><a href="Zondy.Object.GRegion.html">GRegion</a></li><li><a href="Zondy.Object.LabelLinInfo.html">LabelLinInfo</a></li><li><a href="Zondy.Object.LabelRegInfo.html">LabelRegInfo</a></li><li><a href="Zondy.Object.LablePntInfo.html">LablePntInfo</a></li><li><a href="Zondy.Object.MultiPolygon.html">MultiPolygon</a></li><li><a href="Zondy.Object.Point2D.html">Point2D</a></li><li><a href="Zondy.Object.Polygon.html">Polygon</a></li><li><a href="Zondy.Object.PolyLine.html">PolyLine</a></li><li><a href="Zondy.Object.Rectangle.html">Rectangle</a></li><li><a href="Zondy.Object.Tangram.html">Tangram</a></li><li><a href="Zondy.Object.VectCls.html">VectCls</a></li><li><a href="Zondy.Object.WebGraphicsInfo.html">WebGraphicsInfo</a></li><li><a href="Zondy.Service.ServiceBase.html">ServiceBase</a></li></ul><div class="mapgis-menu-span">事件</div><ul class="mapgis-sidebar-menus"><li><a href="Zondy.Map.GeoFeatureThemeLayer.html#event:changelayer">changelayer</a></li><li><a href="Zondy.Map.GeoFeatureThemeLayer.html#event:featuresremoved">featuresremoved</a></li><li><a href="Zondy.Map.graphThemeLayer.html#event:changelayer">changelayer</a></li><li><a href="Zondy.Map.graphThemeLayer.html#event:featuresremoved">featuresremoved</a></li><li><a href="Zondy.Map.randomThemeLayer.html#event:changelayer">changelayer</a></li><li><a href="Zondy.Map.randomThemeLayer.html#event:featuresremoved">featuresremoved</a></li><li><a href="Zondy.Map.rangeThemeLayer.html#event:changelayer">changelayer</a></li><li><a href="Zondy.Map.rangeThemeLayer.html#event:featuresremoved">featuresremoved</a></li><li><a href="Zondy.Map.simpleThemeLayer.html#event:changelayer">changelayer</a></li><li><a href="Zondy.Map.simpleThemeLayer.html#event:featuresremoved">featuresremoved</a></li><li><a href="Zondy.Map.ThemeLayer.html#event:changelayer">changelayer</a></li><li><a href="Zondy.Map.ThemeLayer.html#event:featuresremoved">featuresremoved</a></li><li><a href="Zondy.Map.uniqueThemeLayer.html#event:changelayer">changelayer</a></li><li><a href="Zondy.Map.uniqueThemeLayer.html#event:featuresremoved">featuresremoved</a></li></ul><div class="mapgis-menu-span">全局</div><ul class="mapgis-sidebar-menus"><li><a href="global.html#addFeatures">addFeatures</a></li><li><a href="global.html#addTo">addTo</a></li><li><a href="global.html#appendUrl">appendUrl</a></li><li><a href="global.html#base">base</a></li><li><a href="global.html#baseHeightField">baseHeightField</a></li><li><a href="global.html#BroadcastEvent">BroadcastEvent</a></li><li><a href="global.html#CItemType">CItemType</a></li><li><a href="global.html#CLinAdjustType">CLinAdjustType</a></li><li><a href="global.html#CLinHeadType">CLinHeadType</a></li><li><a href="global.html#CLinJointType">CLinJointType</a></li><li><a href="global.html#CLinStyleMakeType">CLinStyleMakeType</a></li><li><a href="global.html#colorStops">colorStops</a></li><li><a href="global.html#copyProperties">copyProperties</a></li><li><a href="global.html#EightDirType">EightDirType</a></li><li><a href="global.html#enableHighlight">enableHighlight</a></li><li><a href="global.html#EsCatlogName">EsCatlogName</a></li><li><a href="global.html#EsCatlogType">EsCatlogType</a></li><li><a href="global.html#EsGeoHashType">EsGeoHashType</a></li><li><a href="global.html#extend">extend</a></li><li><a href="global.html#FeatureType">FeatureType</a></li><li><a href="global.html#FontShape">FontShape</a></li><li><a href="global.html#getData">getData</a></li><li><a href="global.html#getHighlightStyleOptions">getHighlightStyleOptions</a></li><li><a href="global.html#getLayerStyleOptions">getLayerStyleOptions</a></li><li><a href="global.html#height">height</a></li><li><a href="global.html#heightField">heightField</a></li><li><a href="global.html#heightStops">heightStops</a></li><li><a href="global.html#highlight">highlight</a></li><li><a href="global.html#id">id</a></li><li><a href="global.html#interpolateLagrange">interpolateLagrange</a></li><li><a href="global.html#ISShowArc">ISShowArc</a></li><li><a href="global.html#LabelLinType">LabelLinType</a></li><li><a href="global.html#LabelPntType">LabelPntType</a></li><li><a href="global.html#LabelRegType">LabelRegType</a></li><li><a href="global.html#LabelSpreadType">LabelSpreadType</a></li><li><a href="global.html#LayerEvent">LayerEvent</a></li><li><a href="global.html#LayerStatusType">LayerStatusType</a></li><li><a href="global.html#legendOrientation">legendOrientation</a></li><li><a href="global.html#legendPosition">legendPosition</a></li><li><a href="global.html#legendRatio">legendRatio</a></li><li><a href="global.html#legendTheme">legendTheme</a></li><li><a href="global.html#legendTitle">legendTitle</a></li><li><a href="global.html#LineConstrain">LineConstrain</a></li><li><a href="global.html#map">map</a></li><li><a href="global.html#MapType">MapType</a></li><li><a href="global.html#mix">mix</a></li><li><a href="global.html#NetAnalyType">NetAnalyType</a></li><li><a href="global.html#NetElemType">NetElemType</a></li><li><a href="global.html#objectStack%255Bundefined%255D">objectStack[undefined]</a></li><li><a href="global.html#opacity">opacity</a></li><li><a href="global.html#PARAM_BRACKET_LEFT">PARAM_BRACKET_LEFT</a></li><li><a href="global.html#PARAM_BRACKET_RIGHT">PARAM_BRACKET_RIGHT</a></li><li><a href="global.html#PARAM_COMMA">PARAM_COMMA</a></li><li><a href="global.html#PARAM_SPACE">PARAM_SPACE</a></li><li><a href="global.html#PARAM_SPLIT">PARAM_SPLIT</a></li><li><a href="global.html#PARAM_SUB">PARAM_SUB</a></li><li><a href="global.html#parseNumber">parseNumber</a></li><li><a href="global.html#remove">remove</a></li><li><a href="global.html#RepeatType">RepeatType</a></li><li><a href="global.html#setData">setData</a></li><li><a href="global.html#setLayerOptions">setLayerOptions</a></li><li><a href="global.html#show">show</a></li><li><a href="global.html#showLegend">showLegend</a></li><li><a href="global.html#SPACE_ENUM_POLYGON">SPACE_ENUM_POLYGON</a></li><li><a href="global.html#SubscribeEvent">SubscribeEvent</a></li><li><a href="global.html#themeField">themeField</a></li><li><a href="global.html#TotalCount">TotalCount</a></li><li><a href="global.html#VectClsType">VectClsType</a></li><li><a href="global.html#XClsType">XClsType</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <span class="page-title-sub">mapboxgl/util/Util.js</span>
+                    <span class="page-title-main">Source</span>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { Zondy } from '../core/Base'
+
+export var Util = (Zondy.Util = Zondy.Util || {})
+
+/**
+ * @description 复制源对象的所有属性到目标对象上，源对象上的没有定义的属性在目标对象上也不会被设置。
+ * @example
+ * 要复制Zondy.Size对象的所有属性到自定义对象上，使用方法如下:
+ *     var size = new Zondy.Size(100, 100)
+ *     var obj = {}；
+ *     Zondy.Util.extend(obj, size)
+ * @param destination - {Object} 目标对象。
+ * @param source - {Object} 源对象，其属性将被设置到目标对象上。
+ * @return {Object} 目标对象。
+ */
+export var extend = function(destination, source) {
+  destination = destination || {}
+  if (source) {
+    for (var property in source) {
+      var value = source[property]
+      if (value !== undefined) {
+        destination[property] = value
+      }
+    }
+
+    /**
+     * IE doesn't include the toString property when iterating over an object's
+     * properties with the for(property in object) syntax.  Explicitly check if
+     * the source has its own toString property.
+     */
+
+    /*
+     * FF/Windows &lt; 2.0.0.13 reports 'Illegal operation on WrappedNative
+     * prototype object' when calling hawOwnProperty if the source object
+     * is an instance of window.Event.
+     */
+
+    var sourceIsEvt =
+      typeof window.Event === 'function' &amp;&amp; source instanceof window.Event
+
+    if (
+      !sourceIsEvt &amp;&amp;
+      source.hasOwnProperty &amp;&amp;
+      source.hasOwnProperty('toString')
+    ) {
+      destination.toString = source.toString
+    }
+  }
+  return destination
+}
+
+/**
+ * @description 给url追加参数。
+ * @param url - {string} 待追加参数的url字符串。
+ * @param paramStr - {string} 待追加的参数。
+ * @return {string} The new url
+ */
+export var appendUrl = function(url, paramStr) {
+  var newUrl = url
+  if (paramStr) {
+    var parts = (url + ' ').split(/[?&amp;]/)
+    newUrl +=
+      parts.pop() === ' ' //如果url是以?或者&amp;结尾的直接追加参数
+        ? paramStr
+        : parts.length
+        ? '&amp;' + paramStr
+        : '?' + paramStr
+    //如果url不是以?或者&amp;结尾的则根据是否有参数进行符号补充
+  }
+  return newUrl
+}
+
+/**
+ * @description 复制源对象数组的所有属性到目标对象上，源对象数组的当前对象会重写前一个对象的值
+ * @author 潘卓然ParnDeedlit 基础平台/创新中心
+ * @param dest - {Object}  目标对象
+ * @param sources -{Array} 源对象数据，每个对象都会给目的对象设置对应的属性值
+ * @private
+ */
+export var extendFromArray = function(dest, sources) {
+  for (const src of sources) {
+    for (const k in src) {
+      dest[k] = src[k]
+    }
+  }
+  return dest
+}
+
+/**
+ * @author 潘卓然ParnDeedlit 基础平台/创新中心
+ * @description 判断字符串是否以特定后缀字符结束
+ * @param string {String} 判断字符串
+ * @param string {String} 尾部后缀
+ * @private
+ */
+export var endsWith = function(string, suffix) {
+  return string.indexOf(suffix, string.length - suffix.length) !== -1
+}
+
+// @function create(proto: Object, properties?: Object): Object
+// Compatibility polyfill for [Object.create](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/create)
+export var create =
+  Object.create ||
+  (function() {
+    function F() {}
+    return function(proto) {
+      F.prototype = proto
+      return new F()
+    }
+  })()
+
+// @function bind(fn: Function, …): Function
+// Returns a new function bound to the arguments passed, like [Function.prototype.bind](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Function/bind).
+// Has a `L.bind()` shortcut.
+export function bind(fn, obj) {
+  var slice = Array.prototype.slice
+
+  if (fn.bind) {
+    return fn.bind.apply(fn, slice.call(arguments, 1))
+  }
+
+  var args = slice.call(arguments, 2)
+
+  return function() {
+    return fn.apply(
+      obj,
+      args.length ? args.concat(slice.call(arguments)) : arguments
+    )
+  }
+}
+
+// @property lastId: Number
+// Last unique ID used by [`stamp()`](#util-stamp)
+export var lastId = 0
+
+// @function stamp(obj: Object): Number
+// Returns the unique ID of an object, assigning it one if it doesn't have it.
+export function stamp(obj) {
+  /*eslint-disable */
+  obj._leaflet_id = obj._leaflet_id || ++lastId
+  return obj._leaflet_id
+  /* eslint-enable */
+}
+
+// @function throttle(fn: Function, time: Number, context: Object): Function
+// Returns a function which executes function `fn` with the given scope `context`
+// (so that the `this` keyword refers to `context` inside `fn`'s code). The function
+// `fn` will be called no more than one time per given amount of `time`. The arguments
+// received by the bound function will be any arguments passed when binding the
+// function, followed by any arguments passed when invoking the bound function.
+// Has an `L.throttle` shortcut.
+export function throttle(fn, time, context) {
+  var lock, args, wrapperFn, later
+
+  later = function() {
+    // reset lock and call if queued
+    lock = false
+    if (args) {
+      wrapperFn.apply(context, args)
+      args = false
+    }
+  }
+
+  wrapperFn = function() {
+    if (lock) {
+      // called too soon, queue to call later
+      args = arguments
+    } else {
+      // call and lock until later
+      fn.apply(context, arguments)
+      setTimeout(later, time)
+      lock = true
+    }
+  }
+
+  return wrapperFn
+}
+
+// @function wrapNum(num: Number, range: Number[], includeMax?: Boolean): Number
+// Returns the number `num` modulo `range` in such a way so it lies within
+// `range[0]` and `range[1]`. The returned value will be always smaller than
+// `range[1]` unless `includeMax` is set to `true`.
+export function wrapNum(x, range, includeMax) {
+  var max = range[1],
+    min = range[0],
+    d = max - min
+  return x === max &amp;&amp; includeMax ? x : ((((x - min) % d) + d) % d) + min
+}
+
+// @function falseFn(): Function
+// Returns a function which always returns `false`.
+export function falseFn() {
+  return false
+}
+
+// @function formatNum(num: Number, digits?: Number): Number
+// Returns the number `num` rounded to `digits` decimals, or to 6 decimals by default.
+export function formatNum(num, digits) {
+  var pow = Math.pow(10, digits === undefined ? 6 : digits)
+  return Math.round(num * pow) / pow
+}
+
+// @function trim(str: String): String
+// Compatibility polyfill for [String.prototype.trim](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String/Trim)
+export function trim(str) {
+  return str.trim ? str.trim() : str.replace(/^\s+|\s+$/g, '')
+}
+
+// @function splitWords(str: String): String[]
+// Trims and splits the string on whitespace and returns the array of parts.
+export function splitWords(str) {
+  return trim(str).split(/\s+/)
+}
+
+// @function setOptions(obj: Object, options: Object): Object
+// Merges the given properties to the `options` of the `obj` object, returning the resulting options. See `Class options`. Has an `L.setOptions` shortcut.
+export function setOptions(obj, options) {
+  if (!obj.hasOwnProperty('options')) {
+    obj.options = obj.options ? create(obj.options) : {}
+  }
+  for (var i in options) {
+    obj.options[i] = options[i]
+  }
+  return obj.options
+}
+
+// @function getParamString(obj: Object, existingUrl?: String, uppercase?: Boolean): String
+// Converts an object into a parameter URL string, e.g. `{a: 'foo', b: 'bar'}`
+// translates to `'?a=foo&amp;b=bar'`. If `existingUrl` is set, the parameters will
+// be appended at the end. If `uppercase` is `true`, the parameter names will
+// be uppercased (e.g. `'?A=foo&amp;B=bar'`)
+export function getParamString(obj, existingUrl, uppercase) {
+  var params = []
+  for (var i in obj) {
+    params.push(
+      encodeURIComponent(uppercase ? i.toUpperCase() : i) +
+        '=' +
+        encodeURIComponent(obj[i])
+    )
+  }
+  return (
+    (!existingUrl || existingUrl.indexOf('?') === -1 ? '?' : '&amp;') +
+    params.join('&amp;')
+  )
+}
+
+var templateRe = /\{ *([\w_-]+) *\}/g
+
+// @function template(str: String, data: Object): String
+// Simple templating facility, accepts a template string of the form `'Hello {a}, {b}'`
+// and a data object like `{a: 'foo', b: 'bar'}`, returns evaluated string
+// `('Hello foo, bar')`. You can also specify functions instead of strings for
+// data values — they will be evaluated passing `data` as an argument.
+export function template(str, data) {
+  return str.replace(templateRe, function(str, key) {
+    var value = data[key]
+
+    if (value === undefined) {
+      throw new Error('No value provided for variable ' + str)
+    } else if (typeof value === 'function') {
+      value = value(data)
+    }
+    return value
+  })
+}
+
+// @function isArray(obj): Boolean
+// Compatibility polyfill for [Array.isArray](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array/isArray)
+export var isArray =
+  Array.isArray ||
+  function(obj) {
+    return Object.prototype.toString.call(obj) === '[object Array]'
+  }
+
+// @function indexOf(array: Array, el: Object): Number
+// Compatibility polyfill for [Array.prototype.indexOf](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf)
+export function indexOf(array, el) {
+  for (var i = 0; i &lt; array.length; i++) {
+    if (array[i] === el) {
+      return i
+    }
+  }
+  return -1
+}
+
+// @property emptyImageUrl: String
+// Data URI string containing a base64-encoded empty GIF image.
+// Used as a hack to free memory from unused images on WebKit-powered
+// mobile devices (by setting image `src` to this string).
+export var emptyImageUrl =
+  'data:image/gifbase64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='
+
+// inspired by http://paulirish.com/2011/requestanimationframe-for-smart-animating/
+
+function getPrefixed(name) {
+  return window['webkit' + name] || window['moz' + name] || window['ms' + name]
+}
+
+var lastTime = 0
+
+// fallback for IE 7-8
+function timeoutDefer(fn) {
+  var time = +new Date(),
+    timeToCall = Math.max(0, 16 - (time - lastTime))
+
+  lastTime = time + timeToCall
+  return window.setTimeout(fn, timeToCall)
+}
+
+export var requestFn =
+  window.requestAnimationFrame ||
+  getPrefixed('RequestAnimationFrame') ||
+  timeoutDefer
+export var cancelFn =
+  window.cancelAnimationFrame ||
+  getPrefixed('CancelAnimationFrame') ||
+  getPrefixed('CancelRequestAnimationFrame') ||
+  function(id) {
+    window.clearTimeout(id)
+  }
+
+// @function requestAnimFrame(fn: Function, context?: Object, immediate?: Boolean): Number
+// Schedules `fn` to be executed when the browser repaints. `fn` is bound to
+// `context` if given. When `immediate` is set, `fn` is called immediately if
+// the browser doesn't have native support for
+// [`window.requestAnimationFrame`](https://developer.mozilla.org/docs/Web/API/window/requestAnimationFrame),
+// otherwise it's delayed. Returns a request ID that can be used to cancel the request.
+export function requestAnimFrame(fn, context, immediate) {
+  if (immediate &amp;&amp; requestFn === timeoutDefer) {
+    fn.call(context)
+  } else {
+    return requestFn.call(window, bind(fn, context))
+  }
+}
+
+// @function cancelAnimFrame(id: Number): undefined
+// Cancels a previous `requestAnimFrame`. See also [window.cancelAnimationFrame](https://developer.mozilla.org/docs/Web/API/window/cancelAnimationFrame).
+export function cancelAnimFrame(id) {
+  if (id) {
+    cancelFn.call(window, id)
+  }
+}
+
+Zondy.Util.extend = extend
+Zondy.Util.appendUrl = appendUrl
+Zondy.Util.endsWith = endsWith
+Zondy.Util.extendFromArray = extendFromArray
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>文档生成<a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://www.smaryun.com" target="_blank">司马云</a> <span>© 2020 云生态圈</span>
+                        <a href="http://develop.smaryun.com:8899/" target="_blank">MapGIS Client for JavaScript</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+<script src="scripts/search.js"> </script>
+
+</body>
+</html>
