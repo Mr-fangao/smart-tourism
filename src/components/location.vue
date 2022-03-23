@@ -5,6 +5,8 @@
 </template>
 <script>
 import eventBum from "../views/traffickingnetwork/public/js/EvebtBus";
+import nanjing from "../assets/json/nanjing.json";
+import njprovince from "../assets/json/njprovince.json";
 export default {
   name: "loc",
   data() {
@@ -36,8 +38,48 @@ export default {
         center: [110, 40],
         zoom: 5,
       });
-      map.on("click", function (e) {
-        console.log("点击");
+      map.on('load', () => {
+        map.addSource('njmark',{
+          type: "geojson",
+          data: nanjing
+        });
+        	map.addSource('njpolygon', {
+				type: "geojson",
+				data: njprovince
+			});
+      	map.addLayer({
+				id: "fillID",
+				type: 'fill'/* symbol类型layer，一般用来绘制点*/,
+				source: "njpolygon",
+				paint: {
+				"fill-color":"#FC4E2A",
+				"fill-opacity": 0.6 /* 透明度 */
+				},
+		});
+       	map.addLayer({
+            'id': 'earthquakes-layer',
+            'type': 'circle',
+            'source': 'njmark',
+            'paint': {
+              'circle-radius': 5,
+              'circle-stroke-width': 2,
+              'circle-color': 'red',
+              'circle-stroke-color': 'white'
+                }
+          });
+		  map.addLayer({
+				id: "points",
+				type: 'symbol'/* symbol类型layer，一般用来绘制点*/,
+				source: "njmark",
+				layout: {
+					'text-field': ['get', 'name'],
+					'text-offset': [1.5, 1.5] 
+				},
+       'paint': {
+         'text-color':"#FFFFFF"
+       }
+       });
+	
       });
     },
   },
