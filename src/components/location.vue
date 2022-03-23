@@ -35,51 +35,50 @@ export default {
       var map = new this.$mapboxgl.Map({
         container: "map",
         style: "mapbox://styles/chenjq/cl010ychv001214pdpa5xyq5a",
-        center: [110, 40],
-        zoom: 5,
+        center: [118.886596, 31.492804],
+        zoom: 7.5,
       });
-      map.on('load', () => {
-        map.addSource('njmark',{
+      map.on("load", () => {
+        map.addSource("njmark", {
           type: "geojson",
-          data: nanjing
+          data: nanjing,
         });
-        	map.addSource('njpolygon', {
-				type: "geojson",
-				data: njprovince
-			});
-      	map.addLayer({
-				id: "fillID",
-				type: 'fill'/* symbol类型layer，一般用来绘制点*/,
-				source: "njpolygon",
-				paint: {
-				"fill-color":"#FC4E2A",
-				"fill-opacity": 0.6 /* 透明度 */
-				},
-		});
-       	map.addLayer({
-            'id': 'earthquakes-layer',
-            'type': 'circle',
-            'source': 'njmark',
-            'paint': {
-              'circle-radius': 5,
-              'circle-stroke-width': 2,
-              'circle-color': 'red',
-              'circle-stroke-color': 'white'
-                }
-          });
-		  map.addLayer({
-				id: "points",
-				type: 'symbol'/* symbol类型layer，一般用来绘制点*/,
-				source: "njmark",
-				layout: {
-					'text-field': ['get', 'name'],
-					'text-offset': [1.5, 1.5] 
-				},
-       'paint': {
-         'text-color':"#FFFFFF"
-       }
-       });
-	
+        map.addSource("njpolygon", {
+          type: "geojson",
+          data: njprovince,
+        });
+        map.addLayer({
+          id: "fillID",
+          type: "fill" /* symbol类型layer，一般用来绘制点*/,
+          source: "njpolygon",
+          paint: {
+            "fill-color": "#74add1",
+            "fill-opacity": 0.6 /* 透明度 */,
+          },
+        });
+        map.addLayer({
+          id: "earthquakes-layer",
+          type: "circle",
+          source: "njmark",
+          paint: {
+            "circle-radius": 5,
+            "circle-stroke-width": 2,
+            "circle-color": "#06b2fb",
+            "circle-stroke-color": "white",
+          },
+        });
+        map.addLayer({
+          id: "points",
+          type: "symbol" /* symbol类型layer，一般用来绘制点*/,
+          source: "njmark",
+          layout: {
+            "text-field": ["get", "name"],
+            "text-offset": [1.5, 1.5],
+          },
+          paint: {
+            "text-color": "#FFFFFF",
+          },
+        });
       });
     },
   },

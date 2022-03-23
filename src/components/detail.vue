@@ -69,7 +69,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: move;
+   cursor: pointer;
   .text{
       position:absolute inherit;
       text-align: center;

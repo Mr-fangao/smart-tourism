@@ -100,7 +100,7 @@
           <el-tabs v-model="activeName" type="border-card">
             <el-tab-pane label="好评榜" name="recommendTab">
               <el-table
-                :data="tableRankData"
+                :data="tablescoreRankData"
                 height="328px"
                 stripe
                 style="width: 100%"
@@ -417,7 +417,7 @@
         <div class="content" id="chart2"></div>
       </div>
     </div>
-         <selectRegion />
+    <selectRegion />
   </div>
 </template>
 <script>
@@ -440,7 +440,7 @@ import loading from "../components/loading.vue";
 import wordcloud from "../assets/js/echarts-wordcloud-master/index";
 import echarts from "echarts";
 
-import eventBum from '../views/traffickingnetwork/public/js/EvebtBus'
+import eventBum from "../views/traffickingnetwork/public/js/EvebtBus";
 import SelectRegion from "../views/traffickingnetwork/components/selectRegion.vue";
 export default {
   name: "recommend",
@@ -460,9 +460,9 @@ export default {
     return {
       isShow: true,
       //区域选择
-      selectcity:{
-        name: '中国',
-        level: 0
+      selectcity: {
+        name: "中国",
+        level: 0,
       },
       //推荐项目
       input: "",
@@ -488,11 +488,40 @@ export default {
       checkList: ["飞猪", "艺龙", "途牛", "携程", "马蜂窝", "去哪儿"],
       //数据
       tableRankData: [],
+      tablescoreRankData: [],
       //tab切换
       activeName: "recommendTab",
       comp: "pointgather",
       //echarts数据
       chartname: "北京市",
+      startclouddata: [
+        { value: 773, name: "故宫" },
+        { value: 502, name: "长城" },
+        { value: 270, name: "建筑" },
+        { value: 212, name: "胡同" },
+        { value: 192, name: "天安门" },
+        { value: 182, name: "颐和园" },
+        { value: 170, name: "博物馆" },
+        { value: 158, name: "环球" },
+        { value: 154, name: "历史" },
+        { value: 138, name: "八达岭" },
+        { value: 112, name: "天坛" },
+        { value: 105, name: "度假" },
+        { value: 104, name: "清华" },
+        { value: 100, name: "银杏" },
+        { value: 96, name: "北海" },
+        { value: 94, name: "王府" },
+        { value: 94, name: "皇帝" },
+        { value: 93, name: "慕田峪" },
+        { value: 92, name: "大学" },
+        { value: 88, name: "乾隆" },
+        { value: 87, name: "景山公园" },
+        { value: 86, name: "八达岭长城" },
+        { value: 84, name: "南锣鼓巷" },
+        { value: 79, name: "紫禁城" },
+        { value: 79, name: "地坛" },
+        { value: 75, name: "慕田峪长城" },
+      ],
       wordclouddata: [
         { value: 327, name: "亚龙湾" },
         { value: 278, name: "海南" },
@@ -630,12 +659,12 @@ export default {
     this.initChart1(this.chartdata1);
     this.initChart2(this.chartdata2);
     this.wordCloudInti2(this.$refs.chartword2, this.wordcloudchina);
-    this.wordCloudInti(this.$refs.chartword, this.wordclouddata);
-     eventBum.$on("json", (json) => {
+    this.wordCloudInti(this.$refs.chartword, this.startclouddata);
+    eventBum.$on("json", (json) => {
       this.selectcity.name = json.name;
       this.selectcity.level = json.where;
-      console.log(this.selectcity)
-      if(this.selectcity.name !=undefined){
+      console.log(this.selectcity);
+      if (this.selectcity.name == "南京市") {
         this.showmap(6);
       }
     });
@@ -670,20 +699,33 @@ export default {
       request.get("/api/data/cityRank").then((res) => {
         console.log(res);
         this.tableCityData = res.data;
-        // that.$nextTick(() => {
-        //   that.$refs.interfaceTable.setCurrentRow(that.tableCityData[0]);
-        // });
       });
     },
     getRankTable() {
-      request.get("/api/data/scenicRank").then((res) => {
-        console.log(res);
-        console.log(res.data[1].city);
-        this.tableRankData = res.data;
-        for (let i = 1; i <= res.data.length; i++) {
-          this.tableRankData[i - 1].rank = i;
-        }
-      });
+      request
+        .post("/api/data/scenicRank", {
+          type: "hot",
+        })
+        .then((res) => {
+          console.log(res);
+          console.log(res.data[1].city);
+          this.tableRankData = res.data;
+          for (let i = 1; i <= res.data.length; i++) {
+            this.tableRankData[i - 1].rank = i;
+          }
+        });
+      request
+        .post("/api/data/scenicRank", {
+          type: "score",
+        })
+        .then((res) => {
+          console.log(res);
+          console.log(res.data[1].city);
+          this.tablescoreRankData = res.data;
+          for (let i = 1; i <= res.data.length; i++) {
+            this.tablescoreRankData[i - 1].rank = i;
+          }
+        });
     },
     getLabel(val) {
       let label = val;
@@ -810,8 +852,11 @@ export default {
     clickFun(param) {
       if (param.type == "click") {
         this.chartname = param.name;
-
-        // alert(param.name);
+        if (param.name == "三亚") {
+          this.wordCloudInti(this.$refs.chartword, this.wordclouddata);
+        } else if (param.name == "北京") {
+          this.wordCloudInti(this.$refs.chartword, this.startclouddata);
+        }
       }
     },
     wordCloudInti(wrapEl, data) {
@@ -1322,6 +1367,9 @@ export default {
   .sensicrecommend {
     width: 100%;
     flex: 5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     .title {
       height: 5% !important;
     }

@@ -235,14 +235,14 @@ export default {
   100% {
     width: 1000px;
     height: 655px;
-    background-color: rgba(40, 43, 57, 1);
+    background-color: rgb(22 100 125 / 61%);
   }
 }
 @keyframes nappear { /* 隐藏动画 */
   0% {
     width: 1000px;
     height: 655px;
-    background-color: rgba(40, 43, 57, 1);
+    background-color: rgb(22 100 125 / 61%);
   }
   50% {
     width: 1000px;
