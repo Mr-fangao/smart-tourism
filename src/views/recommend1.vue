@@ -419,7 +419,11 @@
             <div class="content" id="chart2"></div>
           </div>
         </el-tab-pane>
-        <el-tab-pane label="时空变化" name="time"> </el-tab-pane>
+        <el-tab-pane label="时空变化" name="time">
+          <div class="content">
+            <div class="chartcontent" id="timechart"></div>
+          </div>
+        </el-tab-pane>
       </el-tabs>
     </div>
     <selectRegion />
@@ -669,6 +673,7 @@ export default {
     this.getCityRank();
     this.initChart1(this.chartdata1);
     this.initChart2(this.chartdata2);
+    this.initTimechart();
     this.wordCloudInti2(this.$refs.chartword2, this.wordcloudchina);
     this.wordCloudInti(this.$refs.chartword, this.startclouddata);
     eventBum.$on("json", (json) => {
@@ -861,6 +866,91 @@ export default {
         ],
       };
       myChart1.setOption(option);
+    },
+    initTimechart() {
+      var chartDom = document.getElementById("timechart");
+      var myChart = echarts.init(chartDom);
+      var option;
+
+      let base = +new Date(1968, 9, 3);
+      let oneDay = 24 * 3600 * 1000;
+      let date = [];
+      let date2 = [];
+      let data = [Math.random() * 300];
+      let data2 = [Math.random() * 300];
+      for (let i = 1; i < 20000; i++) {
+        var now = new Date((base += oneDay));
+        date.push(
+          [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
+        );
+        data.push(Math.round((Math.random() - 0.5) * 20 + data[i - 1]));
+      }
+      for (let i = 1; i < 20000; i++) {
+        var now = new Date((base += oneDay));
+        date2.push(
+          [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
+        );
+        data2.push(Math.round((Math.random() - 0.5) * 20 + data2[i - 1]));
+      }
+      option = {
+        tooltip: {
+          trigger: "axis",
+          position: function (pt) {
+            return [pt[0], "10%"];
+          },
+        },
+        title: {
+          left: "center",
+          text: "Large Area Chart",
+        },
+        toolbox: {
+          feature: {
+            dataZoom: {
+              yAxisIndex: "none",
+            },
+            restore: {},
+            saveAsImage: {},
+          },
+        },
+        xAxis: {
+          type: "category",
+          boundaryGap: false,
+          data: date,
+        },
+        yAxis: {
+          type: "value",
+          boundaryGap: [0, "10%"],
+        },
+        dataZoom: [
+          {
+            type: "inside",
+            start: 0,
+            end: 10,
+          },
+          {
+            start: 0,
+            end: 10,
+          },
+        ],
+        series: [
+          {
+            name: "Fake Data",
+            type: "line",
+            symbol: "none",
+            sampling: "lttb",
+            data: data,
+          },
+          {
+            name: "Fake Data",
+            type: "line",
+            symbol: "none",
+            sampling: "lttb",
+            data: data2,
+          },
+        ],
+      };
+
+      option && myChart.setOption(option);
     },
     //矩形树图点击事件
     clickFun(param) {
@@ -1746,6 +1836,14 @@ export default {
     border-right: none;
     border-top: 0px solid #0cf3f3;
     // border-bottom: 2px solid #0cf3f3;
+  }
+  .content {
+    width: 100%;
+    height: 100%;
+    .chartcontent {
+      width: 100%;
+      height: 100%;
+    }
   }
   .chartcontent {
     height: 100%;
