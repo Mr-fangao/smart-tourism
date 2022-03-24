@@ -124,9 +124,9 @@ export default {
         grid: {
           left: '3%',
           right: '12%',
-          bottom: '0%',
+          bottom: '5%',
           containLabel: true,
-          height: '90%'
+          height: '80%'
         },
         // dataZoom: [
         //   {

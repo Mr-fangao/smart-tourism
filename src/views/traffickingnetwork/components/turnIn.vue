@@ -49,7 +49,7 @@ export default {
       var data_teenagers = []
       var data_other = []
       var place_name = []
-      if (datas[0] === '输入') {
+      if (datas[0] === '流入') {
         this.title = '各地区输入至' + datas[1][0].to + '儿童年龄组统计'
         for (let index = 0; index < datas[1].length; index++) {
           const element = datas[1][index]

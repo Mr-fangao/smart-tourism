@@ -44,7 +44,7 @@ export default {
     },
     handle(datas) {
       var data = []
-      if (datas[0] === '拐入') {
+      if (datas[0] === '流入') {
         this.title = '各地区游客输出至' + datas[1][0].to + '前十统计'
         for (let index = datas[1].length - 10; index < datas[1].length; index++) {
           const element = datas[1][index]
