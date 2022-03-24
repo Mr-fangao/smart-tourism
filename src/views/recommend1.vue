@@ -398,7 +398,11 @@
       </div>
     </div>
     <div class="recommend-bottom">
-      <el-tabs v-model="activeName2" type="border-card">
+      <el-tabs
+        v-model="activeName2"
+        type="border-card"
+        @tab-click="handleTabClick"
+      >
         <el-tab-pane label="城市总览" name="city">
           <div class="chartcontent">
             <div id="recommend-title" class="title">
@@ -419,9 +423,9 @@
             <div class="content" id="chart2"></div>
           </div>
         </el-tab-pane>
-        <el-tab-pane label="时空变化" name="time">
-          <div class="content">
-            <div class="chartcontent" id="timechart"></div>
+        <el-tab-pane label="时空变化" name="time" >
+          <div class="timechartcontent" >
+            <div class="content" id="timechart"></div>
           </div>
         </el-tab-pane>
       </el-tabs>
@@ -673,7 +677,7 @@ export default {
     this.getCityRank();
     this.initChart1(this.chartdata1);
     this.initChart2(this.chartdata2);
-    this.initTimechart();
+    // this.initTimechart();
     this.wordCloudInti2(this.$refs.chartword2, this.wordcloudchina);
     this.wordCloudInti(this.$refs.chartword, this.startclouddata);
     eventBum.$on("json", (json) => {
@@ -780,6 +784,14 @@ export default {
       console.log(this.input);
       console.log(this.checkList);
       console.log(this.cityname);
+    },
+    handleTabClick(tab) {
+      console.log(tab.name);
+      if (tab.name == "time") {
+        setTimeout(() => {
+          this.initTimechart();
+        }, 500);
+      }
     },
     //矩形树图
     initChart1(data) {
@@ -949,8 +961,7 @@ export default {
           },
         ],
       };
-
-      option && myChart.setOption(option);
+      option && myChart.setOption(option, true);
     },
     //矩形树图点击事件
     clickFun(param) {
@@ -1844,6 +1855,10 @@ export default {
       width: 100%;
       height: 100%;
     }
+  }
+  .timechartcontent {
+    height: 100%;
+    width: 100%;
   }
   .chartcontent {
     height: 100%;
