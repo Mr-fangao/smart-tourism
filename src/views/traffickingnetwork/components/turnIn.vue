@@ -16,7 +16,7 @@ export default {
       },
       data: [],
       myChart: null, // 图表
-      title: '中国各省拐入统计'
+      title: '中国各省游客输入统计'
     }
   },
   beforeDestroy() {
@@ -49,14 +49,14 @@ export default {
       var data_teenagers = []
       var data_other = []
       var place_name = []
-      if (datas[0] === '拐入') {
-        this.title = '各地区拐入至' + datas[1][0].to + '儿童年龄组统计'
+      if (datas[0] === '输入') {
+        this.title = '各地区输入至' + datas[1][0].to + '儿童年龄组统计'
         for (let index = 0; index < datas[1].length; index++) {
           const element = datas[1][index]
           place_name.push(element.from)
         }
       } else {
-        this.title = datas[1][0].from + '拐出至各地区儿童年龄组统计'
+        this.title = datas[1][0].from + '输出至各地区游客年龄组统计'
         for (let index = 0; index < datas[1].length; index++) {
           const element = datas[1][index]
           place_name.push(element.to)

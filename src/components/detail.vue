@@ -79,16 +79,6 @@ export default {
       margin-right: -90% !important
   }
 }
-// .modal-footer {
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   height: 57px;
-//   border-top: 1px solid #ddd;
-// }
-// .modal-footer button {
-//   width: 100px;
-// }
 .modal-main {
   height: 50%;
   padding: 15px 40px;

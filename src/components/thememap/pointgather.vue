@@ -302,9 +302,9 @@ export default {
 .mapcontral {
   position: absolute;
   z-index: 1;
-  width: 40%;
-  height: 6%;
-  bottom: 45%;
+    width: 48%;
+    height: 5%;
+    bottom: 53%;
   left: 25.6%;
   display: flex;
   flex-direction: row;
@@ -384,8 +384,8 @@ export default {
   background: transparent;
   .control {
     position: absolute;
-    left: 54%;
-    top: 48%;
+    left: 66%;
+    top: 8%;
     width: 8%;
     z-index: 9999;
     height: 14%;

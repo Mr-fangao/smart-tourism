@@ -75,7 +75,7 @@ export default {
         where: 0,
         code: ''
       },
-      numbersName: '各省拐卖网络丢失儿童数',
+      numbersName: '已爬取评论总数',
       lose: 35854,
       // 尺度选择
       options: [{
@@ -89,13 +89,13 @@ export default {
         label: '区县'
       }],
       value: '省际',
-      mode: '拐出',
+      mode: '流出',
       modeOptions: [{
-        value: '拐出',
-        label: '拐出'
+        value: '流出',
+        label: '流出'
       }, {
-        value: '拐入',
-        label: '拐入'
+        value: '流入',
+        label: '流入'
       }],
       // 地图
       map: null,
@@ -164,7 +164,7 @@ export default {
       }
       if (this.json.where === 1) {
         data = shengline
-        if (that.mode === '拐出') {
+        if (that.mode === '流出') {
           const map1 = data.reduce((result, item) => {
             result[item.拐出省] = result[item.拐出省] || []
             result[item.拐出省].push(item)
@@ -201,7 +201,7 @@ export default {
         }
       } else if (this.json.where === 2) {
         data = shiline
-        if (that.mode === '拐出') {
+        if (that.mode === '流出') {
           const map1 = data.reduce((result, item) => {
             result[item.拐出市] = result[item.拐出市] || []
             result[item.拐出市].push(item)
@@ -258,7 +258,7 @@ export default {
         const element = qianxidata[y]
         count += element.count
       }
-      that.numbersName = this.json.name.substring(0, 4) + that.mode + '丢失儿童数'
+      that.numbersName = this.json.name.substring(0, 4) + that.mode + '游客数'
       that.lose = count
     },
     // 销毁图层

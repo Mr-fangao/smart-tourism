@@ -73,21 +73,21 @@
               <div class="myimg"></div>
             </div>
             <span class="partname"> 景点数 </span>
-            <span class="partnumber"> 233 </span>
+            <span class="partnumber"> {{ citycount.sensic }} </span>
           </div>
           <div class="Mpart toppart-part">
             <div class="partimg">
               <div class="myimg"></div>
             </div>
             <span class="partname"> 评论数 </span>
-            <span class="partnumber"> 1234 </span>
+            <span class="partnumber"> {{ citycount.comment }} </span>
           </div>
           <div class="Rpart toppart-part">
             <div class="partimg">
               <div class="myimg"></div>
             </div>
             <span class="partname"> 游客数 </span>
-            <span class="partnumber"> 2333 </span>
+            <span class="partnumber"> {{ citycount.tourist }} </span>
           </div>
         </div>
         <div class="datatime">数据更新时间:2022年3月19日</div>
@@ -398,24 +398,29 @@
       </div>
     </div>
     <div class="recommend-bottom">
-      <div class="chartcontent">
-        <div id="recommend-title" class="title">
-          <span>中国热门城市</span>
-        </div>
-        <div class="content" id="chart1"></div>
-      </div>
-      <div class="chartcontent">
-        <div id="recommend-title" class="title">
-          <span>{{ this.chartname }}特征词云</span>
-        </div>
-        <div class="content" ref="chartword"></div>
-      </div>
-      <div class="chartcontent">
-        <div id="recommend-title" class="title">
-          <span>{{ this.chartname }}游客来源</span>
-        </div>
-        <div class="content" id="chart2"></div>
-      </div>
+      <el-tabs v-model="activeName2" type="border-card">
+        <el-tab-pane label="城市总览" name="city">
+          <div class="chartcontent">
+            <div id="recommend-title" class="title">
+              <span>中国热门城市</span>
+            </div>
+            <div class="content" id="chart1"></div>
+          </div>
+          <div class="chartcontent">
+            <div id="recommend-title" class="title">
+              <span>{{ this.chartname }}特征词云</span>
+            </div>
+            <div class="content" ref="chartword"></div>
+          </div>
+          <div class="chartcontent">
+            <div id="recommend-title" class="title">
+              <span>{{ this.chartname }}游客来源</span>
+            </div>
+            <div class="content" id="chart2"></div>
+          </div>
+        </el-tab-pane>
+        <el-tab-pane label="时空变化" name="time"> </el-tab-pane>
+      </el-tabs>
     </div>
     <selectRegion />
   </div>
@@ -465,6 +470,11 @@ export default {
         level: 0,
       },
       //推荐项目
+      citycount: {
+        sensic: "1111",
+        comment: "22222",
+        tourist: "333333",
+      },
       input: "",
       distancechecked: false,
       seasonchecked: false,
@@ -491,6 +501,7 @@ export default {
       tablescoreRankData: [],
       //tab切换
       activeName: "recommendTab",
+      activeName2: "city",
       comp: "pointgather",
       //echarts数据
       chartname: "北京市",
@@ -666,6 +677,9 @@ export default {
       console.log(this.selectcity);
       if (this.selectcity.name == "南京市") {
         this.showmap(6);
+        this.citycount.sensic = "126";
+        this.citycount.comment = "126";
+        this.citycount.tourist = "126";
       }
     });
     // $(".el-checkbox").change(() => {
@@ -998,9 +1012,9 @@ export default {
 .mapcontral {
   position: absolute;
   z-index: 1;
-  width: 28%;
-  height: 6%;
-  bottom: 38.5%;
+  width: 48%;
+  height: 5%;
+  bottom: 46.5%;
   left: 25.6%;
   background-color: #12526ea9;
   .el-menu {
@@ -1690,7 +1704,7 @@ export default {
   width: 49%;
   position: absolute;
   z-index: 1;
-  height: 30%;
+  height: 37%;
   bottom: 8%;
   left: 25.5%;
   background: url("../assets/img/长方形.png") no-repeat;
@@ -1699,6 +1713,40 @@ export default {
   flex-direction: row;
   flex-wrap: nowrap;
   align-items: center;
+  .el-tabs--border-card {
+    background: transparent;
+    border: none;
+    height: 100%;
+    width: 100%;
+    .el-tab-pane {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+    }
+  }
+  /deep/.el-tabs--border-card > .el-tabs__header {
+    background: transparent;
+    border: none;
+    margin: 0%;
+  }
+  /deep/.el-tabs--border-card > .el-tabs__content {
+    padding: 3px;
+    height: 86%;
+  }
+  /deep/.el-tabs--border-card > .el-tabs__header .el-tabs__item {
+    border-left: none;
+    border-right: none;
+  }
+  /deep/.el-tabs--border-card > .el-tabs__header .el-tabs__item.is-active {
+    background: #2baccd6e;
+    color: #dcdfe6;
+    border-left: none;
+    border-right: none;
+    border-top: 0px solid #0cf3f3;
+    // border-bottom: 2px solid #0cf3f3;
+  }
   .chartcontent {
     height: 100%;
     width: 33.3%;
