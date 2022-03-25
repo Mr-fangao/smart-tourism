@@ -21,6 +21,8 @@
           :class="index === 1 ? 'active' : ''"
           plain
         >
+          <el-radio v-model="mapchange" label="1">&ensp;</el-radio>
+          <div class="mapimg map1"></div>
           <span class="tab" slot="title">聚合图</span>
         </el-menu-item>
         <el-menu-item
@@ -29,6 +31,8 @@
           :class="index === 2 ? 'active' : ''"
           plain
         >
+          <el-radio v-model="mapchange" label="2">&ensp;</el-radio>
+          <div class="mapimg map2"></div>
           <span class="tab" slot="title">分级图</span>
         </el-menu-item>
         <el-menu-item
@@ -37,6 +41,8 @@
           :class="index === 3 ? 'active' : ''"
           plain
         >
+          <el-radio v-model="mapchange" label="3">&ensp;</el-radio>
+          <div class="mapimg map3"></div>
           <span class="tab" slot="title">热力图</span>
         </el-menu-item>
         <el-menu-item
@@ -45,6 +51,8 @@
           :class="index === 4 ? 'active' : ''"
           plain
         >
+          <el-radio v-model="mapchange" label="4">&ensp;</el-radio>
+          <div class="mapimg map4"></div>
           <span class="tab" slot="title">时序图</span>
         </el-menu-item>
       </el-menu>
@@ -423,8 +431,8 @@
             <div class="content" id="chart2"></div>
           </div>
         </el-tab-pane>
-        <el-tab-pane label="时空变化" name="time" >
-          <div class="timechartcontent" >
+        <el-tab-pane label="时空变化" name="time">
+          <div class="timechartcontent">
             <div class="content" id="timechart"></div>
           </div>
         </el-tab-pane>
@@ -505,6 +513,7 @@ export default {
       //数据源选择
       checkList: ["飞猪", "艺龙", "途牛", "携程", "马蜂窝", "去哪儿"],
       //数据
+      mapchange: "",
       tableRankData: [],
       tablescoreRankData: [],
       //tab切换
@@ -884,7 +893,7 @@ export default {
       var myChart = echarts.init(chartDom);
       var option;
 
-      let base = +new Date(1968, 9, 3);
+      let base = +new Date(2015, 9, 3);
       let oneDay = 24 * 3600 * 1000;
       let date = [];
       let date2 = [];
@@ -895,14 +904,22 @@ export default {
         date.push(
           [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
         );
-        data.push(Math.round((Math.random() - 0.5) * 20 + data[i - 1]));
+        var absnum = Math.round((Math.random() - 0.5) * 20 + data2[i - 1]);
+        if (absnum < 0) {
+          absnum = -absnum;
+        }
+        data.push(absnum);
       }
       for (let i = 1; i < 20000; i++) {
         var now = new Date((base += oneDay));
         date2.push(
           [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
         );
-        data2.push(Math.round((Math.random() - 0.5) * 20 + data2[i - 1]));
+        var absnum = Math.round((Math.random() - 0.5) * 20 + data2[i - 1]);
+        if (absnum < 0) {
+          absnum = -absnum;
+        }
+        data2.push(absnum);
       }
       option = {
         tooltip: {
@@ -911,27 +928,32 @@ export default {
             return [pt[0], "10%"];
           },
         },
-        title: {
-          left: "center",
-          text: "Large Area Chart",
-        },
-        toolbox: {
-          feature: {
-            dataZoom: {
-              yAxisIndex: "none",
-            },
-            restore: {},
-            saveAsImage: {},
-          },
+        grid: {
+          left: "5%", //图表距边框的距离
+          right: "5%",
+          bottom: "20%",
+          top: "5%",
+          containLabel: true,
         },
         xAxis: {
           type: "category",
           boundaryGap: false,
           data: date,
+          axisLine: {
+            lineStyle: {
+              color: "white",
+            },
+          },
         },
         yAxis: {
+          splitLine: { show: false },
           type: "value",
           boundaryGap: [0, "10%"],
+          axisLine: {
+            lineStyle: {
+              color: "white",
+            },
+          },
         },
         dataZoom: [
           {
@@ -951,6 +973,21 @@ export default {
             symbol: "none",
             sampling: "lttb",
             data: data,
+            itemStyle: {
+              color: "rgb(255, 70, 131)",
+            },
+            areaStyle: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                {
+                  offset: 0,
+                  color: "rgb(255, 158, 68)",
+                },
+                {
+                  offset: 1,
+                  color: "rgb(255, 70, 131)",
+                },
+              ]),
+            },
           },
           {
             name: "Fake Data",
@@ -958,6 +995,21 @@ export default {
             symbol: "none",
             sampling: "lttb",
             data: data2,
+            itemStyle: {
+              color: "#D5F19F",
+            },
+            areaStyle: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                {
+                  offset: 0,
+                  color: "#758A4B",
+                },
+                {
+                  offset: 1,
+                  color: "#A9D750",
+                },
+              ]),
+            },
           },
         ],
       };
@@ -1115,7 +1167,7 @@ export default {
   z-index: 1;
   width: 48%;
   height: 5%;
-  bottom: 46.5%;
+  bottom: 45.3%;
   left: 25.6%;
   background-color: #12526ea9;
   .el-menu {
@@ -1128,9 +1180,37 @@ export default {
     display: flex;
     justify-content: space-around;
     align-items: center;
+    .mapimg {
+      width: 25%;
+      height: 65%;
+    }
+    .map1 {
+      width: 21%;
+      height: 95%;
+      background: url("../assets/img/theme/聚合.png") no-repeat;
+      background-size: 100% 100%;
+    }
+    .map2 {
+      background: url("../assets/img/theme/分级.png") no-repeat;
+      background-size: 100% 100%;
+    }
+    .map3 {
+      background: url("../assets/img/theme/热力图.png") no-repeat;
+      background-size: 100% 100%;
+    }
+    .map4 {
+      background: url("../assets/img/theme/时间.png") no-repeat;
+      background-size: 100% 100%;
+    }
+    .el-radio {
+      margin-right: 0;
+      .el-radio__label {
+        padding-left: 2px;
+      }
+    }
     .tab {
       height: 100%;
-      width: 100%;
+      width: 50%;
       display: flex;
       align-items: center;
       justify-content: space-around;
@@ -1138,9 +1218,9 @@ export default {
     }
   }
   .el-menu-item.is-active {
-    color: #15c5c5;
-    background: transparent;
-    border-bottom: 3px solid #c6e2ff;
+    // color: #15c5c5;
+    // background: transparent;
+    // border-bottom: 3px solid #c6e2ff;
   }
   .el-menu-item {
     width: 20%;
