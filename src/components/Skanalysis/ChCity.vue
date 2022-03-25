@@ -74,7 +74,7 @@ export default {
   },
   methods: {
     getData() {
-      axios.get("../../static/data/ChinaCity.json").then((res) => {
+      axios.get("../../assets/json/ChinaCity.json").then((res) => {
         this.tableData = res.data;
       });
     },

@@ -53,8 +53,9 @@ import deviationellipse from "../components/Skanalysis/ellipse.vue";
 import feelmonitor from "../components/feeling/feelmonitor.vue";
 import cold from "../components/Skanalysis/cold.vue";
 import odfx from "../components/Skanalysis/odfx.vue";
+import hotcold from "../components/Skanalysis/density.vue";
 export default {
-  components: { feelmonitor, deviationellipse, cold, odfx },
+  components: { feelmonitor, deviationellipse, cold, odfx,hotcold },
   name: "skAnalysis",
   data() {
     return {
@@ -68,7 +69,7 @@ export default {
       if (value === 1) this.comp = "deviationellipse";
       else if (value === 2) this.comp = "odfx";
       else if (value === 3) this.comp = "cold";
-      else if (value === 4) this.comp = "feelmonitor";
+      else if (value === 4) this.comp = "hotcold";
       // else if (value === 3) this.comp = "heatmap";
     },
   },

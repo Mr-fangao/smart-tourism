@@ -59,7 +59,7 @@ export default new Router({
     {
       path: '/skAnalysis',
       name: 'skAnalysis',
-      component: () => import("@/views/skAnalysis"),
+      component: () => import("@/components/Skanalysis/density.vue"),
       meta: {
         keepAlive: true
       }
