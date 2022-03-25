@@ -314,7 +314,7 @@ export default {
       this.$router.push({ name: "details" });
     },
     getDetail(val) {
-      this.porpID = val;
+      this.porpID = val.toString();
       this.show = true;
     },
     Realize() {
