@@ -935,7 +935,7 @@ export default {
         date.push(
           [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
         );
-        var absnum = Math.round((Math.random() - 0.5) * 20 + data2[i - 1]);
+        var absnum = Math.round((Math.random() - 0.5) * 20 + data[i - 1]);
         if (absnum < 0) {
           absnum = -absnum;
         }
@@ -953,6 +953,22 @@ export default {
         data2.push(absnum);
       }
       option = {
+        title: {
+          left: "left",
+          text: "游客每日数量变化",
+          textStyle: {
+            //文字颜色
+            color: "#ccc",
+            //字体风格,'normal','italic','oblique'
+            fontStyle: "normal",
+            //字体粗细 'normal','bold','bolder','lighter',100 | 200 | 300 | 400...
+            fontWeight: "bold",
+            //字体系列
+            fontFamily: "sans-serif",
+            //字体大小
+            fontSize: 14,
+          },
+        },
         tooltip: {
           trigger: "axis",
           position: function (pt) {
@@ -963,7 +979,7 @@ export default {
           left: "5%", //图表距边框的距离
           right: "5%",
           bottom: "20%",
-          top: "5%",
+          top: "12%",
           containLabel: true,
         },
         xAxis: {
