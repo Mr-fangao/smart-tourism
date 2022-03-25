@@ -628,6 +628,37 @@ export default {
         { value: 4070, name: "地质公园" },
         { value: 3995, name: "沙漠" },
       ],
+      njwordcloud: [
+        { value: 106, name: "夫子庙" },
+        { value: 85, name: "报恩寺" },
+        { value: 84, name: "溧水" },
+        { value: 80, name: "牛首山" },
+        { value: 72, name: "总统府" },
+        { value: 68, name: "栖霞山" },
+        { value: 60, name: "明孝陵" },
+        { value: 56, name: "博物馆" },
+        { value: 55, name: "中华门" },
+        { value: 55, name: "瞻园" },
+        { value: 54, name: "汤山" },
+        { value: 49, name: "秦淮河" },
+        { value: 45, name: "老门东" },
+        { value: 44, name: "瓮城" },
+        { value: 41, name: "中山陵" },
+        { value: 39, name: "石臼" },
+        { value: 36, name: "太平天国" },
+        { value: 31, name: "栖霞寺" },
+        { value: 27, name: "地质公园" },
+        { value: 25, name: "梧桐" },
+        { value: 24, name: "东南大学" },
+        { value: 23, name: "古都" },
+        { value: 23, name: "公馆" },
+        { value: 22, name: "梅花" },
+        { value: 21, name: "樱花" },
+        { value: 20, name: "河海大学" },
+        { value: 19, name: "王府" },
+        { value: 16, name: "紫金山" },
+        { value: 16, name: "银杏" },
+      ],
       chartdata1: [
         {
           name: "北京",
@@ -1126,6 +1157,46 @@ export default {
 };
 </script>
 
+<style>
+.el-picker-panel {
+  background: rgba(35, 89, 107, 0.9);
+  border: 1px solid #4a8faabd;
+  font-size: 8pt;
+  text-align: center;
+  line-height: 25px;
+  border-radius: 5px;
+  color: #fff;
+}
+.el-date-range-picker__content.is-left {
+  border-right: 1px solid #909399da;
+}
+.el-date-table td.next-month,
+.el-date-table td.prev-month {
+  color: #909399;
+}
+.el-date-table th {
+  color: #fff;
+}
+.el-date-range-picker__header {
+  color: #fff;
+}
+.el-date-table td.in-range div,
+.el-date-table td.in-range div:hover,
+.el-date-table.is-week-mode .el-date-table__row.current div,
+.el-date-table.is-week-mode .el-date-table__row:hover div {
+  background-color: #4a8faabd;
+}
+.el-picker-panel__icon-btn {
+  color: #fff;
+}
+.el-date-editor .el-range-separator {
+  width: 10%;
+  color: #fff;
+}
+.el-date-editor .el-range-input{
+  width: 57%;
+}
+</style>
 <style scoped lang="less">
 #recommend {
   position: fixed;
