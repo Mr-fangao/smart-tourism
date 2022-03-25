@@ -11,6 +11,7 @@
             :class="index === 1 ? 'active' : ''"
             plain
           >
+            <el-radio v-model="datachange" label="1">&ensp;</el-radio>
             <span class="tab" slot="title">景点数据</span>
           </el-menu-item>
           <el-menu-item
@@ -19,6 +20,7 @@
             :class="index === 2 ? 'active' : ''"
             plain
           >
+            <el-radio v-model="datachange" label="2">&ensp;</el-radio>
             <span class="tab" slot="title">评论数据</span>
           </el-menu-item>
           <el-menu-item
@@ -27,6 +29,7 @@
             :class="index === 3 ? 'active' : ''"
             plain
           >
+            <el-radio v-model="datachange" label="3">&ensp;</el-radio>
             <span class="tab" slot="title">游记数据</span>
           </el-menu-item>
           <el-menu-item
@@ -35,6 +38,7 @@
             :class="index === 4 ? 'active' : ''"
             plain
           >
+            <el-radio v-model="datachange" label="4">&ensp;</el-radio>
             <span class="tab" slot="title">游客数据</span>
           </el-menu-item>
         </el-menu>
@@ -59,6 +63,11 @@ import heatMapData from "../../assets/json/heatMapData.json";
 import testjson from "../../assets/json/point.json";
 export default {
   name: "pointgather",
+  data() {
+    return {
+      datachange: "",
+    };
+  },
   mounted() {
     this.initmap();
   },
@@ -302,9 +311,9 @@ export default {
 .mapcontral {
   position: absolute;
   z-index: 1;
-  width: 40%;
-  height: 6%;
-  bottom: 45%;
+  width: 68.7%;
+  height: 5%;
+  bottom: 50.8%;
   left: 25.6%;
   display: flex;
   flex-direction: row;
@@ -325,6 +334,12 @@ export default {
       display: flex;
       justify-content: space-around;
       align-items: center;
+      .el-radio {
+        margin-right: 0;
+        .el-radio__label {
+          padding-left: 0px;
+        }
+      }
       .tab {
         height: 100%;
         width: 100%;
@@ -335,9 +350,9 @@ export default {
       }
     }
     .el-menu-item.is-active {
-      color: #15c5c5;
-      background: transparent;
-      border-bottom: 3px solid #c6e2ff;
+      // color: #15c5c5;
+      // background: transparent;
+      // border-bottom: 3px solid #c6e2ff;
     }
     .el-menu-item {
       width: 20%;
@@ -384,8 +399,8 @@ export default {
   background: transparent;
   .control {
     position: absolute;
-    left: 54%;
-    top: 48%;
+    left: 66%;
+    top: 8%;
     width: 8%;
     z-index: 9999;
     height: 14%;

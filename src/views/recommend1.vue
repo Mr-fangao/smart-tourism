@@ -21,6 +21,8 @@
           :class="index === 1 ? 'active' : ''"
           plain
         >
+          <el-radio v-model="mapchange" label="1">&ensp;</el-radio>
+          <div class="mapimg map1"></div>
           <span class="tab" slot="title">聚合图</span>
         </el-menu-item>
         <el-menu-item
@@ -29,6 +31,8 @@
           :class="index === 2 ? 'active' : ''"
           plain
         >
+          <el-radio v-model="mapchange" label="2">&ensp;</el-radio>
+          <div class="mapimg map2"></div>
           <span class="tab" slot="title">分级图</span>
         </el-menu-item>
         <el-menu-item
@@ -37,6 +41,8 @@
           :class="index === 3 ? 'active' : ''"
           plain
         >
+          <el-radio v-model="mapchange" label="3">&ensp;</el-radio>
+          <div class="mapimg map3"></div>
           <span class="tab" slot="title">热力图</span>
         </el-menu-item>
         <el-menu-item
@@ -45,6 +51,8 @@
           :class="index === 4 ? 'active' : ''"
           plain
         >
+          <el-radio v-model="mapchange" label="4">&ensp;</el-radio>
+          <div class="mapimg map4"></div>
           <span class="tab" slot="title">时序图</span>
         </el-menu-item>
       </el-menu>
@@ -73,21 +81,21 @@
               <div class="myimg"></div>
             </div>
             <span class="partname"> 景点数 </span>
-            <span class="partnumber"> 233 </span>
+            <span class="partnumber"> {{ citycount.sensic }} </span>
           </div>
           <div class="Mpart toppart-part">
             <div class="partimg">
               <div class="myimg"></div>
             </div>
             <span class="partname"> 评论数 </span>
-            <span class="partnumber"> 1234 </span>
+            <span class="partnumber"> {{ citycount.comment }} </span>
           </div>
           <div class="Rpart toppart-part">
             <div class="partimg">
               <div class="myimg"></div>
             </div>
             <span class="partname"> 游客数 </span>
-            <span class="partnumber"> 2333 </span>
+            <span class="partnumber"> {{ citycount.tourist }} </span>
           </div>
         </div>
         <div class="datatime">数据更新时间:2022年3月19日</div>
@@ -100,7 +108,7 @@
           <el-tabs v-model="activeName" type="border-card">
             <el-tab-pane label="好评榜" name="recommendTab">
               <el-table
-                :data="tableRankData"
+                :data="tablescoreRankData"
                 height="328px"
                 stripe
                 style="width: 100%"
@@ -398,26 +406,39 @@
       </div>
     </div>
     <div class="recommend-bottom">
-      <div class="chartcontent">
-        <div id="recommend-title" class="title">
-          <span>中国热门城市</span>
-        </div>
-        <div class="content" id="chart1"></div>
-      </div>
-      <div class="chartcontent">
-        <div id="recommend-title" class="title">
-          <span>{{ this.chartname }}特征词云</span>
-        </div>
-        <div class="content" ref="chartword"></div>
-      </div>
-      <div class="chartcontent">
-        <div id="recommend-title" class="title">
-          <span>{{ this.chartname }}游客来源</span>
-        </div>
-        <div class="content" id="chart2"></div>
-      </div>
+      <el-tabs
+        v-model="activeName2"
+        type="border-card"
+        @tab-click="handleTabClick"
+      >
+        <el-tab-pane label="城市总览" name="city">
+          <div class="chartcontent">
+            <div id="recommend-title" class="title">
+              <span>中国热门城市</span>
+            </div>
+            <div class="content" id="chart1"></div>
+          </div>
+          <div class="chartcontent">
+            <div id="recommend-title" class="title">
+              <span>{{ this.chartname }}特征词云</span>
+            </div>
+            <div class="content" ref="chartword"></div>
+          </div>
+          <div class="chartcontent">
+            <div id="recommend-title" class="title">
+              <span>{{ this.chartname }}游客来源</span>
+            </div>
+            <div class="content" id="chart2"></div>
+          </div>
+        </el-tab-pane>
+        <el-tab-pane label="时空变化" name="time">
+          <div class="timechartcontent">
+            <div class="content" id="timechart"></div>
+          </div>
+        </el-tab-pane>
+      </el-tabs>
     </div>
-         <selectRegion />
+    <selectRegion />
   </div>
 </template>
 <script>
@@ -440,7 +461,7 @@ import loading from "../components/loading.vue";
 import wordcloud from "../assets/js/echarts-wordcloud-master/index";
 import echarts from "echarts";
 
-import eventBum from '../views/traffickingnetwork/public/js/EvebtBus'
+import eventBum from "../views/traffickingnetwork/public/js/EvebtBus";
 import SelectRegion from "../views/traffickingnetwork/components/selectRegion.vue";
 export default {
   name: "recommend",
@@ -460,11 +481,16 @@ export default {
     return {
       isShow: true,
       //区域选择
-      selectcity:{
-        name: '中国',
-        level: 0
+      selectcity: {
+        name: "中国",
+        level: 0,
       },
       //推荐项目
+      citycount: {
+        sensic: "1111",
+        comment: "22222",
+        tourist: "333333",
+      },
       input: "",
       distancechecked: false,
       seasonchecked: false,
@@ -487,12 +513,43 @@ export default {
       //数据源选择
       checkList: ["飞猪", "艺龙", "途牛", "携程", "马蜂窝", "去哪儿"],
       //数据
+      mapchange: "",
       tableRankData: [],
+      tablescoreRankData: [],
       //tab切换
       activeName: "recommendTab",
+      activeName2: "city",
       comp: "pointgather",
       //echarts数据
       chartname: "北京市",
+      startclouddata: [
+        { value: 773, name: "故宫" },
+        { value: 502, name: "长城" },
+        { value: 270, name: "建筑" },
+        { value: 212, name: "胡同" },
+        { value: 192, name: "天安门" },
+        { value: 182, name: "颐和园" },
+        { value: 170, name: "博物馆" },
+        { value: 158, name: "环球" },
+        { value: 154, name: "历史" },
+        { value: 138, name: "八达岭" },
+        { value: 112, name: "天坛" },
+        { value: 105, name: "度假" },
+        { value: 104, name: "清华" },
+        { value: 100, name: "银杏" },
+        { value: 96, name: "北海" },
+        { value: 94, name: "王府" },
+        { value: 94, name: "皇帝" },
+        { value: 93, name: "慕田峪" },
+        { value: 92, name: "大学" },
+        { value: 88, name: "乾隆" },
+        { value: 87, name: "景山公园" },
+        { value: 86, name: "八达岭长城" },
+        { value: 84, name: "南锣鼓巷" },
+        { value: 79, name: "紫禁城" },
+        { value: 79, name: "地坛" },
+        { value: 75, name: "慕田峪长城" },
+      ],
       wordclouddata: [
         { value: 327, name: "亚龙湾" },
         { value: 278, name: "海南" },
@@ -629,14 +686,18 @@ export default {
     this.getCityRank();
     this.initChart1(this.chartdata1);
     this.initChart2(this.chartdata2);
+    // this.initTimechart();
     this.wordCloudInti2(this.$refs.chartword2, this.wordcloudchina);
-    this.wordCloudInti(this.$refs.chartword, this.wordclouddata);
-     eventBum.$on("json", (json) => {
+    this.wordCloudInti(this.$refs.chartword, this.startclouddata);
+    eventBum.$on("json", (json) => {
       this.selectcity.name = json.name;
       this.selectcity.level = json.where;
-      console.log(this.selectcity)
-      if(this.selectcity.name !=undefined){
+      console.log(this.selectcity);
+      if (this.selectcity.name == "南京市") {
         this.showmap(6);
+        this.citycount.sensic = "126";
+        this.citycount.comment = "126";
+        this.citycount.tourist = "126";
       }
     });
     // $(".el-checkbox").change(() => {
@@ -670,20 +731,33 @@ export default {
       request.get("/api/data/cityRank").then((res) => {
         console.log(res);
         this.tableCityData = res.data;
-        // that.$nextTick(() => {
-        //   that.$refs.interfaceTable.setCurrentRow(that.tableCityData[0]);
-        // });
       });
     },
     getRankTable() {
-      request.get("/api/data/scenicRank").then((res) => {
-        console.log(res);
-        console.log(res.data[1].city);
-        this.tableRankData = res.data;
-        for (let i = 1; i <= res.data.length; i++) {
-          this.tableRankData[i - 1].rank = i;
-        }
-      });
+      request
+        .post("/api/data/scenicRank", {
+          type: "hot",
+        })
+        .then((res) => {
+          console.log(res);
+          console.log(res.data[1].city);
+          this.tableRankData = res.data;
+          for (let i = 1; i <= res.data.length; i++) {
+            this.tableRankData[i - 1].rank = i;
+          }
+        });
+      request
+        .post("/api/data/scenicRank", {
+          type: "score",
+        })
+        .then((res) => {
+          console.log(res);
+          console.log(res.data[1].city);
+          this.tablescoreRankData = res.data;
+          for (let i = 1; i <= res.data.length; i++) {
+            this.tablescoreRankData[i - 1].rank = i;
+          }
+        });
     },
     getLabel(val) {
       let label = val;
@@ -719,6 +793,14 @@ export default {
       console.log(this.input);
       console.log(this.checkList);
       console.log(this.cityname);
+    },
+    handleTabClick(tab) {
+      console.log(tab.name);
+      if (tab.name == "time") {
+        setTimeout(() => {
+          this.initTimechart();
+        }, 500);
+      }
     },
     //矩形树图
     initChart1(data) {
@@ -806,12 +888,142 @@ export default {
       };
       myChart1.setOption(option);
     },
+    initTimechart() {
+      var chartDom = document.getElementById("timechart");
+      var myChart = echarts.init(chartDom);
+      var option;
+
+      let base = +new Date(2015, 9, 3);
+      let oneDay = 24 * 3600 * 1000;
+      let date = [];
+      let date2 = [];
+      let data = [Math.random() * 300];
+      let data2 = [Math.random() * 300];
+      for (let i = 1; i < 20000; i++) {
+        var now = new Date((base += oneDay));
+        date.push(
+          [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
+        );
+        var absnum = Math.round((Math.random() - 0.5) * 20 + data2[i - 1]);
+        if (absnum < 0) {
+          absnum = -absnum;
+        }
+        data.push(absnum);
+      }
+      for (let i = 1; i < 20000; i++) {
+        var now = new Date((base += oneDay));
+        date2.push(
+          [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
+        );
+        var absnum = Math.round((Math.random() - 0.5) * 20 + data2[i - 1]);
+        if (absnum < 0) {
+          absnum = -absnum;
+        }
+        data2.push(absnum);
+      }
+      option = {
+        tooltip: {
+          trigger: "axis",
+          position: function (pt) {
+            return [pt[0], "10%"];
+          },
+        },
+        grid: {
+          left: "5%", //图表距边框的距离
+          right: "5%",
+          bottom: "20%",
+          top: "5%",
+          containLabel: true,
+        },
+        xAxis: {
+          type: "category",
+          boundaryGap: false,
+          data: date,
+          axisLine: {
+            lineStyle: {
+              color: "white",
+            },
+          },
+        },
+        yAxis: {
+          splitLine: { show: false },
+          type: "value",
+          boundaryGap: [0, "10%"],
+          axisLine: {
+            lineStyle: {
+              color: "white",
+            },
+          },
+        },
+        dataZoom: [
+          {
+            type: "inside",
+            start: 0,
+            end: 10,
+          },
+          {
+            start: 0,
+            end: 10,
+          },
+        ],
+        series: [
+          {
+            name: "Fake Data",
+            type: "line",
+            symbol: "none",
+            sampling: "lttb",
+            data: data,
+            itemStyle: {
+              color: "rgb(255, 70, 131)",
+            },
+            areaStyle: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                {
+                  offset: 0,
+                  color: "rgb(255, 158, 68)",
+                },
+                {
+                  offset: 1,
+                  color: "rgb(255, 70, 131)",
+                },
+              ]),
+            },
+          },
+          {
+            name: "Fake Data",
+            type: "line",
+            symbol: "none",
+            sampling: "lttb",
+            data: data2,
+            itemStyle: {
+              color: "#D5F19F",
+            },
+            areaStyle: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                {
+                  offset: 0,
+                  color: "#758A4B",
+                },
+                {
+                  offset: 1,
+                  color: "#A9D750",
+                },
+              ]),
+            },
+          },
+        ],
+      };
+      option && myChart.setOption(option, true);
+    },
     //矩形树图点击事件
     clickFun(param) {
       if (param.type == "click") {
         this.chartname = param.name;
-
-        // alert(param.name);
+        if (param.name == "三亚") {
+          this.wordCloudInti(this.$refs.chartword, this.wordclouddata);
+        } else if (param.name == "北京") {
+          this.wordCloudInti(this.$refs.chartword, this.startclouddata);
+        }
       }
     },
     wordCloudInti(wrapEl, data) {
@@ -953,9 +1165,9 @@ export default {
 .mapcontral {
   position: absolute;
   z-index: 1;
-  width: 28%;
-  height: 6%;
-  bottom: 38.5%;
+  width: 48%;
+  height: 5%;
+  bottom: 45.3%;
   left: 25.6%;
   background-color: #12526ea9;
   .el-menu {
@@ -968,9 +1180,37 @@ export default {
     display: flex;
     justify-content: space-around;
     align-items: center;
+    .mapimg {
+      width: 25%;
+      height: 65%;
+    }
+    .map1 {
+      width: 21%;
+      height: 95%;
+      background: url("../assets/img/theme/聚合.png") no-repeat;
+      background-size: 100% 100%;
+    }
+    .map2 {
+      background: url("../assets/img/theme/分级.png") no-repeat;
+      background-size: 100% 100%;
+    }
+    .map3 {
+      background: url("../assets/img/theme/热力图.png") no-repeat;
+      background-size: 100% 100%;
+    }
+    .map4 {
+      background: url("../assets/img/theme/时间.png") no-repeat;
+      background-size: 100% 100%;
+    }
+    .el-radio {
+      margin-right: 0;
+      .el-radio__label {
+        padding-left: 2px;
+      }
+    }
     .tab {
       height: 100%;
-      width: 100%;
+      width: 50%;
       display: flex;
       align-items: center;
       justify-content: space-around;
@@ -978,9 +1218,9 @@ export default {
     }
   }
   .el-menu-item.is-active {
-    color: #15c5c5;
-    background: transparent;
-    border-bottom: 3px solid #c6e2ff;
+    // color: #15c5c5;
+    // background: transparent;
+    // border-bottom: 3px solid #c6e2ff;
   }
   .el-menu-item {
     width: 20%;
@@ -1322,6 +1562,9 @@ export default {
   .sensicrecommend {
     width: 100%;
     flex: 5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     .title {
       height: 5% !important;
     }
@@ -1642,7 +1885,7 @@ export default {
   width: 49%;
   position: absolute;
   z-index: 1;
-  height: 30%;
+  height: 37%;
   bottom: 8%;
   left: 25.5%;
   background: url("../assets/img/长方形.png") no-repeat;
@@ -1651,6 +1894,52 @@ export default {
   flex-direction: row;
   flex-wrap: nowrap;
   align-items: center;
+  .el-tabs--border-card {
+    background: transparent;
+    border: none;
+    height: 100%;
+    width: 100%;
+    .el-tab-pane {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+    }
+  }
+  /deep/.el-tabs--border-card > .el-tabs__header {
+    background: transparent;
+    border: none;
+    margin: 0%;
+  }
+  /deep/.el-tabs--border-card > .el-tabs__content {
+    padding: 3px;
+    height: 86%;
+  }
+  /deep/.el-tabs--border-card > .el-tabs__header .el-tabs__item {
+    border-left: none;
+    border-right: none;
+  }
+  /deep/.el-tabs--border-card > .el-tabs__header .el-tabs__item.is-active {
+    background: #2baccd6e;
+    color: #dcdfe6;
+    border-left: none;
+    border-right: none;
+    border-top: 0px solid #0cf3f3;
+    // border-bottom: 2px solid #0cf3f3;
+  }
+  .content {
+    width: 100%;
+    height: 100%;
+    .chartcontent {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .timechartcontent {
+    height: 100%;
+    width: 100%;
+  }
   .chartcontent {
     height: 100%;
     width: 33.3%;

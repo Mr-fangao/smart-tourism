@@ -313,7 +313,7 @@ export default {
   z-index: 1;
   width: 40%;
   height: 6%;
-  bottom: 38.5%;
+  bottom: 51%;
   left: 25.6%;
   display: flex;
   flex-direction: row;
