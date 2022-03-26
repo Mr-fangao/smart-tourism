@@ -14,7 +14,10 @@
               <div class="titleimg"></div>
               <span>景点名称 : {{ detaildata.name }}</span>
             </div>
-            <div class="address labelcontent"></div>
+            <div class="address labelcontent">
+              <div class="titleimg"></div>
+              <span>地址 : {{ detaildata.address }}</span>
+            </div>
             <div class="name labelcontent"></div>
             <div class="hotandscore labelcontent"></div>
             <div class="level labelcontent"></div>
@@ -143,7 +146,12 @@ export default {
         height: 20%;
         display: flex;
         align-items: center;
-        font-weight:800;
+        font-weight: 800;
+        > span {
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+        }
         .titleimg {
           width: 10%;
           height: 50%;

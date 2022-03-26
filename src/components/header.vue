@@ -114,9 +114,9 @@ export default {
     routerjump(index) {
       if (index != null) this.$router.push({ name: "Login" });
     },
-    quit(){
+    quit() {
       this.$router.push({ name: "Login" });
-    }
+    },
   },
   beforeDestroy() {
     if (this.formatDate) {
@@ -136,7 +136,7 @@ export default {
     margin-left: 1%;
     color: #b8c1c8a1;
   }
-  .times:hover{
+  .times:hover {
     color: #2fa9ce;
   }
   nav {
@@ -257,6 +257,10 @@ export default {
 }
 .el-dropdown-link {
   cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 .el-dropdown-menu__item:focus,
 .el-dropdown-menu__item:not(.is-disabled):hover {
