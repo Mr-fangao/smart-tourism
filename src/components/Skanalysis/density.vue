@@ -132,9 +132,15 @@ export default {
     // let a3 = ($('.timeH').html().split(" ")[2] || '').split("-")
     // this.date = a1+'年'+a2+'月'+a3+'日'
     
-    this.date = $('.timeH').html().split("-")[0] + '年' 
-    + $('.timeH').html().split("-")[1] + '月' + $('.timeH').html().split("-")[2].split(" ")[0] + '日'
-
+if ($(".timeH").html()) {
+      this.date =
+        $(".timeH").html().split("-")[0] +
+        "年" +
+        $(".timeH").html().split("-")[1] +
+        "月" +
+        $(".timeH").html().split("-")[2].split(" ")[0] +
+        "日";
+    }
     const _self = this; //定义一个_self防止后续操作中this丢失
     const option = {
       //定义一个包含有JS API中js开发包和css样式文件的对象
@@ -153,7 +159,7 @@ export default {
         "esri/layers/MapImageLayer",
         "esri/widgets/Legend",
         "esri/views/layers/FeatureLayerView",
-        "dojo/domReady!"
+        "dojo/domReady"
       ],
       option
     ).then(([Map, Basemap, TileLayer, MapView, SceneView, FeatureLayer, MapImageLayer, Legend, FeatureLayerView]) => {
