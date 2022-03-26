@@ -49,6 +49,7 @@
 </template>
 
 <script>
+
 import deviationellipse from "../components/Skanalysis/ellipse.vue";
 import feelmonitor from "../components/feeling/feelmonitor.vue";
 import cold from "../components/Skanalysis/cold.vue";
