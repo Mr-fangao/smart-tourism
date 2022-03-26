@@ -32,9 +32,9 @@
 
 <script>
 import city from "../components/sensations/city.vue";
-import feelmonitor from "../components/feeling/feelmonitor.vue";
+import scenic from "../components/sensations/scenic.vue";
 export default {
-  components: { city, feelmonitor },
+  components: { city, scenic },
   name: "feelings",
   data() {
     return {
@@ -46,7 +46,7 @@ export default {
   methods: {
     show(value) {
       if (value === 1) this.comp = "city";
-      else if (value === 2) this.comp = "feelmonitor";
+      else if (value === 2) this.comp = "scenic";
       // else if (value === 3) this.comp = "heatmap";
     },
   },
