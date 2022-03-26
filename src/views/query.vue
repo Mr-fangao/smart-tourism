@@ -52,6 +52,9 @@
                   width="60"
                   :show-overflow-tooltip="true"
                 >
+                   <template slot-scope="scope">
+                    <span>{{ scope.row.score | rounding }}</span>
+                  </template>
                 </el-table-column>
                 <el-table-column
                   prop="hot"
@@ -324,6 +327,11 @@ export default {
     // startDraw(){
     //   draw.changeMode('draw_point')
     // },
+  },
+    filters: {
+    rounding(value) {
+      return value.toFixed(2);
+    },
   },
   watch: {},
 };
