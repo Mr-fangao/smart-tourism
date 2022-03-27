@@ -326,6 +326,10 @@ export default {
   },
   mounted() {
     this.initChart5();
+    this.initChart1();
+    this.initChart2();
+    this.initChart3();
+    this.initChart4();
     let myChart5 = this.$echarts.init(this.$refs.chart5);
     myChart5.setOption(this.option5);
     let myChart1 = this.$echarts.init(document.getElementById("chart1"));
@@ -758,6 +762,12 @@ export default {
     });
   },
   methods: {
+    initChart1() {
+      
+    },
+    initChart2() {},
+    initChart3() {},
+    initChart4() {},
     //     clickFun(param) {
     //     if (typeof param.seriesIndex == 'undefined') {
     //         return;

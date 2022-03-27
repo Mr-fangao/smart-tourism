@@ -10,7 +10,7 @@
 </template>
 <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <script>
-import heatMapData from "../../assets/json/heatMapData.json";
+import timemapdata from "../../assets/json/timemapdata.json";
 export default {
   name: "heatmap",
   mounted() {
@@ -34,133 +34,128 @@ export default {
         const month = parseInt(e.target.value, 10);
         filterBy(month);
       });
-     const months = [
-            '1月',
-            '2月',
-            '3月',
-            '4月',
-            '5月',
-            '6月',
-            '7月',
-            '8月',
-            '9月',
-            '10月',
-            '11月',
-            '12月'
-        ];
+      const months = [
+        "1月",
+        "2月",
+        "3月",
+        "4月",
+        "5月",
+        "6月",
+        "7月",
+        "8月",
+        "9月",
+        "10月",
+        "11月",
+        "12月",
+      ];
 
-        function filterBy(month) {
-            const filters = ['==', 'month', month];
-            map.setFilter('earthquake-circles', filters);
-            map.setFilter('earthquake-labels', filters);
+      function filterBy(month) {
+        const filters = ["==", "month", month];
+        map.setFilter("earthquake-circles", filters);
+        map.setFilter("earthquake-labels", filters);
 
-            // Set the label to the month
-            document.getElementById('month').textContent = months[month];
+        // Set the label to the month
+        document.getElementById("month").textContent = months[month];
+      }
+
+      map.on("load", () => {
+        d3.json(
+          "https://docs.mapbox.com/mapbox-gl-js/assets/significant-earthquakes-2015.geojson",
+          jsonCallback
+        );
+      });
+
+      function jsonCallback(err, data) {
+        if (err) {
+          throw err;
         }
-
-        map.on('load', () => {
-            d3.json(
-                'https://docs.mapbox.com/mapbox-gl-js/assets/significant-earthquakes-2015.geojson',
-                jsonCallback
-            );
+        // Create a month property value based on time
+        // used to filter against.
+        data.features = data.features.map((d) => {
+          d.properties.month = new Date(d.properties.time).getMonth();
+          // d.properties.coordinates = new location(d.properties.geometry).getElementById("coordinates");
+          return d;
         });
 
-        function jsonCallback(err, data) {
-            if (err) {
-                throw err;
-            }
-            // Create a month property value based on time
-            // used to filter against.
-            data.features = data.features.map((d) => {
-                d.properties.month = new Date(d.properties.time).getMonth();
-                // d.properties.coordinates = new location(d.properties.geometry).getElementById("coordinates");
-                return d;
-            });
+        map.addSource("earthquakes", {
+          type: "geojson",
+          data: data,
+        });
 
-            map.addSource('earthquakes', {
-                'type': 'geojson',
-                data: data
-            });
+        map.addLayer({
+          id: "earthquake-circles",
+          type: "circle",
+          source: "earthquakes",
+          paint: {
+            "circle-color": [
+              "interpolate",
+              ["linear"],
+              ["get", "mag"],
+              6,
+              "#FCA107",
+              8,
+              "#7F3121",
+            ],
+            "circle-opacity": 0.75,
+            "circle-radius": [
+              "interpolate",
+              ["linear"],
+              ["get", "mag"],
+              6,
+              20,
+              8,
+              40,
+            ],
+          },
+        });
 
-            map.addLayer({
-                'id': 'earthquake-circles',
-                'type': 'circle',
-                'source': 'earthquakes',
-                'paint': {
-                    'circle-color': [
-                        'interpolate',
-                        ['linear'],
-                        ['get', 'mag'],
-                        6,
-                        '#FCA107',
-                        8,
-                        '#7F3121'
-                    ],
-                    'circle-opacity': 0.75,
-                    'circle-radius': [
-                        'interpolate',
-                        ['linear'],
-                        ['get', 'mag'],
-                        6,
-                        20,
-                        8,
-                        40
-                    ]
-                }
-            }
-            );
+        map.addLayer({
+          id: "earthquake-labels",
+          type: "symbol",
+          source: "earthquakes",
+          layout: {
+            "text-field": ["concat", ["to-string", ["get", "mag"]], "m"],
+            "text-font": ["Open Sans Bold", "Arial Unicode MS Bold"],
+            "text-size": 12,
+          },
+          paint: {
+            "text-color": "rgba(0,0,0,0.5)",
+          },
+        });
 
-            map.addLayer({
-                'id': 'earthquake-labels',
-                'type': 'symbol',
-                'source': 'earthquakes',
-                'layout': {
-                    'text-field': ['concat', ['to-string', ['get', 'mag']], 'm'],
-                    'text-font': ['Open Sans Bold', 'Arial Unicode MS Bold'],
-                    'text-size': 12
-                },
-                'paint': {
-                    'text-color': 'rgba(0,0,0,0.5)'
-                }
-            });
+        // Set filter to first month of the year
+        // 0 = January
+        filterBy(0);
+        // Create a popup, but don't add it to the map yet.
+        // create the popup
+        const popup = new mapboxgl.Popup({
+          closeButton: true,
+          closeOnClick: true,
+        });
+        map.on("click", "earthquake-circles", (e) => {
+          // Copy coordinates array.
+          const coordinates = e.features[0].geometry.coordinates.slice();
+          const place = e.features[0].properties.place;
 
-            // Set filter to first month of the year
-            // 0 = January
-            filterBy(0);
-            // Create a popup, but don't add it to the map yet.
-            // create the popup
-            const popup = new mapboxgl.Popup({
-                closeButton: true,
-                closeOnClick: true
-            })
-            map.on('click', 'earthquake-circles', (e) => {
-                // Copy coordinates array.
-                const coordinates = e.features[0].geometry.coordinates.slice();
-                const place = e.features[0].properties.place;
+          // Ensure that if the map is zoomed out such that multiple
+          // copies of the feature are visible, the popup appears
+          // over the copy being pointed to.
+          while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+          }
 
-                // Ensure that if the map is zoomed out such that multiple
-                // copies of the feature are visible, the popup appears
-                // over the copy being pointed to.
-                while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-                    coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-                }
+          new mapboxgl.Popup().setLngLat(coordinates).setHTML(place).addTo(map);
+        });
+        // Change the cursor to a pointer when the mouse is over the places layer.
+        map.on("mouseenter", "earthquake-circles", () => {
+          map.getCanvas().style.cursor = "pointer";
+        });
 
-                new mapboxgl.Popup()
-                    .setLngLat(coordinates)
-                    .setHTML(place)
-                    .addTo(map);
-
-            });
-            // Change the cursor to a pointer when the mouse is over the places layer.
-            map.on('mouseenter', 'earthquake-circles', () => {
-                map.getCanvas().style.cursor = 'pointer';
-            });
-
-            // Change it back to a pointer when it leaves.
-            map.on('mouseleave', 'earthquake-circles', () => {
-                map.getCanvas().style.cursor = '';
-            });
-        }
+        // Change it back to a pointer when it leaves.
+        map.on("mouseleave", "earthquake-circles", () => {
+          map.getCanvas().style.cursor = "";
+        });
+      }
     },
   },
 };
@@ -228,5 +223,4 @@ body {
   max-width: 200px;
   font: 12px/20px "Helvetica Neue", Arial, Helvetica, sans-serif;
 }
-
 </style>

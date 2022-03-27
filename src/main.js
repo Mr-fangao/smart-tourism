@@ -12,9 +12,11 @@ import 'font-awesome/css/font-awesome.min.css';
 // import Cesium from '../node_modules/cesium/Build/Cesium'
 // import Cesium from 'cesium/Source/Cesium'
 // Vue.prototype.Cesium = Cesium
-
+import vueSeamlessScroll from "vue-seamless-scroll";
+Vue.use(vueSeamlessScroll);
 
 import 'jquery'
+
 // 引入echarts
 import * as echarts from 'echarts';
 import 'echarts-gl'
