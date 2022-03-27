@@ -36,12 +36,12 @@
         </el-col>
         <el-col :span="8">
           <div class="col-content">
-            <div class="row2title">
+            <div class="row3title">
               <div class="imgBK"></div>
               <span>城市风光一览</span>
             </div>
             <div class="row1chartcontent" id="chart4">
-              <el-carousel :interval="4000" type="card" height="200px">
+              <el-carousel :interval="4000" arrow="always" indicator-position="outside">
                 <el-carousel-item v-for="item in 6" :key="item">
                   <h3 class="medium">{{ item }}</h3>
                 </el-carousel-item>
@@ -161,7 +161,8 @@ export default {
             axisLine: {
               //这是x轴文字颜色
               lineStyle: {
-                color: " #999999",
+                // color: " #999999",
+                color:"#fff",
               },
             },
             data: [
@@ -188,11 +189,18 @@ export default {
             axisLine: {
               //这是x轴文字颜色
               lineStyle: {
-                color: " #999999",
+                // color: " #999999",
+                color:"#fff",
               },
             },
           },
         ],
+        grid: {
+          left:"10%",
+          right:"5%",
+          top:"15%",
+          bottom:"15%",
+        },
         series: [
           {
             name: "城市形象",
@@ -293,9 +301,9 @@ export default {
           },
         },
         grid: {
-          x: 45,
-          y: 5,
-          x2: 0,
+          x: 55,
+          y: 15,
+          x2: 10,
           y2: 40,
           // containLabel: true,
         },
@@ -307,7 +315,8 @@ export default {
           axisLine: {
             //这是x轴文字颜色
             lineStyle: {
-              color: " #999999",
+              // color: " #999999",
+              color:"#fff",
             },
           },
           boundaryGap: [0, 0.01],
@@ -317,7 +326,8 @@ export default {
           axisLine: {
             //这是x轴文字颜色
             lineStyle: {
-              color: " #999999",
+              // color: " #999999",
+              color:"#fff",
             },
           },
           data: ["Brazil", "Indonesia", "USA", "India", "China", "World"],
@@ -361,7 +371,7 @@ export default {
         color: ["#91cc75", "#fec42c", "#ee6666", "#fc8452"],
         legend: {
           top: 10,
-          right: 30,
+          right: 45,
           itemHeight: 8,
           itemWidth: 8,
           orient: "vertical",
@@ -377,10 +387,10 @@ export default {
           formatter: "{@value}", // 点旁边显示label，这里使用name: '横坐标'这样写也可以，鼠标移入出现提示。
         },
         grid: {
-          left: "15%",
-          right: 30,
+          left: "5%",
+          right: "20%",
           top: "10%",
-          bottom: "15%",
+          bottom: "25%",
         },
         xAxis: {
           type: "value",
@@ -392,7 +402,8 @@ export default {
           axisLine: {
             //这是x轴文字颜色
             lineStyle: {
-              color: " #F5FDFD80",
+              // color: " #F5FDFD80",
+              color:"#fff",
             },
           },
           max: 22,
@@ -414,9 +425,9 @@ export default {
             show: false,
           },
           axisLine: {
-            //这是x轴文字颜色
             lineStyle: {
-              color: " #F5FDFD80",
+              // color: " #F5FDFD80",
+              color:"#fff",
             },
           },
         },
@@ -663,8 +674,8 @@ export default {
           justify-content: flex-start;
           align-items: center;
           .imgBK {
-            height: 90%;
-            width: 7%;
+            height: 87%;
+            width: 5%;
             margin-left: 1%;
             background: url("../../assets/img/panelIcon.png") no-repeat;
             background-size: 100% 100%;
@@ -674,6 +685,25 @@ export default {
             font-size: 12pt;
           }
         }
+        .row3title{
+          height: 12%;
+          width: 100%;
+          color: aliceblue;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          .imgBK {
+            height: 87%;
+            width: 9.5%;
+            background: url("../../assets/img/panelIcon.png") no-repeat;
+            background-size: 100% 100%;
+          }
+          > span {
+            color: rgb(115, 215, 228);
+            font-size: 12pt;
+          }
+        }
+        
         .row1chartcontent {
           height: 100%;
           width: 100%;
@@ -781,7 +811,7 @@ export default {
   }
   .travels-bottom {
     display: flex;
-    height: 38%;
+    height: 30%;
     flex-direction: column;
     width: 100%;
     .col-content {
@@ -832,6 +862,6 @@ export default {
 /deep/.el-carousel__container {
   margin-top: 4%;
   margin-bottom: 2%;
-  height: 150px !important;
+  height: 200px !important;
 }
 </style>
