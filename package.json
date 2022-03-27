@@ -22,7 +22,7 @@
     "echarts-gl": "^1.1.0",
     "echarts-wordcloud": "1.0",
     "element-ui": "^2.15.6",
-    "esri-loader": "^3.4.0",
+    "esri-loader": "^2.13.0",
     "font-awesome": "4.7",
     "jquery": "^3.6.0",
     "less-loader": "^4.1.0",

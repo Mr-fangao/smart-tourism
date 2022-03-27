@@ -830,7 +830,7 @@ export default {
       if (tab.name == "time") {
         setTimeout(() => {
           this.initTimechart();
-        }, 500);
+        }, 100);
       }
     },
     //矩形树图
