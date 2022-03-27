@@ -86,21 +86,21 @@
           <div class="echartbottom">
             <div class="echartbottomTitle">
               <img src="../../assets/img/panelIcon.png" alt="" />
-              <span>旅游正面情感热搜</span>
+              <span>旅游正面热搜</span>
             </div>
             <div class="btmCht" id="btmChart1"></div>
           </div>
           <div class="echartbottom">
             <div class="echartbottomTitle">
               <img src="../../assets/img/panelIcon.png" alt="" />
-              <span>旅游负面情感热搜</span>
+              <span>旅游负面热搜</span>
             </div>
             <div class="btmCht" id="btmChart2"></div>
           </div>
           <div class="echartbottom">
             <div class="echartbottomTitle">
               <img src="../../assets/img/panelIcon.png" alt="" />
-              <span>实时旅游情感关键词</span>
+              <span>实时旅游情感分布</span>
             </div>
             <div class="btmCht" id="btmChart3"></div>
           </div>
@@ -177,6 +177,7 @@ export default {
   name: "feelanalysis",
   data() {
     return {
+      currenttime:'',
       leftdata: [
         {
           name: "#10万多株樱花沿路浪漫盛放#",
@@ -325,11 +326,13 @@ export default {
     };
   },
   mounted() {
+    this.getTime();
     this.initChart5();
     this.initChart1();
     this.initChart2();
     this.initChart3();
-    this.initChart4();
+    // this.initChart4();
+
     let myChart5 = this.$echarts.init(this.$refs.chart5);
     myChart5.setOption(this.option5);
     let myChart1 = this.$echarts.init(document.getElementById("chart1"));
@@ -763,10 +766,291 @@ export default {
   },
   methods: {
     initChart1() {
-      
+      let myChart = this.$echarts.init(document.getElementById("btmChart1"));
+      myChart.setOption({
+        // title: {
+        //   text: "总热搜讨论数随热搜分布中,主要集中在新冠疫苗",
+        //   textStyle: {
+        //     fontSize: 12,
+        //     color: "rgba(255, 255, 255, .8)",
+        //   },
+        //   padding: [20, 0, 0, 20], //标题位置
+        // },
+        //grid区域
+        grid: {
+          top: "5%", //距上边距
+          left: "65%", //距离左边距
+          right: "5%", //距离右边距
+          bottom: "15%", //距离下边距
+        },
+        yAxis: {
+          show: true, //是否显示
+          type: "",
+          name: "",
+          nameLocation: "end",
+          nameTextStyle: {
+            //坐标轴名称样式
+            color: "rgba(255, 255, 255, .8)",
+            padding: [5, 0, 0, -5], //坐标轴名称相对位置
+          },
+          axisLabel: {
+            textStyle: {
+              fontSize: 12,
+              color: "rgba(255, 255, 255, .8)",
+            },
+          },
+          data: [
+            "传递两会声音凝聚发展能量",
+            "800年玉兰花王绽放美如雪",
+            "华山桃花有多美",
+            "美丽的草原旅行，放飞自我",
+            "敦煌鸣沙山月牙泉雪后太美了",
+          ],
+        },
+        xAxis: {
+          show: true, //是否显示
+          axisTick: {
+            //坐标轴 刻度
+            show: true, //是否显示
+            inside: true, //是否朝内
+
+            lineStyle: {
+              type: "solid",
+            },
+          },
+
+          axisLabel: {
+            textStyle: {
+              fontSize: 12,
+              color: "rgba(255, 255, 255, .8)",
+            },
+            //坐标轴 标签
+            show: true, //是否显示
+            inside: false, //是否朝内
+            margin: 8, //刻度标签与轴线之间的距离
+          },
+          splitLine: {
+            //grid 区域中的分隔线
+            show: true, //是否显示，'category'类目轴不显示，此时我的y轴为类目轴，splitLine属性是有意义的
+            lineStyle: {
+              color: "rgba(255, 255, 255, .8)",
+              width: 1,
+              type: "dashed", //类型
+            },
+          },
+        },
+
+        //内容数据
+        series: [
+          {
+            name: "", //系列名称
+            type: "bar", //类型
+            legendHoverLink: true, //是否启用图例 hover 时的联动高亮
+            label: {
+              //图形上的文本标签
+              show: true,
+              position: "inside", //相对位置
+              rotate: 0, //旋转角度
+              color: "#eee",
+            },
+            itemStyle: {
+              //图形形状
+              color: "#CC9900",
+              barBorderRadius: [0, 100, 100, 0],
+            },
+            barWidth: "15", //柱形宽度
+            barCategoryGap: "5%", //柱形间距
+
+            data: [1535.22, 1591.75, 1599.25, 1633.55, 1840.33],
+          },
+        ],
+      });
     },
-    initChart2() {},
-    initChart3() {},
+    initChart2() {
+      let myChart = this.$echarts.init(document.getElementById("btmChart2"));
+      myChart.setOption({
+        // title: {
+        //   text: "总热搜讨论数随热搜分布中,主要集中在新冠疫苗",
+        //   textStyle: {
+        //     fontSize: 12,
+        //     color: "rgba(255, 255, 255, .8)",
+        //   },
+        //   padding: [20, 0, 0, 20], //标题位置
+        // },
+        //grid区域
+        grid: {
+          top: "5%", //距上边距
+          left: "65%", //距离左边距
+          right: "5%", //距离右边距
+          bottom: "15%", //距离下边距
+        },
+        yAxis: {
+          show: true, //是否显示
+          type: "",
+          name: "",
+          nameLocation: "end",
+          nameTextStyle: {
+            //坐标轴名称样式
+            color: "rgba(255, 255, 255, .8)",
+            padding: [5, 0, 0, -5], //坐标轴名称相对位置
+          },
+          axisLabel: {
+            textStyle: {
+              fontSize: 12,
+              color: "rgba(255, 255, 255, .8)",
+            },
+          },
+          data: [
+            "全国现有7地高风险81地中风险",
+            "搜救人员向遇难飞机方向默哀3分钟",
+            "威尼斯景区“中国制造”商品被禁",
+            "双黄连可抑制新型冠状病毒",
+            "钟南山刷屏照片真相",
+          ],
+        },
+        xAxis: {
+          show: true, //是否显示
+          axisTick: {
+            //坐标轴 刻度
+            show: true, //是否显示
+            inside: true, //是否朝内
+
+            lineStyle: {
+              type: "solid",
+            },
+          },
+
+          axisLabel: {
+            textStyle: {
+              fontSize: 12,
+              color: "rgba(255, 255, 255, .8)",
+            },
+            //坐标轴 标签
+            show: true, //是否显示
+            inside: false, //是否朝内
+            margin: 8, //刻度标签与轴线之间的距离
+          },
+          splitLine: {
+            //grid 区域中的分隔线
+            show: true, //是否显示，'category'类目轴不显示，此时我的y轴为类目轴，splitLine属性是有意义的
+            lineStyle: {
+              color: "rgba(255, 255, 255, .8)",
+              width: 1,
+              type: "dashed", //类型
+            },
+          },
+        },
+
+        //内容数据
+        series: [
+          {
+            name: "", //系列名称
+            type: "bar", //类型
+            legendHoverLink: true, //是否启用图例 hover 时的联动高亮
+            label: {
+              //图形上的文本标签
+              show: true,
+              position: "inside", //相对位置
+              rotate: 0, //旋转角度
+              color: "#eee",
+            },
+            itemStyle: {
+              //图形形状
+              color: "#CC9900",
+              barBorderRadius: [0, 100, 100, 0],
+            },
+            barWidth: "15", //柱形宽度
+            barCategoryGap: "5%", //柱形间距
+
+            data: [1535.22, 1591.75, 1599.25, 1633.55, 1840.33],
+          },
+        ],
+      });
+    },
+    initChart3() {
+      let myChart = this.$echarts.init(document.getElementById("btmChart3"));
+      myChart.setOption({
+        title: {
+          text: "   热搜数量随话题情绪分类分布中,最高位正面，最低为负面",
+          subtext: '    数据更新时间:'+this.currenttime,
+          textStyle: {
+            color: "rgba(255, 255, 255, .8)",
+            fontSize: 12,
+          },
+        },
+        tooltip: {
+          trigger: "item",
+          formatter: "{a} <br/>{b} : {c}%",
+        },
+        // legend: {
+        //   orient: "horizontal",
+        //   x: "center",
+        //   y: "top",
+        //   padding: [25, 50, 0, 0],
+        //   data: ["中性", "正面", "负面"],
+        //   textStyle: {
+        //     color: "rgba(255, 255, 255, .8)",
+        //   },
+        // },
+        grid: {
+          top: "5%", //距上边距
+          left: "-10%", //距离左边距
+          right: "5%", //距离右边距
+          bottom: "5%", //距离下边距
+        },
+        calculable: true,
+        series: [
+          {
+            name: "漏斗图",
+            type: "funnel",
+            left: 0,
+            top: 50,
+            bottom: 60,
+            width: "100%",
+            height: "50%",
+            // height: {totalHeight} - y - y2,
+            min: 10,
+            max: 100,
+            // minSize: '0%',
+            // maxSize: '100%',
+            minSize: "10%", //每一块的最小宽度
+            maxSize: "55%", //每一块的最大快递,一次去除掉尖角
+            sort: "descending",
+            gap: 0, //每一块之间的间隔
+            // label: {            //设置每一块的名字是显示在图里面还是外面
+            //     show: true,
+            //     position: 'inside'
+            // },
+            labelLine: {
+              length: 20, //设置每一块的名字前面的线的长度
+              lineStyle: {
+                width: 1, //设置每一块的名字前面的线的宽度
+                type: "solid", //设置每一块的名字前面的线的类型
+              },
+            },
+            itemStyle: {
+              normal: {
+                label: {
+                  show: true,
+                  formatter: "{b}:{c}",
+                },
+                borderColor: "rgba(255, 255, 255, .8)", //每一块的边框颜色
+              },
+            },
+            emphasis: {
+              label: {
+                fontSize: 20,
+              },
+            },
+            data: [
+              { value: 156.2, name: "正面", barHeight: 100 },
+              { value: 36.67, name: "中性" },
+              { value: 23.59, name: "负面" },
+            ],
+          },
+        ],
+      });
+    },
     initChart4() {},
     //     clickFun(param) {
     //     if (typeof param.seriesIndex == 'undefined') {
@@ -790,6 +1074,19 @@ export default {
         //Y轴最大值的设置：向上取整并家500
         this.option5.yAxis[0].max = Math.ceil(this.plan_table[0].sum) + 500;
       }
+    },
+        getTime() {
+      let date = new Date();
+      let year = date.getFullYear(); // 年
+      let month = date.getMonth() + 1; // 月
+      let day = date.getDate(); // 日
+      let hour = date.getHours(); // 时
+      hour = hour < 10 ? "0" + hour : hour; // 如果只有一位，则前面补零
+      let minute = date.getMinutes(); // 分
+      minute = minute < 10 ? "0" + minute : minute; // 如果只有一位，则前面补零
+      let second = date.getSeconds(); // 秒
+      second = second < 10 ? "0" + second : second; // 如果只有一位，则前面补零
+      this.currenttime =`${year}/${month}/${day}`+` ${hour}:${minute}:${second}`;
     },
   },
 };
@@ -891,6 +1188,10 @@ export default {
         .echartbottom {
           height: 100%;
           width: 100%;
+          .btmCht {
+            height: 80%;
+            width: 100%;
+          }
         }
       }
       .el-row:nth-child(3) {
@@ -915,6 +1216,11 @@ export default {
         .echartbottom {
           height: 100%;
           width: 100%;
+          .btmCht {
+            height: 80%;
+            width: 100%;
+            color: #d3dce6;
+          }
         }
         .echartbottomTitle:nth-child(1) {
           > img {

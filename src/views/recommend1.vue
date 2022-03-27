@@ -767,7 +767,7 @@ export default {
     getRankTable() {
       request
         .post("/api/data/scenicRank", {
-          type: "hot",
+          model: "hot",
         })
         .then((res) => {
           console.log(res);
@@ -779,7 +779,7 @@ export default {
         });
       request
         .post("/api/data/scenicRank", {
-          type: "score",
+          model: "score",
         })
         .then((res) => {
           console.log(res);

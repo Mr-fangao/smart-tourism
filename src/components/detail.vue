@@ -153,6 +153,9 @@ export default {
           console.log(res);
           this.com = res.data.comcount;
           this.score = res.data.scoreavg;
+          for(var i=0;i<this.score.length;i++){
+            this.score[i]=this.score[i].toFixed(2)
+          }
           setTimeout(() => {
             this.initChart(this.com, this.score);
           }, 50);
@@ -525,7 +528,7 @@ export default {
           .li-scoll {
             list-style: none;
             display: flex;
-            margin-bottom: 0.5%;
+            margin-bottom: 1.5%;
             cursor: pointer;
             line-height: 20px;
             .pinglun {
