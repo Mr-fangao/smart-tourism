@@ -784,7 +784,7 @@ export default {
       }
     }
     .travels-text {
-      color: rgb(141, 141, 141);
+      color: #cfcfcf;
       font-size: 12pt;
       height: 87%;
       overflow-y: auto;

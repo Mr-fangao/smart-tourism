@@ -112,7 +112,7 @@
           >
             <div class="echartbottomTitle">
               <img src="../../assets/img/panelIcon.png" alt="" />
-              <span>景点关注度年变化图</span>
+              <span>景点关注度月变化图</span>
             </div>
             <div class="btmCht" id="btmChart5" ref="chart5"></div>
           </div>
@@ -177,7 +177,25 @@ export default {
   name: "feelanalysis",
   data() {
     return {
-      currenttime:'',
+      currenttime: "",
+      citydata1: [633, 929, 1213, 513, 308, 203, 177, 193, 187, 147, 194, 259],
+      citydata2: [499, 158, 202, 103, 74, 349, 420, 670, 511, 1036, 914, 139],
+      citydata3: [14, 9, 8, 18, 17, 6, 6, 6, 5, 325, 1828, 323],
+      citydata4: [75, 13, 28, 37, 100, 184, 1431, 2102, 167, 221, 550, 92],
+      xdata: [
+        "一月",
+        "二月",
+        "三月",
+        "四月",
+        "五月",
+        "六月",
+        "七月",
+        "八月",
+        "九月",
+        "十月",
+        "十一月",
+        "十二月",
+      ],
       leftdata: [
         {
           name: "#10万多株樱花沿路浪漫盛放#",
@@ -245,50 +263,68 @@ export default {
           "#ffa500",
           "#40e0d0",
         ],
+        grid: {
+          top: "5%", //距上边距
+          left: "10%", //距离左边距
+          right: "10%", //距离右边距
+          bottom: "30%", //距离下边距
+        },
         tooltip: { trigger: "axis" },
         //图例--折线提示提示
         legend: {
           x: "center",
-          y: "30",
+          y: "5",
           borderColor: "#6699FF", //边框颜色
           textStyle: {
             color: "#1e90ff", // 图例文字颜色
           },
-          data: ["大修金额", "中修沥青砼金额", "预防性养护金额", "金额总计"],
+          data: ["珠江南田温泉", "云台山", "长隆野生动物园", "华山"],
         },
         calculable: true,
         xAxis: {
           data: [],
+          axisLine: {
+            lineStyle: {
+              // 设置x、y轴颜色
+              color: "#989DA1",
+            },
+          },
         },
         yAxis: [
           {
             splitLine: { show: false },
             type: "value",
             name: "单位:万元",
-            min: "0",
-            max: "",
+            // min: "0",
+            // max: "",
             splitNumber: 20,
+            axisLine: {
+              lineStyle: {
+                // 设置x、y轴颜色
+                color: "#989DA1",
+              },
+            },
           },
         ],
         series: [
           {
             type: "line",
-            name: "大修金额",
+            name: "珠江南田温泉",
             data: [],
           },
           {
             type: "line",
-            name: "中修沥青砼金额",
+            name: "云台山",
             data: [],
           },
           {
             type: "line",
-            name: "预防性养护金额",
+            name: "长隆野生动物园",
             data: [],
           },
           {
             type: "line",
-            name: "金额总计",
+            name: "华山",
             data: [],
           },
         ],
@@ -331,7 +367,7 @@ export default {
     this.initChart1();
     this.initChart2();
     this.initChart3();
-    // this.initChart4();
+    this.initChart4();
 
     let myChart5 = this.$echarts.init(this.$refs.chart5);
     myChart5.setOption(this.option5);
@@ -765,6 +801,19 @@ export default {
     });
   },
   methods: {
+    getScenicdata() {
+      for (var i = 0; i < this.idlist.length; i++) {}
+      request
+        .post("/api/data/comMonth", {
+          model: name,
+        })
+        .then((res) => {
+          console.log(res);
+          // setTimeout(() => {
+          //   this.initChart(this.com, this.score);
+          // }, 50);
+        });
+    },
     initChart1() {
       let myChart = this.$echarts.init(document.getElementById("btmChart1"));
       myChart.setOption({
@@ -904,8 +953,8 @@ export default {
             "全国现有7地高风险81地中风险",
             "搜救人员向遇难飞机方向默哀3分钟",
             "威尼斯景区“中国制造”商品被禁",
-            "双黄连可抑制新型冠状病毒",
-            "钟南山刷屏照片真相",
+            "硬性捆绑销售引争议",
+            "48小时核酸成多地出行标配",
           ],
         },
         xAxis: {
@@ -972,7 +1021,7 @@ export default {
       myChart.setOption({
         title: {
           text: "   热搜数量随话题情绪分类分布中,最高位正面，最低为负面",
-          subtext: '    数据更新时间:'+this.currenttime,
+          subtext: "    数据更新时间:" + this.currenttime,
           textStyle: {
             color: "rgba(255, 255, 255, .8)",
             fontSize: 12,
@@ -1051,7 +1100,58 @@ export default {
         ],
       });
     },
-    initChart4() {},
+    initChart4() {
+      var chartDom = document.getElementById("btmChart6");
+      var myChart = this.$echarts.init(chartDom);
+      var option;
+
+      option = {
+        legend: {
+          textStyle: {
+            //图例文字的样式
+            color: "#ccc",
+            fontSize: 12,
+          },
+        },
+        tooltip: {},
+        dataset: {
+          source: [
+            ["product", "积极", "中性", "消极"],
+            ["北京", 73.3, 85.8, 63.7],
+            ["上海", 83.1, 73.4, 65.1],
+            ["广州", 86.4, 75.2, 82.5],
+            ["深圳", 72.4, 53.9, 39.1],
+          ],
+        },
+        grid: {
+          top: "10%", //距上边距
+          left: "12%", //距离左边距
+          right: "10%", //距离右边距
+          bottom: "10%", //距离下边距
+        },
+        xAxis: {
+          type: "category",
+          axisLine: {
+            lineStyle: {
+              // 设置x、y轴颜色
+              color: "#989DA1",
+            },
+          },
+        },
+        yAxis: {
+          splitLine: { show: false },
+          axisLine: {
+            lineStyle: {
+              // 设置x、y轴颜色
+              color: "#989DA1",
+            },
+          },
+        },
+        series: [{ type: "bar" }, { type: "bar" }, { type: "bar" }],
+      };
+
+      option && myChart.setOption(option);
+    },
     //     clickFun(param) {
     //     if (typeof param.seriesIndex == 'undefined') {
     //         return;
@@ -1061,32 +1161,33 @@ export default {
     //     }
     // },
     initChart5() {
-      for (var i = 0; i < this.plan_table.length; i++) {
-        this.option5.xAxis.data.push(this.plan_table[i].xxx);
+      for (var i = 0; i < this.citydata1.length; i++) {
+        this.option5.xAxis.data.push(this.xdata[i]);
         //大修金额总计
-        this.option5.series[0].data.push(this.plan_table[i].d);
+        this.option5.series[0].data.push(this.citydata1[i]);
         //中修金额
-        this.option5.series[1].data.push(this.plan_table[i].z);
+        this.option5.series[1].data.push(this.citydata2[i]);
         //预防性养护金额合计
-        this.option5.series[2].data.push(this.plan_table[i].y);
+        this.option5.series[2].data.push(this.citydata3[i]);
         //金额总计
-        this.option5.series[3].data.push(this.plan_table[i].sum);
+        this.option5.series[3].data.push(this.citydata4[i]);
         //Y轴最大值的设置：向上取整并家500
-        this.option5.yAxis[0].max = Math.ceil(this.plan_table[0].sum) + 500;
+        // this.option5.yAxis[0].max = Math.ceil(this.citydata1[i]);
       }
     },
-        getTime() {
+    getTime() {
       let date = new Date();
       let year = date.getFullYear(); // 年
       let month = date.getMonth() + 1; // 月
-      let day = date.getDate(); // 日
-      let hour = date.getHours(); // 时
+      let day = date.getDate() - 1; // 日
+      let hour = date.getHours() - 3; // 时
       hour = hour < 10 ? "0" + hour : hour; // 如果只有一位，则前面补零
-      let minute = date.getMinutes(); // 分
+      let minute = date.getMinutes() - 1; // 分
       minute = minute < 10 ? "0" + minute : minute; // 如果只有一位，则前面补零
       let second = date.getSeconds(); // 秒
       second = second < 10 ? "0" + second : second; // 如果只有一位，则前面补零
-      this.currenttime =`${year}/${month}/${day}`+` ${hour}:${minute}:${second}`;
+      this.currenttime =
+        `${year}/${month}/${day}` + ` ${hour}:${minute}:${second}`;
     },
   },
 };

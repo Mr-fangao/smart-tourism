@@ -153,8 +153,8 @@ export default {
           console.log(res);
           this.com = res.data.comcount;
           this.score = res.data.scoreavg;
-          for(var i=0;i<this.score.length;i++){
-            this.score[i]=this.score[i].toFixed(2)
+          for (var i = 0; i < this.score.length; i++) {
+            this.score[i] = this.score[i].toFixed(2);
           }
           setTimeout(() => {
             this.initChart(this.com, this.score);
@@ -239,6 +239,7 @@ export default {
             splitLine: { show: false },
             type: "value",
             name: "分数",
+
             axisLine: {
               lineStyle: {
                 // 设置y轴颜色
@@ -250,6 +251,7 @@ export default {
             splitLine: { show: false },
             type: "value",
             name: "游客数",
+            min: "dataMin",
             axisLine: {
               lineStyle: {
                 // 设置y轴颜色
