@@ -98,7 +98,7 @@
             <span class="partnumber"> {{ citycount.tourist }} </span>
           </div>
         </div>
-        <div class="datatime">数据更新时间:2022年3月19日</div>
+        <div class="datatime">数据更新时间:{{ this.datatime }}</div>
       </div>
       <div class="ranktable">
         <div id="recommend-title" class="title">
@@ -485,6 +485,7 @@ export default {
         name: "中国",
         level: 0,
       },
+      datatime: "",
       //推荐项目
       citycount: {
         sensic: "1111",
@@ -516,6 +517,7 @@ export default {
       mapchange: "",
       tableRankData: [],
       tablescoreRankData: [],
+    
       //tab切换
       activeName: "recommendTab",
       activeName2: "city",
@@ -712,6 +714,7 @@ export default {
   },
   created() {},
   mounted() {
+    this.getTime();
     this.showmap(1);
     this.getRankTable();
     this.getCityRank();
@@ -832,6 +835,13 @@ export default {
           this.initTimechart();
         }, 100);
       }
+    },
+    getTime() {
+      let date = new Date();
+      let year = date.getFullYear(); // 年
+      let month = date.getMonth() + 1; // 月
+      let day = date.getDate() - 1; // 日
+      this.datatime = `${year}/${month}/${day}`;
     },
     //矩形树图
     initChart1(data) {
@@ -1209,7 +1219,7 @@ export default {
   width: 10%;
   color: #fff;
 }
-.el-date-editor .el-range-input{
+.el-date-editor .el-range-input {
   width: 57%;
 }
 </style>

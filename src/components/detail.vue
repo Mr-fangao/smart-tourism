@@ -54,6 +54,7 @@
                   <span class="content">评论</span>
                   <span class="score">评分</span>
                   <span class="time">评论时间</span>
+                  <span class="website">数据源</span>
                 </li>
               </ul>
             </div>
@@ -73,6 +74,7 @@
                     </div>
                     <div class="fenshu">{{ item.score }}</div>
                     <div class="riqi">{{ item.date }}</div>
+                    <div class="laiyuan">{{ item.website }}</div>
                   </li>
                 </ul>
               </vue-seamless-scroll>
@@ -131,10 +133,12 @@ export default {
         })
         .then((res) => {
           console.log(res);
-          // setTimeout(() => {
-          //   this.initChart();
-          // }, 100);
           this.listData = res.data.commentEntity;
+          if (this.listData.date[0].length > 11) {
+            for (var i = 0; i < this.listData.length; i++) {
+              this.listData.date[i] = this.listData.date[i].slice(0, 9);
+            }
+          }
           this.$forceUpdate();
           this.detaildata = res.data.scenicEntity;
           this.getChartData(res.data.scenicEntity.name);
@@ -505,12 +509,19 @@ export default {
             }
             .time {
               height: 100%;
-              width: 20%;
+              width: 15%;
               display: flex;
               align-items: center;
               justify-content: center;
             }
             .score {
+              height: 100%;
+              width: 5%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            }
+            .website {
               height: 100%;
               width: 10%;
               display: flex;
@@ -548,10 +559,13 @@ export default {
             //   white-space: pre-line; /*合并空白符序列，但是保留换行符。*/
             // }
             .fenshu {
-              width: 10%;
+              width: 5%;
             }
             .riqi {
-              width: 20%;
+              width: 15%;
+            }
+            .laiyuan {
+              width: 10%;
             }
           }
         }

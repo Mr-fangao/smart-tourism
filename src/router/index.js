@@ -57,9 +57,9 @@ export default new Router({
       }
     },
     {
-      path: '/skAnalysis',
-      name: 'skAnalysis',
-      component: () => import("@/components/Skanalysis/density.vue"),
+      path: '/ArcMap',
+      name: 'ArcMap',
+      component: () => import("@/views/spacetime/index"),
       meta: {
         keepAlive: true
       }

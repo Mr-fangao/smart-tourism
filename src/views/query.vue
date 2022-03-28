@@ -126,10 +126,12 @@
 
 <script>
 // import * as turf from "@turf/turf";
-import MapboxDraw from "@mapbox/mapbox-gl-draw";
+// import MapboxDraw from "@mapbox/mapbox-gl-draw";
+
 const mapboxgl = require("mapbox-gl");
-import "@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css";
-import "mapbox-gl/dist/mapbox-gl.css";
+
+// import "@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css";
+// import "mapbox-gl/dist/mapbox-gl.css";
 import request from "../utils/request";
 import Bus from "../assets/js/bus.js";
 // import areaSelect from "../components/areaSelect.vue";
@@ -144,7 +146,7 @@ export default {
     // modalVisible: false,
     // areaSelect,
     wordcloud,
-    MapboxDraw,
+    // MapboxDraw,
     detail,
     loading,
     // "dialog-bar": dialogBar,
@@ -193,26 +195,6 @@ export default {
         center: [105, 35],
         zoom: 3.5,
       });
-      this.map.on("click", function (e) {});
-      // var nav = new mapboxgl.NavigationControl();
-      // this.map.addControl(nav, "top-right");
-      var draw = new MapboxDraw({
-        displayControlsDefault: false,
-        controls: {
-          polygon: true,
-          trash: true,
-        },
-      });
-      this.map.addControl(draw, "top-right");
-      this.map.on("draw.create", updateArea);
-      function updateArea(e) {
-        var data = draw.getAll();
-        if (data.features.length > 0) {
-          console.log(data.features[0].geometry.coordinates[0]);
-        } else {
-          console.log("no data");
-        }
-      }
     },
     flyToLocation(x, y) {
       console.log(x, y);
@@ -529,39 +511,5 @@ export default {
   width: 100%;
   background: #0cf3f3;
 }
-/deep/.mapboxgl-ctrl-group:not(:empty) {
-  background: #8fcef1;
-}
-/deep/.mapbox-gl-draw_ctrl-draw-btn {
-  width: 85px;
-  height: 40px;
-  margin-bottom: 8%;
-  border: none;
-  z-index: 0;
-}
 
-/deep/.mapboxgl-ctrl-group:not(:empty) {
-  background: transparent;
-  box-shadow: none;
-  z-index: 0;
-}
-/deep/.mapbox-gl-draw_polygon {
-  background: url(../assets/img/fw.png) no-repeat;
-  background-size: 100% 100%;
-}
-
-/deep/.mapbox-gl-draw_trash {
-  background: url(../assets/img/qc.png) no-repeat;
-  background-size: 100% 100%;
-}
-/deep/.mapboxgl-ctrl-top-right .mapboxgl-ctrl {
-  margin: 30px 10px 0 0;
-  position: relative;
-  display: block;
-  right: 977%;
-  z-index: 0;
-}
-/deep/.mapboxgl-ctrl button:not(:disabled):hover {
-  background-color: #042d42;
-}
 </style>

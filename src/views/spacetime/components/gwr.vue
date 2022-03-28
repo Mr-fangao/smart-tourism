@@ -1,7 +1,7 @@
 <template>
   <div style="position: absolute;width: 100%;height: 100%">
     <div id="MapSanJ1" />
-    <el-button id="select">{{ msg }}</el-button>
+    <!-- <el-button id="select">{{ msg }}</el-button> -->
   </div>
 </template>
 <script>

@@ -4,7 +4,7 @@
     <div class="city-left">
       <div class="city-left-select">
         <div class="title"><span>城市形象感知分析</span></div>
-        <areaSelect></areaSelect>
+        <div class="selectcontent"></div>
       </div>
       <div class="city-left-bottom">
         <div class="col-content">
@@ -41,9 +41,24 @@
               <span>城市风光一览</span>
             </div>
             <div class="row1chartcontent" id="chart4">
-              <el-carousel :interval="4000" arrow="always" indicator-position="outside">
-                <el-carousel-item v-for="item in 6" :key="item">
-                  <h3 class="medium">{{ item }}</h3>
+              <el-carousel
+                :interval="2000"
+                arrow="always"
+                indicator-position="outside"
+              >
+                <el-carousel-item
+                  v-for="(item, index) in cityimages"
+                  :key="index"
+                >
+                  <img
+                    :src="item.url"
+                    alt="无图片"
+                    style="
+                      background-size: 100% 100%;
+                      witdh: 150px;
+                      height: 200px;
+                    "
+                  />
                 </el-carousel-item>
               </el-carousel>
             </div>
@@ -97,39 +112,40 @@ export default {
   },
   data() {
     return {
+      cityimages: [
+        { url: require("../../assets/img/BJ/beijing01.jpg") },
+        { url: require("../../assets/img/BJ/beijing02.jpg") },
+        { url: require("../../assets/img/BJ/beijing03.jpg") },
+        { url: require("../../assets/img/BJ/beijing04.jpg") },
+        { url: require("../../assets/img/BJ/beijing05.jpg") },
+      ],
       cloudData: [
-        { value: 1800, name: "纳木措" },
-        { value: 1200, name: "西藏" },
-        { value: 1000, name: "海拔" },
-        { value: 900, name: "景色" },
-        { value: 700, name: "湖水" },
-        { value: 650, name: "雪山" },
-        { value: 630, name: "值得" },
-        { value: 610, name: "没有" },
-        { value: 600, name: "地方" },
-        { value: 543, name: "风景" },
-        { value: 523, name: "景区" },
-        { value: 500, name: "感觉" },
-        { value: 500, name: "高原" },
-        { value: 490, name: "湖面" },
-        { value: 490, name: "圣湖" },
-        { value: 490, name: "小时" },
-        { value: 430, name: "湖泊" },
-        { value: 430, name: "大圣" },
-        { value: 430, name: "美丽" },
-        { value: 380, name: "景点" },
-        { value: 380, name: "牦牛" },
-        { value: 340, name: "时间" },
-        { value: 280, name: "咸水湖" },
-        { value: 260, name: "天湖" },
-        { value: 260, name: "藏民" },
-        { value: 200, name: "朋友" },
-        { value: 200, name: "蓝天白云" },
-        { value: 100, name: "开车" },
-        { value: 50, name: "神圣" },
-        { value: 40, name: "推荐" },
-        { value: 25, name: "限速" },
-        { value: 13, name: "距离" },
+        { value: 773, name: "故宫" },
+        { value: 502, name: "长城" },
+        { value: 270, name: "建筑" },
+        { value: 212, name: "胡同" },
+        { value: 192, name: "天安门" },
+        { value: 182, name: "颐和园" },
+        { value: 170, name: "博物馆" },
+        { value: 158, name: "环球" },
+        { value: 154, name: "历史" },
+        { value: 138, name: "八达岭" },
+        { value: 112, name: "天坛" },
+        { value: 105, name: "度假" },
+        { value: 104, name: "清华" },
+        { value: 100, name: "银杏" },
+        { value: 96, name: "北海" },
+        { value: 94, name: "王府" },
+        { value: 94, name: "皇帝" },
+        { value: 93, name: "慕田峪" },
+        { value: 92, name: "大学" },
+        { value: 88, name: "乾隆" },
+        { value: 87, name: "景山公园" },
+        { value: 86, name: "八达岭长城" },
+        { value: 84, name: "南锣鼓巷" },
+        { value: 79, name: "紫禁城" },
+        { value: 79, name: "地坛" },
+        { value: 75, name: "慕田峪长城" },
       ],
       option2: {
         tooltip: {
@@ -162,7 +178,7 @@ export default {
               //这是x轴文字颜色
               lineStyle: {
                 // color: " #999999",
-                color:"#fff",
+                color: "#fff",
               },
             },
             data: [
@@ -190,16 +206,16 @@ export default {
               //这是x轴文字颜色
               lineStyle: {
                 // color: " #999999",
-                color:"#fff",
+                color: "#fff",
               },
             },
           },
         ],
         grid: {
-          left:"10%",
-          right:"5%",
-          top:"15%",
-          bottom:"15%",
+          left: "10%",
+          right: "5%",
+          top: "15%",
+          bottom: "15%",
         },
         series: [
           {
@@ -285,7 +301,7 @@ export default {
         shadowOffsetY: 0,
         shadowColor: "rgba(0,0,0,0.3)",
       },
-      city: "拉萨",
+      city: "北京",
       travelsdata: {
         figure: "",
         daycount: "",
@@ -316,7 +332,7 @@ export default {
             //这是x轴文字颜色
             lineStyle: {
               // color: " #999999",
-              color:"#fff",
+              color: "#fff",
             },
           },
           boundaryGap: [0, 0.01],
@@ -327,7 +343,7 @@ export default {
             //这是x轴文字颜色
             lineStyle: {
               // color: " #999999",
-              color:"#fff",
+              color: "#fff",
             },
           },
           data: ["Brazil", "Indonesia", "USA", "India", "China", "World"],
@@ -394,7 +410,7 @@ export default {
         },
         xAxis: {
           type: "value",
-          name: "日期",
+          name: "关注度",
           nameGap: 0,
           nameTextStyle: {
             fontSize: 12,
@@ -403,7 +419,7 @@ export default {
             //这是x轴文字颜色
             lineStyle: {
               // color: " #F5FDFD80",
-              color:"#fff",
+              color: "#fff",
             },
           },
           max: 22,
@@ -413,7 +429,7 @@ export default {
         },
         yAxis: {
           type: "value",
-          name: "AQI指数",
+          name: "评价",
           nameLocation: "end",
           nameGap: 10,
           scale: true,
@@ -427,7 +443,7 @@ export default {
           axisLine: {
             lineStyle: {
               // color: " #F5FDFD80",
-              color:"#fff",
+              color: "#fff",
             },
           },
         },
@@ -522,7 +538,7 @@ export default {
     getTravels() {
       request
         .post("/api/data/cityTravel", {
-          count: "100",
+          count: "1000",
           city: this.city,
         })
         .then((res) => {
@@ -602,6 +618,10 @@ export default {
         text-shadow: 0 0 10px #fff, 0 0 10px #fff, 0 0 15px #fff,
           0 0 20px #38e9e0, 0 0 25px #0cf3f3;
       }
+    }
+    .selectcontent{
+      height: 100%;
+      width: 100%;
     }
   }
   .city-left-bottom {
@@ -685,7 +705,7 @@ export default {
             font-size: 12pt;
           }
         }
-        .row3title{
+        .row3title {
           height: 12%;
           width: 100%;
           color: aliceblue;
@@ -703,7 +723,7 @@ export default {
             font-size: 12pt;
           }
         }
-        
+
         .row1chartcontent {
           height: 100%;
           width: 100%;

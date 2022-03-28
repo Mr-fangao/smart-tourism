@@ -8,8 +8,6 @@
 import { loadModules } from 'esri-loader'
 export default {
   name: 'LengRe',
-  components:{
-  },
   props: {
     pjson: {
       type: null,
