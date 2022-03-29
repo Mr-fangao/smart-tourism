@@ -116,7 +116,7 @@
                 <el-table-column
                   prop="rank"
                   label="序号"
-                  width="40"
+                  width="30"
                 ></el-table-column>
                 <el-table-column
                   prop="name"
@@ -128,14 +128,14 @@
                 <el-table-column
                   prop="city"
                   label="城市"
-                  width="80"
+                  width="60"
                   :show-overflow-tooltip="true"
                 >
                 </el-table-column>
                 <el-table-column
                   prop="score"
                   label="分数"
-                  width="60"
+                  width="50"
                   :show-overflow-tooltip="true"
                 >
                   <template slot-scope="scope">
@@ -154,7 +154,7 @@
                 <el-table-column
                   prop="rank"
                   label="序号"
-                  width="40"
+                  width="30"
                 ></el-table-column>
                 <el-table-column
                   prop="name"
@@ -173,15 +173,15 @@
                 <el-table-column
                   prop="hot"
                   label="热度"
-                  width="80"
+                  width="70"
                   :show-overflow-tooltip="true"
                 >
                 </el-table-column>
               </el-table>
             </el-tab-pane>
-            <el-tab-pane label="推荐榜" name="myTab">
+            <el-tab-pane label="推荐榜" name="scenicTab">
               <el-table
-                :data="tableRankData"
+                :data="scenicdata"
                 height="328px"
                 stripe
                 style="width: 100%"
@@ -486,6 +486,9 @@ export default {
         level: 0,
       },
       datatime: "",
+      //地图切换
+      index: "1",
+
       //推荐项目
       citycount: {
         sensic: "1111",
@@ -517,7 +520,8 @@ export default {
       mapchange: "",
       tableRankData: [],
       tablescoreRankData: [],
-    
+      tableCityData: [],
+      scenicdata: [],
       //tab切换
       activeName: "recommendTab",
       activeName2: "city",
@@ -822,11 +826,22 @@ export default {
         }, 1200);
     },
     getRecommend() {
-      this.activeName = "hotTab";
-      console.log(this.timevalue);
-      console.log(this.input);
-      console.log(this.checkList);
-      console.log(this.cityname);
+      this.activeName = "scenicTab";
+      request
+        .post("/api/data/recommend", {
+          city: "北京",
+          province: "北京",
+          time: "11",
+          label: "海",
+          datasouse: "马",
+        })
+        .then((res) => {
+          console.log(res);
+          this.scenicdata = res.data;
+          for (let i = 1; i <= res.data.length; i++) {
+            this.scenicdata[i - 1].rank = i;
+          }
+        });
     },
     handleTabClick(tab) {
       console.log(tab.name);
@@ -1260,12 +1275,12 @@ export default {
   }
 }
 .mapcontral {
-  position: absolute;
-  z-index: 1;
-  width: 48%;
-  height: 5%;
-  bottom: 45.3%;
-  left: 25.6%;
+    position: absolute;
+    z-index: 1;
+    width: 53%;
+    height: 4%;
+    bottom: 42.3%;
+    left: 23.6%;
   background-color: #12526ea9;
   .el-menu {
     width: 100%;
@@ -1358,6 +1373,7 @@ export default {
   background: url("../assets/img/side.png") no-repeat;
   background-size: 100% 100%;
   .sourceselect {
+    width: 100%;
     flex: 2;
     // background-color: rgba(240, 248, 255, 0.178);
     .datasource {
@@ -1438,7 +1454,7 @@ export default {
         color: #46da6b;
         .partimg {
           background: url("../assets/img/recommend/left.png") no-repeat;
-          background-size: 85% 100%;
+          background-size: 85% 90%;
           background-position-x: 50%;
           .myimg {
             background: url("../assets/img/recommend/景点.png") no-repeat;
@@ -1451,7 +1467,7 @@ export default {
         color: #33dfdf;
         .partimg {
           background: url("../assets/img/recommend/mid.png") no-repeat;
-          background-size: 85% 100%;
+          background-size: 85% 90%;
           background-position-x: 50%;
           .myimg {
             background: url("../assets/img/recommend/评论.png") no-repeat;
@@ -1463,7 +1479,7 @@ export default {
         color: #a6ad61;
         .partimg {
           background: url("../assets/img/recommend/right.png") no-repeat;
-          background-size: 85% 100%;
+          background-size: 85% 90%;
           background-position-x: 50%;
           .myimg {
             background: url("../assets/img/recommend/人数.png") no-repeat;
@@ -1475,6 +1491,7 @@ export default {
     }
   }
   .ranktable {
+    width: 100%;
     flex: 3;
     // background-color: rgba(0, 255, 255, 0.233);
     .title {
@@ -1517,7 +1534,7 @@ export default {
       }
       /deep/.el-tabs__nav-scroll {
         background: transparent;
-        width: 90%;
+        width: 98%;
         background: url(../assets/img/buttonbg.png) no-repeat;
         background-size: 100% 100%;
       }
@@ -1943,7 +1960,7 @@ export default {
   position: absolute;
   top: 1.2%;
   z-index: 1;
-  width: 25%;
+  width: 23%;
   height: 91%;
   flex-direction: column;
   flex-wrap: wrap;
@@ -1979,12 +1996,12 @@ export default {
   }
 }
 .recommend-bottom {
-  width: 49%;
+  width: 53%;
   position: absolute;
   z-index: 1;
-  height: 37%;
+  height: 34%;
   bottom: 8%;
-  left: 25.5%;
+  left: 23.5%;
   background: url("../assets/img/长方形.png") no-repeat;
   background-size: 100% 100%;
   display: flex;
