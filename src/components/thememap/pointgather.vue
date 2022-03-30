@@ -59,6 +59,7 @@
   </div>
 </template>
 <script>
+import travelimage from "../../assets/img/travel.png";
 import heatMapData from "../../assets/json/heatMapData.json";
 import testjson from "../../assets/json/point.json";
 export default {
@@ -102,10 +103,19 @@ export default {
             clusterRadius: 50,
           });
 
-          map.addSource("sensicjson1", {
-            type: "geojson",
-            data: testjson,
-          });
+          map.loadImage(
+                        travelimage,
+                        (error, image) => {
+                            if (error) throw error;
+
+                            // Add the image to the map style.
+                            map.addImage('travel', image);
+                            map.addSource('point', {
+                                'type': 'geojson',
+                                'data': heatMapData
+                            });
+                        }
+                    );
         }
       });
       //添加数据源类型2
@@ -131,10 +141,19 @@ export default {
             clusterMaxZoom: 14, //最大缩放到群集点
             clusterRadius: 50,
           });
-          map.addSource("sensicjson1", {
-            type: "geojson",
-            data: heatMapData,
-          });
+           map.loadImage(
+                        travelimage,
+                        (error, image) => {
+                            if (error) throw error;
+
+                            // Add the image to the map style.
+                            map.addImage('travel', image);
+                            map.addSource('point', {
+                                'type': 'geojson',
+                                'data': heatMapData
+                            });
+                        }
+                    );
         }
       });
       //添加数据源类型3
@@ -164,11 +183,11 @@ export default {
             "circle-color": [
               "step",
               ["get", "point_count"],
-              "#51bbd6",
+              "#fff591",
               100,
-              "#f1f075",
+              "#ff8a5c",
               750,
-              "#f28cb1",
+              "#e41749",
             ],
             "circle-radius": [
               "step",
@@ -204,7 +223,7 @@ export default {
           source: "sensicjson",
           filter: ["!", ["has", "point_count"]],
           paint: {
-            "circle-color": "#11b4da",
+            "circle-color": "#f5587b",
             "circle-radius": 4,
             "circle-stroke-width": 1,
             "circle-stroke-color": "#fff",
@@ -224,15 +243,15 @@ export default {
         map.setLayoutProperty("unclustered-point", "visibility", "none");
         //添加数据
         //添加点图层
-        map.addLayer({
-          id: "points",
-          type: "circle" /* symbol类型layer，一般用来绘制点*/,
-          source: "sensicjson1",
-          paint: {
-            "circle-radius": 2,
-            "circle-color": "#080",
-          },
-        });
+      map.addLayer({
+'id': 'points',
+'type': 'symbol',
+'source': 'point', // reference the data source
+'layout': {
+'icon-image': 'travel', // reference the image
+'icon-size': 0.15
+}
+});
       });
 
       map.on("load", function () {
