@@ -1,7 +1,7 @@
 <template>
   <div style="position: absolute;width: 100%;height: 100%">
     <div id="MapSanJ1" />
-    <el-button id="select">{{ msg }}</el-button>
+    <!-- <el-button id="select">{{ msg }}</el-button> -->
   </div>
 </template>
 <script>
@@ -16,15 +16,15 @@ export default {
   },
   data() {
     return {
-      msg: {}
+      // msg: {}
     }
   },
   watch: {
-    'pjson.c'() {
-      this.msg = this.pjson
-      var button = document.getElementById('select')
-      button.click()
-    }
+    // 'pjson.c'() {
+    //   this.msg = this.pjson
+    //   var button = document.getElementById('select')
+    //   button.click()
+    // }
   },
   mounted() {
     this._Init()

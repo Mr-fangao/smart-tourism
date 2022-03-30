@@ -426,4 +426,5 @@ export default {
 .mapboxgl-popup {
   max-width: 200px;
 }
+
 </style>

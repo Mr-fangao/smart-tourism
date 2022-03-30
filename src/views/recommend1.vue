@@ -1,8 +1,8 @@
 <template>
   <div id="recommend">
-    <!-- <transition name="fade">
+    <transition name="fade">
       <loading v-if="isLoading" :state="state"></loading>
-    </transition> -->
+    </transition>
     <div class="mapcontent">
       <keep-alive>
         <component :is="comp" v-show="isShow"></component>
@@ -13,6 +13,10 @@
       <div class="cityname">{{ cityname }}</div>
     </div> -->
     <div class="mapcontral">
+      <div class="selecttitle">
+        <div class="title-img"></div>
+        <div class="title-text">专题图选择</div>
+      </div>
       <el-menu>
         <el-menu-item
           style="padding: 1%"
@@ -479,6 +483,7 @@ export default {
   },
   data() {
     return {
+      isLoading: false,
       isShow: true,
       //区域选择
       selectcity: {
@@ -1275,42 +1280,67 @@ export default {
   }
 }
 .mapcontral {
-    position: absolute;
-    z-index: 1;
-    width: 53%;
-    height: 4%;
-    bottom: 42.3%;
-    left: 23.6%;
-  background-color: #12526ea9;
+  position: absolute;
+  z-index: 1;
+  width: 52.8%;
+  height: 4%;
+  bottom: 42.3%;
+  left: 23.6%;
+  background: url("../assets/img/buttonbg.png") no-repeat;
+  background-size: 100% 100%;
+  .selecttitle {
+    float: left;
+    width: 15%;
+    height: 100%;
+    background-color: #12526ea9;
+    .title-img {
+      width: 23%;
+      float: left;
+      height: 100%;
+      background: url("../assets/img/panelIcon.png");
+      background-size: 100% 100%;
+    }
+    .title-text {
+      width: 60%;
+      float: left;
+      height: 100%;
+      color: #dae2e2;
+      font-size: 11pt;
+      line-height: 32px;
+    }
+  }
   .el-menu {
-    width: 100%;
+    float: left;
+    width: 85%;
     height: 100%;
     right: 0%;
-    background: url("../assets/img/buttonbg.png") no-repeat;
-    background-size: 100% 100%;
+    background-color: #12526ea9;
     border: none;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     .mapimg {
       width: 25%;
       height: 65%;
     }
     .map1 {
-      width: 21%;
+      width: 11%;
       height: 95%;
       background: url("../assets/img/theme/聚合.png") no-repeat;
       background-size: 100% 100%;
     }
     .map2 {
+      width: 18%;
       background: url("../assets/img/theme/分级.png") no-repeat;
       background-size: 100% 100%;
     }
     .map3 {
+      width: 18%;
       background: url("../assets/img/theme/热力图.png") no-repeat;
       background-size: 100% 100%;
     }
     .map4 {
+      width: 18%;
       background: url("../assets/img/theme/时间.png") no-repeat;
       background-size: 100% 100%;
     }
@@ -1319,6 +1349,17 @@ export default {
       .el-radio__label {
         padding-left: 2px;
       }
+    }
+    /deep/.el-radio__input.is-checked .el-radio__inner {
+      border-color: #5ddaf0;
+      background: #32b3b8;
+    }
+    /deep/.el-radio__label {
+      padding-left: 5px;
+    }
+    .el-menu-item:focus,
+    .el-menu-item:hover {
+      background: transparent;
     }
     .tab {
       height: 100%;

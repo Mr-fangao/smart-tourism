@@ -3,10 +3,13 @@
     <div id="map"></div>
     <div class="mapcontral">
       <div class="dataselect">
+        <div class="selecttitle">
+          <div class="title-img"></div>
+          <div class="title-text">制图数据选择</div>
+        </div>
         <el-menu>
           <el-menu-item
             id="button3"
-            style="padding: 1%"
             index="1"
             :class="index === 1 ? 'active' : ''"
             plain
@@ -103,19 +106,16 @@ export default {
             clusterRadius: 50,
           });
 
-          map.loadImage(
-                        travelimage,
-                        (error, image) => {
-                            if (error) throw error;
+          map.loadImage(travelimage, (error, image) => {
+            if (error) throw error;
 
-                            // Add the image to the map style.
-                            map.addImage('travel', image);
-                            map.addSource('point', {
-                                'type': 'geojson',
-                                'data': heatMapData
-                            });
-                        }
-                    );
+            // Add the image to the map style.
+            map.addImage("travel", image);
+            map.addSource("point", {
+              type: "geojson",
+              data: heatMapData,
+            });
+          });
         }
       });
       //添加数据源类型2
@@ -141,19 +141,16 @@ export default {
             clusterMaxZoom: 14, //最大缩放到群集点
             clusterRadius: 50,
           });
-           map.loadImage(
-                        travelimage,
-                        (error, image) => {
-                            if (error) throw error;
+          map.loadImage(travelimage, (error, image) => {
+            if (error) throw error;
 
-                            // Add the image to the map style.
-                            map.addImage('travel', image);
-                            map.addSource('point', {
-                                'type': 'geojson',
-                                'data': heatMapData
-                            });
-                        }
-                    );
+            // Add the image to the map style.
+            map.addImage("travel", image);
+            map.addSource("point", {
+              type: "geojson",
+              data: heatMapData,
+            });
+          });
         }
       });
       //添加数据源类型3
@@ -243,15 +240,15 @@ export default {
         map.setLayoutProperty("unclustered-point", "visibility", "none");
         //添加数据
         //添加点图层
-      map.addLayer({
-'id': 'points',
-'type': 'symbol',
-'source': 'point', // reference the data source
-'layout': {
-'icon-image': 'travel', // reference the image
-'icon-size': 0.15
-}
-});
+        map.addLayer({
+          id: "points",
+          type: "symbol",
+          source: "point", // reference the data source
+          layout: {
+            "icon-image": "travel", // reference the image
+            "icon-size": 0.15,
+          },
+        });
       });
 
       map.on("load", function () {
@@ -330,30 +327,55 @@ export default {
 .mapcontral {
   position: absolute;
   z-index: 1;
-  width: 68.7%;
-  height: 5%;
-  bottom: 50.8%;
-  left: 25.6%;
+  width: 75.5%;
+  height: 4%;
+  bottom: 46.8%;
+  left: 23.6%;
+  background: url("../../assets/img/buttonbg.png") no-repeat;
+  background-size: 100% 100%;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   align-items: center;
 
   .dataselect {
+    float: left;
     height: 100%;
-    width: 93%;
+    width: 92%;
+    .selecttitle {
+      float: left;
+      width: 15%;
+      height: 100%;
+      .title-img {
+        width: 23%;
+        float: left;
+        height: 100%;
+        background: url("../../assets/img/panelIcon.png");
+        background-size: 100% 100%;
+      }
+      .title-text {
+        width: 76%;
+        float: left;
+        height: 100%;
+        color: #dae2e2;
+        font-size: 11pt;
+        line-height: 32px;
+      }
+    }
     background-color: #12526ea9;
     .el-menu {
-      width: 100%;
-      height: 100%;
+      float: left;
+      width: 85%;
+      height: 85%;
       right: 0%;
-      background: url("../../assets/img/buttonbg.png") no-repeat;
-      background-size: 100% 100%;
+      background: transparent;
+      // background: url("../../assets/img/buttonbg.png") no-repeat;
+      // background-size: 100% 100%;
       border: none;
       display: flex;
       justify-content: space-around;
       align-items: center;
-      .el-radio {
+      /deep/.el-radio {
         margin-right: 0;
         .el-radio__label {
           padding-left: 0px;
@@ -377,8 +399,16 @@ export default {
       width: 20%;
       color: #fff;
     }
+    .el-menu-item:focus,
     .el-menu-item:hover {
       background: transparent;
+    }
+    .el-menu-item:hover {
+      background: transparent;
+    }
+        /deep/.el-radio__input.is-checked .el-radio__inner {
+      border-color: #94b2bb;
+      background: #3fb0d3;
     }
     .span {
       color: aliceblue;
@@ -418,10 +448,11 @@ export default {
   background: transparent;
   .control {
     position: absolute;
+    z-index: 9999;
     left: 66%;
     top: 8%;
     width: 8%;
-    z-index: 9999;
+
     height: 14%;
     // #button1 {
     //   background: url("../../assets/img/框.png");

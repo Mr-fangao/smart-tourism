@@ -134,7 +134,7 @@ export default {
         .then((res) => {
           console.log(res);
           this.listData = res.data.commentEntity;
-          if (this.listData.date[0].length > 11) {
+          if (this.listData[0].date.length > 11) {
             for (var i = 0; i < this.listData.length; i++) {
               this.listData.date[i] = this.listData.date[i].slice(0, 9);
             }
