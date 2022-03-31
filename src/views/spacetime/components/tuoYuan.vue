@@ -1,5 +1,5 @@
 <template>
-  <div style="position: absolute;width: 100%;height: 100%">
+  <div style="position: absolute;width: 100%;height: 93.6%;margin-top: -1px;">
     <div id="Querymodule">
       <div id="top" @mousedown.prevent="mousedown"><span>≡</span></div>
       <div>
@@ -359,7 +359,7 @@ export default {
         const legend = new Legend({
           view: view
         })
-        view.ui.add(legend, 'bottom-left')
+        view.ui.add(legend, 'bottom-right')
       })
     }
   }
@@ -408,7 +408,7 @@ export default {
   top: 250px;
   position: fixed;
   user-select: none;
-  left: 50px;
+  left: 936px;
   top: 50px;
   display: none;
 }

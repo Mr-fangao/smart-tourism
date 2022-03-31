@@ -514,10 +514,13 @@ export default {
         { id: 1, name: "山岳" },
         { id: 2, name: "海滨" },
         { id: 3, name: "历史" },
-        { id: 4, name: "革命老区" },
-        { id: 5, name: "商业街" },
+        { id: 4, name: "文化" },
+        { id: 5, name: "园林" },
         { id: 6, name: "划船" },
-        { id: 7, name: "文物" },
+        { id: 7, name: "红色" },
+        { id: 8, name: "艺术" },
+        { id: 9, name: "建筑" },
+        { id: 10, name: "陵墓" },
       ],
       //数据源选择
       checkList: ["飞猪", "艺龙", "途牛", "携程", "马蜂窝", "去哪儿"],
@@ -743,15 +746,6 @@ export default {
         this.citycount.tourist = "126";
       }
     });
-    // $(".el-checkbox").change(() => {
-    //   console.log("呵呵");
-    //   if ($(".el-checkbox[type='checkbox']").is(":checked") == true) {
-    //     console.log("选中");
-    //     this.disa = true;
-    //   } else {
-    //     console.log("没选中");
-    //   }
-    // });
   },
   filters: {
     rounding(value) {
@@ -1802,10 +1796,10 @@ export default {
         }
       }
       .exampleinput {
-        height: 10%;
+        height: 16%;
         margin-bottom: 1%;
         .exampellabel {
-          color: #1faacd;
+          color: #d1d7d8f2;
           width: 60%;
           height: 100%;
           float: left;
@@ -1828,6 +1822,7 @@ export default {
               border-radius: 5px;
               cursor: pointer;
               margin: 1%;
+              padding: 1px;
               // margin: 1% 1% 1% 1% ;
             }
           }

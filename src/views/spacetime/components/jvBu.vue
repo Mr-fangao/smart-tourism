@@ -1,5 +1,5 @@
 <template>
-  <div style="position: absolute;width: 100%;height: 100%">
+  <div style="position: absolute;width: 100%;height: 93.6%;margin-top: -1px;">
     <div id="MapSanJ1" />
     <el-button id="select">{{ msg }}</el-button>
   </div>
