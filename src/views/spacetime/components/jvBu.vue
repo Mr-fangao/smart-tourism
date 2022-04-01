@@ -76,17 +76,17 @@ export default {
         }
         var WH_Water = new FeatureLayer({
           url: 'http://114.98.239.36:6080/arcgis/rest/services/BabyHome/analyst/MapServer/5',
-          title: '中国省际丢失儿童局部自相关分析'
+          title: '中国省际景点分布局部自相关分析'
           // popupTemplate: popupTemplate
         })
         var WH_Water1 = new FeatureLayer({
           url: 'http://114.98.239.36:6080/arcgis/rest/services/BabyHome/analyst/MapServer/4',
-          title: '中国市际丢失儿童局部自相关分析'
+          title: '中国市际景点分布局部自相关分析'
           // popupTemplate: popupTemplate
         })
         var WH_Water2 = new FeatureLayer({
           url: 'http://114.98.239.36:6080/arcgis/rest/services/BabyHome/analyst/MapServer/3',
-          title: '中国区县丢失儿童局部自相关分析'
+          title: '中国区县景点分布局部自相关分析'
           // popupTemplate: popupTemplate
         })
         WH_Water1.visible = false
@@ -131,7 +131,7 @@ export default {
         const legend = new Legend({
           view: view
         })
-        view.ui.add(legend, 'bottom-left')
+        view.ui.add(legend, 'bottom-right')
       })
     }
   }

@@ -388,19 +388,22 @@
                     class="ageinput"
                     type="text"
                     v-model="occupationpt"
-                    placeholder="edit me"
+                    placeholder="输入职业"
                   />
                 </div>
               </div>
               <div class="incomept">
                 <div class="person-name">收入:</div>
                 <div class="person-inputcontent">
-                  <input
-                    class="ageinput"
-                    type="text"
-                    v-model="incomept"
-                    placeholder="edit me"
-                  />
+                  <el-select v-model="value" clearable placeholder="选择收入范围">
+                    <el-option
+                      v-for="item in options"
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.value"
+                    >
+                    </el-option>
+                  </el-select>
                 </div>
               </div>
             </div>
@@ -1796,6 +1799,9 @@ export default {
   background: url("../assets/img/side.png") no-repeat;
   background-size: 100% 100%;
   display: flex;
+  /deep/.el-checkbox__input.is-checked+.el-checkbox__label {
+    color: #5cc0da;
+}
   .chinahot {
     width: 100%;
     flex: 2;
@@ -2163,6 +2169,20 @@ export default {
   align-items: center;
   flex-direction: row;
   padding-left: 6%;
+  /deep/.el-input__inner {
+        background: #c3e3e72b;
+        border-radius: 4px;
+        border: 1px solid #3eb7c738;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        color: rgba(220, 225, 227, 0.96);
+        font-size: inherit;
+        height: 32px;
+        // line-height: 90px;
+        width: 127%;
+        padding: 0px;
+        // margin-top: 2%;
+      }
   .el-radio {
     margin-right: 20%;
   }
@@ -2312,5 +2332,17 @@ export default {
       height: 85%;
     }
   }
+}
+</style>
+<style>
+.el-select-dropdown__item.hover,
+.el-select-dropdown__item:hover {
+  background-color: #3eb7c738;
+}
+.el-select-dropdown {
+  background-color: #0d1f30;
+}
+.el-select-dropdown__item {
+  color: #fff;
 }
 </style>

@@ -81,7 +81,7 @@ export default {
           // popupTemplate: popupTemplate
         })
         var WH_Water1 = new FeatureLayer({
-          url: 'http://114.98.239.36:6080/arcgis/rest/services/BabyHome/analyst/MapServer/7',
+          url: 'http://114.98.239.36:6080/arcgis/rest/services/smarttour/city_jd/MapServer',
           title: '中国市际景点冷热点分析'
           // popupTemplate: popupTemplate
         })

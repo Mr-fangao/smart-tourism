@@ -158,7 +158,7 @@ export default {
         }
         var WH_Water = new FeatureLayer({
           url: 'http://114.98.239.36:6080/arcgis/rest/services/BabyHome/analyst/MapServer/6',
-          title: '中国丢失儿童标准椭圆差分析',
+          title: '中国景点分布标准椭圆差分析',
           renderer: backrenderer,
           legendEnabled: false
         })

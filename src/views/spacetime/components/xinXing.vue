@@ -95,7 +95,7 @@ export default {
         })
         var WH_Water = new FeatureLayer({
           url: 'http://114.98.239.36:6080/arcgis/rest/services/BabyHome/TimeSpaceHotSpots/MapServer/0',
-          title: '中国丢失儿童新兴冷热点分析'
+          title: '中国景点分布新兴冷热点分析'
           // popupTemplate: popupTemplate
         })
         const map = new Map({
@@ -121,7 +121,7 @@ export default {
         const legend = new Legend({
           view: view
         })
-        view.ui.add(legend, 'bottom-left')
+        view.ui.add(legend, 'bottom-right')
       })
     }
   }
