@@ -75,9 +75,11 @@
                     <p>制图数据</p>
                   </el-col>
                   <el-col :span="16">
-                    <el-select v-model="json.space" placeholder="请选择制图数据"
+                    <el-select
+                      v-model="json.source"
+                      placeholder="请选择制图数据"
                       ><el-option
-                        v-for="item in space"
+                        v-for="item in source"
                         :key="item.value"
                         :label="item.label"
                         :value="item.value"
@@ -116,7 +118,7 @@
                   icon="el-icon-search"
                   size="small"
                   @click="btnSelect"
-                  >搜索</el-button
+                  >开始分析</el-button
                 >
                 <!-- <el-button type="primary" icon="el-icon-s-order" size="small">统计</el-button> -->
                 <el-button
@@ -128,7 +130,7 @@
                   icon="el-icon-refresh-left"
                   size="small"
                   @click="chongzhi"
-                  >重置</el-button
+                  >重置条件</el-button
                 >
               </el-button-group>
               <div>
@@ -331,7 +333,7 @@ export default {
         STime: new Date("2018"),
         ETime: new Date("2019"),
         space: "",
-        source:"",
+        source: "",
         Type: "",
         c: 0,
       },
@@ -371,18 +373,18 @@ export default {
           label: "县级",
         },
       ],
-      source:[
-         {
+      source: [
+        {
           value: "市级",
-          label: "省级",
+          label: "马蜂窝",
         },
         {
           value: "县级",
-          label: "市级",
+          label: "去哪儿",
         },
         {
           value: "街道",
-          label: "县级",
+          label: "携程",
         },
       ],
       Type: [
@@ -505,7 +507,7 @@ export default {
         this.name = "地理加权回归分析";
       }
       this.word =
-        "通过构建城市地理加权回归模型，分析我国拐卖儿童案件发生与区域教育水平、地区生产总值、人均GDP、人均可支配收入、公路里程数等的关联。";
+        "通过构建城市地理加权回归模型，分析我国景点分布发生与区域教育水平、地区生产总值、人均GDP、人均可支配收入、公路里程数等的关联。";
     },
     ying() {
       this.ceng = 2;
@@ -516,7 +518,7 @@ export default {
         this.name = "局部莫兰指数分析";
       }
       this.word =
-        "通过分析测算空间关联局域指标（Local Indicators of Spatial Association, LISA）显著水平，通过局部自相关分析方法，分析中国拐卖儿童整体空间关联趋势，得出不同尺度范围下我国各区域拐卖之间的关联和影响。";
+        "通过分析测算空间关联局域指标（Local Indicators of Spatial Association, LISA）显著水平，通过局部自相关分析方法，分析中国景点分布整体空间关联趋势，得出不同尺度范围下我国各区域拐卖之间的关联和影响。";
     },
     jv() {
       this.ceng = 3;
@@ -527,7 +529,7 @@ export default {
         this.name = "新兴时空热点分析";
       }
       this.word =
-        "新兴时空热点分析是GIS中的一种空间分析方法，能够根据某一段时间内已存在的地理分布数据做后续发展的时间和空间分析，通过新兴时空热点分析，获取被拐儿童热点和冷点趋势，分析我国拐卖儿童犯罪的时空演化特征，包括拐卖儿童案发数随时间变化的整体趋势、整体的范围、空间等级变化的整体趋势以及犯罪重心随时间变化的整体趋势。";
+        "新兴时空热点分析是GIS中的一种空间分析方法，能够根据某一段时间内已存在的地理分布数据做后续发展的时间和空间分析，通过新兴时空热点分析，获取景点分布热点和冷点趋势，分析我国拐卖儿童犯罪的时空演化特征，包括数据随时间变化的整体趋势、整体的范围、空间等级变化的整体趋势。";
     },
     feng() {
       this.ceng = 4;
@@ -538,7 +540,7 @@ export default {
         this.name = "标准差椭圆分析";
       }
       this.word =
-        "分别计算 x 和 y 方向上的标准距离，用于定义一个包含所有要素分布的椭圆的轴，用于展示空间要素在空间分布中的趋势，用以反映中国拐卖儿童的空间分布和移动特征。";
+        "分别计算 x 和 y 方向上的标准距离，用于定义一个包含所有要素分布的椭圆的轴，用于展示空间要素在空间分布中的趋势，用以反映景点的空间分布。";
     },
     san() {
       this.ceng = 5;

@@ -9,6 +9,7 @@
     </div>
     <div class="map-overlay" id="legend">
       <div id="state-legend" class="state-legend">
+        <h3>景点好评数省级填色图</h3>
         <h4>图例</h4>
         <div><span style="background-color: #313695"></span>25,000,000</div>
         <br />
@@ -93,7 +94,7 @@ export default {
             layers: ["fillID"],
           });
           document.getElementById("pd").innerHTML = states.length
-            ? `<p style="color: #cfedff;font-size:14pt;padding: 5%;float: right;    margin-right: 3%;">景点游客满意度</p>
+            ? `<p style="color: #cfedff;font-size:14pt;padding: 5%;float: right;    margin-right: 3%;">景点游客好评数</p>
             <p id="toppart" style="color: #cfedff;position: absolute;
     margin-left: 42%;
     margin-top: 24%;"</p>
@@ -171,8 +172,8 @@ h2 {
 #features {
   background: url("../../assets/img/theme/themeBG.png") no-repeat;
   background-size: 100% 100%;
-  top: 41%;
-  left: 25.5%;
+  top: 39%;
+  left: 23.5%;
   height: 14%;
   width: 15%;
 }
@@ -183,10 +184,10 @@ h2 {
   background-size: 100% 100%;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   line-height: 18px;
-  height: 26%;
-  margin-bottom: 19%;
-  margin-right: 26%;
-  width: 10%;
+  height: 30%;
+  margin-bottom: 23.2%;
+  margin-right: 23.5%;
+  width: 12%;
 }
 .state-legend {
   background-color: transparent;
@@ -203,11 +204,17 @@ h2 {
 }
 .state-legend h4 {
   margin: 0 0 0px;
-  color: #73fdff;
-  margin: 8% 0;
-  font-size: 14pt;
+  color: #d4dada;
+  margin: 3% 0;
+  font-size: 11pt;
+  padding-right: 44%;
 }
-
+.state-legend h3 {
+  margin: 0 0 0px;
+  color: #73fdff;
+  margin: 3% 0;
+  font-size: 11pt;
+}
 .state-legend div {
   margin-left: 20%;
   float: left;

@@ -67,15 +67,13 @@
           <span>旅游数据总览</span>
         </div>
         <div class="datasource">
-          <div class="leftpt">数据源选择:</div>
+          <div class="leftpt">数据源:</div>
           <div class="rightpt">
             <el-checkbox-group v-model="checkList">
               <el-checkbox label="去哪儿"></el-checkbox>
               <el-checkbox label="马蜂窝"></el-checkbox>
-              <el-checkbox label="携程"></el-checkbox>
-              <el-checkbox label="途牛"></el-checkbox>
-              <el-checkbox label="艺龙"></el-checkbox>
-              <el-checkbox label="飞猪"></el-checkbox>
+              <el-checkbox label="携程网"></el-checkbox>
+              <el-checkbox label="途牛网"></el-checkbox>
             </el-checkbox-group>
           </div>
         </div>
@@ -330,16 +328,18 @@
             </div>
           </div>
           <div class="hotandscore">
-            <div class="name">数据偏好</div>
+            <div class="name">
+              <el-checkbox v-model="sourcechecked">考虑评论</el-checkbox>
+            </div>
             <div class="content">
-              <el-radio v-model="radio" label="1">评分优先</el-radio>
-              <el-radio v-model="radio" label="2">热度优先</el-radio>
+              <el-radio v-model="prferradio" label="score">评分优先</el-radio>
+              <el-radio v-model="prferradio" label="hot">热度优先</el-radio>
             </div>
           </div>
           <div class="distance">
             <div class="name">
               <el-checkbox v-model="distancechecked" @click="addDistance()"
-                >距离</el-checkbox
+                >考虑距离</el-checkbox
               >
             </div>
             <div class="distanceselect">
@@ -350,57 +350,65 @@
           </div>
           <div class="season">
             <div class="name">
-              <el-checkbox v-model="seasonchecked">季节</el-checkbox>
+              <el-checkbox v-model="seasonchecked">季节考虑</el-checkbox>
             </div>
             <div class="distanceselect">
               <el-radio v-model="seasonrange" label="1">春</el-radio>
               <el-radio v-model="seasonrange" label="2">夏</el-radio>
               <el-radio v-model="seasonrange" label="3">秋</el-radio>
-              <el-radio v-model="seasonrange" label="4">东</el-radio>
+              <el-radio v-model="seasonrange" label="4">冬</el-radio>
             </div>
           </div>
-          <div class="ageandsex">
-            <div class="agept">
-              <div class="person-name">年龄:</div>
-              <div class="person-inputcontent">
-                <input class="ageinput" type="text" />
+          <div class="person">
+            <div class="considerperson">
+              <div class="personcheckbox">
+                <el-checkbox v-model="personchecked">考虑个人情况</el-checkbox>
               </div>
             </div>
-            <div class="sexpt">
-              <div class="person-name">性别:</div>
-              <div class="person-inputcontent">
-                <el-radio v-model="sexselect" label="1">男</el-radio>
-                <el-radio v-model="sexselect" label="2">女</el-radio>
+            <div class="ageandsex">
+              <div class="agept">
+                <div class="person-name">年龄:</div>
+                <div class="person-inputcontent">
+                  <input class="ageinput" type="text" />
+                </div>
+              </div>
+              <div class="sexpt">
+                <div class="person-name">性别:</div>
+                <div class="person-inputcontent">
+                  <el-radio v-model="sexselect" label="1">男</el-radio>
+                  <el-radio v-model="sexselect" label="2">女</el-radio>
+                </div>
+              </div>
+            </div>
+            <div class="occupationandincome">
+              <div class="occupationpt">
+                <div class="person-name">职业:</div>
+                <div class="person-inputcontent">
+                  <input
+                    class="ageinput"
+                    type="text"
+                    v-model="occupationpt"
+                    placeholder="edit me"
+                  />
+                </div>
+              </div>
+              <div class="incomept">
+                <div class="person-name">收入:</div>
+                <div class="person-inputcontent">
+                  <input
+                    class="ageinput"
+                    type="text"
+                    v-model="incomept"
+                    placeholder="edit me"
+                  />
+                </div>
               </div>
             </div>
           </div>
-          <div class="occupationandincome">
-            <div class="occupationpt">
-              <div class="person-name">职业:</div>
-              <div class="person-inputcontent">
-                <input
-                  class="ageinput"
-                  type="text"
-                  v-model="occupationpt"
-                  placeholder="edit me"
-                />
-              </div>
-            </div>
-            <div class="incomept">
-              <div class="person-name">收入:</div>
-              <div class="person-inputcontent">
-                <input
-                  class="ageinput"
-                  type="text"
-                  v-model="incomept"
-                  placeholder="edit me"
-                />
-              </div>
-            </div>
-          </div>
+
           <div class="buttoncontent">
             <el-button class="startbutton" @click="refeashData()"
-              >更新数据</el-button
+              >清除条件</el-button
             >
             <el-button class="startbutton" @click="getRecommend()"
               >开始推荐</el-button
@@ -417,25 +425,28 @@
       >
         <el-tab-pane label="城市总览" name="city">
           <div class="chartcontent">
-            <div id="recommend-title" class="title">
-              <span>中国热门城市</span>
+            <div class="title">
+              <div class="imgIcon"></div>
+              <span>{{ treemapname }}</span>
             </div>
             <div class="content" id="chart1"></div>
           </div>
           <div class="chartcontent">
-            <div id="recommend-title" class="title">
+            <div class="title">
+              <div class="imgIcon"></div>
               <span>{{ this.chartname }}特征词云</span>
             </div>
             <div class="content" ref="chartword"></div>
           </div>
           <div class="chartcontent">
-            <div id="recommend-title" class="title">
+            <div class="title">
+              <div class="imgIcon"></div>
               <span>{{ this.chartname }}游客来源</span>
             </div>
             <div class="content" id="chart2"></div>
           </div>
         </el-tab-pane>
-        <el-tab-pane label="时空变化" name="time">
+        <el-tab-pane label="游客数量日变化" name="time">
           <div class="timechartcontent">
             <div class="content" id="timechart"></div>
           </div>
@@ -483,6 +494,7 @@ export default {
   },
   data() {
     return {
+      treemapname: "中国热门城市",
       isLoading: false,
       isShow: true,
       //区域选择
@@ -496,15 +508,17 @@ export default {
 
       //推荐项目
       citycount: {
-        sensic: "1111",
-        comment: "22222",
-        tourist: "333333",
+        sensic: "34682",
+        comment: "1900516",
+        tourist: "65536",
       },
       input: "",
       distancechecked: false,
       seasonchecked: false,
+      sourcechecked: false,
+      personchecked: false,
       timevalue: "",
-      radio: "",
+      prferradio: "",
       sexselect: "",
       distancerange: "",
       seasonrange: "",
@@ -523,7 +537,7 @@ export default {
         { id: 10, name: "陵墓" },
       ],
       //数据源选择
-      checkList: ["飞猪", "艺龙", "途牛", "携程", "马蜂窝", "去哪儿"],
+      checkList: ["途牛网", "携程网", "马蜂窝", "去哪儿"],
       //数据
       mapchange: "",
       tableRankData: [],
@@ -722,10 +736,60 @@ export default {
         { value: 484, name: "河南" },
         { value: 300, name: "湖北" },
       ],
+      chartdata4: [
+        { value: 1048, name: "安徽" },
+        { value: 735, name: "江苏" },
+        { value: 580, name: "广东" },
+        { value: 484, name: "东北" },
+        { value: 300, name: "湖北" },
+      ],
+      chartdata3: [
+        {
+          name: "外秦淮河游船",
+          value: 2163,
+        },
+        {
+          name: "南京中华门城堡",
+          value: 963,
+        },
+        {
+          name: "玄武湖公园",
+          value: 783,
+        },
+        {
+          name: "江宁织造博物馆",
+          value: 783,
+        },
+        {
+          name: "夫子庙大成殿",
+          value: 757,
+        },
+        {
+          name: "灵谷寺",
+          value: 693,
+        },
+        {
+          name: "朝天宫",
+          value: 682,
+        },
+        {
+          name: "莫愁湖公园",
+          value: 407,
+        },
+        {
+          name: "老门东历史街区",
+          value: 396,
+        },
+        {
+          name: "鼓楼",
+          value: 390,
+        },
+      ],
     };
   },
   created() {},
   mounted() {
+    this.getScenicdata();
     this.getTime();
     this.showmap(1);
     this.getRankTable();
@@ -741,9 +805,14 @@ export default {
       console.log(this.selectcity);
       if (this.selectcity.name == "南京市") {
         this.showmap(6);
+        this.treemapname = this.selectcity.name + "热门景点";
         this.citycount.sensic = "126";
         this.citycount.comment = "126";
         this.citycount.tourist = "126";
+        this.initChart1(this.chartdata3);
+        this.chartname = this.selectcity.name;
+        this.wordCloudInti(this.$refs.chartword, this.njwordcloud);
+        this.initChart2(this.chartdata4);
       }
     });
   },
@@ -753,6 +822,11 @@ export default {
     },
   },
   methods: {
+    getScenicdata() {
+      // this.citycount.tourist = 1;
+      // this.citycount.comment = 1;
+      // this.citycount.sensic = 1;
+    },
     hideModal() {
       // 取消弹窗回调
       this.show = false;
@@ -816,23 +890,45 @@ export default {
     },
     //更新数据动画
     refeashData() {
-      this.state = "加载数据中......请稍后";
-      console.log(111);
-      (this.isLoading = true),
-        // this.getrealtime();
-        setTimeout(() => {
-          this.isLoading = false;
-        }, 1200);
+      (this.timevalue = ""),
+        (this.prferradio = ""),
+        (this.sexselect = ""),
+        (this.distancerange = ""),
+        (this.seasonrange = ""),
+        (this.incomept = "");
+      this.occupationpt = "";
+      (this.distancechecked = false),
+        (this.seasonchecked = false),
+        (this.sourcechecked = false),
+        (this.personchecked = false);
+      // this.state = "加载数据中......请稍后";
+      // console.log(111);
+      // (this.isLoading = true),
+      //   // this.getrealtime();
+      //   setTimeout(() => {
+      //     this.isLoading = false;
+      //   }, 1200);
     },
     getRecommend() {
+      var labels;
+      labels = this.input.split("、");
+      var a = labels.pop();
+      // var len =labels.length-1;
+      // labels.splice(len,0);
+      var prfer = "无";
+      if (this.prferradio == "") {
+        this.prferradio = prfer;
+      }
+      console.log(this.prferradio);
+      console.log(a);
+      console.log(labels);
       this.activeName = "scenicTab";
       request
         .post("/api/data/recommend", {
-          city: "北京",
-          province: "北京",
+          city: "南京",
+          preference: "score",
           time: "11",
-          label: "海",
-          datasouse: "马",
+          label: labels,
         })
         .then((res) => {
           console.log(res);
@@ -863,7 +959,6 @@ export default {
       myChart1.on("click", this.clickFun);
       myChart1.setOption({
         title: {
-          text: "   城市热度树图",
           textStyle: {
             color: "rgba(255, 255, 255, .8)",
             fontSize: 12,
@@ -948,13 +1043,13 @@ export default {
       var myChart = echarts.init(chartDom);
       var option;
 
-      let base = +new Date(2015, 9, 3);
+      let base = +new Date(2005, 9, 3);
       let oneDay = 24 * 3600 * 1000;
       let date = [];
       let date2 = [];
       let data = [Math.random() * 300];
       let data2 = [Math.random() * 300];
-      for (let i = 1; i < 20000; i++) {
+      for (let i = 1; i < 6150; i++) {
         var now = new Date((base += oneDay));
         date.push(
           [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
@@ -1060,28 +1155,28 @@ export default {
               ]),
             },
           },
-          {
-            name: "Fake Data",
-            type: "line",
-            symbol: "none",
-            sampling: "lttb",
-            data: data2,
-            itemStyle: {
-              color: "#D5F19F",
-            },
-            areaStyle: {
-              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                {
-                  offset: 0,
-                  color: "#758A4B",
-                },
-                {
-                  offset: 1,
-                  color: "#A9D750",
-                },
-              ]),
-            },
-          },
+          // {
+          //   name: "Fake Data",
+          //   type: "line",
+          //   symbol: "none",
+          //   sampling: "lttb",
+          //   data: data2,
+          //   itemStyle: {
+          //     color: "#D5F19F",
+          //   },
+          //   areaStyle: {
+          //     color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          //       {
+          //         offset: 0,
+          //         color: "#758A4B",
+          //       },
+          //       {
+          //         offset: 1,
+          //         color: "#A9D750",
+          //       },
+          //     ]),
+          //   },
+          // },
         ],
       };
       option && myChart.setOption(option, true);
@@ -1089,7 +1184,10 @@ export default {
     //矩形树图点击事件
     clickFun(param) {
       if (param.type == "click") {
-        this.chartname = param.name;
+        if (this.chartname != "南京市") {
+          this.chartname = param.name;
+        }
+
         if (param.name == "三亚") {
           this.wordCloudInti(this.$refs.chartword, this.wordclouddata);
         } else if (param.name == "北京") {
@@ -1425,7 +1523,7 @@ export default {
       .rightpt {
         flex: 8;
         .el-checkbox-group {
-          width: 100%;
+          width: 93%;
           .el-checkbox {
             color: rgb(174, 193, 199);
             margin-right: 7%;
@@ -1557,15 +1655,16 @@ export default {
         //   background: url(../assets/img/tab.png)no-repeat;
         //   background-size: 100% 100%;
       }
-      /deep/.el-tabs--top.el-tabs--border-card
-        > .el-tabs__header
-        .el-tabs__item:last-child {
-        padding: 0;
-      }
+
       /deep/.el-table .cell {
         padding-left: 0%;
         padding-right: 0%;
         text-align: center;
+      }
+      /deep/.el-tabs--top.el-tabs--border-card
+        > .el-tabs__header
+        .el-tabs__item:last-child {
+        padding: 0;
       }
       /deep/.el-tabs__nav-scroll {
         background: transparent;
@@ -1831,6 +1930,13 @@ export default {
       .hotandscore {
         height: 8%;
         width: 100%;
+        background: url("../assets/img/buttonbg.png") no-repeat center center;
+        background-size: 95% 95%;
+        .name {
+          /deep/.el-checkbox__label {
+            color: #e6eef0;
+          }
+        }
         .content {
           width: 60%;
           height: 100%;
@@ -1853,6 +1959,8 @@ export default {
       .distance {
         height: 8%;
         width: 100%;
+        background: url("../assets/img/buttonbg.png") no-repeat center center;
+        background-size: 95% 95%;
         .name {
           .el-checkbox {
             color: #e6eef0 !important;
@@ -1890,6 +1998,8 @@ export default {
       .season {
         width: 100%;
         height: 8%;
+        background: url("../assets/img/buttonbg.png") no-repeat center center;
+        background-size: 95% 95%;
         .name {
           .el-checkbox {
             color: #e6eef0 !important;
@@ -1924,9 +2034,38 @@ export default {
           }
         }
       }
+      .person {
+        width: 100%;
+        height: 22%;
+        background: url("../assets/img/buttonbg.png") no-repeat center center;
+        background-size: 95% 95%;
+        // background-color: #44afaf3a;
+        .considerperson {
+          height: 27%;
+          width: 100%;
+          .personcheckbox {
+            padding-left: 3%;
+            padding-top: 2%;
+            padding-bottom: 2%;
+            width: 30%;
+            height: 100%;
+            .el-checkbox {
+              color: #e6eef0 !important;
+            }
+            .el-checkbox__inner {
+              width: 12px;
+              height: 12px;
+            }
+            .el-checkbox__label {
+              padding-left: 14px;
+            }
+          }
+        }
+      }
       .occupationandincome {
         width: 100%;
-        height: 8%;
+        height: 34%;
+        // padding-bottom: 2%;
         .incomept {
           width: 50%;
           height: 100%;
@@ -1942,7 +2081,7 @@ export default {
         }
       }
       .buttoncontent {
-        height: 20%;
+        height: 11%;
         width: 70%;
         margin: auto;
         display: flex;
@@ -1964,7 +2103,8 @@ export default {
       }
       .ageandsex {
         width: 100%;
-        height: 8%;
+        height: 34%;
+        // padding-top: 2%;
         .agept {
           width: 50%;
           height: 100%;
@@ -2003,7 +2143,7 @@ export default {
   display: flex;
 }
 .person-name {
-  width: 50%;
+  width: 40%;
   height: 100%;
   float: left;
   text-align: right;
@@ -2057,6 +2197,63 @@ export default {
       flex-wrap: nowrap;
     }
   }
+  /deep/.el-tabs--border-card {
+    height: 96%;
+    margin: 1%;
+    background: transparent;
+    border: none;
+  }
+  .el-tabs--border-card > .el-tabs__content {
+    padding: 0;
+    height: 92%;
+  }
+  /deep/.el-tabs--border-card > .el-tabs__header {
+    background: transparent;
+    border: none;
+    margin: 0%;
+  }
+  /deep/.el-tabs__item {
+    padding: 0;
+    width: 70%;
+    border: none;
+    //   background: url(../assets/img/tab.png)no-repeat;
+    //   background-size: 100% 100%;
+  }
+
+  /deep/.el-table .cell {
+    padding-left: 0%;
+    padding-right: 0%;
+    text-align: center;
+  }
+  /deep/.el-tabs--top.el-tabs--border-card
+    > .el-tabs__header
+    .el-tabs__item:last-child {
+    padding: 0;
+  }
+  /deep/.el-tabs__nav-scroll {
+    background: transparent;
+    width: 28%;
+    background: url(../assets/img/buttonbg.png) no-repeat;
+    background-size: 100% 100%;
+  }
+  /deep/.el-tabs--border-card > .el-tabs__header .el-tabs__item {
+    border-left: none;
+    border-right: none;
+  }
+  /deep/.el-tabs--border-card > .el-tabs__header .el-tabs__item.is-active {
+    background: #2baccd6e;
+    color: #dcdfe6;
+    border-left: none;
+    border-right: none;
+    border-top: 0px solid #0cf3f3;
+    // border-bottom: 2px solid #0cf3f3;
+  }
+  /deep/.el-tabs--border-card > .el-tabs__content {
+    padding: 1%;
+    height: 90%;
+    width: 100%;
+    margin-top: 1%;
+  }
   /deep/.el-tabs--border-card > .el-tabs__header {
     background: transparent;
     border: none;
@@ -2081,10 +2278,6 @@ export default {
   .content {
     width: 100%;
     height: 100%;
-    .chartcontent {
-      width: 100%;
-      height: 100%;
-    }
   }
   .timechartcontent {
     height: 100%;
@@ -2094,7 +2287,25 @@ export default {
     height: 100%;
     width: 33.3%;
     .title {
-      margin-top: 2% !important;
+      height: 10%;
+      width: 100%;
+      margin-top: 1% !important;
+      display: flex;
+      flex-direction: row;
+
+      > span {
+        width: 70%;
+        text-align: left;
+        height: 100%;
+        color: #cfe4e4;
+        font-size: 11pt;
+      }
+      .imgIcon {
+        width: 13%;
+        height: 100%;
+        background: url("../assets/img/panelIcon.png");
+        background-size: 100% 100%;
+      }
     }
     .content {
       width: 100%;

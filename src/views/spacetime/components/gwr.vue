@@ -90,17 +90,17 @@ export default {
           };
           var WH_Water = new FeatureLayer({
             url: "http://114.98.239.36:6080/arcgis/rest/services/BabyHome/analyst/MapServer/2",
-            title: "中国省际丢失儿童地理加权回归分析",
+            title: "中国省际景点地理加权回归分析",
             // popupTemplate: popupTemplate
           });
           var WH_Water1 = new FeatureLayer({
             url: "http://114.98.239.36:6080/arcgis/rest/services/BabyHome/analyst/MapServer/1",
-            title: "中国市际丢失儿童地理加权回归分析",
+            title: "中国市际景点地理加权回归分析",
             // popupTemplate: popupTemplate
           });
           var WH_Water2 = new FeatureLayer({
             url: "http://114.98.239.36:6080/arcgis/rest/services/BabyHome/analyst/MapServer/0",
-            title: "中国区县丢失儿童地理加权回归分析",
+            title: "中国区县景点地理加权回归分析",
             // popupTemplate: popupTemplate
           });
           WH_Water1.visible = false;
@@ -147,7 +147,7 @@ export default {
           const legend = new Legend({
             view: view,
           });
-          view.ui.add(legend, "bottom-left");
+          view.ui.add(legend, "bottom-right");
         }
       );
     },

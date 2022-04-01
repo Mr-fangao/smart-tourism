@@ -322,11 +322,11 @@ export default {
   display: none;
   position: absolute;
   width: 1000px;
-  height: 655px;
+  height: 622px;
   border: 1px solid rgba(25, 186, 139, 0.2);
     background-color: rgb(22 100 125 / 61%);
   left: 50%;
-  top: 50%;
+  top: 43%;
   transform: translate(-50%, -50%);
   z-index: 100;
   text-align: center;

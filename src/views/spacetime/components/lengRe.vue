@@ -76,7 +76,7 @@ export default {
           ]
         }
         var WH_Water = new FeatureLayer({
-          url: 'http://114.98.239.36:6080/arcgis/rest/services/BabyHome/analyst/MapServer/6',
+          url: 'http://114.98.239.36:6080/arcgis/rest/services/smarttour/province_jd/MapServer',
           title: '中国省际景点冷热点分析'
           // popupTemplate: popupTemplate
         })
