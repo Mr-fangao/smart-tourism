@@ -155,7 +155,7 @@
             // Here we're using d3 to help us make the ajax request but you can use
             // Any request method (library or otherwise) you wish.
             d3.json(
-                './评论时间戳.json',
+                './马蜂窝评论.json',
                 jsonCallback
             );
         });
@@ -204,15 +204,15 @@
                         ['linear'],
                         ['get', 'score'],
                         1,
-                        5,
-                        2,
-                        10,
                         3,
-                        15,
+                        2,
+                        6,
+                        3,
+                        9,
                         4,
-                        20,
+                        12,
                         5,
-                        25
+                        15
 
                     ]
                 }
@@ -224,7 +224,7 @@
                 'type': 'symbol',
                 'source': 'earthquakes',
                 'layout': {
-                    'text-field': ['concat', ['to-string', ['get', 'score']], '星'],
+                    'text-field': ['concat', ['to-string', ['get', 'score']], '分'],
                     'text-font': ['Open Sans Bold', 'Arial Unicode MS Bold'],
                     'text-size': 12
                 },
