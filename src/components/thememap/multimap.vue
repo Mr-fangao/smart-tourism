@@ -1,12 +1,15 @@
 <template>
   <div class="com-multimap">
     <div id="map"></div>
+     <div id="state-legend" class="legend">
+<h4>景点评分</h4>
 <div><span style="background-color: #00FFFF"></span>3.5</div>
 <div><span style="background-color: #FFB6C1"></span>3.8</div>
 <div><span style="background-color: #00FF7F"></span>4.1</div>
 <div><span style="background-color: #FF8C00"></span>4.4</div>
 <div><span style="background-color: #FFFF00"></span>4.7</div>
 <div><span style="background-color: #9400D3"></span>5.0</div>
+</div>
     </div>
 </template>
 <script>
@@ -23,9 +26,9 @@ export default {
         "pk.eyJ1IjoiY2hlbmpxIiwiYSI6ImNrcWFmdWt2bjBtZGsybmxjb29oYmRzZzEifQ.mnpiwx7_cBEyi8YiJiMRZg";
       var map = new this.$mapboxgl.Map({
         container: "map",
-        style: "mapbox://styles/chenjq/ckwetfomi0j1014ph4s20wu2x",
-        center: [110, 40],
-        zoom: 5,
+        style: "mapbox://styles/chenjq/cl010ychv001214pdpa5xyq5a",
+        center: [119, 31.2],
+        zoom: 7.2,
       });
         map.on("load", () => {
         map.addSource("njmark", {
@@ -123,5 +126,28 @@ export default {
   font-family: Arial, sans-serif;
   overflow: auto;
   border-radius: 3px;
+}
+.legend {
+background-color: #fff;
+border-radius: 3px;
+bottom: 30px;
+box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+padding: 10px;
+position: absolute;
+right: 10px;
+z-index: 1;
+}
+ 
+.legend h4 {
+margin: 0 0 10px;
+}
+ 
+.legend div span {
+border-radius: 50%;
+display: inline-block;
+height: 10px;
+margin-right: 5px;
+width: 10px;
 }
 </style>
