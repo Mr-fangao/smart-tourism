@@ -107,7 +107,7 @@ export default {
           textStyle: {
             color: '#ffffff'
           },
-          data: ['婴幼儿', '少年', '青少年', '其他']
+          data: ['未成年', '青年', '中年', '老年']
         },
         grid: {
           left: '3%',
@@ -145,22 +145,22 @@ export default {
         ],
         series: [
           {
-            name: '婴幼儿',
+            name: '未成年',
             type: 'line',
             data: data_baby
           },
           {
-            name: '少年',
+            name: '青年',
             type: 'line',
             data: data_juvenile
           },
           {
-            name: '青少年',
+            name: '中年',
             type: 'line',
             data: data_teenagers
           },
           {
-            name: '其他',
+            name: '老年',
             type: 'line',
             data: data_other
           }

@@ -51,8 +51,8 @@ export default {
       const all = []
       const man = []
       const woman = []
-      if (data[0] === '拐入') {
-        this.title = '各地区拐入至' + data[1][0].to + '统计'
+      if (data[0] === '流入') {
+        this.title = '各地区流入至' + data[1][0].to + '统计'
         for (let index = 0; index < data[1].length; index++) {
           const element = data[1][index]
           name.push(element.from.substring(0, 4))
@@ -61,7 +61,7 @@ export default {
           woman.push(element.middata.男生)
         }
       } else {
-        this.title = data[1][0].from + '拐出至各地区统计'
+        this.title = data[1][0].from + '流出至各地区统计'
         for (let index = 0; index < data[1].length; index++) {
           const element = data[1][index]
           name.push(element.to.substring(0, 4))
@@ -111,7 +111,8 @@ export default {
         },
         color: ['#00BFFF', 'rgb(50,149,206)', 'rgb(0,206,209)'],
         yAxis: {
-          type: 'value',
+          type: 'category',
+          data: name,
           splitLine: {
             show: false
           },
@@ -128,27 +129,9 @@ export default {
           containLabel: true,
           height: '80%'
         },
-        // dataZoom: [
-        //   {
-        //     show: true,
-        //     yAxisIndex: 0,
-        //     filterMode: 'empty',
-        //     width: 20,
-        //     height: '90%',
-        //     start: this.start,
-        //     end: 100,
-        //     showDataShadow: false,
-        //     right: '4%'
-        //   },
-        //   {
-        //     type: 'inside',
-        //     yAxisIndex: 0,
-        //     filterMode: 'none'
-        //   }
-        // ],
         xAxis: {
-          type: 'category',
-          data: name,
+          type: 'value',
+
           splitLine: {
             show: false
           },

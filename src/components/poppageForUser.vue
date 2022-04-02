@@ -120,11 +120,11 @@
   </div>
 </template>
 <script>
-import vueSeamlessScroll from "vue-seamless-scroll";
+// import vueSeamlessScroll from "vue-seamless-scroll";
 export default {
   name: "poppage",
   components: {
-    vueSeamlessScroll,
+    // vueSeamlessScroll,
   },
   data() {
     return {

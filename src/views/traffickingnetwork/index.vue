@@ -571,7 +571,7 @@ export default {
   z-index: 10;
   top: 55px;
   width: 180px;
-  right: 310px;
+  right: 385px;
   font-family: KuHei;
   font-size: 14px;
 }

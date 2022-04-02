@@ -1,18 +1,22 @@
 <template>
   <div id="com-city">
+    <selectRegion />
     <div id="map" />
     <div class="city-left">
       <div class="city-left-select">
-        <div class="title"><span>城市形象感知分析</span></div>
-        <div class="selectcontent"></div>
+        <div class="title">
+          <div class="imgBK"></div>
+          <span>城市特征词云分析</span>
+        </div>
+        <div class="content" id="chart1" ref="cloudEl"></div>
       </div>
       <div class="city-left-bottom">
         <div class="col-content">
           <div class="row1title">
             <div class="imgBK"></div>
-            <span>城市特征词云分析</span>
+            <span>游客口碑一览</span>
           </div>
-          <div class="row1chartcontent" id="chart1" ref="cloudEl"></div>
+          <div class="commentroll"></div>
         </div>
         <div class="col-content">
           <div class="row1title">
@@ -99,6 +103,9 @@
   </div>
 </template>
 <script>
+import eventBum from "../../views/traffickingnetwork/public/js/EvebtBus";
+import SelectRegion from "../../views/traffickingnetwork/components/selectRegion.vue";
+
 import wordcloud from "../../assets/js/echarts-wordcloud-master/index";
 import echarts from "echarts";
 import request from "../../utils/request";
@@ -108,10 +115,15 @@ export default {
   name: "city",
   components: {
     wordcloud,
+    SelectRegion,
     areaSelect,
   },
   data() {
     return {
+      selectcity: {
+        name: "中国",
+        level: 0,
+      },
       cityimages: [
         { url: require("../../assets/img/BJ/beijing01.jpg") },
         { url: require("../../assets/img/BJ/beijing02.jpg") },
@@ -360,6 +372,10 @@ export default {
     };
   },
   mounted() {
+    eventBum.$on("json", (json) => {
+      this.selectcity.name = json.name;
+      this.selectcity.level = json.where;
+    });
     this.initmap();
     this.wordCloudInti(this.$refs.cloudEl, this.cloudData);
     this.initChart2();
@@ -600,28 +616,38 @@ export default {
     display: flex;
     flex-direction: column;
     .title {
-      margin-top: 5%;
-      height: 12%;
+      padding-top: 4%;
+      height: 16%;
       width: 100%;
-      position: relative;
-      left: 0%;
-      background: url(../../assets/img/titlebg.png) no-repeat;
-      background-size: 57% 93%;
-      background-position: 9% 100%;
-      font-size: 16pt;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      .imgBK {
+        margin-left: 2%;
+        height: 100%;
+        width: 8%;
+        background: url("../../assets/img/panelIcon.png") no-repeat;
+        background-size: 100% 100%;
+      }
       > span {
-        float: left;
-        margin-left: 18%;
+        color: rgb(115, 215, 228);
         font-size: 12pt;
-        line-height: 30px;
-        color: aliceblue;
-        text-shadow: 0 0 10px #fff, 0 0 10px #fff, 0 0 15px #fff,
-          0 0 20px #38e9e0, 0 0 25px #0cf3f3;
       }
     }
-    .selectcontent{
-      height: 100%;
+    .content {
+      height: 85%;
       width: 100%;
+      display: flex;
+      flex-direction: column;
+      .content1 {
+        margin-top: 10%;
+        width: 100%;
+        height: 20%;
+      }
+      .content2 {
+        width: 100%;
+        height: 50%;
+      }
     }
   }
   .city-left-bottom {
@@ -634,6 +660,10 @@ export default {
       height: 44%;
       width: 100%;
       float: left;
+      .commentroll {
+        height: 85%;
+        width: 100%;
+      }
       .row1title {
         height: 15%;
         width: 100%;

@@ -54,7 +54,7 @@ export default {
           place_name.push(element.from)
         }
       } else {
-        this.title = datas[1][0].from + '流出至各地区儿童走失平均时长统计'
+        this.title = datas[1][0].from + '流出至各地区游客游览平均时长统计'
         for (let index = 0; index < datas[1].length; index++) {
           const element = datas[1][index]
           data.push(element.middata.平均时长)
@@ -85,8 +85,8 @@ export default {
         },
         grid: {
           left: '3%',
-          right: '8%',
-          bottom: '15%',
+          right: '1%',
+          bottom: '50%',
           containLabel: true
         },
         title: {

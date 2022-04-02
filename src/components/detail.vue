@@ -101,8 +101,6 @@ export default {
       com: [],
       score: [],
       components: {
-        //组件
-        vueSeamlessScroll,
       },
     };
   },
@@ -536,6 +534,7 @@ export default {
         width: 100%;
         color: aliceblue;
         font-size: 11pt;
+        //循环界限，超出隐藏
         overflow: hidden;
         .ul-scoll {
           .li-scoll {
@@ -545,19 +544,15 @@ export default {
             cursor: pointer;
             line-height: 20px;
             .pinglun {
-              white-space: nowrap;
               width: 70%;
               height: 100%;
+              //单元格横向长度不足时 隐藏文字内容，并以鼠标悬停的方式显示
               overflow: hidden;
+              white-space: nowrap;
               text-overflow: ellipsis;
               text-align: left;
               text-indent: 1em;
             }
-            // .pinglun:hover {
-            //   text-overflow: inherit;
-            //   overflow: visible;
-            //   white-space: pre-line; /*合并空白符序列，但是保留换行符。*/
-            // }
             .fenshu {
               width: 5%;
             }

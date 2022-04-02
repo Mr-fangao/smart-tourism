@@ -59,6 +59,15 @@
           <div class="mapimg map4"></div>
           <span class="tab" slot="title">时序图</span>
         </el-menu-item>
+                <el-menu-item
+          index="4"
+          @click="showmap(5)"
+          :class="index === 5 ? 'active' : ''"
+          plain
+        >
+          <el-radio v-model="mapchange" label="5">&ensp;</el-radio>
+          <span class="tab" slot="title">景点推荐</span>
+        </el-menu-item>
       </el-menu>
     </div>
     <div class="recommend-left pt">
@@ -395,7 +404,11 @@
               <div class="incomept">
                 <div class="person-name">收入:</div>
                 <div class="person-inputcontent">
-                  <el-select v-model="value" clearable placeholder="选择收入范围">
+                  <el-select
+                    v-model="value"
+                    clearable
+                    placeholder="选择收入范围"
+                  >
                     <el-option
                       v-for="item in options"
                       :key="item.value"
@@ -510,6 +523,7 @@ export default {
       index: "1",
 
       //推荐项目
+      // tablelabel:'分数',
       citycount: {
         sensic: "34682",
         comment: "1900516",
@@ -922,6 +936,10 @@ export default {
       if (this.prferradio == "") {
         this.prferradio = prfer;
       }
+      // else if(this.prferradio=='hot')
+      // {
+      //   this.tablelabel=='热度'
+      // }
       console.log(this.prferradio);
       console.log(a);
       console.log(labels);
@@ -929,7 +947,7 @@ export default {
       request
         .post("/api/data/recommend", {
           city: "南京",
-          preference: "score",
+          preference: this.prferradio,
           time: "11",
           label: labels,
         })
@@ -939,6 +957,11 @@ export default {
           for (let i = 1; i <= res.data.length; i++) {
             this.scenicdata[i - 1].rank = i;
           }
+          // if (this.prferradio == "hot") {
+          //   for (let i = 0; i < this.scenicdata.length; i++) {
+          //     this.scenicdata[i].score = this.scenicdata[i].hot;
+          //   }
+          // }
         });
     },
     handleTabClick(tab) {
@@ -1799,9 +1822,9 @@ export default {
   background: url("../assets/img/side.png") no-repeat;
   background-size: 100% 100%;
   display: flex;
-  /deep/.el-checkbox__input.is-checked+.el-checkbox__label {
+  /deep/.el-checkbox__input.is-checked + .el-checkbox__label {
     color: #5cc0da;
-}
+  }
   .chinahot {
     width: 100%;
     flex: 2;
@@ -2087,6 +2110,7 @@ export default {
         }
       }
       .buttoncontent {
+        padding-top: 5%;
         height: 11%;
         width: 70%;
         margin: auto;
@@ -2170,19 +2194,19 @@ export default {
   flex-direction: row;
   padding-left: 6%;
   /deep/.el-input__inner {
-        background: #c3e3e72b;
-        border-radius: 4px;
-        border: 1px solid #3eb7c738;
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-        color: rgba(220, 225, 227, 0.96);
-        font-size: inherit;
-        height: 32px;
-        // line-height: 90px;
-        width: 127%;
-        padding: 0px;
-        // margin-top: 2%;
-      }
+    background: #c3e3e72b;
+    border-radius: 4px;
+    border: 1px solid #3eb7c738;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    color: rgba(220, 225, 227, 0.96);
+    font-size: inherit;
+    height: 32px;
+    // line-height: 90px;
+    width: 127%;
+    padding: 0px;
+    // margin-top: 2%;
+  }
   .el-radio {
     margin-right: 20%;
   }
@@ -2259,10 +2283,11 @@ export default {
   /deep/.el-tabs--border-card > .el-tabs__header .el-tabs__item {
     border-left: none;
     border-right: none;
+    background-color: #85bdbf38;
   }
   /deep/.el-tabs--border-card > .el-tabs__header .el-tabs__item.is-active {
     background: #2baccd6e;
-    color: #dcdfe6;
+    color: #53eeff;
     border-left: none;
     border-right: none;
     border-top: 0px solid #0cf3f3;
@@ -2286,10 +2311,11 @@ export default {
   /deep/.el-tabs--border-card > .el-tabs__header .el-tabs__item {
     border-left: none;
     border-right: none;
+    color: #dcf7f7;
   }
   /deep/.el-tabs--border-card > .el-tabs__header .el-tabs__item.is-active {
     background: #2baccd6e;
-    color: #dcdfe6;
+    color: #53eeff;
     border-left: none;
     border-right: none;
     border-top: 0px solid #0cf3f3;

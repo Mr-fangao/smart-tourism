@@ -15,7 +15,7 @@
             plain
           >
             <el-radio v-model="datachange" label="1">&ensp;</el-radio>
-            <span class="tab" slot="title">景点数据</span>
+            <span class="tab" slot="title">景点数</span>
           </el-menu-item>
           <el-menu-item
             id="button4"
@@ -24,7 +24,7 @@
             plain
           >
             <el-radio v-model="datachange" label="2">&ensp;</el-radio>
-            <span class="tab" slot="title">评论数据</span>
+            <span class="tab" slot="title">游记数</span>
           </el-menu-item>
           <el-menu-item
             id="button5"
@@ -33,7 +33,7 @@
             plain
           >
             <el-radio v-model="datachange" label="3">&ensp;</el-radio>
-            <span class="tab" slot="title">游记数据</span>
+            <span class="tab" slot="title">评论数</span>
           </el-menu-item>
           <el-menu-item
             id="button6"
@@ -42,7 +42,7 @@
             plain
           >
             <el-radio v-model="datachange" label="4">&ensp;</el-radio>
-            <span class="tab" slot="title">游客数据</span>
+            <span class="tab" slot="title">好评数</span>
           </el-menu-item>
         </el-menu>
       </div>
