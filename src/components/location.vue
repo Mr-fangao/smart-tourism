@@ -2,14 +2,14 @@
   <div class="com-loc">
     <div id="map"></div>
     <div id="state-legend" class="legend">
-<h4>旅游热度</h4>
-<div><span style="background-color: #00FFFF"></span>50</div>
-<div><span style="background-color: #FFB6C1"></span>100</div>
-<div><span style="background-color: #00FF7F"></span>150</div>
-<div><span style="background-color: #FF8C00"></span>200</div>
-<div><span style="background-color: #FFFF00"></span>250</div>
-<div><span style="background-color: #9400D3"></span>300</div>
-</div>
+      <h4>旅游热度</h4>
+      <div><span style="background-color: #ACBE21"></span>50人次/日</div>
+      <div><span style="background-color: #BEB221"></span>100人次/日</div>
+      <div><span style="background-color: #BE8221"></span>150人次/日</div>
+      <div><span style="background-color: #ff8c00"></span>200人次/日</div>
+      <div><span style="background-color: #BE6321"></span>250人次/日</div>
+      <div><span style="background-color: #BE4521"></span>300人次/日</div>
+    </div>
   </div>
 </template>
 <script>
@@ -69,35 +69,34 @@ export default {
             "fill-opacity": 0.6 /* 透明度 */,
           },
         });
-           map.addLayer({
-                'id': 'earthquakes-layer',
-                'type': 'circle',
-                'source': 'njmark',
-                'paint': {
-                  "circle-radius": 5,
-              "circle-stroke-width": 2,
-              'circle-opacity': 0.75,
-              "circle-stroke-color": "white",
-                    'circle-color': [
-                        'interpolate',
-                        ['linear'],
-                        ['get','hot'],
-                        50,
-                        '#00FFFF',
-                        100,
-                        '#FFB6C1',
-                        150,
-                        '#00FF7F',
-                        200,
-                        '#FF8C00',
-                        250,
-                        '#FFFF00',
-                        300,
-                        '#9400D3'
-                    ],
-                }
-            }
-           );
+        map.addLayer({
+          id: "earthquakes-layer",
+          type: "circle",
+          source: "njmark",
+          paint: {
+            "circle-radius": 5,
+            "circle-stroke-width": 2,
+            "circle-opacity": 0.75,
+            "circle-stroke-color": "white",
+            "circle-color": [
+              "interpolate",
+              ["linear"],
+              ["get", "hot"],
+              50,
+              "#ACBE21",
+              100,
+              "#BEB221",
+              150,
+              "#BE8221",
+              200,
+              "#FF8C00",
+              250,
+              "#ff8c00",
+              300,
+              "#BE4521",
+            ],
+          },
+        });
         // map.addLayer({
         //   id: "earthquakes-layer",
         //   type: "circle",
@@ -121,10 +120,10 @@ export default {
             "text-color": "#FFFFFF",
           },
         });
-        const countyLegendEl = document.getElementById('county-legend');
+        const countyLegendEl = document.getElementById("county-legend");
       });
     },
-  }
+  },
 };
 </script>
 
@@ -149,26 +148,30 @@ export default {
   border-radius: 3px;
 }
 .legend {
-background-color: #fff;
-border-radius: 3px;
-bottom: 30px;
-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
-padding: 10px;
-position: absolute;
-right: 10px;
-z-index: 1;
+  background-color: #348ea894;
+  color: aliceblue;
+  border-radius: 3px;
+  bottom: 47%;
+  height: 21%;
+  width: 7%;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  font: 12px/20px "Helvetica Neue", Arial, Helvetica, sans-serif;
+  padding: 10px;
+  position: absolute;
+  right: 23.5%;
+  z-index: 1;
 }
- 
+
 .legend h4 {
-margin: 0 0 10px;
+  margin: 0 0 6px;
+  font-size: 10pt;
 }
- 
+
 .legend div span {
-border-radius: 50%;
-display: inline-block;
-height: 10px;
-margin-right: 5px;
-width: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  height: 10px;
+  margin-right: 5px;
+  width: 10px;
 }
 </style>

@@ -140,6 +140,7 @@ export default {
         uliked: "",
       },
       list: [],
+      scolllist: [],
     };
   },
   props: {
@@ -253,9 +254,11 @@ export default {
             time: list[i].time,
             // time: utilDate.dateFtt(new Date()),
           };
-          this.list.push(j);
+          this.scolllist.push(j);
         }
       }
+      this.list=this.scolllist
+      this.$forceUpdate();
     },
     drawEchaets() {
       let myChart = this.$echarts.init(document.getElementById("myChart"));
@@ -317,7 +320,7 @@ export default {
   computed: {
     optionSetting() {
       return {
-        step: 0.4, // 数值越大速度滚动越快
+        step: 0.2, // 数值越大速度滚动越快
         limitMoveNum: 10, // 开始无缝滚动的数据量 this.dataList.length
         hoverStop: false, // 是否开启鼠标悬停stop
         direction: 1, // 0向下 1向上 2向左 3向右
