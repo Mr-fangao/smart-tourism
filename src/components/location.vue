@@ -3,12 +3,12 @@
     <div id="map"></div>
     <div id="state-legend" class="legend">
       <h4>旅游热度</h4>
-      <div><span style="background-color: #ACBE21"></span>50人次/日</div>
-      <div><span style="background-color: #BEB221"></span>100人次/日</div>
-      <div><span style="background-color: #BE8221"></span>150人次/日</div>
+      <div><span style="background-color: #acbe21"></span>50人次/日</div>
+      <div><span style="background-color: #beb221"></span>100人次/日</div>
+      <div><span style="background-color: #be8221"></span>150人次/日</div>
       <div><span style="background-color: #ff8c00"></span>200人次/日</div>
-      <div><span style="background-color: #BE6321"></span>250人次/日</div>
-      <div><span style="background-color: #BE4521"></span>300人次/日</div>
+      <div><span style="background-color: #be6321"></span>250人次/日</div>
+      <div><span style="background-color: #be4521"></span>300人次/日</div>
     </div>
   </div>
 </template>

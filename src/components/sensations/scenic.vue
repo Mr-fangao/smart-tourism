@@ -16,7 +16,37 @@
             <div class="imgBK"></div>
             <span>游客口碑一览</span>
           </div>
-          <div class="commentroll"></div>
+          <div class="commentroll">
+            <div class="tablehrader">
+              <ul class="uititle">
+                <li class="title">
+                  <span class="content">评论</span>
+                  <span class="score">景点</span>
+                </li>
+              </ul>
+            </div>
+            <div class="srrollcontent">
+              <vue-seamless-scroll
+                :data="commentlist"
+                :class-option="defaultOption"
+              >
+                <ul class="ul-scoll">
+                  <li
+                    class="li-scoll"
+                    v-for="(item, index) in commentlist"
+                    :key="index"
+                  >
+                    <div :title="item.pinglun" class="pinglun">
+                      {{ item.pinglun }}
+                    </div>
+                    <div :title="item.name" class="jingdian">
+                      {{ item.name }}
+                    </div>
+                  </li>
+                </ul>
+              </vue-seamless-scroll>
+            </div>
+          </div>
         </div>
         <div class="col-content">
           <div class="row1title">
@@ -33,7 +63,7 @@
           ><div class="col-content">
             <div class="row2title">
               <div class="imgBK"></div>
-              <span>游客评论文本IPA分析图</span>
+              <span>评论文本分析</span>
             </div>
             <div class="row1chartcontent" id="chart3"></div>
           </div>
@@ -104,7 +134,7 @@
 </template>
 <script>
 import eventBum from "../../views/traffickingnetwork/public/js/EvebtBus";
-import SelectRegion from "../../views/traffickingnetwork/components/selectRegion.vue";
+import SelectRegion from "../../views/traffickingnetwork/components/selectRegionBJ.vue";
 
 import wordcloud from "../../assets/js/echarts-wordcloud-master/index";
 import echarts from "echarts";
@@ -124,6 +154,7 @@ export default {
         name: "中国",
         level: 0,
       },
+      commentlist: [],
       cityimages: [
         { url: require("../../assets/img/BJ/beijing01.jpg") },
         { url: require("../../assets/img/BJ/beijing02.jpg") },
@@ -131,7 +162,14 @@ export default {
         { url: require("../../assets/img/BJ/beijing04.jpg") },
         { url: require("../../assets/img/BJ/beijing05.jpg") },
       ],
-      cloudData: [
+      NJcityimages: [
+        { url: require("../../assets/img/BJ/beijing01.jpg") },
+        { url: require("../../assets/img/BJ/beijing02.jpg") },
+        { url: require("../../assets/img/BJ/beijing03.jpg") },
+        { url: require("../../assets/img/BJ/beijing04.jpg") },
+        { url: require("../../assets/img/BJ/beijing05.jpg") },
+      ],
+      BJcloudData: [
         { value: 773, name: "故宫" },
         { value: 502, name: "长城" },
         { value: 270, name: "建筑" },
@@ -159,6 +197,37 @@ export default {
         { value: 79, name: "地坛" },
         { value: 75, name: "慕田峪长城" },
       ],
+      NJcloudData: [
+        { value: 106, name: "夫子庙" },
+        { value: 85, name: "报恩寺" },
+        { value: 84, name: "溧水" },
+        { value: 80, name: "牛首山" },
+        { value: 72, name: "总统府" },
+        { value: 68, name: "栖霞山" },
+        { value: 60, name: "明孝陵" },
+        { value: 56, name: "博物馆" },
+        { value: 55, name: "中华门" },
+        { value: 55, name: "瞻园" },
+        { value: 54, name: "汤山" },
+        { value: 49, name: "秦淮河" },
+        { value: 45, name: "老门东" },
+        { value: 44, name: "瓮城" },
+        { value: 41, name: "中山陵" },
+        { value: 39, name: "石臼" },
+        { value: 36, name: "太平天国" },
+        { value: 31, name: "栖霞寺" },
+        { value: 27, name: "地质公园" },
+        { value: 25, name: "梧桐" },
+        { value: 24, name: "东南大学" },
+        { value: 23, name: "古都" },
+        { value: 23, name: "公馆" },
+        { value: 22, name: "梅花" },
+        { value: 21, name: "樱花" },
+        { value: 20, name: "河海大学" },
+        { value: 19, name: "王府" },
+        { value: 16, name: "紫金山" },
+        { value: 16, name: "银杏" },
+      ],
       option2: {
         tooltip: {
           trigger: "axis",
@@ -170,8 +239,7 @@ export default {
               "<br>" +
               params[1].seriesName +
               ": " +
-              params[1].data +
-              "%"
+              params[1].data
             );
           },
         },
@@ -282,6 +350,128 @@ export default {
           },
         ],
       },
+      option3: {
+        tooltip: {
+          trigger: "axis",
+          formatter: (params) => {
+            return (
+              params[0].seriesName +
+              ": " +
+              params[0].data +
+              "<br>" +
+              params[1].seriesName +
+              ": " +
+              params[1].data
+            );
+          },
+        },
+        legend: {
+          data: ["城市形象", "全国平均水平"],
+          textStyle: {
+            //图例文字的样式
+            color: "#fff",
+            fontSize: 16,
+          },
+        },
+        xAxis: [
+          {
+            type: "category",
+            axisLine: {
+              //这是x轴文字颜色
+              lineStyle: {
+                // color: " #999999",
+                color: "#fff",
+              },
+            },
+            data: [
+              "交通",
+              "住宿",
+              "地理位置",
+              "旅行体验",
+              "景区环境",
+              "景区设施",
+              "服务",
+              "饮食",
+            ],
+          },
+        ],
+        yAxis: [
+          {
+            splitLine: { show: false },
+            type: "value",
+            name: "数量",
+            interval: 50,
+            axisLabel: {
+              formatter: "{value} ",
+            },
+            axisLine: {
+              //这是x轴文字颜色
+              lineStyle: {
+                // color: " #999999",
+                color: "#fff",
+              },
+            },
+          },
+        ],
+        grid: {
+          left: "10%",
+          right: "5%",
+          top: "15%",
+          bottom: "15%",
+        },
+        series: [
+          {
+            name: "城市形象",
+            type: "bar",
+            barWidth: 20,
+            /*设置柱状图颜色*/
+            itemStyle: {
+              normal: {
+                color: function (params) {
+                  // build a color map as your need.
+                  var colorList = [
+                    "#fe4f4f",
+                    "#fead33",
+                    "#feca2b",
+                    "#fef728",
+                    "#c5ee4a",
+                    "#87ee4a",
+                    "#46eda9",
+                    "#47e4ed",
+                    "#4bbbee",
+                    "#7646d8",
+                    "#924ae2",
+                    "#C6E579",
+                    "#F4E001",
+                    "#F0805A",
+                    "#26C0C0",
+                  ];
+                  return colorList[params.dataIndex];
+                },
+                /*信息显示方式*/
+                label: {
+                  show: true,
+                  position: "top",
+                  formatter: "{b}\n{c}",
+                },
+              },
+            },
+            data: [0.38, 0.218, 0.478, 0.537, 0.569, 0.469, 0.557, 0.472],
+          },
+          {
+            name: "全国平均水平",
+            yAxisIndex: 0, //这里要设置哪个y轴，默认是最左边的是0，然后1，2顺序来。
+            type: "line",
+            itemStyle: {
+              /*设置折线颜色*/
+              normal: {
+                // color:'#c4cddc'
+              },
+            },
+            data: [0.193, 0.178, 0.512, 0.683, 0.721, 0.358, 0.432, 0.498],
+          },
+        ],
+      },
       dataBJ: [
         [4.95, 3.08, "自然景观"],
         [2.56, 2.85, "人文景观"],
@@ -321,7 +511,7 @@ export default {
         title: "",
         cost: "",
       },
-      option5: {
+      option6: {
         tooltip: {
           trigger: "axis",
           axisPointer: {
@@ -329,7 +519,7 @@ export default {
           },
         },
         grid: {
-          x: 55,
+          x: 110,
           y: 15,
           x2: 10,
           y2: 40,
@@ -358,41 +548,126 @@ export default {
               color: "#fff",
             },
           },
-          data: ["Brazil", "Indonesia", "USA", "India", "China", "World"],
+          data: [
+            "外秦淮河游船",
+            "南京中华门城堡",
+            "江宁织造博物馆",
+            "夫子庙大成殿",
+            "灵谷寺",
+            "朝天宫",
+          ],
         },
         series: [
           {
             barWidth: 10,
             name: "2011",
             type: "bar",
-            data: [18203, 23489, 29034, 104970, 131744, 630230],
+            data: [2163, 963, 824, 783, 757, 693],
+          },
+        ],
+      },
+      option5: {
+        tooltip: {
+          trigger: "axis",
+          axisPointer: {
+            type: "shadow",
+          },
+        },
+        grid: {
+          x: 110,
+          y: 15,
+          x2: 10,
+          y2: 40,
+          // containLabel: true,
+        },
+        xAxis: {
+          type: "value",
+          splitLine: {
+            show: false,
+          },
+          axisLine: {
+            //这是x轴文字颜色
+            lineStyle: {
+              // color: " #999999",
+              color: "#fff",
+            },
+          },
+          boundaryGap: [0, 0.01],
+        },
+        yAxis: {
+          type: "category",
+          axisLine: {
+            //这是x轴文字颜色
+            lineStyle: {
+              // color: " #999999",
+              color: "#fff",
+            },
+          },
+          data: [
+            "春晖园温泉度假村",
+            "北京野鸭湖国家湿地公园",
+            "南宫温泉水世界",
+            "八达岭长城",
+            "北京世园公园",
+            "王府井商业街",
+          ],
+        },
+        series: [
+          {
+            barWidth: 10,
+            type: "bar",
+            data: [747, 708, 693, 687, 631, 518],
+            itemStyle: {
+              color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+                { offset: 0, color: "#188df0" },
+                { offset: 0.5, color: "#188df0" },
+                { offset: 1, color: "#83bff6" },
+              ]),
+            },
           },
         ],
       },
     };
   },
   mounted() {
+    this.getTravels();
+    this.getComment();
     eventBum.$on("json", (json) => {
       this.selectcity.name = json.name;
       this.selectcity.level = json.where;
+      var cityname = this.selectcity.name.substr(
+        0,
+        this.selectcity.name.length - 1
+      );
+      this.city = cityname;
+      this.getComment();
+      this.getTravels();
+      if (this.city == "南京") {
+        this.initChart2(this.option3);
+        this.initChart5(this.option6);
+        this.wordCloudInti(this.$refs.cloudEl, this.NJcloudData);
+      } else if (this.city == "北京") {
+        this.initChart2(this.option2);
+        this.initChart5(this.option5);
+        this.wordCloudInti(this.$refs.cloudEl, this.BJcloudData);
+      }
     });
     this.initmap();
-    this.wordCloudInti(this.$refs.cloudEl, this.cloudData);
-    this.initChart2();
+    this.wordCloudInti(this.$refs.cloudEl, this.BJcloudData);
+    this.initChart2(this.option2);
     this.initChart3();
-    this.initChart5();
+    this.initChart5(this.option5);
     this.$nextTick(() => {
       window.addEventListener("resize", () => {
         this.handleResize();
       });
     });
-    this.getTravels();
   },
   methods: {
-    initChart2() {
+    initChart2(opt) {
       let myChart2 = this.$echarts.init(document.getElementById("chart2"));
       // 指定图表的配置项和数据
-      let option = this.option2;
+      let option = opt;
       // 使用刚指定的配置项和数据显示图表。
       myChart2.setOption(option);
     },
@@ -403,14 +678,14 @@ export default {
         color: ["#91cc75", "#fec42c", "#ee6666", "#fc8452"],
         legend: {
           top: 10,
-          right: 45,
+          right: 85,
           itemHeight: 8,
           itemWidth: 8,
           orient: "vertical",
-          data: ["1", "2", "3", "4"],
+          data: ["公园环境", "设施服务", "游憩体验", "游憩成本"],
           textStyle: {
-            color: "#F5FDFD80",
-            fontSize: 12,
+            color: ["#91cc75", "#fec42c", "#ee6666", "#fc8452"],
+            fontSize: 14,
           },
         },
         label: {
@@ -465,25 +740,25 @@ export default {
         },
         series: [
           {
-            name: "1",
+            name: "公园环境",
             type: "scatter",
             itemStyle: this.itemStyle,
             data: this.dataBJ,
           },
           {
-            name: "2",
+            name: "设施服务",
             type: "scatter",
             itemStyle: this.itemStyle,
             data: this.dataGZ,
           },
           {
-            name: "3",
+            name: "游憩体验",
             type: "scatter",
             itemStyle: this.itemStyle,
             data: this.data03,
           },
           {
-            name: "4",
+            name: "游憩成本",
             type: "scatter",
             itemStyle: this.itemStyle,
             data: this.data04,
@@ -493,10 +768,10 @@ export default {
       // 使用刚指定的配置项和数据显示图表。
       myChart3.setOption(option3);
     },
-    initChart5() {
+    initChart5(opt) {
       let myChart5 = this.$echarts.init(document.getElementById("chart5"));
       // 指定图表的配置项和数据
-      let option = this.option5;
+      let option = opt;
       // 使用刚指定的配置项和数据显示图表。
       myChart5.setOption(option);
     },
@@ -551,10 +826,20 @@ export default {
       };
       myChart.setOption(option);
     },
+    getComment() {
+      request
+        .post("/api/data/cityCom", {
+          model: this.city,
+        })
+        .then((res) => {
+          console.log(res);
+          this.commentlist = res.data;
+        });
+    },
     getTravels() {
       request
         .post("/api/data/cityTravel", {
-          count: "1000",
+          count: "1000000",
           city: this.city,
         })
         .then((res) => {
@@ -576,6 +861,20 @@ export default {
         center: [105, 35],
         zoom: 3.5,
       });
+    },
+  },
+  computed: {
+    defaultOption() {
+      return {
+        step: 0.4, // 数值越大速度滚动越快
+        limitMoveNum: 2, // 开始无缝滚动的数据量 this.dataList.length
+        hoverStop: true, // 是否开启鼠标悬停stop
+        direction: 1, // 0向下 1向上 2向左 3向右
+        openWatch: true, // 开启数据实时监控刷新dom
+        singleHeight: 0, // 单步运动停止的高度(默认值0是无缝不停止的滚动) direction => 0/1
+        singleWidth: 0, // 单步运动停止的宽度(默认值0是无缝不停止的滚动) direction => 2/3
+        waitTime: 1000, // 单步运动停止的时间(默认值1000ms)
+      };
     },
   },
 };
@@ -611,13 +910,13 @@ export default {
   flex-wrap: nowrap;
   justify-content: flex-start;
   .city-left-select {
-    flex: 1;
+    flex: 0.7;
     width: 100%;
     display: flex;
     flex-direction: column;
     .title {
-      padding-top: 4%;
-      height: 16%;
+      padding-top: 1%;
+      height: 18%;
       width: 100%;
       display: flex;
       justify-content: flex-start;
@@ -635,7 +934,7 @@ export default {
       }
     }
     .content {
-      height: 85%;
+      height: 80%;
       width: 100%;
       display: flex;
       flex-direction: column;
@@ -653,16 +952,99 @@ export default {
   .city-left-bottom {
     flex: 2;
     width: 100%;
+    height: 70%;
     display: flex;
     flex-direction: column;
-    margin-bottom: 2%;
+    // margin-bottom: 2%;
     .col-content {
-      height: 44%;
       width: 100%;
       float: left;
       .commentroll {
         height: 85%;
         width: 100%;
+        position: relative;
+        .tablehrader {
+          height: 9%;
+          width: 100%;
+          .uititle {
+            height: 100%;
+            background-color: rgba(86, 212, 235, 0.575);
+            color: aliceblue;
+            font-size: 12pt;
+            .title {
+              height: 100%;
+              display: flex;
+              .content {
+                height: 100%;
+                width: 80%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              }
+              .scenic {
+                height: 100%;
+                width: 20%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              }
+            }
+          }
+        }
+        .srrollcontent {
+          height: 87%;
+          width: 100%;
+          color: aliceblue;
+          font-size: 11pt;
+          //循环界限，超出隐藏
+          overflow: hidden;
+          .ul-scoll {
+            .li-scoll {
+              margin-bottom: 1.5%;
+              list-style: none;
+              display: flex;
+              // margin-bottom: 1.5%;
+              border: 1px #8fece783 solid;
+              // border-right: 1px #8fece783 solid;
+              // border-left: 1px #8fece783 solid;
+              cursor: pointer;
+              line-height: 20px;
+              .pinglun {
+                width: 70%;
+                height: 100%;
+                border-right: 1px #8fece783 solid;
+                //单元格横向长度不足时 隐藏文字内容，并以鼠标悬停的方式显示
+                overflow: hidden;
+                // white-space: nowrap;
+                text-overflow: ellipsis;
+                text-align: left;
+                text-indent: 1em;
+                /* 在恰当的断字点进行换行 */
+                word-break: break-all;
+                /* 超出范围隐藏 */
+                overflow: hidden;
+                /* 文字超出用省略号 */
+                text-overflow: ellipsis;
+                /* 盒子模型 */
+                display: -webkit-box;
+                /* 显示的文本行数 */
+                -webkit-line-clamp: 3;
+                /* 子元素的垂直排列方式 */
+                -webkit-box-orient: vertical;
+              }
+              .jingdian {
+                width: 30%;
+                height: 100%;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                text-align: center;
+                text-indent: 0em;
+                margin: auto;
+              }
+            }
+          }
+        }
       }
       .row1title {
         height: 15%;
@@ -687,6 +1069,12 @@ export default {
         height: 90%;
         width: 100%;
       }
+    }
+    .col-content:nth-child(1) {
+      height: 48%;
+    }
+    .col-content:nth-child(2) {
+      height: 41%;
     }
   }
 }

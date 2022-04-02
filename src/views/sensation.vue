@@ -2,14 +2,14 @@
   <div id="sensation">
     <div class="sensation-aside">
       <el-menu>
-        <el-menu-item
+           <el-menu-item
           index="1"
           @click="show(1)"
           :class="index === 1 ? 'active' : ''"
           plain
         >
-          <i class="fa fa-tree fa-lg"></i>
-          <span class="tab">景点</span>
+          <i class="fa fa-building fa-lg"></i>
+          <span class="tab">城市</span>
         </el-menu-item>
         <el-menu-item
           index="2"
@@ -17,9 +17,10 @@
           :class="index === 2 ? 'active' : ''"
           plain
         >
-          <i class="fa fa-building fa-lg"></i>
-          <span class="tab">城市</span>
+          <i class="fa fa-tree fa-lg"></i>
+          <span class="tab">景点</span>
         </el-menu-item>
+     
       </el-menu>
     </div>
     <div class="sensation-content">
@@ -39,14 +40,14 @@ export default {
   data() {
     return {
       index: 1,
-      comp: "city",
+      comp: "scenic",
       isShow: true,
     };
   },
   methods: {
     show(value) {
-      if (value === 1) this.comp = "city";
-      else if (value === 2) this.comp = "scenic";
+      if (value === 1) this.comp = "scenic";
+      else if (value === 2) this.comp = "city";
       // else if (value === 3) this.comp = "heatmap";
     },
   },

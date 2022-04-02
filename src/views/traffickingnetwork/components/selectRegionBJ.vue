@@ -85,8 +85,8 @@ export default {
   data() {
     return {
       json: {
-        name: "中国",
-        // name: "北京",
+        // name: "中国",
+        name: "北京",
         where: 0,
       },
       ioc: "el-icon-arrow-left",
