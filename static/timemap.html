@@ -186,21 +186,34 @@
                     'circle-color': [
                         'interpolate',
                         ['linear'],
-                        ['get', 'mag'],
-                        6,
-                        '#FCA107',
-                        8,
-                        '#7F3121'
+                        ['get', 'score'],
+                        1,
+                        '#00BFFF',
+                        2,
+                        '#3399FF',
+                        3,
+                        '#3366CC',
+                        4,
+                        '#4682B4',
+                        5,
+                        '#003399'
                     ],
                     'circle-opacity': 0.75,
                     'circle-radius': [
                         'interpolate',
                         ['linear'],
-                        ['get', 'mag'],
-                        6,
+                        ['get', 'score'],
+                        1,
+                        5,
+                        2,
+                        10,
+                        3,
+                        15,
+                        4,
                         20,
-                        8,
-                        40
+                        5,
+                        25
+
                     ]
                 }
             }
@@ -211,12 +224,12 @@
                 'type': 'symbol',
                 'source': 'earthquakes',
                 'layout': {
-                    'text-field': ['concat', ['to-string', ['get', 'mag']], 'm'],
+                    'text-field': ['concat', ['to-string', ['get', 'score']], '星'],
                     'text-font': ['Open Sans Bold', 'Arial Unicode MS Bold'],
                     'text-size': 12
                 },
                 'paint': {
-                    'text-color': 'rgba(0,0,0,0.5)'
+                    'text-color': '#FFFFFF'
                 }
             });
 
