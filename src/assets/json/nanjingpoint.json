@@ -24,24 +24,6 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    118.773988,
-                    32.059149
-                ]
-            },
-            "properties": {
-                "id": 1529.0,
-                "name": "不老村",
-                "hot": 14.0,
-                "score": 4.428571428571429,
-                "longitude": 118.773988,
-                "latitude": 32.059149
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
                     118.861444,
                     32.059743
                 ]
@@ -114,42 +96,6 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    118.817669,
-                    32.037982
-                ]
-            },
-            "properties": {
-                "id": 6417.0,
-                "name": "午朝门公园",
-                "hot": 48.0,
-                "score": 4.104166666666667,
-                "longitude": 118.817669,
-                "latitude": 32.037982
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    118.788199,
-                    32.019274
-                ]
-            },
-            "properties": {
-                "id": 6656.0,
-                "name": "南京中华门城堡",
-                "hot": 963.0,
-                "score": 4.645898234683282,
-                "longitude": 118.788199,
-                "latitude": 32.019274
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
                     118.797466,
                     32.026877
                 ]
@@ -161,24 +107,6 @@
                 "score": 4.775590551181103,
                 "longitude": 118.797466,
                 "latitude": 32.026877
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    118.722826,
-                    32.003427
-                ]
-            },
-            "properties": {
-                "id": 6661.0,
-                "name": "南京保利大剧院",
-                "hot": 15.0,
-                "score": 4.733333333333333,
-                "longitude": 118.722826,
-                "latitude": 32.003427
             }
         },
         {
@@ -258,114 +186,6 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    119.056157,
-                    32.0533
-                ]
-            },
-            "properties": {
-                "id": 6710.0,
-                "name": "南京欢乐谷",
-                "hot": 13.0,
-                "score": 3.3076923076923075,
-                "longitude": 119.056157,
-                "latitude": 32.0533
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    119.064851,
-                    32.056289
-                ]
-            },
-            "properties": {
-                "id": 6713.0,
-                "name": "南京汤山一号温泉",
-                "hot": 288.0,
-                "score": 4.545138888888889,
-                "longitude": 119.064851,
-                "latitude": 32.056289
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    119.073695,
-                    32.05548
-                ]
-            },
-            "properties": {
-                "id": 6715.0,
-                "name": "南京汤山圣泉温泉",
-                "hot": 102.0,
-                "score": 4.049019607843137,
-                "longitude": 119.073695,
-                "latitude": 32.05548
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    118.851569,
-                    32.05934
-                ]
-            },
-            "properties": {
-                "id": 6721.0,
-                "name": "南京海底世界",
-                "hot": 89.0,
-                "score": 4.033707865168539,
-                "longitude": 118.851569,
-                "latitude": 32.05934
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    118.708978,
-                    32.001869
-                ]
-            },
-            "properties": {
-                "id": 6735.0,
-                "name": "南京眼步行桥",
-                "hot": 43.0,
-                "score": 4.5813953488372094,
-                "longitude": 118.708978,
-                "latitude": 32.001869
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    118.63011,
-                    32.492816
-                ]
-            },
-            "properties": {
-                "id": 6736.0,
-                "name": "南京科技馆",
-                "hot": 11.0,
-                "score": 3.727272727272727,
-                "longitude": 118.63011,
-                "latitude": 32.492816
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
                     118.753125,
                     32.099745
                 ]
@@ -377,42 +197,6 @@
                 "score": 4.983050847457627,
                 "longitude": 118.753125,
                 "latitude": 32.099745
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    118.651675,
-                    32.119994
-                ]
-            },
-            "properties": {
-                "id": 8955.0,
-                "name": "四方当代美术馆",
-                "hot": 24.0,
-                "score": 4.333333333333333,
-                "longitude": 118.651675,
-                "latitude": 32.119994
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    118.792055,
-                    32.017077
-                ]
-            },
-            "properties": {
-                "id": 9542.0,
-                "name": "外秦淮河游船",
-                "hot": 2163.0,
-                "score": 4.351826167360148,
-                "longitude": 118.792055,
-                "latitude": 32.017077
             }
         },
         {
@@ -449,42 +233,6 @@
                 "score": 4.125,
                 "longitude": 119.124897,
                 "latitude": 31.701949
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    118.795273,
-                    32.026937
-                ]
-            },
-            "properties": {
-                "id": 11370.0,
-                "name": "夫子庙",
-                "hot": 75.0,
-                "score": 3.7466666666666666,
-                "longitude": 118.795273,
-                "latitude": 32.026937
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    118.79529,
-                    32.026848
-                ]
-            },
-            "properties": {
-                "id": 11373.0,
-                "name": "夫子庙大成殿",
-                "hot": 757.0,
-                "score": 4.7701453104359315,
-                "longitude": 118.79529,
-                "latitude": 32.026848
             }
         },
         {
@@ -600,24 +348,6 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    118.94218,
-                    31.857225
-                ]
-            },
-            "properties": {
-                "id": 17420.0,
-                "name": "杨柳湖风景区",
-                "hot": 14.0,
-                "score": 4.5,
-                "longitude": 118.94218,
-                "latitude": 31.857225
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
                     118.976369,
                     32.163868
                 ]
@@ -690,42 +420,6 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    118.803872,
-                    32.079619
-                ]
-            },
-            "properties": {
-                "id": 22968.0,
-                "name": "玄武湖公园",
-                "hot": 824.0,
-                "score": 4.662621359223301,
-                "longitude": 118.803872,
-                "latitude": 32.079619
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    118.835738,
-                    32.071496
-                ]
-            },
-            "properties": {
-                "id": 22971.0,
-                "name": "玄武湖游船",
-                "hot": 57.0,
-                "score": 4.315789473684211,
-                "longitude": 118.835738,
-                "latitude": 32.071496
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
                     119.045561,
                     32.044703
                 ]
@@ -773,42 +467,6 @@
                 "score": 4.505747126436781,
                 "longitude": 118.791411,
                 "latitude": 32.027215
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    118.716126,
-                    31.723182
-                ]
-            },
-            "properties": {
-                "id": 24470.0,
-                "name": "石塘竹海",
-                "hot": 32.0,
-                "score": 3.9375,
-                "longitude": 118.716126,
-                "latitude": 31.723182
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    118.84665,
-                    32.051492
-                ]
-            },
-            "properties": {
-                "id": 24609.0,
-                "name": "石象路",
-                "hot": 75.0,
-                "score": 4.506666666666667,
-                "longitude": 118.84665,
-                "latitude": 32.051492
             }
         },
         {
@@ -888,24 +546,6 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    118.768793,
-                    32.038618
-                ]
-            },
-            "properties": {
-                "id": 27613.0,
-                "name": "莫愁湖公园",
-                "hot": 407.0,
-                "score": 4.218673218673219,
-                "longitude": 118.768793,
-                "latitude": 32.038618
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
                     118.720627,
                     31.813987
                 ]
@@ -917,24 +557,6 @@
                 "score": 4.529411764705882,
                 "longitude": 118.720627,
                 "latitude": 31.813987
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    118.975246,
-                    32.47569
-                ]
-            },
-            "properties": {
-                "id": 30672.0,
-                "name": "金牛湖",
-                "hot": 31.0,
-                "score": 4.354838709677419,
-                "longitude": 118.975246,
-                "latitude": 32.47569
             }
         },
         {
@@ -960,60 +582,6 @@
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    118.801985,
-                    32.133599
-                ]
-            },
-            "properties": {
-                "id": 31422.0,
-                "name": "长江观音景区",
-                "hot": 15.0,
-                "score": 4.066666666666666,
-                "longitude": 118.801985,
-                "latitude": 32.133599
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    119.032686,
-                    32.058098
-                ]
-            },
-            "properties": {
-                "id": 31756.0,
-                "name": "阳山碑材",
-                "hot": 104.0,
-                "score": 4.298076923076923,
-                "longitude": 119.032686,
-                "latitude": 32.058098
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    118.86197,
-                    32.060741
-                ]
-            },
-            "properties": {
-                "id": 32699.0,
-                "name": "音乐台",
-                "hot": 300.0,
-                "score": 4.5633333333333335,
-                "longitude": 118.86197,
-                "latitude": 32.060741
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
                     118.87645,
                     31.324514
                 ]
@@ -1025,24 +593,6 @@
                 "score": 3.8933333333333335,
                 "longitude": 118.87645,
                 "latitude": 31.324514
-            }
-        },
-        {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    118.802157,
-                    32.066601
-                ]
-            },
-            "properties": {
-                "id": 33565.0,
-                "name": "鸡鸣寺",
-                "hot": 220.0,
-                "score": 4.55,
-                "longitude": 118.802157,
-                "latitude": 32.066601
             }
         },
         {
