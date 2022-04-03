@@ -1,55 +1,55 @@
 <template>
   <div class="login">
     <div class="video-container">
-        <div class="filter">
-          <div class="header">
-            <h1>景点智能分析与推荐系统</h1>
-          </div>
-          <div class="login_style">
-            <h2>用户登录</h2>
-            <el-form
-              ref="loginFrom"
-              :model="loginFrom"
-              class="login-from"
-              auto-complete="on"
-            >
-              <el-form-item>
-                <img src="../assets/login/user.png" />
-                <el-input
-                  class="username"
-                  placeholder="请输入用户账号"
-                  v-model="loginFrom.username"
-                  type="text"
-                  clearable
-                ></el-input>
-              </el-form-item>
-              <el-form-item>
-                <img src="../assets/login/password.png" />
-                <el-input
-                  placeholder="请输入用户密码"
-                  class="password"
-                  v-model="loginFrom.password"
-                  show-password
-                  type="password"
-                ></el-input>
-              </el-form-item>
-              <el-form-item>
-                <el-checkbox class="check">记住密码</el-checkbox>
-              </el-form-item>
-              <el-form-item>
-                <el-button
-                  id="btn"
-                  class="button"
-                  type="primary"
-                  round
-                  @click="handleLogin"
-                  >立即登录</el-button
-                >
-              </el-form-item>
-            </el-form>
-          </div>
+      <div class="filter">
+        <div class="header">
+          <h1>基于网络口碑的景点智能分析与推荐系统</h1>
+        </div>
+        <div class="login_style">
+          <h2>用户登录</h2>
+          <el-form
+            ref="loginFrom"
+            :model="loginFrom"
+            class="login-from"
+            auto-complete="on"
+          >
+            <el-form-item>
+              <img src="../assets/login/user.png" />
+              <el-input
+                class="username"
+                placeholder="请输入用户账号"
+                v-model="loginFrom.username"
+                type="text"
+                clearable
+              ></el-input>
+            </el-form-item>
+            <el-form-item>
+              <img src="../assets/login/password.png" />
+              <el-input
+                placeholder="请输入用户密码"
+                class="password"
+                v-model="loginFrom.password"
+                show-password
+                type="password"
+              ></el-input>
+            </el-form-item>
+            <el-form-item>
+              <el-checkbox class="check">记住密码</el-checkbox>
+            </el-form-item>
+            <el-form-item>
+              <el-button
+                id="btn"
+                class="button"
+                type="primary"
+                round
+                @click="handleLogin"
+                >立即登录</el-button
+              >
+            </el-form-item>
+          </el-form>
+        </div>
       </div>
-      <video autoplay muted loop class="fillWidth" >
+      <video autoplay muted loop class="fillWidth">
         <source src="../assets/video/video.mp4" type="video/mp4" />
       </video>
       <!-- ../assets/video/video.mp4
@@ -64,8 +64,8 @@ export default {
   data() {
     return {
       loginFrom: {
-        username: "",
-        password: "",
+        username: "admin",
+        password: "123",
       },
     };
   },
@@ -84,13 +84,13 @@ export default {
       // request.post("/api/user/queryuser", this.loginFrom).then((res) => {
       //   console.log(res.code);
       //   if (res.code == "0") {
-          this.$router.push({ name: "recommend" });
-        // } else {
-        //   this.$message({
-        //     type: "error",
-        //     message: res.description,
-        //   });
-        // }
+      this.$router.push({ name: "recommend" });
+      // } else {
+      //   this.$message({
+      //     type: "error",
+      //     message: res.description,
+      //   });
+      // }
       // });
       // request.get("/api/data/querySalary", this.loginFrom).then((res) => {
       //   console.log(res.data);
@@ -108,8 +108,9 @@ export default {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    .fillWidth{
+    .fillWidth {
       width: 100%;
+      margin-top: -6%;
     }
     .filter {
       display: flex;
@@ -129,11 +130,36 @@ export default {
         width: 100%;
         padding-bottom: 15px;
         h1 {
-          font-size: 45pt;
+          font-size: 35pt;
           color: #ffffff;
-          font-family: Microsoft YaHei;
-          font-weight: bold;
+          font-family: PingFang SC;
+          // font-weight: bold;
           margin-left: 10px;
+
+          text-align: center;
+          /* 背景颜色线性渐变 */
+          /* 老式写法 */
+          /* linear为线性渐变，也可以用下面的那种写法。left top，right top指的是渐变方向，左上到右上 */
+          /* color-stop函数，第一个表示渐变的位置，0为起点，0.5为中点，1为结束点；第二个表示该点的颜色。所以本次渐变为两边灰色，中间渐白色 */
+          /* 新式写法 */
+          /* background: -webkit-linear-gradient(left top, right top, color-stop(0, #4d4d4d), color-stop(.4, #4d4d4d), color-stop(.5, white), color-stop(.6, #4d4d4d), color-stop(1, #4d4d4d)); */
+
+          /* 设置为text，意思是把文本内容之外的背景给裁剪掉 */
+          background: -webkit-gradient(
+            linear,
+            left top,
+            right top,
+            color-stop(0, #c1d9dd),
+            color-stop(0.4, #c1d9dd),
+            color-stop(0.5, white),
+            color-stop(0.6, #c1d9dd),
+            color-stop(1, #c1d9dd)
+          );
+          -webkit-background-clip: text;
+          /* 设置对象中的文字填充颜色 这里设置为透明 */
+          -webkit-text-fill-color: transparent;
+          /* 每隔2秒调用下面的CSS3动画 infinite属性为循环执行animate */
+          -webkit-animation: animate 1.5s infinite;
         }
       }
       .login_style {
@@ -143,7 +169,8 @@ export default {
         position: relative;
         width: 28%;
         height: 45%;
-        background-color: rgba(75, 105, 135, 0.3);
+        background: url("../assets/img/buttonbg.png") no-repeat;
+        background-size: 100% 100%;
         h2 {
           font-size: 18pt;
           color: #ffffff;
@@ -151,10 +178,11 @@ export default {
           font-weight: bold;
           margin-top: 30px;
           margin-bottom: 20px;
+          // font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
         }
         img {
-          height: 20px;
-          margin-top: 10px;
+          height: 24px;
+          margin-bottom: -3%;
         }
         .username {
           border-bottom: 1px solid #b8b6b6;
@@ -178,5 +206,28 @@ export default {
       }
     }
   }
+}
+@-webkit-keyframes animate {
+  /* 背景从-100px的水平位置，移动到+100px的水平位置。如果要移动Y轴的，设置第二个数值 */
+  from {
+    background-position: -500px;
+  }
+  to {
+    background-position: 500px;
+  }
+}
+@keyframes animate {
+  from {
+    background-position: -200px;
+  }
+  to {
+    background-position: 200px;
+  }
+}
+.el-button--primary {
+  color: #fff;
+  font-weight: bold;
+  background-color: #6ccae3;
+  border-color: #6ccae3;
 }
 </style>
