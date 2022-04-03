@@ -149,11 +149,9 @@ import njprovince from "../../assets/json/njprovince.json";
 import wordcloud from "../../assets/js/echarts-wordcloud-master/index";
 import echarts from "echarts";
 import request from "../../utils/request";
-const mapboxgl = require("mapbox-gl");
 import areaSelect from "../areaSelect.vue";
 export default {
   name: "city",
-
   components: {
     wordcloud,
     SelectRegion,
@@ -881,10 +879,9 @@ export default {
         });
     },
     initmap() {
-      var that = this;
       this.$mapboxgl.accessToken =
         "pk.eyJ1IjoiY2hlbmpxIiwiYSI6ImNrcWFmdWt2bjBtZGsybmxjb29oYmRzZzEifQ.mnpiwx7_cBEyi8YiJiMRZg";
-      this.map = new mapboxgl.Map({
+      var map =new this.$mapboxgl.Map({
         container: "map",
         style: "mapbox://styles/chenjq/cl084urgf004014ny2nhu1xre",
         center: [105, 35],
