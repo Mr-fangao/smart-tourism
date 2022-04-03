@@ -658,6 +658,8 @@ export default {
   mounted() {
     this.getTravels();
     this.getComment();
+    this.initmap(this.city);
+
     eventBum.$on("json", (json) => {
       this.selectcity.name = json.name;
       this.selectcity.level = json.where;
@@ -672,13 +674,14 @@ export default {
         this.initChart2(this.option3);
         this.initChart5(this.option6);
         this.wordCloudInti(this.$refs.cloudEl, this.NJcloudData);
+        this.initmap(this.city);
       } else if (this.city == "北京") {
         this.initChart2(this.option2);
         this.initChart5(this.option5);
         this.wordCloudInti(this.$refs.cloudEl, this.BJcloudData);
+        this.initmap(this.city);
       }
     });
-    this.initmap();
     this.wordCloudInti(this.$refs.cloudEl, this.BJcloudData);
     this.initChart2(this.option2);
     this.initChart3();
@@ -691,6 +694,21 @@ export default {
   },
 
   methods: {
+    // flyToLocation(val) {
+    //   if (val == "南京") {
+    //     this.map.flyTo({
+    //       center: [118.77949013671878, 32.04501247139361], // 中心点
+    //       zoom: 16.5, // 缩放比例
+    //       pitch: 45, // 倾斜度
+    //     });
+    //   } else if (val == "北京") {
+    //     this.map.flyTo({
+    //       center: [116.40811432812498, 39.90388639121686], // 中心点
+    //       zoom: 16.5, // 缩放比例
+    //       pitch: 45, // 倾斜度
+    //     });
+    //   }
+    // },
     initChart2(opt) {
       let myChart2 = this.$echarts.init(document.getElementById("chart2"));
       // 指定图表的配置项和数据
@@ -878,16 +896,27 @@ export default {
           this.travelsdata.cost = res.data.price;
         });
     },
-    initmap() {
+    initmap(val) {
       this.$mapboxgl.accessToken =
         "pk.eyJ1IjoiY2hlbmpxIiwiYSI6ImNrcWFmdWt2bjBtZGsybmxjb29oYmRzZzEifQ.mnpiwx7_cBEyi8YiJiMRZg";
-      var map =new this.$mapboxgl.Map({
+      var map = new this.$mapboxgl.Map({
         container: "map",
         style: "mapbox://styles/chenjq/cl084urgf004014ny2nhu1xre",
-        center: [105, 35],
-        zoom: 3.5,
       });
       map.on("load", () => {
+        if (val == "南京") {
+          map.flyTo({
+            center: [118.77949013671878, 32.04501247139361], // 中心点
+            zoom: 10.5, // 缩放比例
+            pitch: 45, // 倾斜度
+          });
+        } else if (val == "北京") {
+          map.flyTo({
+            center: [116.40811432812498, 39.90388639121686], // 中心点
+            zoom: 10.5, // 缩放比例
+            pitch: 45, // 倾斜度
+          });
+        }
         map.addSource("njmark", {
           type: "geojson",
           data: nanjing,
@@ -1389,14 +1418,14 @@ export default {
   background-color: #348ea894;
   color: aliceblue;
   border-radius: 3px;
-  bottom: 47%;
+  bottom: 45%;
   height: 21%;
   width: 7%;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   font: 12px/20px "Helvetica Neue", Arial, Helvetica, sans-serif;
   padding: 10px;
   position: absolute;
-  right: 23.5%;
+  right: 25.8%;
   z-index: 1;
 }
 
