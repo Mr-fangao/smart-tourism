@@ -27,8 +27,8 @@ export default {
       var map = new this.$mapboxgl.Map({
         container: "map",
         style: "mapbox://styles/chenjq/cl010ychv001214pdpa5xyq5a",
-        center: [119, 31.2],
-        zoom: 7.2,
+        center: [116.42,39.55],
+        zoom: 7,
       });
       map.on("load", () => {
         map.addSource("njmark", {

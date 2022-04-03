@@ -612,6 +612,2709 @@
                 "longitude": 118.788493,
                 "latitude": 32.065011
             }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.162392,
+                    39.815494
+                ]
+            },
+            "properties": {
+                "name": "七彩蝶园",
+                "hot": 291.0,
+                "score": 4.292096219931271,
+                "longitude": 116.162392,
+                "latitude": 39.815494
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    115.974472,
+                    40.533108
+                ]
+            },
+            "properties": {
+                "name": "万科石京龙滑雪场",
+                "hot": 41.0,
+                "score": 3.8292682926829267,
+                "longitude": 115.974472,
+                "latitude": 40.533108
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.359802,
+                    39.841377
+                ]
+            },
+            "properties": {
+                "name": "世界花卉大观园",
+                "hot": 78.0,
+                "score": 4.717948717948718,
+                "longitude": 116.359802,
+                "latitude": 39.841377
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.317581,
+                    39.879707
+                ]
+            },
+            "properties": {
+                "name": "东方威尼斯国际温泉酒店",
+                "hot": 36.0,
+                "score": 4.5,
+                "longitude": 116.317581,
+                "latitude": 39.879707
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.340637,
+                    39.943188
+                ]
+            },
+            "properties": {
+                "name": "中国古动物馆",
+                "hot": 469.0,
+                "score": 4.6716417910447765,
+                "longitude": 116.340637,
+                "latitude": 39.943188
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.378738,
+                    39.929386
+                ]
+            },
+            "properties": {
+                "name": "中国地质博物馆",
+                "hot": 63.0,
+                "score": 4.0476190476190474,
+                "longitude": 116.378738,
+                "latitude": 39.929386
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.415451,
+                    39.931461
+                ]
+            },
+            "properties": {
+                "name": "中国美术馆",
+                "hot": 79.0,
+                "score": 4.430379746835443,
+                "longitude": 116.415451,
+                "latitude": 39.931461
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.372887,
+                    40.192097
+                ]
+            },
+            "properties": {
+                "name": "中国航空博物馆",
+                "hot": 152.0,
+                "score": 4.526315789473684,
+                "longitude": 116.372887,
+                "latitude": 40.192097
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.313599,
+                    39.925495
+                ]
+            },
+            "properties": {
+                "name": "中央电视塔",
+                "hot": 75.0,
+                "score": 4.0,
+                "longitude": 116.313599,
+                "latitude": 39.925495
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.510735,
+                    40.110111
+                ]
+            },
+            "properties": {
+                "name": "中家鑫园温泉",
+                "hot": 46.0,
+                "score": 4.717391304347826,
+                "longitude": 116.510735,
+                "latitude": 40.110111
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.287163,
+                    39.873192
+                ]
+            },
+            "properties": {
+                "name": "丰台体育中心游泳馆",
+                "hot": 42.0,
+                "score": 4.571428571428571,
+                "longitude": 116.287163,
+                "latitude": 39.873192
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.424011,
+                    40.186115
+                ]
+            },
+            "properties": {
+                "name": "九华山庄温泉主题公园",
+                "hot": 100.0,
+                "score": 4.55,
+                "longitude": 116.424011,
+                "latitude": 40.186115
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    115.78038,
+                    39.615246
+                ]
+            },
+            "properties": {
+                "name": "云居寺",
+                "hot": 68.0,
+                "score": 4.102941176470588,
+                "longitude": 115.78038,
+                "latitude": 39.615246
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.687897,
+                    40.560299
+                ]
+            },
+            "properties": {
+                "name": "云蒙山国家森林公园",
+                "hot": 289.0,
+                "score": 4.498269896193771,
+                "longitude": 116.687897,
+                "latitude": 40.560299
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.792419,
+                    40.494961
+                ]
+            },
+            "properties": {
+                "name": "云龙涧",
+                "hot": 66.0,
+                "score": 4.181818181818182,
+                "longitude": 116.792419,
+                "latitude": 40.494961
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.415016,
+                    39.954968
+                ]
+            },
+            "properties": {
+                "name": "五道营胡同",
+                "hot": 75.0,
+                "score": 4.373333333333333,
+                "longitude": 116.415016,
+                "latitude": 39.954968
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    117.180656,
+                    40.251255
+                ]
+            },
+            "properties": {
+                "name": "京东大峡谷",
+                "hot": 168.0,
+                "score": 4.357142857142857,
+                "longitude": 117.180656,
+                "latitude": 40.251255
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    117.260597,
+                    40.218624
+                ]
+            },
+            "properties": {
+                "name": "京东大溶洞",
+                "hot": 45.0,
+                "score": 4.4222222222222225,
+                "longitude": 117.260597,
+                "latitude": 40.218624
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    115.915169,
+                    40.009743
+                ]
+            },
+            "properties": {
+                "name": "京西十八潭",
+                "hot": 95.0,
+                "score": 4.08421052631579,
+                "longitude": 115.915169,
+                "latitude": 40.009743
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.573761,
+                    40.182407
+                ]
+            },
+            "properties": {
+                "name": "京西古道",
+                "hot": 115.0,
+                "score": 4.060869565217391,
+                "longitude": 116.573761,
+                "latitude": 40.182407
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.404076,
+                    39.910893
+                ]
+            },
+            "properties": {
+                "name": "人民英雄纪念碑",
+                "hot": 139.0,
+                "score": 4.474820143884892,
+                "longitude": 116.404076,
+                "latitude": 39.910893
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.391243,
+                    39.948372
+                ]
+            },
+            "properties": {
+                "name": "什刹海",
+                "hot": 75.0,
+                "score": 4.28,
+                "longitude": 116.391243,
+                "latitude": 39.948372
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.189209,
+                    39.968353
+                ]
+            },
+            "properties": {
+                "name": "八大处公园",
+                "hot": 75.0,
+                "score": 4.2,
+                "longitude": 116.189209,
+                "latitude": 39.968353
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    115.979423,
+                    40.356556
+                ]
+            },
+            "properties": {
+                "name": "八达岭古长城（残长城）",
+                "hot": 194.0,
+                "score": 4.572164948453608,
+                "longitude": 115.979423,
+                "latitude": 40.356556
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    115.964371,
+                    40.352898
+                ]
+            },
+            "properties": {
+                "name": "八达岭滑雪场",
+                "hot": 51.0,
+                "score": 4.235294117647059,
+                "longitude": 115.964371,
+                "latitude": 40.352898
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.001343,
+                    40.359585
+                ]
+            },
+            "properties": {
+                "name": "八达岭野生动物园",
+                "hot": 75.0,
+                "score": 3.7466666666666666,
+                "longitude": 116.001343,
+                "latitude": 40.359585
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.024071,
+                    40.36264
+                ]
+            },
+            "properties": {
+                "name": "八达岭长城",
+                "hot": 687.0,
+                "score": 4.911208151382824,
+                "longitude": 116.024071,
+                "latitude": 40.36264
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.553062,
+                    39.88979
+                ]
+            },
+            "properties": {
+                "name": "军都山滑雪场",
+                "hot": 70.0,
+                "score": 4.728571428571429,
+                "longitude": 116.553062,
+                "latitude": 39.88979
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    115.675407,
+                    39.625336
+                ]
+            },
+            "properties": {
+                "name": "北京·乐谷银滩景区",
+                "hot": 178.0,
+                "score": 4.724719101123595,
+                "longitude": 115.675407,
+                "latitude": 39.625336
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    115.832085,
+                    39.68
+                ]
+            },
+            "properties": {
+                "name": "北京上方山国家森林公园",
+                "hot": 124.0,
+                "score": 4.475806451612903,
+                "longitude": 115.832085,
+                "latitude": 39.68
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    115.957451,
+                    40.450314
+                ]
+            },
+            "properties": {
+                "name": "北京世园公园",
+                "hot": 631.0,
+                "score": 4.748019017432647,
+                "longitude": 115.957451,
+                "latitude": 40.450314
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.29377,
+                    39.816711
+                ]
+            },
+            "properties": {
+                "name": "北京世界公园",
+                "hot": 28.0,
+                "score": 4.178571428571429,
+                "longitude": 116.29377,
+                "latitude": 39.816711
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.342331,
+                    39.947727
+                ]
+            },
+            "properties": {
+                "name": "北京动物园",
+                "hot": 75.0,
+                "score": 4.16,
+                "longitude": 116.342331,
+                "latitude": 39.947727
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.398506,
+                    39.883595
+                ]
+            },
+            "properties": {
+                "name": "北京古代建筑博物馆",
+                "hot": 40.0,
+                "score": 4.4,
+                "longitude": 116.398506,
+                "latitude": 39.883595
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.105072,
+                    40.133591
+                ]
+            },
+            "properties": {
+                "name": "北京后花园",
+                "hot": 243.0,
+                "score": 4.325102880658436,
+                "longitude": 116.105072,
+                "latitude": 40.133591
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.362824,
+                    39.877083
+                ]
+            },
+            "properties": {
+                "name": "北京大观园",
+                "hot": 75.0,
+                "score": 4.1466666666666665,
+                "longitude": 116.362824,
+                "latitude": 39.877083
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.468864,
+                    39.928192
+                ]
+            },
+            "properties": {
+                "name": "北京朝阳剧场杂技",
+                "hot": 261.0,
+                "score": 4.78544061302682,
+                "longitude": 116.468864,
+                "latitude": 39.928192
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.216148,
+                    40.008873
+                ]
+            },
+            "properties": {
+                "name": "北京植物园",
+                "hot": 386.0,
+                "score": 4.598445595854923,
+                "longitude": 116.216148,
+                "latitude": 40.008873
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.505417,
+                    39.873241
+                ]
+            },
+            "properties": {
+                "name": "北京欢乐谷金面王朝",
+                "hot": 264.0,
+                "score": 4.8143939393939394,
+                "longitude": 116.505417,
+                "latitude": 39.873241
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.308105,
+                    39.835045
+                ]
+            },
+            "properties": {
+                "name": "北京汽车博物馆",
+                "hot": 75.0,
+                "score": 4.16,
+                "longitude": 116.308105,
+                "latitude": 39.835045
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.097923,
+                    39.814117
+                ]
+            },
+            "properties": {
+                "name": "北京河北村民俗文化体验园",
+                "hot": 30.0,
+                "score": 4.566666666666666,
+                "longitude": 116.097923,
+                "latitude": 39.814117
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.507683,
+                    39.990108
+                ]
+            },
+            "properties": {
+                "name": "北京活的3D博物馆",
+                "hot": 160.0,
+                "score": 4.4375,
+                "longitude": 116.507683,
+                "latitude": 39.990108
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.68251,
+                    39.858284
+                ]
+            },
+            "properties": {
+                "name": "北京环球度假区",
+                "hot": 49.0,
+                "score": 4.469387755102041,
+                "longitude": 116.68251,
+                "latitude": 39.858284
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.164665,
+                    39.94112
+                ]
+            },
+            "properties": {
+                "name": "北京田义墓博物馆",
+                "hot": 19.0,
+                "score": 4.473684210526316,
+                "longitude": 116.164665,
+                "latitude": 39.94112
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.684891,
+                    40.305099
+                ]
+            },
+            "properties": {
+                "name": "北京老爷车博物馆",
+                "hot": 24.0,
+                "score": 4.416666666666667,
+                "longitude": 116.684891,
+                "latitude": 40.305099
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.40625,
+                    39.889595
+                ]
+            },
+            "properties": {
+                "name": "北京自然博物馆",
+                "hot": 19.0,
+                "score": 4.368421052631579,
+                "longitude": 116.40625,
+                "latitude": 39.889595
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.340958,
+                    39.50214
+                ]
+            },
+            "properties": {
+                "name": "北京野生动物园",
+                "hot": 114.0,
+                "score": 4.473684210526316,
+                "longitude": 116.340958,
+                "latitude": 39.50214
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    115.86483,
+                    40.414864
+                ]
+            },
+            "properties": {
+                "name": "北京野鸭湖国家湿地公园",
+                "hot": 708.0,
+                "score": 4.5692090395480225,
+                "longitude": 115.86483,
+                "latitude": 40.414864
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.127205,
+                    39.868698
+                ]
+            },
+            "properties": {
+                "name": "北宫国家森林公园",
+                "hot": 372.0,
+                "score": 4.551075268817204,
+                "longitude": 116.127205,
+                "latitude": 39.868698
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.395004,
+                    39.934166
+                ]
+            },
+            "properties": {
+                "name": "北海公园",
+                "hot": 16.0,
+                "score": 4.3125,
+                "longitude": 116.395004,
+                "latitude": 39.934166
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.43177,
+                    40.043282
+                ]
+            },
+            "properties": {
+                "name": "北苑温泉",
+                "hot": 16.0,
+                "score": 4.8125,
+                "longitude": 116.43177,
+                "latitude": 40.043282
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    115.530785,
+                    39.674007
+                ]
+            },
+            "properties": {
+                "name": "十渡东湖港",
+                "hot": 232.0,
+                "score": 4.556034482758621,
+                "longitude": 115.530785,
+                "latitude": 39.674007
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    115.601204,
+                    39.640743
+                ]
+            },
+            "properties": {
+                "name": "十渡拒马河漂流",
+                "hot": 60.0,
+                "score": 4.416666666666667,
+                "longitude": 115.601204,
+                "latitude": 39.640743
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    115.606476,
+                    39.64415
+                ]
+            },
+            "properties": {
+                "name": "十渡风景区",
+                "hot": 201.0,
+                "score": 4.990049751243781,
+                "longitude": 115.606476,
+                "latitude": 39.64415
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.160942,
+                    39.799934
+                ]
+            },
+            "properties": {
+                "name": "南宫五洲植物乐园",
+                "hot": 135.0,
+                "score": 4.7481481481481485,
+                "longitude": 116.160942,
+                "latitude": 39.799934
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.16114,
+                    39.812649
+                ]
+            },
+            "properties": {
+                "name": "南宫旅游景区",
+                "hot": 229.0,
+                "score": 4.598253275109171,
+                "longitude": 116.16114,
+                "latitude": 39.812649
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.160065,
+                    39.798862
+                ]
+            },
+            "properties": {
+                "name": "南宫民族养生温泉",
+                "hot": 107.0,
+                "score": 4.5233644859813085,
+                "longitude": 116.160065,
+                "latitude": 39.798862
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.159821,
+                    39.812412
+                ]
+            },
+            "properties": {
+                "name": "南宫温泉水世界",
+                "hot": 693.0,
+                "score": 4.477633477633478,
+                "longitude": 116.159821,
+                "latitude": 39.812412
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.86869,
+                    40.339073
+                ]
+            },
+            "properties": {
+                "name": "南山滑雪场",
+                "hot": 276.0,
+                "score": 4.963768115942029,
+                "longitude": 116.86869,
+                "latitude": 40.339073
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.4095,
+                    39.943165
+                ]
+            },
+            "properties": {
+                "name": "南锣鼓巷",
+                "hot": 301.0,
+                "score": 4.67109634551495,
+                "longitude": 116.4095,
+                "latitude": 39.943165
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.226296,
+                    39.855991
+                ]
+            },
+            "properties": {
+                "name": "卢沟桥",
+                "hot": 82.0,
+                "score": 4.329268292682927,
+                "longitude": 116.226296,
+                "latitude": 39.855991
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    117.173798,
+                    40.691158
+                ]
+            },
+            "properties": {
+                "name": "古北口长城",
+                "hot": 162.0,
+                "score": 4.969135802469136,
+                "longitude": 117.173798,
+                "latitude": 40.691158
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    117.170494,
+                    40.697861
+                ]
+            },
+            "properties": {
+                "name": "古北水镇司马台新村山水城",
+                "hot": 82.0,
+                "score": 4.926829268292683,
+                "longitude": 117.170494,
+                "latitude": 40.697861
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    117.276131,
+                    40.650818
+                ]
+            },
+            "properties": {
+                "name": "古北水镇大酒店",
+                "hot": 74.0,
+                "score": 5.0,
+                "longitude": 117.276131,
+                "latitude": 40.650818
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    117.284241,
+                    40.661064
+                ]
+            },
+            "properties": {
+                "name": "古北水镇天然温泉",
+                "hot": 441.0,
+                "score": 4.954648526077097,
+                "longitude": 117.284241,
+                "latitude": 40.661064
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    115.782227,
+                    40.46862
+                ]
+            },
+            "properties": {
+                "name": "古崖居",
+                "hot": 164.0,
+                "score": 4.463414634146342,
+                "longitude": 115.782227,
+                "latitude": 40.46862
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.23127,
+                    39.961681
+                ]
+            },
+            "properties": {
+                "name": "名华四季国际温泉会所",
+                "hot": 22.0,
+                "score": 4.7272727272727275,
+                "longitude": 116.23127,
+                "latitude": 39.961681
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.388725,
+                    39.948566
+                ]
+            },
+            "properties": {
+                "name": "后海",
+                "hot": 22.0,
+                "score": 4.863636363636363,
+                "longitude": 116.388725,
+                "latitude": 39.948566
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    115.935104,
+                    39.696636
+                ]
+            },
+            "properties": {
+                "name": "周口店遗址博物馆",
+                "hot": 17.0,
+                "score": 4.705882352941177,
+                "longitude": 115.935104,
+                "latitude": 39.696636
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.495285,
+                    40.472839
+                ]
+            },
+            "properties": {
+                "name": "响水湖长城旅游风景区",
+                "hot": 99.0,
+                "score": 4.505050505050505,
+                "longitude": 116.495285,
+                "latitude": 40.472839
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.495712,
+                    40.965736
+                ]
+            },
+            "properties": {
+                "name": "喇叭沟原始森林公园",
+                "hot": 320.0,
+                "score": 4.584375,
+                "longitude": 116.495712,
+                "latitude": 40.965736
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    115.737587,
+                    39.84753
+                ]
+            },
+            "properties": {
+                "name": "圣莲山",
+                "hot": 138.0,
+                "score": 4.550724637681159,
+                "longitude": 115.737587,
+                "latitude": 39.84753
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.419983,
+                    39.95969
+                ]
+            },
+            "properties": {
+                "name": "地坛公园",
+                "hot": 75.0,
+                "score": 4.226666666666667,
+                "longitude": 116.419983,
+                "latitude": 39.95969
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.748024,
+                    39.887722
+                ]
+            },
+            "properties": {
+                "name": "大运河绿岛公园",
+                "hot": 15.0,
+                "score": 4.533333333333333,
+                "longitude": 116.748024,
+                "latitude": 39.887722
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.419289,
+                    39.889919
+                ]
+            },
+            "properties": {
+                "name": "天坛公园",
+                "hot": 52.0,
+                "score": 4.903846153846154,
+                "longitude": 116.419289,
+                "latitude": 39.889919
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.40065,
+                    40.01469
+                ]
+            },
+            "properties": {
+                "name": "奥林匹克塔",
+                "hot": 153.0,
+                "score": 4.836601307189542,
+                "longitude": 116.40065,
+                "latitude": 40.01469
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.396797,
+                    40.02523
+                ]
+            },
+            "properties": {
+                "name": "奥林匹克森林公园",
+                "hot": 451.0,
+                "score": 4.7272727272727275,
+                "longitude": 116.396797,
+                "latitude": 40.02523
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.699692,
+                    40.187847
+                ]
+            },
+            "properties": {
+                "name": "奥林匹克水上公园",
+                "hot": 109.0,
+                "score": 4.559633027522936,
+                "longitude": 116.699692,
+                "latitude": 40.187847
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.421432,
+                    39.952339
+                ]
+            },
+            "properties": {
+                "name": "孔庙",
+                "hot": 123.0,
+                "score": 4.162601626016261,
+                "longitude": 116.421432,
+                "latitude": 39.952339
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.420342,
+                    39.95311
+                ]
+            },
+            "properties": {
+                "name": "孔庙和国子监博物馆",
+                "hot": 70.0,
+                "score": 4.742857142857143,
+                "longitude": 116.420342,
+                "latitude": 39.95311
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.389565,
+                    39.951737
+                ]
+            },
+            "properties": {
+                "name": "宋庆龄故居",
+                "hot": 236.0,
+                "score": 4.555084745762712,
+                "longitude": 116.389565,
+                "latitude": 39.951737
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.232422,
+                    40.30048
+                ]
+            },
+            "properties": {
+                "name": "定陵",
+                "hot": 241.0,
+                "score": 4.66390041493776,
+                "longitude": 116.232422,
+                "latitude": 40.30048
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.794479,
+                    40.598045
+                ]
+            },
+            "properties": {
+                "name": "密云天门山",
+                "hot": 58.0,
+                "score": 4.448275862068965,
+                "longitude": 116.794479,
+                "latitude": 40.598045
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.793739,
+                    40.569355
+                ]
+            },
+            "properties": {
+                "name": "密云黑龙潭",
+                "hot": 564.0,
+                "score": 4.526595744680851,
+                "longitude": 116.793739,
+                "latitude": 40.569355
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.453667,
+                    39.933994
+                ]
+            },
+            "properties": {
+                "name": "富国海底世界",
+                "hot": 75.0,
+                "score": 3.6,
+                "longitude": 116.453667,
+                "latitude": 39.933994
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.43586,
+                    40.162929
+                ]
+            },
+            "properties": {
+                "name": "小汤山温泉度假区",
+                "hot": 62.0,
+                "score": 4.612903225806452,
+                "longitude": 116.43586,
+                "latitude": 40.162929
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.078217,
+                    40.297394
+                ]
+            },
+            "properties": {
+                "name": "居庸关长城",
+                "hot": 129.0,
+                "score": 4.627906976744186,
+                "longitude": 116.078217,
+                "latitude": 40.297394
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.440376,
+                    39.90752
+                ]
+            },
+            "properties": {
+                "name": "幽谷神潭",
+                "hot": 29.0,
+                "score": 4.482758620689655,
+                "longitude": 116.440376,
+                "latitude": 39.90752
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.90818,
+                    40.382065
+                ]
+            },
+            "properties": {
+                "name": "张裕爱斐堡",
+                "hot": 193.0,
+                "score": 4.590673575129534,
+                "longitude": 116.90818,
+                "latitude": 40.382065
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.664444,
+                    40.452454
+                ]
+            },
+            "properties": {
+                "name": "怀北国际滑雪场",
+                "hot": 52.0,
+                "score": 4.288461538461538,
+                "longitude": 116.664444,
+                "latitude": 40.452454
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.688751,
+                    40.467602
+                ]
+            },
+            "properties": {
+                "name": "怀柔青龙峡",
+                "hot": 233.0,
+                "score": 4.532188841201717,
+                "longitude": 116.688751,
+                "latitude": 40.467602
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.392601,
+                    39.943382
+                ]
+            },
+            "properties": {
+                "name": "恭王府",
+                "hot": 150.0,
+                "score": 4.506666666666667,
+                "longitude": 116.392601,
+                "latitude": 39.943382
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.399223,
+                    39.948357
+                ]
+            },
+            "properties": {
+                "name": "恭王府大戏楼",
+                "hot": 21.0,
+                "score": 4.380952380952381,
+                "longitude": 116.399223,
+                "latitude": 39.948357
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.575897,
+                    40.440147
+                ]
+            },
+            "properties": {
+                "name": "慕田峪长城",
+                "hot": 75.0,
+                "score": 4.88,
+                "longitude": 116.575897,
+                "latitude": 40.440147
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.570351,
+                    40.437611
+                ]
+            },
+            "properties": {
+                "name": "慕田峪长城箱式索道",
+                "hot": 583.0,
+                "score": 4.991423670668953,
+                "longitude": 116.570351,
+                "latitude": 40.437611
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.092995,
+                    39.876732
+                ]
+            },
+            "properties": {
+                "name": "戒台寺",
+                "hot": 334.0,
+                "score": 4.62874251497006,
+                "longitude": 116.092995,
+                "latitude": 39.876732
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.403412,
+                    39.924091
+                ]
+            },
+            "properties": {
+                "name": "故宫博物院",
+                "hot": 243.0,
+                "score": 4.91358024691358,
+                "longitude": 116.403412,
+                "latitude": 39.924091
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.23185,
+                    40.263542
+                ]
+            },
+            "properties": {
+                "name": "明十三陵",
+                "hot": 470.0,
+                "score": 4.876595744680851,
+                "longitude": 116.23185,
+                "latitude": 40.263542
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.219261,
+                    40.232338
+                ]
+            },
+            "properties": {
+                "name": "明皇蜡像宫",
+                "hot": 129.0,
+                "score": 4.852713178294573,
+                "longitude": 116.219261,
+                "latitude": 40.232338
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.328087,
+                    39.768135
+                ]
+            },
+            "properties": {
+                "name": "星美今晟影视城",
+                "hot": 117.0,
+                "score": 4.401709401709402,
+                "longitude": 116.328087,
+                "latitude": 39.768135
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.497566,
+                    40.136604
+                ]
+            },
+            "properties": {
+                "name": "春晖园温泉度假村",
+                "hot": 747.0,
+                "score": 4.621151271753681,
+                "longitude": 116.497566,
+                "latitude": 40.136604
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.402969,
+                    39.932136
+                ]
+            },
+            "properties": {
+                "name": "景山公园",
+                "hot": 75.0,
+                "score": 4.1066666666666665,
+                "longitude": 116.402969,
+                "latitude": 39.932136
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.438866,
+                    39.92318
+                ]
+            },
+            "properties": {
+                "name": "智化寺",
+                "hot": 46.0,
+                "score": 4.369565217391305,
+                "longitude": 116.438866,
+                "latitude": 39.92318
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.489113,
+                    39.950001
+                ]
+            },
+            "properties": {
+                "name": "朝阳公园",
+                "hot": 617.0,
+                "score": 4.4943273905996755,
+                "longitude": 116.489113,
+                "latitude": 39.950001
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.488152,
+                    39.943191
+                ]
+            },
+            "properties": {
+                "name": "朝阳公园勇敢者游乐园",
+                "hot": 20.0,
+                "score": 4.5,
+                "longitude": 116.488152,
+                "latitude": 39.943191
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.803001,
+                    40.546673
+                ]
+            },
+            "properties": {
+                "name": "桃源仙谷",
+                "hot": 490.0,
+                "score": 4.614285714285714,
+                "longitude": 116.803001,
+                "latitude": 40.546673
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    117.093338,
+                    40.528751
+                ]
+            },
+            "properties": {
+                "name": "欢乐松鼠谷",
+                "hot": 22.0,
+                "score": 4.2272727272727275,
+                "longitude": 117.093338,
+                "latitude": 40.528751
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.404144,
+                    39.908875
+                ]
+            },
+            "properties": {
+                "name": "毛主席纪念堂",
+                "hot": 75.0,
+                "score": 4.4,
+                "longitude": 116.404144,
+                "latitude": 39.908875
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.396828,
+                    39.999268
+                ]
+            },
+            "properties": {
+                "name": "水立方",
+                "hot": 502.0,
+                "score": 4.95816733067729,
+                "longitude": 116.396828,
+                "latitude": 39.999268
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.431526,
+                    40.004326
+                ]
+            },
+            "properties": {
+                "name": "汉拿山汤泉国际酒店（亚运村店）",
+                "hot": 93.0,
+                "score": 4.365591397849462,
+                "longitude": 116.431526,
+                "latitude": 40.004326
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.346657,
+                    39.84885
+                ]
+            },
+            "properties": {
+                "name": "浩泰冰上运动中心（天通苑店）",
+                "hot": 11.0,
+                "score": 4.818181818181818,
+                "longitude": 116.346657,
+                "latitude": 39.84885
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.522675,
+                    39.941677
+                ]
+            },
+            "properties": {
+                "name": "海德温泉",
+                "hot": 57.0,
+                "score": 4.333333333333333,
+                "longitude": 116.522675,
+                "latitude": 39.941677
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    115.652535,
+                    40.001518
+                ]
+            },
+            "properties": {
+                "name": "爨底下村",
+                "hot": 31.0,
+                "score": 4.967741935483871,
+                "longitude": 115.652535,
+                "latitude": 40.001518
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.474243,
+                    39.905643
+                ]
+            },
+            "properties": {
+                "name": "玉渊潭公园",
+                "hot": 420.0,
+                "score": 4.652380952380953,
+                "longitude": 116.474243,
+                "latitude": 39.905643
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.418037,
+                    39.919788
+                ]
+            },
+            "properties": {
+                "name": "王府井商业街",
+                "hot": 518.0,
+                "score": 4.590733590733591,
+                "longitude": 116.418037,
+                "latitude": 39.919788
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.406349,
+                    39.92598
+                ]
+            },
+            "properties": {
+                "name": "珍宝馆",
+                "hot": 14.0,
+                "score": 4.785714285714286,
+                "longitude": 116.406349,
+                "latitude": 39.92598
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.350121,
+                    39.90654
+                ]
+            },
+            "properties": {
+                "name": "白云观",
+                "hot": 137.0,
+                "score": 3.9635036496350367,
+                "longitude": 116.350121,
+                "latitude": 39.90654
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.370041,
+                    39.929867
+                ]
+            },
+            "properties": {
+                "name": "白塔寺",
+                "hot": 17.0,
+                "score": 4.0588235294117645,
+                "longitude": 116.370041,
+                "latitude": 39.929867
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.26297,
+                    40.036621
+                ]
+            },
+            "properties": {
+                "name": "百望山森林公园",
+                "hot": 112.0,
+                "score": 4.160714285714286,
+                "longitude": 116.26297,
+                "latitude": 40.036621
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    115.587647,
+                    39.843677
+                ]
+            },
+            "properties": {
+                "name": "百花山",
+                "hot": 13.0,
+                "score": 4.6923076923076925,
+                "longitude": 115.587647,
+                "latitude": 39.843677
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.25779,
+                    40.666027
+                ]
+            },
+            "properties": {
+                "name": "百里山水画廊",
+                "hot": 177.0,
+                "score": 4.4858757062146895,
+                "longitude": 116.25779,
+                "latitude": 40.666027
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    115.953095,
+                    39.801949
+                ]
+            },
+            "properties": {
+                "name": "石花洞国家地质公园",
+                "hot": 537.0,
+                "score": 4.614525139664805,
+                "longitude": 115.953095,
+                "latitude": 39.801949
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.488068,
+                    39.943096
+                ]
+            },
+            "properties": {
+                "name": "索尼探梦",
+                "hot": 25.0,
+                "score": 4.64,
+                "longitude": 116.488068,
+                "latitude": 39.943096
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.398933,
+                    39.928482
+                ]
+            },
+            "properties": {
+                "name": "紫禁城角楼",
+                "hot": 14.0,
+                "score": 5.0,
+                "longitude": 116.398933,
+                "latitude": 39.928482
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.326004,
+                    39.948517
+                ]
+            },
+            "properties": {
+                "name": "紫竹院公园",
+                "hot": 212.0,
+                "score": 4.6084905660377355,
+                "longitude": 116.326004,
+                "latitude": 39.948517
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.70208,
+                    40.183178
+                ]
+            },
+            "properties": {
+                "name": "紫谷伊甸园",
+                "hot": 239.0,
+                "score": 4.677824267782427,
+                "longitude": 116.70208,
+                "latitude": 40.183178
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.634125,
+                    40.389488
+                ]
+            },
+            "properties": {
+                "name": "红螺寺",
+                "hot": 75.0,
+                "score": 4.426666666666667,
+                "longitude": 116.634125,
+                "latitude": 40.389488
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.631691,
+                    40.38097
+                ]
+            },
+            "properties": {
+                "name": "红螺寺滑道",
+                "hot": 685.0,
+                "score": 4.602919708029197,
+                "longitude": 116.631691,
+                "latitude": 40.38097
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.393593,
+                    39.896122
+                ]
+            },
+            "properties": {
+                "name": "纪晓岚故居",
+                "hot": 519.0,
+                "score": 4.795761078998074,
+                "longitude": 116.393593,
+                "latitude": 39.896122
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.391625,
+                    39.940498
+                ]
+            },
+            "properties": {
+                "name": "老北京胡同游",
+                "hot": 150.0,
+                "score": 4.513333333333334,
+                "longitude": 116.391625,
+                "latitude": 39.940498
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.399658,
+                    39.906052
+                ]
+            },
+            "properties": {
+                "name": "老舍茶馆",
+                "hot": 261.0,
+                "score": 4.6513409961685825,
+                "longitude": 116.399658,
+                "latitude": 39.906052
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    117.025269,
+                    40.291233
+                ]
+            },
+            "properties": {
+                "name": "老象峰",
+                "hot": 73.0,
+                "score": 4.342465753424658,
+                "longitude": 117.025269,
+                "latitude": 40.291233
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.299942,
+                    40.270576
+                ]
+            },
+            "properties": {
+                "name": "蟒山国家森林公园",
+                "hot": 549.0,
+                "score": 4.528233151183971,
+                "longitude": 116.299942,
+                "latitude": 40.270576
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.514656,
+                    39.938652
+                ]
+            },
+            "properties": {
+                "name": "行宫国际酒店温泉",
+                "hot": 86.0,
+                "score": 4.813953488372093,
+                "longitude": 116.514656,
+                "latitude": 39.938652
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.39093,
+                    39.901962
+                ]
+            },
+            "properties": {
+                "name": "观复古典艺术博物馆",
+                "hot": 284.0,
+                "score": 4.855633802816901,
+                "longitude": 116.39093,
+                "latitude": 39.901962
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.422302,
+                    40.060528
+                ]
+            },
+            "properties": {
+                "name": "赛纳河休闲商务会馆（立水桥店）",
+                "hot": 26.0,
+                "score": 4.5,
+                "longitude": 116.422302,
+                "latitude": 40.060528
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.352493,
+                    39.903908
+                ]
+            },
+            "properties": {
+                "name": "赛纳河俱乐部（天宁寺店）",
+                "hot": 28.0,
+                "score": 4.535714285714286,
+                "longitude": 116.352493,
+                "latitude": 39.903908
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.784546,
+                    39.94944
+                ]
+            },
+            "properties": {
+                "name": "运河苑水世界",
+                "hot": 340.0,
+                "score": 4.4147058823529415,
+                "longitude": 116.784546,
+                "latitude": 39.94944
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    117.310898,
+                    40.187347
+                ]
+            },
+            "properties": {
+                "name": "金海湖风景区",
+                "hot": 264.0,
+                "score": 4.348484848484849,
+                "longitude": 117.310898,
+                "latitude": 40.187347
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.286964,
+                    40.256187
+                ]
+            },
+            "properties": {
+                "name": "金隅凤山温泉",
+                "hot": 285.0,
+                "score": 4.578947368421052,
+                "longitude": 116.286964,
+                "latitude": 40.256187
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.441597,
+                    39.911587
+                ]
+            },
+            "properties": {
+                "name": "金龙建国温泉酒店温泉区",
+                "hot": 56.0,
+                "score": 4.285714285714286,
+                "longitude": 116.441597,
+                "latitude": 39.911587
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.335121,
+                    40.320995
+                ]
+            },
+            "properties": {
+                "name": "银山塔林",
+                "hot": 57.0,
+                "score": 4.43859649122807,
+                "longitude": 116.335121,
+                "latitude": 40.320995
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.402092,
+                    39.913998
+                ]
+            },
+            "properties": {
+                "name": "长安街",
+                "hot": 75.0,
+                "score": 4.506666666666667,
+                "longitude": 116.402092,
+                "latitude": 39.913998
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.105476,
+                    40.07526
+                ]
+            },
+            "properties": {
+                "name": "阳台山",
+                "hot": 62.0,
+                "score": 4.193548387096774,
+                "longitude": 116.105476,
+                "latitude": 40.07526
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.388443,
+                    39.880661
+                ]
+            },
+            "properties": {
+                "name": "陶然亭公园",
+                "hot": 75.0,
+                "score": 3.9066666666666667,
+                "longitude": 116.388443,
+                "latitude": 39.880661
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.423775,
+                    39.953316
+                ]
+            },
+            "properties": {
+                "name": "雍和宫",
+                "hot": 74.0,
+                "score": 4.594594594594595,
+                "longitude": 116.423775,
+                "latitude": 39.953316
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    117.368957,
+                    40.640213
+                ]
+            },
+            "properties": {
+                "name": "雾灵西峰",
+                "hot": 162.0,
+                "score": 4.802469135802469,
+                "longitude": 117.368957,
+                "latitude": 40.640213
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    117.283539,
+                    40.659
+                ]
+            },
+            "properties": {
+                "name": "震远镖局",
+                "hot": 24.0,
+                "score": 5.0,
+                "longitude": 117.283539,
+                "latitude": 40.659
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.094871,
+                    39.802593
+                ]
+            },
+            "properties": {
+                "name": "青龙湖公园",
+                "hot": 136.0,
+                "score": 4.580882352941177,
+                "longitude": 116.094871,
+                "latitude": 39.802593
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.095215,
+                    39.802593
+                ]
+            },
+            "properties": {
+                "name": "青龙湖水上乐园",
+                "hot": 36.0,
+                "score": 4.638888888888889,
+                "longitude": 116.095215,
+                "latitude": 39.802593
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.442146,
+                    40.256165
+                ]
+            },
+            "properties": {
+                "name": "静之湖滑雪场",
+                "hot": 26.0,
+                "score": 3.6538461538461537,
+                "longitude": 116.442146,
+                "latitude": 40.256165
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.278748,
+                    40.004868
+                ]
+            },
+            "properties": {
+                "name": "颐和园",
+                "hot": 368.0,
+                "score": 4.9103260869565215,
+                "longitude": 116.278748,
+                "latitude": 40.004868
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.34919,
+                    39.912285
+                ]
+            },
+            "properties": {
+                "name": "首都博物馆",
+                "hot": 349.0,
+                "score": 4.6275071633237825,
+                "longitude": 116.34919,
+                "latitude": 39.912285
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.194054,
+                    39.995693
+                ]
+            },
+            "properties": {
+                "name": "香山公园",
+                "hot": 80.0,
+                "score": 4.225,
+                "longitude": 116.194054,
+                "latitude": 39.995693
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.40419,
+                    39.99741
+                ]
+            },
+            "properties": {
+                "name": "鸟巢",
+                "hot": 75.0,
+                "score": 4.266666666666667,
+                "longitude": 116.40419,
+                "latitude": 39.99741
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.109573,
+                    40.072849
+                ]
+            },
+            "properties": {
+                "name": "鹫峰森林公园",
+                "hot": 208.0,
+                "score": 4.4326923076923075,
+                "longitude": 116.109573,
+                "latitude": 40.072849
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.307167,
+                    40.419289
+                ]
+            },
+            "properties": {
+                "name": "黄花城水长城",
+                "hot": 75.0,
+                "score": 4.373333333333333,
+                "longitude": 116.307167,
+                "latitude": 40.419289
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    116.684753,
+                    40.537472
+                ]
+            },
+            "properties": {
+                "name": "龙脉温泉",
+                "hot": 242.0,
+                "score": 4.3264462809917354,
+                "longitude": 116.684753,
+                "latitude": 40.537472
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    115.5671,
+                    40.02853
+                ]
+            },
+            "properties": {
+                "name": "龙门涧",
+                "hot": 26.0,
+                "score": 4.038461538461538,
+                "longitude": 115.5671,
+                "latitude": 40.02853
+            }
         }
     ]
 }
