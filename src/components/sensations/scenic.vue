@@ -138,7 +138,7 @@
       <div><span style="background-color: #ff8c00"></span>4.4</div>
       <div><span style="background-color: #be6321"></span>4.7</div>
       <div><span style="background-color: #be4521"></span>5.0</div>
-      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -884,7 +884,7 @@ export default {
       var that = this;
       this.$mapboxgl.accessToken =
         "pk.eyJ1IjoiY2hlbmpxIiwiYSI6ImNrcWFmdWt2bjBtZGsybmxjb29oYmRzZzEifQ.mnpiwx7_cBEyi8YiJiMRZg";
-      this.map = new this.$mapboxgl.Map({
+      this.map = new mapboxgl.Map({
         container: "map",
         style: "mapbox://styles/chenjq/cl084urgf004014ny2nhu1xre",
         center: [105, 35],
@@ -962,7 +962,7 @@ export default {
         const countyLegendEl = document.getElementById("county-legend");
       });
     },
-  }
+  },
 };
 </script>
 
