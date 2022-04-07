@@ -3,7 +3,7 @@
     <div class="video-container">
       <div class="filter">
         <div class="header">
-          <h1>基于网络口碑的景点智能分析与推荐系统</h1>
+          <h1>旅游景点推荐与智能分析系统</h1>
         </div>
         <div class="login_style">
           <h2>用户登录</h2>
@@ -59,7 +59,6 @@
 </template>
 
 <script>
-import request from "@/utils/request";
 export default {
   data() {
     return {
@@ -149,11 +148,11 @@ export default {
             linear,
             left top,
             right top,
-            color-stop(0, #c1d9dd),
-            color-stop(0.4, #c1d9dd),
+            color-stop(0, #39fcff),
+            color-stop(0.4, #39fcff),
             color-stop(0.5, white),
-            color-stop(0.6, #c1d9dd),
-            color-stop(1, #c1d9dd)
+            color-stop(0.6, #39fcff),
+            color-stop(1, #39fcff)
           );
           -webkit-background-clip: text;
           /* 设置对象中的文字填充颜色 这里设置为透明 */
@@ -227,7 +226,7 @@ export default {
 .el-button--primary {
   color: #fff;
   font-weight: bold;
-  background-color: #6ccae3;
-  border-color: #6ccae3;
+  background-color: #79e4e6;
+  border-color: #79e4e6;
 }
 </style>

@@ -2,7 +2,6 @@
   <div class="com-feelanalysis">
     <div class="left">
       <div class="title">
-        <img src="../../assets/img/panelIcon.png" alt="" />
         <span>景点热搜Top5</span>
       </div>
       <div class="content">
@@ -77,7 +76,6 @@
       <div class="maincontent">
         <el-row>
           <div class="echartsTitle">
-            <img src="../../assets/img/panelIcon.png" alt="" />
             <span>高频热词分布</span>
           </div>
           <div class="echartsContent" id="chart1"></div>
@@ -85,21 +83,18 @@
         <el-row>
           <div class="echartbottom">
             <div class="echartbottomTitle">
-              <img src="../../assets/img/panelIcon.png" alt="" />
               <span>旅游正面热搜</span>
             </div>
             <div class="btmCht" id="btmChart1"></div>
           </div>
           <div class="echartbottom">
             <div class="echartbottomTitle">
-              <img src="../../assets/img/panelIcon.png" alt="" />
               <span>旅游负面热搜</span>
             </div>
             <div class="btmCht" id="btmChart2"></div>
           </div>
           <div class="echartbottom">
             <div class="echartbottomTitle">
-              <img src="../../assets/img/panelIcon.png" alt="" />
               <span>实时旅游情感分布</span>
             </div>
             <div class="btmCht" id="btmChart3"></div>
@@ -111,18 +106,12 @@
             style="background-position: 60% 10%; background-size: 98% 95%"
           >
             <div class="echartbottomTitle">
-              <img src="../../assets/img/panelIcon.png" alt="" />
               <span>景点关注度月变化图</span>
             </div>
             <div class="btmCht" id="btmChart5" ref="chart5"></div>
           </div>
           <div class="echartbottom">
-            <div class="echartbottomTitle">
-              <img
-                id="fifthTitle"
-                src="../../assets/img/panelIcon.png"
-                alt=""
-              />
+            <div class="echartbottomTitle" id="mywidth">
               <span>地区评价情感分布</span>
             </div>
             <div class="btmCht" id="btmChart6"></div>
@@ -132,7 +121,6 @@
     </div>
     <div class="right">
       <div class="title">
-        <img src="../../assets/img/panelIcon.png" alt="" />
         <span>城市热搜Top5</span>
       </div>
       <div class="content">
@@ -877,19 +865,10 @@ export default {
   background-size: 100% 100%;
   .title {
     color: aliceblue;
-    height: 6%;
+    height: 5%;
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    > img {
-      height: 70%;
-      width: 10%;
-      margin-left: 5%;
-    }
-    > span {
-      color: rgb(115, 215, 228);
-      font-size: 12pt;
-    }
   }
   .content {
     width: 100%;
@@ -971,7 +950,7 @@ export default {
         display: flex;
         .echartbottomTitle {
           height: 15%;
-          width: 100%;
+          width: 50% !important;
           color: aliceblue;
           display: flex;
           justify-content: flex-start;
@@ -1098,5 +1077,52 @@ export default {
     font-size: 10pt;
     color: #99b6d8c0;
   }
+}
+.title{
+    width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background: url("../../assets/img/titlebg.png") no-repeat;
+  background-position: 3% 71%;
+  background-size: 46% 80%;
+  > span {
+    color: #a7e3eb;
+    font-size: 12pt;
+    margin-left: 12%;
+  }
+}
+.echartsTitle{
+         width: 35% !important;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background: url("../../assets/img/titlebg.png") no-repeat;
+  background-position: 3% 71%;
+  background-size: 46% 80%;
+  > span {
+    color: #a7e3eb;
+    font-size: 12pt;
+    margin-left: 12%;
+  }
+}
+.echartbottomTitle{
+  margin-left: 3%;
+     width: 100% !important;
+    height: 15% !important;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background: url("../../assets/img/titlebg.png") no-repeat;
+  background-position: 3% 56%;
+  background-size: 46% 80%;
+  > span {
+    color: #a7e3eb;
+    font-size: 12pt;
+    margin-left: 12%;
+  }
+}
+/deep/#mywidth{
+  width: 100% !important
 }
 </style>

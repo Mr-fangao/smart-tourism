@@ -13,7 +13,8 @@
   </div>
 </template>
 <script>
-import nanjing from "../../assets/json/nanjingpoint.json";
+// import nanjing from "../../assets/json/nanjingpoint.json";
+import nanjing from "../../assets/json/nanjing.json";
 import njprovince from "../../assets/json/njprovince.json";
 export default {
   name: "multimap",
@@ -27,8 +28,8 @@ export default {
       var map = new this.$mapboxgl.Map({
         container: "map",
         style: "mapbox://styles/chenjq/cl010ychv001214pdpa5xyq5a",
-        center: [116.42,39.55],
-        zoom: 7,
+        center:  [118.77949013671878, 31.54501247139361],
+        zoom: 8,
       });
       map.on("load", () => {
         map.addSource("njmark", {

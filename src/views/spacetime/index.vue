@@ -23,6 +23,19 @@
               <div class="imgIcon"></div>
               <span>{{ name }}</span>
             </div>
+            <div class="datasource top">
+              <div class="leftpt">数据源:</div>
+              <div class="rightpt">
+                <el-checkbox-group v-model="checkList">
+                  <el-checkbox label="去哪儿"></el-checkbox>
+                  <el-checkbox label="马蜂窝"></el-checkbox>
+                  <el-checkbox label="携程网"></el-checkbox>
+                  <el-checkbox label="途牛网"></el-checkbox>
+                  <el-checkbox label="艺龙网"></el-checkbox>
+                  <el-checkbox label="美团网"></el-checkbox>
+                </el-checkbox-group>
+              </div>
+            </div>
             <!-- 身体 -->
             <div style="width: 100%; height: 15%; top: 20px">
               <!-- 时间选择器 -->
@@ -47,7 +60,6 @@
                 </el-row>
               </div>
             </div>
-
             <div>
               <!--空间尺度-->
               <div v-show="spacedisplay" class="space">
@@ -72,7 +84,7 @@
               <div v-show="spacedisplay" class="space">
                 <el-row>
                   <el-col :span="8">
-                    <p>制图数据</p>
+                    <p>数据类型</p>
                   </el-col>
                   <el-col :span="16">
                     <el-select
@@ -328,12 +340,13 @@ export default {
   },
   data() {
     return {
+       checkList: ["途牛网", "携程网", "马蜂窝", "去哪儿"],
       ceng: 0,
       json: {
         STime: new Date("2018"),
         ETime: new Date("2019"),
-        space: "",
-        source: "",
+        space: "省级",
+        source: "景点数",
         Type: "",
         c: 0,
       },
@@ -361,30 +374,30 @@ export default {
       name: "冷热点分析",
       space: [
         {
-          value: "市级",
+          value: "省级",
           label: "省级",
         },
         {
-          value: "县级",
+          value: "市级",
           label: "市级",
         },
         {
-          value: "街道",
+          value: "县级",
           label: "县级",
         },
       ],
       source: [
         {
           value: "市级",
-          label: "马蜂窝",
+          label: "景点数",
         },
         {
           value: "县级",
-          label: "去哪儿",
+          label: "评论数",
         },
         {
           value: "街道",
-          label: "携程",
+          label: "好评数",
         },
       ],
       Type: [
@@ -518,7 +531,7 @@ export default {
         this.name = "局部莫兰指数分析";
       }
       this.word =
-        "通过分析测算空间关联局域指标（Local Indicators of Spatial Association, LISA）显著水平，通过局部自相关分析方法，分析中国景点分布整体空间关联趋势，得出不同尺度范围下我国各区域拐卖之间的关联和影响。";
+        "通过分析测算空间关联局域指标（Local Indicators of Spatial Association, LISA）显著水平，通过局部自相关分析方法，分析中国景点分布整体空间关联趋势，得出不同尺度范围下我国各区域的关联和影响。";
     },
     jv() {
       this.ceng = 3;
@@ -529,7 +542,7 @@ export default {
         this.name = "新兴时空热点分析";
       }
       this.word =
-        "新兴时空热点分析是GIS中的一种空间分析方法，能够根据某一段时间内已存在的地理分布数据做后续发展的时间和空间分析，通过新兴时空热点分析，获取景点分布热点和冷点趋势，分析我国拐卖儿童犯罪的时空演化特征，包括数据随时间变化的整体趋势、整体的范围、空间等级变化的整体趋势。";
+        "新兴时空热点分析是GIS中的一种空间分析方法，能够根据某一段时间内已存在的地理分布数据做后续发展的时间和空间分析，通过新兴时空热点分析，获取景点分布热点和冷点趋势，分析我国旅游景点的时空演化特征，包括数据随时间变化的整体趋势、整体的范围、空间等级变化的整体趋势。";
     },
     feng() {
       this.ceng = 4;
@@ -738,6 +751,44 @@ export default {
     margin-left: 6%;
     background: url("../../assets/img/panelIcon.png");
     background-size: 100% 100%;
+  }
+}
+.Thematicmap .find .datasource {
+  background: url("./public/ptbg.png") no-repeat center center;
+  background-size: 100% 100%;
+  width: 100%;
+  height: 86px;
+  line-height: 30px;
+  cursor: move;
+  user-select: none;
+  display: flex;align-items: center;
+  .leftpt {
+    flex: 3;
+    font-size: 12pt;
+    color: rgb(174, 193, 199);
+    text-align: right;
+  }
+  .rightpt {
+    flex: 8;
+    .el-checkbox-group {
+      width: 100%;
+      .el-checkbox {
+        color: rgb(174, 193, 199);
+    margin-right: 5%;
+        margin-top: 0%;
+        margin-bottom: 0%;
+        margin-left: 0%;
+      }
+      /deep/.el-checkbox__label{
+        padding-left: 0%;
+      }
+      /deep/.el-checkbox__input.is-checked + .el-checkbox__label {
+        color: #85caca;
+      }
+      /deep/.el-checkbox__input.is-checked .el-checkbox__inner {
+        background-color: #85caca;
+      }
+    }
   }
 }
 /* 时间范围 */

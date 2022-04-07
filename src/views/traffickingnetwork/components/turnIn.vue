@@ -64,13 +64,13 @@ export default {
       }
       for (let i = 0; i < datas[1].length; i++) {
         const element = datas[1][i]
-        data_baby.push(element.middata.婴幼儿)
-        data_juvenile.push(element.middata.少年)
+        data_baby.push(element.middata.少年)
+        data_juvenile.push(element.middata.婴幼儿)
         data_teenagers.push(element.middata.青少年)
         data_other.push(element.middata.其他)
       }
       const option = {
-        color: ['#00BFFF', 'rgb(50,149,206)', 'rgb(0,206,209)','rgb(50,149,206)'],
+        color: ['#00BFFF', '#3EC660', '#E7B63F','#3FE7DD'],
         title: {
           text: this.title,
           left: 'center',
@@ -132,6 +132,7 @@ export default {
         ],
         yAxis: [
           {
+            name:'/万人',
             type: 'value',
             splitLine: {
               show: false

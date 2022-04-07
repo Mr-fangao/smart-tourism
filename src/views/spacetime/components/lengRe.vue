@@ -111,7 +111,7 @@ export default {
         view.when(function() {
           document.getElementById('select').addEventListener('click', function name(params) {
             view.popup.close()
-            if (that.msg.space === '县级') {
+            if (that.msg.space === '市级') {
               WH_Water.visible = false
               WH_Water1.visible = true
               WH_Water2.visible = false
@@ -119,7 +119,7 @@ export default {
               WH_Water.visible = false
               WH_Water1.visible = false
               WH_Water2.visible = true
-            } else if (that.msg.space === '市级') {
+            } else if (that.msg.space === '省级') {
               WH_Water.visible = true
               WH_Water1.visible = false
               WH_Water2.visible = false

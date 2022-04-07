@@ -3,7 +3,7 @@
     <nav>
       <div class="times" @click="quit()">
         <i class="fa fa-sign-out fa-rotate-180 fa-lg" @click="quit()"></i>
-        <!-- <span>{{time}}</span> -->
+        <span id="date">{{ date }}</span>
       </div>
       <ul>
         <li id="u1">
@@ -14,7 +14,7 @@
           <!-- <router-link to="/sensation" exact>形象感知</router-link> -->
         </li>
       </ul>
-      <h1>旅游景点智能分析与推荐系统</h1>
+      <h1>旅游景点推荐与智能分析系统</h1>
       <ul>
         <li id="u2">
           <router-link to="/odAnalysis" exact>客流分析</router-link>
@@ -97,7 +97,7 @@ export default {
       let second = date.getSeconds(); // 秒
       second = second < 10 ? "0" + second : second; // 如果只有一位，则前面补零
       this.date = `${year}/${month}/${day}`;
-      this.time = ` ${hour}:${minute}:${second} ${weekArr[week]}`;
+      // this.time = ` ${hour}:${minute}:${second} ${weekArr[week]}`;
     },
     hideModal() {
       // 取消弹窗回调
@@ -128,6 +128,11 @@ export default {
 
 <style scoped lang="less">
 .backcolor {
+  #date {
+    color: #ffffff;
+    font-size: 12pt;
+    padding-left: 16%;
+  }
   background-color: #02191f;
   .times {
     position: absolute;
@@ -135,6 +140,7 @@ export default {
     font-size: 14pt;
     margin-left: 1%;
     color: #b8c1c8a1;
+    margin-top: 12px;
   }
   .times:hover {
     color: #2fa9ce;
@@ -205,7 +211,7 @@ export default {
       height: 100%;
       width: 30%;
       background: url(../assets/img/userBG.png) no-repeat;
-      background-size: 80% 70%;
+    background-size: 70% 55%;
       background-position: 100% 85%;
       float: left;
     }
@@ -265,6 +271,6 @@ export default {
 .el-dropdown-menu__item:focus,
 .el-dropdown-menu__item:not(.is-disabled):hover {
   background-color: #2fa9ce;
-  color: #ffffff;
+  color: #ffffffd5;
 }
 </style>

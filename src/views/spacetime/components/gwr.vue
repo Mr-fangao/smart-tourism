@@ -1,7 +1,7 @@
 <template>
   <div style="position: absolute; width: 100%; height: 93.6%; margin-top: -1px">
     <div id="MapSanJ1" />
-    <!-- <el-button id="select">{{ msg }}</el-button> -->
+    <el-button id="select">{{ msg }}</el-button>
   </div>
 </template>
 <script>
@@ -89,13 +89,13 @@ export default {
             ],
           };
           var WH_Water = new FeatureLayer({
-            url: "http://114.98.239.36:6080/arcgis/rest/services/BabyHome/analyst/MapServer/2",
-            title: "中国省际景点地理加权回归分析",
+            url: "http://114.98.239.36:6080/arcgis/rest/services/smarttour/GWR_pro/MapServer",
+            title: "中国省级景点地理加权回归分析",
             // popupTemplate: popupTemplate
           });
           var WH_Water1 = new FeatureLayer({
-            url: "http://114.98.239.36:6080/arcgis/rest/services/BabyHome/analyst/MapServer/1",
-            title: "中国市际景点地理加权回归分析",
+            url: "http://114.98.239.36:6080/arcgis/rest/services/smarttour/GWR_city/MapServer",
+            title: "中国市级景点地理加权回归分析",
             // popupTemplate: popupTemplate
           });
           var WH_Water2 = new FeatureLayer({
@@ -103,6 +103,7 @@ export default {
             title: "中国区县景点地理加权回归分析",
             // popupTemplate: popupTemplate
           });
+          WH_Water.visible = true;
           WH_Water1.visible = false;
           WH_Water2.visible = false;
           const map = new Map({
@@ -126,17 +127,17 @@ export default {
               .getElementById("select")
               .addEventListener("click", function name(params) {
                 view.popup.close();
-                if (that.msg.space === "县级") {
-                  WH_Water.visible = false;
-                  WH_Water1.visible = true;
-                  WH_Water2.visible = false;
-                } else if (that.msg.space === "街道") {
+                if (that.msg.space == "县级") {
                   WH_Water.visible = false;
                   WH_Water1.visible = false;
                   WH_Water2.visible = true;
-                } else if (that.msg.space === "市级") {
+                } else if (that.msg.space == "省级") {
                   WH_Water.visible = true;
                   WH_Water1.visible = false;
+                  WH_Water2.visible = false;
+                } else if (that.msg.space == "市级") {
+                  WH_Water.visible = false;
+                  WH_Water1.visible = true;
                   WH_Water2.visible = false;
                 }
                 WH_Water.refresh();

@@ -8,12 +8,20 @@
           <div class="imgBK"></div>
           <span>城市特征词云分析</span>
         </div>
-        <div class="content" id="chart1" ref="cloudEl"></div>
+        <!-- <div class="content" id="chart1" ref="cloudEl"></div> -->
+        <div class="content" id="chart1" ref="cloudEl">
+          <word3D
+            v-if="reFresh"
+            :height="word3Dheight"
+            :width="word3Dwidth"
+            :data="wordcloud3D"
+          >
+          </word3D>
+        </div>
       </div>
       <div class="city-left-bottom">
         <div class="col-content">
-          <div class="row1title">
-            <div class="imgBK"></div>
+          <div class="mytitle">
             <span>游客口碑一览</span>
           </div>
           <div class="commentroll">
@@ -49,8 +57,7 @@
           </div>
         </div>
         <div class="col-content">
-          <div class="row1title">
-            <div class="imgBK"></div>
+          <div class="mytitle">
             <span>形象分类均值分布图</span>
           </div>
           <div class="row1chartcontent" id="chart2" ref="chart2"></div>
@@ -102,8 +109,7 @@
     </div>
     <div class="city-travels">
       <div class="travels-content">
-        <div class="travels-title">
-          <div class="imgBK"></div>
+        <div class="travels-title mytitle">
           <span>历史游记</span>
           <button class="nextp" @click="getTravels()">下一条</button>
         </div>
@@ -116,14 +122,14 @@
             <span>游玩天数:{{ travelsdata.daycount }}</span>
             <span>出游形式:{{ travelsdata.figure }}</span>
             <span>累计费用:{{ travelsdata.cost }}</span>
+            <span>数据源:马蜂窝</span>
           </div>
         </div>
         <div class="travels-text">{{ travelsdata.content }}</div>
       </div>
       <div class="travels-bottom">
         <div class="col-content">
-          <div class="row3title">
-            <div class="imgBK"></div>
+          <div class="mytitle">
             <span>景点网络口碑</span>
           </div>
           <div class="row3chartcontent" id="chart5"></div>
@@ -142,6 +148,7 @@
   </div>
 </template>
 <script>
+import word3D from "../../components/wordcloud3D.vue";
 import eventBum from "../../views/traffickingnetwork/public/js/EvebtBus";
 import SelectRegion from "../../views/traffickingnetwork/components/selectRegionBJ.vue";
 import nanjing from "../../assets/json/nanjingpoint.json";
@@ -156,10 +163,42 @@ export default {
     wordcloud,
     SelectRegion,
     areaSelect,
+    word3D,
   },
 
   data() {
     return {
+      reFresh: true,
+      word3Dheight: 200,
+      word3Dwidth: 350,
+      wordcloud3D: [
+        { value: 773, name: "故宫" },
+        { value: 502, name: "长城" },
+        { value: 270, name: "建筑" },
+        { value: 212, name: "胡同" },
+        { value: 192, name: "天安门" },
+        { value: 182, name: "颐和园" },
+        { value: 170, name: "博物馆" },
+        { value: 158, name: "环球" },
+        { value: 154, name: "历史" },
+        { value: 138, name: "八达岭" },
+        { value: 112, name: "天坛" },
+        { value: 105, name: "度假" },
+        { value: 104, name: "清华" },
+        { value: 100, name: "银杏" },
+        { value: 96, name: "北海" },
+        { value: 94, name: "王府" },
+        { value: 94, name: "皇帝" },
+        { value: 93, name: "慕田峪" },
+        { value: 92, name: "大学" },
+        { value: 88, name: "乾隆" },
+        { value: 87, name: "景山公园" },
+        { value: 86, name: "八达岭长城" },
+        { value: 84, name: "南锣鼓巷" },
+        { value: 79, name: "紫禁城" },
+        { value: 79, name: "地坛" },
+        { value: 75, name: "慕田峪长城" },
+      ],
       selectcity: {
         name: "中国",
         level: 0,
@@ -172,12 +211,19 @@ export default {
         { url: require("../../assets/img/BJ/beijing04.jpg") },
         { url: require("../../assets/img/BJ/beijing05.jpg") },
       ],
-      NJcityimages: [
+      BJcityimages: [
         { url: require("../../assets/img/BJ/beijing01.jpg") },
         { url: require("../../assets/img/BJ/beijing02.jpg") },
         { url: require("../../assets/img/BJ/beijing03.jpg") },
         { url: require("../../assets/img/BJ/beijing04.jpg") },
         { url: require("../../assets/img/BJ/beijing05.jpg") },
+      ],
+      NJcityimages: [
+        { url: require("../../assets/img/LS/lasa01.jpg") },
+        { url: require("../../assets/img/LS/lasa02.jpg") },
+        { url: require("../../assets/img/LS/lasa03.jpg") },
+        { url: require("../../assets/img/LS/lasa04.jpg") },
+        { url: require("../../assets/img/LS/lasa05.jpg") },
       ],
       BJcloudData: [
         { value: 773, name: "故宫" },
@@ -659,7 +705,7 @@ export default {
     this.getTravels();
     this.getComment();
     this.initmap(this.city);
-
+    // this.wordcloud3D=this.BJcloudData;
     eventBum.$on("json", (json) => {
       this.selectcity.name = json.name;
       this.selectcity.level = json.where;
@@ -673,16 +719,22 @@ export default {
       if (this.city == "南京") {
         this.initChart2(this.option3);
         this.initChart5(this.option6);
-        this.wordCloudInti(this.$refs.cloudEl, this.NJcloudData);
+        this.wordcloud3D = this.NJcloudData;
+        // this.wordCloudInti(this.$refs.cloudEl, this.NJcloudData);
         this.initmap(this.city);
+        this.cityimages = this.NJcityimages;
+        this.$forceUpdate();
       } else if (this.city == "北京") {
         this.initChart2(this.option2);
         this.initChart5(this.option5);
-        this.wordCloudInti(this.$refs.cloudEl, this.BJcloudData);
+        // this.wordCloudInti(this.$refs.cloudEl, this.BJcloudData);
+        this.wordcloud3D = this.BJcloudData;
         this.initmap(this.city);
+        this.cityimages = this.BJcityimages;
+        this.$forceUpdate();
       }
     });
-    this.wordCloudInti(this.$refs.cloudEl, this.BJcloudData);
+    // this.wordCloudInti(this.$refs.cloudEl, this.BJcloudData);
     this.initChart2(this.option2);
     this.initChart3();
     this.initChart5(this.option5);
@@ -904,19 +956,21 @@ export default {
         style: "mapbox://styles/chenjq/cl084urgf004014ny2nhu1xre",
       });
       map.on("load", () => {
-        if (val == "南京") {
+        if (val == "北京") {
           map.flyTo({
-            center: [118.77949013671878, 32.04501247139361], // 中心点
-            zoom: 10.5, // 缩放比例
-            pitch: 45, // 倾斜度
-          });
-        } else if (val == "北京") {
-          map.flyTo({
-            center: [116.40811432812498, 39.90388639121686], // 中心点
+            center: [118.77949013671878, 32.04501247139361],
+            // center: [116.40811432812498, 39.90388639121686],
             zoom: 10.5, // 缩放比例
             pitch: 45, // 倾斜度
           });
         }
+        // else if (val == "北京") {
+        //   map.flyTo({
+        //     center: [116.40811432812498, 39.90388639121686], // 中心点
+        //     zoom: 10.5, // 缩放比例
+        //     pitch: 45, // 倾斜度
+        //   });
+        // }
         map.addSource("njmark", {
           type: "geojson",
           data: nanjing,
@@ -989,6 +1043,14 @@ export default {
       });
     },
   },
+  watch: {
+    wordcloud3D() {
+      this.reFresh = false;
+      this.$nextTick(() => {
+        this.reFresh = true;
+      });
+    },
+  },
 };
 </script>
 
@@ -1033,16 +1095,13 @@ export default {
       display: flex;
       justify-content: flex-start;
       align-items: center;
-      .imgBK {
-        margin-left: 2%;
-        height: 100%;
-        width: 8%;
-        background: url("../../assets/img/panelIcon.png") no-repeat;
-        background-size: 100% 100%;
-      }
+      background: url("../../assets/img/titlebg.png") no-repeat;
+      background-position: 3% 71%;
+      background-size: 46% 80%;
       > span {
-        color: rgb(115, 215, 228);
+        color: #a7e3eb;
         font-size: 12pt;
+        margin-left: 12%;
       }
     }
     .content {
@@ -1459,5 +1518,20 @@ export default {
   font-family: Arial, sans-serif;
   overflow: auto;
   border-radius: 3px;
+}
+.mytitle {
+  height: 12%;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background: url("../../assets/img/titlebg.png") no-repeat;
+  background-position: 3% 71%;
+  background-size: 46% 80%;
+  > span {
+    color: #a7e3eb;
+    font-size: 12pt;
+    margin-left: 12%;
+  }
 }
 </style>

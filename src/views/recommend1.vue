@@ -59,21 +59,20 @@
           <div class="mapimg map4"></div>
           <span class="tab" slot="title">时序图</span>
         </el-menu-item>
-                <el-menu-item
-          index="4"
-          @click="showmap(5)"
+        <el-menu-item
+          index="5"
           :class="index === 5 ? 'active' : ''"
           plain
         >
           <el-radio v-model="mapchange" label="5">&ensp;</el-radio>
-          <span class="tab" slot="title">景点推荐</span>
+          <span class="tab" slot="title">点数据</span>
         </el-menu-item>
       </el-menu>
     </div>
     <div class="recommend-left pt">
       <div class="sourceselect">
         <div id="recommend-title">
-          <span>旅游数据总览</span>
+          <span>数据总览</span>
         </div>
         <div class="datasource">
           <div class="leftpt">数据源:</div>
@@ -83,6 +82,8 @@
               <el-checkbox label="马蜂窝"></el-checkbox>
               <el-checkbox label="携程网"></el-checkbox>
               <el-checkbox label="途牛网"></el-checkbox>
+              <el-checkbox label="艺龙网"></el-checkbox>
+              <el-checkbox label="美团网"></el-checkbox>
             </el-checkbox-group>
           </div>
         </div>
@@ -105,7 +106,7 @@
             <div class="partimg">
               <div class="myimg"></div>
             </div>
-            <span class="partname"> 游客数 </span>
+            <span class="partname"> 游记数 </span>
             <span class="partnumber"> {{ citycount.tourist }} </span>
           </div>
         </div>
@@ -113,7 +114,7 @@
       </div>
       <div class="ranktable">
         <div id="recommend-title" class="title">
-          <span>旅游数据总览</span>
+          <span>排行榜单</span>
         </div>
         <div class="ranktable-content">
           <el-tabs v-model="activeName" type="border-card">
@@ -289,9 +290,17 @@
     <div class="recommend-right pt">
       <div class="chinahot">
         <div id="recommend-title" class="title">
-          <span>中国旅游景点印象词云</span>
+          <span>旅游热词</span>
         </div>
-        <div class="wordcontent" ref="chartword2"></div>
+        <!-- <div class="wordcontent" ref="chartword2"></div> -->
+        <div class="wordcontent">
+          <word3D
+            :height="word3Dheight"
+            :width="word3Dwidth"
+            :data="wordcloudchina"
+          >
+          </word3D>
+        </div>
       </div>
       <div class="sensicrecommend">
         <div id="recommend-title" class="title">
@@ -337,7 +346,7 @@
             </div>
           </div>
           <div class="hotandscore">
-            <div class="name">
+            <div class="name names">
               <el-checkbox v-model="sourcechecked">考虑评论</el-checkbox>
             </div>
             <div class="content">
@@ -346,7 +355,7 @@
             </div>
           </div>
           <div class="distance">
-            <div class="name">
+            <div class="name names">
               <el-checkbox v-model="distancechecked" @click="addDistance()"
                 >考虑距离</el-checkbox
               >
@@ -358,8 +367,8 @@
             </div>
           </div>
           <div class="season">
-            <div class="name">
-              <el-checkbox v-model="seasonchecked">季节考虑</el-checkbox>
+            <div class="name names">
+              <el-checkbox v-model="seasonchecked">考虑季节</el-checkbox>
             </div>
             <div class="distanceselect">
               <el-radio v-model="seasonrange" label="1">春</el-radio>
@@ -378,7 +387,7 @@
               <div class="agept">
                 <div class="person-name">年龄:</div>
                 <div class="person-inputcontent">
-                  <input class="ageinput" type="text" />
+                  <input class="ageinput" v-model="ageinput" type="text" />
                 </div>
               </div>
               <div class="sexpt">
@@ -462,9 +471,19 @@
             <div class="content" id="chart2"></div>
           </div>
         </el-tab-pane>
-        <el-tab-pane label="游客数量日变化" name="time">
+        <el-tab-pane label="评论数据变化" name="time">
           <div class="timechartcontent">
             <div class="content" id="timechart"></div>
+          </div>
+        </el-tab-pane>
+        <el-tab-pane label="景点热度变化" name="scenichot">
+          <div class="timechartcontent">
+            <div class="content" id="timechart1"></div>
+          </div>
+        </el-tab-pane>
+        <el-tab-pane label="城市热度变化" name="cityhot">
+          <div class="timechartcontent">
+            <div class="content" id="timechart2"></div>
           </div>
         </el-tab-pane>
       </el-tabs>
@@ -473,6 +492,8 @@
   </div>
 </template>
 <script>
+import word3D from "../components/wordcloud3D.vue";
+
 import Bus from "../assets/js/bus.js";
 import poppage from "../components/poppageForCity.vue";
 
@@ -507,9 +528,12 @@ export default {
     loading,
     wordcloud,
     SelectRegion,
+    word3D,
   },
   data() {
     return {
+      word3Dheight: 200,
+      word3Dwidth: 350,
       treemapname: "中国热门城市",
       isLoading: false,
       isShow: true,
@@ -526,21 +550,22 @@ export default {
       // tablelabel:'分数',
       citycount: {
         sensic: "34682",
-        comment: "1900516",
+        comment: "2521580",
         tourist: "65536",
       },
       input: "",
-      distancechecked: false,
+      distancechecked: true,
       seasonchecked: false,
-      sourcechecked: false,
-      personchecked: false,
+      sourcechecked: true,
+      personchecked: true,
       timevalue: "",
-      prferradio: "",
-      sexselect: "",
-      distancerange: "",
+      prferradio: "score",
+      sexselect: "1", //男
+      distancerange: "1",
       seasonrange: "",
       incomept: "",
-      occupationpt: "",
+      occupationpt: "学生",
+      ageinput: "22",
       labellist: [
         { id: 1, name: "山岳" },
         { id: 2, name: "海滨" },
@@ -556,7 +581,7 @@ export default {
       //数据源选择
       checkList: ["途牛网", "携程网", "马蜂窝", "去哪儿"],
       //数据
-      mapchange: "",
+      mapchange: "1",
       tableRankData: [],
       tablescoreRankData: [],
       tableCityData: [],
@@ -814,22 +839,23 @@ export default {
     this.initChart1(this.chartdata1);
     this.initChart2(this.chartdata2);
     // this.initTimechart();
-    this.wordCloudInti2(this.$refs.chartword2, this.wordcloudchina);
+    // this.wordCloudInti2(this.$refs.chartword2, this.wordcloudchina);
     this.wordCloudInti(this.$refs.chartword, this.startclouddata);
     eventBum.$on("json", (json) => {
       this.selectcity.name = json.name;
       this.selectcity.level = json.where;
       console.log(this.selectcity);
       if (this.selectcity.name == "南京市") {
-        this.showmap(6);
+        this.showmap(5);
         this.treemapname = this.selectcity.name + "热门景点";
-        this.citycount.sensic = "126";
-        this.citycount.comment = "126";
-        this.citycount.tourist = "126";
+        this.citycount.sensic = "488";
+        this.citycount.comment = "52042";
+        this.citycount.tourist = "45";
         this.initChart1(this.chartdata3);
         this.chartname = this.selectcity.name;
         this.wordCloudInti(this.$refs.chartword, this.njwordcloud);
         this.initChart2(this.chartdata4);
+        this.mapchange='5';
       }
     });
   },
@@ -927,9 +953,11 @@ export default {
       //   }, 1200);
     },
     getRecommend() {
+      this.showmap(6);
       var labels;
       labels = this.input.split("、");
       var a = labels.pop();
+      this.mapchange='5';
       // var len =labels.length-1;
       // labels.splice(len,0);
       var prfer = "无";
@@ -969,6 +997,14 @@ export default {
       if (tab.name == "time") {
         setTimeout(() => {
           this.initTimechart();
+        }, 100);
+      } else if (tab.name == "scenichot") {
+        setTimeout(() => {
+          this.initTimechart1();
+        }, 100);
+      } else if (tab.name == "cityhot") {
+        setTimeout(() => {
+          this.initTimechart2();
         }, 100);
       }
     },
@@ -1072,15 +1108,15 @@ export default {
       let base = +new Date(2005, 9, 3);
       let oneDay = 24 * 3600 * 1000;
       let date = [];
-      let date2 = [];
       let data = [Math.random() * 300];
       let data2 = [Math.random() * 300];
+      let data3 = [Math.random() * 3];
       for (let i = 1; i < 6150; i++) {
         var now = new Date((base += oneDay));
         date.push(
           [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
         );
-        var absnum = Math.round((Math.random() - 0.5) * 20 + data[i - 1]);
+        var absnum = Math.round((Math.random() - 0.5) * 50 + data[i - 1]);
         if (absnum < 0) {
           absnum = -absnum;
         }
@@ -1088,7 +1124,7 @@ export default {
       }
       for (let i = 1; i < 20000; i++) {
         var now = new Date((base += oneDay));
-        date2.push(
+        date.push(
           [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
         );
         var absnum = Math.round((Math.random() - 0.5) * 20 + data2[i - 1]);
@@ -1097,22 +1133,28 @@ export default {
         }
         data2.push(absnum);
       }
+      for (let i = 1; i < 6150; i++) {
+        var now = new Date((base += oneDay));
+        date.push(
+          [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
+        );
+        var absnum = Math.round((Math.random() - 0.5) * 5 + data3[i - 1]);
+        if (absnum < 0) {
+          absnum = -absnum;
+        }
+        data3.push(absnum);
+      }
       option = {
-        title: {
-          left: "left",
-          text: "游客每日数量变化",
+        legend: {
+          right: 200,
+          // itemGap: 30,
+          // itemWidth: 8,
+          // padding: 10,
           textStyle: {
-            //文字颜色
-            color: "#ccc",
-            //字体风格,'normal','italic','oblique'
-            fontStyle: "normal",
-            //字体粗细 'normal','bold','bolder','lighter',100 | 200 | 300 | 400...
-            fontWeight: "bold",
-            //字体系列
-            fontFamily: "sans-serif",
-            //字体大小
-            fontSize: 14,
+            fontSize: 12,
+            color: "#fft",
           },
+          align: "left",
         },
         tooltip: {
           trigger: "axis",
@@ -1121,9 +1163,9 @@ export default {
           },
         },
         grid: {
-          left: "5%", //图表距边框的距离
+          left: "2%", //图表距边框的距离
           right: "5%",
-          bottom: "20%",
+          bottom: "18%",
           top: "12%",
           containLabel: true,
         },
@@ -1160,7 +1202,7 @@ export default {
         ],
         series: [
           {
-            name: "Fake Data",
+            name: "评论数",
             type: "line",
             symbol: "none",
             sampling: "lttb",
@@ -1181,28 +1223,426 @@ export default {
               ]),
             },
           },
-          // {
-          //   name: "Fake Data",
-          //   type: "line",
-          //   symbol: "none",
-          //   sampling: "lttb",
-          //   data: data2,
-          //   itemStyle: {
-          //     color: "#D5F19F",
-          //   },
-          //   areaStyle: {
-          //     color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-          //       {
-          //         offset: 0,
-          //         color: "#758A4B",
-          //       },
-          //       {
-          //         offset: 1,
-          //         color: "#A9D750",
-          //       },
-          //     ]),
-          //   },
-          // },
+          {
+            name: "好评数",
+            type: "line",
+            symbol: "none",
+            sampling: "lttb",
+            data: data2,
+            itemStyle: {
+              color: "#D5F19F",
+            },
+            areaStyle: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                {
+                  offset: 0,
+                  color: "#758A4B",
+                },
+                {
+                  offset: 1,
+                  color: "#A9D750",
+                },
+              ]),
+            },
+          },
+          {
+            name: "游记数",
+            type: "line",
+            symbol: "none",
+            sampling: "lttb",
+            data: data3,
+            itemStyle: {
+              color: "#4789D6",
+            },
+            areaStyle: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                {
+                  offset: 0,
+                  color: "#627995",
+                },
+                {
+                  offset: 1,
+                  color: "#3768A1",
+                },
+              ]),
+            },
+          },
+        ],
+      };
+      option && myChart.setOption(option, true);
+    },
+    initTimechart1() {
+      var chartDom = document.getElementById("timechart1");
+      var myChart = echarts.init(chartDom);
+      var option;
+
+      let base = +new Date(2005, 9, 3);
+      let oneDay = 24 * 3600 * 1000;
+      let date = [];
+      let data = [Math.random() * 300];
+      let data2 = [Math.random() * 300];
+      let data3 = [Math.random() * 300];
+           let data4 = [Math.random() * 300];
+      for (let i = 1; i < 6150; i++) {
+        var now = new Date((base += oneDay));
+        date.push(
+          [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
+        );
+        var absnum = Math.round((Math.random() - 0.5) * 20 + data[i - 1]);
+        if (absnum < 0) {
+          absnum = -absnum;
+        }
+        data.push(absnum);
+      }
+      for (let i = 1; i < 6150; i++) {
+        var now = new Date((base += oneDay));
+        date.push(
+          [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
+        );
+        var absnum = Math.round((Math.random() - 0.5) * 20 + data2[i - 1]);
+        if (absnum < 0) {
+          absnum = -absnum;
+        }
+        data2.push(absnum);
+      }
+      for (let i = 1; i < 6150; i++) {
+        var now = new Date((base += oneDay));
+        date.push(
+          [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
+        );
+        var absnum = Math.round((Math.random() - 0.5) * 20 + data3[i - 1]);
+        if (absnum < 0) {
+          absnum = -absnum;
+        }
+        data3.push(absnum);
+      }
+            for (let i = 1; i < 6150; i++) {
+        var now = new Date((base += oneDay));
+        date.push(
+          [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
+        );
+        var absnum = Math.round((Math.random() - 0.5) * 20 + data4[i - 1]);
+        if (absnum < 0) {
+          absnum = -absnum;
+        }
+        data4.push(absnum);
+      }
+      option = {
+        legend: {
+          right: 200,
+          // itemGap: 30,
+          // itemWidth: 8,
+          // padding: 10,
+          textStyle: {
+            fontSize: 12,
+            color: "#fft",
+          },
+          align: "left",
+        },
+        tooltip: {
+          trigger: "axis",
+          position: function (pt) {
+            return [pt[0], "10%"];
+          },
+        },
+        grid: {
+          left: "2%", //图表距边框的距离
+          right: "5%",
+          bottom: "18%",
+          top: "12%",
+          containLabel: true,
+        },
+        xAxis: {
+          type: "category",
+          boundaryGap: false,
+          data: date,
+          axisLine: {
+            lineStyle: {
+              color: "white",
+            },
+          },
+        },
+        yAxis: {
+          splitLine: { show: false },
+          type: "value",
+          boundaryGap: [0, "10%"],
+          axisLine: {
+            lineStyle: {
+              color: "white",
+            },
+          },
+        },
+        dataZoom: [
+          {
+            type: "inside",
+            start: 0,
+            end: 10,
+          },
+          {
+            start: 0,
+            end: 10,
+          },
+        ],
+        series: [
+          {
+            name: "珠江南田温泉",
+            type: "bar",
+            symbol: "none",
+            sampling: "lttb",
+            data: data,
+            itemStyle: {
+              color: "rgb(255, 70, 131)",
+            },
+            areaStyle: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                {
+                  offset: 0,
+                  color: "rgb(255, 158, 68)",
+                },
+                {
+                  offset: 1,
+                  color: "rgb(255, 70, 131)",
+                },
+              ]),
+            },
+          },
+          {
+            name: "云台山",
+            type: "bar",
+            symbol: "none",
+            sampling: "lttb",
+            data: data2,
+            itemStyle: {
+              color: "#D5F19F",
+            },
+            areaStyle: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                {
+                  offset: 0,
+                  color: "#758A4B",
+                },
+                {
+                  offset: 1,
+                  color: "#A9D750",
+                },
+              ]),
+            },
+          },
+          {
+            name: "长隆野生动物园",
+            type: "bar",
+            symbol: "none",
+            sampling: "lttb",
+            data: data3,
+            itemStyle: {
+              color: "#4CE7CC",
+            },
+            areaStyle: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                {
+                  offset: 0,
+                  color: "#50998C",
+                },
+                {
+                  offset: 1,
+                  color: "#42C8B1",
+                },
+              ]),
+            },
+          },
+                    {
+            name: "华山",
+            type: "bar",
+            symbol: "none",
+            sampling: "lttb",
+            data: data4,
+            itemStyle: {
+              color: "#4789D6",
+            },
+            areaStyle: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                {
+                  offset: 0,
+                  color: "#627995",
+                },
+                {
+                  offset: 1,
+                  color: "#3768A1",
+                },
+              ]),
+            },
+          },
+        ],
+      };
+      option && myChart.setOption(option, true);
+    },
+    initTimechart2() {
+      var chartDom = document.getElementById("timechart2");
+      var myChart = echarts.init(chartDom);
+      var option;
+
+      let base = +new Date(2005, 9, 3);
+      let oneDay = 24 * 3600 * 1000;
+      let date = [];
+      let data = [Math.random() * 300];
+      let data2 = [Math.random() * 300];
+      let data3 = [Math.random() * 3];
+      for (let i = 1; i < 6150; i++) {
+        var now = new Date((base += oneDay));
+        date.push(
+          [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
+        );
+        var absnum = Math.round((Math.random() - 0.5) * 20 + data[i - 1]);
+        if (absnum < 0) {
+          absnum = -absnum;
+        }
+        data.push(absnum);
+      }
+      for (let i = 1; i < 20000; i++) {
+        var now = new Date((base += oneDay));
+        date.push(
+          [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
+        );
+        var absnum = Math.round((Math.random() - 0.5) * 20 + data2[i - 1]);
+        if (absnum < 0) {
+          absnum = -absnum;
+        }
+        data2.push(absnum);
+      }
+      for (let i = 1; i < 6150; i++) {
+        var now = new Date((base += oneDay));
+        date.push(
+          [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
+        );
+        var absnum = Math.round((Math.random() - 0.5) * 5 + data3[i - 1]);
+        if (absnum < 0) {
+          absnum = -absnum;
+        }
+        data3.push(absnum);
+      }
+      option = {
+        legend: {
+          right: 200,
+          // itemGap: 30,
+          // itemWidth: 8,
+          // padding: 10,
+          textStyle: {
+            fontSize: 12,
+            color: "#fft",
+          },
+          align: "left",
+        },
+        tooltip: {
+          trigger: "axis",
+          position: function (pt) {
+            return [pt[0], "10%"];
+          },
+        },
+        grid: {
+          left: "2%", //图表距边框的距离
+          right: "5%",
+          bottom: "18%",
+          top: "12%",
+          containLabel: true,
+        },
+        xAxis: {
+          type: "category",
+          boundaryGap: false,
+          data: date,
+          axisLine: {
+            lineStyle: {
+              color: "white",
+            },
+          },
+        },
+        yAxis: {
+          splitLine: { show: false },
+          type: "value",
+          boundaryGap: [0, "10%"],
+          axisLine: {
+            lineStyle: {
+              color: "white",
+            },
+          },
+        },
+        dataZoom: [
+          {
+            type: "inside",
+            start: 0,
+            end: 10,
+          },
+          {
+            start: 0,
+            end: 10,
+          },
+        ],
+        series: [
+          {
+            name: "评论数",
+            type: "line",
+            symbol: "none",
+            sampling: "lttb",
+            data: data,
+            itemStyle: {
+              color: "rgb(255, 70, 131)",
+            },
+            areaStyle: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                {
+                  offset: 0,
+                  color: "rgb(255, 158, 68)",
+                },
+                {
+                  offset: 1,
+                  color: "rgb(255, 70, 131)",
+                },
+              ]),
+            },
+          },
+          {
+            name: "好评数",
+            type: "line",
+            symbol: "none",
+            sampling: "lttb",
+            data: data2,
+            itemStyle: {
+              color: "#D5F19F",
+            },
+            areaStyle: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                {
+                  offset: 0,
+                  color: "#758A4B",
+                },
+                {
+                  offset: 1,
+                  color: "#A9D750",
+                },
+              ]),
+            },
+          },
+          {
+            name: "游记数",
+            type: "line",
+            symbol: "none",
+            sampling: "lttb",
+            data: data3,
+            itemStyle: {
+              color: "#4789D6",
+            },
+            areaStyle: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                {
+                  offset: 0,
+                  color: "#627995",
+                },
+                {
+                  offset: 1,
+                  color: "#3768A1",
+                },
+              ]),
+            },
+          },
         ],
       };
       option && myChart.setOption(option, true);
@@ -1547,14 +1987,15 @@ export default {
         text-align: right;
       }
       .rightpt {
-        flex: 8;
+        flex: 10;
         .el-checkbox-group {
-          width: 93%;
+          width: 100%;
           .el-checkbox {
             color: rgb(174, 193, 199);
-            margin-right: 7%;
+            color: #aec1c7;
+            margin-right: 5%;
             margin-top: 0%;
-            margin-bottom: 2%;
+            margin-bottom: 3%;
             margin-left: 0%;
           }
           /deep/.el-checkbox__input.is-checked + .el-checkbox__label {
@@ -1940,6 +2381,8 @@ export default {
             > span {
               font-size: 11pt;
               color: #c5d4e6;
+              margin-right: 7%;
+
               // margin-left: -19%;
             }
             .chooselabel {
@@ -1950,8 +2393,8 @@ export default {
               border-radius: 5px;
               cursor: pointer;
               margin: 1%;
-              padding: 1px;
-              // margin: 1% 1% 1% 1% ;
+              padding: 2px;
+              margin-right: 2%;
             }
           }
         }
@@ -1974,6 +2417,7 @@ export default {
           align-items: center;
           justify-content: space-evenly;
           .el-radio {
+            margin-right: 0px;
             color: rgb(190, 218, 218);
           }
           /deep/.el-radio__input.is-checked + .el-radio__label {
@@ -2073,7 +2517,7 @@ export default {
           height: 27%;
           width: 100%;
           .personcheckbox {
-            padding-left: 3%;
+            padding-left: 10%;
             padding-top: 2%;
             padding-bottom: 2%;
             width: 30%;
@@ -2258,7 +2702,7 @@ export default {
   }
   /deep/.el-tabs__item {
     padding: 0;
-    width: 70%;
+    width: 39%;
     border: none;
     //   background: url(../assets/img/tab.png)no-repeat;
     //   background-size: 100% 100%;
@@ -2276,7 +2720,7 @@ export default {
   }
   /deep/.el-tabs__nav-scroll {
     background: transparent;
-    width: 28%;
+    width: 60%;
     background: url(../assets/img/buttonbg.png) no-repeat;
     background-size: 100% 100%;
   }
@@ -2307,6 +2751,11 @@ export default {
   /deep/.el-tabs--border-card > .el-tabs__content {
     padding: 3px;
     height: 86%;
+  }
+  /deep/.el-tabs--top.el-tabs--border-card
+    > .el-tabs__header
+    .el-tabs__item:nth-child(2) {
+    padding: 0;
   }
   /deep/.el-tabs--border-card > .el-tabs__header .el-tabs__item {
     border-left: none;
@@ -2370,5 +2819,9 @@ export default {
 }
 .el-select-dropdown__item {
   color: #fff;
+}
+.names {
+  margin-left: 3%;
+  padding-right: 0% !important;
 }
 </style>

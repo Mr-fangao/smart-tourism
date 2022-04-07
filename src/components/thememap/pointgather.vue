@@ -44,6 +44,15 @@
             <el-radio v-model="datachange" label="4">&ensp;</el-radio>
             <span class="tab" slot="title">好评数</span>
           </el-menu-item>
+                    <el-menu-item
+            id="button5"
+            index="5"
+            :class="index === 4 ? 'active' : ''"
+            plain
+          >
+            <el-radio v-model="datachange" label="5">&ensp;</el-radio>
+            <span class="tab" slot="title">景点推荐数据</span>
+          </el-menu-item>
         </el-menu>
       </div>
       <div class="creatmap">
@@ -69,7 +78,7 @@ export default {
   name: "pointgather",
   data() {
     return {
-      datachange: "",
+      datachange: "1",
     };
   },
   mounted() {
@@ -82,8 +91,8 @@ export default {
       var map = new this.$mapboxgl.Map({
         container: "map",
         style: "mapbox://styles/chenjq/cl010ychv001214pdpa5xyq5a",
-        center: [110, 40],
-        zoom: 5,
+      center: [112, 31],
+        zoom: 4,
       });
       //添加数据源1
       document.getElementById("button3").addEventListener("click", () => {
@@ -309,6 +318,13 @@ export default {
             });
         });
       });
+      // this.showmap();
+    },
+    showmap() {
+      this.$nextTick(() => {
+        document.getElementById("button3").click();
+        document.getElementById("button2").click();
+      });
     },
   },
   // destroyed(){
@@ -406,7 +422,7 @@ export default {
     .el-menu-item:hover {
       background: transparent;
     }
-        /deep/.el-radio__input.is-checked .el-radio__inner {
+    /deep/.el-radio__input.is-checked .el-radio__inner {
       border-color: #94b2bb;
       background: #3fb0d3;
     }

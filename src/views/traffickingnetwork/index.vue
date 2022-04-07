@@ -23,6 +23,19 @@
         </li>
       </ul>
     </div>
+    <div id="datasource">
+      <div class="leftpt">数据源:</div>
+      <div class="rightpt">
+        <el-checkbox-group v-model="checkList">
+          <el-checkbox label="去哪儿"></el-checkbox>
+          <el-checkbox label="马蜂窝"></el-checkbox>
+          <el-checkbox label="携程网"></el-checkbox>
+          <el-checkbox label="途牛网"></el-checkbox>
+          <el-checkbox label="艺龙网"></el-checkbox>
+          <el-checkbox label="美团网"></el-checkbox>
+        </el-checkbox-group>
+      </div>
+    </div>
     <!-- 查询类型 -->
     <div class="type">
       <!-- <el-select v-model="value" placeholder="请选择" :popper-append-to-body="false" @change="scaleChange">
@@ -74,7 +87,7 @@ import TurnIn from "./components/turnIn"; // 拐入
 import Heat from "./components/heat"; // 拐入
 import shiline from "./public/js/shiLine.json";
 import shengline from "./public/js/shengLine.json";
-import SelectRegion from "./components/selectRegion";
+import SelectRegion from "./components/selectRegionAH";
 import eventBum from "./public/js/EvebtBus";
 export default {
   name: "Traffickingnetwork",
@@ -87,6 +100,7 @@ export default {
   },
   data() {
     return {
+          checkList: ["途牛网", "携程网", "马蜂窝", "去哪儿"],
       json: {
         name: "中国",
         where: 0,
@@ -553,7 +567,7 @@ export default {
   },
 };
 </script>
-<style scoped>
+<style  scoped>
 #network {
   position: absolute;
   height: 100%;
@@ -605,18 +619,45 @@ export default {
   margin: 0;
   list-style-type: none;
 }
+#datasource {
+  position: absolute;
+  left: 45px;
+  top: 100px;
+  color: rgb(180, 180, 180);
+    width: 220px;
+  height: 97px;
+  text-align: center;
+  z-index: 10;
+  background: url("../../assets/img/矩形1718.png") no-repeat;
+      background-size: 100% 100%;
+  display: flex;
+  align-items: center;
+}
+#datasource .leftpt {
+  height: 100%;
+  width: 30%;
+  padding-left: 7px;
+  font-size: 12pt;
+  color: rgb(174, 193, 199);
+  align-items: center;
+  display: flex;
+}
+#datasource .rightpt {
+  width: 70%;
+  height: 100%;
+}
 /* 左侧数量 */
 #network #Number {
   position: absolute;
   left: 45px;
   top: 5px;
   color: rgb(180, 180, 180);
-  width: 200px;
+    width: 220px;
   height: 97px;
   text-align: center;
   z-index: 10;
   background: url("../../assets/img/矩形1718.png") no-repeat;
-  background-image: 100% 100%;
+    background-size: 100% 100%;
 }
 #network #Number li {
   /* background-color: rgba(18, 18, 18, 0.4); */
@@ -751,5 +792,24 @@ export default {
   border: 1px solid rgba(25, 186, 139, 0.2);
   /* background: url("./public/img/bg.png") rgba(255, 255, 255, 0.1); */
   background: url("./public/img/bg.png") rgba(18, 18, 18, 0.4);
+}
+.el-checkbox-group {
+  width: 100%;
+      flex-direction: row;
+    flex-wrap: wrap;
+}
+.el-checkbox__input.is-checked + .el-checkbox__label {
+  color: #85caca;
+}
+.el-checkbox__input.is-checked .el-checkbox__inner {
+  background-color: #85caca;
+}
+.el-checkbox {
+  color: rgb(174, 193, 199);
+  color: #aec1c7;
+    margin-right: 2%;
+    margin-bottom: 5%;
+    margin-top: 5%;
+    margin-left: 0%;
 }
 </style>

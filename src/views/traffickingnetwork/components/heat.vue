@@ -47,17 +47,17 @@ export default {
       var data = []
       var place_name = []
       if (datas[0] === '流入') {
-        this.title = '各地区输入至' + datas[1][0].to + '游客平均游览时长统计'
+        this.title = '各地区输入至' + datas[1][0].to + '游客评价分数'
         for (let index = 0; index < datas[1].length; index++) {
           const element = datas[1][index]
-          data.push(element.middata.平均时长)
+          data.push((element.middata.平均时长)/10)
           place_name.push(element.from)
         }
       } else {
-        this.title = datas[1][0].from + '流出至各地区游客游览平均时长统计'
+        this.title = datas[1][0].from + '流出至各地区游客评价分数'
         for (let index = 0; index < datas[1].length; index++) {
           const element = datas[1][index]
-          data.push(element.middata.平均时长)
+          data.push((element.middata.平均时长)/10)
           place_name.push(element.to)
         }
       }
@@ -290,7 +290,7 @@ export default {
   position: absolute;
   /* width: 100%;
   height: 100%; */
-  width: 350px;
+  width: 400px;
   height: 420px;
 }
 </style>

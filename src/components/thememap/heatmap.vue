@@ -17,8 +17,8 @@ export default {
       var map = new this.$mapboxgl.Map({
         container: "map",
         style: "mapbox://styles/chenjq/cl010ychv001214pdpa5xyq5a",
-        center: [110, 40],
-        zoom: 5,
+         center: [112, 31],
+        zoom: 4,
       });
 
       map.on("load", function () {

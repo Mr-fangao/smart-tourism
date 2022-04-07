@@ -45,7 +45,7 @@
         <div class="bottompart">
           <div class="headcontent">
             <div class="titleimg"></div>
-            <div class="title">景点评分月变化图</div>
+            <div class="title">景点评论</div>
           </div>
           <div class="maincontent">
             <div class="tablehrader">
