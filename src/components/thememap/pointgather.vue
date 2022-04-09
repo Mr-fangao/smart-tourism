@@ -94,6 +94,81 @@ export default {
       center: [112, 31],
         zoom: 4,
       });
+      map.on('load', () => {
+      map.addSource("sensicjsonfirst", {
+            type: "geojson",
+            data: testjson,
+            cluster: true, //聚合图的数据源需要添加样式
+            clusterMaxZoom: 14, //最大缩放到群集点
+            clusterRadius: 50,
+          });
+              //添加圆形聚合图层
+        map.addLayer({
+          id: "clusters",
+          type: "circle",
+          source: "sensicjsonfirst",
+          filter: ["has", "point_count"],
+          paint: {
+            //使用步骤表达式(https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-step)
+            //用三个步骤实现三种类型的循环:
+            // *蓝色，20px圆，点计数小于100
+            // *黄色，30px的圆圈，点计数在100和750之间
+            // *粉红色，40px的圆圈，当点数大于等于750
+            "circle-color": [
+              "step",
+              ["get", "point_count"],
+              "#fff591",
+              100,
+              "#ff8a5c",
+              750,
+              "#e41749",
+            ],
+            "circle-radius": [
+              "step",
+              ["get", "point_count"],
+              20,
+              100,
+              30,
+              750,
+              40,
+            ],
+          },
+          //"source-layer": "button2"
+        });
+
+        //添加数字图层
+        map.addLayer({
+          id: "cluster-count",
+          type: "symbol",
+          source: "sensicjsonfirst",
+          filter: ["has", "point_count"],
+          layout: {
+            "text-field": "{point_count_abbreviated}",
+            "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
+            "text-size": 12,
+          },
+          //"source-layer": "button2"
+        });
+
+        //添加未聚合图层
+        map.addLayer({
+          id: "unclustered-point",
+          type: "circle",
+          source: "sensicjsonfirst",
+          filter: ["!", ["has", "point_count"]],
+          paint: {
+            "circle-color": "#f5587b",
+            "circle-radius": 4,
+            "circle-stroke-width": 1,
+            "circle-stroke-color": "#fff",
+          },
+          //"source-layer": "button2"
+        });
+        map.fitBounds([
+          [90, 45], // 边界的西南角
+          [120, 30], // 边界的东北角
+        ]);
+      });
       //添加数据源1
       document.getElementById("button3").addEventListener("click", () => {
         //加载前先移除图层
@@ -101,7 +176,7 @@ export default {
         if (map.getLayer("clusters")) map.removeLayer("clusters");
         if (map.getLayer("cluster-count")) map.removeLayer("cluster-count");
 
-        if (map.getSource("sensicjson")) {
+        if (map.getSource("sensicjson")||map.getSource("sensicjsonsensicjsonfirst")) {
           const geojsonSource = map.getSource("sensicjson");
           geojsonSource.setData(testjson);
           const geojsonSource1 = map.getSource("sensicjson1");
@@ -136,7 +211,7 @@ export default {
         // if(map.getSource('testjson'))map.setData('heatMapData');
         // if(map.getSource('testjson'))map.removeSouce('testjson'); debugger;
         //首先判断数据源是否存在，存在的使用setdata方法
-        if (map.getSource("sensicjson")) {
+        if (map.getSource("sensicjson")||map.getSource("sensicjsonsensicjsonfirst")) {
           const geojsonSource = map.getSource("sensicjson");
           geojsonSource.setData(heatMapData);
           const geojsonSource1 = map.getSource("sensicjson1");
