@@ -1,6 +1,5 @@
 <template>
   <div id="recommend">
-    <!-- <div id="map" /> -->
     <transition name="fade">
       <loading v-if="isLoading" :state="state"></loading>
     </transition>
@@ -9,326 +8,488 @@
         <component :is="comp" v-show="isShow"></component>
       </keep-alive>
     </div>
-    <div class="citychoose" @click="getCity()">
+    <!-- <div class="citychoose" @click="getCity()">
       <div class="iconcontent"><i class="fa fa-map-marker fa-lg"></i></div>
       <div class="cityname">{{ cityname }}</div>
+    </div> -->
+    <div class="mapcontral">
+      <div class="selecttitle">
+        <div class="title-img"></div>
+        <div class="title-text">专题图选择</div>
+      </div>
+      <el-menu>
+        <el-menu-item
+          style="padding: 1%"
+          index="1"
+          @click="showmap(1)"
+          :class="index === 1 ? 'active' : ''"
+          plain
+        >
+          <el-radio v-model="mapchange" label="1">&ensp;</el-radio>
+          <div class="mapimg map1"></div>
+          <span class="tab" slot="title">聚合图</span>
+        </el-menu-item>
+        <el-menu-item
+          index="2"
+          @click="showmap(2)"
+          :class="index === 2 ? 'active' : ''"
+          plain
+        >
+          <el-radio v-model="mapchange" label="2">&ensp;</el-radio>
+          <div class="mapimg map2"></div>
+          <span class="tab" slot="title">分级图</span>
+        </el-menu-item>
+        <el-menu-item
+          index="3"
+          @click="showmap(3)"
+          :class="index === 3 ? 'active' : ''"
+          plain
+        >
+          <el-radio v-model="mapchange" label="3">&ensp;</el-radio>
+          <div class="mapimg map3"></div>
+          <span class="tab" slot="title">热力图</span>
+        </el-menu-item>
+        <el-menu-item
+          index="4"
+          @click="showmap(4)"
+          :class="index === 4 ? 'active' : ''"
+          plain
+        >
+          <el-radio v-model="mapchange" label="4">&ensp;</el-radio>
+          <div class="mapimg map4"></div>
+          <span class="tab" slot="title">时序图</span>
+        </el-menu-item>
+        <el-menu-item index="5" :class="index === 5 ? 'active' : ''" plain>
+          <el-radio v-model="mapchange" label="5">&ensp;</el-radio>
+          <span class="tab" slot="title">点数据</span>
+        </el-menu-item>
+      </el-menu>
     </div>
-    <poppage
-      :show="show"
-      :cityname="cityname"
-      @hideModal="hideModal"
-      @submit="submit"
-    >
-    </poppage>
-    <div class="recommend-content left">
-      <div class="con">
-        <div class="title">
-          <span>个性化选择</span>
+    <div class="recommend-left pt">
+      <div class="sourceselect">
+        <div id="recommend-title">
+          <span>数据总览</span>
         </div>
-        <el-row :gutter="20">
-          <el-col :span="8"
-            ><div class="grid-content select">{{ changename }}</div></el-col
-          >
-          <el-col :span="16">
-            <div class="grid-content bg-specially">
-              <div v-if="activeNameflag" class="tab1">
-                <el-input
-                  v-model="input"
-                  placeholder=" 输入内容或点击标签"
-                ></el-input>
-                <div class="labelcontent">
-                  <span>输入示例:</span>
-                  <div
-                    class="chooselabel"
-                    v-for="(item, i) in labellist"
-                    :key="i"
-                    @click="getLabel(item.name)"
-                  >
-                    {{ item.name }}
-                  </div>
-                </div>
-              </div>
-              <div v-if="!activeNameflag" class="tab2"></div>
-            </div>
-          </el-col>
-        </el-row>
-        <div class="row2">
-          <div class="row2-select">出游时间</div>
-          <div class="date-picker">
-            <el-date-picker
-              v-model="timevalue"
-              type="daterange"
-              range-separator="-"
-              size="small"
-              start-placeholder="开始日期"
-              end-placeholder="结束日期"
-            >
-            </el-date-picker>
-          </div>
-        </div>
-        <div class="myrow">
-          <div class="sorcelabel">数据源</div>
-          <div class="datasorce">
+        <div class="datasource">
+          <div class="leftpt">数据源:</div>
+          <div class="rightpt">
             <el-checkbox-group v-model="checkList">
               <el-checkbox label="去哪儿"></el-checkbox>
               <el-checkbox label="马蜂窝"></el-checkbox>
+              <el-checkbox label="携程网"></el-checkbox>
+              <el-checkbox label="途牛网"></el-checkbox>
+              <el-checkbox label="艺龙网"></el-checkbox>
+              <el-checkbox label="美团网"></el-checkbox>
             </el-checkbox-group>
           </div>
         </div>
-        <div class="buttoncontent">
-          <el-button class="startbutton" @click="refeashData()"
-            >更新数据</el-button
-          >
-          <el-button class="startbutton" @click="getRecommend()"
-            >开始推荐</el-button
-          >
-        </div>
-      </div>
-      <div class="toppart">
-        <div class="title">
-          <span>旅游数据总览</span>
-        </div>
         <div class="toppart-content">
           <div class="Lpart toppart-part">
-            <div class="partimg"></div>
-            <span class="partname"></span>
-            <span class="partnumber"></span>
+            <div class="partimg">
+              <div class="myimg"></div>
+            </div>
+            <span class="partname"> 景点数 </span>
+            <span class="partnumber"> {{ citycount.sensic }} </span>
           </div>
           <div class="Mpart toppart-part">
-            <div class="partimg"></div>
-            <span class="partname"></span>
-            <span class="partnumber"></span>
+            <div class="partimg">
+              <div class="myimg"></div>
+            </div>
+            <span class="partname"> 评论数 </span>
+            <span class="partnumber"> {{ citycount.comment }} </span>
           </div>
           <div class="Rpart toppart-part">
-            <div class="partimg"></div>
-            <span class="partname"></span>
-            <span class="partnumber"></span>
+            <div class="partimg">
+              <div class="myimg"></div>
+            </div>
+            <span class="partname"> 游记数 </span>
+            <span class="partnumber"> {{ citycount.tourist }} </span>
           </div>
         </div>
+        <div class="datatime">数据更新时间:{{ this.datatime }}</div>
       </div>
-      <div class="bottompart">
-        <div class="title">
-          <span>景点类型分布</span>
+      <div class="ranktable">
+        <div id="recommend-title" class="title">
+          <span>排行榜单</span>
         </div>
-        <div class="chartcontent" id="chart1"></div>
+        <div class="ranktable-content">
+          <el-tabs v-model="activeName" type="border-card">
+            <el-tab-pane label="好评榜" name="recommendTab">
+              <el-table
+                :data="tablescoreRankData"
+                height="328px"
+                stripe
+                style="width: 100%"
+              >
+                <el-table-column
+                  prop="rank"
+                  label="序号"
+                  width="30"
+                ></el-table-column>
+                <el-table-column
+                  prop="name"
+                  label="景点"
+                  width="180"
+                  :show-overflow-tooltip="true"
+                >
+                </el-table-column>
+                <el-table-column
+                  prop="city"
+                  label="城市"
+                  width="60"
+                  :show-overflow-tooltip="true"
+                >
+                </el-table-column>
+                <el-table-column
+                  prop="score"
+                  label="分数"
+                  width="50"
+                  :show-overflow-tooltip="true"
+                >
+                  <template slot-scope="scope">
+                    <span>{{ scope.row.score | rounding }}</span>
+                  </template>
+                </el-table-column>
+              </el-table>
+            </el-tab-pane>
+            <el-tab-pane label="热度榜" name="hotTab">
+              <el-table
+                :data="tableRankData"
+                height="328px"
+                stripe
+                style="width: 100%"
+              >
+                <el-table-column
+                  prop="rank"
+                  label="序号"
+                  width="30"
+                ></el-table-column>
+                <el-table-column
+                  prop="name"
+                  label="景点"
+                  width="180"
+                  :show-overflow-tooltip="true"
+                >
+                </el-table-column>
+                <el-table-column
+                  prop="city"
+                  label="城市"
+                  width="50"
+                  :show-overflow-tooltip="true"
+                >
+                </el-table-column>
+                <el-table-column
+                  prop="hot"
+                  label="热度"
+                  width="70"
+                  :show-overflow-tooltip="true"
+                >
+                </el-table-column>
+              </el-table>
+            </el-tab-pane>
+            <el-tab-pane label="推荐榜" name="scenicTab">
+              <el-table
+                :data="scenicdata"
+                height="328px"
+                stripe
+                style="width: 100%"
+              >
+                <el-table-column
+                  prop="rank"
+                  label="序号"
+                  width="40"
+                ></el-table-column>
+                <el-table-column
+                  prop="name"
+                  label="景点"
+                  width="120"
+                  :show-overflow-tooltip="true"
+                >
+                </el-table-column>
+                <el-table-column
+                  prop="city"
+                  label="城市"
+                  width="50"
+                  :show-overflow-tooltip="true"
+                >
+                </el-table-column>
+                <el-table-column
+                  prop="hot"
+                  label="热度"
+                  width="80"
+                  :show-overflow-tooltip="true"
+                >
+                </el-table-column>
+                <el-table-column
+                  prop="score"
+                  label="分数"
+                  width="60"
+                  :show-overflow-tooltip="true"
+                >
+                  <template slot-scope="scope">
+                    <span>{{ scope.row.score | rounding }}</span>
+                  </template>
+                </el-table-column>
+              </el-table>
+            </el-tab-pane>
+            <el-tab-pane label="城市榜" name="cityTab">
+              <el-table
+                :data="tableCityData"
+                height="328px"
+                stripe
+                style="width: 100%"
+              >
+                <el-table-column
+                  prop="hotrank"
+                  label="排名"
+                  width="50"
+                  :show-overflow-tooltip="true"
+                >
+                </el-table-column>
+                <el-table-column
+                  prop="city"
+                  label="城市"
+                  width="100"
+                  :show-overflow-tooltip="true"
+                >
+                </el-table-column>
+                <el-table-column
+                  prop="sccount"
+                  label="景点数目"
+                  width="70"
+                  :show-overflow-tooltip="true"
+                >
+                </el-table-column>
+                <el-table-column
+                  prop="comcount"
+                  label="热度"
+                  width="70"
+                  :show-overflow-tooltip="true"
+                >
+                </el-table-column>
+                <el-table-column
+                  prop="scscore"
+                  label="分数"
+                  width="60"
+                  :show-overflow-tooltip="true"
+                >
+                  <template slot-scope="scope">
+                    <span>{{ scope.row.scscore | rounding }}</span>
+                  </template>
+                </el-table-column>
+              </el-table>
+            </el-tab-pane>
+          </el-tabs>
+        </div>
       </div>
     </div>
-    <div class="recommend-content right">
-      <div class="righttop">
-        <el-tabs v-model="activeName" type="border-card">
-          <el-tab-pane label="景点综合排行" name="recommendTab">
-            <el-table
-              :data="tableRankData"
-              height="420px"
-              stripe
-              style="width: 100%"
-            >
-              <el-table-column
-                prop="rank"
-                label="序号"
-                width="40"
-              ></el-table-column>
-              <el-table-column
-                prop="name"
-                label="景点"
-                width="80"
-                :show-overflow-tooltip="true"
-              >
-              </el-table-column>
-              <el-table-column
-                prop="city"
-                label="城市"
-                width="50"
-                :show-overflow-tooltip="true"
-              >
-              </el-table-column>
-              <el-table-column
-                prop="hot"
-                label="热度"
-                width="60"
-                :show-overflow-tooltip="true"
-              >
-              </el-table-column>
-              <el-table-column
-                prop="score"
-                label="分数"
-                width="60"
-                :show-overflow-tooltip="true"
-              >
-              </el-table-column>
-            </el-table>
-          </el-tab-pane>
-          <el-tab-pane label="景点推荐" name="hotTab">
-            <el-table
-              :data="tableRankData"
-              height="420px"
-              stripe
-              style="width: 100%"
-            >
-              <el-table-column
-                prop="rank"
-                label="序号"
-                width="40"
-              ></el-table-column>
-              <el-table-column
-                prop="name"
-                label="景点"
-                width="80"
-                :show-overflow-tooltip="true"
-              >
-              </el-table-column>
-              <el-table-column
-                prop="city"
-                label="城市"
-                width="50"
-                :show-overflow-tooltip="true"
-              >
-              </el-table-column>
-              <el-table-column
-                prop="hot"
-                label="热度"
-                width="60"
-                :show-overflow-tooltip="true"
-              >
-              </el-table-column>
-              <el-table-column
-                prop="score"
-                label="分数"
-                width="60"
-                :show-overflow-tooltip="true"
-              >
-              </el-table-column>
-            </el-table>
-          </el-tab-pane>
-        </el-tabs>
+    <div class="recommend-right pt">
+      <div class="chinahot">
+        <div id="recommend-title" class="title">
+          <span>旅游热词</span>
+        </div>
+        <!-- <div class="wordcontent" ref="chartword2"></div> -->
+        <div class="wordcontent">
+          <word3D
+            :height="word3Dheight"
+            :width="word3Dwidth"
+            :data="wordcloudchina"
+          >
+          </word3D>
+        </div>
       </div>
-      <div class="rightbottom">
-        <div class="title"><span>专题地图选择</span></div>
-        <div class="rightbottom-content">
-          <div
-            class="mapchange"
-            index="1"
-            @click="showmap(1)"
-            :class="activeClass == index ? 'active' : ' '"
-          >
-            <img src="../assets/img/theme/聚合.png" alt="" />
-            <span>点聚合图</span>
+      <div class="sensicrecommend">
+        <div id="recommend-title" class="title">
+          <span>景点推荐</span>
+        </div>
+        <div class="recommend">
+          <div class="timepick">
+            <div class="name">旅游时间:</div>
+            <div class="timepickcontent">
+              <el-date-picker
+                v-model="timevalue"
+                type="daterange"
+                range-separator="-"
+                start-placeholder="开始日期"
+                end-placeholder="结束日期"
+              >
+              </el-date-picker>
+            </div>
           </div>
-          <div
-            class="mapchange"
-            index="2"
-            @click="showmap(2)"
-            :class="activeClass == index ? 'active' : ''"
-          >
-            <img src="../assets/img/theme/分级.png" alt="" />
-            <span>分级色彩</span>
+          <div class="prefer">
+            <div class="name">景点偏好:</div>
+            <div class="prefercontent">
+              <el-input
+                v-model="input"
+                placeholder=" 输入内容或点击标签"
+              ></el-input>
+            </div>
           </div>
-          <div
-            class="mapchange"
-            index="3"
-            @click="showmap(3)"
-            :class="activeClass == index ? 'active' : ''"
-          >
-            <img src="../assets/img/theme/热力图.png" alt="" />
-            <span>热力图</span>
+          <div class="exampleinput">
+            <div class="name"></div>
+            <div class="exampellabel">
+              <div class="labelcontent">
+                <span>输入示例:</span>
+                <div
+                  class="chooselabel"
+                  v-for="(item, i) in labellist"
+                  :key="i"
+                  @click="getLabel(item.name)"
+                >
+                  {{ item.name }}
+                </div>
+              </div>
+            </div>
           </div>
-          <div
-            class="mapchange"
-            index="4"
-            @click="showmap(4)"
-            :class="index === 4 ? 'active' : ''"
-          >
-            <img src="../assets/img/theme/时间.png" alt="" />
-            <span>时序图</span>
+          <div class="hotandscore">
+            <div class="name names">
+              <el-checkbox v-model="sourcechecked">考虑评论</el-checkbox>
+            </div>
+            <div class="content">
+              <el-radio v-model="prferradio" label="score">评分优先</el-radio>
+              <el-radio v-model="prferradio" label="hot">热度优先</el-radio>
+            </div>
           </div>
-          <div class="mapchange"></div>
-          <div class="mapchange"></div>
+          <div class="distance">
+            <div class="name names">
+              <el-checkbox v-model="distancechecked" @click="addDistance()"
+                >考虑距离</el-checkbox
+              >
+            </div>
+            <div class="distanceselect">
+              <el-radio v-model="distancerange" label="1">本市</el-radio>
+              <el-radio v-model="distancerange" label="2">本省</el-radio>
+              <el-radio v-model="distancerange" label="3">邻省</el-radio>
+            </div>
+          </div>
+          <div class="season">
+            <div class="name names">
+              <el-checkbox v-model="seasonchecked">考虑季节</el-checkbox>
+            </div>
+            <div class="distanceselect">
+              <el-radio v-model="seasonrange" label="1">春</el-radio>
+              <el-radio v-model="seasonrange" label="2">夏</el-radio>
+              <el-radio v-model="seasonrange" label="3">秋</el-radio>
+              <el-radio v-model="seasonrange" label="4">冬</el-radio>
+            </div>
+          </div>
+          <div class="person">
+            <div class="considerperson">
+              <div class="personcheckbox">
+                <el-checkbox v-model="personchecked">考虑个人情况</el-checkbox>
+              </div>
+            </div>
+            <div class="ageandsex">
+              <div class="agept">
+                <div class="person-name">年龄:</div>
+                <div class="person-inputcontent">
+                  <input class="ageinput" v-model="ageinput" type="text" />
+                </div>
+              </div>
+              <div class="sexpt">
+                <div class="person-name">性别:</div>
+                <div class="person-inputcontent">
+                  <el-radio v-model="sexselect" label="1">男</el-radio>
+                  <el-radio v-model="sexselect" label="2">女</el-radio>
+                </div>
+              </div>
+            </div>
+            <div class="occupationandincome">
+              <div class="occupationpt">
+                <div class="person-name">职业:</div>
+                <div class="person-inputcontent">
+                  <input
+                    class="ageinput"
+                    type="text"
+                    v-model="occupationpt"
+                    placeholder="输入职业"
+                  />
+                </div>
+              </div>
+              <div class="incomept">
+                <div class="person-name">收入:</div>
+                <div class="person-inputcontent">
+                  <el-select
+                    v-model="value"
+                    clearable
+                    placeholder="选择收入范围"
+                  >
+                    <el-option
+                      v-for="item in options"
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.value"
+                    >
+                    </el-option>
+                  </el-select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="buttoncontent">
+            <el-button class="startbutton" @click="refeashData()"
+              >清除条件</el-button
+            >
+            <el-button class="startbutton" @click="getRecommend()"
+              >开始推荐</el-button
+            >
+          </div>
         </div>
       </div>
     </div>
     <div class="recommend-bottom">
-      <div class="content-bottom">
-        <div class="title"><span>热门城市榜及特征分析</span></div>
-        <div class="content">
-          <el-table
-            ref="interfaceTable"
-            :data="tableCityData"
-            @row-click="clickData"
-            height="211px"
-            style="padding: 2.5%; margin-left: 3%"
-            stripe
-            highlight-current-row
-          >
-            <el-table-column
-              prop="hotrank"
-              label="排名"
-              width="40"
-              :show-overflow-tooltip="true"
-            >
-            </el-table-column>
-            <el-table-column
-              prop="city"
-              label="城市"
-              width="60"
-              :show-overflow-tooltip="true"
-            >
-            </el-table-column>
-            <el-table-column
-              prop="sccount"
-              label="景点数目"
-              width="60"
-              :show-overflow-tooltip="true"
-            >
-            </el-table-column>
-            <el-table-column
-              prop="comcount"
-              label="热度"
-              width="50"
-              :show-overflow-tooltip="true"
-            >
-            </el-table-column>
-            <el-table-column
-              prop="scscore"
-              label="分数"
-              width="50"
-              :show-overflow-tooltip="true"
-            >
-              <template slot-scope="scope">
-                <span>{{ scope.row.scscore | rounding }}</span>
-              </template>
-            </el-table-column>
-          </el-table>
-        </div>
-      </div>
-      <div class="content-bottom">
-        <span class="mytitle">{{ chosencity }}-评论图片</span>
-        <div class="content carouselcontent">
-          <el-carousel
-            indicator-position="outside"
-            height="180px"
-            trigger="click"
-          >
-            <el-carousel-item v-for="(item, index) in cityimages" :key="index">
-              <img
-                :src="item.url"
-                alt="无图片"
-                style="background-size: 100% 100%; witdh: 150px; height: 200px"
-              />
-            </el-carousel-item>
-            <!-- <el-carousel-item v-for="item in cityimages" :key="item">
-              <img :src="item.url" alt="无图片" style="background-size:100% 100%;" display:block; />
-            </el-carousel-item> -->
-          </el-carousel>
-        </div>
-      </div>
-      <div class="content-bottom">
-        <span class="mytitle">{{ chosencity }}-特征词云</span>
-        <div class="content" id="wordcloud" ref="wordcloud"></div>
-      </div>
+      <el-tabs
+        v-model="activeName2"
+        type="border-card"
+        @tab-click="handleTabClick"
+      >
+        <el-tab-pane label="城市总览" name="city">
+          <div class="chartcontent">
+            <div class="title">
+              <div class="imgIcon"></div>
+              <span>{{ treemapname }}</span>
+            </div>
+            <div class="content" id="chart1"></div>
+          </div>
+          <div class="chartcontent">
+            <div class="title">
+              <div class="imgIcon"></div>
+              <span>{{ this.chartname }}特征词云</span>
+            </div>
+            <div class="content" ref="chartword"></div>
+          </div>
+          <div class="chartcontent">
+            <div class="title">
+              <div class="imgIcon"></div>
+              <span>{{ this.chartname }}游客来源</span>
+            </div>
+            <div class="content" id="chart2"></div>
+          </div>
+        </el-tab-pane>
+        <el-tab-pane label="评论数据变化" name="time">
+          <div class="timechartcontent">
+            <div class="content" id="timechart"></div>
+          </div>
+        </el-tab-pane>
+        <el-tab-pane label="景点热度变化" name="scenichot">
+          <div class="timechartcontent">
+            <div class="content" id="timechart1"></div>
+          </div>
+        </el-tab-pane>
+        <el-tab-pane label="城市热度变化" name="cityhot">
+          <div class="timechartcontent">
+            <div class="content" id="timechart2"></div>
+          </div>
+        </el-tab-pane>
+      </el-tabs>
     </div>
+    <selectRegion />
   </div>
 </template>
 <script>
+import word3D from "../components/wordcloud3D.vue";
+
 import Bus from "../assets/js/bus.js";
 import poppage from "../components/poppageForCity.vue";
 
@@ -341,11 +502,15 @@ import pointgather from "../components/thememap/pointgather.vue";
 import heatmap from "../components/thememap/heatmap.vue";
 import timemap from "../components/thememap/timemap.vue";
 import multimap from "../components/thememap/multimap.vue";
+import locmap from "../components/location.vue";
 
 import loading from "../components/loading.vue";
 
 import wordcloud from "../assets/js/echarts-wordcloud-master/index";
 import echarts from "echarts";
+
+import eventBum from "../views/traffickingnetwork/public/js/EvebtBus";
+import SelectRegion from "../views/traffickingnetwork/components/selectRegion.vue";
 export default {
   name: "recommend",
   components: {
@@ -355,33 +520,75 @@ export default {
     heatmap,
     timemap,
     multimap,
+    locmap,
     loading,
     wordcloud,
+    SelectRegion,
+    word3D,
   },
   data() {
     return {
-      //推荐
-
-      //专题图切换
-      activeClass: "1",
-      //下方的城市名
-      chosencity: "北京",
-      //动画加载
-      state: "",
+      word3Dheight: 200,
+      word3Dwidth: 350,
+      treemapname: "中国热门城市",
       isLoading: false,
-      //地图切换
-      index: 1,
-      comp: "pointgather",
       isShow: true,
-      chart1data: [
-        { value: 1048, name: "Search Engine" },
-        { value: 735, name: "Direct" },
-        { value: 580, name: "Email" },
-        { value: 484, name: "Union Ads" },
-        { value: 300, name: "Video Ads" },
+      //区域选择
+      selectcity: {
+        name: "中国",
+        level: 0,
+      },
+      datatime: "",
+      //地图切换
+      index: "1",
+
+      //推荐项目
+      // tablelabel:'分数',
+      citycount: {
+        sensic: "34682",
+        comment: "2521580",
+        tourist: "65536",
+      },
+      input: "",
+      distancechecked: true,
+      seasonchecked: false,
+      sourcechecked: true,
+      personchecked: true,
+      timevalue: "",
+      prferradio: "score",
+      sexselect: "1", //男
+      distancerange: "1",
+      seasonrange: "",
+      incomept: "",
+      occupationpt: "学生",
+      ageinput: "22",
+      labellist: [
+        { id: 1, name: "山岳" },
+        { id: 2, name: "海滨" },
+        { id: 3, name: "历史" },
+        { id: 4, name: "文化" },
+        { id: 5, name: "园林" },
+        { id: 6, name: "划船" },
+        { id: 7, name: "红色" },
+        { id: 8, name: "艺术" },
+        { id: 9, name: "建筑" },
+        { id: 10, name: "陵墓" },
       ],
-      mycloudData: [],
-      beijingData: [
+      //数据源选择
+      checkList: ["途牛网", "携程网", "马蜂窝", "去哪儿"],
+      //数据
+      mapchange: "1",
+      tableRankData: [],
+      tablescoreRankData: [],
+      tableCityData: [],
+      scenicdata: [],
+      //tab切换
+      activeName: "recommendTab",
+      activeName2: "city",
+      comp: "pointgather",
+      //echarts数据
+      chartname: "北京市",
+      startclouddata: [
         { value: 773, name: "故宫" },
         { value: 502, name: "长城" },
         { value: 270, name: "建筑" },
@@ -409,7 +616,7 @@ export default {
         { value: 79, name: "地坛" },
         { value: 75, name: "慕田峪长城" },
       ],
-      sanyaData: [
+      wordclouddata: [
         { value: 327, name: "亚龙湾" },
         { value: 278, name: "海南" },
         { value: 250, name: "海鲜" },
@@ -453,44 +660,200 @@ export default {
         { value: 29, name: "陵水" },
         { value: 29, name: "石梅湾" },
       ],
-      nanjingData: [],
-      cityimages: [
-        { url: require("../assets/img/city/1.jpg") },
-        { url: require("../assets/img/city/201111424880.jpg") },
+      wordcloudchina: [
+        { value: 29434, name: "酒店" },
+        { value: 21500, name: "公园" },
+        { value: 20010, name: "中国" },
+        { value: 17380, name: "旅游" },
+        { value: 16933, name: "文化" },
+        { value: 16792, name: "博物馆" },
+        { value: 16409, name: "历史" },
+        { value: 16259, name: "古镇" },
+        { value: 13814, name: "风景区" },
+        { value: 13705, name: "门票" },
+        { value: 13371, name: "城市" },
+        { value: 10335, name: "广场" },
+        { value: 8753, name: "草原" },
+        { value: 8288, name: "拍照" },
+        { value: 7507, name: "北京" },
+        { value: 6881, name: "自驾游" },
+        { value: 6844, name: "自然" },
+        { value: 6752, name: "黄河" },
+        { value: 6538, name: "瀑布" },
+        { value: 5922, name: "成都" },
+        { value: 5568, name: "温泉" },
+        { value: 5564, name: "湿地" },
+        { value: 5249, name: "遗址" },
+        { value: 5034, name: "重庆" },
+        { value: 4946, name: "新疆" },
+        { value: 4923, name: "峡谷" },
+        { value: 4493, name: "西安" },
+        { value: 4287, name: "老街" },
+        { value: 4229, name: "广州" },
+        { value: 4075, name: "国家森林公园" },
+        { value: 4070, name: "地质公园" },
+        { value: 3995, name: "沙漠" },
       ],
-      beijingimages: [],
-      sanyaimages: [],
-      tableRankData: "",
-      labellist: [
-        { id: 1, name: "山岳" },
-        { id: 2, name: "海滨" },
-        { id: 3, name: "历史" },
-        { id: 4, name: "革命老区" },
-        { id: 5, name: "商业街" },
-        { id: 6, name: "划船" },
-        { id: 7, name: "文物" },
+      njwordcloud: [
+        { value: 106, name: "夫子庙" },
+        { value: 85, name: "报恩寺" },
+        { value: 84, name: "溧水" },
+        { value: 80, name: "牛首山" },
+        { value: 72, name: "总统府" },
+        { value: 68, name: "栖霞山" },
+        { value: 60, name: "明孝陵" },
+        { value: 56, name: "博物馆" },
+        { value: 55, name: "中华门" },
+        { value: 55, name: "瞻园" },
+        { value: 54, name: "汤山" },
+        { value: 49, name: "秦淮河" },
+        { value: 45, name: "老门东" },
+        { value: 44, name: "瓮城" },
+        { value: 41, name: "中山陵" },
+        { value: 39, name: "石臼" },
+        { value: 36, name: "太平天国" },
+        { value: 31, name: "栖霞寺" },
+        { value: 27, name: "地质公园" },
+        { value: 25, name: "梧桐" },
+        { value: 24, name: "东南大学" },
+        { value: 23, name: "古都" },
+        { value: 23, name: "公馆" },
+        { value: 22, name: "梅花" },
+        { value: 21, name: "樱花" },
+        { value: 20, name: "河海大学" },
+        { value: 19, name: "王府" },
+        { value: 16, name: "紫金山" },
+        { value: 16, name: "银杏" },
       ],
-      tableCityData: [],
-      timevalue: [],
-      //景点特征
-      input: "",
-      changename: "景点特征",
-      radio: "1",
-      activeName: "recommendTab",
-      activeNameflag: "true",
-      checkList: [""],
-      //弹窗
-      show: false,
-      cityname: "城市选择",
-      currentRow: null,
+      chartdata1: [
+        {
+          name: "北京",
+          value: 139687,
+        },
+        {
+          name: "三亚",
+          value: 108024,
+        },
+        {
+          name: "杭州",
+          value: 106646,
+        },
+        {
+          name: "郑州",
+          value: 91186,
+        },
+        {
+          name: "洛阳",
+          value: 58379,
+        },
+        {
+          name: "上海",
+          value: 53431,
+        },
+        {
+          name: "广州",
+          value: 53078,
+        },
+        {
+          name: "南京",
+          value: 52042,
+        },
+        {
+          name: "海口",
+          value: 46654,
+        },
+        {
+          name: "开封",
+          value: 44206,
+        },
+      ],
+      chartdata2: [
+        { value: 1048, name: "河北" },
+        { value: 735, name: "安徽" },
+        { value: 580, name: "广东" },
+        { value: 484, name: "河南" },
+        { value: 300, name: "湖北" },
+      ],
+      chartdata4: [
+        { value: 1048, name: "安徽" },
+        { value: 735, name: "江苏" },
+        { value: 580, name: "广东" },
+        { value: 484, name: "东北" },
+        { value: 300, name: "湖北" },
+      ],
+      chartdata3: [
+        {
+          name: "外秦淮河游船",
+          value: 2163,
+        },
+        {
+          name: "南京中华门城堡",
+          value: 963,
+        },
+        {
+          name: "玄武湖公园",
+          value: 783,
+        },
+        {
+          name: "江宁织造博物馆",
+          value: 783,
+        },
+        {
+          name: "夫子庙大成殿",
+          value: 757,
+        },
+        {
+          name: "灵谷寺",
+          value: 693,
+        },
+        {
+          name: "朝天宫",
+          value: 682,
+        },
+        {
+          name: "莫愁湖公园",
+          value: 407,
+        },
+        {
+          name: "老门东历史街区",
+          value: 396,
+        },
+        {
+          name: "鼓楼",
+          value: 390,
+        },
+      ],
     };
   },
   created() {},
   mounted() {
+    this.getScenicdata();
+    this.getTime();
+    this.showmap(1);
     this.getRankTable();
     this.getCityRank();
-    this.initChart1(this.chart1data);
-    this.wordCloudInti(this.$refs.wordcloud, this.beijingData);
+    this.initChart1(this.chartdata1);
+    this.initChart2(this.chartdata2);
+    // this.initTimechart();
+    // this.wordCloudInti2(this.$refs.chartword2, this.wordcloudchina);
+    this.wordCloudInti(this.$refs.chartword, this.startclouddata);
+    eventBum.$on("json", (json) => {
+      this.selectcity.name = json.name;
+      this.selectcity.level = json.where;
+      console.log(this.selectcity);
+      if (this.selectcity.name == "南京市") {
+        this.showmap(5);
+        this.treemapname = this.selectcity.name + "热门景点";
+        this.citycount.sensic = "488";
+        this.citycount.comment = "52042";
+        this.citycount.tourist = "45";
+        this.initChart1(this.chartdata3);
+        this.chartname = this.selectcity.name;
+        this.wordCloudInti(this.$refs.chartword, this.njwordcloud);
+        this.initChart2(this.chartdata4);
+        this.mapchange = "5";
+      }
+    });
   },
   filters: {
     rounding(value) {
@@ -498,25 +861,14 @@ export default {
     },
   },
   methods: {
-    clickData(val) {
-      this.chosencity = val.city;
-      let cityname = val.city;
-      if (cityname == "北京") {
-        this.mycloudData = this.beijingData;
-        this.wordCloudInti(this.$refs.wordcloud, this.mycloudData);
-      } else if (cityname == "三亚") {
-        this.mycloudData = this.sanyaData;
-        this.wordCloudInti(this.$refs.wordcloud, this.mycloudData);
-      }
-      console.log(cityname);
+    getScenicdata() {
+      // this.citycount.tourist = 1;
+      // this.citycount.comment = 1;
+      // this.citycount.sensic = 1;
     },
     hideModal() {
       // 取消弹窗回调
       this.show = false;
-      Bus.$on("sendCityname", (val) => {
-        this.cityname = val;
-        this.recommendCity = val;
-      });
     },
     submit() {
       // 确认弹窗回调
@@ -526,27 +878,36 @@ export default {
       return (this.currentPage - 1) * this.intPageSize + index + 1;
     },
     getCityRank() {
-      var that = this;
       request.get("/api/data/cityRank").then((res) => {
         console.log(res);
         this.tableCityData = res.data;
-        that.$nextTick(() => {
-          that.$refs.interfaceTable.setCurrentRow(that.tableCityData[0]);
-        });
       });
     },
     getRankTable() {
-      request.get("/api/data/scenicRank").then((res) => {
-        console.log(res);
-        console.log(res.data.name);
-        this.tableRankData = res.data;
-        for (let i = 1; i <= res.data.length; i++) {
-          this.tableRankData[i - 1].rank = i;
-          this.tableRankData[i - 1].score = parseFloat(
-            this.tableRankData[i - 1].score
-          ).toFixed(2);
-        }
-      });
+      request
+        .post("/api/data/scenicRank", {
+          model: "hot",
+        })
+        .then((res) => {
+          console.log(res);
+          console.log(res.data[1].city);
+          this.tableRankData = res.data;
+          for (let i = 1; i <= res.data.length; i++) {
+            this.tableRankData[i - 1].rank = i;
+          }
+        });
+      request
+        .post("/api/data/scenicRank", {
+          model: "score",
+        })
+        .then((res) => {
+          console.log(res);
+          console.log(res.data[1].city);
+          this.tablescoreRankData = res.data;
+          for (let i = 1; i <= res.data.length; i++) {
+            this.tablescoreRankData[i - 1].rank = i;
+          }
+        });
     },
     getLabel(val) {
       let label = val;
@@ -563,61 +924,1054 @@ export default {
       else if (value === 3) this.comp = "heatmap";
       else if (value === 4) this.comp = "timemap";
       else if (value === 5) this.comp = "multimap";
+      else if (value === 6) this.comp = "locmap";
       //   else if (value === 3) this.comp = "density";
     },
     //更新数据动画
     refeashData() {
-      this.state = "加载数据中......请稍后";
-      console.log(111);
-      (this.isLoading = true),
-        // this.getrealtime();
-        setTimeout(() => {
-          this.isLoading = false;
-        }, 1200);
+      (this.timevalue = ""),
+        (this.prferradio = ""),
+        (this.sexselect = ""),
+        (this.distancerange = ""),
+        (this.seasonrange = ""),
+        (this.incomept = "");
+      this.occupationpt = "";
+      (this.distancechecked = false),
+        (this.seasonchecked = false),
+        (this.sourcechecked = false),
+        (this.personchecked = false);
+      // this.state = "加载数据中......请稍后";
+      // console.log(111);
+      // (this.isLoading = true),
+      //   // this.getrealtime();
+      //   setTimeout(() => {
+      //     this.isLoading = false;
+      //   }, 1200);
     },
     getRecommend() {
-      this.activeName = "hotTab";
-      console.log(this.timevalue);
-      console.log(this.input);
-      console.log(this.checkList);
-      console.log(this.cityname);
+      this.showmap(6);
+      var labels;
+      labels = this.input.split("、");
+      var a = labels.pop();
+      this.mapchange = "5";
+      // var len =labels.length-1;
+      // labels.splice(len,0);
+      var prfer = "无";
+      if (this.prferradio == "") {
+        this.prferradio = prfer;
+      }
+      // else if(this.prferradio=='hot')
+      // {
+      //   this.tablelabel=='热度'
+      // }
+      console.log(this.prferradio);
+      console.log(a);
+      console.log(labels);
+      this.activeName = "scenicTab";
+      request
+        .post("/api/data/recommend", {
+          city: "南京",
+          preference: this.prferradio,
+          time: "11",
+          label: labels,
+        })
+        .then((res) => {
+          console.log(res);
+          this.scenicdata = res.data;
+          for (let i = 1; i <= res.data.length; i++) {
+            this.scenicdata[i - 1].rank = i;
+          }
+          // if (this.prferradio == "hot") {
+          //   for (let i = 0; i < this.scenicdata.length; i++) {
+          //     this.scenicdata[i].score = this.scenicdata[i].hot;
+          //   }
+          // }
+        });
     },
+    handleTabClick(tab) {
+      console.log(tab.name);
+      if (tab.name == "time") {
+        setTimeout(() => {
+          this.initTimechart();
+        }, 100);
+      } else if (tab.name == "scenichot") {
+        setTimeout(() => {
+          this.initTimechart1();
+        }, 100);
+      } else if (tab.name == "cityhot") {
+        setTimeout(() => {
+          this.initTimechart2();
+        }, 100);
+      }
+    },
+    getTime() {
+      let date = new Date();
+      let year = date.getFullYear(); // 年
+      let month = date.getMonth() + 1; // 月
+      let day = date.getDate() - 1; // 日
+      this.datatime = `${year}/${month}/${day}`;
+    },
+    //矩形树图
     initChart1(data) {
       let myChart1 = this.$echarts.init(document.getElementById("chart1"));
+      myChart1.on("click", this.clickFun);
+      myChart1.setOption({
+        title: {
+          textStyle: {
+            color: "rgba(255, 255, 255, .8)",
+            fontSize: 12,
+          },
+        },
+        tooltip: {
+          trigger: "item",
+          formatter: "{b}" + "热度" + ": {c}",
+        },
+        grid: {
+          top: "0%", //距上边距
+          left: "0%", //距离左边距
+          right: "0%", //距离右边距
+          bottom: "0%", //距离下边距
+        },
+        calculable: false,
+        series: [
+          {
+            name: "矩形图",
+            type: "treemap",
+            radius: "100%",
+            center: ["100%", "100%"],
+            breadcrumb: false, //矩形图下的提示显示与否
+            itemStyle: {
+              normal: {
+                label: {
+                  show: true,
+                  formatter: "{b}" + ": {c}",
+                  fontSize: 10,
+                },
+                borderWidth: 0,
+              },
+              emphasis: {
+                label: {
+                  show: true,
+                },
+              },
+            },
+            data: data,
+          },
+        ],
+      });
+    },
+    initChart2(data) {
+      let myChart1 = this.$echarts.init(document.getElementById("chart2"));
       var option = {
+        color: [
+          "#5470c6",
+          "#91cc75",
+          "#fac858",
+          "#ee6666",
+          "#73c0de",
+          "#3ba272",
+        ],
         legend: {
-          orient: "vertical",
-          left: "left",
+          show: false,
         },
         series: [
           {
             name: "Access From",
             type: "pie",
-            radius: "50%",
+            radius: "70%",
             data: data,
             itemStyle: {
               normal: {
-                label: {
-                  show: false,
-                },
                 labelLine: {
-                  show: false,
+                  //指示线状态
+                  show: true,
+                  smooth: 0.2,
+                  length: 5,
+                  length2: 10,
                 },
               },
             },
-            // data: [
-            //   { value: 1048, name: 'Search Engine' },
-            //   { value: 735, name: 'Direct' },
-            //   { value: 580, name: 'Email' },
-            //   { value: 484, name: 'Union Ads' },
-            //   { value: 300, name: 'Video Ads' }
-            // ],
           },
         ],
       };
       myChart1.setOption(option);
     },
-    //词云
+    initTimechart1() {
+      var chartDom = document.getElementById("timechart1");
+      var myChart = echarts.init(chartDom);
+      var option = {
+        baseOption: {
+          timeline: {
+            //loop: false,
+            axisType: "category",
+            show: true,
+            autoPlay: true, //是否自动播放
+            playInterval: 1500, //播放速度
+            bottom: "85%", //距离容器下侧的距离
+            lineStyle: {
+              color: "#61757b",
+            },
+            symbol: "circle",
+            symbolSize: 16,
+            backgroundColor: "rgb(115, 215, 228)",
+            checkpointStyle: {
+              symbolSize: 13,
+              color: "rgb(115, 215, 228)",
+              borderWidth: 0,
+              symbol: "circle",
+            },
+            label: {
+              color: 'rgb(115, 215, 228)',
+            },
+            controlStyle: { color: 'rgb(115, 215, 228)' },
+            realtime: true,
+            data: ["1", "2", "3", "4", "5", "6", "7", "8"],
+          },
+          grid: {
+            top: "15.8%", //距上边距
+            left: "4%", //距离左边距
+            right: "5%", //距离右边距
+            bottom: "8%", //距离下边距
+            containLabel: true,
+          },
+          xAxis: [
+            {
+              type: "category",
+              // name: "景点",
+              inverse: true,
+              axisLine: {
+                lineStyle: {
+                  color: "#fff",
+                },
+              },
+            },
+          ],
+          yAxis: [
+            {
+              type: "value",
+              name: "日/条",
+              // scale: true,//刻度可随数据变化
+              // max: 50000,
+              splitLine: {
+                show: false,
+              },
+              axisLine: {
+                lineStyle: {
+                  color: "#fff",
+                },
+              },
+            },
+          ],
+          title: {
+            textStyle: {
+              color: "rgb(115, 215, 200)",
+              fontSize: 12,
+            },
+          },
+          series: [
+            {
+              type: "bar",
+              itemStyle: {
+                normal: {
+                  color: "rgb(115, 215, 228)",
+                },
+              },
+            },
+          ],
+        },
+        //变量则写在options中
+        options: [
+          //1号
+          {
+            xAxis: [
+              {
+                data: [
+                  "瑞士",
+                  "卢森堡",
+                  "瑞典",
+                  "挪威",
+                  "丹麦",
+                  "阿联酋",
+                  "冰岛",
+                  "日本",
+                  "美国",
+                  "(131)中国",
+                ],
+              },
+            ],
+            title: {
+              text: "1号统计值",
+            },
+            series: [
+              {
+                data: [
+                  38589.18, 33378.44, 29794.08, 28188.52, 26922.44, 26621.51,
+                  25786.94, 25139.58, 23913.76, 343.3,
+                ],
+              },
+            ],
+          },
+          //2号
+          {
+            xAxis: [
+              {
+                data: [
+                  "卢森堡",
+                  "瑞士",
+                  "日本",
+                  "丹麦",
+                  "挪威",
+                  "德国",
+                  "澳大利亚",
+                  "瑞典",
+                  "荷兰",
+                  "(126)中国",
+                ],
+              },
+            ],
+            title: {
+              text: "2号统计值",
+            },
+            series: [
+              {
+                data: [
+                  51189.75, 48712.21, 42516.46, 35477.69, 34793.77, 31709.25,
+                  30307.42, 29882.78, 28910.83, 604.332,
+                ],
+              },
+            ],
+          },
+          {
+            xAxis: [
+              {
+                data: [
+                  "瑞士",
+                  "卢森堡",
+                  "瑞典",
+                  "挪威",
+                  "丹麦",
+                  "阿联酋",
+                  "冰岛",
+                  "日本",
+                  "美国",
+                  "(131)中国",
+                ],
+              },
+            ],
+            title: {
+              text: "3号统计值",
+            },
+            series: [
+              {
+                data: [
+                  38589.18, 33378.44, 29794.08, 28188.52, 26922.44, 26621.51,
+                  25786.94, 25139.58, 23913.76, 343.3,
+                ],
+              },
+            ],
+          },
+          {
+            xAxis: [
+              {
+                data: [
+                  "卢森堡",
+                  "瑞士",
+                  "日本",
+                  "丹麦",
+                  "挪威",
+                  "德国",
+                  "澳大利亚",
+                  "瑞典",
+                  "荷兰",
+                  "(126)中国",
+                ],
+              },
+            ],
+            title: {
+              text: "4号统计值",
+            },
+            series: [
+              {
+                data: [
+                  51189.75, 48712.21, 42516.46, 35477.69, 34793.77, 31709.25,
+                  30307.42, 29882.78, 28910.83, 604.332,
+                ],
+              },
+            ],
+          },
+          {
+            xAxis: [
+              {
+                data: [
+                  "卢森堡",
+                  "瑞士",
+                  "日本",
+                  "丹麦",
+                  "挪威",
+                  "德国",
+                  "澳大利亚",
+                  "瑞典",
+                  "荷兰",
+                  "(126)中国",
+                ],
+              },
+            ],
+            title: {
+              text: "5号统计值",
+            },
+            series: [
+              {
+                data: [
+                  51189.75, 48712.21, 42516.46, 35477.69, 34793.77, 31709.25,
+                  30307.42, 29882.78, 28910.83, 604.332,
+                ],
+              },
+            ],
+          },
+          {
+            xAxis: [
+              {
+                data: [
+                  "卢森堡",
+                  "瑞士",
+                  "日本",
+                  "丹麦",
+                  "挪威",
+                  "德国",
+                  "澳大利亚",
+                  "瑞典",
+                  "荷兰",
+                  "(126)中国",
+                ],
+              },
+            ],
+            title: {
+              text: "6号统计值",
+            },
+            series: [
+              {
+                data: [
+                  51189.75, 48712.21, 42516.46, 35477.69, 34793.77, 31709.25,
+                  30307.42, 29882.78, 28910.83, 604.332,
+                ],
+              },
+            ],
+          },
+          {
+            xAxis: [
+              {
+                data: [
+                  "卢森堡",
+                  "瑞士",
+                  "日本",
+                  "丹麦",
+                  "挪威",
+                  "德国",
+                  "澳大利亚",
+                  "瑞典",
+                  "荷兰",
+                  "(126)中国",
+                ],
+              },
+            ],
+            title: {
+              text: "7号统计值",
+            },
+            series: [
+              {
+                data: [
+                  51189.75, 48712.21, 42516.46, 35477.69, 34793.77, 31709.25,
+                  30307.42, 29882.78, 28910.83, 604.332,
+                ],
+              },
+            ],
+          },
+          {
+            xAxis: [
+              {
+                data: [
+                  "卢森堡",
+                  "瑞士",
+                  "日本",
+                  "丹麦",
+                  "挪威",
+                  "德国",
+                  "澳大利亚",
+                  "瑞典",
+                  "荷兰",
+                  "(126)中国",
+                ],
+              },
+            ],
+            title: {
+              text: "8号统计值",
+            },
+            series: [
+              {
+                data: [
+                  51189.75, 48712.21, 42516.46, 35477.69, 34793.77, 31709.25,
+                  30307.42, 29882.78, 28910.83, 604.332,
+                ],
+              },
+            ],
+          },
+        ],
+      };
+      option && myChart.setOption(option);
+    },
+    initTimechart() {
+      var chartDom = document.getElementById("timechart");
+      var myChart = echarts.init(chartDom);
+      var option;
+
+      let base = +new Date(2020, 1, 1);
+      let oneDay = 24 * 3600 * 1000;
+      let date = [];
+      let data = [Math.random() * 300];
+      let data2 = [Math.random() * 300];
+      let data3 = [Math.random() * 3];
+      for (let i = 1; i < 700; i++) {
+        var now = new Date((base += oneDay));
+        date.push(
+          [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
+        );
+        var absnum = Math.round((Math.random() - 0.5) * 50 + data[i - 1]);
+        if (absnum < 0) {
+          absnum = -absnum;
+        }
+        data.push(absnum);
+      }
+      for (let i = 1; i < 700; i++) {
+        var absnum = Math.round((Math.random() - 0.5) * 20 + data2[i - 1]);
+        if (absnum < 0) {
+          absnum = -absnum;
+        }
+        data2.push(absnum);
+      }
+      for (let i = 1; i < 700; i++) {
+        var absnum = Math.round((Math.random() - 0.5) * 5 + data3[i - 1]);
+        if (absnum < 0) {
+          absnum = -absnum;
+        }
+        data3.push(absnum);
+      }
+      option = {
+        legend: {
+          right: 200,
+          // itemGap: 30,
+          // itemWidth: 8,
+          // padding: 10,
+          textStyle: {
+            fontSize: 12,
+            color: "#fft",
+          },
+          align: "left",
+        },
+        tooltip: {
+          trigger: "axis",
+          position: function (pt) {
+            return [pt[0], "10%"];
+          },
+        },
+        grid: {
+          left: "2%", //图表距边框的距离
+          right: "5%",
+          bottom: "18%",
+          top: "12%",
+          containLabel: true,
+        },
+        xAxis: {
+          type: "category",
+          boundaryGap: false,
+          data: date,
+          axisLine: {
+            lineStyle: {
+              color: "white",
+            },
+          },
+        },
+        yAxis: {
+          splitLine: { show: false },
+          type: "value",
+          boundaryGap: [0, "10%"],
+          axisLine: {
+            lineStyle: {
+              color: "white",
+            },
+          },
+        },
+        dataZoom: [
+          {
+            type: "inside",
+            start: 0,
+            end: 10,
+          },
+          {
+            start: 0,
+            end: 10,
+          },
+        ],
+        series: [
+          {
+            name: "评论数",
+            type: "line",
+            symbol: "none",
+            sampling: "lttb",
+            data: data,
+            itemStyle: {
+              color: "rgb(255, 70, 131)",
+            },
+            areaStyle: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                {
+                  offset: 0,
+                  color: "rgb(255, 158, 68)",
+                },
+                {
+                  offset: 1,
+                  color: "rgb(255, 70, 131)",
+                },
+              ]),
+            },
+          },
+          {
+            name: "好评数",
+            type: "line",
+            symbol: "none",
+            sampling: "lttb",
+            data: data2,
+            itemStyle: {
+              color: "#D5F19F",
+            },
+            areaStyle: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                {
+                  offset: 0,
+                  color: "#758A4B",
+                },
+                {
+                  offset: 1,
+                  color: "#A9D750",
+                },
+              ]),
+            },
+          },
+          {
+            name: "游记数",
+            type: "line",
+            symbol: "none",
+            sampling: "lttb",
+            data: data3,
+            itemStyle: {
+              color: "#4789D6",
+            },
+            areaStyle: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                {
+                  offset: 0,
+                  color: "#627995",
+                },
+                {
+                  offset: 1,
+                  color: "#3768A1",
+                },
+              ]),
+            },
+          },
+        ],
+      };
+      option && myChart.setOption(option, true);
+    },
+    // initTimechart1() {
+    //   var chartDom = document.getElementById("timechart1");
+    //   var myChart = echarts.init(chartDom);
+    //   var option;
+
+    //   let base = +new Date(2005, 9, 3);
+    //   let oneDay = 24 * 3600 * 1000;
+    //   let date = [];
+    //   let data = [Math.random() * 300];
+    //   let data2 = [Math.random() * 300];
+    //   let data3 = [Math.random() * 300];
+    //        let data4 = [Math.random() * 300];
+    //   for (let i = 1; i < 6150; i++) {
+    //     var now = new Date((base += oneDay));
+    //     date.push(
+    //       [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
+    //     );
+    //     var absnum = Math.round((Math.random() - 0.5) * 20 + data[i - 1]);
+    //     if (absnum < 0) {
+    //       absnum = -absnum;
+    //     }
+    //     data.push(absnum);
+    //   }
+    //   for (let i = 1; i < 6150; i++) {
+    //     var now = new Date((base += oneDay));
+    //     date.push(
+    //       [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
+    //     );
+    //     var absnum = Math.round((Math.random() - 0.5) * 20 + data2[i - 1]);
+    //     if (absnum < 0) {
+    //       absnum = -absnum;
+    //     }
+    //     data2.push(absnum);
+    //   }
+    //   for (let i = 1; i < 6150; i++) {
+    //     var now = new Date((base += oneDay));
+    //     date.push(
+    //       [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
+    //     );
+    //     var absnum = Math.round((Math.random() - 0.5) * 20 + data3[i - 1]);
+    //     if (absnum < 0) {
+    //       absnum = -absnum;
+    //     }
+    //     data3.push(absnum);
+    //   }
+    //         for (let i = 1; i < 6150; i++) {
+    //     var now = new Date((base += oneDay));
+    //     date.push(
+    //       [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
+    //     );
+    //     var absnum = Math.round((Math.random() - 0.5) * 20 + data4[i - 1]);
+    //     if (absnum < 0) {
+    //       absnum = -absnum;
+    //     }
+    //     data4.push(absnum);
+    //   }
+    //   option = {
+    //     legend: {
+    //       right: 200,
+    //       // itemGap: 30,
+    //       // itemWidth: 8,
+    //       // padding: 10,
+    //       textStyle: {
+    //         fontSize: 12,
+    //         color: "#fft",
+    //       },
+    //       align: "left",
+    //     },
+    //     tooltip: {
+    //       trigger: "axis",
+    //       position: function (pt) {
+    //         return [pt[0], "10%"];
+    //       },
+    //     },
+    //     grid: {
+    //       left: "2%", //图表距边框的距离
+    //       right: "5%",
+    //       bottom: "18%",
+    //       top: "12%",
+    //       containLabel: true,
+    //     },
+    //     xAxis: {
+    //       type: "category",
+    //       boundaryGap: false,
+    //       data: date,
+    //       axisLine: {
+    //         lineStyle: {
+    //           color: "white",
+    //         },
+    //       },
+    //     },
+    //     yAxis: {
+    //       splitLine: { show: false },
+    //       type: "value",
+    //       boundaryGap: [0, "10%"],
+    //       axisLine: {
+    //         lineStyle: {
+    //           color: "white",
+    //         },
+    //       },
+    //     },
+    //     dataZoom: [
+    //       {
+    //         type: "inside",
+    //         start: 0,
+    //         end: 10,
+    //       },
+    //       {
+    //         start: 0,
+    //         end: 10,
+    //       },
+    //     ],
+    //     series: [
+    //       {
+    //         name: "珠江南田温泉",
+    //         type: "bar",
+    //         symbol: "none",
+    //         sampling: "lttb",
+    //         data: data,
+    //         itemStyle: {
+    //           color: "rgb(255, 70, 131)",
+    //         },
+    //         areaStyle: {
+    //           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+    //             {
+    //               offset: 0,
+    //               color: "rgb(255, 158, 68)",
+    //             },
+    //             {
+    //               offset: 1,
+    //               color: "rgb(255, 70, 131)",
+    //             },
+    //           ]),
+    //         },
+    //       },
+    //       {
+    //         name: "云台山",
+    //         type: "bar",
+    //         symbol: "none",
+    //         sampling: "lttb",
+    //         data: data2,
+    //         itemStyle: {
+    //           color: "#D5F19F",
+    //         },
+    //         areaStyle: {
+    //           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+    //             {
+    //               offset: 0,
+    //               color: "#758A4B",
+    //             },
+    //             {
+    //               offset: 1,
+    //               color: "#A9D750",
+    //             },
+    //           ]),
+    //         },
+    //       },
+    //       {
+    //         name: "长隆野生动物园",
+    //         type: "bar",
+    //         symbol: "none",
+    //         sampling: "lttb",
+    //         data: data3,
+    //         itemStyle: {
+    //           color: "#4CE7CC",
+    //         },
+    //         areaStyle: {
+    //           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+    //             {
+    //               offset: 0,
+    //               color: "#50998C",
+    //             },
+    //             {
+    //               offset: 1,
+    //               color: "#42C8B1",
+    //             },
+    //           ]),
+    //         },
+    //       },
+    //                 {
+    //         name: "华山",
+    //         type: "bar",
+    //         symbol: "none",
+    //         sampling: "lttb",
+    //         data: data4,
+    //         itemStyle: {
+    //           color: "#4789D6",
+    //         },
+    //         areaStyle: {
+    //           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+    //             {
+    //               offset: 0,
+    //               color: "#627995",
+    //             },
+    //             {
+    //               offset: 1,
+    //               color: "#3768A1",
+    //             },
+    //           ]),
+    //         },
+    //       },
+    //     ],
+    //   };
+    //   option && myChart.setOption(option, true);
+    // },
+    // initTimechart2() {
+    //   var chartDom = document.getElementById("timechart2");
+    //   var myChart = echarts.init(chartDom);
+    //   var option;
+
+    //   let base = +new Date(2005, 9, 3);
+    //   let oneDay = 24 * 3600 * 1000;
+    //   let date = [];
+    //   let data = [Math.random() * 300];
+    //   let data2 = [Math.random() * 300];
+    //   let data3 = [Math.random() * 3];
+    //   for (let i = 1; i < 6150; i++) {
+    //     var now = new Date((base += oneDay));
+    //     date.push(
+    //       [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
+    //     );
+    //     var absnum = Math.round((Math.random() - 0.5) * 20 + data[i - 1]);
+    //     if (absnum < 0) {
+    //       absnum = -absnum;
+    //     }
+    //     data.push(absnum);
+    //   }
+    //   for (let i = 1; i < 20000; i++) {
+    //     var now = new Date((base += oneDay));
+    //     date.push(
+    //       [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
+    //     );
+    //     var absnum = Math.round((Math.random() - 0.5) * 20 + data2[i - 1]);
+    //     if (absnum < 0) {
+    //       absnum = -absnum;
+    //     }
+    //     data2.push(absnum);
+    //   }
+    //   for (let i = 1; i < 6150; i++) {
+    //     var now = new Date((base += oneDay));
+    //     date.push(
+    //       [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
+    //     );
+    //     var absnum = Math.round((Math.random() - 0.5) * 5 + data3[i - 1]);
+    //     if (absnum < 0) {
+    //       absnum = -absnum;
+    //     }
+    //     data3.push(absnum);
+    //   }
+    //   option = {
+    //     legend: {
+    //       right: 200,
+    //       // itemGap: 30,
+    //       // itemWidth: 8,
+    //       // padding: 10,
+    //       textStyle: {
+    //         fontSize: 12,
+    //         color: "#fft",
+    //       },
+    //       align: "left",
+    //     },
+    //     tooltip: {
+    //       trigger: "axis",
+    //       position: function (pt) {
+    //         return [pt[0], "10%"];
+    //       },
+    //     },
+    //     grid: {
+    //       left: "2%", //图表距边框的距离
+    //       right: "5%",
+    //       bottom: "18%",
+    //       top: "12%",
+    //       containLabel: true,
+    //     },
+    //     xAxis: {
+    //       type: "category",
+    //       boundaryGap: false,
+    //       data: date,
+    //       axisLine: {
+    //         lineStyle: {
+    //           color: "white",
+    //         },
+    //       },
+    //     },
+    //     yAxis: {
+    //       splitLine: { show: false },
+    //       type: "value",
+    //       boundaryGap: [0, "10%"],
+    //       axisLine: {
+    //         lineStyle: {
+    //           color: "white",
+    //         },
+    //       },
+    //     },
+    //     dataZoom: [
+    //       {
+    //         type: "inside",
+    //         start: 0,
+    //         end: 10,
+    //       },
+    //       {
+    //         start: 0,
+    //         end: 10,
+    //       },
+    //     ],
+    //     series: [
+    //       {
+    //         name: "评论数",
+    //         type: "line",
+    //         symbol: "none",
+    //         sampling: "lttb",
+    //         data: data,
+    //         itemStyle: {
+    //           color: "rgb(255, 70, 131)",
+    //         },
+    //         areaStyle: {
+    //           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+    //             {
+    //               offset: 0,
+    //               color: "rgb(255, 158, 68)",
+    //             },
+    //             {
+    //               offset: 1,
+    //               color: "rgb(255, 70, 131)",
+    //             },
+    //           ]),
+    //         },
+    //       },
+    //       {
+    //         name: "好评数",
+    //         type: "line",
+    //         symbol: "none",
+    //         sampling: "lttb",
+    //         data: data2,
+    //         itemStyle: {
+    //           color: "#D5F19F",
+    //         },
+    //         areaStyle: {
+    //           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+    //             {
+    //               offset: 0,
+    //               color: "#758A4B",
+    //             },
+    //             {
+    //               offset: 1,
+    //               color: "#A9D750",
+    //             },
+    //           ]),
+    //         },
+    //       },
+    //       {
+    //         name: "游记数",
+    //         type: "line",
+    //         symbol: "none",
+    //         sampling: "lttb",
+    //         data: data3,
+    //         itemStyle: {
+    //           color: "#4789D6",
+    //         },
+    //         areaStyle: {
+    //           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+    //             {
+    //               offset: 0,
+    //               color: "#627995",
+    //             },
+    //             {
+    //               offset: 1,
+    //               color: "#3768A1",
+    //             },
+    //           ]),
+    //         },
+    //       },
+    //     ],
+    //   };
+    //   option && myChart.setOption(option, true);
+    // },
+    //矩形树图点击事件
+    clickFun(param) {
+      if (param.type == "click") {
+        if (this.chartname != "南京市") {
+          this.chartname = param.name;
+        }
+
+        if (param.name == "三亚") {
+          this.wordCloudInti(this.$refs.chartword, this.wordclouddata);
+        } else if (param.name == "北京") {
+          this.wordCloudInti(this.$refs.chartword, this.startclouddata);
+        }
+      }
+    },
     wordCloudInti(wrapEl, data) {
       let myChart = echarts.init(wrapEl);
       var option = {
@@ -628,7 +1982,55 @@ export default {
           {
             name: "热词",
             type: "wordCloud",
-            sizeRange: [10, 35],
+            sizeRange: [10, 40],
+            rotationRange: [-20, 20],
+            shape: "rectangle",
+            left: "center",
+            top: "center",
+            width: "100%",
+            height: "100%",
+            gridSize: 7,
+            textPadding: 0,
+            autoSize: {
+              enable: true,
+              minSize: 4,
+            },
+            textStyle: {
+              normal: {
+                color: function () {
+                  return (
+                    "rgb(" +
+                    [
+                      Math.round(Math.random() * 250),
+                      Math.round(Math.random() * 250),
+                      Math.round(Math.random() * 250),
+                    ].join(",") +
+                    ")"
+                  );
+                },
+              },
+              emphasis: {
+                shadowBlur: 10,
+                shadowColor: "#333",
+              },
+            },
+            data: data,
+          },
+        ],
+      };
+      myChart.setOption(option);
+    },
+    wordCloudInti2(wrapEl, data) {
+      let myChart = echarts.init(wrapEl);
+      var option = {
+        tooltip: {
+          show: true,
+        },
+        series: [
+          {
+            name: "热词",
+            type: "wordCloud",
+            sizeRange: [10, 40],
             rotationRange: [-20, 20],
             shape: "rectangle",
             left: "center",
@@ -670,6 +2072,46 @@ export default {
 };
 </script>
 
+<style>
+.el-picker-panel {
+  background: rgba(35, 89, 107, 0.9);
+  border: 1px solid #4a8faabd;
+  font-size: 8pt;
+  text-align: center;
+  line-height: 25px;
+  border-radius: 5px;
+  color: #fff;
+}
+.el-date-range-picker__content.is-left {
+  border-right: 1px solid #909399da;
+}
+.el-date-table td.next-month,
+.el-date-table td.prev-month {
+  color: #909399;
+}
+.el-date-table th {
+  color: #fff;
+}
+.el-date-range-picker__header {
+  color: #fff;
+}
+.el-date-table td.in-range div,
+.el-date-table td.in-range div:hover,
+.el-date-table.is-week-mode .el-date-table__row.current div,
+.el-date-table.is-week-mode .el-date-table__row:hover div {
+  background-color: #4a8faabd;
+}
+.el-picker-panel__icon-btn {
+  color: #fff;
+}
+.el-date-editor .el-range-separator {
+  width: 10%;
+  color: #fff;
+}
+.el-date-editor .el-range-input {
+  width: 57%;
+}
+</style>
 <style scoped lang="less">
 #recommend {
   position: fixed;
@@ -679,138 +2121,212 @@ export default {
   background: url("../assets/img/banner.png") no-repeat;
   background-size: 100% 100%;
 }
-#map {
+.mapcontent {
   position: relative;
   width: 100%;
   height: 100%;
   z-index: 0;
 }
-.mapcontent {
-  position: relative;
+.ageinput {
+  color: #ffffff;
+  background-color: #59c0c0a1;
+  border: none;
+}
+#recommend-title {
+  height: 9%;
+  background: url(../assets/img/titlebg.png) no-repeat;
+  margin-top: 1%;
+  background-size: 45% 100%;
+  background-position-x: 7%;
+  > span {
+    float: left;
+    margin-left: 15%;
+    font-size: 11pt;
+    line-height: 24px;
+    color: aliceblue;
+    text-shadow: 0 0 8px #fff, 0 0 12px #fff,
+      0 0 15px rgba(128, 189, 189, 0.712), 0 0 20px #38e9e0bd, 0 0 25px #0cf3f3;
+  }
+}
+.mapcontral {
+  position: absolute;
   z-index: 1;
-  height: 100%;
-  width: 100%;
-}
-.citychoose {
-  z-index: 9999;
-  position: absolute;
-  height: 6%;
-  width: 9%;
-  top: 1%;
-  left: 20.5%;
-  background: url("../assets/img/矩形1718.png") no-repeat;
-  opacity: 0.7;
+  width: 52.8%;
+  height: 4%;
+  bottom: 42.3%;
+  left: 23.6%;
+  background: url("../assets/img/buttonbg.png") no-repeat;
   background-size: 100% 100%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: space-around;
-  align-items: center;
-  .iconcontent {
-    flex: 2;
-    color: rgb(92, 235, 216);
-    text-align: right;
+  .selecttitle {
+    float: left;
+    width: 15%;
+    height: 100%;
+    background-color: #12526ea9;
+    .title-img {
+      width: 23%;
+      float: left;
+      height: 100%;
+      background: url("../assets/img/panelIcon.png");
+      background-size: 100% 100%;
+    }
+    .title-text {
+      width: 60%;
+      float: left;
+      height: 100%;
+      color: #dae2e2;
+      font-size: 11pt;
+      line-height: 32px;
+    }
   }
-  .cityname {
-    flex: 6;
-    color: #fafafa;
-    // text-align: left;
-  }
-}
-.recommend-content {
-  position: absolute;
-  z-index: 100;
-  top: 0.5%;
-  height: 92%;
-  width: 20%;
-  background: url("../assets/img/side.png") no-repeat;
-  background-position: 100% 10%;
-  background-size: 100% 100%;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: flex-start;
-  .con {
-    position: absolute;
-    top: 62%;
-    height: 39.3%;
-    width: 100%;
-    .select {
-      // border-left: 5px solid #0cf3f3;
-      color: #cfe2e1;
-      // margin-left: 30%;
-      line-height: 40px;
+  .el-menu {
+    float: left;
+    width: 85%;
+    height: 100%;
+    right: 0%;
+    background-color: #12526ea9;
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .mapimg {
+      width: 25%;
+      height: 65%;
     }
-    .title {
-      margin-top: 0%;
-      height: 10%;
-      margin-bottom: 1%;
+    .map1 {
+      width: 11%;
+      height: 95%;
+      background: url("../assets/img/theme/聚合.png") no-repeat;
+      background-size: 100% 100%;
     }
-    > span {
-      width: 33%;
-      height: 10%;
-      margin-left: -44%;
-      margin-top: 2%;
-      border-left: 5px solid #0cf3f3;
-      font-size: 12pt;
-      line-height: 22px;
-      color: aliceblue;
-      position: absolute;
+    .map2 {
+      width: 18%;
+      background: url("../assets/img/theme/分级.png") no-repeat;
+      background-size: 100% 100%;
     }
-
-    .maptool {
-      position: absolute;
-      top: 85%;
-      left: 30%;
+    .map3 {
+      width: 18%;
+      background: url("../assets/img/theme/热力图.png") no-repeat;
+      background-size: 100% 100%;
     }
-    .buttoncontent {
-      height: 20%;
-      width: 100%;
-      display: flex;
-      flex-direction: row;
-      flex-wrap: nowrap;
-      justify-content: space-around;
-      align-items: center;
+    .map4 {
+      width: 18%;
+      background: url("../assets/img/theme/时间.png") no-repeat;
+      background-size: 100% 100%;
     }
-    /deep/.el-row {
-      width: 100%;
-      color: #dcdfe6;
-      font-size: 12pt;
-      text-align: center;
-      flex-direction: row;
-      margin-left: 0% !important;
-      margin-right: 0% !important;
-      margin-bottom: 0px;
-      &:last-child {
-        margin-bottom: 0;
+    .el-radio {
+      margin-right: 0;
+      .el-radio__label {
+        padding-left: 2px;
       }
     }
-    /deep/.el-col {
-      border-radius: 4px;
-      padding-left: 0% !important;
-      padding-right: 0% !important;
+    /deep/.el-radio__input.is-checked .el-radio__inner {
+      border-color: #5ddaf0;
+      background: #32b3b8;
     }
-    .grid-content {
-      border-radius: 4px;
-      min-height: 36px;
+    /deep/.el-radio__label {
+      padding-left: 5px;
     }
-    .row-bg {
-      padding: 0px 0;
-      background-color: #f9fafc;
+    .el-menu-item:focus,
+    .el-menu-item:hover {
+      background: transparent;
+    }
+    .tab {
+      height: 100%;
+      width: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      flex-direction: row;
     }
   }
-  .toppart {
-    position: absolute;
-    top: 0.3%;
+  .el-menu-item.is-active {
+    // color: #15c5c5;
+    // background: transparent;
+    // border-bottom: 3px solid #c6e2ff;
+  }
+  .el-menu-item {
+    width: 20%;
+    color: #fff;
+  }
+  .el-menu-item:hover {
+    background: transparent;
+  }
+  .span {
+    color: aliceblue;
+  }
+  ul {
+    height: 100%;
+    list-style-type: none; /*消除黑点*/
+    text-align: center;
+    li {
+      height: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      p {
+        color: aqua;
+        font-size: 12px;
+        font-family: Microsoft YaHei;
+        // font-weight: bold;
+        text-decoration: none; /*消除下划线*/
+        border-radius: 5px;
+        padding-bottom: 20px;
+      }
+    }
+  }
+}
+
+.recommend-left {
+  float: left;
+  margin-left: 0.4%;
+  background: url("../assets/img/side.png") no-repeat;
+  background-size: 100% 100%;
+  .sourceselect {
     width: 100%;
-    height: 30%;
-    .title {
-      margin-top: 0%;
-      height: 12%;
-      margin-bottom: 1%;
+    flex: 2;
+    // background-color: rgba(240, 248, 255, 0.178);
+    .datasource {
+      height: 24%;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      .leftpt {
+        flex: 3;
+        font-size: 12pt;
+        color: rgb(174, 193, 199);
+        text-align: right;
+      }
+      .rightpt {
+        flex: 10;
+        .el-checkbox-group {
+          width: 100%;
+          .el-checkbox {
+            color: rgb(174, 193, 199);
+            color: #aec1c7;
+            margin-right: 5%;
+            margin-top: 0%;
+            margin-bottom: 3%;
+            margin-left: 0%;
+          }
+          /deep/.el-checkbox__input.is-checked + .el-checkbox__label {
+            color: #85caca;
+          }
+          /deep/.el-checkbox__input.is-checked .el-checkbox__inner {
+            background-color: #85caca;
+          }
+        }
+      }
+    }
+    .datatime {
+      color: #85caca;
+      font-size: 10pt;
+      text-align: right;
+      margin-top: 2%;
+      padding-right: 6%;
     }
     .toppart-content {
-      height: 87%;
+      height: 55%;
       width: 100%;
       display: flex;
       flex-direction: row;
@@ -819,375 +2335,666 @@ export default {
       .toppart-part {
         background: url("../assets/img/组144.png") no-repeat;
         background-size: 100% 100%;
-        height: 80%;
-        width: 30%;
+        height: 100%;
+        width: 25%;
         display: flex;
         flex-direction: column;
         // margin-bottom: 4%;
         .partname {
           flex: 1;
-          color: #0cf3f3;
+          font-size: 10pt;
+          color: #c0dfda;
           display: block;
         }
         .partnumber {
-          color: rgb(235, 2, 2);
+          font-size: 11pt;
           display: block;
           flex: 1;
         }
         .partimg {
           flex: 3;
+          .myimg {
+            height: 50%;
+            width: 50%;
+            margin-left: 28%;
+            margin-top: 25%;
+          }
         }
       }
       .Lpart {
+        color: #46da6b;
+        .partimg {
+          background: url("../assets/img/recommend/left.png") no-repeat;
+          background-size: 85% 90%;
+          background-position-x: 50%;
+          .myimg {
+            background: url("../assets/img/recommend/景点.png") no-repeat;
+            background-size: 80% 80%;
+            background-position-x: 27%;
+          }
+        }
       }
       .Mpart {
+        color: #33dfdf;
+        .partimg {
+          background: url("../assets/img/recommend/mid.png") no-repeat;
+          background-size: 85% 90%;
+          background-position-x: 50%;
+          .myimg {
+            background: url("../assets/img/recommend/评论.png") no-repeat;
+            background-size: 90% 90%;
+          }
+        }
       }
       .Rpart {
+        color: #a6ad61;
+        .partimg {
+          background: url("../assets/img/recommend/right.png") no-repeat;
+          background-size: 85% 90%;
+          background-position-x: 50%;
+          .myimg {
+            background: url("../assets/img/recommend/人数.png") no-repeat;
+            background-size: 80% 80%;
+            background-position-x: 17%;
+          }
+        }
       }
     }
   }
-  .bottompart {
-    position: absolute;
-    /* bottom: 0%; */
-    top: 32%;
+  .ranktable {
     width: 100%;
-    height: 30.3%;
+    flex: 3;
+    // background-color: rgba(0, 255, 255, 0.233);
     .title {
-      margin-top: 0%;
-      height: 12%;
-      margin-bottom: 1%;
+      margin-top: 0 !important;
+      height: 6% !important;
     }
-    .chartcontent {
-      height: 85%;
-      width: 100%;
+    .ranktable-content {
+      height: 92%;
+      /deep/.el-tabs--border-card {
+        height: 96%;
+        margin: 1%;
+        background: transparent;
+        border: none;
+      }
+      .el-tabs--border-card > .el-tabs__content {
+        padding: 0;
+        height: 92%;
+      }
+      /deep/.el-tabs--border-card > .el-tabs__header {
+        background: transparent;
+        border: none;
+        margin: 0%;
+      }
+      /deep/.el-tabs__item {
+        padding: 0;
+        width: 51%;
+        border: none;
+        //   background: url(../assets/img/tab.png)no-repeat;
+        //   background-size: 100% 100%;
+      }
+
+      /deep/.el-table .cell {
+        padding-left: 0%;
+        padding-right: 0%;
+        text-align: center;
+      }
+      /deep/.el-tabs--top.el-tabs--border-card
+        > .el-tabs__header
+        .el-tabs__item:last-child {
+        padding: 0;
+      }
+      /deep/.el-tabs__nav-scroll {
+        background: transparent;
+        width: 98%;
+        background: url(../assets/img/buttonbg.png) no-repeat;
+        background-size: 100% 100%;
+      }
+      /deep/.el-tabs--border-card > .el-tabs__header .el-tabs__item {
+        border-left: none;
+        border-right: none;
+      }
+      /deep/.el-tabs--border-card > .el-tabs__header .el-tabs__item.is-active {
+        background: #2baccd6e;
+        color: #dcdfe6;
+        border-left: none;
+        border-right: none;
+        border-top: 0px solid #0cf3f3;
+        // border-bottom: 2px solid #0cf3f3;
+      }
+      /deep/.el-tabs--border-card > .el-tabs__content {
+        padding: 1%;
+        height: 90%;
+        width: 100%;
+        margin-top: 1%;
+      }
+      .el-table--fit {
+        background: transparent;
+      }
+      .el-table--fit {
+        background: transparent;
+      }
+      /deep/.el-table .el-table__header-wrapper tr th {
+        background-image: linear-gradient(
+          -180deg,
+          #bdd9e017 4%,
+          #9fdae565 100%
+        ) !important;
+        background: transparent;
+        color: rgb(255, 255, 255);
+        border-bottom: 0px solid #1faacd;
+      }
+      //奇数行背景
+      /deep/.el-table tr {
+        background: rgba(2, 73, 94, 0.432);
+        border-bottom: 1px solid #0cf3f3;
+      }
+      /deep/.el-table .el-table__row {
+        background: #023f5441;
+        color: rgb(255, 255, 255);
+      }
+      /deep/.el-table .el-table__row--striped {
+        background: #023f54ce;
+        color: rgb(255, 255, 255);
+      }
+      /deep/.el-table td.el-table__cell {
+        border: none;
+        padding-left: 0%;
+        padding-right: 0%;
+      }
+      /deep/.el-table .cell {
+        padding-left: 0%;
+        padding-right: 0%;
+        text-align: center;
+      }
+      // /deep/.el-table--enable-row-hover
+      //   .el-table__body
+      //   tr:hover
+      //   > td.el-table__cell {
+      //   background: rgb(18, 47, 92)!important
+      //     }
+      /deep/.el-table--striped
+        .el-table__body
+        tr.el-table__row--striped
+        td.el-table__cell {
+        background: transparent;
+      }
+      //头高、行高
+      /deep/.el-table__header tr,
+      .el-table__header th {
+        height: 30px;
+        padding: 0;
+      }
+      /deep/.el-table__body tr,
+      .el-table__body td {
+        height: 35px;
+        padding: 0;
+      }
+      /deep/.el-table .el-table__cell {
+        padding: 0;
+      }
+      /deep/.el-table th.el-table__cell > .cell {
+        padding: 0;
+        text-align: center;
+      }
+      /deep/.el-table .el-table__body tr.current-row > td {
+        background-color: #84e6e485 !important;
+      }
+      /deep/.el-table .el-table__body tr:hover > td {
+        background-color: #8eabcc !important;
+      }
+      /deep/.el-table--scrollable-y .el-table__body-wrapper {
+        border: none;
+      }
+      /* 消除表格标题的下划线 */
+      /deep/ .el-table td.el-table__cell {
+        border-bottom: 0px transparent !important;
+      }
+      /* 消除表格内部的下划线 */
+      /deep/ .el-table th.el-table__cell.is-leaf {
+        border-bottom: 0px transparent !important;
+      }
+      /deep/ .el-table {
+        border-bottom: 0px transparent !important;
+      }
+      /deep/.el-table--scrollable-y ::-webkit-scrollbar {
+        display: none;
+      }
+      /deep/.el-table__body-wrapper::-webkit-scrollbar {
+        /*width: 0;宽度为0隐藏*/
+        width: 0px;
+      }
     }
   }
 }
-.recommend-bottom {
+.recommend-right {
+  right: 0%;
+  float: right;
+  margin-right: 0.4%;
+  background: url("../assets/img/side.png") no-repeat;
+  background-size: 100% 100%;
+  display: flex;
+  /deep/.el-checkbox__input.is-checked + .el-checkbox__label {
+    color: #5cc0da;
+  }
+  .chinahot {
+    width: 100%;
+    flex: 2;
+    .title {
+      height: 12% !important;
+    }
+    .wordcontent {
+      width: 100%;
+      height: 87%;
+    }
+  }
+  .sensicrecommend {
+    width: 100%;
+    flex: 5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .title {
+      height: 5% !important;
+    }
+    .recommend {
+      height: 93%;
+      width: 100%;
+      .name {
+        color: #e6eef0;
+        font-size: 11pt;
+        width: 30%;
+        height: 100%;
+        float: left;
+        line-height: 36px;
+        text-align: right;
+        padding-right: 4%;
+      }
+      .timepick {
+        height: 8%;
+        margin-bottom: 2%;
+        .timepickcontent {
+          width: 60%;
+          height: 100%;
+          float: left;
+          /deep/.el-date-editor--daterange.el-input,
+          .el-date-editor--daterange.el-input__inner,
+          .el-date-editor--timerange.el-input,
+          .el-date-editor--timerange.el-input__inner {
+            border: none;
+            width: 200px !important;
+          }
+          .el-input__inner {
+            background-color: transparent;
+          }
+          .el-range-editor.el-input__inner {
+            padding: 5px 0px;
+          }
+          .el-date-editor .el-range-separator {
+            width: 0%;
+          }
+          /deep/.el-date-editor .el-range-input {
+            font-size: 11pt;
+            color: #eff1f4;
+            background-color: #81cfd25e;
+          }
+          /deep/.el-date-editor .el-range-input,
+          .el-date-editor .el-range-separator {
+            font-size: 11pt;
+          }
+        }
+      }
+      .prefer {
+        height: 8%;
+        margin-bottom: 1%;
+        .prefercontent {
+          width: 60%;
+          height: 100%;
+          float: left;
+          .el-input {
+            height: 100%;
+          }
+          /deep/.el-input__inner {
+            // display: inline-block;
+            -webkit-appearance: none;
+            background: transparent;
+            border-radius: 4px;
+            border: 1px solid #76c6d187;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            color: rgba(220, 225, 227, 0.96);
+            font-size: inherit;
+            height: 32px;
+            line-height: 36px;
+            width: 95%;
+
+            float: left;
+            margin-top: 1%;
+            padding-left: 3%;
+            margin-left: 6%;
+          }
+        }
+      }
+      .exampleinput {
+        height: 16%;
+        margin-bottom: 1%;
+        .exampellabel {
+          color: #d1d7d8f2;
+          width: 60%;
+          height: 100%;
+          float: left;
+          padding-left: 3%;
+          .labelcontent {
+            display: flex;
+            height: 100%;
+            width: 100%;
+            flex-wrap: wrap;
+            > span {
+              font-size: 11pt;
+              color: #c5d4e6;
+              margin-right: 7%;
+
+              // margin-left: -19%;
+            }
+            .chooselabel {
+              background: #8ae5e54a;
+              margin-left: 2%;
+              border: 1px solid #ffffff40;
+              font-size: 10pt;
+              border-radius: 5px;
+              cursor: pointer;
+              margin: 1%;
+              padding: 2px;
+              margin-right: 2%;
+            }
+          }
+        }
+      }
+      .hotandscore {
+        height: 8%;
+        width: 100%;
+        background: url("../assets/img/buttonbg.png") no-repeat center center;
+        background-size: 95% 95%;
+        .name {
+          /deep/.el-checkbox__label {
+            color: #e6eef0;
+          }
+        }
+        .content {
+          width: 60%;
+          height: 100%;
+          float: left;
+          display: flex;
+          align-items: center;
+          justify-content: space-evenly;
+          .el-radio {
+            margin-right: 0px;
+            color: rgb(190, 218, 218);
+          }
+          /deep/.el-radio__input.is-checked + .el-radio__label {
+            color: #42e0e0;
+          }
+          /deep/.el-radio__input.is-checked .el-radio__inner {
+            border-color: #94b2bb;
+            background: #3fb0d3;
+          }
+        }
+      }
+      .distance {
+        height: 8%;
+        width: 100%;
+        background: url("../assets/img/buttonbg.png") no-repeat center center;
+        background-size: 95% 95%;
+        .name {
+          .el-checkbox {
+            color: #e6eef0 !important;
+          }
+          .el-checkbox__inner {
+            width: 12px;
+            height: 12px;
+          }
+          .el-checkbox__label {
+            padding-left: 14px;
+          }
+        }
+        .distanceselect {
+          width: 60%;
+          height: 100%;
+          float: left;
+          display: flex;
+          flex-direction: row;
+          flex-wrap: nowrap;
+          justify-content: space-evenly;
+          align-items: center;
+          .el-radio {
+            color: rgb(190, 218, 218);
+            margin-right: 4px;
+          }
+          /deep/.el-radio__input.is-checked + .el-radio__label {
+            color: #42e0e0;
+          }
+          /deep/.el-radio__input.is-checked .el-radio__inner {
+            border-color: #94b2bb;
+            background: #3fb0d3;
+          }
+        }
+      }
+      .season {
+        width: 100%;
+        height: 8%;
+        background: url("../assets/img/buttonbg.png") no-repeat center center;
+        background-size: 95% 95%;
+        .name {
+          .el-checkbox {
+            color: #e6eef0 !important;
+          }
+          .el-checkbox__inner {
+            width: 12px;
+            height: 12px;
+          }
+          .el-checkbox__label {
+            padding-left: 14px;
+          }
+        }
+        .distanceselect {
+          width: 60%;
+          height: 100%;
+          float: left;
+          display: flex;
+          flex-direction: row;
+          flex-wrap: nowrap;
+          justify-content: space-evenly;
+          align-items: center;
+          .el-radio {
+            color: rgb(190, 218, 218);
+            margin-right: 4px;
+          }
+          /deep/.el-radio__input.is-checked + .el-radio__label {
+            color: #42e0e0;
+          }
+          /deep/.el-radio__input.is-checked .el-radio__inner {
+            border-color: #94b2bb;
+            background: #3fb0d3;
+          }
+        }
+      }
+      .person {
+        width: 100%;
+        height: 22%;
+        background: url("../assets/img/buttonbg.png") no-repeat center center;
+        background-size: 95% 95%;
+        // background-color: #44afaf3a;
+        .considerperson {
+          height: 27%;
+          width: 100%;
+          .personcheckbox {
+            padding-left: 10%;
+            padding-top: 2%;
+            padding-bottom: 2%;
+            width: 30%;
+            height: 100%;
+            .el-checkbox {
+              color: #e6eef0 !important;
+            }
+            .el-checkbox__inner {
+              width: 12px;
+              height: 12px;
+            }
+            .el-checkbox__label {
+              padding-left: 14px;
+            }
+          }
+        }
+      }
+      .occupationandincome {
+        width: 100%;
+        height: 34%;
+        // padding-bottom: 2%;
+        .incomept {
+          width: 50%;
+          height: 100%;
+          float: left;
+          .person-name {
+            width: 28%;
+          }
+        }
+        .occupationpt {
+          width: 50%;
+          height: 100%;
+          float: left;
+        }
+      }
+      .buttoncontent {
+        padding-top: 5%;
+        height: 11%;
+        width: 70%;
+        margin: auto;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-around;
+        align-items: center;
+        /deep/.el-button {
+          background: url("../assets/img/框.png");
+          background-size: 100% 100%;
+          // background: #24bff390;
+          border: 0px solid #d80d4a;
+          color: #ffffff;
+          padding: 12px 20px;
+          font-size: 14px;
+          border-radius: 5px;
+          width: 40%;
+        }
+      }
+      .ageandsex {
+        width: 100%;
+        height: 34%;
+        // padding-top: 2%;
+        .agept {
+          width: 50%;
+          height: 100%;
+          float: left;
+        }
+        .sexpt {
+          width: 50%;
+          height: 100%;
+          float: left;
+          .person-name {
+            width: 28%;
+          }
+          .el-radio {
+            color: rgb(190, 218, 218);
+          }
+          /deep/.el-radio__input.is-checked + .el-radio__label {
+            color: #42e0e0;
+          }
+          /deep/.el-radio__input.is-checked .el-radio__inner {
+            border-color: #94b2bb;
+            background: #3fb0d3;
+          }
+        }
+      }
+    }
+  }
+}
+.pt {
   position: absolute;
-  z-index: 100;
-  bottom: 7.5%;
-  height: 33%;
-  width: 59%;
-  left: 20.5%;
-  background: #38e9e0;
+  top: 1.2%;
+  z-index: 1;
+  width: 23%;
+  height: 91%;
+  flex-direction: column;
+  flex-wrap: wrap;
+  display: flex;
+}
+.person-name {
+  width: 40%;
+  height: 100%;
+  float: left;
+  text-align: right;
+  font-size: 11pt;
+  color: aliceblue;
+  font-size: 11pt;
+  display: flex;
+  color: aliceblue;
+  align-items: center;
+  flex-direction: row-reverse;
+}
+.person-inputcontent {
+  width: 50%;
+  height: 100%;
+  float: left;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  padding-left: 6%;
+  /deep/.el-input__inner {
+    background: #c3e3e72b;
+    border-radius: 4px;
+    border: 1px solid #3eb7c738;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    color: rgba(220, 225, 227, 0.96);
+    font-size: inherit;
+    height: 32px;
+    // line-height: 90px;
+    width: 127%;
+    padding: 0px;
+    // margin-top: 2%;
+  }
+  .el-radio {
+    margin-right: 20%;
+  }
+  .ageinput {
+    width: 100%;
+    height: 60%;
+  }
+}
+.recommend-bottom {
+  width: 53%;
+  position: absolute;
+  z-index: 1;
+  height: 34%;
+  bottom: 8%;
+  left: 23.5%;
   background: url("../assets/img/长方形.png") no-repeat;
-  background-position: 100% 10%;
   background-size: 100% 100%;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   align-items: center;
-  .content-bottom {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    .title {
-      flex: 1;
-      width: 100%;
-      background-size: 52% 80%;
-      margin-top: 0%;
-      margin-bottom: 0%;
-      > span {
-        line-height: 38px;
-      }
-    }
-    .mytitle {
-      float: left;
-      margin-left: -45%;
-      text-align: left;
-      margin-bottom: 0%;
-      margin-top: 4%;
-      border-left: 5px solid #0cf3f3;
-      color: white;
-      text-indent: 0.8em;
-      font-size: 11pt;
-    }
-    .content {
-      flex: 6;
-      width: 100%;
-    }
-    .carouselcontent {
-      margin-top: 4%;
-      height: 90%;
-      width: 90%;
-    }
-  }
-  .content-bottom:nth-child(2) {
-    flex: 1;
+  .el-tabs--border-card {
+    background: transparent;
+    border: none;
     height: 100%;
-  }
-  .content-bottom:nth-child(1) {
-    flex: 1;
-    height: 100%;
-    .title {
-      flex: 1;
-      width: 100%;
-      background-size: 40% 80%;
-      margin-left: -12%;
-      > span {
-        margin-left: 15.5%;
-      }
-    }
-  }
-  .content-bottom:nth-child(3) {
-    flex: 1;
-    height: 100%;
-  }
-}
-.left {
-  margin-left: 0.2%;
-  left: 0;
-}
-.right {
-  margin-right: 0.2%;
-  right: 0;
-  display: flex;
-  .righttop {
-    flex: 2;
     width: 100%;
-  }
-  .rightbottom {
-    flex: 1;
-    width: 100%;
-    .title {
-      margin-top: -5%;
-      margin-bottom: 0%;
-      height: 15%;
-      > span {
-        line-height: 40px;
-      }
-    }
-    .rightbottom-content {
-      height: 80%;
+    .el-tab-pane {
+      height: 100%;
       width: 100%;
-      margin-bottom: 0%;
       display: flex;
       flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: space-evenly;
-      align-items: center;
-      .mapchange {
-        width: 31%;
-        height: 39%;
-        background: url("../assets/img/bubg.png") no-repeat;
-        background-size: 100% 100%;
-        display: flex;
-        flex-direction: column;
-        flex-wrap: nowrap;
-        // justify-content: space-around;
-        cursor: pointer;
-        .active {
-          color: #0cf3f3;
-        }
-        > img {
-          height: 52%;
-          width: 37%;
-          margin-left: 30%;
-          margin-top: 5%;
-          background-size: 100% 100%;
-        }
-        > span {
-          color: #c5d4e6;
-          padding-top: 5%;
-        }
-      }
+      flex-wrap: nowrap;
     }
-  }
-}
-.col1 {
-  display: flex;
-}
-
-/deep/.el-input__inner {
-  left: 15%;
-  top: 41%;
-  position: absolute;
-  display: inline-block;
-  -webkit-appearance: none;
-  background: transparent;
-  border-radius: 4px;
-  border: 0px solid #dcdfe6;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  color: rgba(220, 225, 227, 0.96);
-  // display: inline-block;
-  font-size: inherit;
-  height: 44px;
-  line-height: 36px;
-  width: 100%;
-  padding: 0 0 0 35px;
-}
-.row2 {
-  height: 20%;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  align-items: center;
-  .row2-select {
-    flex: 1;
-    color: #cfe2e1;
-    margin-left: -11%;
-    margin-top: -11%;
-  }
-  .date-picker {
-    flex: 1;
-  }
-}
-.myrow {
-  height: 17%;
-  width: 100%;
-  margin-top: -9%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  align-items: center;
-  .sorcelabel {
-    flex: 1;
-    color: #cfe2e1;
-    margin-left: 5%;
-  }
-}
-.title {
-  // flex: 0.5;
-  margin-top: 1%;
-  height: 11%;
-  width: 80%;
-  position: relative;
-  left: 0%;
-  background: url(../assets/img/titlebg.png) no-repeat;
-  background-size: 60% 85%;
-  background-position: 12% 70%;
-  margin-bottom: 4%;
-  // background-size: 57% 93%;
-  // background-position: 9% 100%;
-  font-size: 11pt;
-  > span {
-    float: left;
-    margin-left: 18%;
-    font-size: 10pt;
-    line-height: 30px;
-    color: aliceblue;
-    text-shadow: 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #fff, 0 0 30px #38e9e0,
-      0 0 40px #0cf3f3;
-  }
-}
-.checkbox {
-  width: 100%;
-  height: 100%;
-  margin-left: 10%;
-}
-.datasorce {
-  height: 100%;
-  width: 100%;
-  flex: 4;
-  position: relative;
-  .el-checkbox {
-    margin-right: 7px;
-    color: #c5d4e6;
-  }
-  .el-checkbox-group {
-    margin-top: 5%;
-    font-size: 12pt;
-  }
-}
-.recommend-content {
-  .bg-specially {
-    height: 100%;
-    // width: 60%;
-    .labelcontent {
-      display: flex;
-      height: 20%;
-      width: 100%;
-      padding-top: 3%;
-      padding-bottom: 3%;
-      flex-wrap: wrap;
-      > span {
-        font-size: 12pt;
-        color: #c5d4e6;
-        // margin-left: -19%;
-      }
-      .chooselabel {
-        background: #8ae5e54a;
-        margin-left: 2%;
-        border: 1px solid #ffffff40;
-        font-size: 11pt;
-        border-radius: 5px;
-        cursor: pointer;
-        // margin: 1% 1% 1% 1% ;
-      }
-    }
-  }
-  .tab1 {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: flex-start;
-    > span {
-      position: absolute;
-      top: 64%;
-      left: 39%;
-      color: #a7c7c7f0;
-      font-size: 10pt;
-    }
-
-    /deep/.el-input__inner {
-      left: 0%;
-      position: relative;
-      display: inline-block;
-      -webkit-appearance: none;
-      background: #c3e3e72b;
-      border-radius: 4px;
-      border: 1px solid #3eb7c738;
-      -webkit-box-sizing: border-box;
-      box-sizing: border-box;
-      color: rgba(220, 225, 227, 0.96);
-      font-size: inherit;
-      height: 30px;
-      line-height: 90px;
-      width: 100%;
-      padding: 0px;
-      margin-top: 2%;
-    }
-  }
-  /deep/.el-row {
-    height: 17%;
-  }
-  /deep/.el-row:nth-child(1) {
-    height: 0%;
-  }
-  /deep/.el-range-editor--small .el-range__icon {
-    color: transparent !important;
-  }
-  /deep/.el-date-editor .el-range-input {
-    width: 30%;
-    color: rgb(171, 180, 180);
-    height: 60%;
-    background: rgba(82, 173, 209, 0.3);
-  }
-  /deep/.el-button {
-    background: url("../assets/img/框.png");
-    background-size: 100% 100%;
-    // background: #24bff390;
-    border: 0px solid #d80d4a;
-    color: #ffffff;
-    padding: 12px 20px;
-    font-size: 14px;
-    border-radius: 5px;
-    width: 40%;
-  }
-  /deep/.el-button:focus,
-  .el-button:hover {
-    color: #75f8ed;
-    border-color: #c6e2ff;
-    background-color: #ecf5ff;
-  }
-  /deep/.el-radio {
-    color: #aaacb1;
-    line-height: 40px;
   }
   /deep/.el-tabs--border-card {
     height: 96%;
@@ -1202,256 +3009,130 @@ export default {
   /deep/.el-tabs--border-card > .el-tabs__header {
     background: transparent;
     border: none;
-    margin: 2%;
+    margin: 0%;
   }
   /deep/.el-tabs__item {
     padding: 0;
-    width: 70%;
+    width: 39%;
     border: none;
     //   background: url(../assets/img/tab.png)no-repeat;
     //   background-size: 100% 100%;
+  }
+
+  /deep/.el-table .cell {
+    padding-left: 0%;
+    padding-right: 0%;
+    text-align: center;
   }
   /deep/.el-tabs--top.el-tabs--border-card
     > .el-tabs__header
     .el-tabs__item:last-child {
     padding: 0;
   }
-  /deep/.el-table .cell {
-    padding-left: 0%;
-    padding-right: 0%;
-    text-align: center;
-  }
   /deep/.el-tabs__nav-scroll {
     background: transparent;
-    width: 67%;
+    width: 60%;
     background: url(../assets/img/buttonbg.png) no-repeat;
     background-size: 100% 100%;
   }
   /deep/.el-tabs--border-card > .el-tabs__header .el-tabs__item {
     border-left: none;
     border-right: none;
+    background-color: #85bdbf38;
   }
   /deep/.el-tabs--border-card > .el-tabs__header .el-tabs__item.is-active {
-    background: #1cbde62c;
-    color: #dcdfe6;
+    background: #2baccd6e;
+    color: #53eeff;
     border-left: none;
     border-right: none;
-    border-top: 3px solid #0cf3f3;
+    border-top: 0px solid #0cf3f3;
     // border-bottom: 2px solid #0cf3f3;
   }
   /deep/.el-tabs--border-card > .el-tabs__content {
     padding: 1%;
     height: 90%;
     width: 100%;
-    margin-top: 2%;
+    margin-top: 1%;
   }
-  .el-table--fit {
+  /deep/.el-tabs--border-card > .el-tabs__header {
     background: transparent;
-  }
-  /deep/.el-table .el-table__header-wrapper tr th {
-    background-image: linear-gradient(
-      -180deg,
-      #bdd9e017 4%,
-      #9fdae565 100%
-    ) !important;
-    background: transparent;
-    color: rgb(255, 255, 255);
-    border-bottom: 1px solid #1faacd;
-  }
-  //奇数行背景
-  /deep/.el-table tr {
-    background: rgba(2, 73, 94, 0.432);
-    border-bottom: 1px solid #0cf3f3;
-  }
-  /deep/.el-table .el-table__row {
-    background: #023f5441;
-    color: rgb(255, 255, 255);
-  }
-  /deep/.el-table .el-table__row--striped {
-    background: #023f54ce;
-    color: rgb(255, 255, 255);
-  }
-  /deep/.el-table td.el-table__cell {
     border: none;
+    margin: 0%;
   }
-  // /deep/.el-table--enable-row-hover
-  //   .el-table__body
-  //   tr:hover
-  //   > td.el-table__cell {
-  //   background: rgb(18, 47, 92)!important
-  //     }
-  /deep/.el-table--striped
-    .el-table__body
-    tr.el-table__row--striped
-    td.el-table__cell {
-    background: transparent;
+  /deep/.el-tabs--border-card > .el-tabs__content {
+    padding: 3px;
+    height: 86%;
   }
-  //头高、行高
-  /deep/.el-table__header tr,
-  .el-table__header th {
-    height: 30px;
+  /deep/.el-tabs--top.el-tabs--border-card
+    > .el-tabs__header
+    .el-tabs__item:nth-child(2) {
     padding: 0;
   }
-  /deep/.el-table__body tr,
-  .el-table__body td {
-    height: 35px;
-    padding: 0;
+  /deep/.el-tabs--border-card > .el-tabs__header .el-tabs__item {
+    border-left: none;
+    border-right: none;
+    color: #dcf7f7;
   }
-  /deep/.el-table .el-table__cell {
-    padding: 0;
+  /deep/.el-tabs--border-card > .el-tabs__header .el-tabs__item.is-active {
+    background: #2baccd6e;
+    color: #53eeff;
+    border-left: none;
+    border-right: none;
+    border-top: 0px solid #0cf3f3;
+    // border-bottom: 2px solid #0cf3f3;
   }
-  /deep/.el-table th.el-table__cell > .cell {
-    padding: 0;
-    text-align: center;
+  .content {
+    width: 100%;
+    height: 100%;
   }
-  /deep/.el-table .el-table__body tr.current-row > td {
-    background-color: #fafafa !important;
+  .timechartcontent {
+    height: 100%;
+    width: 100%;
   }
-  /deep/.el-table .el-table__body tr:hover > td {
-    background-color: #dfdfdf !important;
+  .chartcontent {
+    height: 100%;
+    width: 33.3%;
+    .title {
+      height: 10%;
+      width: 100%;
+      margin-top: 1% !important;
+      display: flex;
+      flex-direction: row;
+
+      > span {
+        width: 70%;
+        text-align: left;
+        height: 100%;
+        color: #cfe4e4;
+        font-size: 11pt;
+      }
+      .imgIcon {
+        width: 13%;
+        height: 100%;
+        background: url("../assets/img/panelIcon.png");
+        background-size: 100% 100%;
+      }
+    }
+    .content {
+      width: 100%;
+      height: 85%;
+    }
   }
 }
-.recommend-bottom {
-  border: none;
-  .el-table--fit {
-    background: transparent;
-  }
-  /deep/.el-table .el-table__header-wrapper tr th {
-    background-image: linear-gradient(
-      -180deg,
-      #bdd9e017 4%,
-      #9fdae565 100%
-    ) !important;
-    background: transparent;
-    color: rgb(255, 255, 255);
-    border-bottom: 0px solid #1faacd;
-  }
-  //奇数行背景
-  /deep/.el-table tr {
-    background: rgba(2, 73, 94, 0.432);
-    border-bottom: 1px solid #0cf3f3;
-  }
-  /deep/.el-table .el-table__row {
-    background: #023f5441;
-    color: rgb(255, 255, 255);
-  }
-  /deep/.el-table .el-table__row--striped {
-    background: #023f54ce;
-    color: rgb(255, 255, 255);
-  }
-  /deep/.el-table td.el-table__cell {
-    border: none;
-    padding-left: 0%;
-    padding-right: 0%;
-  }
-  /deep/.el-table .cell {
-    padding-left: 0%;
-    padding-right: 0%;
-    text-align: center;
-  }
-  // /deep/.el-table--enable-row-hover
-  //   .el-table__body
-  //   tr:hover
-  //   > td.el-table__cell {
-  //   background: rgb(18, 47, 92)!important
-  //     }
-  /deep/.el-table--striped
-    .el-table__body
-    tr.el-table__row--striped
-    td.el-table__cell {
-    background: transparent;
-  }
-  //头高、行高
-  /deep/.el-table__header tr,
-  .el-table__header th {
-    height: 30px;
-    padding: 0;
-  }
-  /deep/.el-table__body tr,
-  .el-table__body td {
-    height: 35px;
-    padding: 0;
-  }
-  /deep/.el-table .el-table__cell {
-    padding: 0;
-  }
-  /deep/.el-table th.el-table__cell > .cell {
-    padding: 0;
-    text-align: center;
-  }
-  /deep/.el-table .el-table__body tr.current-row > td {
-    background-color: #84e6e485 !important;
-  }
-  /deep/.el-table .el-table__body tr:hover > td {
-    background-color: #8eabcc !important;
-  }
-  /deep/.el-table--scrollable-y .el-table__body-wrapper {
-    border: none;
-  }
-  /* 消除表格标题的下划线 */
-  /deep/ .el-table td.el-table__cell {
-    border-bottom: 0px transparent !important;
-  }
-  /* 消除表格内部的下划线 */
-  /deep/ .el-table th.el-table__cell.is-leaf {
-    border-bottom: 0px transparent !important;
-  }
-  /deep/ .el-table {
-    border-bottom: 0px transparent !important;
-  }
-  /deep/.el-table--scrollable-y ::-webkit-scrollbar {
-    display: none;
-  }
-  /deep/.el-table__body-wrapper::-webkit-scrollbar {
-    /*width: 0;宽度为0隐藏*/
-    width: 0px;
-  }
-  /deep/.el-table__body-wrapper::-webkit-scrollbar-thumb {
-    border-radius: 2px;
-    height: 50px;
-    background: #eee;
-  }
-  /deep/.el-table__body-wrapper::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-    border-radius: 2px;
-    background: rgba(0, 0, 0, 0.4);
-  }
-  /deep/.el-table__row > td {
-    border: none;
-  }
-  /deep/.el-table::before {
-    height: 0px;
-  }
-  .customer-table th {
-    border: none;
-  }
-  .customer-table td,
-  .customer-table th.is-leaf {
-    border: none;
-  }
-
-  .el-table--border,
-  .el-table--group {
-    border: none;
-  }
-
-  .customer-table thead tr th.is-leaf {
-    border-right: none;
-  }
-  .el-table--border::after,
-  .el-table--group::after {
-    width: 0;
-  }
-  .customer-table::before {
-    width: 0;
-  }
-  .customer-table .el-table__fixed-right::before,
-  .el-table__fixed::before {
-    width: 0;
-  }
-
-  .el-table--border th.gutter:last-of-type {
-    border-left: none;
-  }
+</style>
+<style>
+.el-select-dropdown__item.hover,
+.el-select-dropdown__item:hover {
+  background-color: #3eb7c738;
+}
+.el-select-dropdown {
+  background-color: #0d1f30;
+}
+.el-select-dropdown__item {
+  color: #fff;
+}
+.names {
+  margin-left: 3%;
+  padding-right: 0% !important;
 }
 </style>

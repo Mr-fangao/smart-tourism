@@ -104,12 +104,22 @@ export default {
       province: [],
       citys: [
         {
+          name: "北京市",
+          where: 2,
+          code: "",
+        },
+        {
           name: "南京市",
           where: 2,
           code: "",
         },
         {
-          name: "北京市",
+          name: "上海市",
+          where: 2,
+          code: "",
+        },
+        {
+          name: "天津市",
           where: 2,
           code: "",
         },
@@ -337,9 +347,8 @@ export default {
   },
 };
 </script>
-<style lang="less" scoped>
-@keyframes appear {
-  /* 出现动画 */
+<style>
+@keyframes appear { /* 出现动画 */
   0% {
     width: 0;
     height: 0;
@@ -352,15 +361,14 @@ export default {
   100% {
     width: 800px;
     height: 420px;
-    background-color: rgba(40, 43, 57, 1);
+    background-color: rgb(21 62 109);
   }
 }
-@keyframes nappear {
-  /* 隐藏动画 */
+@keyframes nappear { /* 隐藏动画 */
   0% {
     width: 800px;
     height: 420px;
-    background-color: rgba(40, 43, 57, 1);
+    background-color: rgb(21 62 109);
   }
   50% {
     width: 800px;
