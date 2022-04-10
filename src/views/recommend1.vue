@@ -59,11 +59,7 @@
           <div class="mapimg map4"></div>
           <span class="tab" slot="title">时序图</span>
         </el-menu-item>
-        <el-menu-item
-          index="5"
-          :class="index === 5 ? 'active' : ''"
-          plain
-        >
+        <el-menu-item index="5" :class="index === 5 ? 'active' : ''" plain>
           <el-radio v-model="mapchange" label="5">&ensp;</el-radio>
           <span class="tab" slot="title">点数据</span>
         </el-menu-item>
@@ -855,7 +851,7 @@ export default {
         this.chartname = this.selectcity.name;
         this.wordCloudInti(this.$refs.chartword, this.njwordcloud);
         this.initChart2(this.chartdata4);
-        this.mapchange='5';
+        this.mapchange = "5";
       }
     });
   },
@@ -957,7 +953,7 @@ export default {
       var labels;
       labels = this.input.split("、");
       var a = labels.pop();
-      this.mapchange='5';
+      this.mapchange = "5";
       // var len =labels.length-1;
       // labels.splice(len,0);
       var prfer = "无";
@@ -1103,550 +1099,873 @@ export default {
     initTimechart() {
       var chartDom = document.getElementById("timechart");
       var myChart = echarts.init(chartDom);
-      var option;
-
-      let base = +new Date(2005, 9, 3);
-      let oneDay = 24 * 3600 * 1000;
-      let date = [];
-      let data = [Math.random() * 300];
-      let data2 = [Math.random() * 300];
-      let data3 = [Math.random() * 3];
-      for (let i = 1; i < 6150; i++) {
-        var now = new Date((base += oneDay));
-        date.push(
-          [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
-        );
-        var absnum = Math.round((Math.random() - 0.5) * 50 + data[i - 1]);
-        if (absnum < 0) {
-          absnum = -absnum;
-        }
-        data.push(absnum);
-      }
-      for (let i = 1; i < 20000; i++) {
-        var now = new Date((base += oneDay));
-        date.push(
-          [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
-        );
-        var absnum = Math.round((Math.random() - 0.5) * 20 + data2[i - 1]);
-        if (absnum < 0) {
-          absnum = -absnum;
-        }
-        data2.push(absnum);
-      }
-      for (let i = 1; i < 6150; i++) {
-        var now = new Date((base += oneDay));
-        date.push(
-          [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
-        );
-        var absnum = Math.round((Math.random() - 0.5) * 5 + data3[i - 1]);
-        if (absnum < 0) {
-          absnum = -absnum;
-        }
-        data3.push(absnum);
-      }
-      option = {
-        legend: {
-          right: 200,
-          // itemGap: 30,
-          // itemWidth: 8,
-          // padding: 10,
-          textStyle: {
-            fontSize: 12,
-            color: "#fft",
-          },
-          align: "left",
-        },
-        tooltip: {
-          trigger: "axis",
-          position: function (pt) {
-            return [pt[0], "10%"];
-          },
-        },
-        grid: {
-          left: "2%", //图表距边框的距离
-          right: "5%",
-          bottom: "18%",
-          top: "12%",
-          containLabel: true,
-        },
-        xAxis: {
-          type: "category",
-          boundaryGap: false,
-          data: date,
-          axisLine: {
+      var option = {
+        baseOption: {
+          timeline: {
+            //loop: false,
+            axisType: "category",
+            show: true,
+            autoPlay: true, //是否自动播放
+            playInterval: 1500, //播放速度
+            bottom: "85%", //距离容器下侧的距离
             lineStyle: {
-              color: "white",
+              color: "#61757b",
+            },
+            symbol: "circle",
+            symbolSize: 16,
+            backgroundColor: "rgb(115, 215, 228)",
+            checkpointStyle: {
+              symbolSize: 13,
+              color: "rgb(115, 215, 228)",
+              borderWidth: 0,
+              symbol: "circle",
+            },
+            label: {
+              color: 'rgb(115, 215, 228)',
+            },
+            controlStyle: { color: 'rgb(115, 215, 228)' },
+            realtime: true,
+            data: ["1", "2", "3", "4", "5", "6", "7", "8"],
+          },
+          grid: {
+            top: "15.8%", //距上边距
+            left: "4%", //距离左边距
+            right: "5%", //距离右边距
+            bottom: "8%", //距离下边距
+            containLabel: true,
+          },
+          xAxis: [
+            {
+              type: "category",
+              // name: "景点",
+              inverse: true,
+              axisLine: {
+                lineStyle: {
+                  color: "#fff",
+                },
+              },
+            },
+          ],
+          yAxis: [
+            {
+              type: "value",
+              name: "日/条",
+              // scale: true,//刻度可随数据变化
+              // max: 50000,
+              splitLine: {
+                show: false,
+              },
+              axisLine: {
+                lineStyle: {
+                  color: "#fff",
+                },
+              },
+            },
+          ],
+          title: {
+            textStyle: {
+              color: "rgb(115, 215, 200)",
+              fontSize: 12,
             },
           },
+          series: [
+            {
+              type: "bar",
+              itemStyle: {
+                normal: {
+                  color: "rgb(115, 215, 228)",
+                },
+              },
+            },
+          ],
         },
-        yAxis: {
-          splitLine: { show: false },
-          type: "value",
-          boundaryGap: [0, "10%"],
-          axisLine: {
-            lineStyle: {
-              color: "white",
-            },
-          },
-        },
-        dataZoom: [
+        //变量则写在options中
+        options: [
+          //1号
           {
-            type: "inside",
-            start: 0,
-            end: 10,
+            xAxis: [
+              {
+                data: [
+                  "瑞士",
+                  "卢森堡",
+                  "瑞典",
+                  "挪威",
+                  "丹麦",
+                  "阿联酋",
+                  "冰岛",
+                  "日本",
+                  "美国",
+                  "(131)中国",
+                ],
+              },
+            ],
+            title: {
+              text: "1号统计值",
+            },
+            series: [
+              {
+                data: [
+                  38589.18, 33378.44, 29794.08, 28188.52, 26922.44, 26621.51,
+                  25786.94, 25139.58, 23913.76, 343.3,
+                ],
+              },
+            ],
           },
+          //2号
           {
-            start: 0,
-            end: 10,
-          },
-        ],
-        series: [
-          {
-            name: "评论数",
-            type: "line",
-            symbol: "none",
-            sampling: "lttb",
-            data: data,
-            itemStyle: {
-              color: "rgb(255, 70, 131)",
+            xAxis: [
+              {
+                data: [
+                  "卢森堡",
+                  "瑞士",
+                  "日本",
+                  "丹麦",
+                  "挪威",
+                  "德国",
+                  "澳大利亚",
+                  "瑞典",
+                  "荷兰",
+                  "(126)中国",
+                ],
+              },
+            ],
+            title: {
+              text: "2号统计值",
             },
-            areaStyle: {
-              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                {
-                  offset: 0,
-                  color: "rgb(255, 158, 68)",
-                },
-                {
-                  offset: 1,
-                  color: "rgb(255, 70, 131)",
-                },
-              ]),
-            },
-          },
-          {
-            name: "好评数",
-            type: "line",
-            symbol: "none",
-            sampling: "lttb",
-            data: data2,
-            itemStyle: {
-              color: "#D5F19F",
-            },
-            areaStyle: {
-              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                {
-                  offset: 0,
-                  color: "#758A4B",
-                },
-                {
-                  offset: 1,
-                  color: "#A9D750",
-                },
-              ]),
-            },
+            series: [
+              {
+                data: [
+                  51189.75, 48712.21, 42516.46, 35477.69, 34793.77, 31709.25,
+                  30307.42, 29882.78, 28910.83, 604.332,
+                ],
+              },
+            ],
           },
           {
-            name: "游记数",
-            type: "line",
-            symbol: "none",
-            sampling: "lttb",
-            data: data3,
-            itemStyle: {
-              color: "#4789D6",
+            xAxis: [
+              {
+                data: [
+                  "瑞士",
+                  "卢森堡",
+                  "瑞典",
+                  "挪威",
+                  "丹麦",
+                  "阿联酋",
+                  "冰岛",
+                  "日本",
+                  "美国",
+                  "(131)中国",
+                ],
+              },
+            ],
+            title: {
+              text: "3号统计值",
             },
-            areaStyle: {
-              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                {
-                  offset: 0,
-                  color: "#627995",
-                },
-                {
-                  offset: 1,
-                  color: "#3768A1",
-                },
-              ]),
-            },
-          },
-        ],
-      };
-      option && myChart.setOption(option, true);
-    },
-    initTimechart1() {
-      var chartDom = document.getElementById("timechart1");
-      var myChart = echarts.init(chartDom);
-      var option;
-
-      let base = +new Date(2005, 9, 3);
-      let oneDay = 24 * 3600 * 1000;
-      let date = [];
-      let data = [Math.random() * 300];
-      let data2 = [Math.random() * 300];
-      let data3 = [Math.random() * 300];
-           let data4 = [Math.random() * 300];
-      for (let i = 1; i < 6150; i++) {
-        var now = new Date((base += oneDay));
-        date.push(
-          [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
-        );
-        var absnum = Math.round((Math.random() - 0.5) * 20 + data[i - 1]);
-        if (absnum < 0) {
-          absnum = -absnum;
-        }
-        data.push(absnum);
-      }
-      for (let i = 1; i < 6150; i++) {
-        var now = new Date((base += oneDay));
-        date.push(
-          [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
-        );
-        var absnum = Math.round((Math.random() - 0.5) * 20 + data2[i - 1]);
-        if (absnum < 0) {
-          absnum = -absnum;
-        }
-        data2.push(absnum);
-      }
-      for (let i = 1; i < 6150; i++) {
-        var now = new Date((base += oneDay));
-        date.push(
-          [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
-        );
-        var absnum = Math.round((Math.random() - 0.5) * 20 + data3[i - 1]);
-        if (absnum < 0) {
-          absnum = -absnum;
-        }
-        data3.push(absnum);
-      }
-            for (let i = 1; i < 6150; i++) {
-        var now = new Date((base += oneDay));
-        date.push(
-          [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
-        );
-        var absnum = Math.round((Math.random() - 0.5) * 20 + data4[i - 1]);
-        if (absnum < 0) {
-          absnum = -absnum;
-        }
-        data4.push(absnum);
-      }
-      option = {
-        legend: {
-          right: 200,
-          // itemGap: 30,
-          // itemWidth: 8,
-          // padding: 10,
-          textStyle: {
-            fontSize: 12,
-            color: "#fft",
-          },
-          align: "left",
-        },
-        tooltip: {
-          trigger: "axis",
-          position: function (pt) {
-            return [pt[0], "10%"];
-          },
-        },
-        grid: {
-          left: "2%", //图表距边框的距离
-          right: "5%",
-          bottom: "18%",
-          top: "12%",
-          containLabel: true,
-        },
-        xAxis: {
-          type: "category",
-          boundaryGap: false,
-          data: date,
-          axisLine: {
-            lineStyle: {
-              color: "white",
-            },
-          },
-        },
-        yAxis: {
-          splitLine: { show: false },
-          type: "value",
-          boundaryGap: [0, "10%"],
-          axisLine: {
-            lineStyle: {
-              color: "white",
-            },
-          },
-        },
-        dataZoom: [
-          {
-            type: "inside",
-            start: 0,
-            end: 10,
+            series: [
+              {
+                data: [
+                  38589.18, 33378.44, 29794.08, 28188.52, 26922.44, 26621.51,
+                  25786.94, 25139.58, 23913.76, 343.3,
+                ],
+              },
+            ],
           },
           {
-            start: 0,
-            end: 10,
-          },
-        ],
-        series: [
-          {
-            name: "珠江南田温泉",
-            type: "bar",
-            symbol: "none",
-            sampling: "lttb",
-            data: data,
-            itemStyle: {
-              color: "rgb(255, 70, 131)",
+            xAxis: [
+              {
+                data: [
+                  "卢森堡",
+                  "瑞士",
+                  "日本",
+                  "丹麦",
+                  "挪威",
+                  "德国",
+                  "澳大利亚",
+                  "瑞典",
+                  "荷兰",
+                  "(126)中国",
+                ],
+              },
+            ],
+            title: {
+              text: "4号统计值",
             },
-            areaStyle: {
-              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                {
-                  offset: 0,
-                  color: "rgb(255, 158, 68)",
-                },
-                {
-                  offset: 1,
-                  color: "rgb(255, 70, 131)",
-                },
-              ]),
-            },
-          },
-          {
-            name: "云台山",
-            type: "bar",
-            symbol: "none",
-            sampling: "lttb",
-            data: data2,
-            itemStyle: {
-              color: "#D5F19F",
-            },
-            areaStyle: {
-              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                {
-                  offset: 0,
-                  color: "#758A4B",
-                },
-                {
-                  offset: 1,
-                  color: "#A9D750",
-                },
-              ]),
-            },
+            series: [
+              {
+                data: [
+                  51189.75, 48712.21, 42516.46, 35477.69, 34793.77, 31709.25,
+                  30307.42, 29882.78, 28910.83, 604.332,
+                ],
+              },
+            ],
           },
           {
-            name: "长隆野生动物园",
-            type: "bar",
-            symbol: "none",
-            sampling: "lttb",
-            data: data3,
-            itemStyle: {
-              color: "#4CE7CC",
+            xAxis: [
+              {
+                data: [
+                  "卢森堡",
+                  "瑞士",
+                  "日本",
+                  "丹麦",
+                  "挪威",
+                  "德国",
+                  "澳大利亚",
+                  "瑞典",
+                  "荷兰",
+                  "(126)中国",
+                ],
+              },
+            ],
+            title: {
+              text: "5号统计值",
             },
-            areaStyle: {
-              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                {
-                  offset: 0,
-                  color: "#50998C",
-                },
-                {
-                  offset: 1,
-                  color: "#42C8B1",
-                },
-              ]),
-            },
+            series: [
+              {
+                data: [
+                  51189.75, 48712.21, 42516.46, 35477.69, 34793.77, 31709.25,
+                  30307.42, 29882.78, 28910.83, 604.332,
+                ],
+              },
+            ],
           },
-                    {
-            name: "华山",
-            type: "bar",
-            symbol: "none",
-            sampling: "lttb",
-            data: data4,
-            itemStyle: {
-              color: "#4789D6",
+          {
+            xAxis: [
+              {
+                data: [
+                  "卢森堡",
+                  "瑞士",
+                  "日本",
+                  "丹麦",
+                  "挪威",
+                  "德国",
+                  "澳大利亚",
+                  "瑞典",
+                  "荷兰",
+                  "(126)中国",
+                ],
+              },
+            ],
+            title: {
+              text: "6号统计值",
             },
-            areaStyle: {
-              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                {
-                  offset: 0,
-                  color: "#627995",
-                },
-                {
-                  offset: 1,
-                  color: "#3768A1",
-                },
-              ]),
+            series: [
+              {
+                data: [
+                  51189.75, 48712.21, 42516.46, 35477.69, 34793.77, 31709.25,
+                  30307.42, 29882.78, 28910.83, 604.332,
+                ],
+              },
+            ],
+          },
+          {
+            xAxis: [
+              {
+                data: [
+                  "卢森堡",
+                  "瑞士",
+                  "日本",
+                  "丹麦",
+                  "挪威",
+                  "德国",
+                  "澳大利亚",
+                  "瑞典",
+                  "荷兰",
+                  "(126)中国",
+                ],
+              },
+            ],
+            title: {
+              text: "7号统计值",
             },
+            series: [
+              {
+                data: [
+                  51189.75, 48712.21, 42516.46, 35477.69, 34793.77, 31709.25,
+                  30307.42, 29882.78, 28910.83, 604.332,
+                ],
+              },
+            ],
+          },
+          {
+            xAxis: [
+              {
+                data: [
+                  "卢森堡",
+                  "瑞士",
+                  "日本",
+                  "丹麦",
+                  "挪威",
+                  "德国",
+                  "澳大利亚",
+                  "瑞典",
+                  "荷兰",
+                  "(126)中国",
+                ],
+              },
+            ],
+            title: {
+              text: "8号统计值",
+            },
+            series: [
+              {
+                data: [
+                  51189.75, 48712.21, 42516.46, 35477.69, 34793.77, 31709.25,
+                  30307.42, 29882.78, 28910.83, 604.332,
+                ],
+              },
+            ],
           },
         ],
       };
-      option && myChart.setOption(option, true);
+      option && myChart.setOption(option);
     },
-    initTimechart2() {
-      var chartDom = document.getElementById("timechart2");
-      var myChart = echarts.init(chartDom);
-      var option;
+    // initTimechart() {
+    //   var chartDom = document.getElementById("timechart");
+    //   var myChart = echarts.init(chartDom);
+    //   var option;
 
-      let base = +new Date(2005, 9, 3);
-      let oneDay = 24 * 3600 * 1000;
-      let date = [];
-      let data = [Math.random() * 300];
-      let data2 = [Math.random() * 300];
-      let data3 = [Math.random() * 3];
-      for (let i = 1; i < 6150; i++) {
-        var now = new Date((base += oneDay));
-        date.push(
-          [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
-        );
-        var absnum = Math.round((Math.random() - 0.5) * 20 + data[i - 1]);
-        if (absnum < 0) {
-          absnum = -absnum;
-        }
-        data.push(absnum);
-      }
-      for (let i = 1; i < 20000; i++) {
-        var now = new Date((base += oneDay));
-        date.push(
-          [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
-        );
-        var absnum = Math.round((Math.random() - 0.5) * 20 + data2[i - 1]);
-        if (absnum < 0) {
-          absnum = -absnum;
-        }
-        data2.push(absnum);
-      }
-      for (let i = 1; i < 6150; i++) {
-        var now = new Date((base += oneDay));
-        date.push(
-          [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
-        );
-        var absnum = Math.round((Math.random() - 0.5) * 5 + data3[i - 1]);
-        if (absnum < 0) {
-          absnum = -absnum;
-        }
-        data3.push(absnum);
-      }
-      option = {
-        legend: {
-          right: 200,
-          // itemGap: 30,
-          // itemWidth: 8,
-          // padding: 10,
-          textStyle: {
-            fontSize: 12,
-            color: "#fft",
-          },
-          align: "left",
-        },
-        tooltip: {
-          trigger: "axis",
-          position: function (pt) {
-            return [pt[0], "10%"];
-          },
-        },
-        grid: {
-          left: "2%", //图表距边框的距离
-          right: "5%",
-          bottom: "18%",
-          top: "12%",
-          containLabel: true,
-        },
-        xAxis: {
-          type: "category",
-          boundaryGap: false,
-          data: date,
-          axisLine: {
-            lineStyle: {
-              color: "white",
-            },
-          },
-        },
-        yAxis: {
-          splitLine: { show: false },
-          type: "value",
-          boundaryGap: [0, "10%"],
-          axisLine: {
-            lineStyle: {
-              color: "white",
-            },
-          },
-        },
-        dataZoom: [
-          {
-            type: "inside",
-            start: 0,
-            end: 10,
-          },
-          {
-            start: 0,
-            end: 10,
-          },
-        ],
-        series: [
-          {
-            name: "评论数",
-            type: "line",
-            symbol: "none",
-            sampling: "lttb",
-            data: data,
-            itemStyle: {
-              color: "rgb(255, 70, 131)",
-            },
-            areaStyle: {
-              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                {
-                  offset: 0,
-                  color: "rgb(255, 158, 68)",
-                },
-                {
-                  offset: 1,
-                  color: "rgb(255, 70, 131)",
-                },
-              ]),
-            },
-          },
-          {
-            name: "好评数",
-            type: "line",
-            symbol: "none",
-            sampling: "lttb",
-            data: data2,
-            itemStyle: {
-              color: "#D5F19F",
-            },
-            areaStyle: {
-              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                {
-                  offset: 0,
-                  color: "#758A4B",
-                },
-                {
-                  offset: 1,
-                  color: "#A9D750",
-                },
-              ]),
-            },
-          },
-          {
-            name: "游记数",
-            type: "line",
-            symbol: "none",
-            sampling: "lttb",
-            data: data3,
-            itemStyle: {
-              color: "#4789D6",
-            },
-            areaStyle: {
-              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                {
-                  offset: 0,
-                  color: "#627995",
-                },
-                {
-                  offset: 1,
-                  color: "#3768A1",
-                },
-              ]),
-            },
-          },
-        ],
-      };
-      option && myChart.setOption(option, true);
-    },
+    //   let base = +new Date(2005, 9, 3);
+    //   let oneDay = 24 * 3600 * 1000;
+    //   let date = [];
+    //   let data = [Math.random() * 300];
+    //   let data2 = [Math.random() * 300];
+    //   let data3 = [Math.random() * 3];
+    //   for (let i = 1; i < 6150; i++) {
+    //     var now = new Date((base += oneDay));
+    //     date.push(
+    //       [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
+    //     );
+    //     var absnum = Math.round((Math.random() - 0.5) * 50 + data[i - 1]);
+    //     if (absnum < 0) {
+    //       absnum = -absnum;
+    //     }
+    //     data.push(absnum);
+    //   }
+    //   for (let i = 1; i < 20000; i++) {
+    //     var now = new Date((base += oneDay));
+    //     date.push(
+    //       [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
+    //     );
+    //     var absnum = Math.round((Math.random() - 0.5) * 20 + data2[i - 1]);
+    //     if (absnum < 0) {
+    //       absnum = -absnum;
+    //     }
+    //     data2.push(absnum);
+    //   }
+    //   for (let i = 1; i < 6150; i++) {
+    //     var now = new Date((base += oneDay));
+    //     date.push(
+    //       [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
+    //     );
+    //     var absnum = Math.round((Math.random() - 0.5) * 5 + data3[i - 1]);
+    //     if (absnum < 0) {
+    //       absnum = -absnum;
+    //     }
+    //     data3.push(absnum);
+    //   }
+    //   option = {
+    //     legend: {
+    //       right: 200,
+    //       // itemGap: 30,
+    //       // itemWidth: 8,
+    //       // padding: 10,
+    //       textStyle: {
+    //         fontSize: 12,
+    //         color: "#fft",
+    //       },
+    //       align: "left",
+    //     },
+    //     tooltip: {
+    //       trigger: "axis",
+    //       position: function (pt) {
+    //         return [pt[0], "10%"];
+    //       },
+    //     },
+    //     grid: {
+    //       left: "2%", //图表距边框的距离
+    //       right: "5%",
+    //       bottom: "18%",
+    //       top: "12%",
+    //       containLabel: true,
+    //     },
+    //     xAxis: {
+    //       type: "category",
+    //       boundaryGap: false,
+    //       data: date,
+    //       axisLine: {
+    //         lineStyle: {
+    //           color: "white",
+    //         },
+    //       },
+    //     },
+    //     yAxis: {
+    //       splitLine: { show: false },
+    //       type: "value",
+    //       boundaryGap: [0, "10%"],
+    //       axisLine: {
+    //         lineStyle: {
+    //           color: "white",
+    //         },
+    //       },
+    //     },
+    //     dataZoom: [
+    //       {
+    //         type: "inside",
+    //         start: 0,
+    //         end: 10,
+    //       },
+    //       {
+    //         start: 0,
+    //         end: 10,
+    //       },
+    //     ],
+    //     series: [
+    //       {
+    //         name: "评论数",
+    //         type: "line",
+    //         symbol: "none",
+    //         sampling: "lttb",
+    //         data: data,
+    //         itemStyle: {
+    //           color: "rgb(255, 70, 131)",
+    //         },
+    //         areaStyle: {
+    //           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+    //             {
+    //               offset: 0,
+    //               color: "rgb(255, 158, 68)",
+    //             },
+    //             {
+    //               offset: 1,
+    //               color: "rgb(255, 70, 131)",
+    //             },
+    //           ]),
+    //         },
+    //       },
+    //       {
+    //         name: "好评数",
+    //         type: "line",
+    //         symbol: "none",
+    //         sampling: "lttb",
+    //         data: data2,
+    //         itemStyle: {
+    //           color: "#D5F19F",
+    //         },
+    //         areaStyle: {
+    //           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+    //             {
+    //               offset: 0,
+    //               color: "#758A4B",
+    //             },
+    //             {
+    //               offset: 1,
+    //               color: "#A9D750",
+    //             },
+    //           ]),
+    //         },
+    //       },
+    //       {
+    //         name: "游记数",
+    //         type: "line",
+    //         symbol: "none",
+    //         sampling: "lttb",
+    //         data: data3,
+    //         itemStyle: {
+    //           color: "#4789D6",
+    //         },
+    //         areaStyle: {
+    //           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+    //             {
+    //               offset: 0,
+    //               color: "#627995",
+    //             },
+    //             {
+    //               offset: 1,
+    //               color: "#3768A1",
+    //             },
+    //           ]),
+    //         },
+    //       },
+    //     ],
+    //   };
+    //   option && myChart.setOption(option, true);
+    // },
+    // initTimechart1() {
+    //   var chartDom = document.getElementById("timechart1");
+    //   var myChart = echarts.init(chartDom);
+    //   var option;
+
+    //   let base = +new Date(2005, 9, 3);
+    //   let oneDay = 24 * 3600 * 1000;
+    //   let date = [];
+    //   let data = [Math.random() * 300];
+    //   let data2 = [Math.random() * 300];
+    //   let data3 = [Math.random() * 300];
+    //        let data4 = [Math.random() * 300];
+    //   for (let i = 1; i < 6150; i++) {
+    //     var now = new Date((base += oneDay));
+    //     date.push(
+    //       [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
+    //     );
+    //     var absnum = Math.round((Math.random() - 0.5) * 20 + data[i - 1]);
+    //     if (absnum < 0) {
+    //       absnum = -absnum;
+    //     }
+    //     data.push(absnum);
+    //   }
+    //   for (let i = 1; i < 6150; i++) {
+    //     var now = new Date((base += oneDay));
+    //     date.push(
+    //       [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
+    //     );
+    //     var absnum = Math.round((Math.random() - 0.5) * 20 + data2[i - 1]);
+    //     if (absnum < 0) {
+    //       absnum = -absnum;
+    //     }
+    //     data2.push(absnum);
+    //   }
+    //   for (let i = 1; i < 6150; i++) {
+    //     var now = new Date((base += oneDay));
+    //     date.push(
+    //       [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
+    //     );
+    //     var absnum = Math.round((Math.random() - 0.5) * 20 + data3[i - 1]);
+    //     if (absnum < 0) {
+    //       absnum = -absnum;
+    //     }
+    //     data3.push(absnum);
+    //   }
+    //         for (let i = 1; i < 6150; i++) {
+    //     var now = new Date((base += oneDay));
+    //     date.push(
+    //       [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
+    //     );
+    //     var absnum = Math.round((Math.random() - 0.5) * 20 + data4[i - 1]);
+    //     if (absnum < 0) {
+    //       absnum = -absnum;
+    //     }
+    //     data4.push(absnum);
+    //   }
+    //   option = {
+    //     legend: {
+    //       right: 200,
+    //       // itemGap: 30,
+    //       // itemWidth: 8,
+    //       // padding: 10,
+    //       textStyle: {
+    //         fontSize: 12,
+    //         color: "#fft",
+    //       },
+    //       align: "left",
+    //     },
+    //     tooltip: {
+    //       trigger: "axis",
+    //       position: function (pt) {
+    //         return [pt[0], "10%"];
+    //       },
+    //     },
+    //     grid: {
+    //       left: "2%", //图表距边框的距离
+    //       right: "5%",
+    //       bottom: "18%",
+    //       top: "12%",
+    //       containLabel: true,
+    //     },
+    //     xAxis: {
+    //       type: "category",
+    //       boundaryGap: false,
+    //       data: date,
+    //       axisLine: {
+    //         lineStyle: {
+    //           color: "white",
+    //         },
+    //       },
+    //     },
+    //     yAxis: {
+    //       splitLine: { show: false },
+    //       type: "value",
+    //       boundaryGap: [0, "10%"],
+    //       axisLine: {
+    //         lineStyle: {
+    //           color: "white",
+    //         },
+    //       },
+    //     },
+    //     dataZoom: [
+    //       {
+    //         type: "inside",
+    //         start: 0,
+    //         end: 10,
+    //       },
+    //       {
+    //         start: 0,
+    //         end: 10,
+    //       },
+    //     ],
+    //     series: [
+    //       {
+    //         name: "珠江南田温泉",
+    //         type: "bar",
+    //         symbol: "none",
+    //         sampling: "lttb",
+    //         data: data,
+    //         itemStyle: {
+    //           color: "rgb(255, 70, 131)",
+    //         },
+    //         areaStyle: {
+    //           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+    //             {
+    //               offset: 0,
+    //               color: "rgb(255, 158, 68)",
+    //             },
+    //             {
+    //               offset: 1,
+    //               color: "rgb(255, 70, 131)",
+    //             },
+    //           ]),
+    //         },
+    //       },
+    //       {
+    //         name: "云台山",
+    //         type: "bar",
+    //         symbol: "none",
+    //         sampling: "lttb",
+    //         data: data2,
+    //         itemStyle: {
+    //           color: "#D5F19F",
+    //         },
+    //         areaStyle: {
+    //           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+    //             {
+    //               offset: 0,
+    //               color: "#758A4B",
+    //             },
+    //             {
+    //               offset: 1,
+    //               color: "#A9D750",
+    //             },
+    //           ]),
+    //         },
+    //       },
+    //       {
+    //         name: "长隆野生动物园",
+    //         type: "bar",
+    //         symbol: "none",
+    //         sampling: "lttb",
+    //         data: data3,
+    //         itemStyle: {
+    //           color: "#4CE7CC",
+    //         },
+    //         areaStyle: {
+    //           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+    //             {
+    //               offset: 0,
+    //               color: "#50998C",
+    //             },
+    //             {
+    //               offset: 1,
+    //               color: "#42C8B1",
+    //             },
+    //           ]),
+    //         },
+    //       },
+    //                 {
+    //         name: "华山",
+    //         type: "bar",
+    //         symbol: "none",
+    //         sampling: "lttb",
+    //         data: data4,
+    //         itemStyle: {
+    //           color: "#4789D6",
+    //         },
+    //         areaStyle: {
+    //           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+    //             {
+    //               offset: 0,
+    //               color: "#627995",
+    //             },
+    //             {
+    //               offset: 1,
+    //               color: "#3768A1",
+    //             },
+    //           ]),
+    //         },
+    //       },
+    //     ],
+    //   };
+    //   option && myChart.setOption(option, true);
+    // },
+    // initTimechart2() {
+    //   var chartDom = document.getElementById("timechart2");
+    //   var myChart = echarts.init(chartDom);
+    //   var option;
+
+    //   let base = +new Date(2005, 9, 3);
+    //   let oneDay = 24 * 3600 * 1000;
+    //   let date = [];
+    //   let data = [Math.random() * 300];
+    //   let data2 = [Math.random() * 300];
+    //   let data3 = [Math.random() * 3];
+    //   for (let i = 1; i < 6150; i++) {
+    //     var now = new Date((base += oneDay));
+    //     date.push(
+    //       [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
+    //     );
+    //     var absnum = Math.round((Math.random() - 0.5) * 20 + data[i - 1]);
+    //     if (absnum < 0) {
+    //       absnum = -absnum;
+    //     }
+    //     data.push(absnum);
+    //   }
+    //   for (let i = 1; i < 20000; i++) {
+    //     var now = new Date((base += oneDay));
+    //     date.push(
+    //       [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
+    //     );
+    //     var absnum = Math.round((Math.random() - 0.5) * 20 + data2[i - 1]);
+    //     if (absnum < 0) {
+    //       absnum = -absnum;
+    //     }
+    //     data2.push(absnum);
+    //   }
+    //   for (let i = 1; i < 6150; i++) {
+    //     var now = new Date((base += oneDay));
+    //     date.push(
+    //       [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
+    //     );
+    //     var absnum = Math.round((Math.random() - 0.5) * 5 + data3[i - 1]);
+    //     if (absnum < 0) {
+    //       absnum = -absnum;
+    //     }
+    //     data3.push(absnum);
+    //   }
+    //   option = {
+    //     legend: {
+    //       right: 200,
+    //       // itemGap: 30,
+    //       // itemWidth: 8,
+    //       // padding: 10,
+    //       textStyle: {
+    //         fontSize: 12,
+    //         color: "#fft",
+    //       },
+    //       align: "left",
+    //     },
+    //     tooltip: {
+    //       trigger: "axis",
+    //       position: function (pt) {
+    //         return [pt[0], "10%"];
+    //       },
+    //     },
+    //     grid: {
+    //       left: "2%", //图表距边框的距离
+    //       right: "5%",
+    //       bottom: "18%",
+    //       top: "12%",
+    //       containLabel: true,
+    //     },
+    //     xAxis: {
+    //       type: "category",
+    //       boundaryGap: false,
+    //       data: date,
+    //       axisLine: {
+    //         lineStyle: {
+    //           color: "white",
+    //         },
+    //       },
+    //     },
+    //     yAxis: {
+    //       splitLine: { show: false },
+    //       type: "value",
+    //       boundaryGap: [0, "10%"],
+    //       axisLine: {
+    //         lineStyle: {
+    //           color: "white",
+    //         },
+    //       },
+    //     },
+    //     dataZoom: [
+    //       {
+    //         type: "inside",
+    //         start: 0,
+    //         end: 10,
+    //       },
+    //       {
+    //         start: 0,
+    //         end: 10,
+    //       },
+    //     ],
+    //     series: [
+    //       {
+    //         name: "评论数",
+    //         type: "line",
+    //         symbol: "none",
+    //         sampling: "lttb",
+    //         data: data,
+    //         itemStyle: {
+    //           color: "rgb(255, 70, 131)",
+    //         },
+    //         areaStyle: {
+    //           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+    //             {
+    //               offset: 0,
+    //               color: "rgb(255, 158, 68)",
+    //             },
+    //             {
+    //               offset: 1,
+    //               color: "rgb(255, 70, 131)",
+    //             },
+    //           ]),
+    //         },
+    //       },
+    //       {
+    //         name: "好评数",
+    //         type: "line",
+    //         symbol: "none",
+    //         sampling: "lttb",
+    //         data: data2,
+    //         itemStyle: {
+    //           color: "#D5F19F",
+    //         },
+    //         areaStyle: {
+    //           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+    //             {
+    //               offset: 0,
+    //               color: "#758A4B",
+    //             },
+    //             {
+    //               offset: 1,
+    //               color: "#A9D750",
+    //             },
+    //           ]),
+    //         },
+    //       },
+    //       {
+    //         name: "游记数",
+    //         type: "line",
+    //         symbol: "none",
+    //         sampling: "lttb",
+    //         data: data3,
+    //         itemStyle: {
+    //           color: "#4789D6",
+    //         },
+    //         areaStyle: {
+    //           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+    //             {
+    //               offset: 0,
+    //               color: "#627995",
+    //             },
+    //             {
+    //               offset: 1,
+    //               color: "#3768A1",
+    //             },
+    //           ]),
+    //         },
+    //       },
+    //     ],
+    //   };
+    //   option && myChart.setOption(option, true);
+    // },
     //矩形树图点击事件
     clickFun(param) {
       if (param.type == "click") {
