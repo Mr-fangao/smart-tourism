@@ -11,7 +11,7 @@
             <span>景点查询</span>
           </div>
           <div class="sorttable">
-            <el-card shadow="hover" class="tebale_card">
+            <el-card shadow="hover" class="teble_card">
               <el-input
                 prefix-icon="el-icon-search"
                 size="mini"
@@ -35,24 +35,24 @@
                 <el-table-column
                   prop="name"
                   label="名称"
-                  width="130"
+                  width="120"
                   :show-overflow-tooltip="true"
                 >
                 </el-table-column>
                 <el-table-column
                   prop="city"
                   label="城市"
-                  width="60"
+                  width="50"
                   :show-overflow-tooltip="true"
                 >
                 </el-table-column>
                 <el-table-column
                   prop="score"
                   label="评分"
-                  width="60"
+                  width="50"
                   :show-overflow-tooltip="true"
                 >
-                   <template slot-scope="scope">
+                  <template slot-scope="scope">
                     <span>{{ scope.row.score | rounding }}</span>
                   </template>
                 </el-table-column>
@@ -66,7 +66,7 @@
                 <el-table-column
                   prop="address"
                   label="地址"
-                  width="65"
+                  width="80"
                   :show-overflow-tooltip="true"
                 >
                 </el-table-column>
@@ -89,7 +89,7 @@
                   </template>
                 </el-table-column>
               </el-table>
-              <div style="margin: 0px 0">
+              <div id="pagination">
                 <el-pagination
                   @current-change="handleCurrentChange"
                   background
@@ -100,6 +100,7 @@
                   small
                   :page-size="pageSize"
                   :current-page="currentPage"
+                  id="pagination"
                 >
                 </el-pagination>
               </div>
@@ -120,7 +121,6 @@
       <span class="text1">区域查询</span>
       <span>清除查询</span>
     </div> -->
-
   </div>
 </template>
 
@@ -171,7 +171,7 @@ export default {
       pointsflag: 0,
     };
   },
-    filters: {
+  filters: {
     rounding(value) {
       return value.toFixed(2);
     },
@@ -295,7 +295,7 @@ export default {
         });
     },
     clickData(val) {
-      Bus.$emit('myevent',val.id);
+      Bus.$emit("myevent", val.id);
       this.$router.push({ name: "details" });
     },
     getDetail(val) {
@@ -310,7 +310,7 @@ export default {
     //   draw.changeMode('draw_point')
     // },
   },
-    filters: {
+  filters: {
     rounding(value) {
       return value.toFixed(2);
     },
@@ -387,7 +387,7 @@ export default {
   float: left;
   display: flex;
   flex-direction: column;
-  padding: 10px;
+  padding: 6px;
   background: url(../assets/img/side.png) no-repeat;
   opacity: 1;
   background-size: 100% 100%;
@@ -401,7 +401,7 @@ export default {
         bottom: 2%;
         position: absolute;
       }
-      .tebale_card {
+      .teble_card {
         background-color: transparent;
         height: 100%;
         border: none;
@@ -409,6 +409,7 @@ export default {
           background-color: #225e81e3;
           border-color: #1edaeb;
           color: #fff;
+          width: 77px;
         }
         #button2 {
           margin-left: 16%;
@@ -416,7 +417,6 @@ export default {
           border-color: #1edaeb;
           color: #fff;
         }
-      }
       /deep/.el-card__body {
         padding: 6px !important;
         height: 100%;
@@ -501,6 +501,8 @@ export default {
       /deep/.el-table th.el-table__cell.is-leaf {
         border-bottom: transparent !important;
       }
+      }
+
     }
   }
 }
@@ -511,5 +513,23 @@ export default {
   width: 100%;
   background: #0cf3f3;
 }
-
+/deep/.el-input__inner {
+  color: #ccd8ef;
+}
+/deep/.el-pagination__total {
+  color: #ccd8ef;
+}
+/deep/.el-pagination__jump {
+      margin-left: 8px;
+  color: #ccd8ef;
+}
+// #pagination{
+//   /deep/.el-input{
+//     width: 50%;
+//       /deep/.el-input__inner :nth-child(2){
+//     width: 100%;
+    
+//   }
+//   }
+// }
 </style>

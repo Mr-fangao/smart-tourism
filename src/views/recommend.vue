@@ -926,7 +926,7 @@ export default {
       else if (value === 5) this.comp = "multimap";
       else if (value === 6) this.comp = "locmap";
       //   else if (value === 3) this.comp = "density";
-    },
+    }, 
     //更新数据动画
     refeashData() {
       (this.timevalue = ""),

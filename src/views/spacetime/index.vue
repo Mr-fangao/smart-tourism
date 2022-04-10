@@ -340,7 +340,7 @@ export default {
   },
   data() {
     return {
-       checkList: ["途牛网", "携程网", "马蜂窝", "去哪儿"],
+      checkList: ["途牛网", "携程网", "马蜂窝", "去哪儿"],
       ceng: 0,
       json: {
         STime: new Date("2018"),
@@ -372,6 +372,7 @@ export default {
         },
       },
       name: "冷热点分析",
+      spacevalue: "",
       space: [
         {
           value: "省级",
@@ -501,6 +502,8 @@ export default {
       }
     },
     tian() {
+      this.json.space = "省级";
+      this.json.source = "景点数";
       this.ceng = 0;
       if (this.ceng === 0) {
         this.timedisplay = true;
@@ -512,6 +515,8 @@ export default {
         "冷热点分析是GIS中的一种空间分析方法，是对数据集中的每一个要素计算 Getis-Ord Gi* 统计（称为 G-i-星号）。得到 z 得分和 p 值，对应统计学中的聚类，将数据分为高值和低值，其目的在于突出空间特征，颜色越深表示区域高/低值聚集程度越强。";
     },
     re() {
+      this.json.space = "省级";
+      this.json.source = "景点数";
       this.ceng = 1;
       if (this.ceng === 1) {
         this.timedisplay = true;
@@ -523,6 +528,8 @@ export default {
         "通过构建城市地理加权回归模型，分析我国景点分布发生与区域教育水平、地区生产总值、人均GDP、人均可支配收入、公路里程数等的关联。";
     },
     ying() {
+      this.json.space = "省级";
+      this.json.source = "景点数";
       this.ceng = 2;
       if (this.ceng === 2) {
         this.timedisplay = true;
@@ -534,6 +541,8 @@ export default {
         "通过分析测算空间关联局域指标（Local Indicators of Spatial Association, LISA）显著水平，通过局部自相关分析方法，分析中国景点分布整体空间关联趋势，得出不同尺度范围下我国各区域的关联和影响。";
     },
     jv() {
+      this.json.space = "省级";
+      this.json.source = "景点数";
       this.ceng = 3;
       if (this.ceng === 3) {
         this.timedisplay = true;
@@ -545,6 +554,8 @@ export default {
         "新兴时空热点分析是GIS中的一种空间分析方法，能够根据某一段时间内已存在的地理分布数据做后续发展的时间和空间分析，通过新兴时空热点分析，获取景点分布热点和冷点趋势，分析我国旅游景点的时空演化特征，包括数据随时间变化的整体趋势、整体的范围、空间等级变化的整体趋势。";
     },
     feng() {
+      this.json.space = "省级";
+      this.json.source = "景点数";
       this.ceng = 4;
       if (this.ceng === 4) {
         this.timedisplay = true;
@@ -739,6 +750,8 @@ export default {
   cursor: move;
   user-select: none;
   display: flex;
+      margin-top: 2%;
+    margin-left: 2%;
   > span {
     width: 50%;
     height: 100%;
@@ -761,7 +774,8 @@ export default {
   line-height: 30px;
   cursor: move;
   user-select: none;
-  display: flex;align-items: center;
+  display: flex;
+  align-items: center;
   .leftpt {
     flex: 3;
     font-size: 12pt;
@@ -774,12 +788,12 @@ export default {
       width: 100%;
       .el-checkbox {
         color: rgb(174, 193, 199);
-    margin-right: 5%;
+        margin-right: 5%;
         margin-top: 0%;
         margin-bottom: 0%;
         margin-left: 0%;
       }
-      /deep/.el-checkbox__label{
+      /deep/.el-checkbox__label {
         padding-left: 0%;
       }
       /deep/.el-checkbox__input.is-checked + .el-checkbox__label {
