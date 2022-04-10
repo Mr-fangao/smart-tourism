@@ -149,20 +149,19 @@
 </template>
 <script>
 import word3D from "../../components/wordcloud3D.vue";
-import eventBum from "../../views/traffickingnetwork/public/js/EvebtBus";
-import SelectRegion from "../../views/traffickingnetwork/components/selectRegionBJ.vue";
+import eventBum from "../cityselect/EvebtBus";
+import SelectRegion from "../cityselect/newselectRegion.vue";
 import nanjing from "../../assets/json/nanjingpoint.json";
 import njprovince from "../../assets/json/njprovince.json";
 import wordcloud from "../../assets/js/echarts-wordcloud-master/index";
 import echarts from "echarts";
 import request from "../../utils/request";
-import areaSelect from "../areaSelect.vue";
+
 export default {
   name: "city",
   components: {
     wordcloud,
     SelectRegion,
-    areaSelect,
     word3D,
   },
 

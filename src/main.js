@@ -8,6 +8,7 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import 'font-awesome/css/font-awesome.min.css';
 
+import store from './store';
 // import 'cesium/Source/Widgets/widgets.css'
 // import Cesium from '../node_modules/cesium/Build/Cesium'
 // import Cesium from 'cesium/Source/Cesium'
@@ -33,6 +34,7 @@ Vue.use(ElementUI);
 new Vue({
   el: '#app',
   router,
+  store,
   components: {
     App
   },

@@ -10,7 +10,7 @@ export default {
   name: "home",
   data() {
     return {
-      iframeSrc: "http://localhost:8200",
+      iframeSrc: "http://124.221.111.73:8081/",
       iframeWin: ""
     };
   },
