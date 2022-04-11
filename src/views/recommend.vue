@@ -926,7 +926,7 @@ export default {
       else if (value === 5) this.comp = "multimap";
       else if (value === 6) this.comp = "locmap";
       //   else if (value === 3) this.comp = "density";
-    }, 
+    },
     //更新数据动画
     refeashData() {
       (this.timevalue = ""),
@@ -1114,18 +1114,37 @@ export default {
             symbol: "circle",
             symbolSize: 16,
             backgroundColor: "rgb(115, 215, 228)",
+            emphasis: {
+              label: {
+                show: true,
+                // formatter: "{d}日",
+                color: "#fff",
+                // fontSize:10,
+                // rotate: 0,
+              },
+              itemStyle: {
+                color: "rgb(115, 215, 228)",
+              },
+            },
+            controlStyle: {
+              color: "#61757b",
+              borderColor: "#61757b",
+              borderWidth: 1,
+              
+            },
+            progress: {
+              label: {
+                color: "#fff",
+              },
+            },
             checkpointStyle: {
               symbolSize: 13,
               color: "rgb(115, 215, 228)",
               borderWidth: 0,
               symbol: "circle",
             },
-            label: {
-              color: 'rgb(115, 215, 228)',
-            },
-            controlStyle: { color: 'rgb(115, 215, 228)' },
             realtime: true,
-            data: ["1", "2", "3", "4", "5", "6", "7", "8"],
+            data: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10","11", "12", "13", "14", "15", "16", "17", "18", "19", "20"],
           },
           grid: {
             top: "15.8%", //距上边距
