@@ -11,7 +11,7 @@
           <i class="fa fa-bar-chart fa-lg"></i>
           <span class="tab">监测</span>
         </el-menu-item>
-        <el-menu-item
+        <!-- <el-menu-item
           index="2"
           @click="show(2)"
           :class="index === 2 ? 'active' : ''"
@@ -19,7 +19,7 @@
         >
           <i class="fa fa-search fa-lg"></i>
           <span class="tab">查询</span>
-        </el-menu-item>
+        </el-menu-item> -->
       </el-menu>
     </div>
     <div class="feelings-content">

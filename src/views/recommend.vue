@@ -531,6 +531,8 @@ export default {
       word3Dheight: 200,
       word3Dwidth: 350,
       treemapname: "中国热门城市",
+      //评论数据变化
+      commentdata:[],
       isLoading: false,
       isShow: true,
       //区域选择
@@ -825,7 +827,12 @@ export default {
       ],
     };
   },
-  created() {},
+  beforeCreate(){
+    //获取评论数、好评数、游记数
+  },
+  created() {
+     this.getAlldata()
+  },
   mounted() {
     this.getScenicdata();
     this.getTime();
@@ -861,6 +868,15 @@ export default {
     },
   },
   methods: {
+    getAlldata(){
+      request.post("/api/data/commentDay").then((res) => {
+        console.log(res);
+        if(res.code==0){
+          this.commentdata=res.data
+          console.log(this.commentdata)
+        }
+      });
+    },
     getScenicdata() {
       // this.citycount.tourist = 1;
       // this.citycount.comment = 1;
@@ -992,7 +1008,7 @@ export default {
       console.log(tab.name);
       if (tab.name == "time") {
         setTimeout(() => {
-          this.initTimechart();
+          this.initTimechart(this.commentdata);
         }, 100);
       } else if (tab.name == "scenichot") {
         setTimeout(() => {
@@ -1438,41 +1454,29 @@ export default {
       };
       option && myChart.setOption(option);
     },
-    initTimechart() {
+    initTimechart(commentdata) {
       var chartDom = document.getElementById("timechart");
       var myChart = echarts.init(chartDom);
       var option;
-
-      let base = +new Date(2020, 1, 1);
+      var sdata;
+      let base = commentdata.startStamp;
       let oneDay = 24 * 3600 * 1000;
       let date = [];
-      let data = [Math.random() * 300];
-      let data2 = [Math.random() * 300];
-      let data3 = [Math.random() * 3];
-      for (let i = 1; i < 700; i++) {
+      for (let i = 1; i < 365; i++) {
         var now = new Date((base += oneDay));
         date.push(
           [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
         );
-        var absnum = Math.round((Math.random() - 0.5) * 50 + data[i - 1]);
-        if (absnum < 0) {
-          absnum = -absnum;
-        }
-        data.push(absnum);
       }
-      for (let i = 1; i < 700; i++) {
-        var absnum = Math.round((Math.random() - 0.5) * 20 + data2[i - 1]);
-        if (absnum < 0) {
-          absnum = -absnum;
+      for (let i = 1; i < 365; i++) {
+        sdata=Math.round((Math.random() - 0.5) * 700 );
+        if(sdata<0){
+          sdata=-sdata
         }
-        data2.push(absnum);
-      }
-      for (let i = 1; i < 700; i++) {
-        var absnum = Math.round((Math.random() - 0.5) * 5 + data3[i - 1]);
-        if (absnum < 0) {
-          absnum = -absnum;
+        if(commentdata.favorable[i]>=sdata)
+        {
+commentdata.favorable[i]-=sdata;
         }
-        data3.push(absnum);
       }
       option = {
         legend: {
@@ -1512,7 +1516,8 @@ export default {
         yAxis: {
           splitLine: { show: false },
           type: "value",
-          boundaryGap: [0, "10%"],
+          min: 'dataMin',
+          scale:true,
           axisLine: {
             lineStyle: {
               color: "white",
@@ -1536,67 +1541,67 @@ export default {
             type: "line",
             symbol: "none",
             sampling: "lttb",
-            data: data,
+            data: commentdata.daycount,
             itemStyle: {
               color: "rgb(255, 70, 131)",
             },
-            areaStyle: {
-              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                {
-                  offset: 0,
-                  color: "rgb(255, 158, 68)",
-                },
-                {
-                  offset: 1,
-                  color: "rgb(255, 70, 131)",
-                },
-              ]),
-            },
+            // areaStyle: {
+            //   color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            //     {
+            //       offset: 0,
+            //       color: "rgb(255, 158, 68)",
+            //     },
+            //     {
+            //       offset: 1,
+            //       color: "rgb(255, 70, 131)",
+            //     },
+            //   ]),
+            // },
           },
           {
             name: "好评数",
             type: "line",
             symbol: "none",
             sampling: "lttb",
-            data: data2,
+            data: commentdata.favorable,
             itemStyle: {
               color: "#D5F19F",
             },
-            areaStyle: {
-              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                {
-                  offset: 0,
-                  color: "#758A4B",
-                },
-                {
-                  offset: 1,
-                  color: "#A9D750",
-                },
-              ]),
-            },
+            // areaStyle: {
+            //   color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            //     {
+            //       offset: 0,
+            //       color: "#758A4B",
+            //     },
+            //     {
+            //       offset: 1,
+            //       color: "#A9D750",
+            //     },
+            //   ]),
+            // },
           },
-          {
-            name: "游记数",
-            type: "line",
-            symbol: "none",
-            sampling: "lttb",
-            data: data3,
-            itemStyle: {
-              color: "#4789D6",
-            },
-            areaStyle: {
-              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                {
-                  offset: 0,
-                  color: "#627995",
-                },
-                {
-                  offset: 1,
-                  color: "#3768A1",
-                },
-              ]),
-            },
-          },
+          // {
+          //   name: "游记数",
+          //   type: "line",
+          //   symbol: "none",
+          //   sampling: "lttb",
+          //   data: commentdata.travel,
+          //   itemStyle: {
+          //     color: "#4789D6",
+          //   },
+          //   areaStyle: {
+          //     color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          //       {
+          //         offset: 0,
+          //         color: "#627995",
+          //       },
+          //       {
+          //         offset: 1,
+          //         color: "#3768A1",
+          //       },
+          //     ]),
+          //   },
+          // },
         ],
       };
       option && myChart.setOption(option, true);
