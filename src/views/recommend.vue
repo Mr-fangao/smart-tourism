@@ -20,9 +20,7 @@
       <el-menu>
         <el-menu-item
           style="padding: 1%"
-          index="1"
           @click="showmap(1)"
-          :class="index === 1 ? 'active' : ''"
           plain
         >
           <el-radio v-model="mapchange" label="1">&ensp;</el-radio>
@@ -30,9 +28,7 @@
           <span class="tab" slot="title">聚合图</span>
         </el-menu-item>
         <el-menu-item
-          index="2"
           @click="showmap(2)"
-          :class="index === 2 ? 'active' : ''"
           plain
         >
           <el-radio v-model="mapchange" label="2">&ensp;</el-radio>
@@ -40,9 +36,7 @@
           <span class="tab" slot="title">分级图</span>
         </el-menu-item>
         <el-menu-item
-          index="3"
           @click="showmap(3)"
-          :class="index === 3 ? 'active' : ''"
           plain
         >
           <el-radio v-model="mapchange" label="3">&ensp;</el-radio>
@@ -50,16 +44,14 @@
           <span class="tab" slot="title">热力图</span>
         </el-menu-item>
         <el-menu-item
-          index="4"
           @click="showmap(4)"
-          :class="index === 4 ? 'active' : ''"
           plain
         >
           <el-radio v-model="mapchange" label="4">&ensp;</el-radio>
           <div class="mapimg map4"></div>
           <span class="tab" slot="title">时序图</span>
         </el-menu-item>
-        <el-menu-item index="5" :class="index === 5 ? 'active' : ''" plain>
+        <el-menu-item >
           <el-radio v-model="mapchange" label="5">&ensp;</el-radio>
           <span class="tab" slot="title">点数据</span>
         </el-menu-item>
@@ -410,12 +402,12 @@
                 <div class="person-name">收入:</div>
                 <div class="person-inputcontent">
                   <el-select
-                    v-model="value"
+                    v-model="income"
                     clearable
                     placeholder="选择收入范围"
                   >
                     <el-option
-                      v-for="item in options"
+                      v-for="item in income"
                       :key="item.value"
                       :label="item.label"
                       :value="item.value"
@@ -483,6 +475,16 @@
           </div>
         </el-tab-pane>
       </el-tabs>
+      <div
+        class="monthselect"
+        v-if="this.activeName2 == 'cityhot' || this.activeName2 == 'scenichot'"
+      >
+        <!-- <div class="monthselsct-span"></div> -->
+        <div class="monthselsct-month">
+          <el-date-picker value-format="yyyy-MM-dd" v-model="monthvalue" type="month" :placeholder="month" :clearable="clearable" @change="getScenicMonth(monthvalue)" >
+          </el-date-picker>
+        </div>
+      </div>
     </div>
     <selectRegion />
   </div>
@@ -531,8 +533,11 @@ export default {
       word3Dheight: 200,
       word3Dwidth: 350,
       treemapname: "中国热门城市",
-      //评论数据变化
-      commentdata:[],
+      //评论数据变化,页面下方
+      clearable:false,
+      monthvalue: "",
+      commentdata: [],
+      month: "",
       isLoading: false,
       isShow: true,
       //区域选择
@@ -542,7 +547,7 @@ export default {
       },
       datatime: "",
       //地图切换
-      index: "1",
+      index: 1,
 
       //推荐项目
       // tablelabel:'分数',
@@ -552,6 +557,20 @@ export default {
         tourist: "65536",
       },
       input: "",
+      income:[
+         {
+          value: "五千以下",
+          label: "省级",
+        },
+        {
+          value: "两万以下",
+          label: "市级",
+        },
+        {
+          value: "两万以上",
+          label: "县级",
+        },
+      ],
       distancechecked: true,
       seasonchecked: false,
       sourcechecked: true,
@@ -827,11 +846,11 @@ export default {
       ],
     };
   },
-  beforeCreate(){
+  beforeCreate() {
     //获取评论数、好评数、游记数
   },
   created() {
-     this.getAlldata()
+    this.getAlldata();
   },
   mounted() {
     this.getScenicdata();
@@ -868,12 +887,17 @@ export default {
     },
   },
   methods: {
-    getAlldata(){
+    //下方各类数据
+    getScenicMonth(val){
+      var month = val.slice(0, 6);
+      console.log(month)
+    },
+    getAlldata() {
       request.post("/api/data/commentDay").then((res) => {
         console.log(res);
-        if(res.code==0){
-          this.commentdata=res.data
-          console.log(this.commentdata)
+        if (res.code == 0) {
+          this.commentdata = res.data;
+          console.log(this.commentdata);
         }
       });
     },
@@ -934,6 +958,7 @@ export default {
     },
     showmap(value) {
       console.log(value);
+      this.mapchange=value.toString();
       this.activeClass = value;
       if (value === 1) this.comp = "pointgather";
       else if (value === 2) this.comp = "gradedcolormap";
@@ -1026,6 +1051,9 @@ export default {
       let month = date.getMonth() + 1; // 月
       let day = date.getDate() - 1; // 日
       this.datatime = `${year}/${month}/${day}`;
+      if(month/10<1){
+         this.month = `${year}-0${month - 1}`;
+      }
     },
     //矩形树图
     initChart1(data) {
@@ -1119,17 +1147,18 @@ export default {
         baseOption: {
           timeline: {
             //loop: false,
+            // backgroundColor: '#64A9EF',
             axisType: "category",
             show: true,
             autoPlay: true, //是否自动播放
-            playInterval: 1500, //播放速度
-            bottom: "78%", //距离容器下侧的距离
+            playInterval: 1200, //播放速度
+            bottom: "85%", //距离容器下侧的距离
             label: { position: "auto", show: true, color: "#fff" },
             lineStyle: {
-              color: "#61757b",
+              color: "#64A9EF",
             },
             symbol: "circle",
-            symbolSize: 16,
+            symbolSize: 10,
             backgroundColor: "rgb(115, 215, 228)",
             emphasis: {
               label: {
@@ -1144,19 +1173,13 @@ export default {
                 borderColor: "rgb(115, 215, 228)",
                 borderWidth: 1,
               },
-              checkpointStyle: {
-                symbolSize: 13,
-                color: "rgb(115, 215, 228)",
-                borderWidth: 0,
-                symbol: "circle",
-              },
               itemStyle: {
                 color: "rgb(115, 215, 228)",
               },
             },
             controlStyle: {
-              color: "#61757b",
-              borderColor: "#61757b",
+              color: "#99B6D4",
+              borderColor: "#99B6D4",
               borderWidth: 1,
             },
             progress: {
@@ -1172,15 +1195,15 @@ export default {
             },
             realtime: true,
             data: [
-              "1",
-              "2",
-              "3",
-              "4",
-              "5",
-              "6",
-              "7",
-              "8",
-              "9",
+              "1111111111",
+              "22222222222",
+              "33333333333",
+              "222222224",
+              "222222225",
+              "61111111",
+              "2222222227",
+              "82222222222",
+              "922222222",
               "10",
               "11",
               "12",
@@ -1205,7 +1228,6 @@ export default {
             {
               type: "category",
               // name: "景点",
-              
               axisLine: {
                 lineStyle: {
                   color: "#fff",
@@ -1501,21 +1523,17 @@ export default {
         );
       }
       for (let i = 1; i < 365; i++) {
-        sdata=Math.round((Math.random() - 0.5) * 700 );
-        if(sdata<0){
-          sdata=-sdata
+        sdata = Math.round((Math.random() - 0.5) * 700);
+        if (sdata < 0) {
+          sdata = -sdata;
         }
-        if(commentdata.favorable[i]>=sdata)
-        {
-commentdata.favorable[i]-=sdata;
+        if (commentdata.favorable[i] >= sdata) {
+          commentdata.favorable[i] -= sdata;
         }
       }
       option = {
         legend: {
           right: 200,
-          // itemGap: 30,
-          // itemWidth: 8,
-          // padding: 10,
           textStyle: {
             fontSize: 12,
             color: "#fft",
@@ -1531,8 +1549,8 @@ commentdata.favorable[i]-=sdata;
         grid: {
           left: "2%", //图表距边框的距离
           right: "5%",
-          bottom: "18%",
-          top: "12%",
+          bottom: "14%",
+          top: "15%",
           containLabel: true,
         },
         xAxis: {
@@ -1545,17 +1563,32 @@ commentdata.favorable[i]-=sdata;
             },
           },
         },
-        yAxis: {
-          splitLine: { show: false },
-          type: "value",
-          min: 'dataMin',
-          scale:true,
-          axisLine: {
-            lineStyle: {
-              color: "white",
+        yAxis: [
+          {
+            splitLine: { show: false },
+            type: "value",
+            name: "评论/好评数",
+            min: "dataMin",
+            scale: true,
+            axisLine: {
+              lineStyle: {
+                color: "white",
+              },
             },
           },
-        },
+          {
+            splitLine: { show: false },
+            type: "value",
+            name: "游记数",
+            min: "dataMin",
+            scale: true,
+            axisLine: {
+              lineStyle: {
+                color: "white",
+              },
+            },
+          },
+        ],
         dataZoom: [
           {
             type: "inside",
@@ -1565,10 +1598,13 @@ commentdata.favorable[i]-=sdata;
           {
             start: 0,
             end: 10,
+            height: 18,
+            bottom: 9,
           },
         ],
         series: [
           {
+            yAxisIndex: 0,
             name: "评论数",
             type: "line",
             symbol: "none",
@@ -1591,6 +1627,7 @@ commentdata.favorable[i]-=sdata;
             // },
           },
           {
+            yAxisIndex: 0,
             name: "好评数",
             type: "line",
             symbol: "none",
@@ -1612,28 +1649,29 @@ commentdata.favorable[i]-=sdata;
             //   ]),
             // },
           },
-          // {
-          //   name: "游记数",
-          //   type: "line",
-          //   symbol: "none",
-          //   sampling: "lttb",
-          //   data: commentdata.travel,
-          //   itemStyle: {
-          //     color: "#4789D6",
-          //   },
-          //   areaStyle: {
-          //     color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-          //       {
-          //         offset: 0,
-          //         color: "#627995",
-          //       },
-          //       {
-          //         offset: 1,
-          //         color: "#3768A1",
-          //       },
-          //     ]),
-          //   },
-          // },
+          {
+            yAxisIndex: 1,
+            name: "游记数",
+            type: "line",
+            symbol: "none",
+            sampling: "lttb",
+            data: commentdata.travel,
+            itemStyle: {
+              color: "#4789D6",
+            },
+            areaStyle: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                {
+                  offset: 0,
+                  color: "#627995",
+                },
+                {
+                  offset: 1,
+                  color: "#3768A1",
+                },
+              ]),
+            },
+          },
         ],
       };
       option && myChart.setOption(option, true);
@@ -2143,7 +2181,7 @@ commentdata.favorable[i]-=sdata;
 }
 .el-date-table td.next-month,
 .el-date-table td.prev-month {
-  color: #909399;
+  color: #999290;
 }
 .el-date-table th {
   color: #fff;
@@ -3172,6 +3210,81 @@ commentdata.favorable[i]-=sdata;
     .content {
       width: 100%;
       height: 85%;
+    }
+  }
+  .monthselect {
+    position: absolute;
+    height: 15%;
+    width: 11%;
+    right: 28%;
+    top: 2%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    //  background: url(../assets/img/buBG.png) no-repeat;
+    // background-size: 100% 100%;
+    background-color: #85bdbf38;
+    border-top: 1px solid #83d0c1dd;
+    border-bottom: 1px solid #83d0c1dd;
+    // .monthselsct-span{
+    //   width: 30%;
+    //   height: 100%;
+    // }
+    .monthselsct-month {
+      width: 100%;
+      height: 100%;
+           background: #29a1a163;
+      /deep/.el-input__inner {
+        &::placeholder {
+          color: rgb(236, 235, 235);
+          font-size: 14px;
+        }
+      }
+      /deep/.el-date-editor.el-input {
+        width: 100%;
+        height: 100%;
+     padding-right: 13%;
+      }
+      /deep/.el-input--prefix .el-input__inner {
+        padding-left: 0px;
+      }
+      /deep/.el-date-picker__header-label{
+        color: #dde0e0 ;
+      }
+      /deep/.el-month-table td .cell{
+        color: #d3d3d3;
+      }
+      /deep/.el-date-picker table{
+        color: #e5eeee;
+      }
+      // /deep/.el-input__prefix,
+      // .el-input__suffix {
+      //   // color: #12526e00;
+      // }
+      /deep/.el-input__prefix {
+        .el-input__icon {
+          width: 22px;
+          line-height: 38px;
+        }
+      }
+      /deep/.el-date-editor .el-range__close-icon{
+        width: 20px;
+      }
+      /deep/.el-input--suffix .el-input__inner {
+        padding-right: 0px;
+      }
+      /deep/.el-input__inner {
+        color: #ffffff;
+        background: #6d9c9c00;
+        height: 100%;
+        line-height: 40px;
+        outline: 0;
+        padding: 0;
+        text-align: right;
+        border: 0;
+        border-radius: 0px;
+        border-bottom: 1px solid #89c5ec6e;
+      }
     }
   }
 }

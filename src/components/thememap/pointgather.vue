@@ -79,6 +79,7 @@ export default {
   data() {
     return {
       datachange: "1",
+      index:"1",
     };
   },
   mounted() {
