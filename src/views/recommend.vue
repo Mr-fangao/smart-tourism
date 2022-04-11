@@ -1123,7 +1123,8 @@ export default {
             show: true,
             autoPlay: true, //是否自动播放
             playInterval: 1500, //播放速度
-            bottom: "85%", //距离容器下侧的距离
+            bottom: "78%", //距离容器下侧的距离
+            label: { position: "auto", show: true, color: "#fff" },
             lineStyle: {
               color: "#61757b",
             },
@@ -1138,6 +1139,17 @@ export default {
                 // fontSize:10,
                 // rotate: 0,
               },
+              controlStyle: {
+                color: "rgb(115, 215, 228)",
+                borderColor: "rgb(115, 215, 228)",
+                borderWidth: 1,
+              },
+              checkpointStyle: {
+                symbolSize: 13,
+                color: "rgb(115, 215, 228)",
+                borderWidth: 0,
+                symbol: "circle",
+              },
               itemStyle: {
                 color: "rgb(115, 215, 228)",
               },
@@ -1146,7 +1158,6 @@ export default {
               color: "#61757b",
               borderColor: "#61757b",
               borderWidth: 1,
-              
             },
             progress: {
               label: {
@@ -1160,7 +1171,28 @@ export default {
               symbol: "circle",
             },
             realtime: true,
-            data: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10","11", "12", "13", "14", "15", "16", "17", "18", "19", "20"],
+            data: [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8",
+              "9",
+              "10",
+              "11",
+              "12",
+              "13",
+              "14",
+              "15",
+              "16",
+              "17",
+              "18",
+              "19",
+              "20",
+            ],
           },
           grid: {
             top: "15.8%", //距上边距
@@ -1173,7 +1205,7 @@ export default {
             {
               type: "category",
               // name: "景点",
-              inverse: true,
+              
               axisLine: {
                 lineStyle: {
                   color: "#fff",
