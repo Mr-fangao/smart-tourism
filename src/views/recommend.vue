@@ -1166,10 +1166,12 @@ export default {
       let year = date.getFullYear(); // 年
       let month = date.getMonth() + 1; // 月
       let day = date.getDate() - 1; // 日
+      //景点热度日变化默认月
       this.currentmonth = `${year}-${month}-${day + 1}`;
       console.log(date);
       this.datatime = `${year}/${month}/${day}`;
       if (month / 10 < 1) {
+        //月份选择器时间
         this.month = `${year}-0${month - 2}`;
       } else {
         this.month = `${year}-${month - 2}`;
@@ -1554,7 +1556,7 @@ export default {
       }
       option = {
         legend: {
-          right: 200,
+          right: 100,
           textStyle: {
             fontSize: 12,
             color: "#fft",
@@ -1634,18 +1636,18 @@ export default {
             itemStyle: {
               color: "rgb(255, 70, 131)",
             },
-            // areaStyle: {
-            //   color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-            //     {
-            //       offset: 0,
-            //       color: "rgb(255, 158, 68)",
-            //     },
-            //     {
-            //       offset: 1,
-            //       color: "rgb(255, 70, 131)",
-            //     },
-            //   ]),
-            // },
+            areaStyle: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                {
+                  offset: 0,
+                  color: "rgb(255, 70, 131)",
+                },
+                {
+                  offset: 1,
+                  color: "#123456",
+                },
+              ]),
+            },
           },
           {
             yAxisIndex: 0,
@@ -1657,18 +1659,18 @@ export default {
             itemStyle: {
               color: "#D5F19F",
             },
-            // areaStyle: {
-            //   color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-            //     {
-            //       offset: 0,
-            //       color: "#758A4B",
-            //     },
-            //     {
-            //       offset: 1,
-            //       color: "#A9D750",
-            //     },
-            //   ]),
-            // },
+            areaStyle: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                {
+                  offset: 0,
+                  color: "#D5F19F",
+                },
+                {
+                  offset: 1,
+                  color: "#123456",
+                },
+              ]),
+            },
           },
           {
             yAxisIndex: 1,
@@ -1678,17 +1680,17 @@ export default {
             sampling: "lttb",
             data: commentdata.travel,
             itemStyle: {
-              color: "#4789D6",
+              color: "#1DE278",
             },
             areaStyle: {
               color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
                 {
                   offset: 0,
-                  color: "#627995",
+                  color: "#1DE278",
                 },
                 {
                   offset: 1,
-                  color: "#3768A1",
+                  color: "#123456",
                 },
               ]),
             },
@@ -2532,7 +2534,7 @@ export default {
         background: transparent;
         border: none;
       }
-      .el-tabs--border-card > .el-tabs__content {
+      /deep/.el-tabs--border-card > .el-tabs__content {
         padding: 0;
         height: 92%;
       }
@@ -2543,12 +2545,12 @@ export default {
       }
       /deep/.el-tabs__item {
         padding: 0;
-        width: 51%;
+        width: 25%;
         border: none;
-        //   background: url(../assets/img/tab.png)no-repeat;
-        //   background-size: 100% 100%;
       }
-
+      /deep/.el-tabs__nav{
+        width: 100%;
+      }
       /deep/.el-table .cell {
         padding-left: 0%;
         padding-right: 0%;
@@ -2561,7 +2563,7 @@ export default {
       }
       /deep/.el-tabs__nav-scroll {
         background: transparent;
-        width: 98%;
+        width: 100%;
         background: url(../assets/img/buttonbg.png) no-repeat;
         background-size: 100% 100%;
       }
@@ -2583,10 +2585,10 @@ export default {
         width: 100%;
         margin-top: 1%;
       }
-      .el-table--fit {
+      /deep/.el-table--fit {
         background: transparent;
       }
-      .el-table--fit {
+      /deep/.el-table--fit {
         background: transparent;
       }
       /deep/.el-table .el-table__header-wrapper tr th {
@@ -2622,12 +2624,6 @@ export default {
         padding-right: 0%;
         text-align: center;
       }
-      // /deep/.el-table--enable-row-hover
-      //   .el-table__body
-      //   tr:hover
-      //   > td.el-table__cell {
-      //   background: rgb(18, 47, 92)!important
-      //     }
       /deep/.el-table--striped
         .el-table__body
         tr.el-table__row--striped
@@ -3041,6 +3037,7 @@ export default {
   flex-direction: column;
   flex-wrap: wrap;
   display: flex;
+  background-color: #15cfee38;
 }
 .person-name {
   width: 40%;
@@ -3114,7 +3111,8 @@ export default {
   /deep/.el-tabs--border-card {
     height: 96%;
     margin: 1%;
-    background: transparent;
+    // background: transparent;
+    background-color: #15cfee14;
     border: none;
   }
   .el-tabs--border-card > .el-tabs__content {
@@ -3156,8 +3154,8 @@ export default {
     background-color: #85bdbf38;
   }
   /deep/.el-tabs--border-card > .el-tabs__header .el-tabs__item.is-active {
-    background: #2baccd6e;
-    color: #53eeff;
+    background: #00ecff6e;
+    // color: #bb5a00;
     border-left: none;
     border-right: none;
     border-top: 0px solid #0cf3f3;
@@ -3189,8 +3187,8 @@ export default {
     color: #dcf7f7;
   }
   /deep/.el-tabs--border-card > .el-tabs__header .el-tabs__item.is-active {
-    background: #2baccd6e;
-    color: #53eeff;
+    background: #00ecff6e;
+    color: #ffffff;
     border-left: none;
     border-right: none;
     border-top: 0px solid #0cf3f3;

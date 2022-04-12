@@ -44,11 +44,11 @@
                     v-for="(item, index) in commentlist"
                     :key="index"
                   >
-                    <div :title="item.pinglun" class="pinglun">
-                      {{ item.pinglun }}
+                    <div :title="item.content" class="pinglun">
+                      {{ item.content }}
                     </div>
                     <div :title="item.name" class="jingdian">
-                      {{ item.name }}
+                      {{ item.scenicName}}
                     </div>
                   </li>
                 </ul>

@@ -11,6 +11,7 @@
           <el-menu-item
             id="button3"
             index="1"
+            @click="change(1)"
             :class="index === 1 ? 'active' : ''"
             plain
           >
@@ -20,6 +21,7 @@
           <el-menu-item
             id="button4"
             index="2"
+            @click="change(2)"
             :class="index === 2 ? 'active' : ''"
             plain
           >
@@ -29,6 +31,7 @@
           <el-menu-item
             id="button5"
             index="3"
+            @click="change(3)"
             :class="index === 3 ? 'active' : ''"
             plain
           >
@@ -38,15 +41,17 @@
           <el-menu-item
             id="button6"
             index="4"
+            @click="change(4)"
             :class="index === 4 ? 'active' : ''"
             plain
           >
             <el-radio v-model="datachange" label="4">&ensp;</el-radio>
             <span class="tab" slot="title">好评数</span>
           </el-menu-item>
-                    <el-menu-item
+          <el-menu-item
             id="button5"
             index="5"
+            @click="change(5)"
             :class="index === 4 ? 'active' : ''"
             plain
           >
@@ -60,12 +65,12 @@
       </div>
     </div>
     <div class="control">
-      <div style="padding-top: 10px">
+      <!-- <div style="padding-top: 10px">
         <el-button id="button1">取消聚类</el-button>
       </div>
       <div style="padding-top: 10px">
         <el-button id="button2">执行聚类</el-button>
-      </div>
+      </div> -->
     </div>
     <div class="my-class"></div>
   </div>
@@ -74,40 +79,44 @@
 import travelimage from "../../assets/img/travel.png";
 import heatMapData from "../../assets/json/heatMapData.json";
 import testjson from "../../assets/json/point.json";
+const mapboxgl = require("mapbox-gl");
 export default {
   name: "pointgather",
   data() {
     return {
       datachange: "1",
-      index:"1",
+      index: "1",
     };
   },
   mounted() {
     this.initmap();
   },
   methods: {
+    change(val) {
+      this.datachange = val.toString();
+    },
     initmap() {
       this.$mapboxgl.accessToken =
         "pk.eyJ1IjoiY2hlbmpxIiwiYSI6ImNrcWFmdWt2bjBtZGsybmxjb29oYmRzZzEifQ.mnpiwx7_cBEyi8YiJiMRZg";
-      var map = new this.$mapboxgl.Map({
+      const map = new mapboxgl.Map({
         container: "map",
         style: "mapbox://styles/chenjq/cl010ychv001214pdpa5xyq5a",
-      center: [112, 31],
+        center: [112, 31],
         zoom: 4,
       });
-      map.on('load', () => {
-      map.addSource("sensicjsonfirst", {
-            type: "geojson",
-            data: testjson,
-            cluster: true, //聚合图的数据源需要添加样式
-            clusterMaxZoom: 14, //最大缩放到群集点
-            clusterRadius: 50,
-          });
-              //添加圆形聚合图层
+      map.on("load", () => {
+        map.addSource("sensicjson", {
+          type: "geojson",
+          data: testjson,
+          cluster: true, //聚合图的数据源需要添加样式
+          clusterMaxZoom: 14, //最大缩放到群集点
+          clusterRadius: 50,
+        });
+        //添加圆形聚合图层
         map.addLayer({
           id: "clusters",
           type: "circle",
-          source: "sensicjsonfirst",
+          source: "sensicjson",
           filter: ["has", "point_count"],
           paint: {
             //使用步骤表达式(https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-step)
@@ -141,7 +150,7 @@ export default {
         map.addLayer({
           id: "cluster-count",
           type: "symbol",
-          source: "sensicjsonfirst",
+          source: "sensicjson",
           filter: ["has", "point_count"],
           layout: {
             "text-field": "{point_count_abbreviated}",
@@ -155,7 +164,7 @@ export default {
         map.addLayer({
           id: "unclustered-point",
           type: "circle",
-          source: "sensicjsonfirst",
+          source: "sensicjson",
           filter: ["!", ["has", "point_count"]],
           paint: {
             "circle-color": "#f5587b",
@@ -172,84 +181,105 @@ export default {
       });
       //添加数据源1
       document.getElementById("button3").addEventListener("click", () => {
-        //加载前先移除图层
+        //加载前先移除图层、
+
+        if (map.getLayer("unclustered-point"))
+          map.removeLayer("unclustered-point");
         if (map.getLayer("points")) map.removeLayer("points");
         if (map.getLayer("clusters")) map.removeLayer("clusters");
         if (map.getLayer("cluster-count")) map.removeLayer("cluster-count");
+        if (map.getSource("sensicjson")) map.removeSource("sensicjson");
+        map.addSource("sensicjson", {
+          type: "geojson",
+          data: testjson,
+          cluster: true, //聚合图的数据源需要添加样式
+          clusterMaxZoom: 14, //最大缩放到群集点
+          clusterRadius: 50,
+        });
+        //添加圆形聚合图层
+        map.addLayer({
+          id: "clusters",
+          type: "circle",
+          source: "sensicjson",
+          filter: ["has", "point_count"],
+          paint: {
+            //使用步骤表达式(https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-step)
+            //用三个步骤实现三种类型的循环:
+            // *蓝色，20px圆，点计数小于100
+            // *黄色，30px的圆圈，点计数在100和750之间
+            // *粉红色，40px的圆圈，当点数大于等于750
+            "circle-color": [
+              "step",
+              ["get", "point_count"],
+              "#fff591",
+              100,
+              "#ff8a5c",
+              750,
+              "#e41749",
+            ],
+            "circle-radius": [
+              "step",
+              ["get", "point_count"],
+              20,
+              100,
+              30,
+              750,
+              40,
+            ],
+          },
+          //"source-layer": "button2"
+        });
 
-        if (map.getSource("sensicjson")||map.getSource("sensicjsonsensicjsonfirst")) {
-          const geojsonSource = map.getSource("sensicjson");
-          geojsonSource.setData(testjson);
-          const geojsonSource1 = map.getSource("sensicjson1");
-          geojsonSource1.setData(testjson);
-        } else {
-          map.addSource("sensicjson", {
-            type: "geojson",
-            data: testjson,
-            cluster: true, //聚合图的数据源需要添加样式
-            clusterMaxZoom: 14, //最大缩放到群集点
-            clusterRadius: 50,
-          });
+        //添加数字图层
+        map.addLayer({
+          id: "cluster-count",
+          type: "symbol",
+          source: "sensicjson",
+          filter: ["has", "point_count"],
+          layout: {
+            "text-field": "{point_count_abbreviated}",
+            "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
+            "text-size": 12,
+          },
+          //"source-layer": "button2"
+        });
 
-          map.loadImage(travelimage, (error, image) => {
-            if (error) throw error;
-
-            // Add the image to the map style.
-            map.addImage("travel", image);
-            map.addSource("point", {
-              type: "geojson",
-              data: heatMapData,
-            });
-          });
-        }
+        //添加未聚合图层
+        map.addLayer({
+          id: "unclustered-point",
+          type: "circle",
+          source: "sensicjson",
+          filter: ["!", ["has", "point_count"]],
+          paint: {
+            "circle-color": "#f5587b",
+            "circle-radius": 4,
+            "circle-stroke-width": 1,
+            "circle-stroke-color": "#fff",
+          },
+          //"source-layer": "button2"
+        });
+        map.fitBounds([
+          [90, 45], // 边界的西南角
+          [120, 30], // 边界的东北角
+        ]);
       });
       //添加数据源类型2
       document.getElementById("button4").addEventListener("click", () => {
         //加载前先移除图层
+
+        if (map.getLayer("unclustered-point"))
+          map.removeLayer("unclustered-point");
         if (map.getLayer("points")) map.removeLayer("points");
         if (map.getLayer("clusters")) map.removeLayer("clusters");
         if (map.getLayer("cluster-count")) map.removeLayer("cluster-count");
-        // if(map.getSource('testjson'))map.setData('heatMapData');
-        // if(map.getSource('testjson'))map.removeSouce('testjson'); debugger;
-        //首先判断数据源是否存在，存在的使用setdata方法
-        if (map.getSource("sensicjson")||map.getSource("sensicjsonsensicjsonfirst")) {
-          const geojsonSource = map.getSource("sensicjson");
-          geojsonSource.setData(heatMapData);
-          const geojsonSource1 = map.getSource("sensicjson1");
-          geojsonSource1.setData(heatMapData);
-        } //不存在使用addSource方法
-        else {
-          map.addSource("sensicjson", {
-            type: "geojson",
-            data: heatMapData,
-            cluster: true, //聚合图的数据源需要添加样式
-            clusterMaxZoom: 14, //最大缩放到群集点
-            clusterRadius: 50,
-          });
-          map.loadImage(travelimage, (error, image) => {
-            if (error) throw error;
-
-            // Add the image to the map style.
-            map.addImage("travel", image);
-            map.addSource("point", {
-              type: "geojson",
-              data: heatMapData,
-            });
-          });
-        }
-      });
-      //添加数据源类型3
-      document.getElementById("button5").addEventListener("click", () => {});
-
-      document.getElementById("button2").addEventListener("click", () => {
-        //加载图层前需要清除所有图层，防止图层加载重叠。
-        if (map.getLayer("points")) map.removeLayer("points"); //填写需要清除图层的ID，每次只能清除一个。有几个图层就使用几次。
-
-        map.setLayoutProperty("points", "visibility", "none");
-        map.setLayoutProperty("clusters", "visibility", "visible");
-        map.setLayoutProperty("cluster-count", "visibility", "visible");
-        map.setLayoutProperty("unclustered-point", "visibility", "visible");
-
+        if (map.getSource("sensicjson")) map.removeSource("sensicjson");
+        map.addSource("sensicjson", {
+          type: "geojson",
+          data: heatMapData,
+          cluster: true, //聚合图的数据源需要添加样式
+          clusterMaxZoom: 14, //最大缩放到群集点
+          clusterRadius: 50,
+        });
         //添加圆形聚合图层
         map.addLayer({
           id: "clusters",
@@ -318,55 +348,34 @@ export default {
         ]);
       });
 
-      document.getElementById("button1").addEventListener("click", () => {
-        map.setLayoutProperty("points", "visibility", "visible");
-        map.setLayoutProperty("clusters", "visibility", "none");
-        map.setLayoutProperty("cluster-count", "visibility", "none");
-        map.setLayoutProperty("unclustered-point", "visibility", "none");
-        //添加数据
-        //添加点图层
-        map.addLayer({
-          id: "points",
-          type: "symbol",
-          source: "point", // reference the data source
-          layout: {
-            "icon-image": "travel", // reference the image
-            "icon-size": 0.15,
-          },
-        });
-      });
+      // map.on("click", "unclustered-point", (e) => {
+      //   // Copy coordinates array.
+      //   const coordinates = e.features[0].geometry.coordinates.slice();
+      //   const name = e.features[0].properties.name;
 
+      //   // Ensure that if the map is zoomed out such that multiple
+      //   // copies of the feature are visible, the popup appears
+      //   // over the copy being pointed to.
+      //   while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+      //     coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+      //   }
+      //   new mapboxgl.Marker()
+      //     .setLngLat(coordinates)
+      //     .setHTML(name)
+      //     .addTo(map);
+      // });
       map.on("load", function () {
-        //从我们的GeoJSON数据中添加一个新的数据源，并设置
-        // 'cluster'选项为true。GL-JS将向源数据添加point_count属性。
-        map.on("load", () => {
-          jsonCallback;
-        });
-        function jsonCallback(err, data) {
-          if (err) {
-            throw err;
-          }
-          data.features = data.features.map((d) => {
-            d.properties.month = new Date(d.properties.time).getMonth();
-            // d.properties.coordinates = new location(d.properties.geometry).getElementById("coordinates");
-            return d;
-          });
-        }
+        // map.on("click", "unclustered-point", (e) => {
 
-        map.on("click", "unclustered-point", (e) => {
-          // Copy coordinates array.
-          const coordinates = e.features[0].geometry.coordinates.slice();
-          const name = e.features[0].properties.name;
+        //   const coordinates = e.features[0].geometry.coordinates.slice();
+        //   const name = e.features[0].properties.name;
 
-          // Ensure that if the map is zoomed out such that multiple
-          // copies of the feature are visible, the popup appears
-          // over the copy being pointed to.
-          while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-          }
+        //   while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+        //     coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        //   }
 
-          new mapboxgl.Popup().setLngLat(coordinates).setHTML(name).addTo(map);
-        });
+        //   new mapboxgl.Popup().setLngLat(coordinates).setHTML(name).addTo(map);
+        // });
         // Change the cursor to a pointer when the mouse is over the places layer.
         map.on("mouseenter", "unclustered-point", () => {
           map.getCanvas().style.cursor = "pointer";
@@ -397,10 +406,10 @@ export default {
       // this.showmap();
     },
     showmap() {
-      this.$nextTick(() => {
-        document.getElementById("button3").click();
-        document.getElementById("button2").click();
-      });
+      // this.$nextTick(() => {
+      //   document.getElementById("button3").click();
+      //   document.getElementById("button2").click();
+      // });
     },
   },
   // destroyed(){
