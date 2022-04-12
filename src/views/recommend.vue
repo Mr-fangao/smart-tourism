@@ -18,40 +18,27 @@
         <div class="title-text">专题图选择</div>
       </div>
       <el-menu>
-        <el-menu-item
-          style="padding: 1%"
-          @click="showmap(1)"
-          plain
-        >
+        <el-menu-item style="padding: 1%" @click="showmap(1)" plain>
           <el-radio v-model="mapchange" label="1">&ensp;</el-radio>
           <div class="mapimg map1"></div>
           <span class="tab" slot="title">聚合图</span>
         </el-menu-item>
-        <el-menu-item
-          @click="showmap(2)"
-          plain
-        >
+        <el-menu-item @click="showmap(2)" plain>
           <el-radio v-model="mapchange" label="2">&ensp;</el-radio>
           <div class="mapimg map2"></div>
           <span class="tab" slot="title">分级图</span>
         </el-menu-item>
-        <el-menu-item
-          @click="showmap(3)"
-          plain
-        >
+        <el-menu-item @click="showmap(3)" plain>
           <el-radio v-model="mapchange" label="3">&ensp;</el-radio>
           <div class="mapimg map3"></div>
           <span class="tab" slot="title">热力图</span>
         </el-menu-item>
-        <el-menu-item
-          @click="showmap(4)"
-          plain
-        >
+        <el-menu-item @click="showmap(4)" plain>
           <el-radio v-model="mapchange" label="4">&ensp;</el-radio>
           <div class="mapimg map4"></div>
           <span class="tab" slot="title">时序图</span>
         </el-menu-item>
-        <el-menu-item >
+        <el-menu-item>
           <el-radio v-model="mapchange" label="5">&ensp;</el-radio>
           <span class="tab" slot="title">点数据</span>
         </el-menu-item>
@@ -481,7 +468,13 @@
       >
         <!-- <div class="monthselsct-span"></div> -->
         <div class="monthselsct-month">
-          <el-date-picker value-format="yyyy-MM-dd" v-model="monthvalue" type="month" :placeholder="month" :clearable="clearable" @change="getScenicMonth(monthvalue)" >
+          <el-date-picker
+            v-model="monthvalue"
+            type="month"
+            :placeholder="month"
+            :clearable="clearable"
+            @change="getScenicMonth(monthvalue)"
+          >
           </el-date-picker>
         </div>
       </div>
@@ -511,6 +504,7 @@ import loading from "../components/loading.vue";
 import wordcloud from "../assets/js/echarts-wordcloud-master/index";
 import echarts from "echarts";
 
+import comjs from "../components/global.vue";
 import eventBum from "../views/traffickingnetwork/public/js/EvebtBus";
 import SelectRegion from "../views/traffickingnetwork/components/selectRegion.vue";
 export default {
@@ -527,6 +521,7 @@ export default {
     wordcloud,
     SelectRegion,
     word3D,
+    comjs,
   },
   data() {
     return {
@@ -534,7 +529,12 @@ export default {
       word3Dwidth: 350,
       treemapname: "中国热门城市",
       //评论数据变化,页面下方
-      clearable:false,
+      timeflag: true,
+      currentmonth: "",
+      daydata: [],
+      opts1: [],
+      opts2: [],
+      clearable: false,
       monthvalue: "",
       commentdata: [],
       month: "",
@@ -557,8 +557,8 @@ export default {
         tourist: "65536",
       },
       input: "",
-      income:[
-         {
+      income: [
+        {
           value: "五千以下",
           label: "省级",
         },
@@ -888,9 +888,111 @@ export default {
   },
   methods: {
     //下方各类数据
-    getScenicMonth(val){
-      var month = val.slice(0, 6);
-      console.log(month)
+    getScenicMonth(val) {
+      this.timeflag = false;
+      console.log(val);
+      var year = val.getFullYear();
+      var month = val.getMonth() + 1;
+      //当前年月
+      var currmonth;
+      var showmonth = `${year}/${month}`;
+      if (month / 10 < 1) {
+        currmonth = year.toString() + "-0" + month.toString();
+      } else {
+        currmonth = year.toString() + "-" + month.toString();
+      }
+      const currentMonthDays = new Date(year, month, 0).getDate();
+      const currentMonthArr = [];
+      for (let day = 1; day <= currentMonthDays; day++) {
+        var ymd = showmonth + `/${day}`;
+        currentMonthArr.push(ymd);
+        this.daydata.push(ymd);
+      }
+      this.daydata = currentMonthArr;
+      console.log(currmonth);
+      request
+        .post("/api/data/scenicDay", {
+          model: currmonth,
+        })
+        .then((res) => {
+          console.log(res);
+          if (res.code == 0) {
+            var chartdata = res.data;
+            var opts = [];
+            for (let day = 0; day < res.data.length; day++)
+              opts.push({
+                xAxis: [
+                  {
+                    data: chartdata[day].scenic,
+                  },
+                ],
+                title: {
+                  text: chartdata[day].date,
+                },
+                series: [
+                  {
+                    data: chartdata[day].count,
+                  },
+                ],
+              });
+            if (this.activeName2 == "scenichot") {
+              this.initTimechart1(opts);
+            }
+          }
+        });
+    },
+    getCityMonth(val) {
+      this.timeflag = false;
+      console.log(val);
+      var year = val.getFullYear();
+      var month = val.getMonth() + 1;
+      //当前年月
+      var currmonth;
+      var showmonth = `${year}/${month}`;
+      if (month / 10 < 1) {
+        currmonth = year.toString() + "-0" + month.toString();
+      } else {
+        currmonth = year.toString() + "-" + month.toString();
+      }
+      const currentMonthDays = new Date(year, month, 0).getDate();
+      const currentMonthArr = [];
+      for (let day = 1; day <= currentMonthDays; day++) {
+        var ymd = showmonth + `/${day}`;
+        currentMonthArr.push(ymd);
+        this.daydata.push(ymd);
+      }
+      this.daydata = currentMonthArr;
+      console.log(currmonth);
+      request
+        .post("/api/data/cityDay", {
+          model: currmonth,
+        })
+        .then((res) => {
+          console.log(res);
+          if (res.code == 0) {
+            var chartdata = res.data;
+            var opts = [];
+            for (let day = 0; day < res.data.length; day++)
+              opts.push({
+                xAxis: [
+                  {
+                    data: chartdata[day].city,
+                  },
+                ],
+                title: {
+                  text: chartdata[day].date,
+                },
+                series: [
+                  {
+                    data: chartdata[day].count,
+                  },
+                ],
+              });
+            if (this.activeName2 == "cityhot") {
+              this.initTimechart2(opts);
+            }
+          }
+        });
     },
     getAlldata() {
       request.post("/api/data/commentDay").then((res) => {
@@ -958,7 +1060,7 @@ export default {
     },
     showmap(value) {
       console.log(value);
-      this.mapchange=value.toString();
+      this.mapchange = value.toString();
       this.activeClass = value;
       if (value === 1) this.comp = "pointgather";
       else if (value === 2) this.comp = "gradedcolormap";
@@ -1034,15 +1136,29 @@ export default {
       if (tab.name == "time") {
         setTimeout(() => {
           this.initTimechart(this.commentdata);
-        }, 100);
+        }, 10);
       } else if (tab.name == "scenichot") {
         setTimeout(() => {
-          this.initTimechart1();
-        }, 100);
+          if (this.timeflag) {
+            let pretime = this.getPreMonth(this.currentmonth);
+            let time = new Date(pretime);
+            console.log(time);
+            this.getScenicMonth(time);
+          } else {
+            this.getScenicMonth(this.monthvalue);
+          }
+        }, 10);
       } else if (tab.name == "cityhot") {
         setTimeout(() => {
-          this.initTimechart2();
-        }, 100);
+          if (this.timeflag) {
+            let pretime = this.getPreMonth(this.currentmonth);
+            let time = new Date(pretime);
+            console.log(time);
+            this.getCityMonth(time);
+          } else {
+            this.getCityMonth(this.monthvalue);
+          }
+        }, 10);
       }
     },
     getTime() {
@@ -1050,10 +1166,39 @@ export default {
       let year = date.getFullYear(); // 年
       let month = date.getMonth() + 1; // 月
       let day = date.getDate() - 1; // 日
+      this.currentmonth = `${year}-${month}-${day + 1}`;
+      console.log(date);
       this.datatime = `${year}/${month}/${day}`;
-      if(month/10<1){
-         this.month = `${year}-0${month - 1}`;
+      if (month / 10 < 1) {
+        this.month = `${year}-0${month - 2}`;
+      } else {
+        this.month = `${year}-${month - 2}`;
       }
+    },
+    getPreMonth(date) {
+      var arr = date.split("-");
+      var year = arr[0]; //获取当前日期的年份
+      var month = arr[1]; //获取当前日期的月份
+      var day = arr[2]; //获取当前日期的日
+      var days = new Date(year, month, 0);
+      days = days.getDate(); //获取当前日期中月的天数
+      var year2 = year;
+      var month2 = parseInt(month) - 2;
+      if (month2 == 0) {
+        year2 = parseInt(year2) - 1;
+        month2 = 12;
+      }
+      var day2 = day;
+      var days2 = new Date(year2, month2, 0);
+      days2 = days2.getDate();
+      if (day2 > days2) {
+        day2 = days2;
+      }
+      if (month2 < 10) {
+        month2 = "0" + month2;
+      }
+      var t2 = year2 + "-" + month2 + "-" + day2;
+      return t2;
     },
     //矩形树图
     initChart1(data) {
@@ -1140,7 +1285,7 @@ export default {
       };
       myChart1.setOption(option);
     },
-    initTimechart1() {
+    initTimechart1(options) {
       var chartDom = document.getElementById("timechart1");
       var myChart = echarts.init(chartDom);
       var option = {
@@ -1163,10 +1308,10 @@ export default {
             emphasis: {
               label: {
                 show: true,
-                // formatter: "{d}日",
+                formatter: "{d}日",
                 color: "#fff",
-                // fontSize:10,
-                // rotate: 0,
+                fontSize: 10,
+                rotate: 0,
               },
               controlStyle: {
                 color: "rgb(115, 215, 228)",
@@ -1184,7 +1329,7 @@ export default {
             },
             progress: {
               label: {
-                color: "#fff",
+                color: "#Ffff",
               },
             },
             checkpointStyle: {
@@ -1194,35 +1339,21 @@ export default {
               symbol: "circle",
             },
             realtime: true,
-            data: [
-              "1111111111",
-              "22222222222",
-              "33333333333",
-              "222222224",
-              "222222225",
-              "61111111",
-              "2222222227",
-              "82222222222",
-              "922222222",
-              "10",
-              "11",
-              "12",
-              "13",
-              "14",
-              "15",
-              "16",
-              "17",
-              "18",
-              "19",
-              "20",
-            ],
+            data: this.daydata,
           },
           grid: {
             top: "15.8%", //距上边距
-            left: "4%", //距离左边距
-            right: "5%", //距离右边距
-            bottom: "8%", //距离下边距
+            left: "2%", //距离左边距
+            right: "0%", //距离右边距
+            bottom: "4%", //距离下边距
             containLabel: true,
+          },
+          tooltip: {
+            show: true,
+          },
+          label: {
+            show: true,
+            position: "top",
           },
           xAxis: [
             {
@@ -1252,9 +1383,12 @@ export default {
             },
           ],
           title: {
+            show: true, //false
+            right: "60",
+            top: "3",
             textStyle: {
               color: "rgb(115, 215, 200)",
-              fontSize: 12,
+              fontSize: 15,
             },
           },
           series: [
@@ -1269,242 +1403,129 @@ export default {
           ],
         },
         //变量则写在options中
-        options: [
-          //1号
-          {
-            xAxis: [
-              {
-                data: [
-                  "瑞士",
-                  "卢森堡",
-                  "瑞典",
-                  "挪威",
-                  "丹麦",
-                  "阿联酋",
-                  "冰岛",
-                  "日本",
-                  "美国",
-                  "(131)中国",
-                ],
-              },
-            ],
-            title: {
-              text: "1号统计值",
+        options: options,
+      };
+      option && myChart.setOption(option);
+    },
+    initTimechart2(options) {
+      var chartDom = document.getElementById("timechart1");
+      var myChart = echarts.init(chartDom);
+      var option = {
+        baseOption: {
+          timeline: {
+            //loop: false,
+            // backgroundColor: '#64A9EF',
+            axisType: "category",
+            show: true,
+            autoPlay: true, //是否自动播放
+            playInterval: 1200, //播放速度
+            bottom: "85%", //距离容器下侧的距离
+            label: { position: "auto", show: true, color: "#fff" },
+            lineStyle: {
+              color: "#64A9EF",
             },
-            series: [
-              {
-                data: [
-                  38589.18, 33378.44, 29794.08, 28188.52, 26922.44, 26621.51,
-                  25786.94, 25139.58, 23913.76, 343.3,
-                ],
+            symbol: "circle",
+            symbolSize: 10,
+            backgroundColor: "rgb(115, 215, 228)",
+            emphasis: {
+              label: {
+                show: true,
+                formatter: "{d}日",
+                color: "#fff",
+                fontSize: 10,
+                rotate: 0,
               },
-            ],
-          },
-          //2号
-          {
-            xAxis: [
-              {
-                data: [
-                  "卢森堡",
-                  "瑞士",
-                  "日本",
-                  "丹麦",
-                  "挪威",
-                  "德国",
-                  "澳大利亚",
-                  "瑞典",
-                  "荷兰",
-                  "(126)中国",
-                ],
+              controlStyle: {
+                color: "rgb(115, 215, 228)",
+                borderColor: "rgb(115, 215, 228)",
+                borderWidth: 1,
               },
-            ],
-            title: {
-              text: "2号统计值",
+              itemStyle: {
+                color: "rgb(115, 215, 228)",
+              },
             },
-            series: [
-              {
-                data: [
-                  51189.75, 48712.21, 42516.46, 35477.69, 34793.77, 31709.25,
-                  30307.42, 29882.78, 28910.83, 604.332,
-                ],
-              },
-            ],
-          },
-          {
-            xAxis: [
-              {
-                data: [
-                  "瑞士",
-                  "卢森堡",
-                  "瑞典",
-                  "挪威",
-                  "丹麦",
-                  "阿联酋",
-                  "冰岛",
-                  "日本",
-                  "美国",
-                  "(131)中国",
-                ],
-              },
-            ],
-            title: {
-              text: "3号统计值",
+            controlStyle: {
+              color: "#99B6D4",
+              borderColor: "#99B6D4",
+              borderWidth: 1,
             },
-            series: [
-              {
-                data: [
-                  38589.18, 33378.44, 29794.08, 28188.52, 26922.44, 26621.51,
-                  25786.94, 25139.58, 23913.76, 343.3,
-                ],
+            progress: {
+              label: {
+                color: "#Ffff",
               },
-            ],
-          },
-          {
-            xAxis: [
-              {
-                data: [
-                  "卢森堡",
-                  "瑞士",
-                  "日本",
-                  "丹麦",
-                  "挪威",
-                  "德国",
-                  "澳大利亚",
-                  "瑞典",
-                  "荷兰",
-                  "(126)中国",
-                ],
-              },
-            ],
-            title: {
-              text: "4号统计值",
             },
-            series: [
-              {
-                data: [
-                  51189.75, 48712.21, 42516.46, 35477.69, 34793.77, 31709.25,
-                  30307.42, 29882.78, 28910.83, 604.332,
-                ],
-              },
-            ],
-          },
-          {
-            xAxis: [
-              {
-                data: [
-                  "卢森堡",
-                  "瑞士",
-                  "日本",
-                  "丹麦",
-                  "挪威",
-                  "德国",
-                  "澳大利亚",
-                  "瑞典",
-                  "荷兰",
-                  "(126)中国",
-                ],
-              },
-            ],
-            title: {
-              text: "5号统计值",
+            checkpointStyle: {
+              symbolSize: 13,
+              color: "rgb(115, 215, 228)",
+              borderWidth: 0,
+              symbol: "circle",
             },
-            series: [
-              {
-                data: [
-                  51189.75, 48712.21, 42516.46, 35477.69, 34793.77, 31709.25,
-                  30307.42, 29882.78, 28910.83, 604.332,
-                ],
-              },
-            ],
+            realtime: true,
+            data: this.daydata,
           },
-          {
-            xAxis: [
-              {
-                data: [
-                  "卢森堡",
-                  "瑞士",
-                  "日本",
-                  "丹麦",
-                  "挪威",
-                  "德国",
-                  "澳大利亚",
-                  "瑞典",
-                  "荷兰",
-                  "(126)中国",
-                ],
+          grid: {
+            top: "15.8%", //距上边距
+            left: "2%", //距离左边距
+            right: "0%", //距离右边距
+            bottom: "4%", //距离下边距
+            containLabel: true,
+          },
+          tooltip: {
+            show: true,
+          },
+          label: {
+            show: true,
+            position: "top",
+          },
+          xAxis: [
+            {
+              type: "category",
+              // name: "景点",
+              axisLine: {
+                lineStyle: {
+                  color: "#fff",
+                },
               },
-            ],
-            title: {
-              text: "6号统计值",
             },
-            series: [
-              {
-                data: [
-                  51189.75, 48712.21, 42516.46, 35477.69, 34793.77, 31709.25,
-                  30307.42, 29882.78, 28910.83, 604.332,
-                ],
+          ],
+          yAxis: [
+            {
+              type: "value",
+              name: "日/条",
+              // scale: true,//刻度可随数据变化
+              // max: 50000,
+              splitLine: {
+                show: false,
               },
-            ],
-          },
-          {
-            xAxis: [
-              {
-                data: [
-                  "卢森堡",
-                  "瑞士",
-                  "日本",
-                  "丹麦",
-                  "挪威",
-                  "德国",
-                  "澳大利亚",
-                  "瑞典",
-                  "荷兰",
-                  "(126)中国",
-                ],
+              axisLine: {
+                lineStyle: {
+                  color: "#fff",
+                },
               },
-            ],
-            title: {
-              text: "7号统计值",
             },
-            series: [
-              {
-                data: [
-                  51189.75, 48712.21, 42516.46, 35477.69, 34793.77, 31709.25,
-                  30307.42, 29882.78, 28910.83, 604.332,
-                ],
-              },
-            ],
-          },
-          {
-            xAxis: [
-              {
-                data: [
-                  "卢森堡",
-                  "瑞士",
-                  "日本",
-                  "丹麦",
-                  "挪威",
-                  "德国",
-                  "澳大利亚",
-                  "瑞典",
-                  "荷兰",
-                  "(126)中国",
-                ],
-              },
-            ],
-            title: {
-              text: "8号统计值",
+          ],
+          title: {
+            show: true, //false
+            right: "60",
+            top: "3",
+            textStyle: {
+              color: "rgb(115, 215, 200)",
+              fontSize: 15,
             },
-            series: [
-              {
-                data: [
-                  51189.75, 48712.21, 42516.46, 35477.69, 34793.77, 31709.25,
-                  30307.42, 29882.78, 28910.83, 604.332,
-                ],
-              },
-            ],
           },
-        ],
+          series: [
+            {
+              type: "bar",
+              itemStyle: {
+                normal: {
+                  color: "rgb(115, 215, 228)",
+                },
+              },
+            },
+          ],
+        },
+        //变量则写在options中
+        options: options,
       };
       option && myChart.setOption(option);
     },
@@ -3233,7 +3254,7 @@ export default {
     .monthselsct-month {
       width: 100%;
       height: 100%;
-           background: #29a1a163;
+      background: #29a1a163;
       /deep/.el-input__inner {
         &::placeholder {
           color: rgb(236, 235, 235);
@@ -3243,18 +3264,18 @@ export default {
       /deep/.el-date-editor.el-input {
         width: 100%;
         height: 100%;
-     padding-right: 13%;
+        padding-right: 13%;
       }
       /deep/.el-input--prefix .el-input__inner {
         padding-left: 0px;
       }
-      /deep/.el-date-picker__header-label{
-        color: #dde0e0 ;
+      /deep/.el-date-picker__header-label {
+        color: #dde0e0;
       }
-      /deep/.el-month-table td .cell{
+      /deep/.el-month-table td .cell {
         color: #d3d3d3;
       }
-      /deep/.el-date-picker table{
+      /deep/.el-date-picker table {
         color: #e5eeee;
       }
       // /deep/.el-input__prefix,
@@ -3267,7 +3288,7 @@ export default {
           line-height: 38px;
         }
       }
-      /deep/.el-date-editor .el-range__close-icon{
+      /deep/.el-date-editor .el-range__close-icon {
         width: 20px;
       }
       /deep/.el-input--suffix .el-input__inner {
