@@ -14,6 +14,7 @@ export default {
   components: {
     pageheader,
   },
+  mounted() {},
 };
 </script>
 
@@ -29,16 +30,22 @@ export default {
 }
 </style>
 <style >
-.el-date-picker__header-label{
-        color: #dde0e0 ;
-      }
-.el-month-table td .cell{
-        color: #d3d3d3;
-      }
-.el-date-picker table{
-        color: #e5eeee;
-      }
-.el-year-table td.disabled .cell{
-      background-color: #d6e1f121;
+.el-date-picker__header-label {
+  color: #dde0e0;
+}
+.el-month-table td .cell {
+  color: #d3d3d3;
+}
+.el-date-picker table {
+  color: #e5eeee;
+}
+.el-year-table td.disabled .cell {
+  background-color: #d6e1f121;
+}
+.el-month-table td.disabled .cell {
+  background-color: #7a828bb5;
+}
+.el-month-table td .cell {
+  border-radius: 7px;
 }
 </style>

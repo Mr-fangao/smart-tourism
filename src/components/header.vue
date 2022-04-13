@@ -35,7 +35,7 @@
             <el-dropdown-item @click.native="showPop('1111111111')"
               >个人中心</el-dropdown-item
             >
-            <el-dropdown-item @click.native="routerjump"
+            <el-dropdown-item @click.native="routerjump()"
               >返回首页</el-dropdown-item
             >
           </el-dropdown-menu>
@@ -130,8 +130,9 @@ export default {
 .backcolor {
   #date {
     color: #ffffff;
-    font-size: 12pt;
-    padding-left: 16%;
+    font-size: 14px;
+    padding-left: 12%;
+    color: #d4d9dd;
   }
   background-color: #02191f;
   .times {
@@ -211,7 +212,7 @@ export default {
       height: 100%;
       width: 30%;
       background: url(../assets/img/userBG.png) no-repeat;
-    background-size: 70% 55%;
+      background-size: 70% 55%;
       background-position: 100% 85%;
       float: left;
     }

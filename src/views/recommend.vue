@@ -473,7 +473,8 @@
             type="month"
             :placeholder="month"
             :clearable="clearable"
-            @change="getScenicMonth(monthvalue)"
+             :picker-options="pickerOptions"
+            @change="getScenicMonth(monthvalue),getCityMonth(monthvalue)"
           >
           </el-date-picker>
         </div>
@@ -529,6 +530,22 @@ export default {
       word3Dwidth: 350,
       treemapname: "中国热门城市",
       //评论数据变化,页面下方
+       pickerOptions: {
+        disabledDate(time) {
+          const FullYear = time.getFullYear()
+          let myDate = new Date();
+          // const Month = time.getMonth() + 1
+          if (FullYear < 2021) {
+            return true
+          } else {
+            let t = myDate.getDate();
+            // 如果想包含本月本月 - 8.64e7 * t 就不需要了，
+            // 如果想之前的不能选择把 > 换成 <
+            return time.getTime() > (Date.now() - 8.64e7 * t);
+          }
+          // return false
+        },
+      },
       timeflag: true,
       currentmonth: "",
       daydata: [],
@@ -851,19 +868,7 @@ export default {
   },
   created() {
     this.getAlldata();
-  },
-  mounted() {
-    this.getScenicdata();
-    this.getTime();
-    this.showmap(1);
-    this.getRankTable();
-    this.getCityRank();
-    this.initChart1(this.chartdata1);
-    this.initChart2(this.chartdata2);
-    // this.initTimechart();
-    // this.wordCloudInti2(this.$refs.chartword2, this.wordcloudchina);
-    this.wordCloudInti(this.$refs.chartword, this.startclouddata);
-    eventBum.$on("json", (json) => {
+        eventBum.$on("json", (json) => {
       this.selectcity.name = json.name;
       this.selectcity.level = json.where;
       console.log(this.selectcity);
@@ -880,6 +885,18 @@ export default {
         this.mapchange = "5";
       }
     });
+  },
+  mounted() {
+    this.getScenicdata();
+    this.getTime();
+    this.showmap(1);
+    this.getRankTable();
+    this.getCityRank();
+    this.initChart1(this.chartdata1);
+    this.initChart2(this.chartdata2);
+    // this.initTimechart();
+    // this.wordCloudInti2(this.$refs.chartword2, this.wordcloudchina);
+    this.wordCloudInti(this.$refs.chartword, this.startclouddata);
   },
   filters: {
     rounding(value) {
@@ -1410,7 +1427,7 @@ export default {
       option && myChart.setOption(option);
     },
     initTimechart2(options) {
-      var chartDom = document.getElementById("timechart1");
+      var chartDom = document.getElementById("timechart2");
       var myChart = echarts.init(chartDom);
       var option = {
         baseOption: {
