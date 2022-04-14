@@ -11,15 +11,15 @@
           <i class="fa fa-building fa-lg"></i>
           <span class="tab">城市</span>
         </el-menu-item>
-        <!-- <el-menu-item
+        <el-menu-item
           index="2"
           @click="show(2)"
           :class="index === 2 ? 'active' : ''"
           plain
         >
           <i class="fa fa-tree fa-lg"></i>
-          <span class="tab">景点</span>
-        </el-menu-item> -->
+          <span class="tab">特征</span>
+        </el-menu-item>
       </el-menu>
     </div>
     <div class="sensation-content">
@@ -32,21 +32,21 @@
 
 <script>
 import city from "../components/sensations/city.vue";
-import scenic from "../components/sensations/scenic.vue";
+import features from "../components/sensations/features.vue";
 export default {
-  components: { city, scenic },
+  components: { city, features },
   name: "feelings",
   data() {
     return {
       index: 1,
-      comp: "scenic",
+      comp: "city",
       isShow: true,
     };
   },
   methods: {
     show(value) {
-      if (value === 1) this.comp = "scenic";
-      else if (value === 2) this.comp = "city";
+      if (value === 1) this.comp = "city";
+      else if (value === 2) this.comp = "features";
       // else if (value === 3) this.comp = "heatmap";
     },
   },

@@ -10,11 +10,18 @@ const store = new Vuex.Store({
         // 定义一个number，以供全局使用
         number: 0,
         // 定义一个list，以供全局使用
-        list: [
-            { id: 1, name: '111' },
-            { id: 2, name: '222' },
-            { id: 3, name: '333' },
-        ]
+        alldatacount: {
+            scenic:'',
+            comment:'',
+            travels:'',
+        }
+    },
+    mutations: { // 增加nutations属性
+        setAlldatacount(state,num) {  // 增加一个mutations的方法，方法的作用是让num从0变成5，state是必须默认参数
+            state.alldatacount.scenic = num.scenic;
+            state.alldatacount.comment = num.comment;
+            state.alldatacount.travels = num.travel;
+        }
     },
 });
 

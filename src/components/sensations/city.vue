@@ -1,151 +1,287 @@
 <template>
   <div id="com-city">
+    <selectRegion />
+    <div id="map" />
     <div class="city-left">
-      <div class="title"><span>城市形象感知分析</span></div>
+      <div class="city-left-select">
+        <div class="title">
+          <div class="imgBK"></div>
+          <span>城市特征词云分析</span>
+        </div>
+        <!-- <div class="content" id="chart1" ref="cloudEl"></div> -->
+        <div class="content" id="chart1" ref="cloudEl">
+          <word3D
+            v-if="reFresh"
+            :height="word3Dheight"
+            :width="word3Dwidth"
+            :data="wordcloud3D"
+          >
+          </word3D>
+        </div>
+      </div>
       <div class="city-left-bottom">
-        <areaSelect></areaSelect>
+        <div class="col-content">
+          <div class="mytitle">
+            <span>游客口碑一览</span>
+          </div>
+          <div class="commentroll">
+            <div class="tablehrader">
+              <ul class="uititle">
+                <li class="title">
+                  <span class="content">评论</span>
+                  <span class="score">景点</span>
+                </li>
+              </ul>
+            </div>
+            <div class="srrollcontent">
+              <vue-seamless-scroll
+                :data="commentlist"
+                :class-option="defaultOption"
+              >
+                <ul class="ul-scoll">
+                  <li
+                    class="li-scoll"
+                    v-for="(item, index) in commentlist"
+                    :key="index"
+                  >
+                    <div :title="item.content" class="pinglun">
+                      {{ item.content }}
+                    </div>
+                    <div :title="item.name" class="jingdian">
+                      {{ item.scenicName}}
+                    </div>
+                  </li>
+                </ul>
+              </vue-seamless-scroll>
+            </div>
+          </div>
+        </div>
+        <div class="col-content">
+          <div class="mytitle">
+            <span>形象分类均值分布图</span>
+          </div>
+          <div class="row1chartcontent" id="chart2" ref="chart2"></div>
+        </div>
       </div>
     </div>
     <div class="city-content">
       <el-row>
-        <el-col :span="24">
-          <div class="col-content">
-            <div class="row1title">
-              <!-- <img src="../../assets/img/panelIcon.png" alt="" /> -->
+        <el-col :span="16"
+          ><div class="col-content">
+            <div class="row2title">
               <div class="imgBK"></div>
-              <span>城市特征词云分析</span>
+              <span>评论文本分析</span>
             </div>
-            <div class="row1chartcontent" id="chart1" ref="cloudEl"></div>
-          </div>
-          <div class="col-content">
-            <div class="row1title">
-              <div class="imgBK"></div>
-              <span>形象分类均值分布图</span>
-            </div>
-            <div class="row1chartcontent" id="chart2" ref="chart2"></div>
+            <div class="row1chartcontent" id="chart3"></div>
           </div>
         </el-col>
-        <el-col :span="24">
+        <el-col :span="8">
           <div class="col-content">
-            <div class="row2title">
-              <!-- <img src="../../assets/img/panelIcon.png" alt="" /> -->
+            <div class="row3title">
               <div class="imgBK"></div>
               <span>城市风光一览</span>
             </div>
-            <div class="row1chartcontent" id="chart3">
-              <el-carousel :interval="4000" type="card" height="200px">
-                <el-carousel-item v-for="item in 6" :key="item">
-                  <h3 class="medium">{{ item }}</h3>
+            <div class="row1chartcontent" id="chart4">
+              <el-carousel
+                :interval="2000"
+                arrow="always"
+                indicator-position="outside"
+              >
+                <el-carousel-item
+                  v-for="(item, index) in cityimages"
+                  :key="index"
+                >
+                  <img
+                    :src="item.url"
+                    alt="无图片"
+                    style="
+                      background-size: 100% 100%;
+                      witdh: 150px;
+                      height: 200px;
+                    "
+                  />
                 </el-carousel-item>
               </el-carousel>
             </div>
           </div>
-          <div class="col-content">
-            <div class="row2title">
-              <!-- <img src="../../assets/img/panelIcon.png" alt="" /> -->
-              <div class="imgBK"></div>
-              <span>游客评论文本IPA分析图</span>
-            </div>
-            <div class="row1chartcontent" id="chart4"></div>
-          </div>
         </el-col>
-        <el-col :span="24">
-          <div class="col-content">
-            <div class="row3title">
-              <!-- <img src="../../assets/img/panelIcon.png" alt="" /> -->
-              <div class="imgBK"></div>
-              <span>网络评论关注点</span>
-            </div>
-            <div class="row3chartcontent" id="chart5"></div>
-          </div>
-          <div class="col-content">
-            <div class="row3title">
-              <!-- <img src="../../assets/img/panelIcon.png" alt="" /> -->
-              <div class="imgBK"></div>
-              <span>景点网络口碑</span>
-            </div>
-            <div class="row3chartcontent" id="chart6"></div>
-          </div>
-          <div class="col-content">
-            <div class="row3title">
-              <!-- <img src="../../assets/img/panelIcon.png" alt="" /> -->
-              <div class="imgBK"></div>
-              <span>关键词分布雷达图</span>
-            </div>
-            <div class="row3chartcontent" id="chart7"></div></div
-        ></el-col>
       </el-row>
-      <div class="travels">
-        <div class="travels-title">
-          <div class="imgBK"></div>
+    </div>
+    <div class="city-travels">
+      <div class="travels-content">
+        <div class="travels-title mytitle">
           <span>历史游记</span>
           <button class="nextp" @click="getTravels()">下一条</button>
         </div>
-        <div class="travels-content">
-          <div class="travels-name">
-            <div class="title">
-              {{ travelsdata.title }}
-            </div>
-            <div class="descriptions">
-              <!-- <span>用户名称:{{ travelsdata.title }}</span> -->
-              <span>游玩天数:{{ travelsdata.daycount }}</span>
-              <span>出游形式:{{ travelsdata.figure }}</span>
-              <span>累计费用:{{ travelsdata.cost }}</span>
-            </div>
+        <div class="travels-name">
+          <div class="title">
+            {{ travelsdata.title }}
           </div>
-          <div class="travels-text">{{ travelsdata.content }}</div>
+          <div class="descriptions">
+            <!-- <span>用户名称:{{ travelsdata.title }}</span> -->
+            <span>游玩天数:{{ travelsdata.daycount }}</span>
+            <span>出游形式:{{ travelsdata.figure }}</span>
+            <span>累计费用:{{ travelsdata.cost }}</span>
+            <span>数据源:马蜂窝</span>
+          </div>
+        </div>
+        <div class="travels-text">{{ travelsdata.content }}</div>
+      </div>
+      <div class="travels-bottom">
+        <div class="col-content">
+          <div class="mytitle">
+            <span>景点网络口碑</span>
+          </div>
+          <div class="row3chartcontent" id="chart5"></div>
         </div>
       </div>
+    </div>
+    <div id="state-legend" class="legend">
+      <h4>景点评分</h4>
+      <div><span style="background-color: #acbe21"></span>3.5</div>
+      <div><span style="background-color: #beb221"></span>3.8</div>
+      <div><span style="background-color: #be8221"></span>4.1</div>
+      <div><span style="background-color: #ff8c00"></span>4.4</div>
+      <div><span style="background-color: #be6321"></span>4.7</div>
+      <div><span style="background-color: #be4521"></span>5.0</div>
     </div>
   </div>
 </template>
 <script>
+import word3D from "../wordcloud3D.vue";
+import eventBum from "../cityselect/EvebtBus";
+import SelectRegion from "../cityselect/newselectRegion.vue";
+import nanjing from "../../assets/json/nanjingpoint.json";
+import njprovince from "../../assets/json/njprovince.json";
 import wordcloud from "../../assets/js/echarts-wordcloud-master/index";
 import echarts from "echarts";
 import request from "../../utils/request";
 
-import areaSelect from "../../components/areaSelect.vue";
 export default {
   name: "city",
   components: {
     wordcloud,
-    areaSelect,
+    SelectRegion,
+    word3D,
   },
+
   data() {
     return {
-      cloudData: [
-        { value: 1800, name: "纳木措" },
-        { value: 1200, name: "西藏" },
-        { value: 1000, name: "海拔" },
-        { value: 900, name: "景色" },
-        { value: 700, name: "湖水" },
-        { value: 650, name: "雪山" },
-        { value: 630, name: "值得" },
-        { value: 610, name: "没有" },
-        { value: 600, name: "地方" },
-        { value: 543, name: "风景" },
-        { value: 523, name: "景区" },
-        { value: 500, name: "感觉" },
-        { value: 500, name: "高原" },
-        { value: 490, name: "湖面" },
-        { value: 490, name: "圣湖" },
-        { value: 490, name: "小时" },
-        { value: 430, name: "湖泊" },
-        { value: 430, name: "大圣" },
-        { value: 430, name: "美丽" },
-        { value: 380, name: "景点" },
-        { value: 380, name: "牦牛" },
-        { value: 340, name: "时间" },
-        { value: 280, name: "咸水湖" },
-        { value: 260, name: "天湖" },
-        { value: 260, name: "藏民" },
-        { value: 200, name: "朋友" },
-        { value: 200, name: "蓝天白云" },
-        { value: 100, name: "开车" },
-        { value: 50, name: "神圣" },
-        { value: 40, name: "推荐" },
-        { value: 25, name: "限速" },
-        { value: 13, name: "距离" },
+      reFresh: true,
+      word3Dheight: 200,
+      word3Dwidth: 350,
+      wordcloud3D: [
+        { value: 773, name: "故宫" },
+        { value: 502, name: "长城" },
+        { value: 270, name: "建筑" },
+        { value: 212, name: "胡同" },
+        { value: 192, name: "天安门" },
+        { value: 182, name: "颐和园" },
+        { value: 170, name: "博物馆" },
+        { value: 158, name: "环球" },
+        { value: 154, name: "历史" },
+        { value: 138, name: "八达岭" },
+        { value: 112, name: "天坛" },
+        { value: 105, name: "度假" },
+        { value: 104, name: "清华" },
+        { value: 100, name: "银杏" },
+        { value: 96, name: "北海" },
+        { value: 94, name: "王府" },
+        { value: 94, name: "皇帝" },
+        { value: 93, name: "慕田峪" },
+        { value: 92, name: "大学" },
+        { value: 88, name: "乾隆" },
+        { value: 87, name: "景山公园" },
+        { value: 86, name: "八达岭长城" },
+        { value: 84, name: "南锣鼓巷" },
+        { value: 79, name: "紫禁城" },
+        { value: 79, name: "地坛" },
+        { value: 75, name: "慕田峪长城" },
+      ],
+      selectcity: {
+        name: "中国",
+        level: 0,
+      },
+      commentlist: [],
+      cityimages: [
+        { url: require("../../assets/img/BJ/beijing01.jpg") },
+        { url: require("../../assets/img/BJ/beijing02.jpg") },
+        { url: require("../../assets/img/BJ/beijing03.jpg") },
+        { url: require("../../assets/img/BJ/beijing04.jpg") },
+        { url: require("../../assets/img/BJ/beijing05.jpg") },
+      ],
+      BJcityimages: [
+        { url: require("../../assets/img/BJ/beijing01.jpg") },
+        { url: require("../../assets/img/BJ/beijing02.jpg") },
+        { url: require("../../assets/img/BJ/beijing03.jpg") },
+        { url: require("../../assets/img/BJ/beijing04.jpg") },
+        { url: require("../../assets/img/BJ/beijing05.jpg") },
+      ],
+      NJcityimages: [
+        { url: require("../../assets/img/LS/lasa01.jpg") },
+        { url: require("../../assets/img/LS/lasa02.jpg") },
+        { url: require("../../assets/img/LS/lasa03.jpg") },
+        { url: require("../../assets/img/LS/lasa04.jpg") },
+        { url: require("../../assets/img/LS/lasa05.jpg") },
+      ],
+      BJcloudData: [
+        { value: 773, name: "故宫" },
+        { value: 502, name: "长城" },
+        { value: 270, name: "建筑" },
+        { value: 212, name: "胡同" },
+        { value: 192, name: "天安门" },
+        { value: 182, name: "颐和园" },
+        { value: 170, name: "博物馆" },
+        { value: 158, name: "环球" },
+        { value: 154, name: "历史" },
+        { value: 138, name: "八达岭" },
+        { value: 112, name: "天坛" },
+        { value: 105, name: "度假" },
+        { value: 104, name: "清华" },
+        { value: 100, name: "银杏" },
+        { value: 96, name: "北海" },
+        { value: 94, name: "王府" },
+        { value: 94, name: "皇帝" },
+        { value: 93, name: "慕田峪" },
+        { value: 92, name: "大学" },
+        { value: 88, name: "乾隆" },
+        { value: 87, name: "景山公园" },
+        { value: 86, name: "八达岭长城" },
+        { value: 84, name: "南锣鼓巷" },
+        { value: 79, name: "紫禁城" },
+        { value: 79, name: "地坛" },
+        { value: 75, name: "慕田峪长城" },
+      ],
+      NJcloudData: [
+        { value: 106, name: "夫子庙" },
+        { value: 85, name: "报恩寺" },
+        { value: 84, name: "溧水" },
+        { value: 80, name: "牛首山" },
+        { value: 72, name: "总统府" },
+        { value: 68, name: "栖霞山" },
+        { value: 60, name: "明孝陵" },
+        { value: 56, name: "博物馆" },
+        { value: 55, name: "中华门" },
+        { value: 55, name: "瞻园" },
+        { value: 54, name: "汤山" },
+        { value: 49, name: "秦淮河" },
+        { value: 45, name: "老门东" },
+        { value: 44, name: "瓮城" },
+        { value: 41, name: "中山陵" },
+        { value: 39, name: "石臼" },
+        { value: 36, name: "太平天国" },
+        { value: 31, name: "栖霞寺" },
+        { value: 27, name: "地质公园" },
+        { value: 25, name: "梧桐" },
+        { value: 24, name: "东南大学" },
+        { value: 23, name: "古都" },
+        { value: 23, name: "公馆" },
+        { value: 22, name: "梅花" },
+        { value: 21, name: "樱花" },
+        { value: 20, name: "河海大学" },
+        { value: 19, name: "王府" },
+        { value: 16, name: "紫金山" },
+        { value: 16, name: "银杏" },
       ],
       option2: {
         tooltip: {
@@ -158,8 +294,7 @@ export default {
               "<br>" +
               params[1].seriesName +
               ": " +
-              params[1].data +
-              "%"
+              params[1].data
             );
           },
         },
@@ -177,7 +312,8 @@ export default {
             axisLine: {
               //这是x轴文字颜色
               lineStyle: {
-                color: " #999999",
+                // color: " #999999",
+                color: "#fff",
               },
             },
             data: [
@@ -204,11 +340,18 @@ export default {
             axisLine: {
               //这是x轴文字颜色
               lineStyle: {
-                color: " #999999",
+                // color: " #999999",
+                color: "#fff",
               },
             },
           },
         ],
+        grid: {
+          left: "10%",
+          right: "5%",
+          top: "15%",
+          bottom: "15%",
+        },
         series: [
           {
             name: "城市形象",
@@ -262,6 +405,128 @@ export default {
           },
         ],
       },
+      option3: {
+        tooltip: {
+          trigger: "axis",
+          formatter: (params) => {
+            return (
+              params[0].seriesName +
+              ": " +
+              params[0].data +
+              "<br>" +
+              params[1].seriesName +
+              ": " +
+              params[1].data
+            );
+          },
+        },
+        legend: {
+          data: ["城市形象", "全国平均水平"],
+          textStyle: {
+            //图例文字的样式
+            color: "#fff",
+            fontSize: 16,
+          },
+        },
+        xAxis: [
+          {
+            type: "category",
+            axisLine: {
+              //这是x轴文字颜色
+              lineStyle: {
+                // color: " #999999",
+                color: "#fff",
+              },
+            },
+            data: [
+              "交通",
+              "住宿",
+              "地理位置",
+              "旅行体验",
+              "景区环境",
+              "景区设施",
+              "服务",
+              "饮食",
+            ],
+          },
+        ],
+        yAxis: [
+          {
+            splitLine: { show: false },
+            type: "value",
+            name: "数量",
+            interval: 50,
+            axisLabel: {
+              formatter: "{value} ",
+            },
+            axisLine: {
+              //这是x轴文字颜色
+              lineStyle: {
+                // color: " #999999",
+                color: "#fff",
+              },
+            },
+          },
+        ],
+        grid: {
+          left: "10%",
+          right: "5%",
+          top: "15%",
+          bottom: "15%",
+        },
+        series: [
+          {
+            name: "城市形象",
+            type: "bar",
+            barWidth: 20,
+            /*设置柱状图颜色*/
+            itemStyle: {
+              normal: {
+                color: function (params) {
+                  // build a color map as your need.
+                  var colorList = [
+                    "#fe4f4f",
+                    "#fead33",
+                    "#feca2b",
+                    "#fef728",
+                    "#c5ee4a",
+                    "#87ee4a",
+                    "#46eda9",
+                    "#47e4ed",
+                    "#4bbbee",
+                    "#7646d8",
+                    "#924ae2",
+                    "#C6E579",
+                    "#F4E001",
+                    "#F0805A",
+                    "#26C0C0",
+                  ];
+                  return colorList[params.dataIndex];
+                },
+                /*信息显示方式*/
+                label: {
+                  show: true,
+                  position: "top",
+                  formatter: "{b}\n{c}",
+                },
+              },
+            },
+            data: [0.38, 0.218, 0.478, 0.537, 0.569, 0.469, 0.557, 0.472],
+          },
+          {
+            name: "全国平均水平",
+            yAxisIndex: 0, //这里要设置哪个y轴，默认是最左边的是0，然后1，2顺序来。
+            type: "line",
+            itemStyle: {
+              /*设置折线颜色*/
+              normal: {
+                // color:'#c4cddc'
+              },
+            },
+            data: [0.193, 0.178, 0.512, 0.683, 0.721, 0.358, 0.432, 0.498],
+          },
+        ],
+      },
       dataBJ: [
         [4.95, 3.08, "自然景观"],
         [2.56, 2.85, "人文景观"],
@@ -293,41 +558,13 @@ export default {
         shadowOffsetY: 0,
         shadowColor: "rgba(0,0,0,0.3)",
       },
-      city: "拉萨",
+      city: "北京",
       travelsdata: {
         figure: "",
         daycount: "",
         content: "",
         title: "",
         cost: "",
-      },
-      option5: {
-        tooltip: {
-          trigger: "item",
-        },
-        color: ["#0C7BE3", "#5BA1E3", "#88B7E3"],
-        series: [
-          {
-            name: "Access From",
-            type: "pie",
-            radius: ["40%", "70%"],
-            data: [
-              { value: 1048, name: "Search Engine" },
-              { value: 735, name: "Direct" },
-              { value: 580, name: "Email" },
-            ],
-            labelLine: {
-              normal: {
-                show: true,
-                length: 5,
-                length2: 10,
-                lineStyle: {
-                  color: "#808080",
-                },
-              },
-            },
-          },
-        ],
       },
       option6: {
         tooltip: {
@@ -337,9 +574,9 @@ export default {
           },
         },
         grid: {
-          x: 45,
-          y: 5,
-          x2: 0,
+          x: 110,
+          y: 15,
+          x2: 10,
           y2: 40,
           // containLabel: true,
         },
@@ -351,7 +588,8 @@ export default {
           axisLine: {
             //这是x轴文字颜色
             lineStyle: {
-              color: " #999999",
+              // color: " #999999",
+              color: "#fff",
             },
           },
           boundaryGap: [0, 0.01],
@@ -361,93 +599,190 @@ export default {
           axisLine: {
             //这是x轴文字颜色
             lineStyle: {
-              color: " #999999",
+              // color: " #999999",
+              color: "#fff",
             },
           },
-          data: ["Brazil", "Indonesia", "USA", "India", "China", "World"],
+          data: [
+            "外秦淮河游船",
+            "南京中华门城堡",
+            "江宁织造博物馆",
+            "夫子庙大成殿",
+            "灵谷寺",
+            "朝天宫",
+          ],
         },
         series: [
           {
             barWidth: 10,
             name: "2011",
             type: "bar",
-            data: [18203, 23489, 29034, 104970, 131744, 630230],
+            data: [2163, 963, 824, 783, 757, 693],
           },
         ],
       },
-      option7: {
+      option5: {
         tooltip: {
-          trigger: "item",
+          trigger: "axis",
+          axisPointer: {
+            type: "shadow",
+          },
+        },
+        grid: {
+          x: 110,
+          y: 15,
+          x2: 10,
+          y2: 40,
+          // containLabel: true,
+        },
+        xAxis: {
+          type: "value",
+          splitLine: {
+            show: false,
+          },
+          axisLine: {
+            //这是x轴文字颜色
+            lineStyle: {
+              // color: " #999999",
+              color: "#fff",
+            },
+          },
+          boundaryGap: [0, 0.01],
+        },
+        yAxis: {
+          type: "category",
+          axisLine: {
+            //这是x轴文字颜色
+            lineStyle: {
+              // color: " #999999",
+              color: "#fff",
+            },
+          },
+          data: [
+            "春晖园温泉度假村",
+            "北京野鸭湖国家湿地公园",
+            "南宫温泉水世界",
+            "八达岭长城",
+            "北京世园公园",
+            "王府井商业街",
+          ],
         },
         series: [
           {
-            name: "Access From",
-            type: "pie",
-            radius: "70%",
-            center: ["50%", "50%"],
-            data: [
-              { value: 335, name: "Direct" },
-              { value: 310, name: "Email" },
-              { value: 274, name: "Union Ads" },
-              { value: 235, name: "Video Ads" },
-              { value: 400, name: "Search Engine" },
-            ].sort(function (a, b) {
-              return a.value - b.value;
-            }),
-            roseType: "radius",
-            label: {
-              color: "rgba(255, 255, 255, 0.3)",
-            },
-            labelLine: {
-              lineStyle: {
-                color: "rgba(255, 255, 255, 0.3)",
-              },
-              smooth: 0.2,
-              length: 5,
-              length2: 5,
+            barWidth: 10,
+            type: "bar",
+            data: [747, 708, 693, 687, 631, 518],
+            itemStyle: {
+              color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+                { offset: 0, color: "#188df0" },
+                { offset: 0.5, color: "#188df0" },
+                { offset: 1, color: "#83bff6" },
+              ]),
             },
           },
         ],
       },
     };
   },
+
+  computed: {
+    defaultOption() {
+      return {
+        step: 0.4, // 数值越大速度滚动越快
+        limitMoveNum: 2, // 开始无缝滚动的数据量 this.dataList.length
+        hoverStop: true, // 是否开启鼠标悬停stop
+        direction: 1, // 0向下 1向上 2向左 3向右
+        openWatch: true, // 开启数据实时监控刷新dom
+        singleHeight: 0, // 单步运动停止的高度(默认值0是无缝不停止的滚动) direction => 0/1
+        singleWidth: 0, // 单步运动停止的宽度(默认值0是无缝不停止的滚动) direction => 2/3
+        waitTime: 1000, // 单步运动停止的时间(默认值1000ms)
+      };
+    },
+  },
+
   mounted() {
-    this.wordCloudInti(this.$refs.cloudEl, this.cloudData);
-    this.initChart2();
-    this.initChart4();
-    this.initChart5();
-    this.initChart6();
-    this.initChart7();
+    console.log(this.$route.path)
+    this.getTravels();
+    this.getComment();
+    this.initmap(this.city);
+    // this.wordcloud3D=this.BJcloudData;
+    eventBum.$on("json", (json) => {
+      this.selectcity.name = json.name;
+      this.selectcity.level = json.where;
+      var cityname = this.selectcity.name.substr(
+        0,
+        this.selectcity.name.length - 1
+      );
+      this.city = cityname;
+      this.getComment();
+      this.getTravels();
+      if (this.city == "南京") {
+        this.initChart2(this.option3);
+        this.initChart5(this.option6);
+        this.wordcloud3D = this.NJcloudData;
+        // this.wordCloudInti(this.$refs.cloudEl, this.NJcloudData);
+        this.initmap(this.city);
+        this.cityimages = this.NJcityimages;
+        this.$forceUpdate();
+      } else if (this.city == "北京") {
+        this.initChart2(this.option2);
+        this.initChart5(this.option5);
+        // this.wordCloudInti(this.$refs.cloudEl, this.BJcloudData);
+        this.wordcloud3D = this.BJcloudData;
+        this.initmap(this.city);
+        this.cityimages = this.BJcityimages;
+        this.$forceUpdate();
+      }
+    });
+    // this.wordCloudInti(this.$refs.cloudEl, this.BJcloudData);
+    this.initChart2(this.option2);
+    this.initChart3();
+    this.initChart5(this.option5);
     this.$nextTick(() => {
       window.addEventListener("resize", () => {
         this.handleResize();
       });
     });
-    this.getTravels();
   },
+
   methods: {
-    initChart2() {
+    // flyToLocation(val) {
+    //   if (val == "南京") {
+    //     this.map.flyTo({
+    //       center: [118.77949013671878, 32.04501247139361], // 中心点
+    //       zoom: 16.5, // 缩放比例
+    //       pitch: 45, // 倾斜度
+    //     });
+    //   } else if (val == "北京") {
+    //     this.map.flyTo({
+    //       center: [116.40811432812498, 39.90388639121686], // 中心点
+    //       zoom: 16.5, // 缩放比例
+    //       pitch: 45, // 倾斜度
+    //     });
+    //   }
+    // },
+    initChart2(opt) {
       let myChart2 = this.$echarts.init(document.getElementById("chart2"));
       // 指定图表的配置项和数据
-      let option = this.option2;
+      let option = opt;
       // 使用刚指定的配置项和数据显示图表。
       myChart2.setOption(option);
     },
-    initChart4() {
-      let myChart4 = this.$echarts.init(document.getElementById("chart4"));
+    initChart3() {
+      let myChart3 = this.$echarts.init(document.getElementById("chart3"));
       // 指定图表的配置项和数据
-      var option4 = {
+      var option3 = {
         color: ["#91cc75", "#fec42c", "#ee6666", "#fc8452"],
         legend: {
           top: 10,
-          right: 30,
+          right: 85,
           itemHeight: 8,
           itemWidth: 8,
           orient: "vertical",
-          data: ["1", "2", "3", "4"],
+          data: ["公园环境", "设施服务", "游憩体验", "游憩成本"],
           textStyle: {
-            color: "#F5FDFD80",
-            fontSize: 12,
+            color: ["#91cc75", "#fec42c", "#ee6666", "#fc8452"],
+            fontSize: 14,
           },
         },
         label: {
@@ -456,14 +791,14 @@ export default {
           formatter: "{@value}", // 点旁边显示label，这里使用name: '横坐标'这样写也可以，鼠标移入出现提示。
         },
         grid: {
-          left: "15%",
-          right: 30,
+          left: "5%",
+          right: "20%",
           top: "10%",
-          bottom: "15%",
+          bottom: "25%",
         },
         xAxis: {
           type: "value",
-          name: "日期",
+          name: "关注度",
           nameGap: 0,
           nameTextStyle: {
             fontSize: 12,
@@ -471,7 +806,8 @@ export default {
           axisLine: {
             //这是x轴文字颜色
             lineStyle: {
-              color: " #F5FDFD80",
+              // color: " #F5FDFD80",
+              color: "#fff",
             },
           },
           max: 22,
@@ -481,7 +817,7 @@ export default {
         },
         yAxis: {
           type: "value",
-          name: "AQI指数",
+          name: "评价",
           nameLocation: "end",
           nameGap: 10,
           scale: true,
@@ -493,33 +829,33 @@ export default {
             show: false,
           },
           axisLine: {
-            //这是x轴文字颜色
             lineStyle: {
-              color: " #F5FDFD80",
+              // color: " #F5FDFD80",
+              color: "#fff",
             },
           },
         },
         series: [
           {
-            name: "1",
+            name: "公园环境",
             type: "scatter",
             itemStyle: this.itemStyle,
             data: this.dataBJ,
           },
           {
-            name: "2",
+            name: "设施服务",
             type: "scatter",
             itemStyle: this.itemStyle,
             data: this.dataGZ,
           },
           {
-            name: "3",
+            name: "游憩体验",
             type: "scatter",
             itemStyle: this.itemStyle,
             data: this.data03,
           },
           {
-            name: "4",
+            name: "游憩成本",
             type: "scatter",
             itemStyle: this.itemStyle,
             data: this.data04,
@@ -527,28 +863,14 @@ export default {
         ],
       };
       // 使用刚指定的配置项和数据显示图表。
-      myChart4.setOption(option4);
+      myChart3.setOption(option3);
     },
-    initChart5() {
+    initChart5(opt) {
       let myChart5 = this.$echarts.init(document.getElementById("chart5"));
       // 指定图表的配置项和数据
-      let option = this.option5;
+      let option = opt;
       // 使用刚指定的配置项和数据显示图表。
       myChart5.setOption(option);
-    },
-    initChart6() {
-      let myChart6 = this.$echarts.init(document.getElementById("chart6"));
-      // 指定图表的配置项和数据
-      let option = this.option6;
-      // 使用刚指定的配置项和数据显示图表。
-      myChart6.setOption(option);
-    },
-    initChart7() {
-      let myChart7 = this.$echarts.init(document.getElementById("chart7"));
-      // 指定图表的配置项和数据
-      let option = this.option7;
-      // 使用刚指定的配置项和数据显示图表。
-      myChart7.setOption(option);
     },
     handleResize() {
       this.myChart2 && this.myChart2.resize();
@@ -601,10 +923,20 @@ export default {
       };
       myChart.setOption(option);
     },
+    getComment() {
+      request
+        .post("/api/data/cityCom", {
+          model: this.city,
+        })
+        .then((res) => {
+          console.log(res);
+          this.commentlist = res.data;
+        });
+    },
     getTravels() {
       request
         .post("/api/data/cityTravel", {
-          count: "100",
+          count: "1000000",
           city: this.city,
         })
         .then((res) => {
@@ -615,6 +947,108 @@ export default {
           this.travelsdata.figure = res.data.figure;
           this.travelsdata.cost = res.data.price;
         });
+    },
+    initmap(val) {
+      this.$mapboxgl.accessToken =
+        "pk.eyJ1IjoiY2hlbmpxIiwiYSI6ImNrcWFmdWt2bjBtZGsybmxjb29oYmRzZzEifQ.mnpiwx7_cBEyi8YiJiMRZg";
+      var map = new this.$mapboxgl.Map({
+        container: "map",
+        style: "mapbox://styles/chenjq/cl084urgf004014ny2nhu1xre",
+      });
+      map.on("load", () => {
+        if (val == "北京") {
+          map.flyTo({
+            center: [118.77949013671878, 32.04501247139361],
+            // center: [116.40811432812498, 39.90388639121686],
+            zoom: 10.5, // 缩放比例
+            pitch: 45, // 倾斜度
+          });
+        }
+        // else if (val == "北京") {
+        //   map.flyTo({
+        //     center: [116.40811432812498, 39.90388639121686], // 中心点
+        //     zoom: 10.5, // 缩放比例
+        //     pitch: 45, // 倾斜度
+        //   });
+        // }
+        map.addSource("njmark", {
+          type: "geojson",
+          data: nanjing,
+        });
+        map.addSource("njpolygon", {
+          type: "geojson",
+          data: njprovince,
+        });
+        map.addLayer({
+          id: "fillID",
+          type: "fill" /* symbol类型layer，一般用来绘制点*/,
+          source: "njpolygon",
+          paint: {
+            "fill-color": "#74add1",
+            "fill-opacity": 0.6 /* 透明度 */,
+          },
+        });
+        map.addLayer({
+          id: "earthquakes-layer",
+          type: "circle",
+          source: "njmark",
+          paint: {
+            "circle-radius": 5,
+            "circle-stroke-width": 2,
+            "circle-opacity": 0.75,
+            "circle-stroke-color": "white",
+            "circle-color": [
+              "interpolate",
+              ["linear"],
+              ["get", "score"],
+              3.5,
+              "#ACBE21",
+              3.8,
+              "#BEB221",
+              4.1,
+              "#BE8221",
+              4.4,
+              "#FF8C00",
+              4.7,
+              "#BE6321",
+              5.0,
+              "#BE4521",
+            ],
+          },
+        });
+        // map.addLayer({
+        //   id: "earthquakes-layer",
+        //   type: "circle",
+        //   source: "njmark",
+        //   paint: {
+        //     "circle-radius": 5,
+        //     "circle-stroke-width": 2,
+        //     "circle-color": "#06b2fb",
+        //     "circle-stroke-color": "white",
+        //   },
+        // });
+        map.addLayer({
+          id: "points",
+          type: "symbol" /* symbol类型layer，一般用来绘制点*/,
+          source: "njmark",
+          layout: {
+            "text-field": ["get", "name"],
+            "text-offset": [1.5, 1.5],
+          },
+          paint: {
+            "text-color": "#FFFFFF",
+          },
+        });
+        const countyLegendEl = document.getElementById("county-legend");
+      });
+    },
+  },
+  watch: {
+    wordcloud3D() {
+      this.reFresh = false;
+      this.$nextTick(() => {
+        this.reFresh = true;
+      });
     },
   },
 };
@@ -630,170 +1064,287 @@ export default {
   flex-direction: row;
   flex-wrap: nowrap;
 }
-.city-left {
+#map {
+  position: relative;
+  width: 100%;
   height: 100%;
-  width: 20%;
-  margin-left: 0.5%;
+  z-index: 0;
+}
+.city-left {
+  position: absolute;
+  left: 0%;
+  height: 100%;
+  width: 22.5%;
+  margin-left: 0.1%;
   background: url("../../assets/img/side.png") no-repeat;
-  background-position: 100% 10%;
-  background-size: 100% 91%;
+  background-position: 100% 8%;
+  background-size: 100% 92%;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
   justify-content: flex-start;
-  .title {
-    // flex: 0.5;
-    margin-top: 5%;
-    height: 4%;
+  .city-left-select {
+    flex: 0.7;
     width: 100%;
-    position: relative;
-    left: 0%;
-    background: url(../../assets/img/titlebg.png) no-repeat;
-    background-size: 57% 93%;
-    background-position: 9% 100%;
-    font-size: 16pt;
-    > span {
-      float: left;
-      margin-left: 18%;
-      font-size: 12pt;
-      line-height: 30px;
-      color: aliceblue;
-      text-shadow: 0 0 10px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #38e9e0,
-        0 0 25px #0cf3f3;
+    display: flex;
+    flex-direction: column;
+    .title {
+      padding-top: 1%;
+      height: 18%;
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      background: url("../../assets/img/titlebg.png") no-repeat;
+      background-position: 3% 71%;
+      background-size: 46% 80%;
+      > span {
+        color: #a7e3eb;
+        font-size: 12pt;
+        margin-left: 12%;
+      }
+    }
+    .content {
+      height: 80%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      .content1 {
+        margin-top: 10%;
+        width: 100%;
+        height: 20%;
+      }
+      .content2 {
+        width: 100%;
+        height: 50%;
+      }
     }
   }
   .city-left-bottom {
-    height: 85%;
+    flex: 2;
     width: 100%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    // margin-bottom: 2%;
+    .col-content {
+      width: 100%;
+      float: left;
+      .commentroll {
+        height: 85%;
+        width: 100%;
+        position: relative;
+        .tablehrader {
+          height: 9%;
+          width: 100%;
+          .uititle {
+            height: 100%;
+            background-color: rgba(86, 212, 235, 0.575);
+            color: aliceblue;
+            font-size: 12pt;
+            .title {
+              height: 100%;
+              display: flex;
+              .content {
+                height: 100%;
+                width: 80%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              }
+              .scenic {
+                height: 100%;
+                width: 20%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              }
+            }
+          }
+        }
+        .srrollcontent {
+          height: 87%;
+          width: 100%;
+          color: aliceblue;
+          font-size: 11pt;
+          //循环界限，超出隐藏
+          overflow: hidden;
+          .ul-scoll {
+            .li-scoll {
+              margin-bottom: 1.5%;
+              list-style: none;
+              display: flex;
+              // margin-bottom: 1.5%;
+              border: 1px #8fece783 solid;
+              // border-right: 1px #8fece783 solid;
+              // border-left: 1px #8fece783 solid;
+              cursor: pointer;
+              line-height: 20px;
+              .pinglun {
+                width: 70%;
+                height: 100%;
+                border-right: 1px #8fece783 solid;
+                //单元格横向长度不足时 隐藏文字内容，并以鼠标悬停的方式显示
+                overflow: hidden;
+                // white-space: nowrap;
+                text-overflow: ellipsis;
+                text-align: left;
+                text-indent: 1em;
+                /* 在恰当的断字点进行换行 */
+                word-break: break-all;
+                /* 超出范围隐藏 */
+                overflow: hidden;
+                /* 文字超出用省略号 */
+                text-overflow: ellipsis;
+                /* 盒子模型 */
+                display: -webkit-box;
+                /* 显示的文本行数 */
+                -webkit-line-clamp: 3;
+                /* 子元素的垂直排列方式 */
+                -webkit-box-orient: vertical;
+              }
+              .jingdian {
+                width: 30%;
+                height: 100%;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                text-align: center;
+                text-indent: 0em;
+                margin: auto;
+              }
+            }
+          }
+        }
+      }
+      .row1title {
+        height: 15%;
+        width: 100%;
+        margin-left: 2%;
+        color: aliceblue;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        .imgBK {
+          height: 90%;
+          width: 7%;
+          background: url("../../assets/img/panelIcon.png") no-repeat;
+          background-size: 100% 100%;
+        }
+        > span {
+          color: rgb(115, 215, 228);
+          font-size: 12pt;
+        }
+      }
+      .row1chartcontent {
+        height: 90%;
+        width: 100%;
+      }
+    }
+    .col-content:nth-child(1) {
+      height: 48%;
+    }
+    .col-content:nth-child(2) {
+      height: 41%;
+    }
   }
 }
 .city-content {
-  height: 100%;
-  width: 76.5%;
-  position: relative;
-  right: 0%;
+  width: 51%;
+  position: absolute;
+  z-index: 1;
+  height: 37%;
+  bottom: 7.4%;
+  left: 23%;
+  background: url("../../assets/img/side.png") no-repeat;
+  background-size: 100% 100%;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: center;
   align-items: stretch;
   .el-row {
+    width: 100%;
+    height: 100%;
     margin-bottom: 0;
-    height: 91%;
-    width: 70%;
-    top: 1%;
+    // top: 1%;
     .el-col {
-      height: 33.3%;
-      width: 100%;
-      padding: 5px;
-    }
-    .imgBK {
-      background: url("../../assets/img/panelIcon.png") no-repeat;
-      background-size: 100% 100%;
-    }
-    .el-col:nth-child(1) {
+      // padding: 5px;
+      height: 100%;
       .col-content {
         height: 100%;
-        width: 50%;
-        float: left;
-        .row1title {
-          height: 15%;
-          width: 100%;
-          color: aliceblue;
-          display: flex;
-          justify-content: flex-start;
-          align-items: center;
-          .imgBK {
-            height: 90%;
-            width: 7%;
-          }
-          > span {
-            color: rgb(115, 215, 228);
-            font-size: 12pt;
-          }
-        }
-        .row1chartcontent {
-          height: 100%;
-          width: 100%;
-        }
-      }
-    }
-    .el-col:nth-child(2) {
-      .col-content {
-        height: 100%;
-        width: 50%;
+        width: 100%;
         float: left;
         .row2title {
-          height: 15%;
+          height: 12%;
           width: 100%;
           color: aliceblue;
           display: flex;
           justify-content: flex-start;
           align-items: center;
           .imgBK {
-            height: 90%;
-            width: 7%;
-            margin-left: 2%;
+            height: 87%;
+            width: 5%;
+            margin-left: 1%;
+            background: url("../../assets/img/panelIcon.png") no-repeat;
+            background-size: 100% 100%;
           }
           > span {
             color: rgb(115, 215, 228);
             font-size: 12pt;
           }
         }
+        .row3title {
+          height: 12%;
+          width: 100%;
+          color: aliceblue;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          .imgBK {
+            height: 87%;
+            width: 9.5%;
+            background: url("../../assets/img/panelIcon.png") no-repeat;
+            background-size: 100% 100%;
+          }
+          > span {
+            color: rgb(115, 215, 228);
+            font-size: 12pt;
+          }
+        }
+
         .row1chartcontent {
           height: 100%;
           width: 100%;
         }
       }
     }
-    .el-col:nth-child(3) {
-      .col-content {
-        height: 100%;
-        width: 33.3%;
-        float: left;
-        .row3title {
-          height: 15%;
-          width: 100%;
-          color: aliceblue;
-          display: flex;
-          justify-content: flex-start;
-          align-items: center;
-          .imgBK {
-            height: 90%;
-            width: 11%;
-            margin-left: 2%;
-          }
-          > span {
-            color: rgb(115, 215, 228);
-            font-size: 12pt;
-          }
-        }
-        .row3chartcontent {
-          height: 100%;
-          width: 100%;
-        }
-      }
-      // .col-content:nth-child(1){
-      //   width: 33.3%;
-      // }
-      // .col-content:nth-child(2){
-      //   width: 66.6%;
-      // }
-    }
   }
-  .travels {
-    width: 30%;
-    height: 100%;
-    // background-color:#38e9e0;
+}
+.city-travels {
+  position: absolute;
+  right: 3%;
+  width: 22.5%;
+  height: 100%;
+  background: url("../../assets/img/side.png") no-repeat;
+  background-position: 100% 8%;
+  background-size: 100% 92%;
+  display: flex;
+  flex-direction: column;
+  .travels-content {
+    display: flex;
+    flex-direction: column;
+    height: 61%;
+    width: 100%;
     .travels-title {
-      height: 4%;
+      height: 8%;
       width: 100%;
       margin-top: 4%;
       display: flex;
       justify-content: flex-start;
       align-items: center;
       .imgBK {
-        height: 90%;
+        height: 85%;
         width: 7%;
         margin-left: 2%;
         background: url("../../assets/img/panelIcon.png") no-repeat;
@@ -815,58 +1366,89 @@ export default {
         cursor: pointer;
       }
     }
-    .travels-content {
-      height: 84%;
+    .travels-name {
+      height: 13%;
       width: 100%;
-      .travels-name {
-        height: 8%;
-        color: #fff;
-        font-size: 12pt;
-        .title {
-          height: 60%;
-          width: 100%;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          padding: 0 10%;
-        }
-        .descriptions {
-          height: 70%;
-          width: 100%;
-          padding-left: 9%;
-          > span {
-            width: 50%;
-            float: left;
-            color: #89c4eb9a;
-            font-size: 10pt;
-            text-align: left;
-          }
-        }
-      }
-      .travels-text {
-        color: rgb(141, 141, 141);
-        font-size: 12pt;
-        height: 90%;
-        overflow-y: auto;
-        padding: 10px;
+      color: #fff;
+      font-size: 12pt;
+      .title {
+        height: 40%;
         width: 100%;
-        text-indent: 2em;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding: 0 10%;
       }
-      ::-webkit-scrollbar {
-        width: 5px; /*高宽分别对应横竖滚动条的尺寸 */
-        height: 5px;
-        background-color: rgba(135, 175, 221, 0.055);
+      .descriptions {
+        height: 60%;
+        width: 100%;
+        padding-left: 9%;
+        > span {
+          width: 50%;
+          float: left;
+          color: #89c4eb9a;
+          font-size: 10pt;
+          text-align: left;
+        }
       }
+    }
+    .travels-text {
+      color: #cfcfcf;
+      font-size: 12pt;
+      height: 87%;
+      overflow-y: auto;
+      padding: 10px;
+      width: 100%;
+      text-indent: 2em;
+    }
+    ::-webkit-scrollbar {
+      width: 5px; /*高宽分别对应横竖滚动条的尺寸 */
+      height: 5px;
+      background-color: rgba(135, 175, 221, 0.055);
+    }
 
-      /* 滚动槽的轨道 */
-      ::-webkit-scrollbar-track {
-        border-radius: 30px;
-      }
+    /* 滚动槽的轨道 */
+    ::-webkit-scrollbar-track {
+      border-radius: 30px;
+    }
 
-      /* 滚动条的小滑块 */
-      ::-webkit-scrollbar-thumb {
-        border-radius: 10px;
-        background: lightskyblue;
+    /* 滚动条的小滑块 */
+    ::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      background: lightskyblue;
+    }
+  }
+  .travels-bottom {
+    display: flex;
+    height: 30%;
+    flex-direction: column;
+    width: 100%;
+    .col-content {
+      height: 95%;
+      width: 100%;
+      float: left;
+      .row3title {
+        height: 15%;
+        width: 100%;
+        margin-left: 2%;
+        color: aliceblue;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        .imgBK {
+          height: 90%;
+          width: 7%;
+          background: url("../../assets/img/panelIcon.png") no-repeat;
+          background-size: 100% 100%;
+        }
+        > span {
+          color: rgb(115, 215, 228);
+          font-size: 12pt;
+        }
+      }
+      .row3chartcontent {
+        height: 100%;
+        width: 100%;
       }
     }
   }
@@ -889,6 +1471,67 @@ export default {
 /deep/.el-carousel__container {
   margin-top: 4%;
   margin-bottom: 2%;
-  height: 150px !important;
+  height: 200px !important;
+}
+.legend {
+  background-color: #348ea894;
+  color: aliceblue;
+  border-radius: 3px;
+  bottom: 45%;
+  height: 21%;
+  width: 7%;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  font: 12px/20px "Helvetica Neue", Arial, Helvetica, sans-serif;
+  padding: 10px;
+  position: absolute;
+  right: 25.8%;
+  z-index: 1;
+}
+
+.legend h4 {
+  margin: 0 0 6px;
+  font-size: 10pt;
+}
+
+.legend div span {
+  border-radius: 50%;
+  display: inline-block;
+  height: 10px;
+  margin-right: 5px;
+  width: 10px;
+}
+.com-multimap {
+  height: 100%;
+  #map {
+    position: relative;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+  }
+}
+.map-overlay {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: #fff;
+  margin-right: 20px;
+  font-family: Arial, sans-serif;
+  overflow: auto;
+  border-radius: 3px;
+}
+.mytitle {
+  height: 12%;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background: url("../../assets/img/titlebg.png") no-repeat;
+  background-position: 3% 71%;
+  background-size: 46% 80%;
+  > span {
+    color: #a7e3eb;
+    font-size: 12pt;
+    margin-left: 12%;
+  }
 }
 </style>

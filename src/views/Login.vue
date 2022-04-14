@@ -59,6 +59,9 @@
 </template>
 
 <script>
+import request from "../utils/request";
+import { mapState } from 'vuex';
+import { mapMutations } from 'vuex';
 export default {
   data() {
     return {
@@ -66,18 +69,32 @@ export default {
         username: "admin",
         password: "123",
       },
+      alldatacount: {
+        }
     };
   },
+  computed:{
+    },
   mounted() {
     //登录绑定事件
     window.addEventListener("keydown", this.keyDown);
+    this.getAlldatacount();
   },
   methods: {
+    ...mapMutations(['setAlldatacount']),
     keyDown(e) {
       //如果是回车则执行登录方法
       if (e.keyCode == 13) {
         document.getElementById("btn").click();
       }
+    },
+    getAlldatacount(){
+    request.get("/api/data/getSCT").then((res) => {
+        console.log(res.data);
+        var data=res.data;
+        this.alldatacount=data
+         this.setAlldatacount(this.alldatacount);
+      });
     },
     handleLogin() {
       // request.post("/api/user/queryuser", this.loginFrom).then((res) => {

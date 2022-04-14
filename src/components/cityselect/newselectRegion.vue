@@ -141,6 +141,10 @@ export default {
   created() {},
   beforeDestroy() {},
   mounted() {
+    if(this.$route.path=="/sensation")
+    {
+      this.json.name='北京市'
+    }
     var that = this;
     for (let i = 0; i < city.length; i++) {
       var gong = {};

@@ -68,21 +68,21 @@
               <div class="myimg"></div>
             </div>
             <span class="partname"> 景点数 </span>
-            <span class="partnumber"> {{ citycount.sensic }} </span>
+            <span class="partnumber"> {{ this.alldatacount.scenic }} </span>
           </div>
           <div class="Mpart toppart-part">
             <div class="partimg">
               <div class="myimg"></div>
             </div>
             <span class="partname"> 评论数 </span>
-            <span class="partnumber"> {{ citycount.comment }} </span>
+            <span class="partnumber"> {{ this.alldatacount.comment }} </span>
           </div>
           <div class="Rpart toppart-part">
             <div class="partimg">
               <div class="myimg"></div>
             </div>
             <span class="partname"> 游记数 </span>
-            <span class="partnumber"> {{ citycount.tourist }} </span>
+            <span class="partnumber"> {{ this.alldatacount.travels }} </span>
           </div>
         </div>
         <div class="datatime">数据更新时间:{{ this.datatime }}</div>
@@ -473,8 +473,8 @@
             type="month"
             :placeholder="month"
             :clearable="clearable"
-             :picker-options="pickerOptions"
-            @change="getScenicMonth(monthvalue),getCityMonth(monthvalue)"
+            :picker-options="pickerOptions"
+            @change="getScenicMonth(monthvalue), getCityMonth(monthvalue)"
           >
           </el-date-picker>
         </div>
@@ -486,12 +486,12 @@
 <script>
 import word3D from "../components/wordcloud3D.vue";
 
-import Bus from "../assets/js/bus.js";
 import poppage from "../components/poppageForCity.vue";
 
 import request from "../utils/request";
-
-import recommendCity from "../assets/js/global_variable";
+//vuex
+import { mapState } from "vuex";
+import { mapMutations } from "vuex";
 
 import gradedcolormap from "../components/thememap/gradedcolormap.vue";
 import pointgather from "../components/thememap/pointgather.vue";
@@ -530,23 +530,24 @@ export default {
       word3Dwidth: 350,
       treemapname: "中国热门城市",
       //评论数据变化,页面下方
-       pickerOptions: {
+      pickerOptions: {
         disabledDate(time) {
-          const FullYear = time.getFullYear()
+          const FullYear = time.getFullYear();
           let myDate = new Date();
           // const Month = time.getMonth() + 1
           if (FullYear < 2021) {
-            return true
+            return true;
           } else {
             let t = myDate.getDate();
             // 如果想包含本月本月 - 8.64e7 * t 就不需要了，
             // 如果想之前的不能选择把 > 换成 <
-            return time.getTime() > (Date.now() - 8.64e7 * t);
+            return time.getTime() > Date.now() - 8.64e7 * t;
           }
           // return false
         },
       },
       timeflag: true,
+      timeflag2: true,
       currentmonth: "",
       daydata: [],
       opts1: [],
@@ -866,9 +867,21 @@ export default {
   beforeCreate() {
     //获取评论数、好评数、游记数
   },
+  computed: {
+    ...mapState(["alldatacount"]),
+  },
   created() {
     this.getAlldata();
-        eventBum.$on("json", (json) => {
+    sessionStorage.getItem("state") &&this.$store.replaceState(Object.assign({},
+          this.$store.state,
+          JSON.parse(sessionStorage.getItem("state"))
+        )
+      );
+    //进行页面刷新时存储 store.state 数据存储到sessionStorage中
+    window.addEventListener("beforeunload", () => {
+      sessionStorage.setItem("state", JSON.stringify(this.$store.state));
+    });
+    eventBum.$on("json", (json) => {
       this.selectcity.name = json.name;
       this.selectcity.level = json.where;
       console.log(this.selectcity);
@@ -959,7 +972,7 @@ export default {
         });
     },
     getCityMonth(val) {
-      this.timeflag = false;
+      this.timeflag2 = false;
       console.log(val);
       var year = val.getFullYear();
       var month = val.getMonth() + 1;
@@ -1167,7 +1180,7 @@ export default {
         }, 10);
       } else if (tab.name == "cityhot") {
         setTimeout(() => {
-          if (this.timeflag) {
+          if (this.timeflag2) {
             let pretime = this.getPreMonth(this.currentmonth);
             let time = new Date(pretime);
             console.log(time);
@@ -1716,382 +1729,6 @@ export default {
       };
       option && myChart.setOption(option, true);
     },
-    // initTimechart1() {
-    //   var chartDom = document.getElementById("timechart1");
-    //   var myChart = echarts.init(chartDom);
-    //   var option;
-
-    //   let base = +new Date(2005, 9, 3);
-    //   let oneDay = 24 * 3600 * 1000;
-    //   let date = [];
-    //   let data = [Math.random() * 300];
-    //   let data2 = [Math.random() * 300];
-    //   let data3 = [Math.random() * 300];
-    //        let data4 = [Math.random() * 300];
-    //   for (let i = 1; i < 6150; i++) {
-    //     var now = new Date((base += oneDay));
-    //     date.push(
-    //       [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
-    //     );
-    //     var absnum = Math.round((Math.random() - 0.5) * 20 + data[i - 1]);
-    //     if (absnum < 0) {
-    //       absnum = -absnum;
-    //     }
-    //     data.push(absnum);
-    //   }
-    //   for (let i = 1; i < 6150; i++) {
-    //     var now = new Date((base += oneDay));
-    //     date.push(
-    //       [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
-    //     );
-    //     var absnum = Math.round((Math.random() - 0.5) * 20 + data2[i - 1]);
-    //     if (absnum < 0) {
-    //       absnum = -absnum;
-    //     }
-    //     data2.push(absnum);
-    //   }
-    //   for (let i = 1; i < 6150; i++) {
-    //     var now = new Date((base += oneDay));
-    //     date.push(
-    //       [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
-    //     );
-    //     var absnum = Math.round((Math.random() - 0.5) * 20 + data3[i - 1]);
-    //     if (absnum < 0) {
-    //       absnum = -absnum;
-    //     }
-    //     data3.push(absnum);
-    //   }
-    //         for (let i = 1; i < 6150; i++) {
-    //     var now = new Date((base += oneDay));
-    //     date.push(
-    //       [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
-    //     );
-    //     var absnum = Math.round((Math.random() - 0.5) * 20 + data4[i - 1]);
-    //     if (absnum < 0) {
-    //       absnum = -absnum;
-    //     }
-    //     data4.push(absnum);
-    //   }
-    //   option = {
-    //     legend: {
-    //       right: 200,
-    //       // itemGap: 30,
-    //       // itemWidth: 8,
-    //       // padding: 10,
-    //       textStyle: {
-    //         fontSize: 12,
-    //         color: "#fft",
-    //       },
-    //       align: "left",
-    //     },
-    //     tooltip: {
-    //       trigger: "axis",
-    //       position: function (pt) {
-    //         return [pt[0], "10%"];
-    //       },
-    //     },
-    //     grid: {
-    //       left: "2%", //图表距边框的距离
-    //       right: "5%",
-    //       bottom: "18%",
-    //       top: "12%",
-    //       containLabel: true,
-    //     },
-    //     xAxis: {
-    //       type: "category",
-    //       boundaryGap: false,
-    //       data: date,
-    //       axisLine: {
-    //         lineStyle: {
-    //           color: "white",
-    //         },
-    //       },
-    //     },
-    //     yAxis: {
-    //       splitLine: { show: false },
-    //       type: "value",
-    //       boundaryGap: [0, "10%"],
-    //       axisLine: {
-    //         lineStyle: {
-    //           color: "white",
-    //         },
-    //       },
-    //     },
-    //     dataZoom: [
-    //       {
-    //         type: "inside",
-    //         start: 0,
-    //         end: 10,
-    //       },
-    //       {
-    //         start: 0,
-    //         end: 10,
-    //       },
-    //     ],
-    //     series: [
-    //       {
-    //         name: "珠江南田温泉",
-    //         type: "bar",
-    //         symbol: "none",
-    //         sampling: "lttb",
-    //         data: data,
-    //         itemStyle: {
-    //           color: "rgb(255, 70, 131)",
-    //         },
-    //         areaStyle: {
-    //           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-    //             {
-    //               offset: 0,
-    //               color: "rgb(255, 158, 68)",
-    //             },
-    //             {
-    //               offset: 1,
-    //               color: "rgb(255, 70, 131)",
-    //             },
-    //           ]),
-    //         },
-    //       },
-    //       {
-    //         name: "云台山",
-    //         type: "bar",
-    //         symbol: "none",
-    //         sampling: "lttb",
-    //         data: data2,
-    //         itemStyle: {
-    //           color: "#D5F19F",
-    //         },
-    //         areaStyle: {
-    //           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-    //             {
-    //               offset: 0,
-    //               color: "#758A4B",
-    //             },
-    //             {
-    //               offset: 1,
-    //               color: "#A9D750",
-    //             },
-    //           ]),
-    //         },
-    //       },
-    //       {
-    //         name: "长隆野生动物园",
-    //         type: "bar",
-    //         symbol: "none",
-    //         sampling: "lttb",
-    //         data: data3,
-    //         itemStyle: {
-    //           color: "#4CE7CC",
-    //         },
-    //         areaStyle: {
-    //           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-    //             {
-    //               offset: 0,
-    //               color: "#50998C",
-    //             },
-    //             {
-    //               offset: 1,
-    //               color: "#42C8B1",
-    //             },
-    //           ]),
-    //         },
-    //       },
-    //                 {
-    //         name: "华山",
-    //         type: "bar",
-    //         symbol: "none",
-    //         sampling: "lttb",
-    //         data: data4,
-    //         itemStyle: {
-    //           color: "#4789D6",
-    //         },
-    //         areaStyle: {
-    //           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-    //             {
-    //               offset: 0,
-    //               color: "#627995",
-    //             },
-    //             {
-    //               offset: 1,
-    //               color: "#3768A1",
-    //             },
-    //           ]),
-    //         },
-    //       },
-    //     ],
-    //   };
-    //   option && myChart.setOption(option, true);
-    // },
-    // initTimechart2() {
-    //   var chartDom = document.getElementById("timechart2");
-    //   var myChart = echarts.init(chartDom);
-    //   var option;
-
-    //   let base = +new Date(2005, 9, 3);
-    //   let oneDay = 24 * 3600 * 1000;
-    //   let date = [];
-    //   let data = [Math.random() * 300];
-    //   let data2 = [Math.random() * 300];
-    //   let data3 = [Math.random() * 3];
-    //   for (let i = 1; i < 6150; i++) {
-    //     var now = new Date((base += oneDay));
-    //     date.push(
-    //       [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
-    //     );
-    //     var absnum = Math.round((Math.random() - 0.5) * 20 + data[i - 1]);
-    //     if (absnum < 0) {
-    //       absnum = -absnum;
-    //     }
-    //     data.push(absnum);
-    //   }
-    //   for (let i = 1; i < 20000; i++) {
-    //     var now = new Date((base += oneDay));
-    //     date.push(
-    //       [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
-    //     );
-    //     var absnum = Math.round((Math.random() - 0.5) * 20 + data2[i - 1]);
-    //     if (absnum < 0) {
-    //       absnum = -absnum;
-    //     }
-    //     data2.push(absnum);
-    //   }
-    //   for (let i = 1; i < 6150; i++) {
-    //     var now = new Date((base += oneDay));
-    //     date.push(
-    //       [now.getFullYear(), now.getMonth() + 1, now.getDate()].join("/")
-    //     );
-    //     var absnum = Math.round((Math.random() - 0.5) * 5 + data3[i - 1]);
-    //     if (absnum < 0) {
-    //       absnum = -absnum;
-    //     }
-    //     data3.push(absnum);
-    //   }
-    //   option = {
-    //     legend: {
-    //       right: 200,
-    //       // itemGap: 30,
-    //       // itemWidth: 8,
-    //       // padding: 10,
-    //       textStyle: {
-    //         fontSize: 12,
-    //         color: "#fft",
-    //       },
-    //       align: "left",
-    //     },
-    //     tooltip: {
-    //       trigger: "axis",
-    //       position: function (pt) {
-    //         return [pt[0], "10%"];
-    //       },
-    //     },
-    //     grid: {
-    //       left: "2%", //图表距边框的距离
-    //       right: "5%",
-    //       bottom: "18%",
-    //       top: "12%",
-    //       containLabel: true,
-    //     },
-    //     xAxis: {
-    //       type: "category",
-    //       boundaryGap: false,
-    //       data: date,
-    //       axisLine: {
-    //         lineStyle: {
-    //           color: "white",
-    //         },
-    //       },
-    //     },
-    //     yAxis: {
-    //       splitLine: { show: false },
-    //       type: "value",
-    //       boundaryGap: [0, "10%"],
-    //       axisLine: {
-    //         lineStyle: {
-    //           color: "white",
-    //         },
-    //       },
-    //     },
-    //     dataZoom: [
-    //       {
-    //         type: "inside",
-    //         start: 0,
-    //         end: 10,
-    //       },
-    //       {
-    //         start: 0,
-    //         end: 10,
-    //       },
-    //     ],
-    //     series: [
-    //       {
-    //         name: "评论数",
-    //         type: "line",
-    //         symbol: "none",
-    //         sampling: "lttb",
-    //         data: data,
-    //         itemStyle: {
-    //           color: "rgb(255, 70, 131)",
-    //         },
-    //         areaStyle: {
-    //           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-    //             {
-    //               offset: 0,
-    //               color: "rgb(255, 158, 68)",
-    //             },
-    //             {
-    //               offset: 1,
-    //               color: "rgb(255, 70, 131)",
-    //             },
-    //           ]),
-    //         },
-    //       },
-    //       {
-    //         name: "好评数",
-    //         type: "line",
-    //         symbol: "none",
-    //         sampling: "lttb",
-    //         data: data2,
-    //         itemStyle: {
-    //           color: "#D5F19F",
-    //         },
-    //         areaStyle: {
-    //           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-    //             {
-    //               offset: 0,
-    //               color: "#758A4B",
-    //             },
-    //             {
-    //               offset: 1,
-    //               color: "#A9D750",
-    //             },
-    //           ]),
-    //         },
-    //       },
-    //       {
-    //         name: "游记数",
-    //         type: "line",
-    //         symbol: "none",
-    //         sampling: "lttb",
-    //         data: data3,
-    //         itemStyle: {
-    //           color: "#4789D6",
-    //         },
-    //         areaStyle: {
-    //           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-    //             {
-    //               offset: 0,
-    //               color: "#627995",
-    //             },
-    //             {
-    //               offset: 1,
-    //               color: "#3768A1",
-    //             },
-    //           ]),
-    //         },
-    //       },
-    //     ],
-    //   };
-    //   option && myChart.setOption(option, true);
-    // },
     //矩形树图点击事件
     clickFun(param) {
       if (param.type == "click") {
@@ -2201,6 +1838,12 @@ export default {
         ],
       };
       myChart.setOption(option);
+    },
+  },
+  //监听全局变量
+  watch: {
+    "$store.state.alldatacount": function (val, old) {
+      console.log(val);
     },
   },
 };
@@ -2565,7 +2208,7 @@ export default {
         width: 25%;
         border: none;
       }
-      /deep/.el-tabs__nav{
+      /deep/.el-tabs__nav {
         width: 100%;
       }
       /deep/.el-table .cell {
