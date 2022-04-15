@@ -811,6 +811,8 @@ export default {
   height: 100%;
   background: url("./public/ptbg.png") no-repeat center center;
   background-size: 100% 100%;
+      margin-left: 2%;
+    margin-top: 1%;
 }
 .Thematicmap .find .time .el-date-editor.el-input {
   width: 140px !important;
@@ -820,7 +822,8 @@ export default {
 }
 /* 空间尺度 */
 .space {
-  margin: 1px 3px;
+    margin-left: 2%;
+    margin-top: 1%;
   /* border-top: 1px solid #fff; */
   padding: 10px;
   background: url("./public/ptbg.png") no-repeat center center;
@@ -840,7 +843,8 @@ export default {
   background: url("./public/ptbg.png") no-repeat center center;
 } */
 .Thematicmap .find .bottom {
-  margin-top: 1px;
+    margin-left: 2%;
+    margin-top: 1%;
   /* border-top: 1px solid #fff; */
   background: url("./public/ptbg.png") no-repeat center center;
   background-size: 100% 100%;
@@ -850,8 +854,8 @@ export default {
   border-bottom-left-radius: 5px; */
   /* background-color: rgb(40, 43, 57); */
   color: rgba(255, 255, 255, 0.8);
-  width: 100%;
-  height: 100%;
+    width: 98%;
+    height: 87%;
   line-height: 35px;
   user-select: none;
   display: flex;

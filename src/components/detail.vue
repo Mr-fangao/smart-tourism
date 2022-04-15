@@ -69,11 +69,11 @@
                     v-for="(item, index) in listData"
                     :key="index"
                   >
-                    <div :title="item.pinglun" class="pinglun">
-                      {{ item.pinglun }}
+                    <div :title="item.content" class="pinglun">
+                      {{ item.content }}
                     </div>
                     <div class="fenshu">{{ item.score }}</div>
-                    <div class="riqi">{{ item.date }}</div>
+                    <div class="riqi">{{ item.releaseTime }}</div>
                     <div class="laiyuan">{{ item.website }}</div>
                   </li>
                 </ul>
@@ -132,7 +132,7 @@ export default {
         .then((res) => {
           console.log(res);
           this.listData = res.data.commentEntity;
-          if (this.listData[0].date.length > 11) {
+          if (res.data.commentEntity[0].releaseTime.length > 11) {
             for (var i = 0; i < this.listData.length; i++) {
               this.listData.date[i] = this.listData.date[i].slice(0, 9);
             }

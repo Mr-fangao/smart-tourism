@@ -7,7 +7,7 @@
         <li @click="tan()">
           <span>{{ json.name }}</span>
         </li>
-        <li><icon-svg icon-class="icon-chengshi" /></li>
+        <li>  <icon name="loc" :w="25" :h="25"></icon></li>
       </ul>
     </div>
     <!-- 弹出框 -->
