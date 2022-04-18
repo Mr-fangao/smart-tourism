@@ -19,10 +19,13 @@ export default {
 </script>
 
 <style>
+html, body, #app{
+  height: 100%;
+  min-width: 1450px;
+  min-height: 550px;
+  overflow: hidden;
+}
 #app {
-    width: 100vw;
-  height: 100vh;
-   overflow: hidden;
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
