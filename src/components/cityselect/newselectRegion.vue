@@ -1,13 +1,13 @@
 <template>
   <div id="selectRegion">
     <!-- 城市 -->
-    <div class="city">
+    <div class="city" :style="{ right: `${this.right}px` }">
       <ul>
         <li @click="stretch()"><i :class="ioc" /></li>
         <li @click="tan()">
           <span>{{ json.name }}</span>
         </li>
-        <li>  <icon name="loc" :w="25" :h="25"></icon></li>
+        <li><icon name="loc" :w="25" :h="25"></icon></li>
       </ul>
     </div>
     <!-- 弹出框 -->
@@ -57,7 +57,7 @@
               </li>
             </ul>
           </el-tab-pane>
-          <el-tab-pane label="县区" name="third">
+          <!-- <el-tab-pane label="县区" name="third">
             <div v-if="xians.length === 0" class="nothing">暂无数据</div>
             <ul v-if="xians.length !== 0">
               <li
@@ -69,7 +69,7 @@
                 {{ value.name }}
               </li>
             </ul>
-          </el-tab-pane>
+          </el-tab-pane> -->
         </el-tabs>
       </div>
       <!-- 尾部 -->
@@ -94,6 +94,12 @@ import eventBum from "./EvebtBus";
 import city from "./city.json";
 export default {
   name: "SelectRegion",
+  props: {
+    right: {
+      type: Number,
+      default: 370,
+    },
+  },
   data() {
     return {
       json: {
@@ -141,9 +147,8 @@ export default {
   created() {},
   beforeDestroy() {},
   mounted() {
-    if(this.$route.path=="/sensation")
-    {
-      this.json.name='北京市'
+    if (this.$route.path == "/sensation") {
+      this.json.name = "北京市";
     }
     var that = this;
     for (let i = 0; i < city.length; i++) {
@@ -191,6 +196,7 @@ export default {
         });
       } else {
         eventBum.$emit("json", this.json);
+        console.log(this.json);
         this.close();
       }
     },
@@ -352,7 +358,8 @@ export default {
 };
 </script>
 <style>
-@keyframes appear { /* 出现动画 */
+@keyframes appear {
+  /* 出现动画 */
   0% {
     width: 0;
     height: 0;
@@ -368,7 +375,8 @@ export default {
     background-color: rgb(21 62 109);
   }
 }
-@keyframes nappear { /* 隐藏动画 */
+@keyframes nappear {
+  /* 隐藏动画 */
   0% {
     width: 800px;
     height: 420px;
@@ -407,13 +415,13 @@ p {
   width: 180px;
   height: 45px;
   line-height: 45px;
-  top: 5px;
-  right: 410px !important;
+  top: 12px;
+  /* right: 370px !important; */
   /* background-color: rgba(40, 43, 57, 0.8); */
   /* background-color: rgba(18, 18, 18, 0.4); */
   /* border: 1px solid rgba(175, 233, 215, 0.4); */
   border: 1px solid rgba(25, 186, 139, 0.2);
-  background-color: #0d1f2ebb;
+  background-color: #0f5975d6;
   color: #fff;
   font-family: KuHei;
   font-size: 14px;
@@ -557,7 +565,7 @@ p {
   >>> .el-tabs--border-card
   > .el-tabs__header
   .el-tabs__item:first-child {
-  width: calc(100% / 4 + 1.1px);
+  width: calc(100% / 3 + 1.1px);
   height: 50px;
   line-height: 50px;
   text-align: center;

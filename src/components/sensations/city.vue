@@ -1,6 +1,6 @@
 <template>
   <div id="com-city">
-    <selectRegion />
+    <selectRegion :right="400" />
     <div id="map" />
     <div class="city-left">
       <div class="city-left-select">
@@ -167,6 +167,7 @@ export default {
 
   data() {
     return {
+      right:400,
       reFresh: true,
       word3Dheight: 200,
       word3Dwidth: 350,

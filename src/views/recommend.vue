@@ -506,8 +506,8 @@ import wordcloud from "../assets/js/echarts-wordcloud-master/index";
 import echarts from "echarts";
 
 import comjs from "../components/global.vue";
-import eventBum from "../views/traffickingnetwork/public/js/EvebtBus";
-import SelectRegion from "../views/traffickingnetwork/components/selectRegion.vue";
+import eventBum from "../components/cityselect/EvebtBus";
+import SelectRegion from "../components/cityselect/newselectRegion.vue";
 export default {
   name: "recommend",
   components: {
