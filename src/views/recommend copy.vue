@@ -353,62 +353,59 @@
             </div>
           </div>
           <div class="person">
-            <div class="all">
-              <div class="considerperson">
-                <div class="personcheckbox">
-                  <el-checkbox v-model="personchecked"
-                    >考虑个人情况</el-checkbox
+            <div class="considerperson">
+              <div class="personcheckbox">
+                <el-checkbox v-model="personchecked">考虑个人情况</el-checkbox>
+              </div>
+            </div>
+            <div class="ageandsex">
+              <div class="agept">
+                <div class="person-name">年龄:</div>
+                <div class="person-inputcontent">
+                  <input class="ageinput" v-model="ageinput" type="text" />
+                </div>
+              </div>
+              <div class="sexpt">
+                <div class="person-name">性别:</div>
+                <div class="person-inputcontent">
+                  <el-radio v-model="sexselect" label="1">男</el-radio>
+                  <el-radio v-model="sexselect" label="2">女</el-radio>
+                </div>
+              </div>
+            </div>
+            <div class="occupationandincome">
+              <div class="occupationpt">
+                <div class="person-name">职业:</div>
+                <div class="person-inputcontent">
+                  <input
+                    class="ageinput"
+                    type="text"
+                    v-model="occupationpt"
+                    placeholder="输入职业"
+                  />
+                </div>
+              </div>
+              <div class="incomept">
+                <div class="person-name">收入:</div>
+                <div class="person-inputcontent">
+                  <el-select
+                    v-model="income"
+                    clearable
+                    placeholder="选择收入范围"
                   >
-                </div>
-              </div>
-              <div class="ageandsex">
-                <div class="agept">
-                  <div class="person-name">年龄:</div>
-                  <div class="person-inputcontent">
-                    <input class="ageinput" v-model="ageinput" type="text" />
-                  </div>
-                </div>
-                <div class="sexpt">
-                  <div class="person-name">性别:</div>
-                  <div class="person-inputcontent">
-                    <el-radio v-model="sexselect" label="1">男</el-radio>
-                    <el-radio v-model="sexselect" label="2">女</el-radio>
-                  </div>
-                </div>
-              </div>
-              <div class="occupationandincome">
-                <div class="occupationpt">
-                  <div class="person-name">职业:</div>
-                  <div class="person-inputcontent">
-                    <input
-                      class="ageinput"
-                      type="text"
-                      v-model="occupationpt"
-                      placeholder="输入职业"
-                    />
-                  </div>
-                </div>
-                <div class="incomept">
-                  <div class="person-name">收入:</div>
-                  <div class="person-inputcontent">
-                    <el-select
-                      v-model="income"
-                      clearable
-                      placeholder="选择收入范围"
+                    <el-option
+                      v-for="item in income"
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.value"
                     >
-                      <el-option
-                        v-for="item in income"
-                        :key="item.value"
-                        :label="item.label"
-                        :value="item.value"
-                      >
-                      </el-option>
-                    </el-select>
-                  </div>
+                    </el-option>
+                  </el-select>
                 </div>
               </div>
             </div>
           </div>
+
           <div class="buttoncontent">
             <el-button class="startbutton" @click="refeashData()"
               >清除条件</el-button
@@ -875,10 +872,7 @@ export default {
   },
   created() {
     this.getAlldata();
-    sessionStorage.getItem("state") &&
-      this.$store.replaceState(
-        Object.assign(
-          {},
+    sessionStorage.getItem("state") &&this.$store.replaceState(Object.assign({},
           this.$store.state,
           JSON.parse(sessionStorage.getItem("state"))
         )
@@ -2598,67 +2592,27 @@ export default {
       .person {
         width: 100%;
         height: 22%;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        // background: url("../assets/img/buttonbg.png") no-repeat center center;
-        // background-size: 95% 95%;
+        background: url("../assets/img/buttonbg.png") no-repeat center center;
+        background-size: 95% 95%;
         // background-color: #44afaf3a;
-        .all {
-          width: 90%;
-          height: 95%;
-          border: #3cf4f4b2 solid 2px;
-          .considerperson {
-            height: 27%;
-            width: 100%;
-            position: relative;
-            top: -19%;
-            left: -6%;
-            .personcheckbox {
-              padding-left: 10%;
-              padding-top: 2%;
-              padding-bottom: 2%;
-              width: 30%;
-              height: 100%;
-              .el-checkbox {
-                color: #e6eef0 !important;
-                background-color: #275f69;
-              }
-              .el-checkbox__inner {
-                width: 12px;
-                height: 12px;
-              }
-              .el-checkbox__label {
-                padding-left: 14px;
-              }
+        .considerperson {
+          height: 27%;
+          width: 100%;
+          .personcheckbox {
+            padding-left: 10%;
+            padding-top: 2%;
+            padding-bottom: 2%;
+            width: 30%;
+            height: 100%;
+            .el-checkbox {
+              color: #e6eef0 !important;
             }
-          }
-          .ageandsex {
-            width: 100%;
-            height: 34%;
-            margin-top: -2%;
-            .agept {
-              width: 50%;
-              height: 100%;
-              float: left;
+            .el-checkbox__inner {
+              width: 12px;
+              height: 12px;
             }
-            .sexpt {
-              width: 50%;
-              height: 100%;
-              float: left;
-              .person-name {
-                width: 28%;
-              }
-              .el-radio {
-                color: rgb(190, 218, 218);
-              }
-              /deep/.el-radio__input.is-checked + .el-radio__label {
-                color: #42e0e0;
-              }
-              /deep/.el-radio__input.is-checked .el-radio__inner {
-                border-color: #94b2bb;
-                background: #3fb0d3;
-              }
+            .el-checkbox__label {
+              padding-left: 14px;
             }
           }
         }
@@ -2701,6 +2655,34 @@ export default {
           font-size: 14px;
           border-radius: 5px;
           width: 40%;
+        }
+      }
+      .ageandsex {
+        width: 100%;
+        height: 34%;
+        // padding-top: 2%;
+        .agept {
+          width: 50%;
+          height: 100%;
+          float: left;
+        }
+        .sexpt {
+          width: 50%;
+          height: 100%;
+          float: left;
+          .person-name {
+            width: 28%;
+          }
+          .el-radio {
+            color: rgb(190, 218, 218);
+          }
+          /deep/.el-radio__input.is-checked + .el-radio__label {
+            color: #42e0e0;
+          }
+          /deep/.el-radio__input.is-checked .el-radio__inner {
+            border-color: #94b2bb;
+            background: #3fb0d3;
+          }
         }
       }
     }
