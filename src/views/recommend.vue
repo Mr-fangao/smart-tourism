@@ -322,7 +322,6 @@
           </div>
           <div class="hotandscore">
             <div class="considertitle">
-              <div class="img"></div>
               <el-checkbox v-model="sourcechecked">考虑评论</el-checkbox>
             </div>
             <div class="content">
@@ -332,7 +331,6 @@
           </div>
           <div class="distance">
             <div class="considertitle">
-              <div class="img"></div>
               <el-checkbox v-model="distancechecked" @click="addDistance()"
                 >考虑距离</el-checkbox
               >
@@ -345,7 +343,6 @@
           </div>
           <div class="season">
             <div class="considertitle">
-              <div class="img"></div>
               <el-checkbox v-model="seasonchecked">考虑季节</el-checkbox>
             </div>
             <div class="distanceselect">
@@ -357,7 +354,6 @@
           </div>
           <div class="person">
             <div class="considertitle">
-              <div class="img"></div>
               <el-checkbox v-model="personchecked">考虑个人情况</el-checkbox>
             </div>
 
@@ -2495,25 +2491,26 @@ export default {
           height: 40%;
           display: flex;
           align-items: center;
-          .img {
-            width: 4%;
-            height: 100%;
-            margin: 0% 10% 0% 14%;
-            background: url("../assets/img/time.png") no-repeat;
-            background-size: 100% 100%;
-          }
+          border-left: 5px solid #1af3f3;
+          margin-left: 5%;
+          padding-left: 3.5%;
           /deep/.el-checkbox__label {
             color: #e6eef0;
           }
         }
         .content {
           width: 80%;
+          // width: 90%;
           height: 60%;
           float: left;
+          // padding-left: 20%;
+          // margin-left: 5%;
           margin-left: 20%;
           display: flex;
           align-items: center;
           justify-content: space-evenly;
+          // background: url("../assets/img/buttonbg.png") no-repeat center center;
+          // background-size: 95% 95%;
           .el-radio {
             margin-right: 0px;
             color: rgb(190, 218, 218);
@@ -2537,13 +2534,9 @@ export default {
           height: 40%;
           display: flex;
           align-items: center;
-          .img {
-            width: 4%;
-            height: 100%;
-            margin: 0% 10% 0% 14%;
-            background: url("../assets/img/time.png") no-repeat;
-            background-size: 100% 100%;
-          }
+          border-left: 5px solid #1af3f3;
+          margin-left: 5%;
+          padding-left: 3.5%;
           .el-checkbox {
             color: #e6eef0 !important;
           }
@@ -2587,13 +2580,9 @@ export default {
           height: 40%;
           display: flex;
           align-items: center;
-          .img {
-            width: 4%;
-            height: 100%;
-            margin: 0% 10% 0% 14%;
-            background: url("../assets/img/time.png") no-repeat;
-            background-size: 100% 100%;
-          }
+          border-left: 5px solid #1af3f3;
+          margin-left: 5%;
+          padding-left: 3.5%;
           .el-checkbox {
             color: #e6eef0 !important;
           }
@@ -2637,13 +2626,9 @@ export default {
           height: 24%;
           display: flex;
           align-items: center;
-          .img {
-            width: 3.5%;
-            height: 100%;
-            margin: 0% 8.55% 0% 12.1%;
-            background: url("../assets/img/time.png") no-repeat;
-            background-size: 100% 100%;
-          }
+          border-left: 5px solid #1af3f3;
+          margin-left: 5%;
+          padding-left: 3.5%;
           .el-checkbox {
             color: #e6eef0 !important;
           }
