@@ -1,27 +1,29 @@
 <template>
-  <div class="content">
-    <div class="left">
-      <div class="title">景点热搜Top10</div>
-    </div>
-    <div class="main">
-      <div class="header"></div>
-    </div>
-    <div class="right">
-      <div class="title">城市热搜Top10</div>
+  <div id="maptest">
+    <div id="map"></div>
+    <div class="main-content">
+       <selectRegion :right="400" />
     </div>
   </div>
 </template>
 
 <script>
+import eventBum from "../components/cityselect/EvebtBus";
+import SelectRegion from "../components/cityselect/newselectRegion.vue";
 export default {
   name: "survey",
-
+  components: {
+    eventBum,
+    SelectRegion,
+  },
   data() {
-    return {
-    };
+    return {};
   },
   mounted() {
     this.initmap();
+     eventBum.$on("json", (json) => {
+       console.log(json);
+     });
   },
   methods: {
     initmap() {
@@ -29,7 +31,7 @@ export default {
         "pk.eyJ1IjoiY2hlbmpxIiwiYSI6ImNrcWFmdWt2bjBtZGsybmxjb29oYmRzZzEifQ.mnpiwx7_cBEyi8YiJiMRZg";
       var map = new this.$mapboxgl.Map({
         container: "map",
-        style: "mapbox://styles/chenjq/ckwetfomi0j1014ph4s20wu2x",
+        style: "mapbox://styles/chenjq/cl084urgf004014ny2nhu1xre",
         center: [110, 40],
         zoom: 4,
       });
@@ -39,33 +41,23 @@ export default {
 </script>
 
 <style scoped lang="less">
-.content {
-  height: calc(100% - 50px);
+#maptest {
+  height: 100%;
   width: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  .left {
-    height: 100%;
-    width: 20%;
-    background-color: rgba(127, 194, 172, 0.1);
-    .title {
-      font-size: 16pt;
-      padding: 20px 0px 10px 0px;
-    }
-  }
-  .main {
-    height: 100%;
-    width: 57%;
-  }
-  .right {
-    height: 100%;
-    width: 20%;
-    background-color: rgba(127, 194, 172, 0.1);
-    .title {
-      font-size: 16pt;
-      padding: 20px 0px 10px 0px;
-    }
-  }
+  position: fixed;
+  z-index: 0;
+}
+#map {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+.main-content {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: 10;
+  top: 0;
 }
 </style>

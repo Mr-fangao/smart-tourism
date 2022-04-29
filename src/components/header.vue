@@ -119,9 +119,6 @@ export default {
     },
   },
   beforeDestroy() {
-    if (this.formatDate) {
-      clearInterval(this.formatDate); // 在Vue实例销毁前，清除时间定时器
-    }
   },
 };
 </script>

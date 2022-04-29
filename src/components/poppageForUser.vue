@@ -341,7 +341,7 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 10;
+  z-index: 10000;
 }
 .modal-container {
   background: url("../assets/img/popbk.png");

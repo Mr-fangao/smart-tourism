@@ -92,13 +92,5 @@ export default new Router({
       path: "*", // 此处需特别注意置于最底部
       component: notFound
     },
-    {
-      path: '/time',
-      name: 'time',
-      component: () => import("@/views/selecttime"),
-      meta: {
-        keepAlive: true
-      }
-    },
   ]
 })

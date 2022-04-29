@@ -11,24 +11,23 @@ export default {
   data() {
     return {
       // iframeSrc: "http://124.221.111.73:8081/",
-            iframeSrc: "http://localhost:8200",
-      iframeWin: ""
+      iframeSrc: "http://localhost:8200",
+      iframeWin: "",
     };
   },
   mounted() {
     this.iframeWin = this.$refs.iframe.contentWindow;
   },
-  methods: {
-  }
+  methods: {},
 };
 </script>
 <style lang="less" scoped>
-.home{
+.home {
   position: relative;
   height: calc(100% - 50px);
   width: 100%;
- overflow: hidden;
-  .flowto{
+  overflow: hidden;
+  .flowto {
     border: 0;
     height: 100%;
     width: 100%;
