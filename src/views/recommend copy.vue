@@ -1567,6 +1567,7 @@ export default {
       var option;
       var sdata;
       let base = commentdata.startStamp;
+      console.log(base);
       let oneDay = 24 * 3600 * 1000;
       let date = [];
       for (let i = 1; i < 365; i++) {
