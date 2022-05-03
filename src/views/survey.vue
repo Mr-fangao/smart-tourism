@@ -3,7 +3,7 @@
     <div id="map"></div>
     <div class="main-content">
       <!-- <selectRegion :right="400" /> -->
-      //<SelectRegion :right="400"></SelectRegion>
+      <SelectRegion :right="400"></SelectRegion>
     </div>
   </div>
 </template>
@@ -48,7 +48,6 @@ export default {
           type: "geojson",
           data: china,
         });
-
         map.addLayer({
           id: "fillID",
           type: "fill" /* fill类型一般用来表示一个面，一般较大 */,
@@ -56,25 +55,25 @@ export default {
           //过滤器、只展示name = _this.json的省份
           filter: ["==", "name", _this.json], //关键点：name对应geojson中的属性字段
           paint: {
-            "fill-color": {
-              //以json数据中的adcode字段作为分割
-              property: "adcode",
-              //这里更改地图分级色彩
-              stops: [
-                [0, "#66E1FD"],
-                [100000, "#66E1FD"],
-                [120000, "#40CCFB"],
-                [140000, "#02ABF9"],
-                [160000, "#0185D6"],
-                [180000, "#0163B3"],
-                [200000, "#004690"],
-                [220000, "#003277"],
-              ],
-            },
+            "fill-color": "#0163B3", //更改地图颜色
             "fill-outline-color": "#81D24E",
-            "fill-opacity": 1 /* 透明度 */,
+            "fill-opacity": 0.7 /* 透明度 */,
           },
         });
+      });
+      var list = china.features;
+      //判断选择的省份
+      list.some((itme, index) => {
+        if (itme.properties.name == _this.json) {
+          //未选择省份时不执行
+          if (_this.json != "") {
+            map.flyTo({
+              center: itme.properties.centroid,
+              zoom: 6, //设置缩放级别
+            });
+          }
+          return true;
+        }
       });
     },
   },
