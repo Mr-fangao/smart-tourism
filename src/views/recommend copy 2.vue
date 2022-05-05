@@ -282,29 +282,30 @@
           <span>景点推荐</span>
         </div>
         <div class="recommend">
-          <div class="smalltitle">
-            <div class="textcontent">时间选择</div>
+          <div class="timepick">
+            <div class="name">旅游时间:</div>
+            <div class="timepickcontent">
+              <el-date-picker
+                v-model="timevalue"
+                type="daterange"
+                range-separator="-"
+                start-placeholder="开始日期"
+                end-placeholder="结束日期"
+              >
+              </el-date-picker>
+            </div>
           </div>
-          <div class="timepickcontent">
-            <el-date-picker
-              v-model="timevalue"
-              type="daterange"
-              range-separator="-"
-              start-placeholder="开始日期"
-              end-placeholder="结束日期"
-            >
-            </el-date-picker>
-          </div>
-          <div class="smalltitle">
-            <div class="textcontent">偏好选择</div>
-          </div>
-          <div class="perfer">
+          <div class="prefer">
+            <div class="name">景点偏好:</div>
             <div class="prefercontent">
               <el-input
                 v-model="input"
                 placeholder=" 输入内容或点击标签"
               ></el-input>
             </div>
+          </div>
+          <div class="exampleinput">
+            <div class="name"></div>
             <div class="exampellabel">
               <div class="labelcontent">
                 <span>输入示例:</span>
@@ -319,25 +320,43 @@
               </div>
             </div>
           </div>
-          <div class="smalltitle">
-            <div class="textcontent">个人偏好</div>
-          </div>
-          <div class="person">
-            <div class="select">
+          <div class="hotandscore">
+            <div class="considertitle">
+              <el-checkbox v-model="sourcechecked">考虑评论</el-checkbox>
+            </div>
+            <div class="content">
               <el-radio v-model="prferradio" label="score">评分优先</el-radio>
               <el-radio v-model="prferradio" label="hot">热度优先</el-radio>
             </div>
-            <div class="select">
+          </div>
+          <div class="distance">
+            <div class="considertitle">
+              <el-checkbox v-model="distancechecked" @click="addDistance()"
+                >考虑距离</el-checkbox
+              >
+            </div>
+            <div class="distanceselect">
               <el-radio v-model="distancerange" label="1">本市</el-radio>
               <el-radio v-model="distancerange" label="2">本省</el-radio>
               <el-radio v-model="distancerange" label="3">邻省</el-radio>
             </div>
-            <div class="select">
+          </div>
+          <div class="season">
+            <div class="considertitle">
+              <el-checkbox v-model="seasonchecked">考虑季节</el-checkbox>
+            </div>
+            <div class="distanceselect">
               <el-radio v-model="seasonrange" label="1">春</el-radio>
               <el-radio v-model="seasonrange" label="2">夏</el-radio>
               <el-radio v-model="seasonrange" label="3">秋</el-radio>
               <el-radio v-model="seasonrange" label="4">冬</el-radio>
             </div>
+          </div>
+          <div class="person">
+            <div class="considertitle">
+              <el-checkbox v-model="personchecked">考虑个人情况</el-checkbox>
+            </div>
+
             <div class="ageandsex">
               <div class="agept">
                 <div class="person-name">年龄:</div>
@@ -2354,67 +2373,57 @@ export default {
     .recommend {
       height: 93%;
       width: 100%;
-      .smalltitle {
-        padding: 4px;
-        height: 24px;
-        width: 100%;
-        margin: 1% 0%;
-        display: flex;
-        .textcontent {
-          border-left: 4px solid #1af3f3;
-          padding-left: 2%;
-          margin-left: 2%;
-          height: 100%;
-          width: 90%;
-          text-align: left;
-          color: #35d8e4;
-          font-size: 14px;
-          line-height: 18px;
-        }
-      }
-
-      .timepickcontent {
-        width: 90%;
+      .name {
+        color: #e6eef0;
+        font-size: 11pt;
+        width: 30%;
+        height: 100%;
         float: left;
-        margin: 0% 5%;
-        padding: 1%;
-        background: url("../assets/img/buttonbg.png") center no-repeat;
-        background-size: 97% 97%;
-        /deep/.el-date-editor--daterange.el-input,
-        .el-date-editor--daterange.el-input__inner,
-        .el-date-editor--timerange.el-input,
-        .el-date-editor--timerange.el-input__inner {
-          border: none;
-          width: 200px !important;
-        }
-        .el-input__inner {
-          background-color: transparent;
-        }
-        .el-range-editor.el-input__inner {
-          padding: 5px 0px;
-        }
-        .el-date-editor .el-range-separator {
-          width: 0%;
-        }
-        /deep/.el-date-editor .el-range-input {
-          font-size: 11pt;
-          color: #eff1f4;
-          background-color: #81cfd25e;
-        }
-        /deep/.el-date-editor .el-range-input,
-        .el-date-editor .el-range-separator {
-          font-size: 11pt;
+        line-height: 36px;
+        text-align: right;
+        padding-right: 4%;
+      }
+      .timepick {
+        height: 8%;
+        margin-bottom: 2%;
+        .timepickcontent {
+          width: 60%;
+          height: 100%;
+          float: left;
+          /deep/.el-date-editor--daterange.el-input,
+          .el-date-editor--daterange.el-input__inner,
+          .el-date-editor--timerange.el-input,
+          .el-date-editor--timerange.el-input__inner {
+            border: none;
+            width: 200px !important;
+          }
+          .el-input__inner {
+            background-color: transparent;
+          }
+          .el-range-editor.el-input__inner {
+            padding: 5px 0px;
+          }
+          .el-date-editor .el-range-separator {
+            width: 0%;
+          }
+          /deep/.el-date-editor .el-range-input {
+            font-size: 11pt;
+            color: #eff1f4;
+            background-color: #81cfd25e;
+          }
+          /deep/.el-date-editor .el-range-input,
+          .el-date-editor .el-range-separator {
+            font-size: 11pt;
+          }
         }
       }
-      .perfer {
-        width: 90%;
-          margin: 0% 5%;
-          padding: 1%;
-          background: url("../assets/img/buttonbg.png") center no-repeat;
-          background-size: 97% 97%;
+      .prefer {
+        height: 8%;
+        margin-bottom: 1%;
         .prefercontent {
-          width: 90%;
-          margin: 0% 5%;
+          width: 60%;
+          height: 100%;
+          float: left;
           .el-input {
             height: 100%;
           }
@@ -2435,13 +2444,19 @@ export default {
             float: left;
             margin-top: 1%;
             padding-left: 3%;
-
+            margin-left: 6%;
           }
         }
+      }
+      .exampleinput {
+        height: 12%;
+        margin-bottom: 1%;
         .exampellabel {
           color: #d1d7d8f2;
-          width: 90%;
-          margin: 0% 5%;
+          width: 65%;
+          height: 100%;
+          float: left;
+          padding-left: 3%;
           .labelcontent {
             display: flex;
             height: 100%;
@@ -2450,14 +2465,15 @@ export default {
             > span {
               font-size: 11pt;
               color: #c5d4e6;
-              margin-right: 3%;
-              margin-top: 1.5%;
+              margin-right: 7%;
+
+              // margin-left: -19%;
             }
             .chooselabel {
               background: #8ae5e54a;
               margin-left: 2%;
               border: 1px solid #ffffff40;
-              font-size: 11pt;
+              font-size: 10pt;
               border-radius: 5px;
               cursor: pointer;
               margin: 1%;
@@ -2466,22 +2482,78 @@ export default {
           }
         }
       }
-
-      .person {
-        width: 90%;
-          margin: 0% 5%;
-          margin-bottom: 1%;
-          padding-top: 2%;
-          padding-bottom: 1%;
-          background: url("../assets/img/buttonbg.png") center no-repeat;
-          background-size: 97% 97%;
-        height: 35%;
-        .select {
-          width: 95%;
-          height: 16%;
+      .hotandscore {
+        display: flex;
+        flex-direction: column;
+        height: 12%;
+        width: 100%;
+        .considertitle {
+          width: 35%;
+          height: 40%;
+          display: flex;
+          align-items: center;
+          border-left: 5px solid #1af3f3;
+          margin-left: 5%;
+          padding-left: 3.5%;
+          /deep/.el-checkbox__label {
+            color: #e6eef0;
+          }
+        }
+        .content {
+          width: 80%;
+          // width: 90%;
+          height: 60%;
           float: left;
-          margin-left: 2.5%;
-          margin-bottom: 1%;
+          // padding-left: 20%;
+          // margin-left: 5%;
+          margin-left: 20%;
+          display: flex;
+          align-items: center;
+          justify-content: space-evenly;
+          // background: url("../assets/img/buttonbg.png") no-repeat center center;
+          // background-size: 95% 95%;
+          .el-radio {
+            margin-right: 0px;
+            color: rgb(190, 218, 218);
+          }
+          /deep/.el-radio__input.is-checked + .el-radio__label {
+            color: #42e0e0;
+          }
+          /deep/.el-radio__input.is-checked .el-radio__inner {
+            border-color: #94b2bb;
+            background: #3fb0d3;
+          }
+        }
+      }
+      .distance {
+        display: flex;
+        flex-direction: column;
+        height: 12%;
+        width: 100%;
+        .considertitle {
+          width: 35%;
+          height: 40%;
+          display: flex;
+          align-items: center;
+          border-left: 5px solid #1af3f3;
+          margin-left: 5%;
+          padding-left: 3.5%;
+          .el-checkbox {
+            color: #e6eef0 !important;
+          }
+          .el-checkbox__inner {
+            width: 12px;
+            height: 12px;
+          }
+          .el-checkbox__label {
+            padding-left: 14px;
+          }
+        }
+        .distanceselect {
+          width: 80%;
+          height: 60%;
+          float: left;
+          margin-left: 23.5%;
           display: flex;
           flex-wrap: nowrap;
           justify-content: space-evenly;
@@ -2499,25 +2571,42 @@ export default {
           }
         }
       }
-
-      .ageandsex {
+      .season {
+        display: flex;
+        flex-direction: column;
+        height: 12%;
         width: 100%;
-        height: 20%;
-        margin-bottom: 1%;
-        .agept {
-          width: 50%;
-          height: 100%;
-          float: left;
-        }
-        .sexpt {
-          width: 50%;
-          height: 100%;
-          float: left;
-          .person-name {
-            width: 28%;
+        .considertitle {
+          width: 35%;
+          height: 40%;
+          display: flex;
+          align-items: center;
+          border-left: 5px solid #1af3f3;
+          margin-left: 5%;
+          padding-left: 3.5%;
+          .el-checkbox {
+            color: #e6eef0 !important;
           }
+          .el-checkbox__inner {
+            width: 12px;
+            height: 12px;
+          }
+          .el-checkbox__label {
+            padding-left: 14px;
+          }
+        }
+        .distanceselect {
+          width: 80%;
+          height: 60%;
+          float: left;
+          margin-left: 25%;
+          display: flex;
+          flex-wrap: nowrap;
+          justify-content: space-evenly;
+          align-items: center;
           .el-radio {
             color: rgb(190, 218, 218);
+            margin-right: 4px;
           }
           /deep/.el-radio__input.is-checked + .el-radio__label {
             color: #42e0e0;
@@ -2528,11 +2617,63 @@ export default {
           }
         }
       }
-
-      .occupationandincome {
+      .person {
+        display: flex;
+        flex-direction: column;
         width: 100%;
         height: 20%;
-        margin-bottom: 1%;
+        .considertitle {
+          width: 40.5%;
+          height: 24%;
+          display: flex;
+          align-items: center;
+          border-left: 5px solid #1af3f3;
+          margin-left: 5%;
+          padding-left: 3.5%;
+          .el-checkbox {
+            color: #e6eef0 !important;
+          }
+          .el-checkbox__inner {
+            width: 12px;
+            height: 12px;
+          }
+          .el-checkbox__label {
+            padding-left: 14px;
+          }
+        }
+
+        .ageandsex {
+          width: 100%;
+          height: 38%;
+          .agept {
+            width: 50%;
+            height: 100%;
+            float: left;
+          }
+          .sexpt {
+            width: 50%;
+            height: 100%;
+            float: left;
+            .person-name {
+              width: 28%;
+            }
+            .el-radio {
+              color: rgb(190, 218, 218);
+            }
+            /deep/.el-radio__input.is-checked + .el-radio__label {
+              color: #42e0e0;
+            }
+            /deep/.el-radio__input.is-checked .el-radio__inner {
+              border-color: #94b2bb;
+              background: #3fb0d3;
+            }
+          }
+        }
+      }
+      .occupationandincome {
+        width: 100%;
+        height: 38%;
+        // padding-bottom: 2%;
         .incomept {
           width: 50%;
           height: 100%;
@@ -2548,8 +2689,9 @@ export default {
         }
       }
       .buttoncontent {
-        height: 8%;
-        width: 65%;
+        padding-top: 2.5%;
+        height: 11%;
+        width: 70%;
         margin: auto;
         display: flex;
         flex-direction: row;
@@ -2565,6 +2707,7 @@ export default {
           padding: 12px 20px;
           font-size: 14px;
           border-radius: 5px;
+          width: 40%;
         }
       }
     }
