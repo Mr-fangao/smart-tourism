@@ -78,24 +78,24 @@ export default {
   mounted() {
     //登录绑定事件
     window.addEventListener("keydown", this.keyDown);
-    this.getAlldatacount();
+    // this.getAlldatacount();
   },
   methods: {
-    ...mapMutations(['setAlldatacount']),
+    // ...mapMutations(['setAlldatacount']),
     keyDown(e) {
       //如果是回车则执行登录方法
       if (e.keyCode == 13) {
         document.getElementById("btn").click();
       }
     },
-    getAlldatacount(){
-    request.get("/api/data/getSCT").then((res) => {
-        console.log(res.data);
-        var data=res.data;
-        this.alldatacount=data
-         this.setAlldatacount(this.alldatacount);
-      });
-    },
+    // getAlldatacount(){
+    // request.get("/api/data/getSCT").then((res) => {
+    //     console.log(res.data);
+    //     var data=res.data;
+    //     this.alldatacount=data
+    //     this.setAlldatacount(this.alldatacount);
+    //   });
+    // },
     handleLogin() {
       // request.post("/api/user/queryuser", this.loginFrom).then((res) => {
       //   console.log(res.code);

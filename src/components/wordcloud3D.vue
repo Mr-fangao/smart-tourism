@@ -8,6 +8,7 @@
     >
       <span
         class="wordCloud__tag"
+        @click="clickTag(item.name)"
         v-for="(item, index) of data"
         :key="index"
         :style="{color:color[index % color.length],...contentEle[index].style}"
@@ -19,8 +20,12 @@
 
 
 <script>
+import eventBum from "../components/cityselect/EvebtBus";
 export default {
   name: 'cloudWork',
+   components: {
+    eventBum,
+  },
   props: {
     width: {
       type: Number,
@@ -116,6 +121,9 @@ export default {
     this.innit();
   },
   methods: {
+    clickTag(val){
+      eventBum.$emit("features", val);
+    },
     innit() {
       const RADIUSX = (this.width - 50) / 2;
       const RADIUSY = (this.height - 50) / 2;
@@ -234,6 +242,7 @@ export default {
   font-size: 15px;
   font-family: '微软雅黑';
   font-weight: bold;
+  cursor: pointer;
 }
 .wordCloud__tag :hover {
   color: red;

@@ -33,7 +33,7 @@ export default {
     font-size: 14px;
     border-radius: 5px;
     width: 84px;
-      height: 30px;
+      height: 28px;
   }
   .el-button:focus {
     background-image: url("../assets/img/tab.png") no-repeat center center;

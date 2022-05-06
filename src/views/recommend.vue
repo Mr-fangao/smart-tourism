@@ -82,7 +82,7 @@
               <div class="myimg"></div>
             </div>
             <span class="partname"> 游记数 </span>
-            <span class="partnumber"> {{ this.alldatacount.travels }} </span>
+            <span class="partnumber"> {{ this.alldatacount.travel }} </span>
           </div>
         </div>
         <div class="datatime">数据更新时间:{{ this.datatime }}</div>
@@ -484,7 +484,6 @@ import loading from "../components/loading.vue";
 import wordcloud from "../assets/js/echarts-wordcloud-master/index";
 import echarts from "echarts";
 
-import comjs from "../components/global.vue";
 import eventBum from "../components/cityselect/EvebtBus";
 import SelectRegion from "../components/cityselect/newselectRegion.vue";
 export default {
@@ -501,13 +500,17 @@ export default {
     wordcloud,
     SelectRegion,
     word3D,
-    comjs,
   },
   data() {
     return {
       word3Dheight: 200,
       word3Dwidth: 350,
       treemapname: "中国热门城市",
+      alldatacount: {
+        scenic: "",
+        comment: "",
+        travels: "",
+      },
       //评论数据变化,页面下方
       pickerOptions: {
         disabledDate(time) {
@@ -847,22 +850,22 @@ export default {
     //获取评论数、好评数、游记数
   },
   computed: {
-    ...mapState(["alldatacount"]),
+    // ...mapState(["alldatacount"]),
   },
   created() {
     this.getAlldata();
-    sessionStorage.getItem("state") &&
-      this.$store.replaceState(
-        Object.assign(
-          {},
-          this.$store.state,
-          JSON.parse(sessionStorage.getItem("state"))
-        )
-      );
-    //进行页面刷新时存储 store.state 数据存储到sessionStorage中
-    window.addEventListener("beforeunload", () => {
-      sessionStorage.setItem("state", JSON.stringify(this.$store.state));
-    });
+    // sessionStorage.getItem("state") &&
+    //   this.$store.replaceState(
+    //     Object.assign(
+    //       {},
+    //       this.$store.state,
+    //       JSON.parse(sessionStorage.getItem("state"))
+    //     )
+    //   );
+    // //进行页面刷新时存储 store.state 数据存储到sessionStorage中
+    // window.addEventListener("beforeunload", () => {
+    //   sessionStorage.setItem("state", JSON.stringify(this.$store.state));
+    // });
     eventBum.$on("json", (json) => {
       this.selectcity.name = json.name;
       this.selectcity.level = json.where;
@@ -889,6 +892,7 @@ export default {
     this.getCityRank();
     this.initChart1(this.chartdata1);
     this.initChart2(this.chartdata2);
+    this.postSCT();
     // this.initTimechart();
     // this.wordCloudInti2(this.$refs.chartword2, this.wordcloudchina);
     this.wordCloudInti(this.$refs.chartword, this.startclouddata);
@@ -899,6 +903,12 @@ export default {
     },
   },
   methods: {
+    postSCT() {
+      request.get("/api/data/getSCT").then((res) => {
+        console.log(res.data);
+        this.alldatacount = res.data;
+      });
+    },
     //下方各类数据
     getScenicMonth(val) {
       this.timeflag = false;
@@ -1825,9 +1835,9 @@ export default {
   },
   //监听全局变量
   watch: {
-    "$store.state.alldatacount": function (val, old) {
-      console.log(val);
-    },
+    // "$store.state.name": function (val, old) {
+    //   console.log(val);
+    // },
   },
 };
 </script>
@@ -2408,10 +2418,10 @@ export default {
       }
       .perfer {
         width: 90%;
-          margin: 0% 5%;
-          padding: 1%;
-          background: url("../assets/img/buttonbg.png") center no-repeat;
-          background-size: 97% 97%;
+        margin: 0% 5%;
+        padding: 1%;
+        background: url("../assets/img/buttonbg.png") center no-repeat;
+        background-size: 97% 97%;
         .prefercontent {
           width: 90%;
           margin: 0% 5%;
@@ -2435,7 +2445,6 @@ export default {
             float: left;
             margin-top: 1%;
             padding-left: 3%;
-
           }
         }
         .exampellabel {
@@ -2469,12 +2478,12 @@ export default {
 
       .person {
         width: 90%;
-          margin: 0% 5%;
-          margin-bottom: 1%;
-          padding-top: 2%;
-          padding-bottom: 1%;
-          background: url("../assets/img/buttonbg.png") center no-repeat;
-          background-size: 97% 97%;
+        margin: 0% 5%;
+        margin-bottom: 1%;
+        padding-top: 2%;
+        padding-bottom: 1%;
+        background: url("../assets/img/buttonbg.png") center no-repeat;
+        background-size: 97% 97%;
         height: 35%;
         .select {
           width: 95%;

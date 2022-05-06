@@ -9,6 +9,7 @@ export default {
       let GMT = new Date(time);
       return GMT;
     },
+
     formatDate(date) {
       var cut = "-";
       var date = new Date(date);

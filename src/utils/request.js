@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const request = axios.create({
-  timeout: 5000,
+  timeout: 10000,
 });
 
 // request 拦截器
@@ -10,8 +10,6 @@ const request = axios.create({
 request.interceptors.request.use(
   (config) => {
     config.headers["Content-Type"] = "application/json;charset=utf-8";
-
-
     return config;
   },
   (error) => {
@@ -30,7 +28,7 @@ request.interceptors.response.use(
     return res;
   },
   (error) => {
-    console.log("err" + error); // for debug
+    console.log("err" + error); // debug
     return Promise.reject(error);
   }
 );
