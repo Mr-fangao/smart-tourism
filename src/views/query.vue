@@ -111,7 +111,6 @@
               @hideModal="hideModal"
               @submit="submit"
             >
-              <p>这里放弹窗的内容</p>
             </detail>
           </div>
         </div>
