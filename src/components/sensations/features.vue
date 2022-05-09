@@ -1,6 +1,6 @@
 <template>
   <div id="com-features">
-    <selectRegion />
+    <selectRegion :right="3" />
     <div id="map" />
     <div class="features-left">
       <div class="row1 left-part">
@@ -16,7 +16,7 @@
               ></el-input>
             </div>
             <div class="buttoncontent">
-              <pbutton :name="buttonname" @click="sd "></pbutton>
+              <pbutton :name="buttonname" @click="sd"></pbutton>
             </div>
           </div>
           <div class="chosenlabel">
@@ -29,9 +29,24 @@
           </div>
         </div>
       </div>
-      <div class="row2 left-part"></div>
-      <div class="row3 left-part"></div>
+      <div class="row2 left-part">
+        <div class="features-title">
+          <span>特征地区分布排行</span>
+                  <div class="chartselect">
+          <el-radio-group
+            v-model="isCollapse"
+            @change="changeChartTab"
+            style="margin-bottom: 20px"
+          >
+            <el-radio-button :label="false">热度榜</el-radio-button>
+            <el-radio-button :label="true">评价榜</el-radio-button>
+          </el-radio-group>
+        </div>
+        </div>
+        <div class="content"></div>
+      </div>
     </div>
+    <div class="features-bottom"></div>
   </div>
 </template>
 <script>
@@ -55,6 +70,7 @@ export default {
 
   data() {
     return {
+      isCollapse:true,//地区分布图表切换
       word3Dheight: 200, //3D词云大小
       word3Dwidth: 350,
       buttonname: "分析", //按钮名称
@@ -112,9 +128,7 @@ export default {
   },
 
   methods: {
-    postFeature(){
-      
-    },
+    postFeature() {},
     handleResize() {
       this.myChart2 && this.myChart2.resize();
     },
@@ -156,7 +170,6 @@ export default {
   display: flex;
   flex-direction: column;
   .left-part {
-    height: 30%;
     width: 100%;
     .content {
       height: 88%;
@@ -173,15 +186,15 @@ export default {
         align-items: center;
         .searchinput {
           width: 70%;
-          height: 55%;
+          height: 30px;
           .el-input {
             height: 100%;
           }
-          /deep/.el-input__suffix {
-            .el-icon-circle-close:before {
-              // margin-top: -100%;
-            }
-          }
+          // /deep/.el-input__suffix {
+          //   .el-icon-circle-close:before {
+          //     margin-top: -100%;
+          //   }
+          // }
           /deep/.el-input__inner {
             &::placeholder {
               color: rgba(194, 194, 194, 0.815);
@@ -212,6 +225,9 @@ export default {
       }
     }
   }
+  .row2 {
+    height: 60%;
+  }
 }
 .features-title {
   padding-top: 1%;
@@ -228,5 +244,37 @@ export default {
     font-size: 14px;
     margin-left: 13%;
   }
+  .chartselect {
+  width: 100px;
+  height: 28px;
+  top: 37.5%;
+  right: 4%;
+  background-color: transparent;
+  position: absolute;
+  display: flex;
+  /deep/.el-radio-button__inner {
+    padding: 6px 5px;
+    font-size: 13px;
+    border: none;
+    background-color: transparent;
+
+
+  }
+  /deep/.el-radio-button__orig-radio:checked + .el-radio-button__inner {
+    border: none;
+    background: url("../../assets/img/tabchosenBG.png") no-repeat center center;
+        background-color: transparent;
+  }
+  /deep/.el-radio-button__inner {
+    color: white;
+    border: none;
+    background: url("../../assets/img/tabBG.png") no-repeat center center;
+    background-color: transparent;
+  }
+  /deep/.el-radio-button__orig-radio:checked+.el-radio-button__inner{
+        -webkit-box-shadow: 0px 0 0 0 #409eff;
+    box-shadow: 0px 0 0 0 #409eff;
+  }
+}
 }
 </style>

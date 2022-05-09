@@ -1,7 +1,7 @@
 <template>
   <div id="selectRegion">
     <!-- 城市 -->
-    <div class="city" :style="{ right: `${this.right}px` }">
+    <div class="city" :style="{ right: `${this.right}%` }">
       <ul>
         <li @click="stretch()"><i :class="ioc" /></li>
         <li @click="tan()">
