@@ -16,9 +16,9 @@
               ></el-input>
             </div>
             <div class="buttoncontent">
-              <pbutton :name="buttonname" @click="sd"></pbutton>
+              <pbutton :name="buttonname" @click.native="postFeature()"></pbutton>
             </div>
-          </div>
+          </div> 
           <div class="chosenlabel">
             <word3D
               :height="word3Dheight"
@@ -32,16 +32,16 @@
       <div class="row2 left-part">
         <div class="features-title">
           <span>特征地区分布排行</span>
-                  <div class="chartselect">
-          <el-radio-group
-            v-model="isCollapse"
-            @change="changeChartTab"
-            style="margin-bottom: 20px"
-          >
-            <el-radio-button :label="false">热度榜</el-radio-button>
-            <el-radio-button :label="true">评价榜</el-radio-button>
-          </el-radio-group>
-        </div>
+          <div class="chartselect">
+            <el-radio-group
+              v-model="isCollapse"
+              @change="changeChartTab"
+              style="margin-bottom: 20px"
+            >
+              <el-radio-button :label="false">热度榜</el-radio-button>
+              <el-radio-button :label="true">评价榜</el-radio-button>
+            </el-radio-group>
+          </div>
         </div>
         <div class="content"></div>
       </div>
@@ -70,7 +70,7 @@ export default {
 
   data() {
     return {
-      isCollapse:true,//地区分布图表切换
+      isCollapse: true, //地区分布图表切换
       word3Dheight: 200, //3D词云大小
       word3Dwidth: 350,
       buttonname: "分析", //按钮名称
@@ -128,7 +128,10 @@ export default {
   },
 
   methods: {
-    postFeature() {},
+    postFeature() {
+      console.log("postFeature is already !");
+    },
+    changeChartTab(){},
     handleResize() {
       this.myChart2 && this.myChart2.resize();
     },
@@ -245,36 +248,36 @@ export default {
     margin-left: 13%;
   }
   .chartselect {
-  width: 100px;
-  height: 28px;
-  top: 37.5%;
-  right: 4%;
-  background-color: transparent;
-  position: absolute;
-  display: flex;
-  /deep/.el-radio-button__inner {
-    padding: 6px 5px;
-    font-size: 13px;
-    border: none;
+    width: 100px;
+    height: 28px;
+    top: 41%;
+    right: 4%;
     background-color: transparent;
-
-
+    position: absolute;
+    display: flex;
+    /deep/.el-radio-button__inner {
+      padding: 6px 5px;
+      font-size: 13px;
+      border: none;
+      background-color: transparent;
+    }
+    /deep/.el-radio-button__orig-radio:checked + .el-radio-button__inner {
+      border: none;
+      background: url("../../assets/img/tabchosenBG.png") no-repeat center
+        center;
+      background-color: transparent;
+    }
+    /deep/.el-radio-button__inner {
+      color: white;
+      border: none;
+      background: url("../../assets/img/tabBG.png") no-repeat center center;
+      background-color: transparent;
+    }
+    //去除左侧蓝线
+    /deep/.el-radio-button__orig-radio:checked + .el-radio-button__inner {
+      -webkit-box-shadow: 0px 0 0 0 #409eff;
+      box-shadow: 0px 0 0 0 #409eff;
+    }
   }
-  /deep/.el-radio-button__orig-radio:checked + .el-radio-button__inner {
-    border: none;
-    background: url("../../assets/img/tabchosenBG.png") no-repeat center center;
-        background-color: transparent;
-  }
-  /deep/.el-radio-button__inner {
-    color: white;
-    border: none;
-    background: url("../../assets/img/tabBG.png") no-repeat center center;
-    background-color: transparent;
-  }
-  /deep/.el-radio-button__orig-radio:checked+.el-radio-button__inner{
-        -webkit-box-shadow: 0px 0 0 0 #409eff;
-    box-shadow: 0px 0 0 0 #409eff;
-  }
-}
 }
 </style>

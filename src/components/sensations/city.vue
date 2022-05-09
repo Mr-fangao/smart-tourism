@@ -1,6 +1,6 @@
 <template>
   <div id="com-city">
-    <selectRegion :right="400" />
+    <selectRegion :right="25"/>
     <div id="map" />
     <div class="city-left">
       <div class="city-left-select">

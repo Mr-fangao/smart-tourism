@@ -462,7 +462,7 @@
         </div>
       </div>
     </div>
-    <selectRegion />
+    <selectRegion :right="24"/>
   </div>
 </template>
 <script>
