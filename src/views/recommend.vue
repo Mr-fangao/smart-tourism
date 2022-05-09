@@ -324,15 +324,18 @@
           </div>
           <div class="person">
             <div class="select">
+              <span>考虑评分：</span>
               <el-radio v-model="prferradio" label="score">评分优先</el-radio>
               <el-radio v-model="prferradio" label="hot">热度优先</el-radio>
             </div>
             <div class="select">
+              <span>考虑距离：</span>
               <el-radio v-model="distancerange" label="1">本市</el-radio>
               <el-radio v-model="distancerange" label="2">本省</el-radio>
               <el-radio v-model="distancerange" label="3">邻省</el-radio>
             </div>
             <div class="select">
+              <span>考虑季节：</span>
               <el-radio v-model="seasonrange" label="1">春</el-radio>
               <el-radio v-model="seasonrange" label="2">夏</el-radio>
               <el-radio v-model="seasonrange" label="3">秋</el-radio>
@@ -2362,6 +2365,9 @@ export default {
       height: 5% !important;
     }
     .recommend {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       height: 93%;
       width: 100%;
       .smalltitle {
@@ -2384,9 +2390,8 @@ export default {
       }
 
       .timepickcontent {
-        width: 90%;
+        width: 95%;
         float: left;
-        margin: 0% 5%;
         padding: 1%;
         background: url("../assets/img/buttonbg.png") center no-repeat;
         background-size: 97% 97%;
@@ -2395,7 +2400,7 @@ export default {
         .el-date-editor--timerange.el-input,
         .el-date-editor--timerange.el-input__inner {
           border: none;
-          width: 200px !important;
+          width: 90% !important;
         }
         .el-input__inner {
           background-color: transparent;
@@ -2417,14 +2422,15 @@ export default {
         }
       }
       .perfer {
-        width: 90%;
-        margin: 0% 5%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 95%;
         padding: 1%;
         background: url("../assets/img/buttonbg.png") center no-repeat;
         background-size: 97% 97%;
         .prefercontent {
-          width: 90%;
-          margin: 0% 5%;
+          width: 95%;
           .el-input {
             height: 100%;
           }
@@ -2440,8 +2446,7 @@ export default {
             font-size: inherit;
             height: 32px;
             line-height: 36px;
-            width: 95%;
-
+            width: 100%;
             float: left;
             margin-top: 1%;
             padding-left: 3%;
@@ -2449,8 +2454,7 @@ export default {
         }
         .exampellabel {
           color: #d1d7d8f2;
-          width: 90%;
-          margin: 0% 5%;
+          width: 95%;
           .labelcontent {
             display: flex;
             height: 100%;
@@ -2477,8 +2481,7 @@ export default {
       }
 
       .person {
-        width: 90%;
-        margin: 0% 5%;
+        width: 95%;
         margin-bottom: 1%;
         padding-top: 2%;
         padding-bottom: 1%;
@@ -2489,15 +2492,20 @@ export default {
           width: 95%;
           height: 16%;
           float: left;
-          margin-left: 2.5%;
+          margin-left: 4%;
           margin-bottom: 1%;
           display: flex;
           flex-wrap: nowrap;
-          justify-content: space-evenly;
+          // justify-content: space-evenly;
           align-items: center;
+          span {
+            color: #fff;
+            font-size: 11pt;
+            margin-right: 2%;
+          }
           .el-radio {
             color: rgb(190, 218, 218);
-            margin-right: 4px;
+            margin-right: 6%;
           }
           /deep/.el-radio__input.is-checked + .el-radio__label {
             color: #42e0e0;
@@ -2510,7 +2518,7 @@ export default {
       }
 
       .ageandsex {
-        width: 100%;
+        width: 92%;
         height: 20%;
         margin-bottom: 1%;
         .agept {
@@ -2539,7 +2547,7 @@ export default {
       }
 
       .occupationandincome {
-        width: 100%;
+        width: 92%;
         height: 20%;
         margin-bottom: 1%;
         .incomept {
@@ -2559,7 +2567,6 @@ export default {
       .buttoncontent {
         height: 8%;
         width: 65%;
-        margin: auto;
         display: flex;
         flex-direction: row;
         flex-wrap: nowrap;
@@ -2591,12 +2598,11 @@ export default {
   background-color: #15cfee38;
 }
 .person-name {
-  width: 40%;
+  width: 28%;
+  margin-left: 3%;
   height: 100%;
   float: left;
   text-align: right;
-  font-size: 11pt;
-  color: aliceblue;
   font-size: 11pt;
   display: flex;
   color: aliceblue;
