@@ -3,7 +3,7 @@
     <div id="map"></div>
     <div class="main-content">
       <!-- <selectRegion :right="400" /> -->
-      <SelectRegion :right="400"></SelectRegion>
+   <selectRegion :defaultplace="'南京'" :right="3.5" />
     </div>
   </div>
 </template>
