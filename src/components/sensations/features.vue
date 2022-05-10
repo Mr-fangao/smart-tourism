@@ -1,6 +1,6 @@
 <template>
   <div id="com-features">
-    <selectRegion :right="3" />
+    <!-- <selectRegion :defaultplace="'南京'" :right="3.5" /> -->
     <div id="map" />
     <div class="features-left">
       <div class="row1 left-part">
@@ -16,9 +16,12 @@
               ></el-input>
             </div>
             <div class="buttoncontent">
-              <pbutton :name="buttonname" @click.native="postFeature()"></pbutton>
+              <pbutton
+                :name="buttonname"
+                @click.native="postFeature()"
+              ></pbutton>
             </div>
-          </div> 
+          </div>
           <div class="chosenlabel">
             <word3D
               :height="word3Dheight"
@@ -35,11 +38,11 @@
           <div class="chartselect">
             <el-radio-group
               v-model="isCollapse"
-              @change="changeChartTab"
-              style="margin-bottom: 20px"
+              @change="changeChartTab(isCollapse)"
             >
-              <el-radio-button :label="false">热度榜</el-radio-button>
-              <el-radio-button :label="true">评价榜</el-radio-button>
+              <el-radio-button :label="0">省份</el-radio-button>
+              <el-radio-button :label="1">城市</el-radio-button>
+              <el-radio-button :label="2">景点</el-radio-button>
             </el-radio-group>
           </div>
         </div>
@@ -61,6 +64,11 @@ import request from "../../utils/request";
 
 export default {
   name: "city",
+  //  props: {
+  //   faetureslist: {
+  //     type: String,
+  //   },
+  // },
   components: {
     SelectRegion,
     pbutton,
@@ -70,11 +78,12 @@ export default {
 
   data() {
     return {
-      isCollapse: true, //地区分布图表切换
+      isCollapse: 0, //地区分布图表切换
       word3Dheight: 200, //3D词云大小
       word3Dwidth: 350,
       buttonname: "分析", //按钮名称
       selectinput: "",
+      faetureslist: [],
       placeholder: "",
       selectcity: {
         name: "中国",
@@ -123,15 +132,46 @@ export default {
     this.initmap();
     eventBum.$on("features", (features) => {
       console.log(features);
-      this.selectinput += features + "、";
+      features = features.toString();
+      if (this.selectinput == "") {
+        this.selectinput += features;
+      } else if (this.selectinput != null) {
+        this.selectinput += "、" + features;
+      }
     });
   },
 
   methods: {
+    getFeaturesList() {
+      if (typeof this.selectinput == "string") {
+        var faetureslist = this.selectinput.toString();
+        faetureslist = faetureslist.split("、");
+        console.log(faetureslist, typeof faetureslist);
+      }
+      this.faetureslist = faetureslist;
+    },
     postFeature() {
+      if(this.faetureslist.length==0){
+        this.getFeaturesList();
+      }
       console.log("postFeature is already !");
     },
-    changeChartTab(){},
+    getLevelsData(){
+
+    },
+    changeChartTab(level) {
+      if(this.faetureslist.length==0){
+        this.getFeaturesList();
+      }
+      //  request
+      //     .post("/api/data/?", {
+      //       level: level,
+      //       features:features
+      //     })
+      //     .then((res) => {
+      //       console.log(res);
+      //     });
+    },
     handleResize() {
       this.myChart2 && this.myChart2.resize();
     },
@@ -144,7 +184,11 @@ export default {
       });
     },
   },
-  watch: {},
+  watch: {
+    isCollapse(newVal, oldVal){
+      this.changeChartTab(newVal);
+    }
+  },
 };
 </script>
 
@@ -248,10 +292,10 @@ export default {
     margin-left: 13%;
   }
   .chartselect {
-    width: 100px;
+    width: 125px;
     height: 28px;
     top: 41%;
-    right: 4%;
+    right: 2%;
     background-color: transparent;
     position: absolute;
     display: flex;
@@ -266,12 +310,14 @@ export default {
       background: url("../../assets/img/tabchosenBG.png") no-repeat center
         center;
       background-color: transparent;
+      background-size: 100% 80%;
     }
     /deep/.el-radio-button__inner {
       color: white;
       border: none;
       background: url("../../assets/img/tabBG.png") no-repeat center center;
       background-color: transparent;
+      background-size: 100% 80%;
     }
     //去除左侧蓝线
     /deep/.el-radio-button__orig-radio:checked + .el-radio-button__inner {

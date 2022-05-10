@@ -99,6 +99,10 @@ export default {
       type: Number,
       default: 370,
     },
+    defaultplace: {
+      type: String,
+      default: "中国",
+    },
   },
   data() {
     return {
@@ -147,8 +151,8 @@ export default {
   created() {},
   beforeDestroy() {},
   mounted() {
-    if (this.$route.path == "/sensation") {
-      this.json.name = "北京市";
+    if (this.defaultplace != "中国") {
+      this.json.name = this.defaultplace;
     }
     var that = this;
     for (let i = 0; i < city.length; i++) {
@@ -354,7 +358,9 @@ export default {
         });
       }
     },
+
   },
+     
 };
 </script>
 <style>
