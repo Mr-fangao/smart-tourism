@@ -49,7 +49,14 @@
         <div class="content"></div>
       </div>
     </div>
-    <div class="features-bottom"></div>
+    <div class="features-bottom">
+      <div class="bottompart">
+         <div class="features-title">
+          <span>旅游产品特征分析</span>
+        </div>
+        <div class="content"></div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -90,38 +97,41 @@ export default {
         level: 0,
       },
       wordcloudchina: [
-        { value: 29434, name: "酒店" },
-        { value: 21500, name: "公园" },
-        { value: 20010, name: "中国" },
-        { value: 17380, name: "旅游" },
-        { value: 16933, name: "文化" },
-        { value: 16792, name: "博物馆" },
-        { value: 16409, name: "历史" },
-        { value: 16259, name: "古镇" },
-        { value: 13814, name: "风景区" },
-        { value: 13705, name: "门票" },
-        { value: 13371, name: "城市" },
-        { value: 10335, name: "广场" },
-        { value: 8753, name: "草原" },
-        { value: 8288, name: "拍照" },
-        { value: 7507, name: "北京" },
-        { value: 6881, name: "自驾游" },
-        { value: 6844, name: "自然" },
-        { value: 6752, name: "黄河" },
-        { value: 6538, name: "瀑布" },
-        { value: 5922, name: "成都" },
-        { value: 5568, name: "温泉" },
-        { value: 5564, name: "湿地" },
-        { value: 5249, name: "遗址" },
-        { value: 5034, name: "重庆" },
-        { value: 4946, name: "新疆" },
-        { value: 4923, name: "峡谷" },
-        { value: 4493, name: "西安" },
-        { value: 4287, name: "老街" },
-        { value: 4229, name: "广州" },
-        { value: 4075, name: "国家森林公园" },
-        { value: 4070, name: "地质公园" },
-        { value: 3995, name: "沙漠" },
+        { value: 5589, name: "山岳" },
+        { value: 6734, name: "海滨" },
+        { value: 7879, name: "历史" },
+        { value: 9024, name: "文化" },
+        { value: 2456, name: "园林" },
+        { value: 5467, name: "自驾游" },
+        { value: 4567, name: "商业街" },
+        { value: 6546, name: "划船" },
+        { value: 4567, name: "沙漠" },
+        { value: 4564, name: "森林公园" },
+        { value: 6775, name: "湿地" },
+        { value: 4567, name: "瀑布" },
+        { value: 7654, name: "温泉" },
+        { value: 6789, name: "峡谷" },
+        { value: 3456, name: "草原" },
+        { value: 6543, name: "艺术" },
+        { value: 5678, name: "红色" },
+        { value: 4567, name: "古迹" },
+        { value: 6543, name: "动物" },
+        { value: 2299, name: "建筑" },
+        { value: 4488, name: "陵墓" },
+        { value: 5578, name: "风光" },
+        { value: 2367, name: "地貌" },
+        { value: 3478, name: "异域" },
+        { value: 9865, name: "寺庙" },
+        { value: 7654, name: "避暑" },
+        { value: 7654, name: "游乐园" },
+        { value: 3456, name: "水上乐园" },
+        { value: 6789, name: "宗教" },
+        { value: 1234, name: "道观" },
+        { value: 9090, name: "广场" },
+        { value: 2344, name: "亲子" },
+        { value: 5432, name: "爬山" },
+        { value: 8888, name: "网红" },
+        { value: 5566, name: "特色商业" },
       ],
     };
   },
@@ -151,16 +161,14 @@ export default {
       this.faetureslist = faetureslist;
     },
     postFeature() {
-      if(this.faetureslist.length==0){
+      if (this.faetureslist.length == 0) {
         this.getFeaturesList();
       }
       console.log("postFeature is already !");
     },
-    getLevelsData(){
-
-    },
+    getLevelsData() {},
     changeChartTab(level) {
-      if(this.faetureslist.length==0){
+      if (this.faetureslist.length == 0) {
         this.getFeaturesList();
       }
       //  request
@@ -185,9 +193,9 @@ export default {
     },
   },
   watch: {
-    isCollapse(newVal, oldVal){
+    isCollapse(newVal, oldVal) {
       this.changeChartTab(newVal);
-    }
+    },
   },
 };
 </script>
@@ -274,6 +282,25 @@ export default {
   }
   .row2 {
     height: 60%;
+  }
+}
+.features-bottom {
+  position: absolute;
+  height: 39%;
+  width: 73.8%;
+  bottom: 53px;
+  right: 49px;
+  background: url("../../assets/img/长方形.png") no-repeat;
+  background-size: 100% 100%;
+  display: flex;
+  flex-direction: column;
+  .bottompart{
+    width: 33.3%;
+    height: 100%;
+    .content{
+      height: 90%;
+      width: 100%;
+    }
   }
 }
 .features-title {
