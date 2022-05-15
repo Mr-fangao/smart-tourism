@@ -462,7 +462,7 @@
         </div>
       </div>
     </div>
-    <selectRegion :right="24"/>
+    <selectRegion :right="24" />
   </div>
 </template>
 <script>
@@ -873,6 +873,7 @@ export default {
       this.selectcity.name = json.name;
       this.selectcity.level = json.where;
       console.log(this.selectcity);
+       this.postCityWorldCloud();
       if (this.selectcity.name == "南京市") {
         this.showmap(5);
         this.treemapname = this.selectcity.name + "热门景点";
@@ -888,6 +889,7 @@ export default {
     });
   },
   mounted() {
+    this.postCityWorldCloud();
     this.getScenicdata();
     this.getTime();
     this.showmap(1);
@@ -1027,6 +1029,21 @@ export default {
           console.log(this.commentdata);
         }
       });
+    },
+    postCityWorldCloud() {
+      var name = this.selectcity.name;
+      name = this.selectcity.name.replace("省", "");
+      name = name.replace("市", "");
+      request
+        .post("/api/data/wordCloud", {
+          model: name,
+        })
+        .then((res) => {
+          console.log(res);
+          if (res.code == 0) {
+            console.log(res);
+          }
+        });
     },
     getScenicdata() {
       // this.citycount.tourist = 1;
