@@ -81,14 +81,6 @@ export default new Router({
       }
     },
     {
-      path: '/thememap',
-      name: 'thememap',
-      component: () => import("@/views/theme"),
-      meta: {
-        keepAlive: true
-      }
-    },
-    {
       path: "*", // 此处需特别注意置于最底部
       component: notFound
     },
