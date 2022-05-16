@@ -544,6 +544,7 @@ export default {
       isLoading: false,
       isShow: true,
       //区域选择
+      selectedcity: "",
       selectcity: {
         name: "中国",
         level: 0,
@@ -749,48 +750,8 @@ export default {
         { value: 16, name: "紫金山" },
         { value: 16, name: "银杏" },
       ],
-      chartdata1: [
-        {
-          name: "北京",
-          value: 139687,
-        },
-        {
-          name: "三亚",
-          value: 108024,
-        },
-        {
-          name: "杭州",
-          value: 106646,
-        },
-        {
-          name: "郑州",
-          value: 91186,
-        },
-        {
-          name: "洛阳",
-          value: 58379,
-        },
-        {
-          name: "上海",
-          value: 53431,
-        },
-        {
-          name: "广州",
-          value: 53078,
-        },
-        {
-          name: "南京",
-          value: 52042,
-        },
-        {
-          name: "海口",
-          value: 46654,
-        },
-        {
-          name: "开封",
-          value: 44206,
-        },
-      ],
+      chartdatatreemap: [],
+      piedata: [],
       chartdata2: [
         { value: 1048, name: "河北" },
         { value: 735, name: "安徽" },
@@ -849,53 +810,37 @@ export default {
       ],
     };
   },
-  beforeCreate() {
-    //获取评论数、好评数、游记数
-  },
-  computed: {
-    // ...mapState(["alldatacount"]),
-  },
+  beforeCreate() {},
+  computed: {},
   created() {
     this.getAlldata();
-    // sessionStorage.getItem("state") &&
-    //   this.$store.replaceState(
-    //     Object.assign(
-    //       {},
-    //       this.$store.state,
-    //       JSON.parse(sessionStorage.getItem("state"))
-    //     )
-    //   );
-    // //进行页面刷新时存储 store.state 数据存储到sessionStorage中
-    // window.addEventListener("beforeunload", () => {
-    //   sessionStorage.setItem("state", JSON.stringify(this.$store.state));
-    // });
+    eventBum.$off("json");
     eventBum.$on("json", (json) => {
       this.selectcity.name = json.name;
       this.selectcity.level = json.where;
-      console.log(this.selectcity);
-       this.postCityWorldCloud();
+      // this.selectdcity = this.selectcity.name.replace("省", "");
+      this.selectedcity = this.selectcity.name.replace("市", "");
+      console.log(this.selectcity, this.selectedcity);
+      this.postCityWorldCloud();
+      this.postScenicListByCity();
+      this.postScenicSourceByCity();
       if (this.selectcity.name == "南京市") {
         this.showmap(5);
         this.treemapname = this.selectcity.name + "热门景点";
         this.citycount.sensic = "488";
         this.citycount.comment = "52042";
         this.citycount.tourist = "45";
-        this.initChart1(this.chartdata3);
         this.chartname = this.selectcity.name;
-        this.wordCloudInti(this.$refs.chartword, this.njwordcloud);
         this.initChart2(this.chartdata4);
         this.mapchange = "5";
       }
     });
   },
   mounted() {
-    this.postCityWorldCloud();
-    this.getScenicdata();
+    this.getCityRank();
     this.getTime();
     this.showmap(1);
     this.getRankTable();
-    this.getCityRank();
-    this.initChart1(this.chartdata1);
     this.initChart2(this.chartdata2);
     this.postSCT();
     // this.initTimechart();
@@ -1031,25 +976,20 @@ export default {
       });
     },
     postCityWorldCloud() {
-      var name = this.selectcity.name;
-      name = this.selectcity.name.replace("省", "");
-      name = name.replace("市", "");
       request
         .post("/api/data/wordCloud", {
-          model: name,
+          model: this.selectedcity,
         })
         .then((res) => {
           console.log(res);
           if (res.code == 0) {
-            console.log(res);
+            setTimeout(() => {
+              this.wordCloudInti(this.$refs.chartword, res.data);
+            }, 20);
           }
         });
     },
-    getScenicdata() {
-      // this.citycount.tourist = 1;
-      // this.citycount.comment = 1;
-      // this.citycount.sensic = 1;
-    },
+
     hideModal() {
       // 取消弹窗回调
       this.show = false;
@@ -1061,10 +1001,59 @@ export default {
     indexMethod(index) {
       return (this.currentPage - 1) * this.intPageSize + index + 1;
     },
+    postScenicListByCity() {
+      let that = this;
+      request
+        .post("/api/data/citySH", {
+          model: this.selectedcity,
+        })
+        .then((res) => {
+          that.chartdatatreemap = res.data;
+          setTimeout(() => {
+            that.initChart1(that.chartdatatreemap);
+          }, 20);
+        });
+    },
+    postScenicSourceByCity() {
+      let that = this;
+      request
+        .post("/api/data/citySource", {
+          model: this.selectedcity,
+        })
+        .then((res) => {
+          that.piedata = res.data;
+          setTimeout(() => {
+            that.initChart2(that.piedata);
+          }, 20);
+        });
+    },
     getCityRank() {
       request.get("/api/data/cityRank").then((res) => {
-        console.log(res);
+        console.log(res.data);
         this.tableCityData = res.data;
+        var item = {
+          name: "",
+          value: "",
+        };
+        var index = 0;
+        for (index; index < res.data.length; index++) {
+          item.name = res.data[index].city;
+          item.value = res.data[index].comcount;
+          this.chartdatatreemap.push({
+            name: item.name,
+            value: item.value,
+          });
+          for (var key in item) {
+            delete item[key];
+          }
+          // if (index <= res.data.length) {
+          //   item.name == res.data[index + 1].name;
+          //   item.value == res.data[index + 1].hot;
+          //   chartdatatreemap.push(item);
+          // }
+        }
+        console.log(this.chartdatatreemap);
+        this.initChart1(this.chartdatatreemap);
       });
     },
     getRankTable() {
@@ -1745,15 +1734,10 @@ export default {
     //矩形树图点击事件
     clickFun(param) {
       if (param.type == "click") {
-        if (this.chartname != "南京市") {
-          this.chartname = param.name;
-        }
-
-        if (param.name == "三亚") {
-          this.wordCloudInti(this.$refs.chartword, this.wordclouddata);
-        } else if (param.name == "北京") {
-          this.wordCloudInti(this.$refs.chartword, this.startclouddata);
-        }
+        this.selectedcity = param.name;
+        this.postCityWorldCloud();
+        this.postScenicSourceByCity();
+        this.chartname = param.name + "市";
       }
     },
     wordCloudInti(wrapEl, data) {
