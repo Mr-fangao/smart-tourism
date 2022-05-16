@@ -1885,6 +1885,9 @@ export default {
 .el-date-editor .el-range-input {
   width: 57%;
 }
+/* .el-icon-date:before{
+  content: none;
+} */
 </style>
 <style scoped lang="less">
 #recommend {
@@ -1902,9 +1905,15 @@ export default {
   z-index: 0;
 }
 .ageinput {
-  color: #ffffff;
-  background-color: #59c0c0a1;
-  border: none;
+  width: 100%;
+  background: #c3e3e72b;
+  border-radius: 4px;
+  border: 1px solid #3eb7c738;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  color: rgba(220, 225, 227, 0.96);
+  font-size: 11pt;
+  height: 22px;
 }
 #recommend-title {
   height: 9%;
@@ -2625,19 +2634,13 @@ export default {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     color: rgba(220, 225, 227, 0.96);
-    font-size: inherit;
-    height: 32px;
-    // line-height: 90px;
+    font-size: 11pt;
+    height: 24px;
     width: 127%;
     padding: 0px;
-    // margin-top: 2%;
   }
   .el-radio {
     margin-right: 20%;
-  }
-  .ageinput {
-    width: 100%;
-    height: 60%;
   }
 }
 .recommend-bottom {
@@ -2864,6 +2867,12 @@ export default {
       }
     }
   }
+}
+/deep/.el-icon-date:before {
+  content: none;
+}
+/deep/.el-input__icon:after {
+  content: none;
 }
 </style>
 <style>
