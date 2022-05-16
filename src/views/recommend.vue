@@ -456,7 +456,6 @@
             :placeholder="month"
             :clearable="clearable"
             :picker-options="pickerOptions"
-            @change="getScenicMonth(monthvalue), getCityMonth(monthvalue)"
           >
           </el-date-picker>
         </div>
@@ -515,6 +514,7 @@ export default {
         travels: "",
       },
       //评论数据变化,页面下方
+      permonths: 3, //设置数据为几个月之前的数据
       pickerOptions: {
         disabledDate(time) {
           const FullYear = time.getFullYear();
@@ -752,75 +752,19 @@ export default {
       ],
       chartdatatreemap: [],
       piedata: [],
-      chartdata2: [
-        { value: 1048, name: "河北" },
-        { value: 735, name: "安徽" },
-        { value: 580, name: "广东" },
-        { value: 484, name: "河南" },
-        { value: 300, name: "湖北" },
-      ],
-      chartdata4: [
-        { value: 1048, name: "安徽" },
-        { value: 735, name: "江苏" },
-        { value: 580, name: "广东" },
-        { value: 484, name: "东北" },
-        { value: 300, name: "湖北" },
-      ],
-      chartdata3: [
-        {
-          name: "外秦淮河游船",
-          value: 2163,
-        },
-        {
-          name: "南京中华门城堡",
-          value: 963,
-        },
-        {
-          name: "玄武湖公园",
-          value: 783,
-        },
-        {
-          name: "江宁织造博物馆",
-          value: 783,
-        },
-        {
-          name: "夫子庙大成殿",
-          value: 757,
-        },
-        {
-          name: "灵谷寺",
-          value: 693,
-        },
-        {
-          name: "朝天宫",
-          value: 682,
-        },
-        {
-          name: "莫愁湖公园",
-          value: 407,
-        },
-        {
-          name: "老门东历史街区",
-          value: 396,
-        },
-        {
-          name: "鼓楼",
-          value: 390,
-        },
-      ],
     };
   },
   beforeCreate() {},
   computed: {},
   created() {
     this.getAlldata();
+    this.getCityRank();
     eventBum.$off("json");
     eventBum.$on("json", (json) => {
       this.selectcity.name = json.name;
       this.selectcity.level = json.where;
       // this.selectdcity = this.selectcity.name.replace("省", "");
       this.selectedcity = this.selectcity.name.replace("市", "");
-      console.log(this.selectcity, this.selectedcity);
       this.postCityWorldCloud();
       this.postScenicListByCity();
       this.postScenicSourceByCity();
@@ -837,14 +781,13 @@ export default {
     });
   },
   mounted() {
-    this.getCityRank();
+    this.postScenicSourceByCity();
     this.getTime();
     this.showmap(1);
     this.getRankTable();
     this.initChart2(this.chartdata2);
     this.postSCT();
     // this.initTimechart();
-    // this.wordCloudInti2(this.$refs.chartword2, this.wordcloudchina);
     this.wordCloudInti(this.$refs.chartword, this.startclouddata);
   },
   filters: {
@@ -855,14 +798,12 @@ export default {
   methods: {
     postSCT() {
       request.get("/api/data/getSCT").then((res) => {
-        console.log(res.data);
         this.alldatacount = res.data;
       });
     },
     //下方各类数据
     getScenicMonth(val) {
       this.timeflag = false;
-      console.log(val);
       var year = val.getFullYear();
       var month = val.getMonth() + 1;
       //当前年月
@@ -881,13 +822,11 @@ export default {
         this.daydata.push(ymd);
       }
       this.daydata = currentMonthArr;
-      console.log(currmonth);
       request
         .post("/api/data/scenicDay", {
           model: currmonth,
         })
         .then((res) => {
-          console.log(res);
           if (res.code == 0) {
             var chartdata = res.data;
             var opts = [];
@@ -915,7 +854,6 @@ export default {
     },
     getCityMonth(val) {
       this.timeflag2 = false;
-      console.log(val);
       var year = val.getFullYear();
       var month = val.getMonth() + 1;
       //当前年月
@@ -934,13 +872,12 @@ export default {
         this.daydata.push(ymd);
       }
       this.daydata = currentMonthArr;
-      console.log(currmonth);
+
       request
         .post("/api/data/cityDay", {
           model: currmonth,
         })
         .then((res) => {
-          console.log(res);
           if (res.code == 0) {
             var chartdata = res.data;
             var opts = [];
@@ -968,10 +905,8 @@ export default {
     },
     getAlldata() {
       request.post("/api/data/commentDay").then((res) => {
-        console.log(res);
         if (res.code == 0) {
           this.commentdata = res.data;
-          console.log(this.commentdata);
         }
       });
     },
@@ -981,11 +916,10 @@ export default {
           model: this.selectedcity,
         })
         .then((res) => {
-          console.log(res);
           if (res.code == 0) {
-            setTimeout(() => {
+            this.$nextTick(() => {
               this.wordCloudInti(this.$refs.chartword, res.data);
-            }, 20);
+            });
           }
         });
     },
@@ -1009,27 +943,28 @@ export default {
         })
         .then((res) => {
           that.chartdatatreemap = res.data;
-          setTimeout(() => {
+          this.$nextTick(() => {
             that.initChart1(that.chartdatatreemap);
-          }, 20);
+          });
         });
     },
-    postScenicSourceByCity() {
+    postScenicSourceByCity(val) {
       let that = this;
+      let city = this.selectedcity;
+      city = city == null ? this.chartdatatreemap[0].name : "北京";
       request
         .post("/api/data/citySource", {
-          model: this.selectedcity,
+          model: city,
         })
         .then((res) => {
           that.piedata = res.data;
-          setTimeout(() => {
+          this.$nextTick(() => {
             that.initChart2(that.piedata);
-          }, 20);
+          });
         });
     },
     getCityRank() {
       request.get("/api/data/cityRank").then((res) => {
-        console.log(res.data);
         this.tableCityData = res.data;
         var item = {
           name: "",
@@ -1046,13 +981,8 @@ export default {
           for (var key in item) {
             delete item[key];
           }
-          // if (index <= res.data.length) {
-          //   item.name == res.data[index + 1].name;
-          //   item.value == res.data[index + 1].hot;
-          //   chartdatatreemap.push(item);
-          // }
         }
-        console.log(this.chartdatatreemap);
+
         this.initChart1(this.chartdatatreemap);
       });
     },
@@ -1062,8 +992,6 @@ export default {
           model: "hot",
         })
         .then((res) => {
-          console.log(res);
-          console.log(res.data[1].city);
           this.tableRankData = res.data;
           for (let i = 1; i <= res.data.length; i++) {
             this.tableRankData[i - 1].rank = i;
@@ -1074,8 +1002,6 @@ export default {
           model: "score",
         })
         .then((res) => {
-          console.log(res);
-          console.log(res.data[1].city);
           this.tablescoreRankData = res.data;
           for (let i = 1; i <= res.data.length; i++) {
             this.tablescoreRankData[i - 1].rank = i;
@@ -1090,7 +1016,6 @@ export default {
       this.show = true;
     },
     showmap(value) {
-      console.log(value);
       this.mapchange = value.toString();
       this.activeClass = value;
       if (value === 1) this.comp = "pointgather";
@@ -1138,9 +1063,7 @@ export default {
       // {
       //   this.tablelabel=='热度'
       // }
-      console.log(this.prferradio);
-      console.log(a);
-      console.log(labels);
+
       this.activeName = "scenicTab";
       request
         .post("/api/data/recommend", {
@@ -1150,7 +1073,6 @@ export default {
           label: labels,
         })
         .then((res) => {
-          console.log(res);
           this.scenicdata = res.data;
           for (let i = 1; i <= res.data.length; i++) {
             this.scenicdata[i - 1].rank = i;
@@ -1163,33 +1085,32 @@ export default {
         });
     },
     handleTabClick(tab) {
-      console.log(tab.name);
       if (tab.name == "time") {
-        setTimeout(() => {
+        this.$nextTick(() => {
           this.initTimechart(this.commentdata);
-        }, 10);
+        });
       } else if (tab.name == "scenichot") {
-        setTimeout(() => {
+        this.$nextTick(() => {
           if (this.timeflag) {
             let pretime = this.getPreMonth(this.currentmonth);
             let time = new Date(pretime);
-            console.log(time);
+
             this.getScenicMonth(time);
           } else {
             this.getScenicMonth(this.monthvalue);
           }
-        }, 10);
+        });
       } else if (tab.name == "cityhot") {
-        setTimeout(() => {
+        this.$nextTick(() => {
           if (this.timeflag2) {
             let pretime = this.getPreMonth(this.currentmonth);
             let time = new Date(pretime);
-            console.log(time);
+
             this.getCityMonth(time);
           } else {
             this.getCityMonth(this.monthvalue);
           }
-        }, 10);
+        });
       }
     },
     getTime() {
@@ -1199,14 +1120,16 @@ export default {
       let day = date.getDate() - 1; // 日
       //景点热度日变化默认月
       this.currentmonth = `${year}-${month}-${day + 1}`;
-      console.log(date);
       this.datatime = `${year}/${month}/${day}`;
-      if (month / 10 < 1) {
-        //月份选择器时间
-        this.month = `${year}-0${month - 2}`;
-      } else {
-        this.month = `${year}-${month - 2}`;
-      }
+      this.month = `${year}-${month - 3}`; //时间选择器所选择的数据为当前月前三个月
+
+      // let pretime = this.getPreMonth(this.currentmonth);
+      // let time = new Date(pretime);
+
+      // this.getScenicMonth(time);
+      // this.getCityMonth(time);
+      // this.timeflag = false;
+      // this.timeflag2 = false;
     },
     getPreMonth(date) {
       var arr = date.split("-");
@@ -1216,7 +1139,7 @@ export default {
       var days = new Date(year, month, 0);
       days = days.getDate(); //获取当前日期中月的天数
       var year2 = year;
-      var month2 = parseInt(month) - 2;
+      var month2 = parseInt(month) - 3; //设置数据时间为当前的前几个月，需要保证该月有数据
       if (month2 == 0) {
         year2 = parseInt(year2) - 1;
         month2 = 12;
@@ -1568,7 +1491,7 @@ export default {
       var option;
       var sdata;
       let base = commentdata.startStamp;
-      console.log(base);
+
       let oneDay = 24 * 3600 * 1000;
       let date = [];
       for (let i = 1; i < 365; i++) {
@@ -1788,54 +1711,6 @@ export default {
       };
       myChart.setOption(option);
     },
-    wordCloudInti2(wrapEl, data) {
-      let myChart = echarts.init(wrapEl);
-      var option = {
-        tooltip: {
-          show: true,
-        },
-        series: [
-          {
-            name: "热词",
-            type: "wordCloud",
-            sizeRange: [10, 40],
-            rotationRange: [-20, 20],
-            shape: "rectangle",
-            left: "center",
-            top: "center",
-            width: "100%",
-            height: "100%",
-            gridSize: 7,
-            textPadding: 0,
-            autoSize: {
-              enable: true,
-              minSize: 4,
-            },
-            textStyle: {
-              normal: {
-                color: function () {
-                  return (
-                    "rgb(" +
-                    [
-                      Math.round(Math.random() * 250),
-                      Math.round(Math.random() * 250),
-                      Math.round(Math.random() * 250),
-                    ].join(",") +
-                    ")"
-                  );
-                },
-              },
-              emphasis: {
-                shadowBlur: 10,
-                shadowColor: "#333",
-              },
-            },
-            data: data,
-          },
-        ],
-      };
-      myChart.setOption(option);
-    },
   },
   //监听全局变量
   watch: {
@@ -1916,7 +1791,7 @@ export default {
   height: 22px;
 }
 #recommend-title {
-  height: 9%;
+  height: 25px;
   background: url(../assets/img/titlebg.png) no-repeat;
   margin-top: 1%;
   background-size: 45% 100%;
@@ -2190,7 +2065,7 @@ export default {
     // background-color: rgba(0, 255, 255, 0.233);
     .title {
       margin-top: 0 !important;
-      height: 6% !important;
+      // height: 6% !important;
     }
     .ranktable-content {
       height: 92%;
@@ -2356,10 +2231,11 @@ export default {
   }
   .chinahot {
     width: 100%;
+    height: 30%;
     flex: 2;
-    .title {
-      height: 12% !important;
-    }
+    // .title {
+    //   height: 12% !important;
+    // }
     .wordcontent {
       width: 100%;
       height: 87%;
