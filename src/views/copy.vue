@@ -7,7 +7,7 @@
 </template>
  
 <script>
-import { getPie3D, getParametricEquation } from 'chart.js' //工具类js，页面路径自己修改
+import { getPie3D, getParametricEquation } from '../js/chart3d.js' //工具类js，页面路径自己修改
  
 const color = ['#005aff', '#f8b551']
  

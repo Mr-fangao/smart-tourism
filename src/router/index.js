@@ -81,6 +81,14 @@ export default new Router({
       }
     },
     {
+      path: '/test',
+      name: 'test',
+      component: () => import("@/views/copy"),
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
       path: "*", // 此处需特别注意置于最底部
       component: notFound
     },
