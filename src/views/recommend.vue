@@ -456,6 +456,7 @@
             :placeholder="month"
             :clearable="clearable"
             :picker-options="pickerOptions"
+            @change="getCityMonth(monthvalue),getScenicMonth(monthvalue)"
           >
           </el-date-picker>
         </div>
@@ -468,6 +469,7 @@
 import word3D from "../components/wordcloud3D.vue";
 
 import poppage from "../components/poppageForCity.vue";
+import { getPie3D, getParametricEquation } from "../js/chart3d";
 
 import request from "../utils/request";
 //vuex
@@ -752,11 +754,25 @@ export default {
       ],
       chartdatatreemap: [],
       piedata: [],
+      //3D　Pie data
+      optionData: [
+        {
+          name: "启用电梯",
+          value: 176,
+        },
+        {
+          name: "停用电梯",
+          value: 288,
+        },
+      ],
+      statusChart: null,
+      pieoption: {},
     };
   },
   beforeCreate() {},
   computed: {},
   created() {
+    // this.setLabel();
     this.getAlldata();
     this.getCityRank();
     eventBum.$off("json");
@@ -781,11 +797,12 @@ export default {
     });
   },
   mounted() {
+    // this.init3DPieChart();
     this.postScenicSourceByCity();
     this.getTime();
     this.showmap(1);
     this.getRankTable();
-    this.initChart2(this.chartdata2);
+    // this.initChart2(this.chartdata2);
     this.postSCT();
     // this.initTimechart();
     this.wordCloudInti(this.$refs.chartword, this.startclouddata);
@@ -796,6 +813,75 @@ export default {
     },
   },
   methods: {
+    setLabel() {
+      this.optionData.forEach((item, index) => {
+        item.itemStyle = {
+          color: color[index],
+        };
+        item.label = {
+          normal: {
+            show: true,
+            color: color[index],
+            formatter: ["{b|{b}}", "{c|{c}}{b|台}", "{d|{d}%}"].join("\n"), // 用\n来换行
+            rich: {
+              b: {
+                color: "#fff",
+                lineHeight: 25,
+                align: "left",
+              },
+              c: {
+                fontSize: 22,
+                color: "#fff",
+                textShadowColor: "#1c90a6",
+                textShadowOffsetX: 0,
+                textShadowOffsetY: 2,
+                textShadowBlur: 5,
+              },
+              d: {
+                color: color[index],
+                align: "left",
+              },
+            },
+          },
+        };
+        item.labelLine = {
+          normal: {
+            lineStyle: {
+              width: 1,
+              color: "rgba(255,255,255,0.7)",
+            },
+          },
+        };
+      });
+    },
+    // 图表初始化
+    init3DPieChart() {
+      this.statusChart = this.$echarts.init(this.$refs.chart);
+      // 传入数据生成 pieoption, 构建3d饼状图, 参数工具文件已经备注的很详细
+      this.pieoption = getPie3D(this.optionData, 0.8, 240, 28, 26, 0.5);
+      this.statusChart.setOption(this.pieoption);
+      // 是否需要label指引线，如果要就添加一个透明的2d饼状图并调整角度使得labelLine和3d的饼状图对齐，并再次setOption
+      this.pieoption.series.push({
+        name: "电梯状态", //自己根据场景修改
+        backgroundColor: "transparent",
+        type: "pie",
+        label: {
+          opacity: 1,
+          fontSize: 13,
+          lineHeight: 20,
+        },
+        startAngle: -40, // 起始角度，支持范围[0, 360]。
+        clockwise: false, // 饼图的扇区是否是顺时针排布。上述这两项配置主要是为了对齐3d的样式
+        radius: ["20%", "50%"],
+        center: ["50%", "50%"],
+        data: this.optionData,
+        itemStyle: {
+          opacity: 0, //这里必须是0，不然2d的图会覆盖在表面
+        },
+      });
+      this.statusChart.setOption(this.pieoption);
+      this.bindListen(this.statusChart);
+    },
     postSCT() {
       request.get("/api/data/getSCT").then((res) => {
         this.alldatacount = res.data;
@@ -1026,16 +1112,16 @@ export default {
       else if (value === 6) this.comp = "locmap";
       //   else if (value === 3) this.comp = "density";
     },
-    //更新数据动画
+    //更新数据动画,清空已选条件
     refeashData() {
       (this.timevalue = ""),
         (this.prferradio = ""),
         (this.sexselect = ""),
         (this.distancerange = ""),
         (this.seasonrange = ""),
-        (this.incomept = "");
-      this.occupationpt = "";
-      (this.distancechecked = false),
+        (this.incomept = ""),
+        (this.occupationpt = ""),
+        (this.distancechecked = false),
         (this.seasonchecked = false),
         (this.sourcechecked = false),
         (this.personchecked = false);
@@ -1122,14 +1208,6 @@ export default {
       this.currentmonth = `${year}-${month}-${day + 1}`;
       this.datatime = `${year}/${month}/${day}`;
       this.month = `${year}-${month - 3}`; //时间选择器所选择的数据为当前月前三个月
-
-      // let pretime = this.getPreMonth(this.currentmonth);
-      // let time = new Date(pretime);
-
-      // this.getScenicMonth(time);
-      // this.getCityMonth(time);
-      // this.timeflag = false;
-      // this.timeflag2 = false;
     },
     getPreMonth(date) {
       var arr = date.split("-");
