@@ -270,8 +270,6 @@
         <!-- <div class="wordcontent" ref="chartword2"></div> -->
         <div class="wordcontent">
           <word3D
-            :height="word3Dheight"
-            :width="word3Dwidth"
             :data="wordcloudchina"
           >
           </word3D>
@@ -508,8 +506,6 @@ export default {
   },
   data() {
     return {
-      word3Dheight: 200,
-      word3Dwidth: 350,
       treemapname: "中国热门城市",
       alldatacount: {
         scenic: "",
@@ -761,7 +757,8 @@ export default {
       pieoption: {},
     };
   },
-  beforeCreate() {},
+  beforeCreate() {
+  },
   computed: {},
   created() {
     this.getAlldata();
@@ -2323,6 +2320,7 @@ export default {
   }
   .sensicrecommend {
     width: 100%;
+    height: 70%;
     flex: 5;
     display: flex;
     flex-direction: column;

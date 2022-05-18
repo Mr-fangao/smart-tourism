@@ -25,11 +25,10 @@
               >
               <el-table
                 @row-click="clickData"
-                :row-style="getRowClass"
                 :header-row-style="getRowClass"
                 :header-cell-style="getRowClass"
-                :height="height"
-                style="width: 100%; align: center"
+                :height="tableheight"
+                style="width: 100% align: center"
                 :data="tableData"
               >
                 <el-table-column
@@ -89,21 +88,19 @@
                   </template>
                 </el-table-column>
               </el-table>
-              <div id="pagination">
-                <el-pagination
-                  @current-change="handleCurrentChange"
-                  background
-                  layout="total,prev, pager, next,jumper"
-                  :total="total"
-                  :pager-count="5"
-                  :page-count="pagecount"
-                  small
-                  :page-size="pageSize"
-                  :current-page="currentPage"
-                  id="pagination"
-                >
-                </el-pagination>
-              </div>
+              <el-pagination
+                @current-change="handleCurrentChange"
+                background
+                layout="total,prev, pager, next,jumper"
+                :total="total"
+                :pager-count="5"
+                :page-count="pagecount"
+                small
+                :page-size="pageSize"
+                :current-page="currentPage"
+                id="pagination"
+              >
+              </el-pagination>
             </el-card>
             <detail
               :show="show"
@@ -156,11 +153,11 @@ export default {
       isLoading: false,
       tableData: [],
       pagecount: 0,
-      height: "",
+      tableheight: "",
       search: "",
       currentPage: 1,
       total: 0,
-      pageSize: 11,
+      pageSize: 12,
       location: [],
       //弹窗字段
       show: false,
@@ -170,15 +167,21 @@ export default {
       pointsflag: 0,
     };
   },
+  created() {
+    this.getHeight();
+  },
+  mounted() {
+    let that = this;
+    this.initmap();
+    this.load();
+    window.onresize = function () {
+      that.getHeight();
+    };
+  },
   filters: {
     rounding(value) {
       return value.toFixed(2);
     },
-  },
-  mounted() {
-    this.getHeight();
-    this.initmap();
-    this.load();
   },
   beforeCreate() {
     // this.load();
@@ -233,7 +236,7 @@ export default {
       }
     },
     getRowClass({ row, column, rowIndex, columnIndex }) {
-      return "background:#3f5c6d2c;color:#FFF;";
+      return "background:#3f5c6d2c;color:#FFF;height:30px";
     },
     keyDown(e) {
       //如果是回车则执行查询方法
@@ -242,7 +245,8 @@ export default {
       }
     },
     getHeight() {
-      this.height = window.innerHeight - 230 + "px";
+      console.log("11");
+      this.tableheight = window.innerHeight - 190 + "px";
     },
     // 加载表格数据
     load() {
@@ -308,11 +312,6 @@ export default {
     // startDraw(){
     //   draw.changeMode('draw_point')
     // },
-  },
-  filters: {
-    rounding(value) {
-      return value.toFixed(2);
-    },
   },
   watch: {},
 };
@@ -396,13 +395,14 @@ export default {
       width: 100%;
       // background-color: #0cf3f3;
       .el-pagination {
-        left: 12%;
-        bottom: 2%;
-        position: absolute;
+        bottom: 1.5%;
+        position: relative;
       }
+
       .teble_card {
         background-color: transparent;
         height: 100%;
+        width: 100%;
         border: none;
         #button1 {
           background-color: #225e81e3;
@@ -416,92 +416,92 @@ export default {
           border-color: #1edaeb;
           color: #fff;
         }
-      /deep/.el-card__body {
-        padding: 6px !important;
-        height: 100%;
-      }
-      /deep/.el-overlay {
-        background-color: rgba(255, 255, 255, 0.02);
-      }
-      .el-table,
-      .el-table__expanded-cell {
-        margin-top: 3%;
-        background: #3f5c6d2c;
-      }
-      /deep/ .el-button--mini,
-      .el-button--mini.is-round {
-        padding: 7px 20px;
-        position: absolute;
-        left: 60%;
-        top: 8.5%;
-      }
-      /deep/.el-icon-search {
-        height: 0px;
-      }
-      /deep/.el-table .cell {
-        text-align: center;
-      }
-      /deep/.el-table .el-table__cell {
-        padding: 2.5px 0 !important;
-      }
-      // /deep/.el-button--mini :nth-child(1){
-      //           background-color: #225e81e3;
-      //   border-color: #1edaeb;
-      //   color: #fff;
-      // }
-      /deep/.el-input :nth-child(1) {
-        position: relative;
-        font-size: 14px;
-        // color: rgba(233, 14, 80, 0.781);
-        display: inline-block;
-        width: 50%;
-        margin-top: 2%;
-        margin-left: -40%;
-        background-image: url("../assets/img/bg9.png");
-        background-size: 100% 100%;
-        border: none;
-      }
-      /deep/.el-input--mini .el-input__inner {
-        background-color: #6d4c3f2c;
-      }
-      /deep/.el-table tbody tr:hover > td {
-        background-color: #23ece22c !important;
-      }
-      /deep/.el-table tr {
-        color: #fff;
-        // background-color: rgb(2, 64, 86, 0.1);
-        background-color: #6d4c3f2c;
-      }
-      /deep/ .el-table th.gutter {
-        display: table-cell !important;
-        background: #3f5c6d2c; //因为我改了我的默认表格背景颜色，所以要跟着改
-      }
-      /deep/.el-table::before {
-        background-color: transparent;
-      }
-      /deep/.el-input__prefix {
-        left: 38px;
-        top: 26%;
-      }
-      /deep/.el-pagination .el-pager li {
-        background-color: transparent;
-        color: #fff;
-        margin: 0 2px;
-      }
-      /deep/.el-pagination .btn-prev {
-        background-color: transparent;
-        color: #fff;
-      }
-      /deep/.el-pagination .btn-next {
-        background-color: #00a2ff2c;
-        color: #fff;
-      }
-      /deep/.el-table td.el-table__cell,
-      /deep/.el-table th.el-table__cell.is-leaf {
-        border-bottom: transparent !important;
-      }
-      }
+        /deep/.el-card__body {
+          padding: 6px !important;
+          height: 100%;
+        }
+        /deep/.el-overlay {
+          background-color: rgba(255, 255, 255, 0.02);
+        }
+        .el-table,
+        .el-table__expanded-cell {
+          margin-top: 3%;
+          background: #3f5c6d2c;
+        }
 
+        /deep/ .el-button--mini,
+        .el-button--mini.is-round {
+          padding: 7px 20px;
+          position: absolute;
+          left: 60%;
+          top: 8.5%;
+        }
+        /deep/.el-icon-search {
+          height: 0px;
+        }
+        /deep/.el-table .cell {
+          text-align: center;
+        }
+        /deep/.el-table .el-table__cell {
+          padding: 2px 0 !important;
+        }
+        // /deep/.el-button--mini :nth-child(1){
+        //           background-color: #225e81e3;
+        //   border-color: #1edaeb;
+        //   color: #fff;
+        // }
+        /deep/.el-input :nth-child(1) {
+          position: relative;
+          font-size: 14px;
+          // color: rgba(233, 14, 80, 0.781);
+          display: inline-block;
+          width: 50%;
+          margin-top: 2%;
+          margin-left: -40%;
+          background-image: url("../assets/img/bg9.png");
+          background-size: 100% 100%;
+          border: none;
+        }
+        /deep/.el-input--mini .el-input__inner {
+          background-color: #6d4c3f2c;
+        }
+        /deep/.el-table tbody tr:hover > td {
+          background-color: #23ece22c !important;
+        }
+        /deep/.el-table tr {
+          color: #fff;
+          // background-color: rgb(2, 64, 86, 0.1);
+          background-color: #6d4c3f2c;
+        }
+        /deep/ .el-table th.gutter {
+          display: table-cell !important;
+          background: #3f5c6d2c; //因为我改了我的默认表格背景颜色，所以要跟着改
+        }
+        /deep/.el-table::before {
+          background-color: transparent;
+        }
+        /deep/.el-input__prefix {
+          left: 38px;
+          top: 26%;
+        }
+        /deep/.el-pagination .el-pager li {
+          background-color: transparent;
+          color: #fff;
+          margin: 0 2px;
+        }
+        /deep/.el-pagination .btn-prev {
+          background-color: transparent;
+          color: #fff;
+        }
+        /deep/.el-pagination .btn-next {
+          background-color: #00a2ff2c;
+          color: #fff;
+        }
+        /deep/.el-table td.el-table__cell,
+        /deep/.el-table th.el-table__cell.is-leaf {
+          border-bottom: transparent !important;
+        }
+      }
     }
   }
 }
@@ -519,15 +519,18 @@ export default {
   color: #ccd8ef;
 }
 /deep/.el-pagination__jump {
-      margin-left: 8px;
+  margin-left: 8px;
   color: #ccd8ef;
 }
+
+// position: absolute;
+// bottom: 1%;
 // #pagination{
 //   /deep/.el-input{
 //     width: 50%;
 //       /deep/.el-input__inner :nth-child(2){
 //     width: 100%;
-    
+
 //   }
 //   }
 // }

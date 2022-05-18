@@ -21,7 +21,7 @@
             <div class="hotandscore labelcontent">
               <div class="label">
                 <div class="titleimg"></div>
-                <span>平均分数 : {{ detaildata.score | rounding }}</span>
+                <span>平均分数 : {{ detaildata.score }}</span>
               </div>
               <div class="label">
                 <div class="titleimg"></div>
@@ -114,11 +114,6 @@ export default {
       default: "",
     },
   },
-  filters: {
-    rounding(value) {
-      return value.toFixed(2);
-    },
-  },
   mounted() {
     this.startData("2343");
   },
@@ -130,7 +125,6 @@ export default {
           id: this.porpID,
         })
         .then((res) => {
-          console.log(res);
           this.listData = res.data.commentEntity;
           if (res.data.commentEntity[0].releaseTime.length > 11) {
             for (var i = 0; i < this.listData.length; i++) {
@@ -139,6 +133,7 @@ export default {
           }
           this.$forceUpdate();
           this.detaildata = res.data.scenicEntity;
+          this.detaildata.score= this.detaildata.score.toFixed(2)
           this.getChartData(res.data.scenicEntity.name);
           if (this.detaildata.level == "null") {
             this.detaildata.level = "暂无";
@@ -152,7 +147,6 @@ export default {
           model: name,
         })
         .then((res) => {
-          console.log(res);
           this.com = res.data.comcount;
           this.score = res.data.scoreavg;
           for (var i = 0; i < this.score.length; i++) {
@@ -170,7 +164,6 @@ export default {
           id: val,
         })
         .then((res) => {
-          console.log(res);
           this.detaildata = res.data.scenicEntity;
           if (this.detaildata.level == "null") {
             this.detaildata.level = "暂无";
@@ -184,7 +177,6 @@ export default {
       this.$emit("submit");
     },
     initChart(com, score) {
-      console.log("1111111");
       var chartDom = document.getElementById("linechart");
       let myChart = this.$echarts.init(chartDom);
       var option;

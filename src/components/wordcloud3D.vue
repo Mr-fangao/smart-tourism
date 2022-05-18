@@ -24,14 +24,6 @@ export default {
     eventBum,
   },
   props: {
-    width: {
-      type: Number,
-      default: 300
-    },
-    height: {
-      type: Number,
-      default: 300
-    },
     // 测试数据
     data: {
       type: Array,
@@ -100,6 +92,8 @@ export default {
     }
   },
   data: () => ({
+    width: '',
+    height: '',
     color: ['#2D4DB6', '#04B67C', '#D1AF07', '#E27914', '#CB4A4D', '#B02690'],
     contentEle: [],
     direction: '-1',
@@ -115,9 +109,10 @@ export default {
     }));
   },
   mounted() {
-    this.innit();
-    this.width=$(".wordCloud__tagBall").width();
+        this.width=$(".wordCloud__tagBall").width();
     this.height=$(".wordCloud__tagBall").height();
+    this.innit();
+
   },
   methods: {
     clickTag(val){
@@ -126,8 +121,8 @@ export default {
     innit() {
 
       console.log( this.height, this.width)
-      const RADIUSX = (this.width - 50) / 2;
-      const RADIUSY = (this.height- 50) / 2;
+      const RADIUSX = (this.width - 30) / 2;
+      const RADIUSY = (this.height- 30) / 2;
       this.contentEle = [];
       for (let i = 0; i < this.data.length; i += 1) {
         const k = -1 + (2 * (i + 1) - 1) / this.data.length;
@@ -191,7 +186,7 @@ export default {
       this.contentEle = this.contentEle.map((singleEle) => {
         const { x, y, z } = singleEle;
         const fallLength = 500;
-        const RADIUS = (this.width - 50) / 2;
+        const RADIUS = (this.width - 30) / 2;
         const scale = fallLength / (fallLength - z);
         const alpha = (z + RADIUS) / (2 * RADIUS);
         const left = `${x + CX - 15}px`;
