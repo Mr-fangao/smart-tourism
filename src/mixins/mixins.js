@@ -1,6 +1,8 @@
+
 export default {
     data () {
       return {
+       pie3Dcolor :['#fc8251', '#5470c6', '#91cd77', '#ef6567', '#f9c956', '#75bedc'],
       }
     },
     created () {

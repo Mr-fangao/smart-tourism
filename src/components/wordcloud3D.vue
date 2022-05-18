@@ -1,8 +1,6 @@
 <template>
-  <div>
     <div
       class="wordCloud__tagBall"
-      :style="{width:`${this.width}px`,height:`${this.height}px`}"
       @mouseenter="stop"
       @mouseleave="start"
     >
@@ -15,7 +13,6 @@
         :title="item.name+item.value"
       >{{item.name}}</span>
     </div>
-  </div>
 </template>
 
 
@@ -119,14 +116,18 @@ export default {
   },
   mounted() {
     this.innit();
+    this.width=$(".wordCloud__tagBall").width();
+    this.height=$(".wordCloud__tagBall").height();
   },
   methods: {
     clickTag(val){
       eventBum.$emit("features", val);
     },
     innit() {
+
+      console.log( this.height, this.width)
       const RADIUSX = (this.width - 50) / 2;
-      const RADIUSY = (this.height - 50) / 2;
+      const RADIUSY = (this.height- 50) / 2;
       this.contentEle = [];
       for (let i = 0; i < this.data.length; i += 1) {
         const k = -1 + (2 * (i + 1) - 1) / this.data.length;
@@ -185,8 +186,8 @@ export default {
       });
     },
     move() {
-      const CX = this.width / 2;
-      const CY = this.height / 2;
+      const CX =this.width / 2;
+      const CY =this.height / 2;
       this.contentEle = this.contentEle.map((singleEle) => {
         const { x, y, z } = singleEle;
         const fallLength = 500;
@@ -230,6 +231,9 @@ export default {
 .wordCloud__tagBall {
   margin: 5px auto;
   position: relative;
+  /* overflow: hidden; */
+  height: 100%;
+  width: 100%;
 }
 
 .wordCloud__tag {

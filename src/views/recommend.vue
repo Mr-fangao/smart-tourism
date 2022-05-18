@@ -466,11 +466,11 @@
   </div>
 </template>
 <script>
-import mixins from "../mixins/index.js";
+
 import word3D from "../components/wordcloud3D.vue";
 
 import poppage from "../components/poppageForCity.vue";
-import { getPie3D, getParametricEquation } from "../js/chart3d";
+import { getPie3D,bindListen} from "../js/chart3d";
 
 import request from "../utils/request";
 //vuex
@@ -488,7 +488,8 @@ import echarts from "echarts";
 
 import eventBum from "../components/cityselect/EvebtBus";
 import SelectRegion from "../components/cityselect/newselectRegion.vue";
-const color = ["#005aff", "#f8b999", "#555aff", "#f8b551", "#255888"];
+import mixins from "../mixins/mixins.js";
+
 export default {
   name: "recommend",
   mixins: [mixins],
@@ -806,15 +807,15 @@ export default {
     },
   },
   methods: {
-    setLabel() {
-      this.optionData.forEach((item, index) => {
+    setLabel(optionData) {
+      optionData.forEach((item, index) => {
         item.itemStyle = {
-          color: color[index],
+          color: this.pie3Dcolor[index],//该颜色数组取自mixin中的数据
         };
         item.label = {
           normal: {
             show: true,
-            color: color[index],
+            color:  this.pie3Dcolor[index],
             formatter: ["{b|{b}}", "{c|{c}}{b|人}", "{d|{d}%}"].join("\n"), // 用\n来换行
             rich: {
               b: {
@@ -831,7 +832,7 @@ export default {
                 textShadowBlur: 5,
               },
               d: {
-                color: color[index],
+                color:  this.pie3Dcolor[index],
                 align: "left",
               },
             },
@@ -851,11 +852,11 @@ export default {
     init3DPieChart() {
       this.statusChart = this.$echarts.init(this.$refs.piechart);
       // 传入数据生成 pieoption, 构建3d饼状图, 参数工具文件已经备注的很详细
-      this.pieoption = getPie3D(this.optionData, 0.8, 240, 28, 26, 0.5);
+      this.pieoption = getPie3D(this.optionData, 0.6, 200,30, 30, 0.6);
       this.statusChart.setOption(this.pieoption);
       // 是否需要label指引线，如果要就添加一个透明的2d饼状图并调整角度使得labelLine和3d的饼状图对齐，并再次setOption
       this.pieoption.series.push({
-        name: "电梯状态", //自己根据场景修改
+        name: "来源信息", //自己根据场景修改
         backgroundColor: "transparent",
         type: "pie",
         label: {
@@ -873,156 +874,9 @@ export default {
         },
       });
       this.statusChart.setOption(this.pieoption);
-      this.bindListen(this.statusChart);
+      bindListen(this.statusChart);
     },
-    bindListen(myChart, optionName = "pieoption") {
-      let selectedIndex = "";
-      let hoveredIndex = "";
-      // 监听点击事件，实现选中效果（单选）
-      myChart.on("click", (params) => {
-        // 从 pieoption.series 中读取重新渲染扇形所需的参数，将是否选中取反。
-        const isSelected =
-          !this[optionName].series[params.seriesIndex].pieStatus.selected;
-        const isHovered =
-          this[optionName].series[params.seriesIndex].pieStatus.hovered;
-        const k = this[optionName].series[params.seriesIndex].pieStatus.k;
-        const startRatio =
-          this[optionName].series[params.seriesIndex].pieData.startRatio;
-        const endRatio =
-          this[optionName].series[params.seriesIndex].pieData.endRatio;
-        // 如果之前选中过其他扇形，将其取消选中（对 pieoption 更新）
-        if (selectedIndex !== "" && selectedIndex !== params.seriesIndex) {
-          this[optionName].series[selectedIndex].parametricEquation =
-            getParametricEquation(
-              this[optionName].series[selectedIndex].pieData.startRatio,
-              this[optionName].series[selectedIndex].pieData.endRatio,
-              false,
-              false,
-              k,
-              this[optionName].series[selectedIndex].pieData.value
-            );
-          this[optionName].series[selectedIndex].pieStatus.selected = false;
-        }
-        // 对当前点击的扇形，执行选中/取消选中操作（对 pieoption 更新）
-        this[optionName].series[params.seriesIndex].parametricEquation =
-          getParametricEquation(
-            startRatio,
-            endRatio,
-            isSelected,
-            isHovered,
-            k,
-            this[optionName].series[params.seriesIndex].pieData.value
-          );
-        this[optionName].series[params.seriesIndex].pieStatus.selected =
-          isSelected;
-        // 如果本次是选中操作，记录上次选中的扇形对应的系列号 seriesIndex
-        selectedIndex = isSelected ? params.seriesIndex : null;
-        // 使用更新后的 option，渲染图表
-        myChart.setOption(this[optionName]);
-      });
-      // 监听 mouseover，近似实现高亮（放大）效果
-      myChart.on("mouseover", (params) => {
-        // 准备重新渲染扇形所需的参数
-        let isSelected;
-        let isHovered;
-        let startRatio;
-        let endRatio;
-        let k;
-        // 如果触发 mouseover 的扇形当前已高亮，则不做操作
-        if (hoveredIndex === params.seriesIndex) {
-          // 否则进行高亮及必要的取消高亮操作
-        } else {
-          // 如果当前有高亮的扇形，取消其高亮状态（对 pieoption 更新）
-          if (hoveredIndex !== "") {
-            // 从 pieoption.series 中读取重新渲染扇形所需的参数，将是否高亮设置为 false。
-            isSelected =
-              this[optionName].series[hoveredIndex].pieStatus.selected;
-            isHovered = false;
-            startRatio =
-              this[optionName].series[hoveredIndex].pieData.startRatio;
-            endRatio = this[optionName].series[hoveredIndex].pieData.endRatio;
-            k = this[optionName].series[hoveredIndex].pieStatus.k;
-            // 对当前点击的扇形，执行取消高亮操作（对 pieoption 更新）
-            this[optionName].series[hoveredIndex].parametricEquation =
-              getParametricEquation(
-                startRatio,
-                endRatio,
-                isSelected,
-                isHovered,
-                k,
-                this[optionName].series[hoveredIndex].pieData.value
-              );
-            this[optionName].series[hoveredIndex].pieStatus.hovered = isHovered;
-            // 将此前记录的上次选中的扇形对应的系列号 seriesIndex 清空
-            hoveredIndex = "";
-          }
-          // 如果触发 mouseover 的扇形不是透明圆环，将其高亮（对 pieoption 更新）
-          if (
-            params.seriesName !== "mouseoutSeries" &&
-            params.seriesName !== "pie2d"
-          ) {
-            // 从 pieoption.series 中读取重新渲染扇形所需的参数，将是否高亮设置为 true。
-            isSelected =
-              this[optionName].series[params.seriesIndex].pieStatus.selected;
-            isHovered = true;
-            startRatio =
-              this[optionName].series[params.seriesIndex].pieData.startRatio;
-            endRatio =
-              this[optionName].series[params.seriesIndex].pieData.endRatio;
-            k = this[optionName].series[params.seriesIndex].pieStatus.k;
-            // 对当前点击的扇形，执行高亮操作（对 pieoption 更新）
-            this[optionName].series[params.seriesIndex].parametricEquation =
-              getParametricEquation(
-                startRatio,
-                endRatio,
-                isSelected,
-                isHovered,
-                k,
-                this[optionName].series[params.seriesIndex].pieData.value + 60
-              );
-            this[optionName].series[params.seriesIndex].pieStatus.hovered =
-              isHovered;
-            // 记录上次高亮的扇形对应的系列号 seriesIndex
-            hoveredIndex = params.seriesIndex;
-          }
-          // 使用更新后的 option，渲染图表
-          myChart.setOption(this[optionName]);
-        }
-      });
-      // 修正取消高亮失败的 bug
-      myChart.on("globalout", () => {
-        // 准备重新渲染扇形所需的参数
-        let isSelected;
-        let isHovered;
-        let startRatio;
-        let endRatio;
-        let k;
-        if (hoveredIndex !== "") {
-          // 从 pieoption.series 中读取重新渲染扇形所需的参数，将是否高亮设置为 true。
-          isSelected = this[optionName].series[hoveredIndex].pieStatus.selected;
-          isHovered = false;
-          k = this[optionName].series[hoveredIndex].pieStatus.k;
-          startRatio = this[optionName].series[hoveredIndex].pieData.startRatio;
-          endRatio = this[optionName].series[hoveredIndex].pieData.endRatio;
-          // 对当前点击的扇形，执行取消高亮操作（对 pieoption 更新）
-          this[optionName].series[hoveredIndex].parametricEquation =
-            getParametricEquation(
-              startRatio,
-              endRatio,
-              isSelected,
-              isHovered,
-              k,
-              this[optionName].series[hoveredIndex].pieData.value
-            );
-          this[optionName].series[hoveredIndex].pieStatus.hovered = isHovered;
-          // 将此前记录的上次选中的扇形对应的系列号 seriesIndex 清空
-          hoveredIndex = "";
-        }
-        // 使用更新后的 option，渲染图表
-        myChart.setOption(this[optionName]);
-      });
-    },
-    // 自适应宽高
+    // pie自适应宽高
     changeSize() {
       this.statusChart.resize();
     },
@@ -1190,7 +1044,7 @@ export default {
           that.optionData = res.data;
           this.$nextTick(() => {
             // that.initChart2(that.piedata);
-            this.setLabel();
+            this.setLabel(this.optionData);
             this.$nextTick(() => {
               this.init3DPieChart();
             });
