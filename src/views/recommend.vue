@@ -466,6 +466,7 @@
   </div>
 </template>
 <script>
+import mixins from "../mixins/index.js";
 import word3D from "../components/wordcloud3D.vue";
 
 import poppage from "../components/poppageForCity.vue";
@@ -473,9 +474,6 @@ import { getPie3D, getParametricEquation } from "../js/chart3d";
 
 import request from "../utils/request";
 //vuex
-import { mapState } from "vuex";
-import { mapMutations } from "vuex";
-
 import gradedcolormap from "../components/thememap/gradedcolormap.vue";
 import pointgather from "../components/thememap/pointgather.vue";
 import heatmap from "../components/thememap/heatmap.vue";
@@ -490,9 +488,10 @@ import echarts from "echarts";
 
 import eventBum from "../components/cityselect/EvebtBus";
 import SelectRegion from "../components/cityselect/newselectRegion.vue";
-const color = ["#005aff", "#f8b551"];
+const color = ["#005aff", "#f8b999", "#555aff", "#f8b551", "#255888"];
 export default {
   name: "recommend",
+  mixins: [mixins],
   components: {
     poppage,
     gradedcolormap,
@@ -547,7 +546,7 @@ export default {
       isLoading: false,
       isShow: true,
       //区域选择
-      selectedcity: "",
+      selectedcity: "北京",
       selectcity: {
         name: "中国",
         level: 0,
@@ -756,16 +755,7 @@ export default {
       chartdatatreemap: [],
       piedata: [],
       //3D　Pie data
-      optionData: [
-        {
-          name: "启用电梯",
-          value: 176,
-        },
-        {
-          name: "停用电梯",
-          value: 288,
-        },
-      ],
+      optionData: [],
       statusChart: null,
       pieoption: {},
     };
@@ -773,37 +763,35 @@ export default {
   beforeCreate() {},
   computed: {},
   created() {
-    this.setLabel();
     this.getAlldata();
     this.getCityRank();
     eventBum.$off("json");
     eventBum.$on("json", (json) => {
-      this.selectcity.name = json.name;
-      this.selectcity.level = json.where;
-      // this.selectdcity = this.selectcity.name.replace("省", "");
-      this.selectedcity = this.selectcity.name.replace("市", "");
-      this.postCityWorldCloud();
-      this.postScenicListByCity();
-      this.postScenicSourceByCity();
-      if (this.selectcity.name == "南京市") {
-        this.showmap(5);
-        this.treemapname = this.selectcity.name + "热门景点";
-        this.citycount.sensic = "488";
-        this.citycount.comment = "52042";
-        this.citycount.tourist = "45";
-        this.chartname = this.selectcity.name;
-        this.initChart2(this.chartdata4);
-        this.mapchange = "5";
+      if (json.where == 2) {
+        this.selectcity.name = json.name;
+        this.selectcity.level = json.where;
+        this.chartname = json.name;
+        this.selectedcity = this.selectcity.name.replace("省", "");
+        this.selectedcity = this.selectedcity.replace("市", "");
+        this.postCityWorldCloud();
+        this.postScenicListByCity();
+        this.postScenicSourceByCity();
+        if (this.selectcity.name == "南京市") {
+          this.showmap(5);
+          this.mapchange = "5";
+        }
+      } else if (json.where == 1&& json.name.includes("省")) {
+        this.warningForpProvince();
       }
     });
   },
   mounted() {
-    this.init3DPieChart();
+    this.postScenicSourceByCity();
     const that = this;
     window.onresize = function () {
       that.changeSize();
     };
-    // this.postScenicSourceByCity();
+
     this.getTime();
     this.showmap(1);
     this.getRankTable();
@@ -827,7 +815,7 @@ export default {
           normal: {
             show: true,
             color: color[index],
-            formatter: ["{b|{b}}", "{c|{c}}{b|台}", "{d|{d}%}"].join("\n"), // 用\n来换行
+            formatter: ["{b|{b}}", "{c|{c}}{b|人}", "{d|{d}%}"].join("\n"), // 用\n来换行
             rich: {
               b: {
                 color: "#fff",
@@ -877,7 +865,7 @@ export default {
         },
         startAngle: -40, // 起始角度，支持范围[0, 360]。
         clockwise: false, // 饼图的扇区是否是顺时针排布。上述这两项配置主要是为了对齐3d的样式
-        radius: ["20%", "60%"],
+        radius: ["20%", "50%"],
         center: ["50%", "50%"],
         data: this.optionData,
         itemStyle: {
@@ -1190,18 +1178,22 @@ export default {
           });
         });
     },
-    postScenicSourceByCity(val) {
+    postScenicSourceByCity() {
       let that = this;
       let city = this.selectedcity;
-      city = city == null ? this.chartdatatreemap[0].name : "北京";
+      console.log('当前选择城市:',city);
       request
         .post("/api/data/citySource", {
           model: city,
         })
         .then((res) => {
-          that.piedata = res.data;
+          that.optionData = res.data;
           this.$nextTick(() => {
-            that.initChart2(that.piedata);
+            // that.initChart2(that.piedata);
+            this.setLabel();
+            this.$nextTick(() => {
+              this.init3DPieChart();
+            });
           });
         });
     },
