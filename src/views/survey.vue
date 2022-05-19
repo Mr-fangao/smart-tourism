@@ -3,7 +3,7 @@
     <div id="map"></div>
     <div class="main-content">
       <!-- <selectRegion :right="400" /> -->
-   <selectRegion :defaultplace="'南京'" :right="3.5" />
+      <SelectRegion ref="box" :right="400"></SelectRegion>
     </div>
   </div>
 </template>
@@ -20,20 +20,20 @@ export default {
   },
   data() {
     return {
-      json: "",
+      json: "  ",
     };
   },
   mounted() {
-    this.initmap();
     eventBum.$on("json", (json) => {
-      // console.log(json);
       this.json = json.name;
-      this.initmap();
     });
+    this.initmap();
   },
   methods: {
     initmap() {
       var _this = this;
+      var layerIDs = [];
+      console.log(_this);
       this.$mapboxgl.accessToken =
         "pk.eyJ1IjoiY2hlbmpxIiwiYSI6ImNrcWFmdWt2bjBtZGsybmxjb29oYmRzZzEifQ.mnpiwx7_cBEyi8YiJiMRZg";
       var map = new this.$mapboxgl.Map({
@@ -44,36 +44,65 @@ export default {
       });
       map.on("load", function () {
         //添加数据源
-        map.addSource("fillSourceID", {
+        map.addSource("china", {
           type: "geojson",
           data: china,
         });
-        map.addLayer({
-          id: "fillID",
-          type: "fill" /* fill类型一般用来表示一个面，一般较大 */,
-          source: "fillSourceID",
-          //过滤器、只展示name = _this.json的省份
-          filter: ["==", "name", _this.json], //关键点：name对应geojson中的属性字段
-          paint: {
-            "fill-color": "#0163B3", //更改地图颜色
-            "fill-outline-color": "#81D24E",
-            "fill-opacity": 0.7 /* 透明度 */,
-          },
-        });
-      });
-      var list = china.features;
-      //判断选择的省份
-      list.some((itme, index) => {
-        if (itme.properties.name == _this.json) {
-          //未选择省份时不执行
-          if (_this.json != "") {
-            map.flyTo({
-              center: itme.properties.centroid,
-              zoom: 6, //设置缩放级别
+        china.features.forEach(function (feature) {
+          var sfName = feature.properties["name"];
+          var layerID = "poi" + sfName;
+          if (!map.getLayer(layerID)) {
+            map.addLayer({
+              id: layerID,
+              type: "fill",
+              source: "china",
+              paint: {
+                "fill-color": "#0163B3", //更改地图颜色
+                "fill-outline-color": "#81D24E",
+                "fill-opacity": 0.7 /* 透明度 */,
+              },
+              filter: ["==", "name", sfName],
             });
+            layerIDs.push(layerID);
           }
-          return true;
-        }
+        });
+        //这一步是保证初始时不显示地图
+        layerIDs.forEach(function (layerID) {
+          map.setLayoutProperty(
+            layerID,
+            "visibility",
+            layerID.indexOf(_this.json) > -1 ? "visible" : "none"
+          );
+        });
+        //获取子组件中的dom元素
+        var box = _this.$refs.box.$el;
+        var queding = box.querySelector("#choice .right");
+        //监听点击事件
+        queding.addEventListener("click", function (e) {
+          var diming = _this.json;
+          layerIDs.forEach(function (layerID) {
+            map.setLayoutProperty(
+              layerID,
+              "visibility",
+              layerID.indexOf(diming) > -1 ? "visible" : "none"
+            );
+          });
+          var list = china.features;
+          //判断选择的省份
+          list.some((itme, index) => {
+            if (itme.properties.name == _this.json) {
+              //未选择省份时不执行
+              if (_this.json != "") {
+                map.flyTo({
+                  center: itme.properties.centroid,
+                  zoom: 6.5, //设置选择地名后地图的缩放级别
+                  pitch: 45, // 倾斜度
+                });
+              }
+              return true;
+            }
+          });
+        });
       });
     },
   },
