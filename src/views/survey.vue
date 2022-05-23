@@ -2,8 +2,13 @@
   <div id="maptest">
     <div id="map"></div>
     <div class="main-content">
-      <!-- <selectRegion :right="400" /> -->
-      <SelectRegion ref="box" :right="400"></SelectRegion>
+      <SelectRegion ref="box" :right="25"></SelectRegion>
+      <div class="mapchange">
+        <el-button id="bt1" type="primary">地图样式1</el-button>
+        <el-button id="bt2" type="primary">地图样式2</el-button>
+        <el-button id="bt3" type="primary">地图样式3</el-button>
+        <el-button id="bt4" type="primary">地图样式4</el-button>
+      </div>
     </div>
   </div>
 </template>
@@ -21,11 +26,13 @@ export default {
   data() {
     return {
       json: "  ",
+      selectlevel: 0, //所选层级，1代表省 2代表市
     };
   },
   mounted() {
     eventBum.$on("json", (json) => {
       this.json = json.name;
+      this.selectlevel = json.where; //所选层级，默认为0 1代表省 2代表市
     });
     this.initmap();
   },
@@ -59,7 +66,7 @@ export default {
               paint: {
                 "fill-color": "#0163B3", //更改地图颜色
                 "fill-outline-color": "#81D24E",
-                "fill-opacity": 0.7 /* 透明度 */,
+                "fill-opacity": 0.3 /* 透明度 */,
               },
               filter: ["==", "name", sfName],
             });
@@ -95,8 +102,8 @@ export default {
               if (_this.json != "") {
                 map.flyTo({
                   center: itme.properties.centroid,
-                  zoom: 6.5, //设置选择地名后地图的缩放级别
-                  pitch: 45, // 倾斜度
+                  zoom: 7, //设置选择地名后地图的缩放级别
+                  pitch: 15, // 倾斜度
                 });
               }
               return true;
@@ -127,6 +134,19 @@ export default {
     position: absolute;
     // z-index: 10;
     top: 0;
+    .mapchange {
+      width: 20%;
+      height: 10%;
+      bottom: 6%;
+      right: 5%;
+      z-index: 10;
+      position: absolute;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      flex-wrap: nowrap;
+      justify-content: space-evenly;
+    }
   }
 }
 </style>

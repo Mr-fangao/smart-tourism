@@ -183,8 +183,7 @@ export default {
       document.getElementById("button3").addEventListener("click", () => {
         //加载前先移除图层、
 
-        if (map.getLayer("unclustered-point"))
-          map.removeLayer("unclustered-point");
+        if (map.getLayer("unclustered-point")) map.removeLayer("unclustered-point");
         if (map.getLayer("points")) map.removeLayer("points");
         if (map.getLayer("clusters")) map.removeLayer("clusters");
         if (map.getLayer("cluster-count")) map.removeLayer("cluster-count");
