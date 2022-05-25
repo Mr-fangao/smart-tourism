@@ -171,14 +171,6 @@ export default {
       if (this.faetureslist.length == 0) {
         this.getFeaturesList();
       }
-      //  request
-      //     .post("/api/data/?", {
-      //       level: level,
-      //       features:features
-      //     })
-      //     .then((res) => {
-      //       console.log(res);
-      //     });
     },
     handleResize() {
       this.myChart2 && this.myChart2.resize();

@@ -9,8 +9,7 @@ import pbutton from "../button.vue";
 import eventBum from "../cityselect/EvebtBus";
 import SelectRegion from "../cityselect/newselectRegion.vue";
 import word3D from "../wordcloud3D.vue";
-import nanjing from "../../assets/json/nanjingpoint.json";
-import njprovince from "../../assets/json/njprovince.json";
+
 import echarts from "echarts";
 import request from "../../utils/request";
 

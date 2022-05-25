@@ -4,10 +4,10 @@
     <div class="main-content">
       <SelectRegion ref="box" :right="25"></SelectRegion>
       <div class="mapchange">
-        <el-button id="bt1" type="primary">地图样式1</el-button>
-        <el-button id="bt2" type="primary">地图样式2</el-button>
-        <el-button id="bt3" type="primary">地图样式3</el-button>
-        <el-button id="bt4" type="primary">地图样式4</el-button>
+        <el-button id="bt1" type="primary">蜂窝图</el-button>
+        <el-button id="bt2" type="primary">网格图</el-button>
+        <el-button id="bt3" type="primary">热力图</el-button>
+        <el-button id="bt4" type="primary">聚合图</el-button>
       </div>
     </div>
   </div>
