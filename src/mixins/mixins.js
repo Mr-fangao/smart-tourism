@@ -16,7 +16,7 @@ export default {
             message: '暂不支持省份选择，请选择城市',
             type: 'warning',
             position: 'top-left',
-            duration:2000
+            duration:3000
           });
       }
     }

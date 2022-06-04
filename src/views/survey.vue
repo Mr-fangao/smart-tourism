@@ -52,7 +52,7 @@ export default {
         zoom: 4,
       });
 
-      //获取子组件中的dom元素
+      //获取子组件中的所有dom元素
       var box = _this.$refs.box.$el;
       var queding = box.querySelector("#choice .right");
       map.on("load", function () {
