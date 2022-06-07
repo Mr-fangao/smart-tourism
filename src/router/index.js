@@ -80,14 +80,14 @@ export default new Router({
         keepAlive: true
       }
     },
-    {
-      path: '/test',
-      name: 'test',
-      component: () => import("@/views/copy"),
-      meta: {
-        keepAlive: true
-      }
-    },
+    // {
+    //   path: '/test',
+    //   name: 'test',
+    //   component: () => import("@/views/copy"),
+    //   meta: {
+    //     keepAlive: true
+    //   }
+    // },
     {
       path: "*", // 此处需特别注意置于最底部
       component: notFound
