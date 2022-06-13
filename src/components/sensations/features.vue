@@ -51,7 +51,7 @@
     </div>
     <div class="features-bottom">
       <div class="bottompart">
-         <div class="features-title">
+        <div class="features-title">
           <span>旅游产品特征分析</span>
         </div>
         <div class="content"></div>
@@ -86,6 +86,18 @@ export default {
   data() {
     return {
       isCollapse: 0, //地区分布图表切换
+      echartsLevelsData: [
+        { DatanName: [], DatanValue: [] },
+        { DatanName: [], DatanValue: [] },
+        { DataName: [], DataValue: [] },
+      ],
+
+      // provDatanName: [],
+      // provDatanValue: [],
+      // cityDatanName: [],
+      // cityDatanValue: [],
+      // scenicDataName: [],
+      // scenicDataValue: [],
       word3Dheight: 200, //3D词云大小
       word3Dwidth: 350,
       buttonname: "分析", //按钮名称
@@ -160,15 +172,16 @@ export default {
       }
       this.faetureslist = faetureslist;
     },
-    postFeature() {
+    postFeatureByLevel(level) {
       if (this.faetureslist.length == 0) {
         this.getFeaturesList();
       }
+      // echartsLevelsData[level]
       console.log("postFeature is already !");
     },
     getLevelsData() {},
     changeChartTab(level) {
-      if (this.faetureslist.length == 0) {
+      if (level == 0) {
         this.getFeaturesList();
       }
     },
@@ -286,10 +299,10 @@ export default {
   background-size: 100% 100%;
   display: flex;
   flex-direction: column;
-  .bottompart{
+  .bottompart {
     width: 33.3%;
     height: 100%;
-    .content{
+    .content {
       height: 90%;
       width: 100%;
     }
