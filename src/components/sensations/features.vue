@@ -34,7 +34,14 @@
       </div>
       <div class="row2 left-part">
         <div class="features-title">
-          <span>特征地区分布排行</span>
+          <span>景点--特征关系图谱</span>
+        </div>
+        <div class="content"></div>
+      </div>
+    </div>
+    <div class="features-bottom">
+      <div class="bottompart">
+        <div class="features-title">
           <div class="chartselect">
             <el-radio-group
               v-model="isCollapse"
@@ -45,14 +52,13 @@
               <el-radio-button :label="2">景点</el-radio-button>
             </el-radio-group>
           </div>
+          <span>地区特征匹配度排行</span>
         </div>
         <div class="content"></div>
       </div>
-    </div>
-    <div class="features-bottom">
       <div class="bottompart">
         <div class="features-title">
-          <span>旅游产品特征分析</span>
+          <span>地图类型选择</span>
         </div>
         <div class="content"></div>
       </div>
@@ -176,14 +182,23 @@ export default {
       if (this.faetureslist.length == 0) {
         this.getFeaturesList();
       }
+      if (echarts[level].DatanName == null) {
+        this.echarts[level].DatanName = res.data.x;
+        this.echarts[level].DatanValue = res.data.y;
+      } else {
+        this.initEcharts(this.echarts[level]);
+      }
+
       // echartsLevelsData[level]
       console.log("postFeature is already !");
     },
+    initEcharts() {},
     getLevelsData() {},
     changeChartTab(level) {
-      if (level == 0) {
+      if (this.faetureslist.length == 0) {
         this.getFeaturesList();
       }
+      this.postFeatureByLevel(level);
     },
     handleResize() {
       this.myChart2 && this.myChart2.resize();
@@ -223,8 +238,7 @@ export default {
   position: absolute;
   height: 92%;
   width: 22.5%;
-  margin-left: 0.4%;
-  margin-top: 0.4%;
+  margin: 0.4%;
   background: url("../../assets/img/side.png") no-repeat;
   background-size: 100% 100%;
   display: flex;
@@ -232,7 +246,7 @@ export default {
   .left-part {
     width: 100%;
     .content {
-      height: 88%;
+      height: 92%;
       width: 100%;
     }
   }
@@ -292,48 +306,53 @@ export default {
 .features-bottom {
   position: absolute;
   height: 39%;
-  width: 73.8%;
-  bottom: 53px;
-  right: 49px;
+  width: 72.8%;
+  bottom: 7.1%;
+  right: 3.7%;
   background: url("../../assets/img/长方形.png") no-repeat;
   background-size: 100% 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   .bottompart {
-    width: 33.3%;
     height: 100%;
     .content {
-      height: 90%;
+      height: 87%;
       width: 100%;
     }
   }
+  .bottompart:nth-child(1) {
+    flex: 2;
+  }
+  .bottompart:nth-child(2) {
+    flex: 1;
+  }
 }
 .features-title {
-  padding-top: 1%;
+  margin-top: 1%;
   height: 30px;
-  width: 100%;
+  width: 200px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   background: url("../../assets/img/titlebg.png") no-repeat;
-  background-position: 4% 88%;
-  background-size: 50% 82%;
+  // background-position: 4% 130%;
+  background-size: 100% 100%;
   > span {
     color: #a7e3eb;
     font-size: 14px;
-    margin-left: 13%;
+    margin-left: 23%;
   }
   .chartselect {
-    width: 125px;
+    width: 140px;
     height: 28px;
-    top: 41%;
-    right: 2%;
+    top: 4%;
+    left: 40%;
     background-color: transparent;
     position: absolute;
     display: flex;
     /deep/.el-radio-button__inner {
       padding: 6px 5px;
-      font-size: 13px;
+      font-size: 14px;
       border: none;
       background-color: transparent;
     }
@@ -355,6 +374,12 @@ export default {
     /deep/.el-radio-button__orig-radio:checked + .el-radio-button__inner {
       -webkit-box-shadow: 0px 0 0 0 #409eff;
       box-shadow: 0px 0 0 0 #409eff;
+    }
+    /deep/.el-radio-group {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
     }
   }
 }
