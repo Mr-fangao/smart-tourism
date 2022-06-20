@@ -3,41 +3,13 @@
     <SelectRegion ref="box" :right="25"></SelectRegion>
     <div id="map" />
     <div class="features-left">
-      <div class="row1 left-part">
+      <div class="features-analysis leftpart">
         <div class="features-title">
-          <span>旅游产品特征分析</span>
+          <span>111s</span>
         </div>
-        <div class="content">
-          <div class="search">
-            <div class="searchinput">
-              <el-input
-                v-model="selectinput"
-                placeholder="输入内容或点击词云标签"
-              ></el-input>
-            </div>
-            <div class="buttoncontent">
-              <pbutton
-                :name="buttonname"
-                @click.native="postFeature()"
-              ></pbutton>
-            </div>
-          </div>
-          <div class="chosenlabel">
-            <word3D
-              :height="word3Dheight"
-              :width="word3Dwidth"
-              :data="wordcloudchina"
-            >
-            </word3D>
-          </div>
-        </div>
+        <div ></div>
       </div>
-      <div class="row2 left-part">
-        <div class="features-title">
-          <span>景点--特征关系图谱</span>
-        </div>
-        <div class="content"></div>
-      </div>
+      <div class="features-RelationalGraph leftpart"></div>
     </div>
     <div class="features-bottom">
       <div class="bottompart">
@@ -70,11 +42,10 @@ import pbutton from "../button.vue";
 import eventBum from "../cityselect/EvebtBus";
 import SelectRegion from "../cityselect/newselectRegion.vue";
 import word3D from "../wordcloud3D.vue";
-import nanjing from "../../assets/json/nanjingpoint.json";
-import njprovince from "../../assets/json/njprovince.json";
+
 import echarts from "echarts";
 import request from "../../utils/request";
-import mixins from "../../mixins/mixins.js";
+import mixins from "../../mixins/mixins.js";//混入模型
 import china from "../../../src/assets/json/中华人民共和国.json";
 export default {
   name: "city",
@@ -344,72 +315,13 @@ export default {
 }
 .features-left {
   position: absolute;
-  height: 92%;
+  height: calc(100% - 50px);
   width: 22.5%;
-  margin: 0.4%;
-  background: url("../../assets/img/side.png") no-repeat;
-  background-size: 100% 100%;
+  background: url("../../assets/img/side.png")center no-repeat;
+  background-size: 97% 97%;
   display: flex;
   flex-direction: column;
-  .left-part {
-    width: 100%;
-    .content {
-      height: 92%;
-      width: 100%;
-    }
-  }
-  .row1 {
-    height: 40%;
-    .content {
-      .search {
-        height: 22%;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        .searchinput {
-          width: 70%;
-          height: 30px;
-          .el-input {
-            height: 100%;
-          }
-          // /deep/.el-input__suffix {
-          //   .el-icon-circle-close:before {
-          //     margin-top: -100%;
-          //   }
-          // }
-          /deep/.el-input__inner {
-            &::placeholder {
-              color: rgba(194, 194, 194, 0.815);
-              font-size: 14px;
-            }
-            -webkit-appearance: none;
-            background: transparent;
-            border-radius: 4px;
-            border: 2px solid #1abbf1a6;
-            -webkit-box-sizing: border-box;
-            box-sizing: border-box;
-            color: rgba(220, 225, 227, 0.96);
-            font-size: inherit;
-
-            height: 100%;
-            line-height: 36px;
-            width: 90%;
-          }
-        }
-        .buttoncontent {
-          width: 30%;
-          height: 60%;
-        }
-      }
-      .chosenlabel {
-        height: 78%;
-        width: 100%;
-      }
-    }
-  }
-  .row2 {
-    height: 60%;
-  }
+  padding: 1%;
 }
 .features-bottom {
   position: absolute;
@@ -436,7 +348,6 @@ export default {
   }
 }
 .features-title {
-  margin-top: 1%;
   height: 30px;
   width: 200px;
   display: flex;
@@ -491,4 +402,44 @@ export default {
     }
   }
 }
+      // .search {
+      //   height: 22%;
+      //   width: 100%;
+      //   display: flex;
+      //   align-items: center;
+      //   .searchinput {
+      //     width: 70%;
+      //     height: 30px;
+      //     .el-input {
+      //       height: 100%;
+      //     }
+      //     // /deep/.el-input__suffix {
+      //     //   .el-icon-circle-close:before {
+      //     //     margin-top: -100%;
+      //     //   }
+      //     // }
+      //     /deep/.el-input__inner {
+      //       &::placeholder {
+      //         color: rgba(194, 194, 194, 0.815);
+      //         font-size: 14px;
+      //       }
+      //       -webkit-appearance: none;
+      //       background: transparent;
+      //       border-radius: 4px;
+      //       border: 2px solid #1abbf1a6;
+      //       -webkit-box-sizing: border-box;
+      //       box-sizing: border-box;
+      //       color: rgba(220, 225, 227, 0.96);
+      //       font-size: inherit;
+
+      //       height: 100%;
+      //       line-height: 36px;
+      //       width: 90%;
+      //     }
+      //   }
+      //   .buttoncontent {
+      //     width: 30%;
+      //     height: 60%;
+      //   }
+      // }
 </style>
