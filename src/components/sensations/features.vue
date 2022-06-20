@@ -1,19 +1,75 @@
 <template>
   <div id="com-features">
-    <SelectRegion ref="box" :right="25"></SelectRegion>
+    <SelectRegion ref="box" :right="5"></SelectRegion>
     <div id="map" />
     <div class="features-left">
       <div class="features-analysis leftpart">
         <div class="features-title">
-          <span>111s</span>
+          <span>形象感知分析</span>
         </div>
-        <div ></div>
+        <div class="content">
+          <div class="smalltitle">
+            <div class="textcontent">数据源选择</div>
+          </div>
+          <div class="datasource">
+            <el-checkbox-group v-model="checkList">
+              <el-checkbox label="去哪儿"></el-checkbox>
+              <el-checkbox label="马蜂窝"></el-checkbox>
+              <el-checkbox label="携程网"></el-checkbox>
+              <el-checkbox label="途牛网"></el-checkbox>
+              <el-checkbox label="艺龙网"></el-checkbox>
+              <el-checkbox label="美团网"></el-checkbox>
+            </el-checkbox-group>
+          </div>
+          <div class="smalltitle">
+            <div class="textcontent">数据时间范围</div>
+          </div>
+          <div class="timepickcontent">
+            <el-date-picker
+              v-model="timevalue"
+              type="monthrange"
+              range-separator="-"
+              start-placeholder="2015.01.01"
+              end-placeholder="2022.06.01"
+            >
+            </el-date-picker>
+          </div>
+          <div class="smalltitle">
+            <div class="textcontent">特征输入</div>
+          </div>
+          <div class="featuresinput">
+            <div class="searchinput">
+              <el-input
+                v-model="selectinput"
+                placeholder="输入内容或点击词云标签"
+              ></el-input>
+            </div>
+            <div class="buttoncontent">
+              <pbutton
+                :name="buttonname"
+                @click.native="postFeature()"
+              ></pbutton>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="features-RelationalGraph leftpart"></div>
+      <div class="features-RelationalGraph leftpart">
+        <div class="features-title">
+          <span>特征关系图谱</span>
+        </div>
+        <div class="content"></div>
+      </div>
     </div>
     <div class="features-bottom">
       <div class="bottompart">
         <div class="features-title">
+          <span>景点特征词频表</span>
+        </div>
+        <div class="content"></div>
+      </div>
+      <div class="bottompart">
+        <div class="features-title">
+          <span>地区特征匹配度排行</span>
           <div class="chartselect">
             <el-radio-group
               v-model="isCollapse"
@@ -24,13 +80,6 @@
               <el-radio-button :label="2">景点</el-radio-button>
             </el-radio-group>
           </div>
-          <span>地区特征匹配度排行</span>
-        </div>
-        <div class="content"></div>
-      </div>
-      <div class="bottompart">
-        <div class="features-title">
-          <span>地图类型选择</span>
         </div>
         <div class="content"></div>
       </div>
@@ -45,7 +94,7 @@ import word3D from "../wordcloud3D.vue";
 
 import echarts from "echarts";
 import request from "../../utils/request";
-import mixins from "../../mixins/mixins.js";//混入模型
+import mixins from "../../mixins/mixins.js"; //混入模型
 import china from "../../../src/assets/json/中华人民共和国.json";
 export default {
   name: "city",
@@ -72,7 +121,8 @@ export default {
         { DatanName: [], DatanValue: [] },
         { DataName: [], DataValue: [] },
       ],
-
+      checkList: ["途牛网", "携程网", "马蜂窝", "去哪儿"],
+      timevalue: "",
       // provDatanName: [],
       // provDatanValue: [],
       // cityDatanName: [],
@@ -317,31 +367,174 @@ export default {
   position: absolute;
   height: calc(100% - 50px);
   width: 22.5%;
-  background: url("../../assets/img/side.png")center no-repeat;
+  background: url("../../assets/img/side.png") center no-repeat;
   background-size: 97% 97%;
   display: flex;
   flex-direction: column;
   padding: 1%;
+  .leftpart {
+    width: 100%;
+    .content {
+      height: calc(100% - 30px);
+      width: 100%;
+    }
+  }
+  .features-analysis {
+    flex: 3;
+    .smalltitle {
+      padding: 1%;
+      height: 10%;
+      width: 100%;
+      margin: 2% 0% 2% 0%;
+      display: flex;
+      .textcontent {
+        border-left: 4px solid #1af3f3;
+        padding-left: 2%;
+        height: 100%;
+        width: 90%;
+        text-align: left;
+        color: #35d8e4;
+        font-size: 14px;
+        line-height: 18px;
+      }
+    }
+    .datasource {
+      height: 25%;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      background: url("../../assets/img/buttonbg.png") center no-repeat;
+      background-size: 100% 100%;
+      background-color: #22dede17;
+      .el-checkbox-group {
+        width: 100%;
+        .el-checkbox {
+          color: rgb(174, 193, 199);
+          color: #aec1c7;
+          margin-left: 4%;
+          margin-right: 4%;
+          margin-top: 1%;
+          margin-bottom: 1%;
+        }
+        /deep/.el-checkbox__input.is-checked + .el-checkbox__label {
+          color: #85caca;
+        }
+        /deep/.el-checkbox__input.is-checked .el-checkbox__inner {
+          background-color: #85caca;
+        }
+        /deep/.el-checkbox__label {
+          padding-left: 7px;
+        }
+      }
+    }
+    .timepickcontent {
+      height: 15%;
+      width: 100%;
+      background: url("../../assets/img/buttonbg.png") center no-repeat;
+      background-size: 100% 100%;
+      background-color: #22dede17;
+      /deep/.el-date-editor--daterange.el-input,
+      .el-date-editor--daterange.el-input__inner,
+      .el-date-editor--timerange.el-input,
+      .el-date-editor--timerange.el-input__inner {
+        border: none;
+        width: 90% !important;
+      }
+      .el-input__inner {
+        border: none;
+      }
+      .el-input__inner {
+        background-color: transparent;
+      }
+      .el-range-editor.el-input__inner {
+        padding: 5px 0px;
+      }
+      .el-date-editor .el-range-separator {
+        width: 0%;
+      }
+      /deep/.el-date-editor .el-range__icon {
+        color: #c0c4cc00;
+      }
+      /deep/.el-date-editor .el-range-input {
+        font-size: 11pt;
+        color: #eff1f4;
+        background-color: #81cfd226;
+      }
+      /deep/.el-date-editor .el-range-input,
+      .el-date-editor .el-range-separator {
+        font-size: 11pt;
+        color: #dddfe0;
+      }
+    }
+    .featuresinput {
+      height: 15%;
+      width: 100%;
+      // background: url("../../assets/img/buttonbg.png") center no-repeat;
+      // background-size: 100% 100%;
+      // background-color: #22dede17;
+      display: flex;
+      align-items: center;
+      .searchinput {
+        width: 70%;
+        height: 30px;
+        .el-input {
+          height: 100%;
+        }
+        // /deep/.el-input__suffix {
+        //   .el-icon-circle-close:before {
+        //     margin-top: -100%;
+        //   }
+        // }
+        /deep/.el-input__inner {
+          &::placeholder {
+            color: rgba(194, 194, 194, 0.815);
+            font-size: 13px;
+          }
+          -webkit-appearance: none;
+          background: transparent;
+          border-radius: 4px;
+          border: 2px solid #1ad2f17d;
+          -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+          color: rgba(220, 225, 227, 0.96);
+          font-size: inherit;
+
+          height: 100%;
+          line-height: 36px;
+          width: 90%;
+        }
+      }
+      .buttoncontent {
+        width: 30%;
+        height: 60%;
+      }
+    }
+  }
+  .features-RelationalGraph {
+    flex: 4;
+  }
 }
 .features-bottom {
   position: absolute;
-  height: 39%;
-  width: 72.8%;
-  bottom: 7.1%;
-  right: 3.7%;
-  background: url("../../assets/img/长方形.png") no-repeat;
-  background-size: 100% 100%;
+  right: 3%;
+  height: 40%;
+  width: 75.5%;
+  padding: 0.8% 1% 1% 1.5%;
+  bottom: 7%;
+  // right: 3.7%;
+  background: url("../../assets/img/长方形.png") center no-repeat;
+  background-size: 97% 97%;
   display: flex;
   flex-direction: row;
   .bottompart {
     height: 100%;
     .content {
-      height: 87%;
+      height: calc(100% - 30px);
       width: 100%;
     }
   }
   .bottompart:nth-child(1) {
-    flex: 2;
+    flex: 1;
   }
   .bottompart:nth-child(2) {
     flex: 1;
@@ -364,8 +557,8 @@ export default {
   .chartselect {
     width: 140px;
     height: 28px;
-    top: 4%;
-    left: 40%;
+    top: 5%;
+    right: 7%;
     background-color: transparent;
     position: absolute;
     display: flex;
@@ -402,44 +595,4 @@ export default {
     }
   }
 }
-      // .search {
-      //   height: 22%;
-      //   width: 100%;
-      //   display: flex;
-      //   align-items: center;
-      //   .searchinput {
-      //     width: 70%;
-      //     height: 30px;
-      //     .el-input {
-      //       height: 100%;
-      //     }
-      //     // /deep/.el-input__suffix {
-      //     //   .el-icon-circle-close:before {
-      //     //     margin-top: -100%;
-      //     //   }
-      //     // }
-      //     /deep/.el-input__inner {
-      //       &::placeholder {
-      //         color: rgba(194, 194, 194, 0.815);
-      //         font-size: 14px;
-      //       }
-      //       -webkit-appearance: none;
-      //       background: transparent;
-      //       border-radius: 4px;
-      //       border: 2px solid #1abbf1a6;
-      //       -webkit-box-sizing: border-box;
-      //       box-sizing: border-box;
-      //       color: rgba(220, 225, 227, 0.96);
-      //       font-size: inherit;
-
-      //       height: 100%;
-      //       line-height: 36px;
-      //       width: 90%;
-      //     }
-      //   }
-      //   .buttoncontent {
-      //     width: 30%;
-      //     height: 60%;
-      //   }
-      // }
 </style>

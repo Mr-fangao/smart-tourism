@@ -39,7 +39,7 @@ export default {
     background-image: url("../assets/img/tab.png") no-repeat center center;
     background-size: 100% 100%;
     opacity: 0.8;
-    background-color: #1a90d4c0;
+    background-color: #1ab8d4c0;
   }
 }
 </style>
