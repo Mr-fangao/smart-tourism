@@ -29,8 +29,8 @@
               v-model="timevalue"
               type="monthrange"
               range-separator="-"
-              start-placeholder="2015.01.01"
-              end-placeholder="2022.06.01"
+              start-placeholder="2015.01"
+              end-placeholder="2022.06"
             >
             </el-date-picker>
           </div>
@@ -41,7 +41,7 @@
             <div class="searchinput">
               <el-input
                 v-model="selectinput"
-                placeholder="输入内容或点击词云标签"
+                placeholder="输入感兴趣的景点特征"
               ></el-input>
             </div>
             <div class="buttoncontent">
@@ -57,7 +57,9 @@
         <div class="features-title">
           <span>特征关系图谱</span>
         </div>
-        <div class="content"></div>
+        <div class="content">
+          
+        </div>
       </div>
     </div>
     <div class="features-bottom">
@@ -65,7 +67,51 @@
         <div class="features-title">
           <span>景点特征词频表</span>
         </div>
-        <div class="content"></div>
+        <div class="content">
+          <div class="tablecontent">
+            <el-table
+              border
+              :data="tableList"
+              stripe
+              height="0"
+              style="width: 100%"
+              >>
+              <template v-if="tableData.length == 0">
+                <el-table-column
+                  label="姓名"
+                  align="center"
+                  prop="name"
+                ></el-table-column>
+                <el-table-column
+                  label="成绩"
+                  align="center"
+                  prop="point"
+                ></el-table-column>
+              </template>
+              <template
+                v-else
+                v-for="(val, index) in tableData.length > 4
+                  ? 4
+                  : tableData.length"
+              >
+                <el-table-column label="特征词" align="center" prop="name">
+                  <template
+                    slot-scope="scope"
+                    v-if="scope.$index * 4 + index < tableData.length"
+                    >{{ tableData[scope.$index * 4 + index].name }}</template
+                  >
+                </el-table-column>
+                <el-table-column label="频率" align="center" prop="point">
+                  <template
+                    slot-scope="scope"
+                    v-if="scope.$index * 4 + index < tableData.length"
+                    >{{ tableData[scope.$index * 4 + index].point }}</template
+                  >
+                </el-table-column>
+              </template>
+            </el-table>
+          </div>
+        </div>
       </div>
       <div class="bottompart">
         <div class="features-title">
@@ -123,6 +169,43 @@ export default {
       ],
       checkList: ["途牛网", "携程网", "马蜂窝", "去哪儿"],
       timevalue: "",
+      tableHeight: 0, // 表格高度
+      tableData: [
+        { name: "张三", point: "60" },
+        { name: "李四", point: "70" },
+        { name: "王五", point: "80" },
+        { name: "小明", point: "66" },
+        { name: "小红", point: "67" },
+        { name: "小美", point: "90" },
+        { name: "小王", point: "88" },
+        { name: "小明", point: "66" },
+        { name: "小红", point: "67" },
+        { name: "小美", point: "90" },
+        { name: "小红", point: "67" },
+        { name: "小美", point: "90" },
+        { name: "小王", point: "88" },
+        { name: "小明", point: "66" },
+        { name: "小红", point: "67" },
+        { name: "小美", point: "90" },
+        { name: "小红", point: "67" },
+        { name: "小美", point: "90" },
+        { name: "小美", point: "90" },
+        { name: "小美", point: "90" },
+        { name: "小红", point: "67" },
+        { name: "小美", point: "90" },
+        { name: "小美", point: "90" },
+        { name: "小美", point: "90" },
+        { name: "小红", point: "67" },
+        { name: "小美", point: "90" },
+        { name: "小红", point: "67" },
+        { name: "小美", point: "90" },
+        { name: "小王", point: "88" },
+        { name: "小明", point: "66" },
+        { name: "小红", point: "67" },
+        { name: "小美", point: "90" },
+        { name: "小红", point: "67" },
+      ],
+      tableList: [],
       // provDatanName: [],
       // provDatanValue: [],
       // cityDatanName: [],
@@ -180,9 +263,17 @@ export default {
   },
 
   computed: {},
-
+  created() {
+    if (this.tableData.length > 0) {
+      let num = Math.ceil(this.tableData.length / 3);
+      for (let j = 0; j < num; j++) {
+        this.tableList.push({});
+      }
+    }
+  },
   mounted() {
     this.initmap();
+
     eventBum.$on("json", (json) => {
       this.json = json.name;
       this.selectlevel = json.where; //所选层级，默认为0 1代表省 2代表市
@@ -348,9 +439,10 @@ export default {
   },
 };
 </script>
-
 <style scoped lang="less">
+@import "../../assets/css/table.css";
 #com-features {
+  overflow: hidden;
   z-index: 1;
   position: fixed;
   width: 100%;
@@ -365,6 +457,7 @@ export default {
 }
 .features-left {
   position: absolute;
+
   height: calc(100% - 50px);
   width: 22.5%;
   background: url("../../assets/img/side.png") center no-repeat;
@@ -456,13 +549,13 @@ export default {
         color: #c0c4cc00;
       }
       /deep/.el-date-editor .el-range-input {
-        font-size: 11pt;
+        font-size: 14px;
         color: #eff1f4;
         background-color: #81cfd226;
       }
       /deep/.el-date-editor .el-range-input,
       .el-date-editor .el-range-separator {
-        font-size: 11pt;
+        font-size: 14px;
         color: #dddfe0;
       }
     }
@@ -593,6 +686,182 @@ export default {
       flex-direction: row;
       justify-content: space-around;
     }
+  }
+}
+.content {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  .tablecontent {
+    flex: auto;
+    overflow: hidden; //重要点3 在flex元素上再设置个overflex：hidden，表示在该元素内部进行计算
+  }
+  /deep/ .el-table {
+    height: 100% !important; //重要点2
+  }
+  /deep/.el-tabs--border-card {
+    height: 96%;
+    margin: 1%;
+    background: transparent;
+    border: none;
+  }
+  /deep/.el-tabs--border-card > .el-tabs__content {
+    padding: 0;
+    height: 92%;
+  }
+  /deep/.el-tabs--border-card > .el-tabs__header {
+    background: transparent;
+    border: none;
+    margin: 0%;
+  }
+  /deep/.el-tabs__item {
+    padding: 0;
+    width: 25%;
+    border: none;
+  }
+  /deep/.el-tabs__nav {
+    width: 100%;
+  }
+  /deep/.el-table .cell {
+    padding-left: 0%;
+    padding-right: 0%;
+    text-align: center;
+  }
+  /deep/.el-tabs--top.el-tabs--border-card
+    > .el-tabs__header
+    .el-tabs__item:last-child {
+    padding: 0;
+  }
+  /deep/.el-tabs__nav-scroll {
+    background: transparent;
+    width: 100%;
+    background: url("../../assets/img/buttonbg.png") no-repeat;
+    background-size: 100% 100%;
+  }
+  /deep/.el-tabs--border-card > .el-tabs__header .el-tabs__item {
+    border-left: none;
+    border-right: none;
+  }
+  /deep/.el-tabs--border-card > .el-tabs__header .el-tabs__item.is-active {
+    background: #2baccd6e;
+    color: #dcdfe6;
+    border-left: none;
+    border-right: none;
+    border-top: 0px solid #0cf3f3;
+    // border-bottom: 2px solid #0cf3f3;
+  }
+  /deep/.el-tabs--border-card > .el-tabs__content {
+    padding: 1%;
+    height: 90%;
+    width: 100%;
+    margin-top: 1%;
+  }
+  /deep/.el-table--fit {
+    background: transparent;
+  }
+  /deep/.el-table--fit {
+    background: transparent;
+  }
+  /deep/.el-table .el-table__header-wrapper tr th {
+    background-image: linear-gradient(
+      -180deg,
+      #bdd9e017 4%,
+      #9fdae565 100%
+    ) !important;
+    background: transparent;
+    color: rgb(255, 255, 255);
+    border-bottom: 0px solid #1faacd;
+  }
+  //奇数行背景
+  /deep/.el-table tr {
+    background: rgba(2, 73, 94, 0.432);
+    border-bottom: 1px solid #0cf3f3;
+  }
+  /deep/.el-table .el-table__row {
+    background: #023f5441;
+    color: rgb(255, 255, 255);
+  }
+  /deep/.el-table .el-table__row--striped {
+    background: #023f54ce;
+    color: rgb(255, 255, 255);
+  }
+  /deep/.el-table td.el-table__cell {
+    border: none;
+    padding-left: 0%;
+    padding-right: 0%;
+  }
+  /deep/.el-table .cell {
+    padding-left: 0%;
+    padding-right: 0%;
+    text-align: center;
+  }
+  /deep/.el-table--striped
+    .el-table__body
+    tr.el-table__row--striped
+    td.el-table__cell {
+    background: transparent;
+  }
+  //头高、行高
+  /deep/.el-table__header tr,
+  .el-table__header th {
+    height: 30px;
+    padding: 0;
+  }
+  /deep/.el-table__body tr,
+  .el-table__body td {
+    height: 35px;
+    padding: 0;
+  }
+  /deep/.el-table .el-table__cell {
+    padding: 0;
+  }
+  /deep/.el-table th.el-table__cell > .cell {
+    padding: 0;
+    text-align: center;
+  }
+  /deep/.el-table .el-table__body tr.current-row > td {
+    background-color: #84e6e485 !important;
+  }
+  /deep/.el-table .el-table__body tr:hover > td {
+    background-color: #8eabcc !important;
+  }
+  /deep/.el-table--scrollable-y .el-table__body-wrapper {
+    border: none;
+  }
+  /* 消除表格标题的下划线 */
+  /deep/ .el-table td.el-table__cell {
+    border-bottom: 0px transparent !important;
+  }
+  /* 消除表格内部的下划线 */
+  /deep/ .el-table th.el-table__cell.is-leaf {
+    border-bottom: 0px transparent !important;
+  }
+  /deep/ .el-table {
+    border-bottom: 0px transparent !important;
+  }
+  /deep/.el-table--scrollable-y ::-webkit-scrollbar {
+    display: none;
+  }
+  /deep/.el-table__body-wrapper::-webkit-scrollbar {
+    /*width: 0;宽度为0隐藏*/
+    width: 0px;
+  }
+  /deep/.el-table--border,
+  .el-table--group {
+    border: none;
+  }
+  /deep/.el-table--border .el-table__cell {
+    border: none;
+  }
+  .el-table--border::after {
+    width: 0;
+  }
+  .el-table::before {
+    height: 0;
   }
 }
 </style>
