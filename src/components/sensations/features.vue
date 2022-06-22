@@ -1,7 +1,7 @@
 <template>
   <div id="com-features">
     <SelectRegion ref="box" :right="5"></SelectRegion>
-    <div id="map" />
+    <div id="map"></div>
     <div class="features-left">
       <div class="features-analysis leftpart">
         <div class="features-title">
@@ -39,16 +39,21 @@
           </div>
           <div class="featuresinput">
             <div class="searchinput">
+              <!-- <input
+                type="text"
+                class="ipt"
+                v-model="searchContent"
+                @keydown.enter="search()"
+                placeholder="搜索盗墓笔记重启试试"
+              /> -->
               <el-input
-                v-model="selectinput"
+                 v-model="searchContent"
                 placeholder="输入感兴趣的景点特征"
               ></el-input>
             </div>
             <div class="buttoncontent">
-              <pbutton
-                :name="buttonname"
-                @click.native="postFeature()"
-              ></pbutton>
+              <el-button 
+              @click="search(searchContent)">11</el-button>
             </div>
           </div>
         </div>
@@ -57,8 +62,13 @@
         <div class="features-title">
           <span>特征关系图谱</span>
         </div>
-        <div class="content">
-          
+        <div class="content" id="keywords">
+          <Keywords
+            v-show="type === 1"
+            @searchData="search"
+            @windowResize="windowResize"
+          ></Keywords>
+          <Charts ref="charts" v-show="type === 2" :chartList="searchList" />
         </div>
       </div>
     </div>
@@ -137,7 +147,9 @@ import pbutton from "../button.vue";
 import eventBum from "../cityselect/EvebtBus";
 import SelectRegion from "../cityselect/newselectRegion.vue";
 import word3D from "../wordcloud3D.vue";
-
+import Keywords from "../word-graph/Keywords";
+import Charts from "../word-graph/Charts";
+import { search } from "../word-graph/mock";
 import echarts from "echarts";
 import request from "../../utils/request";
 import mixins from "../../mixins/mixins.js"; //混入模型
@@ -155,6 +167,8 @@ export default {
     pbutton,
     word3D,
     eventBum,
+    Keywords,
+    Charts,
   },
 
   data() {
@@ -215,6 +229,9 @@ export default {
       word3Dheight: 200, //3D词云大小
       word3Dwidth: 350,
       buttonname: "分析", //按钮名称
+      searchContent: "",
+      type: 1,
+      searchList: [],
       selectinput: "",
       faetureslist: [],
       placeholder: "",
@@ -273,7 +290,7 @@ export default {
   },
   mounted() {
     this.initmap();
-
+    this.type = 1;
     eventBum.$on("json", (json) => {
       this.json = json.name;
       this.selectlevel = json.where; //所选层级，默认为0 1代表省 2代表市
@@ -290,6 +307,31 @@ export default {
   },
 
   methods: {
+    /**
+     * 搜索方法,text为空则为点击类别操作,不为空则为输入框搜索
+     */
+    async search(text) {
+      text || (text = this.searchContent);
+      console.log("sss", text, this.searchContent);
+      if (!text) {
+        this.type = 1;
+        return;
+      }
+      try {
+        let result = await search(text);
+        this.type = 2;
+        this.searchList = [].concat(result);
+      } catch (error) {
+        alert("未查询到数据,请更改查询条件");
+      }
+    },
+    /**
+     * 窗体大小变化回调
+     */
+    windowResize() {
+      const charts = this.$refs.charts;
+      charts && charts.myChart && charts.myChart.resize();
+    },
     getFeaturesList() {
       if (typeof this.selectinput == "string") {
         var faetureslist = this.selectinput.toString();
@@ -440,7 +482,7 @@ export default {
 };
 </script>
 <style scoped lang="less">
-@import "../../assets/css/table.css";
+// @import "../../assets/css/table.css";
 #com-features {
   overflow: hidden;
   z-index: 1;
@@ -449,6 +491,9 @@ export default {
   height: 100%;
   display: flex;
 }
+// #keywords{
+//   padding-top: 5%;
+// }
 #map {
   position: relative;
   width: 100%;
@@ -457,7 +502,6 @@ export default {
 }
 .features-left {
   position: absolute;
-
   height: calc(100% - 50px);
   width: 22.5%;
   background: url("../../assets/img/side.png") center no-repeat;
@@ -475,8 +519,7 @@ export default {
   .features-analysis {
     flex: 3;
     .smalltitle {
-      padding: 1%;
-      height: 10%;
+      height: 20px;
       width: 100%;
       margin: 2% 0% 2% 0%;
       display: flex;
@@ -489,6 +532,8 @@ export default {
         color: #35d8e4;
         font-size: 14px;
         line-height: 18px;
+        display: flex;
+        align-items: center;
       }
     }
     .datasource {
@@ -526,6 +571,9 @@ export default {
       background: url("../../assets/img/buttonbg.png") center no-repeat;
       background-size: 100% 100%;
       background-color: #22dede17;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       /deep/.el-date-editor--daterange.el-input,
       .el-date-editor--daterange.el-input__inner,
       .el-date-editor--timerange.el-input,
@@ -570,6 +618,18 @@ export default {
       .searchinput {
         width: 70%;
         height: 30px;
+        .ipt {
+          border: 1px solid #9093c7;
+          border-radius: 20px;
+          width: 300px;
+          height: 30px;
+          line-height: 44px;
+          box-sizing: border-box;
+          color: #555;
+          background-color: #fff;
+          background-image: none;
+          border: 1px solid #ccc;
+        }
         .el-input {
           height: 100%;
         }
@@ -695,7 +755,7 @@ export default {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-evenly;
   .tablecontent {
     flex: auto;
     overflow: hidden; //重要点3 在flex元素上再设置个overflex：hidden，表示在该元素内部进行计算

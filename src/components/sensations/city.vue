@@ -1,6 +1,6 @@
 <template>
   <div id="com-city">
-    <selectRegion :defaultplace="'北京'" :right="25"/>
+    <selectRegion :defaultplace="'北京'" :right="25" />
     <div id="map" />
     <div class="city-left">
       <div class="city-left-select">
@@ -48,7 +48,7 @@
                       {{ item.content }}
                     </div>
                     <div :title="item.name" class="jingdian">
-                      {{ item.scenicName}}
+                      {{ item.scenicName }}
                     </div>
                   </li>
                 </ul>
@@ -167,7 +167,7 @@ export default {
 
   data() {
     return {
-      right:400,
+      right: 400,
       reFresh: true,
       word3Dheight: 200,
       word3Dwidth: 350,
@@ -702,7 +702,6 @@ export default {
   },
 
   mounted() {
-    console.log(this.$route.path)
     this.getTravels();
     this.getComment();
     this.initmap(this.city);
@@ -930,7 +929,6 @@ export default {
           model: this.city,
         })
         .then((res) => {
-          console.log(res);
           this.commentlist = res.data;
         });
     },
@@ -941,7 +939,6 @@ export default {
           city: this.city,
         })
         .then((res) => {
-          console.log(res);
           this.travelsdata.title = res.data.title;
           this.travelsdata.content = res.data.content;
           this.travelsdata.daycount = res.data.daycount;
