@@ -1,10 +1,12 @@
 
 import china from "../../src/assets/json/中华人民共和国.json";
+import nanjing from "../../src/assets/json/nanjing.json"
 export default {
     data () {
       return {
        pie3Dcolor :['#fc8251', '#5470c6', '#91cd77', '#ef6567', '#f9c956', '#75bedc'],
        china,
+       nanjing,
       }
     },
     created () {

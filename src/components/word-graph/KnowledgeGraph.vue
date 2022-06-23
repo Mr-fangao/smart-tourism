@@ -55,7 +55,7 @@ export default {
                 this.type = 2
                 this.searchList = [].concat(result)
             } catch (error) {
-                alert('未查询到数据,请更改查询条件')
+                // alert('未查询到数据,请更改查询条件')
             }
 
         },

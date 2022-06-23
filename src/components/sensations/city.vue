@@ -1041,6 +1041,10 @@ export default {
       });
     },
   },
+  beforeDestroy() {
+    // 关闭传值
+    eventBum.$off("json");
+  },
   watch: {
     wordcloud3D() {
       this.reFresh = false;

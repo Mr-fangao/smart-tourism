@@ -47,13 +47,17 @@
                 placeholder="搜索盗墓笔记重启试试"
               /> -->
               <el-input
-                 v-model="searchContent"
+                v-model="searchContent"
                 placeholder="输入感兴趣的景点特征"
               ></el-input>
             </div>
             <div class="buttoncontent">
-              <el-button 
-              @click="search(searchContent)">11</el-button>
+              <el-button
+                class="searchbutton"
+                size="mini"
+                @click="search(searchContent)"
+                >分析</el-button
+              >
             </div>
           </div>
         </div>
@@ -153,6 +157,7 @@ import { search } from "../word-graph/mock";
 import echarts from "echarts";
 import request from "../../utils/request";
 import mixins from "../../mixins/mixins.js"; //混入模型
+import axios from "axios";
 import china from "../../../src/assets/json/中华人民共和国.json";
 export default {
   name: "city",
@@ -174,7 +179,8 @@ export default {
   data() {
     return {
       isCollapse: 0, //地区分布图表切换
-      json: "  ",
+      json: "",
+      selectedcity: "中国",
       selectlevel: 0, //所选层级，1代表省 2代表市
       echartsLevelsData: [
         { DatanName: [], DatanValue: [] },
@@ -294,6 +300,8 @@ export default {
     eventBum.$on("json", (json) => {
       this.json = json.name;
       this.selectlevel = json.where; //所选层级，默认为0 1代表省 2代表市
+      this.selectedcity = json.name.replace("省", "");
+      this.selectedcity = this.selectedcity.replace("市", "");
     });
     eventBum.$on("features", (features) => {
       console.log(features);
@@ -307,10 +315,9 @@ export default {
   },
 
   methods: {
-    /**
-     * 搜索方法,text为空则为点击类别操作,不为空则为输入框搜索
-     */
+    //搜索方法,text为空则为点击类别操作,不为空则为输入框搜索
     async search(text) {
+      this.postFeatures();
       text || (text = this.searchContent);
       console.log("sss", text, this.searchContent);
       if (!text) {
@@ -322,8 +329,14 @@ export default {
         this.type = 2;
         this.searchList = [].concat(result);
       } catch (error) {
-        alert("未查询到数据,请更改查询条件");
+        // alert("未查询到数据,请更改查询条件");
       }
+    },
+    postFeatures() {
+      let _self = this;
+      console.log(_self.searchContent);
+      console.log(_self.json);
+      console.log(_self.selectlevel);
     },
     /**
      * 窗体大小变化回调
@@ -383,11 +396,16 @@ export default {
       map.on("load", function () {
         var chinaid = "";
         var china_json = "";
+        var scenicid = "";
+        var scenic_json = "";
+        var sceniclayer;
         var i = 0;
         queding.addEventListener("click", async function () {
           i = i + 1;
           china_json = "";
           chinaid = "";
+          scenicid = "";
+          scenic_json = "";
           //选择的是省份
           if (_this.selectlevel == 1) {
             china_json = china;
@@ -406,18 +424,29 @@ export default {
                 console.log("error");
               }
             );
+            const scenicpoint = this.nanjing;
             //设置数据源的 ID
             chinaid = _this.json + "_" + "shi" + i;
             china_json = get_data;
+            scenicid = _this.json;
+            scenic_json = scenicpoint;
+            sceniclayer="sceniclayer"
           }
           //添加数据源
           map.addSource('"' + chinaid + '"', {
             type: "geojson",
             data: china_json,
           });
+          map.addSource('"' + scenicid + '"', {
+            type: "geojson",
+            data: scenic_json,
+          });
+
           china_json.features.forEach(function (feature) {
             var sfName = feature.properties["name"];
             var layerID = "poi" + sfName;
+            // console.log(sfName, layerID, feature.properties);
+            console.log(map.getLayer(layerID));
             if (!map.getLayer(layerID)) {
               map.addLayer({
                 id: layerID,
@@ -659,7 +688,30 @@ export default {
       }
       .buttoncontent {
         width: 30%;
-        height: 60%;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        .searchbutton {
+          //  margin-left: 16%;
+          background-color: #57a1ac40;
+          border-color: #58d6e2b5;
+          color: #fff;
+        }
+        /deep/ .el-button--mini {
+          &:focus {
+            color: #e7e7e7;
+            background-color: rgba(38, 189, 216, 0.63);
+          }
+        }
+        /deep/ .el-button--mini,
+        .el-button--mini.is-round {
+          padding: 7px 20px;
+          // position: absolute;
+          // left: 60%;
+          // top: 8.5%;
+        }
       }
     }
   }
@@ -687,6 +739,9 @@ export default {
     }
   }
   .bottompart:nth-child(1) {
+    // table-layout: fixed;
+    // word-wrap: break-word;
+    overflow: hidden;
     flex: 1;
   }
   .bottompart:nth-child(2) {
