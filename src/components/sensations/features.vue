@@ -159,6 +159,7 @@ import request from "../../utils/request";
 import mixins from "../../mixins/mixins.js"; //混入模型
 import axios from "axios";
 import china from "../../../src/assets/json/中华人民共和国.json";
+import nanjing from "../../assets/json/nanjing.json";
 export default {
   name: "city",
   mixins: [mixins],
@@ -303,15 +304,15 @@ export default {
       this.selectedcity = json.name.replace("省", "");
       this.selectedcity = this.selectedcity.replace("市", "");
     });
-    eventBum.$on("features", (features) => {
-      console.log(features);
-      features = features.toString();
-      if (this.selectinput == "") {
-        this.selectinput += features;
-      } else if (this.selectinput != null) {
-        this.selectinput += "、" + features;
-      }
-    });
+    // eventBum.$on("features", (features) => {
+    //   console.log(features);
+    //   features = features.toString();
+    //   if (this.selectinput == "") {
+    //     this.selectinput += features;
+    //   } else if (this.selectinput != null) {
+    //     this.selectinput += "、" + features;
+    //   }
+    // });
   },
 
   methods: {
@@ -398,7 +399,7 @@ export default {
         var china_json = "";
         var scenicid = "";
         var scenic_json = "";
-        var sceniclayer;
+        var sceniclayer = "";
         var i = 0;
         queding.addEventListener("click", async function () {
           i = i + 1;
@@ -424,81 +425,132 @@ export default {
                 console.log("error");
               }
             );
-            const scenicpoint = this.nanjing;
+            // const scenicpoint = nanjing;
+
             //设置数据源的 ID
             chinaid = _this.json + "_" + "shi" + i;
             china_json = get_data;
             scenicid = _this.json;
-            scenic_json = scenicpoint;
-            sceniclayer="sceniclayer"
+            scenic_json = nanjing;
+            sceniclayer = "sceniclayer";
+            console.log(scenic_json);
           }
           //添加数据源
+
           map.addSource('"' + chinaid + '"', {
             type: "geojson",
             data: china_json,
           });
-          map.addSource('"' + scenicid + '"', {
-            type: "geojson",
-            data: scenic_json,
-          });
+          console.log(_this.json);
+          if (_this.json == "南京市") {
+            console.log("11")
+            map.addSource("scenicpoint", {
+              type: "geojson",
+              data: scenic_json,
+            });
+            if (map.getLayer("sceniclayer")) map.removeLayer("sceniclayer");
+            if (map.getLayer("sceniclayertext"))
+              map.removeLayer("sceniclayertext");
+            map.addLayer({
+              id: "sceniclayer",
+              type: "circle",
+              source: "scenicpoint",
+              paint: {
+                "circle-radius": 5,
+                "circle-stroke-width": 2,
+                "circle-opacity": 0.75,
+                "circle-stroke-color": "white",
+                "circle-color": [
+                  "interpolate",
+                  ["linear"],
+                  ["get", "score"],
+                  3.5,
+                  "#ACBE21",
+                  3.8,
+                  "#BEB221",
+                  4.1,
+                  "#BE8221",
+                  4.4,
+                  "#FF8C00",
+                  4.7,
+                  "#BE6321",
+                  5.0,
+                  "#BE4521",
+                ],
+              },
+            });
+            // map.addLayer({
+            //   id: "sceniclayertext",
+            //   type: "symbol" /* symbol类型layer，一般用来绘制点*/,
+            //   source: "" + scenic_json + "",
+            //   layout: {
+            //     "text-field": ["get", "name"],
+            //     "text-offset": [1.5, 1.5],
+            //   },
+            //   paint: {
+            //     "text-color": "#FFFFFF",
+            //   },
+            // });
+          }
 
-          china_json.features.forEach(function (feature) {
-            var sfName = feature.properties["name"];
-            var layerID = "poi" + sfName;
-            // console.log(sfName, layerID, feature.properties);
-            console.log(map.getLayer(layerID));
-            if (!map.getLayer(layerID)) {
-              map.addLayer({
-                id: layerID,
-                type: "fill",
-                source: '"' + chinaid + '"',
-                paint: {
-                  "fill-color": "#0163B3", //更改地图颜色
-                  "fill-outline-color": "#81D24E",
-                  "fill-opacity": 0.3 /* 透明度 */,
-                },
-                filter: ["==", "name", sfName],
-              });
-              layerIDs.push(layerID);
-            }
-          });
-          var diming = _this.json;
-          layerIDs.forEach(function (layerID) {
-            map.setLayoutProperty(
-              layerID,
-              "visibility",
-              layerID.indexOf(diming) > -1 ? "visible" : "none"
-            );
-          });
-          var list = "";
-          list = china_json.features;
-          list.some((itme, index) => {
-            if (itme.properties.name == _this.json) {
-              //如果选择的是市，缩放高度就设置为 7
-              if (_this.selectlevel == 1) {
-                //未选择省份时不执行
-                if (_this.json != "") {
-                  map.flyTo({
-                    center: itme.properties.centroid,
-                    zoom: 7, //设置选择地名后地图的缩放级别
-                    pitch: 15, // 倾斜度
-                  });
-                }
-              }
-              //如果选择的是市，缩放级别就设置为 8
-              if (_this.selectlevel == 2) {
-                //未选择省份时不执行
-                if (_this.json != "") {
-                  map.flyTo({
-                    center: itme.properties.centroid,
-                    zoom: 8, //设置选择地名后地图的缩放级别
-                    pitch: 15, // 倾斜度
-                  });
-                }
-              }
-              return true;
-            }
-          });
+          // china_json.features.forEach(function (feature) {
+          //   var sfName = feature.properties["name"];
+          //   var layerID = "poi" + sfName;
+          //   // console.log(sfName, layerID, feature.properties);
+          //   console.log(map.getLayer(layerID));
+          //   if (!map.getLayer(layerID)) {
+          //     map.addLayer({
+          //       id: layerID,
+          //       type: "fill",
+          //       source: '"' + chinaid + '"',
+          //       paint: {
+          //         "fill-color": "#0163B3", //更改地图颜色
+          //         "fill-outline-color": "#81D24E",
+          //         "fill-opacity": 0.3 /* 透明度 */,
+          //       },
+          //       filter: ["==", "name", sfName],
+          //     });
+          //     layerIDs.push(layerID);
+          //   }
+          // });
+          // var diming = _this.json;
+          // layerIDs.forEach(function (layerID) {
+          //   map.setLayoutProperty(
+          //     layerID,
+          //     "visibility",
+          //     layerID.indexOf(diming) > -1 ? "visible" : "none"
+          //   );
+          // });
+          // var list = "";
+          // list = china_json.features;
+          // list.some((itme, index) => {
+          //   if (itme.properties.name == _this.json) {
+          //     //如果选择的是市，缩放高度就设置为 7
+          //     if (_this.selectlevel == 1) {
+          //       //未选择省份时不执行
+          //       if (_this.json != "") {
+          //         map.flyTo({
+          //           center: itme.properties.centroid,
+          //           zoom: 7, //设置选择地名后地图的缩放级别
+          //           pitch: 15, // 倾斜度
+          //         });
+          //       }
+          //     }
+          //     //如果选择的是市，缩放级别就设置为 8
+          //     if (_this.selectlevel == 2) {
+          //       //未选择省份时不执行
+          //       if (_this.json != "") {
+          //         map.flyTo({
+          //           center: itme.properties.centroid,
+          //           zoom: 8, //设置选择地名后地图的缩放级别
+          //           pitch: 15, // 倾斜度
+          //         });
+          //       }
+          //     }
+          //     return true;
+          //   }
+          // });
+        
         });
       });
     },
