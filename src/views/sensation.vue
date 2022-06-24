@@ -2,7 +2,7 @@
   <div id="sensation">
     <div class="sensation-aside">
       <el-menu>
-           <el-menu-item
+        <el-menu-item
           index="1"
           @click="show(1)"
           :class="index === 1 ? 'active' : ''"
@@ -23,9 +23,7 @@
       </el-menu>
     </div>
     <div class="sensation-content">
-      <keep-alive>
-        <component :is="comp" v-show="isShow"></component>
-      </keep-alive>
+      <component :is="comp" v-show="isShow"></component>
     </div>
   </div>
 </template>

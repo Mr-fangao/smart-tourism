@@ -717,7 +717,7 @@ export default {
       this.getComment();
       this.getTravels();
       if (this.city == "南京") {
-        this.initChart2(this.option3);
+        // this.initChart2(this.option3);
         this.initChart5(this.option6);
         this.wordcloud3D = this.NJcloudData;
         // this.wordCloudInti(this.$refs.cloudEl, this.NJcloudData);

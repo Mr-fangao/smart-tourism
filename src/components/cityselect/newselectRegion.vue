@@ -115,7 +115,7 @@ export default {
       citys: [
         {
           name: "北京市",
-          where: 2,
+          where: 1,
           code: "",
         },
         {
@@ -360,7 +360,6 @@ export default {
     },
 
   },
-     
 };
 </script>
 <style>
