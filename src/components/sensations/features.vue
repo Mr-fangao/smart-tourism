@@ -85,21 +85,21 @@
           <div class="tablecontent">
             <el-table
               border
-              :data="tableList"
+              :data="tableData"
               stripe
               height="0"
               style="width: 100%"
-              >>
+            >
               <template v-if="tableData.length == 0">
                 <el-table-column
-                  label="姓名"
+                  label="特征词"
                   align="center"
                   prop="name"
                 ></el-table-column>
                 <el-table-column
-                  label="成绩"
+                  label="频率"
                   align="center"
-                  prop="point"
+                  prop="value"
                 ></el-table-column>
               </template>
               <template
@@ -108,18 +108,18 @@
                   ? 4
                   : tableData.length"
               >
-                <el-table-column label="特征词" align="center" prop="name">
+                <el-table-column label="特征词" align="center" prop="name" min-width="12.5%">
                   <template
                     slot-scope="scope"
                     v-if="scope.$index * 4 + index < tableData.length"
                     >{{ tableData[scope.$index * 4 + index].name }}</template
                   >
                 </el-table-column>
-                <el-table-column label="频率" align="center" prop="point">
+                <el-table-column label="频率" align="center" prop="value" min-width="12.5%" style="color: #a5e5f6">
                   <template
                     slot-scope="scope"
                     v-if="scope.$index * 4 + index < tableData.length"
-                    >{{ tableData[scope.$index * 4 + index].point }}</template
+                    >{{ tableData[scope.$index * 4 + index].value }}</template
                   >
                 </el-table-column>
               </template>
@@ -181,7 +181,7 @@ export default {
     return {
       isCollapse: 0, //地区分布图表切换
       json: "",
-      selectedcity: "中国",
+      selectedcity: "北京",
       selectlevel: 0, //所选层级，1代表省 2代表市
       echartsLevelsData: [
         { DatanName: [], DatanValue: [] },
@@ -195,41 +195,7 @@ export default {
       checkList: ["途牛网", "携程网", "马蜂窝", "去哪儿"],
       timevalue: "",
       tableHeight: 0, // 表格高度
-      tableData: [
-        { name: "张三", point: "60" },
-        { name: "李四", point: "70" },
-        { name: "王五", point: "80" },
-        { name: "小明", point: "66" },
-        { name: "小红", point: "67" },
-        { name: "小美", point: "90" },
-        { name: "小王", point: "88" },
-        { name: "小明", point: "66" },
-        { name: "小红", point: "67" },
-        { name: "小美", point: "90" },
-        { name: "小红", point: "67" },
-        { name: "小美", point: "90" },
-        { name: "小王", point: "88" },
-        { name: "小明", point: "66" },
-        { name: "小红", point: "67" },
-        { name: "小美", point: "90" },
-        { name: "小红", point: "67" },
-        { name: "小美", point: "90" },
-        { name: "小美", point: "90" },
-        { name: "小美", point: "90" },
-        { name: "小红", point: "67" },
-        { name: "小美", point: "90" },
-        { name: "小美", point: "90" },
-        { name: "小美", point: "90" },
-        { name: "小红", point: "67" },
-        { name: "小美", point: "90" },
-        { name: "小红", point: "67" },
-        { name: "小美", point: "90" },
-        { name: "小王", point: "88" },
-        { name: "小明", point: "66" },
-        { name: "小红", point: "67" },
-        { name: "小美", point: "90" },
-        { name: "小红", point: "67" },
-      ],
+      tableData: [],
       tableList: [],
       // provDatanName: [],
       // provDatanValue: [],
@@ -291,7 +257,9 @@ export default {
   },
 
   computed: {},
+  beforeCreate() {},
   created() {
+    this.getWordcloud();
     if (this.tableData.length > 0) {
       let num = Math.ceil(this.tableData.length / 3);
       for (let j = 0; j < num; j++) {
@@ -301,6 +269,7 @@ export default {
   },
   mounted() {
     this.initmap();
+
     this.type = 1;
     eventBum.$on("json", (json) => {
       this.json = json.name;
@@ -308,6 +277,9 @@ export default {
       this.selectedcity = json.name.replace("省", "");
       this.selectedcity = this.selectedcity.replace("市", "");
       this.postFeatures();
+      if (json.where == 2) {
+        this.getWordcloud();
+      }
     });
   },
 
@@ -328,6 +300,17 @@ export default {
       } catch (error) {
         // alert("未查询到数据,请更改查询条件");
       }
+    },
+    getWordcloud() {
+      request
+        .post("/api/data/wordCloud", {
+          model: this.selectedcity,
+        })
+        .then((res) => {
+          console.log(res.data);
+          this.tableData = res.data;
+                    console.log(this.tableData);
+        });
     },
     postFeatures() {
       let _self = this;
