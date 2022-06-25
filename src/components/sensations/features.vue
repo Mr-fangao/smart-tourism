@@ -108,19 +108,44 @@
                   ? 4
                   : tableData.length"
               >
-                <el-table-column label="特征词" align="center" prop="name" min-width="12.5%">
+                <el-table-column
+                  label="特征词"
+                  align="center"
+                  prop="name"
+                  min-width="12.5%"
+                >
                   <template
                     slot-scope="scope"
                     v-if="scope.$index * 4 + index < tableData.length"
                     >{{ tableData[scope.$index * 4 + index].name }}</template
                   >
                 </el-table-column>
-                <el-table-column label="频率" align="center" prop="value" min-width="12.5%" style="color: #a5e5f6">
+                <el-table-column
+                  label="频率"
+                  align="center"
+                  prop="value"
+                  min-width="12.5%"
+                >
                   <template
                     slot-scope="scope"
                     v-if="scope.$index * 4 + index < tableData.length"
-                    >{{ tableData[scope.$index * 4 + index].value }}</template
                   >
+                    <div
+                      v-if="tableData[scope.$index * 4 + index].value >= 1000"
+                      style="color: red"
+                    >
+                      {{ tableData[scope.$index * 4 + index].value }}
+                    </div>
+                    <div
+                      v-if="tableData[scope.$index * 4 + index].value >= 500&&tableData[scope.$index * 4 + index].value<1000"
+                      style="color: yellow"
+                    >
+                      {{ tableData[scope.$index * 4 + index].value }}
+                    </div>
+                    <div v-if="tableData[scope.$index * 4 + index].value >= 0&&tableData[scope.$index * 4 + index].value<500">
+                      {{ tableData[scope.$index * 4 + index].value }}
+                    </div>
+                  </template>
                 </el-table-column>
               </template>
             </el-table>
@@ -207,6 +232,7 @@ export default {
       word3Dwidth: 350,
       buttonname: "分析", //按钮名称
       searchContent: [""],
+      featuresinput:[""],
       type: 1,
       searchList: [],
       selectinput: "",
@@ -272,6 +298,7 @@ export default {
 
     this.type = 1;
     eventBum.$on("json", (json) => {
+      this.searchContent=[''];
       this.json = json.name;
       this.selectlevel = json.where; //所选层级，默认为0 1代表省 2代表市
       this.selectedcity = json.name.replace("省", "");
@@ -286,7 +313,7 @@ export default {
   methods: {
     //搜索方法,text为空则为点击类别操作,不为空则为输入框搜索
     async search(text) {
-      // this.postFeatures();
+      this.postFeatures();
       text || (text = this.searchContent);
       console.log("sss", text, this.searchContent);
       if (!text) {
@@ -309,11 +336,17 @@ export default {
         .then((res) => {
           console.log(res.data);
           this.tableData = res.data;
-                    console.log(this.tableData);
+          console.log(this.tableData);
         });
     },
     postFeatures() {
       let _self = this;
+      if(typeof _self.searchContent=='arrar'){
+      _self.featuresinput[0]=_self.searchContent[0];
+      }
+      else if(typeof _self.searchContent=='string'){
+        _self.featuresinput[0]=_self.searchContent;
+      }
       var pointjson = {
         type: "FeatureCollection",
         features: [],
@@ -326,7 +359,7 @@ export default {
       if (_self.selectlevel == 2) level = 1;
       request
         .post("/api/data/labelInfo", {
-          labels: _self.searchContent,
+          labels: _self.featuresinput,
           type: level,
           region: _self.selectedcity,
         })
