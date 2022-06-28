@@ -8,8 +8,8 @@
           :class="index === 1 ? 'active' : ''"
           plain
         >
-          <i class="fa fa-building fa-lg"></i>
-          <span class="tab">城市</span>
+          <i class="fa fa-tree fa-lg"></i>
+          <span class="tab">特征</span>
         </el-menu-item>
         <el-menu-item
           index="2"
@@ -17,8 +17,8 @@
           :class="index === 2 ? 'active' : ''"
           plain
         >
-          <i class="fa fa-tree fa-lg"></i>
-          <span class="tab">特征</span>
+          <i class="fa fa-building fa-lg"></i>
+          <span class="tab">城市</span>
         </el-menu-item>
       </el-menu>
     </div>
@@ -41,10 +41,13 @@ export default {
       isShow: true,
     };
   },
+  mounted() {
+    this.show(1);
+  },
   methods: {
     show(value) {
-      if (value === 1) this.comp = "city";
-      else if (value === 2) this.comp = "features";
+      if (value === 1) this.comp = "features";
+      else if (value === 2) this.comp = "city";
       // else if (value === 3) this.comp = "heatmap";
     },
   },

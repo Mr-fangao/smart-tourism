@@ -406,8 +406,8 @@ export const expendNodes = (id) => {
 
 /**
  * 递归数组,把所有children都拆出来到第一层
- * @param {*} list 
- * @param {*} item 
+ * @param {*} list
+ * @param {*} item
  */
 function getDeepChildrens(list, item, parentId) {
   const {

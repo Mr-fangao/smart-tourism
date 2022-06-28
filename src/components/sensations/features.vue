@@ -298,7 +298,7 @@ export default {
 
     this.type = 1;
     eventBum.$on("json", (json) => {
-      this.searchContent=[''];
+      this.searchContent= [''];
       this.json = json.name;
       this.selectlevel = json.where; //所选层级，默认为0 1代表省 2代表市
       this.selectedcity = json.name.replace("省", "");
@@ -454,18 +454,18 @@ export default {
           "circle-color": [
             "interpolate",
             ["linear"],
-            ["get", "score"],
-            3.5,
+            ["get", "matching"],
+            0.5,
             "#ACBE21",
-            3.8,
+            0.7,
             "#BEB221",
-            4.1,
+            0.8,
             "#BE8221",
-            4.4,
+            0.85,
             "#FF8C00",
-            4.7,
+            0.9,
             "#BE6321",
-            5.0,
+            0.95,
             "#BE4521",
           ],
         },
