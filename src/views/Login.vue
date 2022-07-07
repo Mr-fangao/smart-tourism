@@ -14,28 +14,30 @@
             auto-complete="on"
           >
             <el-form-item>
-              <img src="../assets/login/user.png" />
+              <!-- <img src="../assets/login/user.png" /> -->
               <el-input
                 class="username"
                 placeholder="请输入用户账号"
                 v-model="loginFrom.username"
+                prefix-icon="el-icon-user-solid"
                 type="text"
                 clearable
               ></el-input>
             </el-form-item>
             <el-form-item>
-              <img src="../assets/login/password.png" />
+              <!-- <img src="../assets/login/password.png" /> -->
               <el-input
                 placeholder="请输入用户密码"
                 class="password"
                 v-model="loginFrom.password"
+                prefix-icon="el-icon-unlock"
                 show-password
                 type="password"
               ></el-input>
             </el-form-item>
-            <el-form-item>
+            <!-- <el-form-item>
               <el-checkbox class="check">记住密码</el-checkbox>
-            </el-form-item>
+            </el-form-item> -->
             <el-form-item>
               <el-button
                 id="btn"
@@ -60,8 +62,8 @@
 
 <script>
 import request from "../utils/request";
-import { mapState } from 'vuex';
-import { mapMutations } from 'vuex';
+import { mapState } from "vuex";
+import { mapMutations } from "vuex";
 export default {
   data() {
     return {
@@ -69,12 +71,10 @@ export default {
         username: "admin",
         password: "123",
       },
-      alldatacount: {
-        }
+      alldatacount: {},
     };
   },
-  computed:{
-    },
+  computed: {},
   mounted() {
     //登录绑定事件
     window.addEventListener("keydown", this.keyDown);
@@ -183,10 +183,14 @@ export default {
         flex-direction: column;
         align-items: center;
         position: relative;
-        width: 28%;
-        height: 45%;
-        background: url("../assets/img/buttonbg.png") no-repeat;
-        background-size: 100% 100%;
+        // width: 35%;
+        // height: 45%;
+        width: 400px;
+        height: 280px;
+        // background: url("../assets/img/buttonbg.png") no-repeat;
+        // background-size: 100% 100%;
+        border-radius: 10px;
+        background-color: rgba(21, 1, 1, 0.4);
         h2 {
           font-size: 18pt;
           color: #ffffff;
@@ -245,5 +249,33 @@ export default {
   font-weight: bold;
   background-color: #79e4e6;
   border-color: #79e4e6;
+}
+//文本框样式设置
+/deep/.el-input__inner {
+  border: 0 !important;
+  background-color: transparent;
+  border-radius: 0;
+  border-bottom: 2px solid #579af7 !important;
+  color: #ffffff;
+}
+// 去掉输入框下划线
+.login .video-container .filter .login_style .username[data-v-26084dc2] {
+  border: 0;
+}
+// 去掉输入框下划线
+.login .video-container .filter .login_style .password[data-v-26084dc2] {
+  border: 0;
+}
+// 登录按钮样式
+.login .video-container .filter .login_style .button[data-v-26084dc2] {
+  width: 220px;
+  height: 40px;
+  margin-left: 0;
+  background-color: #579af7;
+  border: 0;
+}
+// 修改文本框中文字距离图标的距离
+.el-input--prefix /deep/.el-input__inner {
+  padding-left: 35px !important;
 }
 </style>
