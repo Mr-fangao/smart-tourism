@@ -137,12 +137,20 @@
                       {{ tableData[scope.$index * 4 + index].value }}
                     </div>
                     <div
-                      v-if="tableData[scope.$index * 4 + index].value >= 500&&tableData[scope.$index * 4 + index].value<1000"
+                      v-if="
+                        tableData[scope.$index * 4 + index].value >= 500 &&
+                        tableData[scope.$index * 4 + index].value < 1000
+                      "
                       style="color: yellow"
                     >
                       {{ tableData[scope.$index * 4 + index].value }}
                     </div>
-                    <div v-if="tableData[scope.$index * 4 + index].value >= 0&&tableData[scope.$index * 4 + index].value<500">
+                    <div
+                      v-if="
+                        tableData[scope.$index * 4 + index].value >= 0 &&
+                        tableData[scope.$index * 4 + index].value < 500
+                      "
+                    >
                       {{ tableData[scope.$index * 4 + index].value }}
                     </div>
                   </template>
@@ -232,7 +240,7 @@ export default {
       word3Dwidth: 350,
       buttonname: "分析", //按钮名称
       searchContent: [""],
-      featuresinput:[""],
+      featuresinput: [""],
       type: 1,
       searchList: [],
       selectinput: "",
@@ -298,7 +306,7 @@ export default {
 
     this.type = 1;
     eventBum.$on("json", (json) => {
-      this.searchContent= [''];
+      this.searchContent = [""];
       this.json = json.name;
       this.selectlevel = json.where; //所选层级，默认为0 1代表省 2代表市
       this.selectedcity = json.name.replace("省", "");
@@ -341,11 +349,10 @@ export default {
     },
     postFeatures() {
       let _self = this;
-      if(typeof _self.searchContent=='arrar'){
-      _self.featuresinput[0]=_self.searchContent[0];
-      }
-      else if(typeof _self.searchContent=='string'){
-        _self.featuresinput[0]=_self.searchContent;
+      if (typeof _self.searchContent == "arrar") {
+        _self.featuresinput[0] = _self.searchContent[0];
+      } else if (typeof _self.searchContent == "string") {
+        _self.featuresinput[0] = _self.searchContent;
       }
       var pointjson = {
         type: "FeatureCollection",
