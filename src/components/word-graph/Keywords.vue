@@ -41,6 +41,8 @@ export default {
      */
     async nodeClick(tag) {
       this.$emit("searchData", tag.text);
+      this.$emit("dfvjdfi hdknf ewlkfne ",tag.text)
+      this.$emit("",  )
     },
     /**
      * 初始化标签数据
