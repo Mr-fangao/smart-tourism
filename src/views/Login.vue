@@ -255,9 +255,10 @@ export default {
   border: 0 !important;
   background-color: transparent;
   border-radius: 0;
-  border-bottom: 2px solid #579af7 !important;
+  border-bottom: 1px solid #dceafd !important;
   color: #ffffff;
 }
+
 // 去掉输入框下划线
 .login .video-container .filter .login_style .username[data-v-26084dc2] {
   border: 0;
@@ -271,9 +272,13 @@ export default {
   width: 220px;
   height: 40px;
   margin-left: 0;
-  background-color: #579af7;
+  background-color: rgb(173, 247, 248);
   border: 0;
 }
+.login .video-container .filter .login_style .button[data-v-26084dc2]:hover {
+  background-color: rgb(27, 246, 250);
+}
+
 // 修改文本框中文字距离图标的距离
 .el-input--prefix /deep/.el-input__inner {
   padding-left: 35px !important;
