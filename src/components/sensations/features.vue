@@ -329,7 +329,7 @@ export default {
         return;
       }
       try {
-        let result = await search(text);
+        let result = await search(n );
         this.type = 2;
         this.searchList = [].concat(result);
       } catch (error) {
@@ -427,10 +427,23 @@ export default {
     initEcharts() {},
     getLevelsData() {},
     changeChartTab(level) {
-      if (this.faetureslist.length == 0) {
-        this.getFeaturesList();
+      let _self = this;
+      if (typeof _self.searchContent == "arrar") {
+        _self.featuresinput[0] = _self.searchContent[0];
+      } else if (typeof _self.searchContent == "string") {
+        _self.featuresinput[0] = _self.searchContent;
       }
-      this.postFeatureByLevel(level);
+      var level;
+      var features = ["爬山"];
+      if (_self.selectlevel == 1) level = 2;
+      if (_self.selectlevel == 2) level = 1;
+      request
+        .post("/api/data/labelInfo", {
+          labels: _self.featuresinput,
+          type: level,
+          region: _self.selectedcity,
+        })
+        .then((res) => {});
     },
     handleResize() {
       this.myChart2 && this.myChart2.resize();
