@@ -226,6 +226,7 @@ export default {
       unformatterjson: {},
       watching: { watch: 0 },
       checkList: ["途牛网", "携程网", "马蜂窝", "去哪儿"],
+      wordcloudlist: [],
       timevalue: "",
       tableHeight: 0, // 表格高度
       tableData: [],
@@ -329,7 +330,7 @@ export default {
         return;
       }
       try {
-        let result = await search(n );
+        let result = await search(n);
         this.type = 2;
         this.searchList = [].concat(result);
       } catch (error) {
@@ -344,8 +345,12 @@ export default {
         .then((res) => {
           console.log(res.data);
           this.tableData = res.data;
-          console.log(this.tableData);
+          let words = this.tableData.name;
+          //  words.forEach(function (item) {
+          //      this.wordcloudlist.push(item)
+          //   });
         });
+      console.log(this.tableData.name);
     },
     postFeatures() {
       let _self = this;
