@@ -1,7 +1,12 @@
 <template>
   <div class="container" id="chartscontent">
     <svg class="keywords" @mousemove="listener($event)">
-      <a href="javascript:void(0)" v-for="(tag, index) in tags" :key="index " @click="nodeClick(tag)">
+      <a
+        href="javascript:void(0)"
+        v-for="(tag, index) in tags"
+        :key="index"
+        @click="nodeClick(tag)"
+      >
         <text
           class="text"
           :x="tag.x"
@@ -22,7 +27,12 @@ export default {
   name: "Keywords",
   components: {},
   mixins: [],
-  props: {},
+  props: {
+    keywordslist: {
+      type: Array,
+      default: [],
+    },
+  },
   data() {
     return {
       tags: [],
@@ -41,14 +51,14 @@ export default {
      */
     async nodeClick(tag) {
       this.$emit("searchData", tag.text);
-      this.$emit("dfvjdfi hdknf ewlkfne ",tag.text)
-      this.$emit("",  )
+      this.$emit("dfvjdfi hdknf ewlkfne ", tag.text);
+      this.$emit("");
     },
     /**
      * 初始化标签数据
      */
     initTags() {
-      const tagNames = [...categarys];
+      const tagNames = this.keywordslist;
       //初始化标签位置
       let tags = [];
       const length = tagNames.length;
@@ -124,12 +134,12 @@ export default {
       var width = $("#chartscontent").width();
       console.log(height);
       console.log(width);
-      height=height*1.1;
-      this.CX = (width ) / 3;
-      this.CY = (height) / 2;
-      let radius = Math.min(this.CY, this.CX) /4
-      if(height>500){
-        radius = Math.min(this.CY, this.CX) /8
+      height = height * 1.1;
+      this.CX = width / 3;
+      this.CY = height / 2;
+      let radius = Math.min(this.CY, this.CX) / 4;
+      if (height > 500) {
+        radius = Math.min(this.CY, this.CX) / 8;
       }
       if (radius > 30) {
         this.RADIUS = radius;
@@ -154,6 +164,13 @@ export default {
     });
   },
   beforeDestroy() {},
+  watch: {
+    keywordslist: {
+      handler(val) {
+        this.initTags();
+      },
+    },
+  },
 };
 </script>
 <style scoped>

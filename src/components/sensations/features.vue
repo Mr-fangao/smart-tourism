@@ -69,6 +69,7 @@
         <div class="content" id="keywords">
           <Keywords
             v-show="type === 1"
+            :keywordslist="wordcloudlist"
             @searchData="search"
             @windowResize="windowResize"
           ></Keywords>
@@ -345,12 +346,16 @@ export default {
         .then((res) => {
           console.log(res.data);
           this.tableData = res.data;
-          let words = this.tableData.name;
+          let w =0;
+          for(w;w< res.data.length;w++){
+            this.wordcloudlist.push(res.data[w].name)
+          }
+          console.log(this.wordcloudlist);
           //  words.forEach(function (item) {
           //      this.wordcloudlist.push(item)
           //   });
         });
-      console.log(this.tableData.name);
+
     },
     postFeatures() {
       let _self = this;
