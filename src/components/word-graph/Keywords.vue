@@ -22,7 +22,7 @@
   </div>
 </template>
 <script>
-import { categarys } from "./mock";
+// import { categarys } from "./mock";
 export default {
   name: "Keywords",
   components: {},
@@ -51,14 +51,15 @@ export default {
      */
     async nodeClick(tag) {
       this.$emit("searchData", tag.text);
-      this.$emit("dfvjdfi hdknf ewlkfne ", tag.text);
-      this.$emit("");
+      // this.$emit("dfvjdfi hdknf ewlkfne ", tag.text);
+      // this.$emit("");
     },
     /**
      * 初始化标签数据
      */
     initTags() {
       const tagNames = this.keywordslist;
+        //  const tagNames = [...categarys];
       //初始化标签位置
       let tags = [];
       const length = tagNames.length;

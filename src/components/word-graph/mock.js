@@ -3,11 +3,11 @@
  */
 export const data = [{
     id: 10000,
-    name: '盗墓笔记重启[南派三叔所著小说]',
+    name: '无轨电车[南派三叔所著小说]',
     categary: '百科',
     children: [{
         id: 2,
-        name: '盗墓笔记重启',
+        name: '无轨电车',
         categary: '中文名称',
       },
       {

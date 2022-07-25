@@ -68,12 +68,12 @@
         </div>
         <div class="content" id="keywords">
           <Keywords
-            v-show="type === 1"
+            v-show="type == 1"
             :keywordslist="wordcloudlist"
             @searchData="search"
             @windowResize="windowResize"
           ></Keywords>
-          <Charts ref="charts" v-show="type === 2" :chartList="searchList" />
+          <Charts ref="charts" v-show="type == 2" :chartList="searchList" />
         </div>
       </div>
     </div>
@@ -323,20 +323,22 @@ export default {
   methods: {
     //搜索方法,text为空则为点击类别操作,不为空则为输入框搜索
     async search(text) {
-      this.postFeatures();
+      // this.type = 2;
       text || (text = this.searchContent);
-      console.log("sss", text, this.searchContent);
+      // console.log("sss", text, this.searchContent);
       if (!text) {
         this.type = 1;
         return;
       }
       try {
-        let result = await search(n);
+        let result = await search(text);
         this.type = 2;
         this.searchList = [].concat(result);
+        console.log(this.searchList)
       } catch (error) {
         // alert("未查询到数据,请更改查询条件");
       }
+      this.postFeatures();
     },
     getWordcloud() {
       request
