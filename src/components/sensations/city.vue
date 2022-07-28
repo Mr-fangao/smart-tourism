@@ -1,6 +1,6 @@
 <template>
   <div id="com-city">
-    <selectRegion :defaultplace="'北京'" :right="25" />
+    <selectRegion :defaultplace="'南京 '" :right="25" />
     <div id="map" />
     <div class="city-left">
       <div class="city-left-select">

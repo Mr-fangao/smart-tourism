@@ -169,13 +169,14 @@
               v-model="isCollapse"
               @change="changeChartTab(isCollapse)"
             >
-              <el-radio-button :label="0">省份</el-radio-button>
+              <el-radio-button :label="0 ">景点</el-radio-button>
               <el-radio-button :label="1">城市</el-radio-button>
-              <el-radio-button :label="2">景点</el-radio-button>
             </el-radio-group>
           </div>
         </div>
-        <div class="content"></div>
+        <div class="content">
+          <div id="features-chart"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -187,7 +188,7 @@ import SelectRegion from "../cityselect/newselectRegion.vue";
 import word3D from "../wordcloud3D.vue";
 import Keywords from "../word-graph/Keywords";
 import Charts from "../word-graph/Charts";
-import { search } from "../word-graph/mock";
+import { data, search } from "../word-graph/mock";
 import echarts from "echarts";
 import request from "../../utils/request";
 // import mixins from "../../mixins/mixins.js";
@@ -213,7 +214,7 @@ export default {
 
   data() {
     return {
-      isCollapse: 0, //地区分布图表切换
+      isCollapse: 1, //地区分布图表切换
       json: "",
       selectedcity: "北京",
       selectlevel: 0, //所选层级，1代表省 2代表市
@@ -295,7 +296,7 @@ export default {
   computed: {},
   beforeCreate() {},
   created() {
-    this.getWordcloud();
+    // this.getWordcloud();
     if (this.tableData.length > 0) {
       let num = Math.ceil(this.tableData.length / 3);
       for (let j = 0; j < num; j++) {
@@ -305,7 +306,6 @@ export default {
   },
   mounted() {
     this.initmap();
-
     this.type = 1;
     eventBum.$on("json", (json) => {
       this.searchContent = [""];
@@ -323,6 +323,7 @@ export default {
   methods: {
     //搜索方法,text为空则为点击类别操作,不为空则为输入框搜索
     async search(text) {
+      this.changeChartTab(this.isCollapse)
       // this.type = 2;
       text || (text = this.searchContent);
       // console.log("sss", text, this.searchContent);
@@ -349,13 +350,10 @@ export default {
           console.log(res.data);
           this.tableData = res.data;
           let w =0;
+          this.wordcloudlist=[];
           for(w;w< res.data.length;w++){
             this.wordcloudlist.push(res.data[w].name)
           }
-          console.log(this.wordcloudlist);
-          //  words.forEach(function (item) {
-          //      this.wordcloudlist.push(item)
-          //   });
         });
 
     },
@@ -436,7 +434,9 @@ export default {
       // echartsLevelsData[level]
       console.log("postFeature is already !");
     },
-    initEcharts() {},
+    initEcharts(data) {
+      console.log(data)
+    },
     getLevelsData() {},
     changeChartTab(level) {
       let _self = this;
@@ -445,17 +445,14 @@ export default {
       } else if (typeof _self.searchContent == "string") {
         _self.featuresinput[0] = _self.searchContent;
       }
-      var level;
-      var features = ["爬山"];
-      if (_self.selectlevel == 1) level = 2;
-      if (_self.selectlevel == 2) level = 1;
       request
-        .post("/api/data/labelInfo", {
-          labels: _self.featuresinput,
+        .post("/api/data/featureMatching", {
           type: level,
-          region: _self.selectedcity,
+          labels: _self.featuresinput,
         })
-        .then((res) => {});
+        .then((res) => {
+          this.initEcharts(res.data)
+        });
     },
     handleResize() {
       this.myChart2 && this.myChart2.resize();
@@ -938,7 +935,7 @@ export default {
       box-shadow: 0px 0 0 0 #409eff;
     }
     /deep/.el-radio-group {
-      width: 100%;
+   width: 70%;
       display: flex;
       flex-direction: row;
       justify-content: space-around;
