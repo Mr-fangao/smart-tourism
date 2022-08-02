@@ -102,14 +102,14 @@ export default {
         container: "map",
         style: "mapbox://styles/chenjq/cl010ychv001214pdpa5xyq5a",
         center: [112, 31],
-        zoom: 4,
+        zoom: 6,
       });
       map.on("load", () => {
         map.addSource("sensicjson", {
           type: "geojson",
           data: testjson,
           cluster: true, //聚合图的数据源需要添加样式
-          clusterMaxZoom: 14, //最大缩放到群集点
+          clusterMaxZoom: 12, //最大缩放到群集点
           clusterRadius: 50,
         });
         //添加圆形聚合图层

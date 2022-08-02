@@ -169,13 +169,13 @@
               v-model="isCollapse"
               @change="changeChartTab(isCollapse)"
             >
-              <el-radio-button :label="0 ">景点</el-radio-button>
+              <el-radio-button :label="0">景点</el-radio-button>
               <el-radio-button :label="1">城市</el-radio-button>
             </el-radio-group>
           </div>
         </div>
         <div class="content">
-          <div id="features-chart"></div>
+          <div class="chartcontent" id="features-chart"></div>
         </div>
       </div>
     </div>
@@ -323,7 +323,7 @@ export default {
   methods: {
     //搜索方法,text为空则为点击类别操作,不为空则为输入框搜索
     async search(text) {
-      this.changeChartTab(this.isCollapse)
+      this.changeChartTab(this.isCollapse);
       // this.type = 2;
       text || (text = this.searchContent);
       // console.log("sss", text, this.searchContent);
@@ -335,7 +335,7 @@ export default {
         let result = await search(text);
         this.type = 2;
         this.searchList = [].concat(result);
-        console.log(this.searchList)
+        console.log(this.searchList);
       } catch (error) {
         // alert("未查询到数据,请更改查询条件");
       }
@@ -349,13 +349,12 @@ export default {
         .then((res) => {
           console.log(res.data);
           this.tableData = res.data;
-          let w =0;
-          this.wordcloudlist=[];
-          for(w;w< res.data.length;w++){
-            this.wordcloudlist.push(res.data[w].name)
+          let w = 0;
+          this.wordcloudlist = [];
+          for (w; w < res.data.length; w++) {
+            this.wordcloudlist.push(res.data[w].name);
           }
         });
-
     },
     postFeatures() {
       let _self = this;
@@ -434,8 +433,86 @@ export default {
       // echartsLevelsData[level]
       console.log("postFeature is already !");
     },
-    initEcharts(data) {
-      console.log(data)
+    initEcharts(e) {
+      var xdata = [];
+      var ydata = [];
+      for (let i = 0; i < e.length; i++) {
+        xdata[i] = e[i].name;
+        ydata[i] = e[i].value;
+      }
+      console.log(xdata, ydata);
+      var chartDom = document.getElementById("features-chart");
+      var myChart = this.$echarts.init(chartDom);
+      var option = {
+        legend: {
+          right: 100,
+          textStyle: {
+            fontSize: 12,
+            color: "#fft",
+          },
+          align: "left",
+        },
+        tooltip: {
+          trigger: "axis",
+          position: function (pt) {
+            return [pt[0], "10%"];
+          },
+        },
+        grid: {
+          left: "5%", //图表距边框的距离
+          right: "5%",
+          bottom: "4%",
+          top: "5%",
+          containLabel: true,
+        },
+        xAxis: {
+          type: "category",
+          boundaryGap: false,
+          data: xdata,
+          axisLine: {
+            lineStyle: {
+              color: "white",
+            },
+          },
+        },
+        yAxis: [
+          {
+            splitLine: { show: false },
+            type: "value",
+            name: "匹配度",
+            scale: true,
+            axisLine: {
+              lineStyle: {
+                color: "white",
+              },
+            },
+          },
+        ],
+        series: [
+          {
+            type: "line",
+            symbol: "none",
+            sampling: "lttb",
+            data: ydata,
+            itemStyle: {
+              color: "rgb(255, 70, 131)",
+            },
+            areaStyle: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                {
+                  offset: 0,
+                  color: "rgb(255, 70, 131)",
+                },
+                {
+                  offset: 1,
+                  color: "#123456",
+                },
+              ]),
+            },
+          },
+        ],
+      };
+      option && myChart.setOption(option);
     },
     getLevelsData() {},
     changeChartTab(level) {
@@ -451,7 +528,7 @@ export default {
           labels: _self.featuresinput,
         })
         .then((res) => {
-          this.initEcharts(res.data)
+          this.initEcharts(res.data);
         });
     },
     handleResize() {
@@ -875,6 +952,10 @@ export default {
     .content {
       height: calc(100% - 30px);
       width: 100%;
+      .chartcontent {
+        height: 100%;
+        width: 100%;
+      }
     }
   }
   .bottompart:nth-child(1) {
@@ -935,7 +1016,7 @@ export default {
       box-shadow: 0px 0 0 0 #409eff;
     }
     /deep/.el-radio-group {
-   width: 70%;
+      width: 70%;
       display: flex;
       flex-direction: row;
       justify-content: space-around;

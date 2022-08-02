@@ -885,8 +885,8 @@ export default {
     //下方各类数据
     getScenicMonth(val) {
       this.timeflag = false;
-      var year = val.getFullYear();
-      var month = val.getMonth() + 1;
+      var year = val.getFullYear()-1;
+      var month = val.getMonth() +4;
       //当前年月
       var currmonth;
       var showmonth = `${year}/${month}`;
@@ -935,8 +935,8 @@ export default {
     },
     getCityMonth(val) {
       this.timeflag2 = false;
-      var year = val.getFullYear();
-      var month = val.getMonth() + 1;
+      var year = val.getFullYear()-1;
+      var month = val.getMonth() +4;
       //当前年月
       var currmonth;
       var showmonth = `${year}/${month}`;
@@ -1206,7 +1206,7 @@ export default {
       //景点热度日变化默认月
       this.currentmonth = `${year}-${month}-${day + 1}`;
       this.datatime = `${year}/${month}/${day}`;
-      this.month = `${year}-${month - 3}`; //时间选择器所选择的数据为当前月前三个月
+      this.month = `${year}-${month - 0}`; //时间选择器所选择的数据为当前月前三个月
     },
     getPreMonth(date) {
       var arr = date.split("-");
