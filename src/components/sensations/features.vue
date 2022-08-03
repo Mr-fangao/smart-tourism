@@ -592,6 +592,7 @@ export default {
     initmap() {
       var _this = this;
       var layerIDs = [];
+      var startlayerIDs = [];
       this.$mapboxgl.accessToken =
         "pk.eyJ1IjoiY2hlbmpxIiwiYSI6ImNrcWFmdWt2bjBtZGsybmxjb29oYmRzZzEifQ.mnpiwx7_cBEyi8YiJiMRZg";
       _this.map = new this.$mapboxgl.Map({
@@ -600,7 +601,67 @@ export default {
         center: [110, 40],
         zoom: 4,
       });
-
+      //定义页面刚载入时内容
+      _this.map.on("load", function () {
+        var start_url = "../../../static/shi/" + "安徽省" + ".json";
+        //通过axios请求选择省份的数据
+        axios.get(start_url).then(
+          (res) => {
+            const start_get_data=res.data
+            var start_id = "黄山市" + "_" + "shi";
+            var start_json = start_get_data;
+            _this.map.addSource('"' + start_id + '"', {
+              type: "geojson",
+              data: start_get_data,
+            });
+            console.log(start_get_data);
+            start_json.features.forEach(function (feature) {
+              var sfName = feature.properties["name"];
+              var layerID = "poi" + sfName;
+              // console.log(sfName, layerID, feature.properties);
+              console.log(_this.map.getLayer(layerID));
+              if (!_this.map.getLayer(layerID)) {
+                _this.map.addLayer({
+                  id: layerID,
+                  type: "fill",
+                  source: '"' + start_id + '"',
+                  paint: {
+                    "fill-color": "#0163B3", //更改地图颜色
+                    "fill-outline-color": "#81D24E",
+                    "fill-opacity": 0.3 /* 透明度 */,
+                  },
+                  filter: ["==", "name", sfName],
+                });
+                startlayerIDs.push(layerID);
+              }
+            });
+            var diming = "黄山市";
+            startlayerIDs.forEach(function (layerID) {
+              _this.map.setLayoutProperty(
+                layerID,
+                "visibility",
+                layerID.indexOf(diming) > -1 ? "visible" : "none"
+              );
+            });
+            var list = "";
+            list = start_json.features;
+            list.some((itme, index) => {
+              if (itme.properties.name == "黄山市") {
+                _this.map.flyTo({
+                  center: itme.properties.centroid,
+                  zoom: 8, //设置选择地名后地图的缩放级别
+                  pitch: 15, // 倾斜度
+                });
+                return true;
+              }
+            });
+            return start_get_data;
+          },
+          (response) => {
+            console.log("error");
+          }
+        );
+      });
       //获取子组件中的所有dom元素
       var box = _this.$refs.box.$el;
       var queding = box.querySelector("#choice .right");

@@ -245,7 +245,6 @@ export default {
       }
     },
     getHeight() {
-      console.log("11");
       this.tableheight = window.innerHeight - 190 + "px";
     },
     // 加载表格数据

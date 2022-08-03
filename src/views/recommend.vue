@@ -96,33 +96,26 @@
             <el-tab-pane label="好评榜" name="recommendTab">
               <el-table
                 :data="tablescoreRankData"
-                height="328px"
+                :height="tableheight"
                 stripe
                 style="width: 100%"
               >
-                <el-table-column
-                  prop="rank"
-                  label="序号"
-                  width="30"
-                ></el-table-column>
+                <el-table-column prop="rank" label="序号"></el-table-column>
                 <el-table-column
                   prop="name"
                   label="景点"
-                  width="180"
                   :show-overflow-tooltip="true"
                 >
                 </el-table-column>
                 <el-table-column
                   prop="city"
                   label="城市"
-                  width="60"
                   :show-overflow-tooltip="true"
                 >
                 </el-table-column>
                 <el-table-column
                   prop="score"
                   label="分数"
-                  width="50"
                   :show-overflow-tooltip="true"
                 >
                   <template slot-scope="scope">
@@ -134,33 +127,26 @@
             <el-tab-pane label="热度榜" name="hotTab">
               <el-table
                 :data="tableRankData"
-                height="328px"
+                :height="tableheight"
                 stripe
                 style="width: 100%"
               >
-                <el-table-column
-                  prop="rank"
-                  label="序号"
-                  width="30"
-                ></el-table-column>
+                <el-table-column prop="rank" label="序号"></el-table-column>
                 <el-table-column
                   prop="name"
                   label="景点"
-                  width="180"
                   :show-overflow-tooltip="true"
                 >
                 </el-table-column>
                 <el-table-column
                   prop="city"
                   label="城市"
-                  width="50"
                   :show-overflow-tooltip="true"
                 >
                 </el-table-column>
                 <el-table-column
                   prop="hot"
                   label="热度"
-                  width="70"
                   :show-overflow-tooltip="true"
                 >
                 </el-table-column>
@@ -169,26 +155,20 @@
             <el-tab-pane label="推荐榜" name="scenicTab">
               <el-table
                 :data="scenicdata"
-                height="328px"
+                :height="tableheight"
                 stripe
                 style="width: 100%"
               >
-                <el-table-column
-                  prop="rank"
-                  label="序号"
-                  width="40"
-                ></el-table-column>
+                <el-table-column prop="rank" label="序号"></el-table-column>
                 <el-table-column
                   prop="name"
                   label="景点"
-                  width="120"
                   :show-overflow-tooltip="true"
                 >
                 </el-table-column>
                 <el-table-column
                   prop="city"
                   label="城市"
-                  width="50"
                   :show-overflow-tooltip="true"
                 >
                 </el-table-column>
@@ -202,7 +182,6 @@
                 <el-table-column
                   prop="score"
                   label="分数"
-                  width="60"
                   :show-overflow-tooltip="true"
                 >
                   <template slot-scope="scope">
@@ -214,42 +193,37 @@
             <el-tab-pane label="城市榜" name="cityTab">
               <el-table
                 :data="tableCityData"
-                height="328px"
+                :height="tableheight"
                 stripe
                 style="width: 100%"
               >
                 <el-table-column
                   prop="hotrank"
                   label="排名"
-                  width="50"
                   :show-overflow-tooltip="true"
                 >
                 </el-table-column>
                 <el-table-column
                   prop="city"
                   label="城市"
-                  width="100"
                   :show-overflow-tooltip="true"
                 >
                 </el-table-column>
                 <el-table-column
                   prop="sccount"
                   label="景点数目"
-                  width="70"
                   :show-overflow-tooltip="true"
                 >
                 </el-table-column>
                 <el-table-column
                   prop="comcount"
                   label="热度"
-                  width="70"
                   :show-overflow-tooltip="true"
                 >
                 </el-table-column>
                 <el-table-column
                   prop="scscore"
                   label="分数"
-                  width="60"
                   :show-overflow-tooltip="true"
                 >
                   <template slot-scope="scope">
@@ -269,10 +243,7 @@
         </div>
         <!-- <div class="wordcontent" ref="chartword2"></div> -->
         <div class="wordcontent">
-          <word3D
-            :data="wordcloudchina"
-          >
-          </word3D>
+          <word3D :data="wordcloudchina"> </word3D>
         </div>
       </div>
       <div class="sensicrecommend">
@@ -464,11 +435,10 @@
   </div>
 </template>
 <script>
-
 import word3D from "../components/wordcloud3D.vue";
 
 import poppage from "../components/poppageForCity.vue";
-import { getPie3D,bindListen} from "../js/chart3d";
+import { getPie3D, bindListen } from "../js/chart3d";
 
 import request from "../utils/request";
 //vuex
@@ -574,6 +544,7 @@ export default {
           label: "县级",
         },
       ],
+      tableheight: "",
       distancechecked: true,
       seasonchecked: false,
       sourcechecked: true,
@@ -757,10 +728,10 @@ export default {
       pieoption: {},
     };
   },
-  beforeCreate() {
-  },
+  beforeCreate() {},
   computed: {},
   created() {
+    this.getHeight();
     this.getAlldata();
     this.getCityRank();
     eventBum.$off("json");
@@ -778,7 +749,7 @@ export default {
           this.showmap(5);
           this.mapchange = "5";
         }
-      } else if (json.where == 1&& json.name.includes("省")) {
+      } else if (json.where == 1 && json.name.includes("省")) {
         this.warningForpProvince();
       }
     });
@@ -788,6 +759,7 @@ export default {
     const that = this;
     window.onresize = function () {
       that.changeSize();
+      that.getHeight();
     };
 
     this.getTime();
@@ -807,12 +779,12 @@ export default {
     setLabel(optionData) {
       optionData.forEach((item, index) => {
         item.itemStyle = {
-          color: this.pie3Dcolor[index],//该颜色数组取自mixin中的数据
+          color: this.pie3Dcolor[index], //该颜色数组取自mixin中的数据
         };
         item.label = {
           normal: {
             show: true,
-            color:  this.pie3Dcolor[index],
+            color: this.pie3Dcolor[index],
             formatter: ["{b|{b}}", "{c|{c}}{b|人}", "{d|{d}%}"].join("\n"), // 用\n来换行
             rich: {
               b: {
@@ -829,7 +801,7 @@ export default {
                 textShadowBlur: 5,
               },
               d: {
-                color:  this.pie3Dcolor[index],
+                color: this.pie3Dcolor[index],
                 align: "left",
               },
             },
@@ -849,7 +821,7 @@ export default {
     init3DPieChart() {
       this.statusChart = this.$echarts.init(this.$refs.piechart);
       // 传入数据生成 pieoption, 构建3d饼状图, 参数工具文件已经备注的很详细
-      this.pieoption = getPie3D(this.optionData, 0.6, 200,30, 30, 0.6);
+      this.pieoption = getPie3D(this.optionData, 0.6, 200, 30, 30, 0.6);
       this.statusChart.setOption(this.pieoption);
       // 是否需要label指引线，如果要就添加一个透明的2d饼状图并调整角度使得labelLine和3d的饼状图对齐，并再次setOption
       this.pieoption.series.push({
@@ -885,8 +857,8 @@ export default {
     //下方各类数据
     getScenicMonth(val) {
       this.timeflag = false;
-      var year = val.getFullYear()-1;
-      var month = val.getMonth() +4;
+      var year = val.getFullYear() - 1;
+      var month = val.getMonth() + 4;
       //当前年月
       var currmonth;
       var showmonth = `${year}/${month}`;
@@ -935,8 +907,8 @@ export default {
     },
     getCityMonth(val) {
       this.timeflag2 = false;
-      var year = val.getFullYear()-1;
-      var month = val.getMonth() +4;
+      var year = val.getFullYear() - 1;
+      var month = val.getMonth() + 4;
       //当前年月
       var currmonth;
       var showmonth = `${year}/${month}`;
@@ -1032,7 +1004,7 @@ export default {
     postScenicSourceByCity() {
       let that = this;
       let city = this.selectedcity;
-      console.log('当前选择城市:',city);
+      console.log("当前选择城市:", city);
       request
         .post("/api/data/citySource", {
           model: city,
@@ -1232,6 +1204,10 @@ export default {
       }
       var t2 = year2 + "-" + month2 + "-" + day2;
       return t2;
+    },
+    getHeight() {
+      console.log(window.innerHeight);
+      this.tableheight = window.innerHeight * (328 / 762) + "px";
     },
     //矩形树图
     initChart1(data) {

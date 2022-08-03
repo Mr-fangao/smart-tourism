@@ -102,14 +102,14 @@ export default {
         container: "map",
         style: "mapbox://styles/chenjq/cl010ychv001214pdpa5xyq5a",
         center: [112, 31],
-        zoom: 6,
+        zoom: 4,
       });
       map.on("load", () => {
         map.addSource("sensicjson", {
           type: "geojson",
           data: testjson,
           cluster: true, //聚合图的数据源需要添加样式
-          clusterMaxZoom: 12, //最大缩放到群集点
+          clusterMaxZoom: 6, //最大缩放到群集点
           clusterRadius: 50,
         });
         //添加圆形聚合图层
@@ -175,8 +175,8 @@ export default {
           //"source-layer": "button2"
         });
         map.fitBounds([
-          [90, 45], // 边界的西南角
-          [120, 30], // 边界的东北角
+          [70, 45], // 边界的西南角
+          [150  , 30], // 边界的东北角
         ]);
       });
       //添加数据源1
