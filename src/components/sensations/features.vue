@@ -1,6 +1,10 @@
 <template>
   <div id="com-features">
-    <SelectRegion ref="box" :right="5"></SelectRegion>
+    <SelectRegion
+      ref="box"
+      :right="5"
+      :defaultplace="defaultplace"
+    ></SelectRegion>
     <div id="map"></div>
     <div class="features-left">
       <div class="features-analysis leftpart">
@@ -216,7 +220,8 @@ export default {
     return {
       isCollapse: 1, //地区分布图表切换
       json: "",
-      selectedcity: "北京",
+      selectedcity: "常州",
+      defaultplace: "常州市",
       selectlevel: 0, //所选层级，1代表省 2代表市
       echartsLevelsData: [
         { DatanName: [], DatanValue: [] },
@@ -307,6 +312,7 @@ export default {
   mounted() {
     this.initmap();
     this.type = 1;
+    this.readystart("常州");
     eventBum.$on("json", (json) => {
       this.searchContent = [""];
       this.json = json.name;
@@ -356,7 +362,67 @@ export default {
           }
         });
     },
-    postFeatures() {
+    readystart(name) {
+      let _self = this;
+      request
+        .post("/api/data/wordCloud", {
+          model: name,
+        })
+        .then((res) => {
+          console.log(res.data);
+          this.tableData = res.data;
+          let w = 0;
+          this.wordcloudlist = [];
+          for (w; w < res.data.length; w++) {
+            this.wordcloudlist.push(res.data[w].name);
+          }
+        });
+      this.searchContent = "恐龙";
+      request
+        .post("/api/data/featureMatching", {
+          type: "1",
+          labels: ["恐龙"],
+        })
+        .then((res) => {
+          this.initEcharts(res.data);
+        });
+      var pointlist = [];
+      var pointjson = {
+        type: "FeatureCollection",
+        features: [],
+      };
+      request
+        .post("/api/data/labelInfo", {
+          type: "1",
+          labels: ["恐龙"],
+          region: "常州",
+        })
+        .then((res) => {
+          _self.unformatterjson = res.data;
+          let i = 0;
+          for (i; i < _self.unformatterjson.length; i++) {
+            pointlist.push({
+              type: "Feature",
+              properties: _self.unformatterjson[i],
+              geometry: {
+                type: "Point",
+                coordinates: [
+                  _self.unformatterjson[i].longitude,
+                  _self.unformatterjson[i].latitude,
+                ],
+              },
+            });
+          }
+          pointjson.features = pointlist;
+          _self.formatterjson = pointjson;
+          console.log(_self.formatterjson);
+
+          setTimeout(function () {
+            _self.refeashMap();
+          }, 200);
+        });
+    },
+    async postFeatures() {
       let _self = this;
       if (typeof _self.searchContent == "arrar") {
         _self.featuresinput[0] = _self.searchContent[0];
@@ -401,7 +467,7 @@ export default {
 
           setTimeout(function () {
             _self.refeashMap();
-          }, 200);
+          }, 100);
         });
     },
     /**
@@ -603,12 +669,12 @@ export default {
       });
       //定义页面刚载入时内容
       _this.map.on("load", function () {
-        var start_url = "../../../static/shi/" + "安徽省" + ".json";
+        var start_url = "../../../static/shi/" + "江苏省" + ".json";
         //通过axios请求选择省份的数据
         axios.get(start_url).then(
           (res) => {
-            const start_get_data=res.data
-            var start_id = "黄山市" + "_" + "shi";
+            const start_get_data = res.data;
+            var start_id = "常州市" + "_" + "shi";
             var start_json = start_get_data;
             _this.map.addSource('"' + start_id + '"', {
               type: "geojson",
@@ -635,7 +701,7 @@ export default {
                 startlayerIDs.push(layerID);
               }
             });
-            var diming = "黄山市";
+            var diming = "常州市";
             startlayerIDs.forEach(function (layerID) {
               _this.map.setLayoutProperty(
                 layerID,
@@ -646,7 +712,7 @@ export default {
             var list = "";
             list = start_json.features;
             list.some((itme, index) => {
-              if (itme.properties.name == "黄山市") {
+              if (itme.properties.name == "常州市") {
                 _this.map.flyTo({
                   center: itme.properties.centroid,
                   zoom: 8, //设置选择地名后地图的缩放级别
