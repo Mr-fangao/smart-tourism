@@ -3,17 +3,17 @@
  */
 export const data = [{
     id: 10000,
-    name: '无轨电车[南派三叔所著小说]',
+    name: '索道[娱乐项目]',
     categary: '百科',
     children: [{
         id: 2,
-        name: '无轨电车',
+        name: '索道',
         categary: '中文名称',
       },
       {
         id: 3,
-        name: '南派三叔',
-        categary: '作者',
+        name: '缆车',
+        categary: '别名',
         children: [{
             id: 301,
             name: '企业家',
@@ -54,34 +54,30 @@ export const data = [{
       },
       {
         id: 4,
-        name: '悬疑',
-        categary: '类型',
+        name: '运输工具',
+        categary: '定义',
       },
       {
         id: 5,
-        name: '悬疑',
-        categary: '连载状态',
+        name: '刺激',
+        categary: '特点',
       },
       {
         id: 6,
-        name: '连载平台',
-        categary: '个人微信公众号和互联网上',
+        name: '通天峡',
+        categary: '著名景点',
       },
       {
         id: 7,
-        name: '最新章节',
-        categary: '重启·极海听雷第两百二十四章结局了',
+        name: '黄山索道',
+        categary: '著名景点',
       },
       {
         id: 8,
-        name: '小说主角',
-        categary: '吴邪、胖子、张起灵',
+        name: '天门山索道',
+        categary: '著名景点',
       },
-      {
-        id: 9,
-        name: '连载状态',
-        categary: '连载中',
-      }
+
     ]
   },
   {

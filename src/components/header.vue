@@ -14,7 +14,7 @@
           <!-- <router-link to="/sensation" exact>形象感知</router-link> -->
         </li>
       </ul>
-      <h1>旅游景点推荐与智能分析系统</h1>
+      <h1>旅游景点智能推荐与分析系统</h1>
       <ul>
         <li id="u2">
           <router-link to="/odAnalysis" exact>客流分析</router-link>

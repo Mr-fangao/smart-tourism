@@ -3,7 +3,7 @@
     <div class="video-container">
       <div class="filter">
         <div class="header">
-          <h1>旅游景点推荐与智能分析系统</h1>
+          <h1>旅游景点智能推荐与分析系统</h1>
         </div>
         <div class="login_style">
           <h2>用户登录</h2>

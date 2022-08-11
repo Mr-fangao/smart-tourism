@@ -129,10 +129,10 @@ export default {
   data() {
     return {
       user: {
-        uname: "李齐枫",
+        uname: "李某",
         uage: "21",
         sex: "男",
-        email: "123456789@163.com",
+        email: "xxxxxxxx@163.com",
         uAddress: "滁州市",
         //历史游览景点偏向分析
         uAnaysis: "",
