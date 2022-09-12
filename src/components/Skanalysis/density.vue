@@ -91,7 +91,6 @@
 </template>
 
 <script>
-import {loadModules} from "esri-loader";
 import axios from "axios";
 import HosNews from "./HosNews";
 import ChCity from "./ChCity.vue";

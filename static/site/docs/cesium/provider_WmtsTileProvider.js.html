@@ -1,0 +1,498 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> provider/WmtsTileProvider.js</title>
+
+  <script src="../cdn/run_prettify.js"></script>
+  <script src="../cdn/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="../cdn/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="../cdn/googleapis.css" rel="stylesheet">
+  <link href="../cdn/prettify.css" rel="stylesheet">
+  <link rel="stylesheet" href="../cdn/all.css" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="../cdn/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="../cdn/mapgis.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="../cdn/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+             
+                <a class="image" href="/">
+                    <img class="mapgis-webclient-logo" src="../image/mapgis_blue.png" alt="logo">
+                </a>
+            
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API
+                </a>
+                <div class="dropdown is-hoverable is-right">
+                    <a class="dropdown-trigger link">
+                        帮助向导
+                    </a>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-content">
+                        
+                            
+                                <a class="dropdown-item" href="tutorial-1.快速入门.html">
+                                    1.快速入门
+                                </a>
+                            
+                        
+                        </div>
+                    </div>
+                </div>
+                 
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/cesium/index.html"
+                        >
+                            Cesium
+                        </a>
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/mapboxgl/index.html"
+                        >
+                            MapboxGL
+                        </a>
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/leaflet/index.html"
+                        >
+                            Leaflet
+                        </a>
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/openlayers/index.html"
+                        >
+                            OpenLayers
+                        </a>
+                    
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            <div>
+                <span class="mapgis-api-document-span"><a href="index.html">API文档</a></span>
+            </div>
+            
+                <div class="search-wrapper">
+                    <input id="search" type="text" placeholder="搜索文档..." class="input">
+                </div>
+            
+            <nav>
+                
+                    <div class="category"><div class="mapgis-menu-span">模块</div><ul class="mapgis-sidebar-menus"><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E4%25BA%258B%25E4%25BB%25B6%25E7%25AE%25A1%25E7%2590%2586.html">客户端事件管理</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%2585%25AC%25E5%2585%25B1%25E6%2596%25B9%25E6%25B3%2595.html">客户端公共方法</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.html">客户端可视化</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596%25E5%2588%2586%25E6%259E%2590.html">客户端可视化分析</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.html">客户端数据服务</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%25B8%25B2%25E6%259F%2593.html">客户端渲染</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E8%25A7%2586%25E5%259B%25BE%25E7%25AE%25A1%25E7%2590%2586.html">客户端视图管理</a></li><li><a href="module-%25E6%259C%258D%25E5%258A%25A1%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259F%25A5%25E8%25AF%25A2.html">服务端数据查询</a></li><li><a href="module-%25E7%2594%25A8%25E6%2588%25B7%25E7%2595%258C%25E9%259D%25A2.html">用户界面</a></li></ul><div class="mapgis-menu-span">类名</div><ul class="mapgis-sidebar-menus"><li><a href="BaseLayer%2520%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1%25E5%259F%25BA%25E7%25B1%25BB.html">BaseLayer 数据服务基类</a></li><li><a href="CesiumSelectionIndicator.html">CesiumSelectionIndicator</a></li><li><a href="MapGIS2dDocProvider.html">MapGIS2dDocProvider</a></li><li><a href="module.exports_module.exports.html">exports</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E4%25BA%258B%25E4%25BB%25B6%25E7%25AE%25A1%25E7%2590%2586.MouseEventManager.html">MouseEventManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%2585%25AC%25E5%2585%25B1%25E6%2596%25B9%25E6%25B3%2595.CommonDataManager.html">CommonDataManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%2585%25AC%25E5%2585%25B1%25E6%2596%25B9%25E6%25B3%2595.CommonFuncManager.html">CommonFuncManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.EchartsLayer.html">EchartsLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.EntityController.html">EntityController</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.LabelLayer.html">LabelLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.MapVLayer.html">MapVLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.PopupController.html">PopupController</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.PopupLayer.html">PopupLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596%25E5%2588%2586%25E6%259E%2590.AdvancedAnalysisManager.html">AdvancedAnalysisManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596%25E5%2588%2586%25E6%259E%2590.AnalysisManager.html">AnalysisManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.LayerManager.html">LayerManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.M3DLayer.html">M3DLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.OGCLayer.html">OGCLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.TerrainLayer.html">TerrainLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.ThirdPartyLayer.html">ThirdPartyLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.TilesLayer.html">TilesLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%25B8%25B2%25E6%259F%2593.VectorTileLayer.html">VectorTileLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E8%25A7%2586%25E5%259B%25BE%25E7%25AE%25A1%25E7%2590%2586.SceneManager.html">SceneManager</a></li><li><a href="module-%25E6%259C%258D%25E5%258A%25A1%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259F%25A5%25E8%25AF%25A2.G3DDocQuery.html">G3DDocQuery</a></li><li><a href="module-%25E6%259C%258D%25E5%258A%25A1%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259F%25A5%25E8%25AF%25A2.MapDocQuery.html">MapDocQuery</a></li><li><a href="PopupElement.html">PopupElement</a></li><li><a href="WmtsTileProvider.html">WmtsTileProvider</a></li></ul><div class="mapgis-menu-span">全局</div><ul class="mapgis-sidebar-menus"><li><a href="global.html#addGridInfo">addGridInfo</a></li><li><a href="global.html#addImageLayer">addImageLayer</a></li><li><a href="global.html#calAngleOf3Pnt">calAngleOf3Pnt</a></li><li><a href="global.html#LayerType">LayerType</a></li><li><a href="global.html#removeAllEntities">removeAllEntities</a></li><li><a href="global.html#removeAllImageLayers">removeAllImageLayers</a></li><li><a href="global.html#removeAllPrimitives">removeAllPrimitives</a></li><li><a href="global.html#removeDocs">removeDocs</a></li><li><a href="global.html#removeEntity">removeEntity</a></li><li><a href="global.html#removeGridInfo">removeGridInfo</a></li><li><a href="global.html#removeImageLayer">removeImageLayer</a></li><li><a href="global.html#removeM3dLayer">removeM3dLayer</a></li><li><a href="global.html#removePrimitive">removePrimitive</a></li><li><a href="global.html#removeTerrain">removeTerrain</a></li><li><a href="global.html#updataPopupPosition">updataPopupPosition</a></li><li><a href="global.html#zoomToM3dLayer">zoomToM3dLayer</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <span class="page-title-sub">provider/WmtsTileProvider.js</span>
+                    <span class="page-title-main">Source</span>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// import Cesium from "../../../node_modules/cesium/Source/Cesium";
+import { CesiumZondy } from "../core/Base";
+
+var defaultCreditZondy = new Cesium.Credit("MapGISMap");
+
+/**
+ * @class 
+ * @param {*} options 
+ */
+export function WmtsTileProvider(options) {
+  function MapGISMapImageProvider(options) {
+    options = Cesium.defaultValue(options, {});
+
+    this.options = options;
+    this._imageVersion = Cesium.defaultValue(options.imageVersion, "0");
+    //var url = Cesium.defaultValue(options.url, "http://localhost:6163/igs/rest/mrms/tile/QUANQIU_180_ZC/{level}/{row}/{col}");
+    this._resource = new Cesium.Resource.createIfNeeded(options.url); //Resource.createIfNeeded(url);
+
+    this._mapStyle = options.mapStyle;
+    this._colNum = Cesium.defaultValue(options.colNum, 2);
+    this._rowNum = Cesium.defaultValue(options.rowNum, 1);
+    this._proxy = options.proxy;
+    this._imageInfoUrl = null;
+    this._tilingScheme = Cesium.defaultValue(
+      options.tilingScheme,
+      new Cesium.GeographicTilingScheme({
+        rectangle: Cesium.defaultValue(
+          options.rectangle,
+          new Cesium.Rectangle.fromDegrees(-180, -90, 180, 90)
+        ),
+        ellipsoid: Cesium.Ellipsoid.WGS84,
+        numberOfLevelZeroTilesX: this._colNum,
+        numberOfLevelZeroTilesY: this._rowNum,
+      })
+    );
+
+    this._rectangle = Cesium.defaultValue(
+      options.rectangle,
+      this._tilingScheme.rectangle
+    );
+    this._tileDiscardPolicy = options.tileDiscardPolicy;
+    this._tileWidth = Cesium.defaultValue(options.tileWidth, 256);
+    this._tileHeight = Cesium.defaultValue(options.tileWidth, 256);
+    this._enablePickFeatures = Cesium.defaultValue(
+      options.enablePickFeatures,
+      false
+    );
+    this._minimumLevel = Cesium.defaultValue(options.minimumLevel, 0);
+    this._maximumLevel = Cesium.defaultValue(options.maximumLevel, 20);
+
+    // this.url = options.url;
+    this.layer = options.layer;
+    this.style = options.style;
+    this.format = options.format;
+    this.tilematrixset = options.tilematrixset;
+    this.version = options.version || '1.0.0'
+
+    //韩彦生  --这里检查最小级别的瓦片数（限制不能大于4，否则后面的级别下载渲染的数据量太大容易死机）
+    var swTile = this._tilingScheme.positionToTileXY(
+      new Cesium.Rectangle.southwest(this._rectangle),
+      this._minimumLevel
+    );
+    var neTile = this._tilingScheme.positionToTileXY(
+      new Cesium.Rectangle.northeast(this._rectangle),
+      this._minimumLevel
+    );
+    var tileCount =
+      (Math.abs(neTile.x - swTile.x) + 1) * (Math.abs(neTile.y - swTile.y) + 1);
+    if (tileCount > 4) {
+      //throw new Cesium.DeveloperError('最小级别瓦片数量要小于4');
+    }
+
+    this._errorEvent = new Cesium.Event();
+    this._ready = true;
+    this._credit = Cesium.defaultValue(options.credit, defaultCreditZondy);
+  }
+  //注意MapGIS的xy和谷歌天地图以及其他瓦片的xy是相反的 x-y，y-x
+  function buildImageResource(imageryProvider, x, y, level, request) {
+    var imageUrl = imageryProvider._resource.url;
+
+    let version = imageryProvider.version || '1.0.0';
+    let layer = imageryProvider.layer;
+    let style = imageryProvider.style;
+    let format = imageryProvider.format || 'image/png';
+    let tilematrixset = imageryProvider.tilematrixset;
+    let tileMatrixSetID = imageryProvider.tileMatrixSetID;
+
+    imageUrl = imageUrl + `?service=WMTS&amp;version=${version}&amp;request=GetTile` 
+      + `&amp;layer=${layer}&amp;style=${style}`
+      + `&amp;tilematrixset=${tilematrixset}&amp;format=${format}`
+      + `&amp;tilematrix=${level}&amp;tilerow=${y}&amp;tilecol=${x}`
+
+  
+    return imageryProvider._resource.getDerivedResource({
+      url: imageUrl,
+      request: request,
+      proxy: imageryProvider._proxy, //添加代理处理
+      // templateValues: {
+      //    subdomain: subdomains[subdomainIndex],
+      //     culture: imageryProvider._culture
+      // }
+    });
+  }
+
+  Cesium.defineProperties(MapGISMapImageProvider.prototype, {
+    url: {
+      get: function () {
+        return this._url;
+      },
+    },
+    /**
+     * 获取代理.
+     * @memberof MapGISMapImageProvider.prototype
+     * @type {Proxy}
+     * @readonly
+     */
+    proxy: {
+      get: function () {
+        return this._proxy;
+      },
+    },
+
+    tileWidth: {
+      get: function () {
+        //>>includeStart('debug', pragmas.debug);
+        if (!this._ready) {
+          throw new Cesium.DeveloperError("图层未创建.");
+        }
+        //>>includeEnd('debug');
+
+        return this._tileWidth;
+      },
+    },
+
+    tileHeight: {
+      get: function () {
+        //>>includeStart('debug', pragmas.debug);
+        if (!this._ready) {
+          throw new Cesium.DeveloperError("图层未创建");
+        }
+        //>>includeEnd('debug');
+
+        return this._tileHeight;
+      },
+    },
+
+    maximumLevel: {
+      get: function () {
+        //>>includeStart('debug', pragmas.debug);
+        if (!this._ready) {
+          throw new Cesium.DeveloperError("图层未创建");
+        }
+        //>>includeEnd('debug');
+
+        return this._maximumLevel;
+      },
+    },
+
+    minimumLevel: {
+      get: function () {
+        //>>includeStart('debug', pragmas.debug);
+        if (!this._ready) {
+          throw new Cesium.DeveloperError("minimumLevel 图层未创建");
+        }
+        //>>includeEnd('debug');
+
+        return this._minimumLevel;
+      },
+    },
+
+    tilingScheme: {
+      get: function () {
+        //>>includeStart('debug', pragmas.debug);
+        if (!this._ready) {
+          throw new Cesium.DeveloperError("tilingScheme 图层未创建");
+        }
+        //>>includeEnd('debug');
+
+        return this._tilingScheme;
+      },
+    },
+
+    rectangle: {
+      get: function () {
+        //>>includeStart('debug', pragmas.debug);
+        if (!this._ready) {
+          throw new Cesium.DeveloperError("rectangle图层未创建");
+        }
+        //>>includeEnd('debug');
+
+        return this._rectangle;
+      },
+    },
+
+    tileDiscardPolicy: {
+      get: function () {
+        //>>includeStart('debug', pragmas.debug);
+        if (!this._ready) {
+          throw new Cesium.DeveloperError("tileDiscardPolicy 图层未创建.");
+        }
+        //>>includeEnd('debug');
+
+        return this._tileDiscardPolicy;
+      },
+    },
+
+    errorEvent: {
+      get: function () {
+        return this._errorEvent;
+      },
+    },
+
+    ready: {
+      get: function () {
+        return this._ready;
+      },
+    },
+
+    credit: {
+      get: function () {
+        return this._credit;
+      },
+    },
+
+    hasAlphaChannel: {
+      get: function () {
+        return true;
+      },
+    },
+  });
+
+  MapGISMapImageProvider.prototype.getTileCredits = function (x, y, level) {
+    if (!this._ready) {
+      throw new Cesium.DeveloperError("当前图层还未创建");
+    }
+    //暂时不需要
+    //var rectangleScratch = new Rectangle();
+    //var rectangle = this._tilingScheme.tileXYToRectangle(x, y, level, rectangleScratch);
+    var result = null;
+
+    return result;
+  };
+
+  MapGISMapImageProvider.prototype.requestImage = function (
+    x,
+    y,
+    level,
+    request
+  ) {
+    //>>includeStart('debug', pragmas.debug);
+    if (this.options.offset != 0) {
+      level += this.options.offset;
+    }
+    if (!this._ready) {
+      throw new Cesium.DeveloperError("requestImage ---图层未创建.");
+    }
+    //>>includeEnd('debug');
+    return Cesium.ImageryProvider.loadImage(
+      this,
+      buildImageResource(this, x, y, level, request)
+    );
+  };
+
+  MapGISMapImageProvider.prototype.pickFeatures = function (
+    x,
+    y,
+    level,
+    longitude,
+    latitude
+  ) {
+    if (!this._ready) {
+      throw new Cesium.DeveloperError("当前图层还未创建");
+    }
+
+    if (!this._enablePickFeatures) {
+      return undefined;
+    }
+
+    var url = this._imageInfoUrl.replace("{s}", (x + y) % 4);
+    url = url.replace("{row}", y);
+    url = url.replace("{col}", x);
+    url = url.replace("{level}", level);
+    if (this._isHistoryImage) {
+      url = url.replace("{version}", this._imageVersion);
+    }
+    var query = {
+      f: "json",
+    };
+
+    var resource = this._resource.getDerivedResource({
+      url: url,
+      queryParameters: query,
+    });
+    //约定返回为json后续
+    return resource.fetchJson().then(function (json) {
+      var result = [];
+
+      var features = json.results;
+      if (!features) {
+        return result;
+      }
+
+      for (var i = 0; i &lt; features.length; ++i) {
+        var feature = features[i];
+
+        var featureInfo = new Cesium.ImageryLayerFeatureInfo();
+        featureInfo.data = feature;
+        featureInfo.name = feature.value;
+        featureInfo.properties = feature.attributes;
+        featureInfo.configureDescriptionFromProperties(feature.attributes);
+        // 韩彦生 这里可以后续添加针对不同坐标系的坐标转换
+        result.push(featureInfo);
+      }
+      return result;
+    });
+  };
+
+  return new MapGISMapImageProvider(options);
+}
+
+CesiumZondy.Provider.MapGISMapImageProvider = WmtsTileProvider;
+CesiumZondy.Provider.WmtsTileProvider = WmtsTileProvider;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>文档生成<a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://www.smaryun.com" target="_blank">司马云</a> <span>© 2020 云生态圈</span>
+                        <a href="http://develop.smaryun.com:8899/" target="_blank">MapGIS Client for JavaScript</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+<script src="scripts/search.js"> </script>
+
+</body>
+</html>

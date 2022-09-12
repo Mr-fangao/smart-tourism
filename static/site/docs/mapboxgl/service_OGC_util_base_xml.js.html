@@ -1,0 +1,760 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Client for JavaScript service/OGC/util/base/xml.js</title>
+
+  <script src="../cdn/run_prettify.js"></script>
+  <script src="../cdn/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="../cdn/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="../cdn/googleapis.css" rel="stylesheet">
+  <link href="../cdn/prettify.css" rel="stylesheet">
+  <link rel="stylesheet" href="../cdn/all.css" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="../cdn/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="../cdn/mapgis.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="../cdn/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+             
+                <a class="image" href="/">
+                    <img class="mapgis-webclient-logo" src="../image/mapgis_blue.png" alt="logo">
+                </a>
+            
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API
+                </a>
+                <div class="dropdown is-hoverable is-right">
+                    <a class="dropdown-trigger link">
+                        帮助向导
+                    </a>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-content">
+                        
+                            
+                                <a class="dropdown-item" href="tutorial-1.快速入门.html">
+                                    1.快速入门
+                                </a>
+                            
+                        
+                        </div>
+                    </div>
+                </div>
+                 
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/cesium/index.html"
+                        >
+                            Cesium
+                        </a>
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/mapboxgl/index.html"
+                        >
+                            MapboxGL
+                        </a>
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/leaflet/index.html"
+                        >
+                            Leaflet
+                        </a>
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/openlayers/index.html"
+                        >
+                            OpenLayers
+                        </a>
+                    
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            <div>
+                <span class="mapgis-api-document-span"><a href="index.html">API文档</a></span>
+            </div>
+            
+                <div class="search-wrapper">
+                    <input id="search" type="text" placeholder="搜索文档..." class="input">
+                </div>
+            
+            <nav>
+                
+                    <div class="category"><div class="mapgis-menu-span">模块</div><ul class="mapgis-sidebar-menus"><li><a href="module-ArcGis.html">ArcGis</a></li><li><a href="module-CloudDisk.html">CloudDisk</a></li><li><a href="module-DataStore.html">DataStore</a></li><li><a href="module-IGServerX.html">IGServerX</a></li><li><a href="module-OGC%25E6%259C%258D%25E5%258A%25A1.html">OGC服务</a></li><li><a href="module-OpenGeospatialConsortium%25E6%259C%258D%25E5%258A%25A1.html">OpenGeospatialConsortium服务</a></li><li><a href="module-PostGIS.html">PostGIS</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.html">专题图服务</a></li><li><a href="module-%25E5%2587%25A0%25E4%25BD%2595%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.html">几何分析服务</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.html">分析服务</a></li><li><a href="module-%25E5%259C%25B0%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.html">地图服务</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.html">客户端可视化</a></li><li><a href="module-%25E5%25BC%25B9%25E6%2580%25A7%25E6%2590%259C%25E7%25B4%25A2%25E6%259C%258D%25E5%258A%25A1.html">弹性搜索服务</a></li><li><a href="module-%25E7%259B%25AE%25E5%25BD%2595%25E6%259C%258D%25E5%258A%25A1.html">目录服务</a></li><li><a href="module-%25E7%259F%25A2%25E9%2587%258F%25E5%25A4%25A7%25E6%2595%25B0%25E6%258D%25AE.html">矢量大数据</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.html">要素服务</a></li></ul><div class="mapgis-menu-span">类名</div><ul class="mapgis-sidebar-menus"><li><a href="Circle.html">Circle</a></li><li><a href="CoordinateElpTrans.html">CoordinateElpTrans</a></li><li><a href="ElsCubeLayer_ElsCubeLayer.html">ElsCubeLayer</a></li><li><a href="FunctionWareService.html">FunctionWareService</a></li><li><a href="GeojsonStreamLayer.html">GeojsonStreamLayer</a></li><li><a href="ISocketService.html">ISocketService</a></li><li><a href="L.zondy.StreamLayer.html">StreamLayer</a></li><li><a href="mapboxgl.zondy.CubeLayer.html">CubeLayer</a></li><li><a href="mapboxgl.zondy.DeckglLayer.html">DeckglLayer</a></li><li><a href="mapboxgl.zondy.Graphic.html">Graphic</a></li><li><a href="mapboxgl.Zondy.Map.ArcGISLayer.html">ArcGISLayer</a></li><li><a href="mapboxgl.Zondy.Map.MapDocLayer.html">MapDocLayer</a></li><li><a href="mapboxgl.Zondy.Map.MapTileLayer.html">MapTileLayer</a></li><li><a href="mapboxgl.Zondy.Map.MapVectorLayer.html">MapVectorLayer</a></li><li><a href="mapboxgl.Zondy.Map.MapWmsLayer.html">MapWmsLayer</a></li><li><a href="mapboxgl.Zondy.Map.MapWMTSLayer.html">MapWMTSLayer</a></li><li><a href="mapboxgl.Zondy.Map.TDTLayer.html">TDTLayer</a></li><li><a href="mapboxgl.zondy.UniqueTheme3DLayer.html">UniqueTheme3DLayer</a></li><li><a href="mapboxgl.zondy.Util.html">Util</a></li><li><a href="MapvStreamLayer.html">MapvStreamLayer</a></li><li><a href="module-ArcGis.ArcGisBaseParam.html">ArcGisBaseParam</a></li><li><a href="module-ArcGis.ArcGisExtent.html">ArcGisExtent</a></li><li><a href="module-ArcGis.ArcGisFeatureLayer.html">ArcGisFeatureLayer</a></li><li><a href="module-ArcGis.ArcGisFindTask.html">ArcGisFindTask</a></li><li><a href="module-ArcGis.ArcGisGraphic.html">ArcGisGraphic</a></li><li><a href="module-ArcGis.ArcGisIdentifyTask.html">ArcGisIdentifyTask</a></li><li><a href="module-ArcGis.ArcGisMultipoint.html">ArcGisMultipoint</a></li><li><a href="module-ArcGis.ArcGisPoint.html">ArcGisPoint</a></li><li><a href="module-ArcGis.ArcGisPolygon.html">ArcGisPolygon</a></li><li><a href="module-ArcGis.ArcGisPolyline.html">ArcGisPolyline</a></li><li><a href="module-ArcGis.ArcGisQuery.html">ArcGisQuery</a></li><li><a href="module-ArcGis.ArcGisServiceBase.html">ArcGisServiceBase</a></li><li><a href="module-ArcGis.ArcGisSpatialReference.html">ArcGisSpatialReference</a></li><li><a href="module-CloudDisk.CalculateModelService.html">CalculateModelService</a></li><li><a href="module-CloudDisk.CloudDiskService.html">CloudDiskService</a></li><li><a href="module-CloudDisk.GeoDatasetService.html">GeoDatasetService</a></li><li><a href="module-CloudDisk.GisCore.FileService.html">FileService</a></li><li><a href="module-CloudDisk.ToolsService.html">ToolsService</a></li><li><a href="module-CloudDisk.UserService.html">UserService</a></li><li><a href="module-DataStore.DataStoreService.html">DataStoreService</a></li><li><a href="module-DataStore.ServiceParameter.html">ServiceParameter</a></li><li><a href="module-IGServerX.IGServerXService.html">IGServerXService</a></li><li><a href="module-OGC%2525E6%25259C%25258D%2525E5%25258A%2525A1.OGCService.html">OGCService</a></li><li><a href="module-OGC%25E6%259C%258D%25E5%258A%25A1.OGCWMSInfo.html">OGCWMSInfo</a></li><li><a href="module-OGC%25E6%259C%258D%25E5%258A%25A1.OGCWMTSInfo.html">OGCWMTSInfo</a></li><li><a href="module-OGC%25E6%259C%258D%25E5%258A%25A1.WMS.html">WMS</a></li><li><a href="module-PostGIS.PostgisCatlogService.html">PostgisCatlogService</a></li><li><a href="module-PostGIS.PostgisCustomQueryService.html">PostgisCustomQueryService</a></li><li><a href="module-PostGIS.PostgisQueryService.html">PostgisQueryService</a></li><li><a href="module-PostGIS.PostgisTableService.html">PostgisTableService</a></li><li><a href="module-PostGIS.PostgisVectorTileService.html">PostgisVectorTileService</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CAllOtherDataItemInfoSource.html">CAllOtherDataItemInfoSource</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CAnnInfo.html">CAnnInfo</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CChartLabelFormat.html">CChartLabelFormat</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CChartTheme.html">CChartTheme</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CChartThemeInfo.html">CChartThemeInfo</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CChartThemeRepresentInfo.html">CChartThemeRepresentInfo</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CChartType.html">CChartType</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CDotDensityTheme.html">CDotDensityTheme</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CFourColorTheme.html">CFourColorTheme</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CGraduatedSymbolTheme.html">CGraduatedSymbolTheme</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CLinInfo.html">CLinInfo</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CMultiClassTheme.html">CMultiClassTheme</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CPntInfo.html">CPntInfo</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CRandomTheme.html">CRandomTheme</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CRangeTheme.html">CRangeTheme</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CRangeThemeInfo.html">CRangeThemeInfo</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CRegInfo.html">CRegInfo</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CSimpleTheme.html">CSimpleTheme</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CTheme.html">CTheme</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CThemeInfo.html">CThemeInfo</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CUniqueTheme.html">CUniqueTheme</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CUniqueThemeInfo.html">CUniqueThemeInfo</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.ExpInfo.html">ExpInfo</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.FolderInfo.html">FolderInfo</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.FolderInfoAttribute.html">FolderInfoAttribute</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.ItemValue.html">ItemValue</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.ThemeOper.html">ThemeOper</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.ThemesInfo.html">ThemesInfo</a></li><li><a href="module-%25E5%2587%25A0%25E4%25BD%2595%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.CalArea.html">CalArea</a></li><li><a href="module-%25E5%2587%25A0%25E4%25BD%2595%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.CalPolyLineLength.html">CalPolyLineLength</a></li><li><a href="module-%25E5%2587%25A0%25E4%25BD%2595%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.CalServiceBase.html">CalServiceBase</a></li><li><a href="module-%25E5%2587%25A0%25E4%25BD%2595%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.CProjectBySRSID.html">CProjectBySRSID</a></li><li><a href="module-%25E5%2587%25A0%25E4%25BD%2595%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.CProjectParam.html">CProjectParam</a></li><li><a href="module-%25E5%2587%25A0%25E4%25BD%2595%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.GeometryAnalysisBase.html">GeometryAnalysisBase</a></li><li><a href="module-%25E5%2587%25A0%25E4%25BD%2595%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ProjectDots.html">ProjectDots</a></li><li><a href="module-%25E5%2587%25A0%25E4%25BD%2595%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ProjectRang.html">ProjectRang</a></li><li><a href="module-%25E5%2587%25A0%25E4%25BD%2595%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.Smooth.html">Smooth</a></li><li><a href="module-%25E5%2587%25A0%25E4%25BD%2595%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.TopAnalysis.html">TopAnalysis</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.AnalysisBase.html">AnalysisBase</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ClassBufferBase.html">ClassBufferBase</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ClassBufferByMultiplyRing.html">ClassBufferByMultiplyRing</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ClassBufferBySingleRing.html">ClassBufferBySingleRing</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ClipBase.html">ClipBase</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ClipByCircle.html">ClipByCircle</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ClipByLayer.html">ClipByLayer</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ClipByPolygon.html">ClipByPolygon</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ContourAnalyse.html">ContourAnalyse</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.FeatureBuffBase.html">FeatureBuffBase</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.FeatureBuffByMultiplyRing.html">FeatureBuffByMultiplyRing</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.FeatureBuffBySingleRing.html">FeatureBuffBySingleRing</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.NetAnalysis.html">NetAnalysis</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.OverlayBase.html">OverlayBase</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.OverlayByLayer.html">OverlayByLayer</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.OverlayByPolygon.html">OverlayByPolygon</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ProjectBase.html">ProjectBase</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ProjectByLayer.html">ProjectByLayer</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ProjectBySRID.html">ProjectBySRID</a></li><li><a href="module-%25E5%259C%25B0%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.GetDocImageService.html">GetDocImageService</a></li><li><a href="module-%25E5%259C%25B0%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.GetLayerImageService.html">GetLayerImageService</a></li><li><a href="module-%25E5%259C%25B0%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.GetMapImageService.html">GetMapImageService</a></li><li><a href="module-%25E5%259C%25B0%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.GetMapInfoService.html">GetMapInfoService</a></li><li><a href="module-%25E5%259C%25B0%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.GetTileImageService.html">GetTileImageService</a></li><li><a href="module-%25E5%259C%25B0%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.MapServiceBase.html">MapServiceBase</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.EchartsLayer.html">EchartsLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.MapvLayer.html">MapvLayer</a></li><li><a href="module-%25E5%25BC%25B9%25E6%2580%25A7%25E6%2590%259C%25E7%25B4%25A2%25E6%259C%258D%25E5%258A%25A1.EsCatlogService.html">EsCatlogService</a></li><li><a href="module-%25E5%25BC%25B9%25E6%2580%25A7%25E6%2590%259C%25E7%25B4%25A2%25E6%259C%258D%25E5%258A%25A1.ESGeoCode.html">ESGeoCode</a></li><li><a href="module-%25E5%25BC%25B9%25E6%2580%25A7%25E6%2590%259C%25E7%25B4%25A2%25E6%259C%258D%25E5%258A%25A1.EsGeocodeParameter.html">EsGeocodeParameter</a></li><li><a href="module-%25E5%25BC%25B9%25E6%2580%25A7%25E6%2590%259C%25E7%25B4%25A2%25E6%259C%258D%25E5%258A%25A1.EsGeocodeService.html">EsGeocodeService</a></li><li><a href="module-%25E5%25BC%25B9%25E6%2580%25A7%25E6%2590%259C%25E7%25B4%25A2%25E6%259C%258D%25E5%258A%25A1.ESGeoDecode.html">ESGeoDecode</a></li><li><a href="module-%25E5%25BC%25B9%25E6%2580%25A7%25E6%2590%259C%25E7%25B4%25A2%25E6%259C%258D%25E5%258A%25A1.ESQueryStats.html">ESQueryStats</a></li><li><a href="module-%25E5%25BC%25B9%25E6%2580%25A7%25E6%2590%259C%25E7%25B4%25A2%25E6%259C%258D%25E5%258A%25A1.EsSpaceTimeQueryByAgg.html">EsSpaceTimeQueryByAgg</a></li><li><a href="module-%25E5%25BC%25B9%25E6%2580%25A7%25E6%2590%259C%25E7%25B4%25A2%25E6%259C%258D%25E5%258A%25A1.EsTableService.html">EsTableService</a></li><li><a href="module-%25E7%259B%25AE%25E5%25BD%2595%25E6%259C%258D%25E5%258A%25A1.CatalogService.html">CatalogService</a></li><li><a href="module-%25E7%259B%25AE%25E5%25BD%2595%25E6%259C%258D%25E5%258A%25A1.ColorInfo.html">ColorInfo</a></li><li><a href="module-%25E7%259B%25AE%25E5%25BD%2595%25E6%259C%258D%25E5%258A%25A1.GDBInfo.html">GDBInfo</a></li><li><a href="module-%25E7%259B%25AE%25E5%25BD%2595%25E6%259C%258D%25E5%258A%25A1.MapDoc.html">MapDoc</a></li><li><a href="module-%25E7%259B%25AE%25E5%25BD%2595%25E6%259C%258D%25E5%258A%25A1.SystomInfo.html">SystomInfo</a></li><li><a href="module-%25E7%259B%25AE%25E5%25BD%2595%25E6%259C%258D%25E5%258A%25A1.TileLayer.html">TileLayer</a></li><li><a href="module-%25E7%259B%25AE%25E5%25BD%2595%25E6%259C%258D%25E5%258A%25A1.VectorLayer.html">VectorLayer</a></li><li><a href="module-%25E7%259F%25A2%25E9%2587%258F%25E5%25A4%25A7%25E6%2595%25B0%25E6%258D%25AE.SparkBufferService.html">SparkBufferService</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.EditDocFeature.html">EditDocFeature</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.EditLayerFeature.html">EditLayerFeature</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.EditServiceBase.html">EditServiceBase</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.MultiGeoQuery.html">MultiGeoQuery</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.MultiGeoQueryParameter.html">MultiGeoQueryParameter</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.ObjClsQuery.html">ObjClsQuery</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.ObjClsQueryParameter.html">ObjClsQueryParameter</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.QueryByLayerParameter.html">QueryByLayerParameter</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.QueryDocFeature.html">QueryDocFeature</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.QueryFeatureRule.html">QueryFeatureRule</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.QueryFeatureStruct.html">QueryFeatureStruct</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.QueryLayerFeature.html">QueryLayerFeature</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.QueryParameter.html">QueryParameter</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.QueryParameterBase.html">QueryParameterBase</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.QueryServiceBase.html">QueryServiceBase</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.QueryUnifyFeature.html">QueryUnifyFeature</a></li><li><a href="module=ArcGis.ArcGisFindParameters.html">ArcGisFindParameters</a></li><li><a href="module=ArcGis.ArcGisIdentifyParameters.html">ArcGisIdentifyParameters</a></li><li><a href="RangeTheme3DLayer.html">RangeTheme3DLayer</a></li><li><a href="SocketService.html">SocketService</a></li><li><a href="Theme3DLayer.html">Theme3DLayer</a></li><li><a href="TimeSpaceCubeLayer_TimeSpaceCubeLayer.html">TimeSpaceCubeLayer</a></li><li><a href="Zondy.Catalog.G3DMapDoc.html">G3DMapDoc</a></li><li><a href="Zondy.Catalog.G3DMapDoc_GetFeature.html">GetFeature</a></li><li><a href="Zondy.Catalog.G3DService.html">G3DService</a></li><li><a href="Zondy.Catalog.SystomInfo.html#GetSystemLibrary">GetSystemLibrary</a></li><li><a href="Zondy.Format.WMSCapabilities.html">WMSCapabilities</a></li><li><a href="Zondy.Format.WMTSCapabilities.html">WMTSCapabilities</a></li><li><a href="Zondy.Map.GeoFeatureThemeLayer.html">GeoFeatureThemeLayer</a></li><li><a href="Zondy.Map.graphThemeLayer.html">graphThemeLayer</a></li><li><a href="Zondy.Map.randomThemeLayer.html">randomThemeLayer</a></li><li><a href="Zondy.Map.rangeThemeLayer.html">rangeThemeLayer</a></li><li><a href="Zondy.Map.rankSymbolThemeLayer.html">rankSymbolThemeLayer</a></li><li><a href="Zondy.Map.simpleThemeLayer.html">simpleThemeLayer</a></li><li><a href="Zondy.Map.ThemeLayer.html">ThemeLayer</a></li><li><a href="Zondy.Map.ThemeStyle.html">ThemeStyle</a></li><li><a href="Zondy.Map.uniqueThemeLayer.html">uniqueThemeLayer</a></li><li><a href="Zondy.Object.AnyLine.html">AnyLine</a></li><li><a href="Zondy.Object.Arc.html">Arc</a></li><li><a href="Zondy.Object.CAttDataRow.html">CAttDataRow</a></li><li><a href="Zondy.Object.CAttStruct.html">CAttStruct</a></li><li><a href="Zondy.Object.CDisplayStyle.html">CDisplayStyle</a></li><li><a href="Zondy.Object.CDisplayStyleExtend.html">CDisplayStyleExtend</a></li><li><a href="Zondy.Object.CDynNoteInfo.html">CDynNoteInfo</a></li><li><a href="Zondy.Object.Circle.html">Circle</a></li><li><a href="Zondy.Object.CLineInfo.html">CLineInfo</a></li><li><a href="Zondy.Object.ContourAnalyse.ContourParam.html">ContourParam</a></li><li><a href="Zondy.Object.ContourAnalyse.MeshingParam.html">MeshingParam</a></li><li><a href="Zondy.Object.ContourAnalyse.SlopLineParam.html">SlopLineParam</a></li><li><a href="Zondy.Object.CPointInfo.html">CPointInfo</a></li><li><a href="Zondy.Object.CRegionInfo.html">CRegionInfo</a></li><li><a href="Zondy.Object.DynNoteLableType.html">DynNoteLableType</a></li><li><a href="Zondy.Object.DynShowStyle.html">DynShowStyle</a></li><li><a href="Zondy.Object.Feature.html">Feature</a></li><li><a href="Zondy.Object.FeatureGeometry.html">FeatureGeometry</a></li><li><a href="Zondy.Object.FeatureGraphicBase.html">FeatureGraphicBase</a></li><li><a href="Zondy.Object.FeatureSet.html">FeatureSet</a></li><li><a href="Zondy.Object.GLine.html">GLine</a></li><li><a href="Zondy.Object.GPoint.html">GPoint</a></li><li><a href="Zondy.Object.GRegion.html">GRegion</a></li><li><a href="Zondy.Object.LabelLinInfo.html">LabelLinInfo</a></li><li><a href="Zondy.Object.LabelRegInfo.html">LabelRegInfo</a></li><li><a href="Zondy.Object.LablePntInfo.html">LablePntInfo</a></li><li><a href="Zondy.Object.MultiPolygon.html">MultiPolygon</a></li><li><a href="Zondy.Object.Point2D.html">Point2D</a></li><li><a href="Zondy.Object.Polygon.html">Polygon</a></li><li><a href="Zondy.Object.PolyLine.html">PolyLine</a></li><li><a href="Zondy.Object.Rectangle.html">Rectangle</a></li><li><a href="Zondy.Object.Tangram.html">Tangram</a></li><li><a href="Zondy.Object.VectCls.html">VectCls</a></li><li><a href="Zondy.Object.WebGraphicsInfo.html">WebGraphicsInfo</a></li><li><a href="Zondy.Service.ServiceBase.html">ServiceBase</a></li></ul><div class="mapgis-menu-span">事件</div><ul class="mapgis-sidebar-menus"><li><a href="Zondy.Map.GeoFeatureThemeLayer.html#event:changelayer">changelayer</a></li><li><a href="Zondy.Map.GeoFeatureThemeLayer.html#event:featuresremoved">featuresremoved</a></li><li><a href="Zondy.Map.graphThemeLayer.html#event:changelayer">changelayer</a></li><li><a href="Zondy.Map.graphThemeLayer.html#event:featuresremoved">featuresremoved</a></li><li><a href="Zondy.Map.randomThemeLayer.html#event:changelayer">changelayer</a></li><li><a href="Zondy.Map.randomThemeLayer.html#event:featuresremoved">featuresremoved</a></li><li><a href="Zondy.Map.rangeThemeLayer.html#event:changelayer">changelayer</a></li><li><a href="Zondy.Map.rangeThemeLayer.html#event:featuresremoved">featuresremoved</a></li><li><a href="Zondy.Map.simpleThemeLayer.html#event:changelayer">changelayer</a></li><li><a href="Zondy.Map.simpleThemeLayer.html#event:featuresremoved">featuresremoved</a></li><li><a href="Zondy.Map.ThemeLayer.html#event:changelayer">changelayer</a></li><li><a href="Zondy.Map.ThemeLayer.html#event:featuresremoved">featuresremoved</a></li><li><a href="Zondy.Map.uniqueThemeLayer.html#event:changelayer">changelayer</a></li><li><a href="Zondy.Map.uniqueThemeLayer.html#event:featuresremoved">featuresremoved</a></li></ul><div class="mapgis-menu-span">全局</div><ul class="mapgis-sidebar-menus"><li><a href="global.html#addFeatures">addFeatures</a></li><li><a href="global.html#addTo">addTo</a></li><li><a href="global.html#appendUrl">appendUrl</a></li><li><a href="global.html#base">base</a></li><li><a href="global.html#baseHeightField">baseHeightField</a></li><li><a href="global.html#BroadcastEvent">BroadcastEvent</a></li><li><a href="global.html#CItemType">CItemType</a></li><li><a href="global.html#CLinAdjustType">CLinAdjustType</a></li><li><a href="global.html#CLinHeadType">CLinHeadType</a></li><li><a href="global.html#CLinJointType">CLinJointType</a></li><li><a href="global.html#CLinStyleMakeType">CLinStyleMakeType</a></li><li><a href="global.html#colorStops">colorStops</a></li><li><a href="global.html#copyProperties">copyProperties</a></li><li><a href="global.html#EightDirType">EightDirType</a></li><li><a href="global.html#enableHighlight">enableHighlight</a></li><li><a href="global.html#EsCatlogName">EsCatlogName</a></li><li><a href="global.html#EsCatlogType">EsCatlogType</a></li><li><a href="global.html#EsGeoHashType">EsGeoHashType</a></li><li><a href="global.html#extend">extend</a></li><li><a href="global.html#FeatureType">FeatureType</a></li><li><a href="global.html#FontShape">FontShape</a></li><li><a href="global.html#getData">getData</a></li><li><a href="global.html#getHighlightStyleOptions">getHighlightStyleOptions</a></li><li><a href="global.html#getLayerStyleOptions">getLayerStyleOptions</a></li><li><a href="global.html#height">height</a></li><li><a href="global.html#heightField">heightField</a></li><li><a href="global.html#heightStops">heightStops</a></li><li><a href="global.html#highlight">highlight</a></li><li><a href="global.html#id">id</a></li><li><a href="global.html#interpolateLagrange">interpolateLagrange</a></li><li><a href="global.html#ISShowArc">ISShowArc</a></li><li><a href="global.html#LabelLinType">LabelLinType</a></li><li><a href="global.html#LabelPntType">LabelPntType</a></li><li><a href="global.html#LabelRegType">LabelRegType</a></li><li><a href="global.html#LabelSpreadType">LabelSpreadType</a></li><li><a href="global.html#LayerEvent">LayerEvent</a></li><li><a href="global.html#LayerStatusType">LayerStatusType</a></li><li><a href="global.html#legendOrientation">legendOrientation</a></li><li><a href="global.html#legendPosition">legendPosition</a></li><li><a href="global.html#legendRatio">legendRatio</a></li><li><a href="global.html#legendTheme">legendTheme</a></li><li><a href="global.html#legendTitle">legendTitle</a></li><li><a href="global.html#LineConstrain">LineConstrain</a></li><li><a href="global.html#map">map</a></li><li><a href="global.html#MapType">MapType</a></li><li><a href="global.html#mix">mix</a></li><li><a href="global.html#NetAnalyType">NetAnalyType</a></li><li><a href="global.html#NetElemType">NetElemType</a></li><li><a href="global.html#objectStack%255Bundefined%255D">objectStack[undefined]</a></li><li><a href="global.html#opacity">opacity</a></li><li><a href="global.html#PARAM_BRACKET_LEFT">PARAM_BRACKET_LEFT</a></li><li><a href="global.html#PARAM_BRACKET_RIGHT">PARAM_BRACKET_RIGHT</a></li><li><a href="global.html#PARAM_COMMA">PARAM_COMMA</a></li><li><a href="global.html#PARAM_SPACE">PARAM_SPACE</a></li><li><a href="global.html#PARAM_SPLIT">PARAM_SPLIT</a></li><li><a href="global.html#PARAM_SUB">PARAM_SUB</a></li><li><a href="global.html#parseNumber">parseNumber</a></li><li><a href="global.html#remove">remove</a></li><li><a href="global.html#RepeatType">RepeatType</a></li><li><a href="global.html#setData">setData</a></li><li><a href="global.html#setLayerOptions">setLayerOptions</a></li><li><a href="global.html#show">show</a></li><li><a href="global.html#showLegend">showLegend</a></li><li><a href="global.html#SPACE_ENUM_POLYGON">SPACE_ENUM_POLYGON</a></li><li><a href="global.html#SubscribeEvent">SubscribeEvent</a></li><li><a href="global.html#themeField">themeField</a></li><li><a href="global.html#TotalCount">TotalCount</a></li><li><a href="global.html#VectClsType">VectClsType</a></li><li><a href="global.html#XClsType">XClsType</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <span class="page-title-sub">service/OGC/util/base/xml.js</span>
+                    <span class="page-title-main">Source</span>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import {
+    Zondy
+} from '../../../common/Base';
+import {
+    extend
+} from './array';
+
+/**
+ * @private
+ * @description This document should be used when creating nodes for XML serializations. This
+ * document is also used by {@link module:ol/xml~createElementNS}
+ * 适用于创建XML序列节点
+ * @const DOCUMENT
+ * @type {Document}
+ */
+const DOCUMENT = document.implementation.createDocument('', '', null);
+
+
+/**
+ * @private
+ * @const XML_SCHEMA_INSTANCE_URI
+ * @type {string}
+ */
+const XML_SCHEMA_INSTANCE_URI = 'http://www.w3.org/2001/XMLSchema-instance';
+
+
+/**
+ * @private
+ * @description 创建节点元素
+ * @param {string} namespaceURI Namespace URI.
+ * @param {string} qualifiedName Qualified name.
+ * @return {Element} Node.
+ */
+var createElementNS = function (namespaceURI, qualifiedName) {
+    return DOCUMENT.createElementNS(namespaceURI, qualifiedName);
+}
+
+
+/**
+ * @private
+ * @description Recursively grab all text content of child nodes into a single string.
+ * 递归通过单个字符获取子节点的所有文本内容
+ * @param {Node} node Node.
+ * @param {boolean} normalizeWhitespace Normalize whitespace: remove all line
+ * breaks.
+ * @return {string} All text content.
+ */
+var getAllTextContent = function (node, normalizeWhitespace) {
+    return getAllTextContent_(node, normalizeWhitespace, []).join('');
+}
+
+
+/**
+ * @private
+ * @description Recursively grab all text content of child nodes into a single string.
+ * 递归通过单个字符获取子节点的所有文本内容
+ * @param {Node} node Node.
+ * @param {boolean} normalizeWhitespace Normalize whitespace: remove all line
+ * breaks.
+ * @param {Array&lt;string>} accumulator Accumulator.
+ * @private
+ * @return {Array&lt;string>} Accumulator.
+ */
+var getAllTextContent_ = function (node, normalizeWhitespace, accumulator) {
+    if (node.nodeType == Node.CDATA_SECTION_NODE ||
+        node.nodeType == Node.TEXT_NODE) {
+        if (normalizeWhitespace) {
+            accumulator.push(String(node.nodeValue).replace(/(\r\n|\r|\n)/g, ''));
+        } else {
+            accumulator.push(node.nodeValue);
+        }
+    } else {
+        let n;
+        for (n = node.firstChild; n; n = n.nextSibling) {
+            getAllTextContent_(n, normalizeWhitespace, accumulator);
+        }
+    }
+    return accumulator;
+}
+
+
+/**
+ * @private
+ * @description 判断给定的值是否为文档
+ * @param {?} value Value.
+ * @return {boolean} Is document.
+ */
+var isDocument = function (value) {
+    return value instanceof Document;
+}
+
+
+/**
+ * @private
+ * @description 判断给定的值是否为节点
+ * @param {?} value Value.
+ * @return {boolean} Is node.
+ */
+var isNode = function (value) {
+    return value instanceof Node;
+}
+
+
+/**
+ * @private
+ * @description 获取属性信息
+ * @param {Element} node Node.
+ * @param {?string} namespaceURI Namespace URI.
+ * @param {string} name Attribute name.
+ * @return {string} Value
+ */
+var getAttributeNS = function (node, namespaceURI, name) {
+    return node.getAttributeNS(namespaceURI, name) || '';
+}
+
+
+/**
+ * @private
+ * @description Parse an XML string to an XML Document.
+ * 将XML字符串解析为XML文档
+ * @param {string} xml XML.
+ * @return {Document} Document.
+ * @api
+ */
+var parse = function (xml) {
+    return new DOMParser().parseFromString(xml, 'application/xml');
+}
+
+
+/**
+ * @private
+ * @description Make an array extender function for extending the array at the top of the
+ * object stack.
+ * 创建一个数组扩展器函数，用于扩展对象堆栈顶部的数组。
+ * @param {function(this: T, Node, Array&lt;*>): (Array&lt;*>|undefined)} valueReader Value reader.
+ * @param {T=} opt_this The object to use as `this` in `valueReader`.
+ * @return {Parser} Parser.
+ * @template T
+ */
+var makeArrayExtender = function (valueReader, opt_this) {
+    return (
+        /**
+         * @private
+         * @param {Node} node Node.
+         * @param {Array&lt;*>} objectStack Object stack.
+         */
+            function (node, objectStack) {
+            const value = valueReader.call(opt_this !== undefined ? opt_this : this, node, objectStack);
+            if (value !== undefined) {
+                const array = /** @type {Array&lt;*>} */ (objectStack[objectStack.length - 1]);
+                extend(array, value);
+            }
+        }
+    );
+}
+
+
+/**
+ * @private
+ * @description Make an array pusher function for pushing to the array at the top of the
+ * object stack.
+ * 创建一个数组推送器功能，用于推送到对象堆栈顶部的数组。
+ * @param {function(this: T, Element, Array&lt;*>): *} valueReader Value reader.
+ * @param {T=} opt_this The object to use as `this` in `valueReader`.
+ * @return {Parser} Parser.
+ * @template T
+ */
+var makeArrayPusher = function (valueReader, opt_this) {
+    return (
+        /**
+         * @private
+         * @param {Element} node Node.
+         * @param {Array&lt;*>} objectStack Object stack.
+         */
+            function (node, objectStack) {
+            const value = valueReader.call(opt_this !== undefined ? opt_this : this, node, objectStack);
+            if (value !== undefined) {
+                const array = /** @type {Array&lt;*>} */ (objectStack[objectStack.length - 1]);
+                array.push(value);
+            }
+        });
+}
+
+
+/**
+ * @private
+ * @description Make an object stack replacer function for replacing the object at the
+ * top of the stack.
+ * 创建一个对象堆栈替换器函数，用于替换堆栈顶部的对象。
+ * @param {function(this: T, Node, Array&lt;*>): *} valueReader Value reader.
+ * @param {T=} opt_this The object to use as `this` in `valueReader`.
+ * @return {Parser} Parser.
+ * @template T
+ */
+var makeReplacer = function (valueReader, opt_this) {
+    return (
+        /**
+         * @private
+         * @param {Node} node Node.
+         * @param {Array&lt;*>} objectStack Object stack.
+         */
+            function (node, objectStack) {
+            const value = valueReader.call(opt_this !== undefined ? opt_this : this, node, objectStack);
+            if (value !== undefined) {
+                objectStack[objectStack.length - 1] = value;
+            }
+        });
+}
+
+
+/**
+ * @private
+ * @description Make an object property pusher function for adding a property to the
+ * object at the top of the stack.
+ * 创建一个对象属性推送器函数，用于向堆栈顶部的对象添加属性。
+ * @param {function(this: T, Element, Array&lt;*>): *} valueReader Value reader.
+ * @param {string=} opt_property Property.
+ * @param {T=} opt_this The object to use as `this` in `valueReader`.
+ * @return {Parser} Parser.
+ * @template T
+ */
+var makeObjectPropertyPusher = function (valueReader, opt_property, opt_this) {
+    return (
+        /**
+         * @private
+         * @param {Element} node Node.
+         * @param {Array&lt;*>} objectStack Object stack.
+         */
+            function (node, objectStack) {
+            const value = valueReader.call(opt_this !== undefined ? opt_this : this, node, objectStack);
+            if (value !== undefined) {
+                const object = /** @type {!Object} */ (objectStack[objectStack.length - 1]);
+                const property = opt_property !== undefined ? opt_property : node.localName;
+                let array;
+                if (property in object) {
+                    array = object[property];
+                } else {
+                    array = object[property] = [];
+                }
+                array.push(value);
+            }
+        });
+}
+
+
+/**
+ * @private
+ * @description Make an object property setter function.
+ * 创建一个对象属性设置函数。
+ * @param {function(this: T, Element, Array&lt;*>): *} valueReader Value reader.
+ * @param {string=} opt_property Property.
+ * @param {T=} opt_this The object to use as `this` in `valueReader`.
+ * @return {Parser} Parser.
+ * @template T
+ */
+var makeObjectPropertySetter = function (valueReader, opt_property, opt_this) {
+    return (
+        /**
+         * @private
+         * @param {Element} node Node.
+         * @param {Array&lt;*>} objectStack Object stack.
+         */
+            function (node, objectStack) {
+            const value = valueReader.call(opt_this !== undefined ? opt_this : this, node, objectStack);
+            if (value !== undefined) {
+                const object = /** @type {!Object} */ (objectStack[objectStack.length - 1]);
+                const property = opt_property !== undefined ? opt_property : node.localName;
+                object[property] = value;
+            }
+        });
+}
+
+
+/**
+ * @private
+ * @description Create a serializer that appends nodes written by its `nodeWriter` to its
+ * designated parent. 创建一个序列化程序，将其`nodeWriter`写入的节点附加到其指定的父节点
+ * The parent is the `node` of the
+ * {@link module:ol/xml~NodeStackItem} at the top of the `objectStack`.
+ * @param {function(this: T, Node, V, Array&lt;*>)} nodeWriter Node writer.
+ * @param {T=} opt_this The object to use as `this` in `nodeWriter`.
+ * @return {Serializer} Serializer.
+ * @template T, V
+ */
+var makeChildAppender = function (nodeWriter, opt_this) {
+    return function (node, value, objectStack) {
+        nodeWriter.call(opt_this !== undefined ? opt_this : this, node, value, objectStack);
+        const parent = /** @type {NodeStackItem} */ (objectStack[objectStack.length - 1]);
+        const parentNode = parent.node;
+        parentNode.appendChild(node);
+    };
+}
+
+
+/**
+ * @private
+ * @description Create a serializer that calls the provided `nodeWriter` from
+ * {@link module:ol/xml~serialize}. This can be used by the parent writer to have the
+ * 'nodeWriter' called with an array of values when the `nodeWriter` was
+ * designed to serialize a single item. An example would be a LineString
+ * geometry writer, which could be reused for writing MultiLineString
+ * geometries.
+ * @param {function(this: T, Element, V, Array&lt;*>)} nodeWriter Node writer.
+ * @param {T=} opt_this The object to use as `this` in `nodeWriter`.
+ * @return {Serializer} Serializer.
+ * @template T, V
+ */
+var makeArraySerializer = function (nodeWriter, opt_this) {
+    let serializersNS,
+        nodeFactory;
+    return function (node, value, objectStack) {
+        if (serializersNS === undefined) {
+            serializersNS = {};
+            const serializers = {};
+            serializers[node.localName] = nodeWriter;
+            serializersNS[node.namespaceURI] = serializers;
+            nodeFactory = makeSimpleNodeFactory(node.localName);
+        }
+        serialize(serializersNS, nodeFactory, value, objectStack);
+    };
+}
+
+
+/**
+ * @private
+ * @description Create a node factory which can use the `opt_keys` passed to
+ * {@link module:ol/xml~serialize} or {@link module:ol/xml~pushSerializeAndPop} as node names,
+ * or a fixed node name. The namespace of the created nodes can either be fixed,
+ * or the parent namespace will be used.
+ * @param {string=} opt_nodeName Fixed node name which will be used for all
+ *     created nodes. If not provided, the 3rd argument to the resulting node
+ *     factory needs to be provided and will be the nodeName.
+ * @param {string=} opt_namespaceURI Fixed namespace URI which will be used for
+ *     all created nodes. If not provided, the namespace of the parent node will
+ *     be used.
+ * @return {function(*, Array&lt;*>, string=): (Node|undefined)} Node factory.
+ */
+var makeSimpleNodeFactory = function (opt_nodeName, opt_namespaceURI) {
+    const fixedNodeName = opt_nodeName;
+    return (
+        /**
+         * @private
+         * @param {*} value Value.
+         * @param {Array&lt;*>} objectStack Object stack.
+         * @param {string=} opt_nodeName Node name.
+         * @return {Node} Node.
+         */
+            function (value, objectStack, opt_nodeName) {
+            const context = /** @type {NodeStackItem} */ (objectStack[objectStack.length - 1]);
+            const node = context.node;
+            let nodeName = fixedNodeName;
+            if (nodeName === undefined) {
+                nodeName = opt_nodeName;
+            }
+
+            const namespaceURI = opt_namespaceURI !== undefined ? opt_namespaceURI : node.namespaceURI;
+            return createElementNS(namespaceURI, /** @type {string} */ (nodeName));
+        }
+    );
+}
+
+
+/**
+ * @private
+ * @description A node factory that creates a node using the parent's `namespaceURI` and the
+ * `nodeName` passed by {@link module:ol/xml~serialize} or
+ * {@link module:ol/xml~pushSerializeAndPop} to the node factory.
+ * @const
+ * @type {function(*, Array&lt;*>, string=): (Node|undefined)}
+ */
+const OBJECT_PROPERTY_NODE_FACTORY = makeSimpleNodeFactory();
+
+
+/**
+ * @private
+ * @description Create an array of `values` to be used with {@link module:ol/xml~serialize} or
+ * {@link module:ol/xml~pushSerializeAndPop}, where `orderedKeys` has to be provided as
+ * `opt_key` argument.
+ * @param {Object&lt;string, V>} object Key-value pairs for the sequence. Keys can
+ *     be a subset of the `orderedKeys`.
+ * @param {Array&lt;string>} orderedKeys Keys in the order of the sequence.
+ * @return {Array&lt;V>} Values in the order of the sequence. The resulting array
+ *     has the same length as the `orderedKeys` array. Values that are not
+ *     present in `object` will be `undefined` in the resulting array.
+ * @template V
+ */
+var makeSequence = function (object, orderedKeys) {
+    const length = orderedKeys.length;
+    const sequence = new Array(length);
+    for (let i = 0; i &lt; length; ++i) {
+        sequence[i] = object[orderedKeys[i]];
+    }
+    return sequence;
+}
+
+
+/**
+ * @private
+ * @description Create a namespaced structure, using the same values for each namespace.
+ * This can be used as a starting point for versioned parsers, when only a few
+ * values are version specific.
+ * @param {Array&lt;string>} namespaceURIs Namespace URIs.
+ * @param {T} structure Structure.
+ * @param {Object&lt;string, T>=} opt_structureNS Namespaced structure to add to.
+ * @return {Object&lt;string, T>} Namespaced structure.
+ * @template T
+ */
+var makeStructureNS = function (namespaceURIs, structure, opt_structureNS) {
+    /**
+     * @type {Object&lt;string, T>}
+     */
+    const structureNS = opt_structureNS !== undefined ? opt_structureNS : {};
+    let i,
+        ii;
+    for (i = 0, ii = namespaceURIs.length; i &lt; ii; ++i) {
+        structureNS[namespaceURIs[i]] = structure;
+    }
+    return structureNS;
+}
+
+
+/**
+ * @private
+ * @description Parse a node using the parsers and object stack.
+ * @param {Object&lt;string, Object&lt;string, Parser>>} parsersNS
+ *     Parsers by namespace.
+ * @param {Element} node Node.
+ * @param {Array&lt;*>} objectStack Object stack.
+ * @param {*=} opt_this The object to use as `this`.
+ */
+var parseNode = function (parsersNS, node, objectStack, opt_this) {
+    let n;
+    for (n = node.firstElementChild; n; n = n.nextElementSibling) {
+        const parsers = parsersNS[n.namespaceURI];
+        if (parsers !== undefined) {
+            const parser = parsers[n.localName];
+            if (parser !== undefined) {
+                parser.call(opt_this, n, objectStack);
+            }
+        }
+    }
+}
+
+
+/**
+ * @private
+ * @description Push an object on top of the stack, parse and return the popped object.
+ * @param {T} object Object.
+ * @param {Object&lt;string, Object&lt;string, Parser>>} parsersNS
+ *     Parsers by namespace.
+ * @param {Element} node Node.
+ * @param {Array&lt;*>} objectStack Object stack.
+ * @param {*=} opt_this The object to use as `this`.
+ * @return {T} Object.
+ * @template T
+ */
+var pushParseAndPop = function (object, parsersNS, node, objectStack, opt_this) {
+    objectStack.push(object);
+    parseNode(parsersNS, node, objectStack, opt_this);
+    return /** @type {T} */ (objectStack.pop());
+}
+
+
+/**
+ * @private
+ * @description Walk through an array of `values` and call a serializer for each value.
+ * @param {Object&lt;string, Object&lt;string, Serializer>>} serializersNS
+ *     Namespaced serializers.
+ * @param {function(this: T, *, Array&lt;*>, (string|undefined)): (Node|undefined)} nodeFactory
+ *     Node factory. The `nodeFactory` creates the node whose namespace and name
+ *     will be used to choose a node writer from `serializersNS`. This
+ *     separation allows us to decide what kind of node to create, depending on
+ *     the value we want to serialize. An example for this would be different
+ *     geometry writers based on the geometry type.
+ * @param {Array&lt;*>} values Values to serialize. An example would be an array
+ *     of {@link module:ol/Feature~Feature} instances.
+ * @param {Array&lt;*>} objectStack Node stack.
+ * @param {Array&lt;string>=} opt_keys Keys of the `values`. Will be passed to the
+ *     `nodeFactory`. This is used for serializing object literals where the
+ *     node name relates to the property key. The array length of `opt_keys` has
+ *     to match the length of `values`. For serializing a sequence, `opt_keys`
+ *     determines the order of the sequence.
+ * @param {T=} opt_this The object to use as `this` for the node factory and
+ *     serializers.
+ * @template T
+ */
+var serialize = function (serializersNS, nodeFactory, values, objectStack, opt_keys, opt_this) {
+    const length = (opt_keys !== undefined ? opt_keys : values).length;
+    let value,
+        node;
+    for (let i = 0; i &lt; length; ++i) {
+        value = values[i];
+        if (value !== undefined) {
+            node = nodeFactory.call(opt_this !== undefined ? opt_this : this, value, objectStack,
+                opt_keys !== undefined ? opt_keys[i] : undefined);
+            if (node !== undefined) {
+                serializersNS[node.namespaceURI][node.localName]
+                    .call(opt_this, node, value, objectStack);
+            }
+        }
+    }
+}
+
+
+/**
+ * @private
+ * @param {O} object Object.
+ * @param {Object&lt;string, Object&lt;string, Serializer>>} serializersNS
+ *     Namespaced serializers.
+ * @param {function(this: T, *, Array&lt;*>, (string|undefined)): (Node|undefined)} nodeFactory
+ *     Node factory. The `nodeFactory` creates the node whose namespace and name
+ *     will be used to choose a node writer from `serializersNS`. This
+ *     separation allows us to decide what kind of node to create, depending on
+ *     the value we want to serialize. An example for this would be different
+ *     geometry writers based on the geometry type.
+ * @param {Array&lt;*>} values Values to serialize. An example would be an array
+ *     of {@link module:ol/Feature~Feature} instances.
+ * @param {Array&lt;*>} objectStack Node stack.
+ * @param {Array&lt;string>=} opt_keys Keys of the `values`. Will be passed to the
+ *     `nodeFactory`. This is used for serializing object literals where the
+ *     node name relates to the property key. The array length of `opt_keys` has
+ *     to match the length of `values`. For serializing a sequence, `opt_keys`
+ *     determines the order of the sequence.
+ * @param {T=} opt_this The object to use as `this` for the node factory and
+ *     serializers.
+ * @return {O|undefined} Object.
+ * @template O, T
+ */
+var pushSerializeAndPop = function (object, serializersNS, nodeFactory, values, objectStack, opt_keys, opt_this) {
+    objectStack.push(object);
+    serialize(serializersNS, nodeFactory, values, objectStack, opt_keys, opt_this);
+    return /** @type {O|undefined} */ (objectStack.pop());
+}
+
+export {
+    DOCUMENT,
+    XML_SCHEMA_INSTANCE_URI,
+    createElementNS,
+    getAllTextContent,
+    getAllTextContent_,
+    isDocument,
+    isNode,
+    getAttributeNS,
+    parse,
+    makeArrayExtender,
+    makeArrayPusher,
+    makeReplacer,
+    makeObjectPropertyPusher,
+    makeObjectPropertySetter,
+    makeChildAppender,
+    makeArraySerializer,
+    makeSimpleNodeFactory,
+    OBJECT_PROPERTY_NODE_FACTORY,
+    makeSequence,
+    makeStructureNS,
+    parseNode,
+    pushParseAndPop,
+    serialize,
+    pushSerializeAndPop
+};
+
+Zondy.xml.DOCUMENT = DOCUMENT;
+Zondy.xml.XML_SCHEMA_INSTANCE_URI = XML_SCHEMA_INSTANCE_URI;
+Zondy.xml.createElementNS = createElementNS;
+Zondy.xml.getAllTextContent = getAllTextContent;
+Zondy.xml.getAllTextContent_ = getAllTextContent_;
+Zondy.xml.isDocument = isDocument;
+Zondy.xml.isNode = isNode;
+Zondy.xml.getAttributeNS = getAttributeNS;
+Zondy.xml.parse = parse;
+Zondy.xml.makeArrayExtender = makeArrayExtender;
+Zondy.xml.makeArrayPusher = makeArrayPusher;
+Zondy.xml.makeReplacer = makeReplacer;
+Zondy.xml.makeObjectPropertyPusher = makeObjectPropertyPusher;
+Zondy.xml.makeObjectPropertySetter = makeObjectPropertySetter;
+Zondy.xml.makeChildAppender = makeChildAppender;
+Zondy.xml.makeArraySerializer = makeArraySerializer;
+Zondy.xml.makeSimpleNodeFactory = makeSimpleNodeFactory;
+Zondy.xml.OBJECT_PROPERTY_NODE_FACTORY = OBJECT_PROPERTY_NODE_FACTORY;
+Zondy.xml.makeSequence = makeSequence;
+Zondy.xml.makeStructureNS = makeStructureNS;
+Zondy.xml.parseNode = parseNode;
+Zondy.xml.pushParseAndPop = pushParseAndPop;
+Zondy.xml.serialize = serialize;
+Zondy.xml.applyTransform = pushSerializeAndPop;</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>文档生成<a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://www.smaryun.com" target="_blank">司马云</a> <span>© 2020 云生态圈</span>
+                        <a href="http://develop.smaryun.com:8899/" target="_blank">MapGIS Client for JavaScript</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+<script src="scripts/search.js"> </script>
+
+</body>
+</html>

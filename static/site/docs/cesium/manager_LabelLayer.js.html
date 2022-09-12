@@ -1,0 +1,569 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> manager/LabelLayer.js</title>
+
+  <script src="../cdn/run_prettify.js"></script>
+  <script src="../cdn/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="../cdn/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="../cdn/googleapis.css" rel="stylesheet">
+  <link href="../cdn/prettify.css" rel="stylesheet">
+  <link rel="stylesheet" href="../cdn/all.css" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="../cdn/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="../cdn/mapgis.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="../cdn/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+             
+                <a class="image" href="/">
+                    <img class="mapgis-webclient-logo" src="../image/mapgis_blue.png" alt="logo">
+                </a>
+            
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API
+                </a>
+                <div class="dropdown is-hoverable is-right">
+                    <a class="dropdown-trigger link">
+                        帮助向导
+                    </a>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-content">
+                        
+                            
+                                <a class="dropdown-item" href="tutorial-1.快速入门.html">
+                                    1.快速入门
+                                </a>
+                            
+                        
+                        </div>
+                    </div>
+                </div>
+                 
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/cesium/index.html"
+                        >
+                            Cesium
+                        </a>
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/mapboxgl/index.html"
+                        >
+                            MapboxGL
+                        </a>
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/leaflet/index.html"
+                        >
+                            Leaflet
+                        </a>
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/openlayers/index.html"
+                        >
+                            OpenLayers
+                        </a>
+                    
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            <div>
+                <span class="mapgis-api-document-span"><a href="index.html">API文档</a></span>
+            </div>
+            
+                <div class="search-wrapper">
+                    <input id="search" type="text" placeholder="搜索文档..." class="input">
+                </div>
+            
+            <nav>
+                
+                    <div class="category"><div class="mapgis-menu-span">模块</div><ul class="mapgis-sidebar-menus"><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E4%25BA%258B%25E4%25BB%25B6%25E7%25AE%25A1%25E7%2590%2586.html">客户端事件管理</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%2585%25AC%25E5%2585%25B1%25E6%2596%25B9%25E6%25B3%2595.html">客户端公共方法</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.html">客户端可视化</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596%25E5%2588%2586%25E6%259E%2590.html">客户端可视化分析</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.html">客户端数据服务</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%25B8%25B2%25E6%259F%2593.html">客户端渲染</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E8%25A7%2586%25E5%259B%25BE%25E7%25AE%25A1%25E7%2590%2586.html">客户端视图管理</a></li><li><a href="module-%25E6%259C%258D%25E5%258A%25A1%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259F%25A5%25E8%25AF%25A2.html">服务端数据查询</a></li><li><a href="module-%25E7%2594%25A8%25E6%2588%25B7%25E7%2595%258C%25E9%259D%25A2.html">用户界面</a></li></ul><div class="mapgis-menu-span">类名</div><ul class="mapgis-sidebar-menus"><li><a href="BaseLayer%2520%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1%25E5%259F%25BA%25E7%25B1%25BB.html">BaseLayer 数据服务基类</a></li><li><a href="CesiumSelectionIndicator.html">CesiumSelectionIndicator</a></li><li><a href="MapGIS2dDocProvider.html">MapGIS2dDocProvider</a></li><li><a href="module.exports_module.exports.html">exports</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E4%25BA%258B%25E4%25BB%25B6%25E7%25AE%25A1%25E7%2590%2586.MouseEventManager.html">MouseEventManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%2585%25AC%25E5%2585%25B1%25E6%2596%25B9%25E6%25B3%2595.CommonDataManager.html">CommonDataManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%2585%25AC%25E5%2585%25B1%25E6%2596%25B9%25E6%25B3%2595.CommonFuncManager.html">CommonFuncManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.EchartsLayer.html">EchartsLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.EntityController.html">EntityController</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.LabelLayer.html">LabelLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.MapVLayer.html">MapVLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.PopupController.html">PopupController</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.PopupLayer.html">PopupLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596%25E5%2588%2586%25E6%259E%2590.AdvancedAnalysisManager.html">AdvancedAnalysisManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596%25E5%2588%2586%25E6%259E%2590.AnalysisManager.html">AnalysisManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.LayerManager.html">LayerManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.M3DLayer.html">M3DLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.OGCLayer.html">OGCLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.TerrainLayer.html">TerrainLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.ThirdPartyLayer.html">ThirdPartyLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.TilesLayer.html">TilesLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%25B8%25B2%25E6%259F%2593.VectorTileLayer.html">VectorTileLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E8%25A7%2586%25E5%259B%25BE%25E7%25AE%25A1%25E7%2590%2586.SceneManager.html">SceneManager</a></li><li><a href="module-%25E6%259C%258D%25E5%258A%25A1%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259F%25A5%25E8%25AF%25A2.G3DDocQuery.html">G3DDocQuery</a></li><li><a href="module-%25E6%259C%258D%25E5%258A%25A1%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259F%25A5%25E8%25AF%25A2.MapDocQuery.html">MapDocQuery</a></li><li><a href="PopupElement.html">PopupElement</a></li><li><a href="WmtsTileProvider.html">WmtsTileProvider</a></li></ul><div class="mapgis-menu-span">全局</div><ul class="mapgis-sidebar-menus"><li><a href="global.html#addGridInfo">addGridInfo</a></li><li><a href="global.html#addImageLayer">addImageLayer</a></li><li><a href="global.html#calAngleOf3Pnt">calAngleOf3Pnt</a></li><li><a href="global.html#LayerType">LayerType</a></li><li><a href="global.html#removeAllEntities">removeAllEntities</a></li><li><a href="global.html#removeAllImageLayers">removeAllImageLayers</a></li><li><a href="global.html#removeAllPrimitives">removeAllPrimitives</a></li><li><a href="global.html#removeDocs">removeDocs</a></li><li><a href="global.html#removeEntity">removeEntity</a></li><li><a href="global.html#removeGridInfo">removeGridInfo</a></li><li><a href="global.html#removeImageLayer">removeImageLayer</a></li><li><a href="global.html#removeM3dLayer">removeM3dLayer</a></li><li><a href="global.html#removePrimitive">removePrimitive</a></li><li><a href="global.html#removeTerrain">removeTerrain</a></li><li><a href="global.html#updataPopupPosition">updataPopupPosition</a></li><li><a href="global.html#zoomToM3dLayer">zoomToM3dLayer</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <span class="page-title-sub">manager/LabelLayer.js</span>
+                    <span class="page-title-main">Source</span>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { CesiumZondy } from '../core/Base';
+
+import BaseLayer from '../layer/BaseLayer';
+
+/**
+ * @author 三维基础平台研发中心·冯桂英
+ * @class module:客户端可视化.LabelLayer
+ * @category  LabelLayer
+ * @classdesc LabelLayer注记图层管理类
+ * @description 注记图层管理类,处理注记相关操作
+ * @param options.viewer 场景视图
+ */
+export default class LabelLayer extends BaseLayer {
+    constructor(optionsParam) {
+        const options = optionsParam;
+        super(options);
+    }
+
+    /**
+     * 添加文字标签
+     * @function module:客户端可视化.LabelLayer.prototype.appendLabel
+     * @param {Number} lon 经度
+     * @param {Number} lat 纬度
+     * @param {Number} height 高程
+     * @param {String} lText 标签内容
+     * @param {Object} optionsParam 参数
+     * @param {String} [optionsParam.font='14pt monospace'] 字体
+     * @param {Color}  [optionsParam.fillColor =Cesium.Color.WHITE ] 字体的填充色
+     * @param {Color}  [optionsParam.outlineColor =Cesium.Color.WHITE ] 字体的填充色
+     * @param {LabelStyle} [optionsParam.style = Cesium.LabelStyle.FILL_AND_OUTLINE ] 样式
+     * @param {Number} [optionsParam.outlineWidth =1 ] 外边线宽度
+     * @param {Number} [optionsParam.heightReference =Cesium.HeightReference.NONE ] 外边线宽度
+     * @param {VerticalOrigin} [optionsParam.verticalOrigin = Cesium.VerticalOrigin.CENTER] 标签位置 Cesium.VerticalOrigin.Cesium.VerticalOrigin.LEFT Cesium.VerticalOrigin.RIGHT
+     * @param {HorizontalOrigin} [optionsParam.horizontalOrigin = Cesium.HorizontalOrigin.CENTER] 标签位置 Cesium.HorizontalOrigin.Cesium.HorizontalOrigin.LEFT Cesium.HorizontalOrigin.RIGHT
+     * @param {String} [optionsParam.description] 属性描述
+     * @returns {Entity} 标签对象 移除通过removeEntity(entity)
+     * @example
+     *  let labelLayer = new LabelLayer({viewer:viewer});
+     *  let label = labelLayer.appendLabel(114.2, 31, 200, '这是一个标签', {
+     *      font:'14pt 楷体',
+     *      style:Cesium.LabelStyle.FILL_AND_OUTLINE,
+     *      verticalOrigin:Cesium.VerticalOrigin.BOTTOM,
+     *      pixelOffset:new Cesium.Cartesian2(0, -9)});
+     */
+    appendLabel(lon, lat, height, lText, optionsParam) {
+        const options = Cesium.defaultValue(optionsParam, Cesium.defaultValue.EMPTY_OBJECT);
+        const lFont = Cesium.defaultValue(options.font, '14pt monospace');
+        const lFillColor = Cesium.defaultValue(options.fillColor, Cesium.Color.WHITE);
+        const lOutlineColor = Cesium.defaultValue(options.outlineColor, Cesium.Color.WHITE);
+        const lStyle = Cesium.defaultValue(options.style, Cesium.LabelStyle.FILL_AND_OUTLINE);
+        const lOutlineWidth = Cesium.defaultValue(options.outlineWidth, 1);
+        // 垂直位置
+        const lVerticalOrigin = Cesium.defaultValue(options.verticalOrigin, Cesium.VerticalOrigin.CENTER);
+        // 水平位置
+        const lHorizontalOrigin = Cesium.defaultValue(options.horizontalOrigin, Cesium.HorizontalOrigin.CENTER);
+        // 相对于原点的偏移量 以像素为单位（原点从左到右为x正方向→，从上到下为正方向↓）
+        const lPixelOffset = Cesium.defaultValue(options.pixelOffset, new Cesium.Cartesian2(0.0, 0.0));
+        const lScaleByDistance = Cesium.defaultValue(options.scaleByDistance, new Cesium.NearFarScalar(1.5e2, 3.0, 1.5e7, 0.5));
+        const lTransparentByDistance = Cesium.defaultValue(options.transparentByDistance, new Cesium.NearFarScalar(1.5e5, 1.0, 1.5e7, 0.0));
+        const lHeightReference = Cesium.defaultValue(options.heightReference, Cesium.HeightReference.NONE);
+
+        const para = {
+            name: '标签',
+            position: Cesium.Cartesian3.fromDegrees(lon, lat, height),
+            label: {
+                // 文字标签
+                text: lText,
+                font: lFont,
+                fillColor: lFillColor,
+                style: lStyle,
+                outlineWidth: lOutlineWidth,
+                outlineColor: lOutlineColor,
+                verticalOrigin: lVerticalOrigin, // 垂直方向以底部来计算标签的位置
+                horizontalOrigin: lHorizontalOrigin,
+                pixelOffset: lPixelOffset, // 偏移量
+                heightReference: lHeightReference,
+                pixelOffsetScaleByDistance: lScaleByDistance, // 随远近缩放
+                translucencyByDistance: lTransparentByDistance // 随远近隐藏
+            },
+            description: options.description // '这是一个标签的描述'
+        };
+
+        if (Cesium.defined(options)) {
+            Object.extend(para, options);
+        }
+        const label = this.viewer.entities.add(para);
+        return label;
+    }
+
+    /**
+     * 添加图片标签
+     * @function module:客户端可视化.LabelLayer.prototype.appendBillboard
+     * @param {Number} lon 经度
+     * @param {Number} lat 纬度
+     * @param {Number} height 高度
+     * @param {String} name  名称
+     * @param {String} imageUrl 图片地址
+     * @param {Number} imageWidth 图片宽度
+     * @param {Number} imageHeight 图片高度
+     * @param {Object} optionsParam 扩展参数
+     * @param {String} [optionsParam.description] 描述信息
+     * @returns {Entity}  添加的公告板对象   移除通过removeEntity(entity)
+     * @example
+     * let labelLayer = new LabelLayer({viewer:viewer});
+     * let options = {
+     *      id:125,
+     *      description:'描述'
+     *    };
+     *  let billBoard = labelLayer.appendBillboard(113.2, 31, 200, 'name','http://localhost:8088/car.png', 64, 64,options);
+     */
+    appendBillboard(lon, lat, height, name, imageUrl, imageWidth, imageHeight, optionsParam) {
+        const options = Cesium.defaultValue(optionsParam, {});
+        const lScaleByDistance = Cesium.defaultValue(options.scaleByDistance, new Cesium.NearFarScalar(1.5e2, 3.0, 1.5e7, 0.5));
+        const lTransparentByDistance = Cesium.defaultValue(options.transparentByDistance, new Cesium.NearFarScalar(1.5e5, 1.0, 1.5e7, 0.0));
+        const lHeightReference = Cesium.defaultValue(options.heightReference, Cesium.HeightReference.NONE);
+
+        const para = {
+            name,
+            position: Cesium.Cartesian3.fromDegrees(lon, lat, height),
+            billboard: {
+                // 图标
+                image: imageUrl,
+                width: imageWidth,
+                height: imageHeight,
+                heightReference: lHeightReference,
+                // 随远近缩放
+                pixelOffsetScaleByDistance: lScaleByDistance, // new NearFarScalar(1.5e2, 3.0, 1.5e7, 0.5),
+                // 随远近隐藏
+                translucencyByDistance: lTransparentByDistance, // new NearFarScalar(1.5e5, 1.0, 1.5e7, 0.0),
+                // 定位点
+                verticalOrigin: Cesium.VerticalOrigin.BOTTOM
+            },
+            description: Cesium.defaultValue(options.description, '这是一个公告板的描述')
+        };
+        if (Cesium.defined(options)) {
+            Object.extend(para, options);
+        }
+        const billBoard = this.viewer.entities.add(para);
+        return billBoard;
+    }
+
+    /**
+     * 添加图标注记
+     * @function module:客户端可视化.LabelLayer.prototype.appendLabelIcon
+     * @param {String} text       注记文字内容
+     * @param {Number} lon        经度
+     * @param {Number} lat        纬度
+     * @param {Number} height     高程
+     * @param {String} font       字体 这里将字体和大小放在一起 eg:'14pt 楷体'
+     * @param {Color}  fillColor  字体的填充色
+     * @param {String} iconUrl    图标路径
+     * @param {Number} iconWidth  图标宽度
+     * @param {Number} iconHeight 图标高度
+     * @param {Number} farDist    最远显示距离,相机到注记的距离大于该值 注记不显示
+     * @param {Number} nearDist   最近显示距离,相机到注记的距离小于该值 注记不显示
+     * @param {String} txtPos     图片位置 'center','top','bottom'
+     * @param {String} attribute  其他属性信息
+     * @returns {Entity} labelIcon  图标注记对象 移除通过removeEntity(entity)
+     * @example
+     * //更多参数设置可以使用appendLabelIconComm方法
+     * let labelLayer = new LabelLayer({viewer:viewer});
+     * let labelIcon = labelLayer.appendLabelIcon('注记文本',110,33,0,'14pt 楷体','/car.png',64,64,10000000,1,bottom,'这是属性信息查询时可以看到');
+     */
+    appendLabelIcon(text, lon, lat, height, font, fillColor, iconUrl, iconWidth, iconHeight, farDist, nearDist, txtPosParam, attribute) {
+        let txtPos = Cesium.VerticalOrigin.BOTTOM;
+        if (txtPosParam === 'center') {
+            txtPos = Cesium.VerticalOrigin.CENTER;
+        } else if (txtPosParam === 'top') {
+            txtPos = Cesium.VerticalOrigin.TOP;
+        } else {
+            txtPos = Cesium.VerticalOrigin.BOTTOM;
+        }
+        const labelIcon = this.viewer.entities.add({
+            name: text,
+            position: Cesium.Cartesian3.fromDegrees(lon, lat, height),
+            billboard: {
+                image: iconUrl,
+                width: iconWidth,
+                height: iconHeight,
+                // 随远近缩放
+                pixelOffsetScaleByDistance: new Cesium.NearFarScalar(nearDist, 3.0, farDist, 0.5),
+                // 随远近隐藏
+                translucencyByDistance: new Cesium.NearFarScalar(nearDist, 1.0, farDist, 0.0),
+                verticalOrigin: txtPos,
+                // 定位点
+                horizontalOrigin: Cesium.HorizontalOrigin.CENTER
+            },
+            label: {
+                // 文字标签
+                text,
+                font,
+                style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+                fillColor,
+                outlineWidth: 1,
+                verticalOrigin: Cesium.VerticalOrigin.CENTER, // 垂直方向以底部来计算标签的位置
+                horizontalOrigin: Cesium.HorizontalOrigin.CENTER, // 原点在下方
+                // 随远近缩放
+                pixelOffset: new Cesium.Cartesian2(0.0, -iconHeight / 4), // x,y方向偏移 相对于屏幕
+                pixelOffsetScaleByDistance: new Cesium.NearFarScalar(1.5e2, 3.0, 1.5e7, 0.5),
+                // 随远近隐藏
+                translucencyByDistance: new Cesium.NearFarScalar(1.5e5, 1.0, 1.5e7, 0.0)
+            },
+            description: attribute
+        });
+        return labelIcon;
+    }
+
+    /**
+     * 添加图标注记
+     * @function module:客户端可视化.LabelLayer.prototype.appendLabelIconEx
+     * @param {Number} lon               经度
+     * @param {Number} lat               纬度
+     * @param {Number} height            高程
+     * @param {Object} [options]         可配置参数
+     * @param {String} [options.iconUrl] 图标路径，默认值: undefined
+     * @param {String} [options.text]    注记文字内容，默认值: undefined
+     * @param {Number} [options.disableDepthTestDistance] 图片和文字注记的深度测试
+     * @param {NearFarScalar} [options.translucencyByDistance] 透明显示参数 默认值: new NearFarScalar(1.5e5, 1.0, 1.5e9, 0.0)
+     * @param {NearFarScalar} [options.scaleByDistance] 缩放距离参数 默认值: new Cesium.NearFarScalar(1.5e2, 1.5, 1.5e7, 0.0)
+     * @param {Number} [options.iconWidth]              图标宽度 默认值: 64
+     * @param {Number} [options.iconHeight]             图标高度 默认值: 64
+     * @param {Cartesian2} [options.icoPixelOffset]     图标偏移 默认值: Cartesian2.ZERO
+     * @param {NearFarScalar} [options.icoPixelOffsetScaleByDistance] 图标偏移值缩放距离参数 默认值: undefined
+     * @param {Number} [options.icoVerticalOrigin]      图标相对于原点的竖直位置 默认值: VerticalOrigin.CENTER
+     * @param {Number} [options.icoHorizontalOrigin]    图标相对于原点的水平位置 默认值: HorizontalOrigin.TOP
+     * @param {String} [options.font]                   字体 这里将字体和大小放在一起 eg:'14pt 楷体'
+     * @param {Cartesian2} [options.labelPixelOffset]   默认值: new Cartesian2(0.0, -iconHeight / 4)
+     * @param {NearFarScalar} [options.labelPixelOffsetScaleByDistance] 文字注记偏移值缩放距离参数默认值: new NearFarScalar(1.5e5, 1.5, 1.5e7, 0.0)
+     * @param {Color}  [options.labelFillColor]         默认值: Color.WHITE
+     * @param {Color}  [options.labelBackgroundColor]   默认值: new Color(0.165, 0.165, 0.165, 0.8)
+     * @param {Bool}   [options.labelShow]              默认值: true
+     * @param {BOOL}   [options.labelShowBackground]    默认值: false
+     * @param {Number} [options.labelStyle]             默认值: LabelStyle.FILL_AND_OUTLINE
+     * @param {Color}  [options.labelOutlineWidth]      默认值: 1
+     * @param {String} [options.labelVerticalOrigin]    文字注记相对于原点的竖直位置 默认值: VerticalOrigin.BOTTOM
+     * @param {String} [options.labelHorizontalOrigin]  文字注记相对于原点的水平位置 默认值: HorizontalOrigin.BOTTOM
+     * @param {String} [options.attribute]              属性参数 默认值: undefined
+     * @example
+     *  const options = { iconUrl: '/car.png', text: '注记文本', font: '14pt 楷体', labelShowBackground: true, attribute: '这是属性信息查询时可以看到' }
+     *  const labelIcon = webGlobe.appendLabelIconEx(110, 33, 0, options);
+     * @returns {Entity} labelIcon  图标注记对象 移除通过removeEntity(entity)
+     */
+    appendLabelIconEx(lon, lat, height, options) {
+        // eslint-disable-next-line no-param-reassign
+        options = Cesium.defaultValue(options, {});
+
+        const text = Cesium.defaultValue(options.text, undefined);
+        const iconUrl = Cesium.defaultValue(options.iconUrl, undefined);
+
+        if (!Cesium.defined(text) &amp;&amp; !Cesium.defined(iconUrl)) {
+            // eslint-disable-next-line no-console
+            console.log('text 和 iconUrl 都未定义，无法正常添加 labelIcon');
+            return null;
+        }
+
+        const translucencyByDistance = Cesium.defaultValue(options.translucencyByDistance, new Cesium.NearFarScalar(1.5e5, 1.0, 1.5e9, 0.0));
+        const scaleByDistance = Cesium.defaultValue(options.scaleByDistance, new Cesium.NearFarScalar(1.5e2, 1.5, 1.5e7, 0.0));
+        const disableDepthTestDistance = Cesium.defaultValue(options.disableDepthTestDistance, Number.POSITIVE_INFINITY);
+
+        const iconWidth = Cesium.defaultValue(options.iconWidth, 64);
+        const iconHeight = Cesium.defaultValue(options.iconHeight, 64);
+        const icoPixelOffset = Cesium.defaultValue(options.icoPixelOffset, new Cesium.Cartesian2(0.0, 0.0));
+        const icoPixelOffsetScaleByDistance = Cesium.defaultValue(options.icoPixelOffsetScaleByDistance, undefined);
+        const icoVerticalOrigin = Cesium.defaultValue(options.icoVerticalOrigin, Cesium.VerticalOrigin.CENTER);
+        const icoHorizontalOrigin = Cesium.defaultValue(options.icoHorizontalOrigin, Cesium.HorizontalOrigin.TOP);
+
+        const font = Cesium.defaultValue(options.font, '14pt 楷体');
+        const labelPixelOffset = Cesium.defaultValue(options.labelPixelOffset, new Cesium.Cartesian2(0.0, -iconHeight / 2));
+        const labelPixelOffsetScaleByDistance = Cesium.defaultValue(
+            options.labelPixelOffsetScaleByDistance,
+            new Cesium.NearFarScalar(1.5e5, 1.5, 1.5e7, 0.0)
+        );
+        const labelFillColor = Cesium.defaultValue(options.labelFillColor, Cesium.Color.WHITE);
+        const labelShowBackground = Cesium.defaultValue(options.labelShowBackground, false);
+        const labelBackgroundColor = Cesium.defaultValue(options.labelBackgroundColor, new Cesium.Color(0.165, 0.165, 0.165, 0.8));
+        const labelShow = Cesium.defaultValue(options.labelShow, true);
+        const labelStyle = Cesium.defaultValue(options.labelStyle, Cesium.LabelStyle.FILL_AND_OUTLINE);
+        const labelOutlineWidth = Cesium.defaultValue(options.labelOutlineWidth, 1);
+        const labelVerticalOrigin = Cesium.defaultValue(options.labelVerticalOrigin, Cesium.VerticalOrigin.BOTTOM);
+        const labelHorizontalOrigin = Cesium.defaultValue(options.labelHorizontalOrigin, Cesium.HorizontalOrigin.BOTTOM);
+
+        const attribute = Cesium.defaultValue(options.attribute, undefined);
+
+        const entity = {
+            name: Cesium.defined(text) ? text : 'defaut',
+            position: Cesium.Cartesian3.fromDegrees(lon, lat, height),
+
+            description: attribute
+        };
+
+        if (Cesium.defined(iconUrl)) {
+            entity.billboard = {
+                // 图标
+                image: iconUrl,
+                width: iconWidth,
+                height: iconHeight,
+                pixelOffset: icoPixelOffset,
+                pixelOffsetScaleByDistance: icoPixelOffsetScaleByDistance,
+                // 随远近隐藏
+                translucencyByDistance,
+                // 随远近缩放
+                scaleByDistance,
+                // 定位点
+                verticalOrigin: icoVerticalOrigin,
+                horizontalOrigin: icoHorizontalOrigin,
+                disableDepthTestDistance
+            };
+        }
+
+        if (Cesium.defined(text)) {
+            entity.label = {
+                // 文字标签
+                text,
+                font,
+                show: labelShow,
+                style: labelStyle,
+                fillColor: labelFillColor,
+                showBackground: labelShowBackground,
+                backgroundColor: labelBackgroundColor,
+                outlineWidth: labelOutlineWidth,
+                verticalOrigin: labelVerticalOrigin, // 垂直方向以底部来计算标签的位置
+                horizontalOrigin: labelHorizontalOrigin, // 原点在下方
+                // heightReference: heightReference,
+                pixelOffset: labelPixelOffset, // x,y方向偏移 相对于屏幕
+                pixelOffsetScaleByDistance: labelPixelOffsetScaleByDistance,
+                // 随远近缩放
+                scaleByDistance,
+                // 随远近隐藏
+                translucencyByDistance,
+                disableDepthTestDistance
+            };
+        }
+
+        const labelIcon = this.viewer.entities.add(entity);
+        return labelIcon;
+    }
+
+    /**
+     * 添加图标注记
+     * @function module:客户端可视化.LabelLayer.prototype.appendLabelIconComm
+     * @param {String} name 注记文字内容
+     * @param {String} description 描述
+     * @param {Cartesian3} position 位置
+     * @param {BillboardGraphics} billboardGraphics 图片对象
+     * @see {@link https://cesium.com/docs/cesiumjs-ref-doc/BillboardGraphics.html } 图片对象参数
+     * @param {LabelGraphics} labelGraphics 文本对象
+     * @see {@link https://cesium.com/docs/cesiumjs-ref-doc/LabelGraphics.html } 文本对象参数
+     * @example
+     * let labelLayer = new LabelLayer({viewer:viewer});
+     * let labelGraphics = { //文字标签
+     *    text: "文字标签内容",
+     *    font: '14pt monospace',
+     *    fillColor: Cesium.Color.WHITE,
+     *    style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+     *    outlineWidth: 1,
+     *    outlineColor: Cesium.Color.WHITE,
+     *    verticalOrigin: Cesium.VerticalOrigin.CENTER, //垂直方向以底部来计算标签的位置
+     *    horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
+     *    pixelOffset: new Cesium.Cartesian2(0.0, 0.0), //偏移量
+     *    heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
+     *    pixelOffsetScaleByDistance: new Cesium.NearFarScalar(1.5e2, 3.0, 1.5e7, 0.5), //随远近缩放
+     *    translucencyByDistance: new Cesium.NearFarScalar(1.5e5, 1.0, 1.5e7, 0.0) //随远近隐藏
+     * };
+     * let billboardGraphics ={
+     * //图标
+     *   image: iconUrl,
+     *   width: iconWidth,
+     *   height: iconHeight,
+     *   //heightReference: this.root.HeightReference.CLAMP_TO_GROUND,
+     *   //随远近缩放
+     *   //pixelOffset:new this.root.Cartesian2(0.0, -image.height),
+     *   pixelOffsetScaleByDistance: new Cesium.NearFarScalar(1.5e5, 3.0, 1.5e7, 0.5),
+     *   //随远近隐藏
+     *   translucencyByDistance: new Cesium.NearFarScalar(1.5e5, 1.0, 1.5e7, 0.0),
+     *   //定位点
+     *   //verticalOrigin: Cesium.VerticalOrigin.BOTTOM
+     *   horizontalOrigin: Cesium.HorizontalOrigin.TOP
+     *  };
+     *  let labelIcon = labelLayer.appendLabelIcon('注记文本','这是属性信息查询时可以看到',Cesium.Cartesian3.fromDegrees(110,33,0),billboardGraphics,labelGraphics);
+     */
+    appendLabelIconComm(name, description, position, billboardGraphics, labelGraphics) {
+        const labelIcon = this.viewer.entities.add({
+            name,
+            description,
+            position,
+            billboard: billboardGraphics,
+            label: labelGraphics
+        });
+        return labelIcon;
+    }
+}
+
+CesiumZondy.Manager.LabelLayer = LabelLayer;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>文档生成<a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://www.smaryun.com" target="_blank">司马云</a> <span>© 2020 云生态圈</span>
+                        <a href="http://develop.smaryun.com:8899/" target="_blank">MapGIS Client for JavaScript</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+<script src="scripts/search.js"> </script>
+
+</body>
+</html>

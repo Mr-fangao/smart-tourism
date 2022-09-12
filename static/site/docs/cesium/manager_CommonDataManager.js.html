@@ -1,0 +1,474 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> manager/CommonDataManager.js</title>
+
+  <script src="../cdn/run_prettify.js"></script>
+  <script src="../cdn/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="../cdn/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="../cdn/googleapis.css" rel="stylesheet">
+  <link href="../cdn/prettify.css" rel="stylesheet">
+  <link rel="stylesheet" href="../cdn/all.css" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="../cdn/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="../cdn/mapgis.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="../cdn/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+             
+                <a class="image" href="/">
+                    <img class="mapgis-webclient-logo" src="../image/mapgis_blue.png" alt="logo">
+                </a>
+            
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API
+                </a>
+                <div class="dropdown is-hoverable is-right">
+                    <a class="dropdown-trigger link">
+                        帮助向导
+                    </a>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-content">
+                        
+                            
+                                <a class="dropdown-item" href="tutorial-1.快速入门.html">
+                                    1.快速入门
+                                </a>
+                            
+                        
+                        </div>
+                    </div>
+                </div>
+                 
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/cesium/index.html"
+                        >
+                            Cesium
+                        </a>
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/mapboxgl/index.html"
+                        >
+                            MapboxGL
+                        </a>
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/leaflet/index.html"
+                        >
+                            Leaflet
+                        </a>
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/openlayers/index.html"
+                        >
+                            OpenLayers
+                        </a>
+                    
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            <div>
+                <span class="mapgis-api-document-span"><a href="index.html">API文档</a></span>
+            </div>
+            
+                <div class="search-wrapper">
+                    <input id="search" type="text" placeholder="搜索文档..." class="input">
+                </div>
+            
+            <nav>
+                
+                    <div class="category"><div class="mapgis-menu-span">模块</div><ul class="mapgis-sidebar-menus"><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E4%25BA%258B%25E4%25BB%25B6%25E7%25AE%25A1%25E7%2590%2586.html">客户端事件管理</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%2585%25AC%25E5%2585%25B1%25E6%2596%25B9%25E6%25B3%2595.html">客户端公共方法</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.html">客户端可视化</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596%25E5%2588%2586%25E6%259E%2590.html">客户端可视化分析</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.html">客户端数据服务</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%25B8%25B2%25E6%259F%2593.html">客户端渲染</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E8%25A7%2586%25E5%259B%25BE%25E7%25AE%25A1%25E7%2590%2586.html">客户端视图管理</a></li><li><a href="module-%25E6%259C%258D%25E5%258A%25A1%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259F%25A5%25E8%25AF%25A2.html">服务端数据查询</a></li><li><a href="module-%25E7%2594%25A8%25E6%2588%25B7%25E7%2595%258C%25E9%259D%25A2.html">用户界面</a></li></ul><div class="mapgis-menu-span">类名</div><ul class="mapgis-sidebar-menus"><li><a href="BaseLayer%2520%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1%25E5%259F%25BA%25E7%25B1%25BB.html">BaseLayer 数据服务基类</a></li><li><a href="CesiumSelectionIndicator.html">CesiumSelectionIndicator</a></li><li><a href="MapGIS2dDocProvider.html">MapGIS2dDocProvider</a></li><li><a href="module.exports_module.exports.html">exports</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E4%25BA%258B%25E4%25BB%25B6%25E7%25AE%25A1%25E7%2590%2586.MouseEventManager.html">MouseEventManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%2585%25AC%25E5%2585%25B1%25E6%2596%25B9%25E6%25B3%2595.CommonDataManager.html">CommonDataManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%2585%25AC%25E5%2585%25B1%25E6%2596%25B9%25E6%25B3%2595.CommonFuncManager.html">CommonFuncManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.EchartsLayer.html">EchartsLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.EntityController.html">EntityController</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.LabelLayer.html">LabelLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.MapVLayer.html">MapVLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.PopupController.html">PopupController</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.PopupLayer.html">PopupLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596%25E5%2588%2586%25E6%259E%2590.AdvancedAnalysisManager.html">AdvancedAnalysisManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596%25E5%2588%2586%25E6%259E%2590.AnalysisManager.html">AnalysisManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.LayerManager.html">LayerManager</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.M3DLayer.html">M3DLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.OGCLayer.html">OGCLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.TerrainLayer.html">TerrainLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.ThirdPartyLayer.html">ThirdPartyLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259C%258D%25E5%258A%25A1.TilesLayer.html">TilesLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E6%25B8%25B2%25E6%259F%2593.VectorTileLayer.html">VectorTileLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E8%25A7%2586%25E5%259B%25BE%25E7%25AE%25A1%25E7%2590%2586.SceneManager.html">SceneManager</a></li><li><a href="module-%25E6%259C%258D%25E5%258A%25A1%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259F%25A5%25E8%25AF%25A2.G3DDocQuery.html">G3DDocQuery</a></li><li><a href="module-%25E6%259C%258D%25E5%258A%25A1%25E7%25AB%25AF%25E6%2595%25B0%25E6%258D%25AE%25E6%259F%25A5%25E8%25AF%25A2.MapDocQuery.html">MapDocQuery</a></li><li><a href="PopupElement.html">PopupElement</a></li><li><a href="WmtsTileProvider.html">WmtsTileProvider</a></li></ul><div class="mapgis-menu-span">全局</div><ul class="mapgis-sidebar-menus"><li><a href="global.html#addGridInfo">addGridInfo</a></li><li><a href="global.html#addImageLayer">addImageLayer</a></li><li><a href="global.html#calAngleOf3Pnt">calAngleOf3Pnt</a></li><li><a href="global.html#LayerType">LayerType</a></li><li><a href="global.html#removeAllEntities">removeAllEntities</a></li><li><a href="global.html#removeAllImageLayers">removeAllImageLayers</a></li><li><a href="global.html#removeAllPrimitives">removeAllPrimitives</a></li><li><a href="global.html#removeDocs">removeDocs</a></li><li><a href="global.html#removeEntity">removeEntity</a></li><li><a href="global.html#removeGridInfo">removeGridInfo</a></li><li><a href="global.html#removeImageLayer">removeImageLayer</a></li><li><a href="global.html#removeM3dLayer">removeM3dLayer</a></li><li><a href="global.html#removePrimitive">removePrimitive</a></li><li><a href="global.html#removeTerrain">removeTerrain</a></li><li><a href="global.html#updataPopupPosition">updataPopupPosition</a></li><li><a href="global.html#zoomToM3dLayer">zoomToM3dLayer</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <span class="page-title-sub">manager/CommonDataManager.js</span>
+                    <span class="page-title-main">Source</span>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { CesiumZondy } from '../core/Base';
+import LayerManager from '../layer/LayerManager';
+
+/**
+ * @author 三维基础平台研发中心·冯桂英
+ * @class module:客户端公共方法.CommonDataManager
+ * @category CommonDataManager
+ * @classdesc 通用数据管理类
+ * @description 该类实现了通用数据的添加与删除功能
+ * @param option.viewer 视图
+ */
+export default class CommonDataManager extends LayerManager {
+    constructor(optionsParam) {
+        const options = optionsParam;
+        super(options);
+    }
+
+    /**
+     * 通过地址添加图片，包括本地图片和网络图片
+     * @function module:客户端公共方法.CommonDataManager.prototype.appendImageByUrl
+     * @param {String} url 图片地址
+     * @param {Number} west 西经
+     * @param {Number} south 南纬
+     * @param {Number} east 东经
+     * @param {Number} north 北纬
+     * @param {Object} options 扩展参数
+     * @example
+     * let cesiumFun = new CommonDataManager({viewer:viewer});
+     * let singleImage = cesiumFun.appendImageByUrl('.../../../../../../../../static/libs/Cesium/MapGIS/image/2.5D2.png',110,20,114,30);
+     */
+    appendImageByUrl(url, west, south, east, north, options) {
+        const providerOpts = {
+            url,
+            rectangle: Cesium.Rectangle.fromDegrees(west, south, east, north)
+        };
+        if (Cesium.defined(options)) {
+            Object.extend(providerOpts, options);
+        }
+        const singleImage = this.viewer.imageryLayers.addImageryProvider(new Cesium.SingleTileImageryProvider(providerOpts));
+        return singleImage;
+    }
+
+    /**
+     *移除添加的图片
+     * @function module:客户端公共方法.CommonDataManager.prototype.removeImage
+     * @param {Object} imageryLayer 添加的图片对象
+     * @param {Boolean} isDestroy  是否销毁图片对象
+     */
+    removeImage(imageryLayer, isDestroy = true) {
+        if (this.viewer.imageryLayers.contains(imageryLayer)) {
+            this.viewer.imageryLayers.remove(imageryLayer, isDestroy);
+        }
+    }
+
+    /**
+     * 通过路径添加3DTile数据
+     * @function module:客户端公共方法.CommonDataManager.prototype.append3DTile
+     * @param {String} url 路径
+     * @param {Function} onsuccess 成功回调
+     * @param {Object} options 扩展参数
+     * @see {@link https://cesium.com/docs/cesiumjs-ref-doc/Cesium3DTileset.html }
+     * @returns {Object} kml数据对象
+     * @example
+     * function load(layer) {
+                viewer.flyTo(layer);
+                console.log("这是一个加载成功回调");
+            }
+        tiles = cesiumFun.append3DTile('../../../../../../static/data/BatchedTilesets/tileset.json', load);
+     */
+    append3DTile(url, onsuccess, options) {
+        if (url === null) {
+            return null;
+        }
+        const para = {
+            url
+        };
+        if (Cesium.defined(options)) {
+            Object.extend(para, options);
+        }
+        const tileset = this.viewer.scene.primitives.add(new Cesium.Cesium3DTileset(para));
+        if (Object.prototype.toString.call(onsuccess) === '[object Function]') {
+            tileset.readyPromise.then(() => {
+                onsuccess(tileset);
+            });
+        }
+        return tileset;
+    }
+
+    /**
+     *移除3dTile对象
+     * @function module:客户端公共方法.CommonDataManager.prototype.remove3DTile
+     * @param {Object} tileset 3dTile对象
+     */
+    remove3DTile(tileset) {
+        this.viewer.scene.primitives.remove(tileset);
+    }
+
+    /**
+     * 添加模型（gltf文件）
+     * @function module:客户端公共方法.CommonDataManager.prototype.appendModel
+     * @param {Number} id 模型id
+     * @param {String} url 模型url路径
+     * @param {Number} lon 模型所在经度
+     * @param {Number} lat 模型坐在纬度
+     * @param {Number} height 高度
+     * @param {Number} scale 缩放比
+     * @param {Object} options 包含以下参数
+     * @param {Color} [options.color] 颜色 
+     * @param {ColorBlendMode} [options.colorBlendMode] 颜色混合模式 Cesium.ColorBlendMode.MIX
+     * @param {Number} [options.colorBlendAmount] 颜色混合程度
+     * @returns {Object} model 移除通过 removeModel()
+     * @example
+     *   let modelUrl = '../../../../../../static/data/CesiumAir/Cesium_Air.gltf';
+            cesiumFun.appendModels('1', modelUrl, 114, 28, 200, 100000, {
+                color: Cesium.Color.RED,
+                colorBlendMode: Cesium.ColorBlendMode.MIX,//  MIX是混合 Cesium.ColorBlendMode.HIGHLIGHT, HIGHLIGHT是高亮
+                colorBlendAmount: 0.4 //这个是程度
+            });
+     */
+    appendModel(id, url, lon, lat, height = 1000.0, scale = 1.0, options) {
+        const position = Cesium.Cartesian3.fromDegrees(lon, lat, height);
+        const modelMatrix = Cesium.Transforms.headingPitchRollToFixedFrame(position, new Cesium.HeadingPitchRoll());
+        const modelObj = {
+            id,
+            url,
+            modelMatrix,
+            scale
+        };
+        if (Cesium.defined(options)) {
+            Object.extend(modelObj, options);
+        }
+        const modelSingle = this.viewer.scene.primitives.add(Cesium.Model.fromGltf(modelObj));
+        modelSingle.readyPromise.then(() => {
+            modelSingle.activeAnimations.addAll({
+                speedup: 0.5,
+                loop: Cesium.ModelAnimationLoop.REPEAT
+            });
+        });
+
+        return modelSingle;
+    }
+
+    /**
+     * 批量添加模型
+     * @function module:客户端公共方法.CommonDataManager.prototype.appendModels
+     * @param {String} modelsString 模型组织
+     * @param {Function} successCall 成功后的回调
+     * @returns {Object} 模型层对象
+     */
+    appendModels(modelsString, successCall) {
+        const models = new Cesium.CzmlDataSource();
+        const datasourcePromise = this.viewer.dataSources.add(models.load(modelsString));
+        datasourcePromise.then((datasource) => {
+            if (successCall !== null &amp;&amp; typeof successCall === 'function') {
+                successCall(datasource.entities);
+            }
+        });
+        return models;
+    }
+
+    /**
+     * 通过文件批量添加模型
+     * @function module:客户端公共方法.CommonDataManager.prototype.appendModels
+     * @param  {String} filePath 模型组织文件
+     * @param {Function} successCall 成功后的回调
+     * @returns {Object} 模型层对象
+     */
+    appendModelsByFile(filePath, successCall) {
+        const models = new Cesium.CzmlDataSource();
+        const datasourcePromise = this.viewer.dataSources.add(models.load(filePath));
+        datasourcePromise.then((datasource) => {
+            if (successCall !== null &amp;&amp; typeof successCall === 'function') {
+                successCall(datasource.entities);
+            }
+        });
+        return models;
+    }
+
+    /**
+     * 加载Kml、kmz数据
+     * @function module:客户端公共方法.CommonDataManager.prototype.appendKml
+     * @param {String} url 路径
+     * @param {Object} options 参数
+     * @see {@link https://cesium.com/docs/cesiumjs-ref-doc/KmlDataSource.html }
+     * @returns {KmlDataSource} kml数据对象
+     */
+    appendKml(url, options, successCall) {
+        const opt = {
+            camera: this.viewer.scene.camera,
+            canvas: this.viewer.scene.canvas
+        };
+        if (Cesium.defined(options)) {
+            Object.extend(opt, options);
+        }
+        const kmlData = new Cesium.KmlDataSource(opt);
+
+        const datasourcePromise = this.viewer.dataSources.add(kmlData.load(url, opt));
+        datasourcePromise.then((datasource) => {
+            if (successCall !== null &amp;&amp; typeof successCall === 'function') {
+                successCall(datasource.entities);
+            }
+            this.viewer.clock.multiplier = 1;
+            this.viewer.clock.shouldAnimate = true;
+        });
+        return kmlData;
+    }
+
+    /**
+     * 添加czml文件
+     * @function module:客户端公共方法.CommonDataManager.prototype.appendCZML
+     * @param {String} url 文件地址
+     * @param {Function} successCall 成功后的回调
+     * @returns {CzmlDataSource} czml 对象
+     * @example
+     *  var czml = cesiumFun.addCZML('SampleData/model.czml');
+     */
+    appendCZML(url, successCall) {
+        const dataSource = new Cesium.CzmlDataSource();
+        const datasourcePromise = this.viewer.dataSources.add(dataSource.load(url));
+        datasourcePromise.then((datasource) => {
+            if (successCall !== null &amp;&amp; typeof successCall === 'function') {
+                successCall(datasource.entities);
+            }
+        });
+        return dataSource;
+    }
+
+    /**
+     * 添加GeoJson文件
+     * @function module:客户端公共方法.CommonDataManager.prototype.appendGeoJson
+     * @param {String} url 文件地址
+     * @returns {GeoJsonDataSource} 数据对象
+     * @example
+     *  let geoJson = cesiumFun.appendGeoJson('SampleData/china.topojson');
+     */
+    appendGeoJson(url, successCall, options) {
+        const dataSource = new Cesium.GeoJsonDataSource();
+        const dataOptions = {
+            stroke: Cesium.Color.HOTPINK,
+            fill: Cesium.Color.PINK.withAlpha(0.5),
+            strokeWidth: 3
+        };
+        if (Cesium.defined(options)) {
+            Object.extend(dataOptions, options);
+        }
+        const datasourcePromise = this.viewer.dataSources.add(dataSource.load(url, dataOptions));
+        datasourcePromise.then((datasource) => {
+            if (successCall !== null &amp;&amp; typeof successCall === 'function') {
+                successCall(datasource.entities);
+            }
+        });
+        return dataSource;
+    }
+
+    /**
+     * 移除模型
+     * @function module:客户端公共方法.CommonDataManager.prototype.removeModel
+     * @param {Model} model 模型对象
+     */
+    removeModel(model) {
+        this.viewer.entities.remove(model);
+        this.viewer.scene.primitives.remove(model);
+    }
+
+    /**
+     * 移除通过appendModelsByFile()和appendModels()添加的模型
+     * @function module:客户端公共方法.CommonDataManager.prototype.removeModels
+     * @param  {DataSource} models 模型组织
+     */
+    removeModels(models) {
+        this.viewer.dataSources.remove(models);
+    }
+
+    /**
+     * 移除数据对象
+     * @function module:客户端公共方法.CommonDataManager.prototype.removeDataSource
+     * @param {DataSource} datasource 模型组织
+     * @param {Boolean} isDestroy 是否销毁
+     */
+    removeDataSource(datasource, isDestroy = false) {
+        if (Cesium.defined(datasource)) {
+            if (this.viewer.dataSources.contains(datasource)) {
+                this.viewer.dataSources.remove(datasource, isDestroy);
+            }
+        }
+    }
+
+    /**
+     * 删除所有数据源：与以上几个接口配合使用
+     * @function module:客户端公共方法.CommonDataManager.prototype.removeAllDataSource
+     * @param {Boolean} isDestroy 是否销毁
+     */
+    removeAllDataSource(isDestroy = false) {
+        this.viewer.dataSources.removeAll(isDestroy);
+    }
+}
+
+CesiumZondy.Manager.CommonDataManager = CommonDataManager;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>文档生成<a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://www.smaryun.com" target="_blank">司马云</a> <span>© 2020 云生态圈</span>
+                        <a href="http://develop.smaryun.com:8899/" target="_blank">MapGIS Client for JavaScript</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+<script src="scripts/search.js"> </script>
+
+</body>
+</html>

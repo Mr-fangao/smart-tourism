@@ -12,62 +12,23 @@
           </div>
           <div class="sorttable">
             <el-card shadow="hover" class="teble_card">
-              <el-input
-                prefix-icon="el-icon-search"
-                size="mini"
-                v-model="search"
-                placeholder="输入关键字搜索"
-              /><el-button size="mini" id="button1" @click="Search(search)"
-                >查询</el-button
-              >
-              <el-button size="mini" id="button2" @click="Realize()"
-                >清除搜索</el-button
-              >
-              <el-table
-                @row-click="clickData"
-                :header-row-style="getRowClass"
-                :header-cell-style="getRowClass"
-                :height="tableheight"
-                style="width: 100% align: center"
-                :data="tableData"
-              >
-                <el-table-column
-                  prop="name"
-                  label="名称"
-                  width="120"
-                  :show-overflow-tooltip="true"
-                >
+              <el-input prefix-icon="el-icon-search" size="mini" v-model="search" placeholder="输入关键字搜索" />
+              <el-button size="mini" id="button1" @click="Search(search)">查询</el-button>
+              <el-button size="mini" id="button2" @click="Realize()">清除搜索</el-button>
+              <el-table @row-click="clickData" :header-row-style="getRowClass" :header-cell-style="getRowClass"
+                :height="tableheight" style="width: 100% align: center" :data="tableData">
+                <el-table-column prop="name" label="名称" width="120" :show-overflow-tooltip="true">
                 </el-table-column>
-                <el-table-column
-                  prop="city"
-                  label="城市"
-                  width="50"
-                  :show-overflow-tooltip="true"
-                >
+                <el-table-column prop="city" label="城市" width="50" :show-overflow-tooltip="true">
                 </el-table-column>
-                <el-table-column
-                  prop="score"
-                  label="评分"
-                  width="50"
-                  :show-overflow-tooltip="true"
-                >
+                <el-table-column prop="score" label="评分" width="50" :show-overflow-tooltip="true">
                   <template slot-scope="scope">
                     <span>{{ scope.row.score | rounding }}</span>
                   </template>
                 </el-table-column>
-                <el-table-column
-                  prop="hot"
-                  label="热度"
-                  width="60"
-                  :show-overflow-tooltip="true"
-                >
+                <el-table-column prop="hot" label="热度" width="60" :show-overflow-tooltip="true">
                 </el-table-column>
-                <el-table-column
-                  prop="address"
-                  label="地址"
-                  width="80"
-                  :show-overflow-tooltip="true"
-                >
+                <el-table-column prop="address" label="地址" width="80" :show-overflow-tooltip="true">
                 </el-table-column>
                 <el-table-column prop="x" label="x" v-if="false">
                 </el-table-column>
@@ -77,37 +38,17 @@
                 </el-table-column>
                 <el-table-column prop="detail" label="操作" width="100">
                   <template slot-scope="scope">
-                    <el-button
-                      type="text"
-                      @click.stop="flyToLocation(scope.row.x, scope.row.y)"
-                      >定位</el-button
-                    >
-                    <el-button type="text" @click.stop="getDetail(scope.row.id)"
-                      >详情</el-button
-                    >
+                    <el-button type="text" @click.stop="flyToLocation(scope.row.x, scope.row.y)">定位</el-button>
+                    <el-button type="text" @click.stop="getDetail(scope.row.id)">详情</el-button>
                   </template>
                 </el-table-column>
               </el-table>
-              <el-pagination
-                @current-change="handleCurrentChange"
-                background
-                layout="total,prev, pager, next,jumper"
-                :total="total"
-                :pager-count="5"
-                :page-count="pagecount"
-                small
-                :page-size="pageSize"
-                :current-page="currentPage"
-                id="pagination"
-              >
+              <el-pagination @current-change="handleCurrentChange" background layout="total,prev, pager, next,jumper"
+                :total="total" :pager-count="5" :page-count="pagecount" small :page-size="pageSize"
+                :current-page="currentPage" id="pagination">
               </el-pagination>
             </el-card>
-            <detail
-              :show="show"
-              :porpID="porpID"
-              @hideModal="hideModal"
-              @submit="submit"
-            >
+            <detail :show="show" :porpID="porpID" @hideModal="hideModal" @submit="submit">
             </detail>
           </div>
         </div>
@@ -165,6 +106,9 @@ export default {
       points: [{ lng: "10", lat: "10" }],
       pointsdata: [{ lng: "0", lat: "0" }],
       pointsflag: 0,
+
+      //三维地图相关
+      map: null,
     };
   },
   created() {
@@ -189,13 +133,19 @@ export default {
   methods: {
     initmap() {
       var that = this;
-      this.$mapboxgl.accessToken =
-        "pk.eyJ1IjoiY2hlbmpxIiwiYSI6ImNrcWFmdWt2bjBtZGsybmxjb29oYmRzZzEifQ.mnpiwx7_cBEyi8YiJiMRZg";
-      this.map = new mapboxgl.Map({
-        container: "map",
-        style: "mapbox://styles/chenjq/cl084urgf004014ny2nhu1xre",
-        center: [105, 35],
-        zoom: 3.5,
+      var webGlobe = new Cesium.WebSceneControl("map", {
+        terrainExaggeration: 1,
+      });
+      var blueImage = new Cesium.UrlTemplateImageryProvider({
+        url: "https://map.geoq.cn/arcgis/rest/services/ChinaOnlineStreetPurplishBlue/MapServer/tile/{z}/{y}/{x}",
+        tilingScheme: new Cesium.WebMercatorTilingScheme(),
+        maximumLevel: 12,
+      });
+      webGlobe.viewer.imageryLayers.addImageryProvider(blueImage);
+      that.map = webGlobe.viewer;
+      var center = Cesium.Cartesian3.fromDegrees(114, 30, 8000000.0);
+      that.map.scene.camera.setView({
+        destination: center,
       });
     },
     flyToLocation(x, y) {
@@ -338,12 +288,14 @@ export default {
   //   }
   // }
 }
+
 #map {
   position: relative;
   width: 100%;
   height: 100%;
   z-index: 0;
 }
+
 // /deep/#isearch {
 //   margin-top: 10%;
 //   margin-left: 10%;
@@ -353,10 +305,12 @@ export default {
   //  background-size: 100% 100%;
   // background: url(../assets/img/titlebg.png) no-repeat;
 }
+
 .draw {
   width: 50px;
   height: 50px;
 }
+
 .head {
   height: 5%;
   width: 40%;
@@ -364,7 +318,8 @@ export default {
   left: 2%;
   background: url(../assets/img/titlebg.png) no-repeat;
   background-size: 70% 91%;
-  > span {
+
+  >span {
     float: left;
     margin-left: 18%;
     font-size: 12pt;
@@ -374,6 +329,7 @@ export default {
       0 0 70px #0cf3f3;
   }
 }
+
 .left-part {
   position: absolute;
   top: 3px;
@@ -388,10 +344,12 @@ export default {
   background: url(../assets/img/side.png) no-repeat;
   opacity: 1;
   background-size: 100% 100%;
+
   .pt1 {
     .sorttable {
       height: 95%;
       width: 100%;
+
       // background-color: #0cf3f3;
       .el-pagination {
         bottom: 1.5%;
@@ -403,25 +361,30 @@ export default {
         height: 100%;
         width: 100%;
         border: none;
+
         #button1 {
           background-color: #225e81e3;
           border-color: #1edaeb;
           color: #fff;
           width: 77px;
         }
+
         #button2 {
           margin-left: 16%;
           background-color: #225e81e3;
           border-color: #1edaeb;
           color: #fff;
         }
+
         /deep/.el-card__body {
           padding: 6px !important;
           height: 100%;
         }
+
         /deep/.el-overlay {
           background-color: rgba(255, 255, 255, 0.02);
         }
+
         .el-table,
         .el-table__expanded-cell {
           margin-top: 3%;
@@ -435,15 +398,19 @@ export default {
           left: 60%;
           top: 8.5%;
         }
+
         /deep/.el-icon-search {
           height: 0px;
         }
+
         /deep/.el-table .cell {
           text-align: center;
         }
+
         /deep/.el-table .el-table__cell {
           padding: 2px 0 !important;
         }
+
         // /deep/.el-button--mini :nth-child(1){
         //           background-color: #225e81e3;
         //   border-color: #1edaeb;
@@ -461,41 +428,51 @@ export default {
           background-size: 100% 100%;
           border: none;
         }
+
         /deep/.el-input--mini .el-input__inner {
           background-color: #6d4c3f2c;
         }
-        /deep/.el-table tbody tr:hover > td {
+
+        /deep/.el-table tbody tr:hover>td {
           background-color: #23ece22c !important;
         }
+
         /deep/.el-table tr {
           color: #fff;
           // background-color: rgb(2, 64, 86, 0.1);
           background-color: #6d4c3f2c;
         }
+
         /deep/ .el-table th.gutter {
           display: table-cell !important;
           background: #3f5c6d2c; //因为我改了我的默认表格背景颜色，所以要跟着改
         }
+
         /deep/.el-table::before {
           background-color: transparent;
         }
+
         /deep/.el-input__prefix {
           left: 38px;
           top: 26%;
         }
+
         /deep/.el-pagination .el-pager li {
           background-color: transparent;
           color: #fff;
           margin: 0 2px;
         }
+
         /deep/.el-pagination .btn-prev {
           background-color: transparent;
           color: #fff;
         }
+
         /deep/.el-pagination .btn-next {
           background-color: #00a2ff2c;
           color: #fff;
         }
+
         /deep/.el-table td.el-table__cell,
         /deep/.el-table th.el-table__cell.is-leaf {
           border-bottom: transparent !important;
@@ -504,6 +481,7 @@ export default {
     }
   }
 }
+
 .detail {
   position: relative;
   z-index: 9999999999;
@@ -511,12 +489,15 @@ export default {
   width: 100%;
   background: #0cf3f3;
 }
+
 /deep/.el-input__inner {
   color: #ccd8ef;
 }
+
 /deep/.el-pagination__total {
   color: #ccd8ef;
 }
+
 /deep/.el-pagination__jump {
   margin-left: 8px;
   color: #ccd8ef;

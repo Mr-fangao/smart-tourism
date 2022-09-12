@@ -1,0 +1,922 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Client for JavaScript service/ArcGis/FeatureLayer.js</title>
+
+  <script src="../cdn/run_prettify.js"></script>
+  <script src="../cdn/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="../cdn/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="../cdn/googleapis.css" rel="stylesheet">
+  <link href="../cdn/prettify.css" rel="stylesheet">
+  <link rel="stylesheet" href="../cdn/all.css" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="../cdn/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="../cdn/mapgis.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="../cdn/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+             
+                <a class="image" href="/">
+                    <img class="mapgis-webclient-logo" src="../image/mapgis_blue.png" alt="logo">
+                </a>
+            
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API
+                </a>
+                <div class="dropdown is-hoverable is-right">
+                    <a class="dropdown-trigger link">
+                        帮助向导
+                    </a>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-content">
+                        
+                            
+                                <a class="dropdown-item" href="tutorial-1.快速入门.html">
+                                    1.快速入门
+                                </a>
+                            
+                        
+                        </div>
+                    </div>
+                </div>
+                 
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/cesium/index.html"
+                        >
+                            Cesium
+                        </a>
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/mapboxgl/index.html"
+                        >
+                            MapboxGL
+                        </a>
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/leaflet/index.html"
+                        >
+                            Leaflet
+                        </a>
+                    
+                        <a
+                            class="link user-link "
+                            href="/docs/openlayers/index.html"
+                        >
+                            OpenLayers
+                        </a>
+                    
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            <div>
+                <span class="mapgis-api-document-span"><a href="index.html">API文档</a></span>
+            </div>
+            
+                <div class="search-wrapper">
+                    <input id="search" type="text" placeholder="搜索文档..." class="input">
+                </div>
+            
+            <nav>
+                
+                    <div class="category"><div class="mapgis-menu-span">模块</div><ul class="mapgis-sidebar-menus"><li><a href="module-ArcGis.html">ArcGis</a></li><li><a href="module-CloudDisk.html">CloudDisk</a></li><li><a href="module-DataStore.html">DataStore</a></li><li><a href="module-IGServerX.html">IGServerX</a></li><li><a href="module-OGC%25E6%259C%258D%25E5%258A%25A1.html">OGC服务</a></li><li><a href="module-OpenGeospatialConsortium%25E6%259C%258D%25E5%258A%25A1.html">OpenGeospatialConsortium服务</a></li><li><a href="module-PostGIS.html">PostGIS</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.html">专题图服务</a></li><li><a href="module-%25E5%2587%25A0%25E4%25BD%2595%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.html">几何分析服务</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.html">分析服务</a></li><li><a href="module-%25E5%259C%25B0%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.html">地图服务</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.html">客户端可视化</a></li><li><a href="module-%25E5%25BC%25B9%25E6%2580%25A7%25E6%2590%259C%25E7%25B4%25A2%25E6%259C%258D%25E5%258A%25A1.html">弹性搜索服务</a></li><li><a href="module-%25E7%259B%25AE%25E5%25BD%2595%25E6%259C%258D%25E5%258A%25A1.html">目录服务</a></li><li><a href="module-%25E7%259F%25A2%25E9%2587%258F%25E5%25A4%25A7%25E6%2595%25B0%25E6%258D%25AE.html">矢量大数据</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.html">要素服务</a></li></ul><div class="mapgis-menu-span">类名</div><ul class="mapgis-sidebar-menus"><li><a href="Circle.html">Circle</a></li><li><a href="CoordinateElpTrans.html">CoordinateElpTrans</a></li><li><a href="ElsCubeLayer_ElsCubeLayer.html">ElsCubeLayer</a></li><li><a href="FunctionWareService.html">FunctionWareService</a></li><li><a href="GeojsonStreamLayer.html">GeojsonStreamLayer</a></li><li><a href="ISocketService.html">ISocketService</a></li><li><a href="L.zondy.StreamLayer.html">StreamLayer</a></li><li><a href="mapboxgl.zondy.CubeLayer.html">CubeLayer</a></li><li><a href="mapboxgl.zondy.DeckglLayer.html">DeckglLayer</a></li><li><a href="mapboxgl.zondy.Graphic.html">Graphic</a></li><li><a href="mapboxgl.Zondy.Map.ArcGISLayer.html">ArcGISLayer</a></li><li><a href="mapboxgl.Zondy.Map.MapDocLayer.html">MapDocLayer</a></li><li><a href="mapboxgl.Zondy.Map.MapTileLayer.html">MapTileLayer</a></li><li><a href="mapboxgl.Zondy.Map.MapVectorLayer.html">MapVectorLayer</a></li><li><a href="mapboxgl.Zondy.Map.MapWmsLayer.html">MapWmsLayer</a></li><li><a href="mapboxgl.Zondy.Map.MapWMTSLayer.html">MapWMTSLayer</a></li><li><a href="mapboxgl.Zondy.Map.TDTLayer.html">TDTLayer</a></li><li><a href="mapboxgl.zondy.UniqueTheme3DLayer.html">UniqueTheme3DLayer</a></li><li><a href="mapboxgl.zondy.Util.html">Util</a></li><li><a href="MapvStreamLayer.html">MapvStreamLayer</a></li><li><a href="module-ArcGis.ArcGisBaseParam.html">ArcGisBaseParam</a></li><li><a href="module-ArcGis.ArcGisExtent.html">ArcGisExtent</a></li><li><a href="module-ArcGis.ArcGisFeatureLayer.html">ArcGisFeatureLayer</a></li><li><a href="module-ArcGis.ArcGisFindTask.html">ArcGisFindTask</a></li><li><a href="module-ArcGis.ArcGisGraphic.html">ArcGisGraphic</a></li><li><a href="module-ArcGis.ArcGisIdentifyTask.html">ArcGisIdentifyTask</a></li><li><a href="module-ArcGis.ArcGisMultipoint.html">ArcGisMultipoint</a></li><li><a href="module-ArcGis.ArcGisPoint.html">ArcGisPoint</a></li><li><a href="module-ArcGis.ArcGisPolygon.html">ArcGisPolygon</a></li><li><a href="module-ArcGis.ArcGisPolyline.html">ArcGisPolyline</a></li><li><a href="module-ArcGis.ArcGisQuery.html">ArcGisQuery</a></li><li><a href="module-ArcGis.ArcGisServiceBase.html">ArcGisServiceBase</a></li><li><a href="module-ArcGis.ArcGisSpatialReference.html">ArcGisSpatialReference</a></li><li><a href="module-CloudDisk.CalculateModelService.html">CalculateModelService</a></li><li><a href="module-CloudDisk.CloudDiskService.html">CloudDiskService</a></li><li><a href="module-CloudDisk.GeoDatasetService.html">GeoDatasetService</a></li><li><a href="module-CloudDisk.GisCore.FileService.html">FileService</a></li><li><a href="module-CloudDisk.ToolsService.html">ToolsService</a></li><li><a href="module-CloudDisk.UserService.html">UserService</a></li><li><a href="module-DataStore.DataStoreService.html">DataStoreService</a></li><li><a href="module-DataStore.ServiceParameter.html">ServiceParameter</a></li><li><a href="module-IGServerX.IGServerXService.html">IGServerXService</a></li><li><a href="module-OGC%2525E6%25259C%25258D%2525E5%25258A%2525A1.OGCService.html">OGCService</a></li><li><a href="module-OGC%25E6%259C%258D%25E5%258A%25A1.OGCWMSInfo.html">OGCWMSInfo</a></li><li><a href="module-OGC%25E6%259C%258D%25E5%258A%25A1.OGCWMTSInfo.html">OGCWMTSInfo</a></li><li><a href="module-OGC%25E6%259C%258D%25E5%258A%25A1.WMS.html">WMS</a></li><li><a href="module-PostGIS.PostgisCatlogService.html">PostgisCatlogService</a></li><li><a href="module-PostGIS.PostgisCustomQueryService.html">PostgisCustomQueryService</a></li><li><a href="module-PostGIS.PostgisQueryService.html">PostgisQueryService</a></li><li><a href="module-PostGIS.PostgisTableService.html">PostgisTableService</a></li><li><a href="module-PostGIS.PostgisVectorTileService.html">PostgisVectorTileService</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CAllOtherDataItemInfoSource.html">CAllOtherDataItemInfoSource</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CAnnInfo.html">CAnnInfo</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CChartLabelFormat.html">CChartLabelFormat</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CChartTheme.html">CChartTheme</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CChartThemeInfo.html">CChartThemeInfo</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CChartThemeRepresentInfo.html">CChartThemeRepresentInfo</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CChartType.html">CChartType</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CDotDensityTheme.html">CDotDensityTheme</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CFourColorTheme.html">CFourColorTheme</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CGraduatedSymbolTheme.html">CGraduatedSymbolTheme</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CLinInfo.html">CLinInfo</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CMultiClassTheme.html">CMultiClassTheme</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CPntInfo.html">CPntInfo</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CRandomTheme.html">CRandomTheme</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CRangeTheme.html">CRangeTheme</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CRangeThemeInfo.html">CRangeThemeInfo</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CRegInfo.html">CRegInfo</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CSimpleTheme.html">CSimpleTheme</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CTheme.html">CTheme</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CThemeInfo.html">CThemeInfo</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CUniqueTheme.html">CUniqueTheme</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.CUniqueThemeInfo.html">CUniqueThemeInfo</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.ExpInfo.html">ExpInfo</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.FolderInfo.html">FolderInfo</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.FolderInfoAttribute.html">FolderInfoAttribute</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.ItemValue.html">ItemValue</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.ThemeOper.html">ThemeOper</a></li><li><a href="module-%25E4%25B8%2593%25E9%25A2%2598%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.ThemesInfo.html">ThemesInfo</a></li><li><a href="module-%25E5%2587%25A0%25E4%25BD%2595%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.CalArea.html">CalArea</a></li><li><a href="module-%25E5%2587%25A0%25E4%25BD%2595%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.CalPolyLineLength.html">CalPolyLineLength</a></li><li><a href="module-%25E5%2587%25A0%25E4%25BD%2595%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.CalServiceBase.html">CalServiceBase</a></li><li><a href="module-%25E5%2587%25A0%25E4%25BD%2595%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.CProjectBySRSID.html">CProjectBySRSID</a></li><li><a href="module-%25E5%2587%25A0%25E4%25BD%2595%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.CProjectParam.html">CProjectParam</a></li><li><a href="module-%25E5%2587%25A0%25E4%25BD%2595%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.GeometryAnalysisBase.html">GeometryAnalysisBase</a></li><li><a href="module-%25E5%2587%25A0%25E4%25BD%2595%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ProjectDots.html">ProjectDots</a></li><li><a href="module-%25E5%2587%25A0%25E4%25BD%2595%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ProjectRang.html">ProjectRang</a></li><li><a href="module-%25E5%2587%25A0%25E4%25BD%2595%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.Smooth.html">Smooth</a></li><li><a href="module-%25E5%2587%25A0%25E4%25BD%2595%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.TopAnalysis.html">TopAnalysis</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.AnalysisBase.html">AnalysisBase</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ClassBufferBase.html">ClassBufferBase</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ClassBufferByMultiplyRing.html">ClassBufferByMultiplyRing</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ClassBufferBySingleRing.html">ClassBufferBySingleRing</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ClipBase.html">ClipBase</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ClipByCircle.html">ClipByCircle</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ClipByLayer.html">ClipByLayer</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ClipByPolygon.html">ClipByPolygon</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ContourAnalyse.html">ContourAnalyse</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.FeatureBuffBase.html">FeatureBuffBase</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.FeatureBuffByMultiplyRing.html">FeatureBuffByMultiplyRing</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.FeatureBuffBySingleRing.html">FeatureBuffBySingleRing</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.NetAnalysis.html">NetAnalysis</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.OverlayBase.html">OverlayBase</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.OverlayByLayer.html">OverlayByLayer</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.OverlayByPolygon.html">OverlayByPolygon</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ProjectBase.html">ProjectBase</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ProjectByLayer.html">ProjectByLayer</a></li><li><a href="module-%25E5%2588%2586%25E6%259E%2590%25E6%259C%258D%25E5%258A%25A1.ProjectBySRID.html">ProjectBySRID</a></li><li><a href="module-%25E5%259C%25B0%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.GetDocImageService.html">GetDocImageService</a></li><li><a href="module-%25E5%259C%25B0%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.GetLayerImageService.html">GetLayerImageService</a></li><li><a href="module-%25E5%259C%25B0%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.GetMapImageService.html">GetMapImageService</a></li><li><a href="module-%25E5%259C%25B0%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.GetMapInfoService.html">GetMapInfoService</a></li><li><a href="module-%25E5%259C%25B0%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.GetTileImageService.html">GetTileImageService</a></li><li><a href="module-%25E5%259C%25B0%25E5%259B%25BE%25E6%259C%258D%25E5%258A%25A1.MapServiceBase.html">MapServiceBase</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.EchartsLayer.html">EchartsLayer</a></li><li><a href="module-%25E5%25AE%25A2%25E6%2588%25B7%25E7%25AB%25AF%25E5%258F%25AF%25E8%25A7%2586%25E5%258C%2596.MapvLayer.html">MapvLayer</a></li><li><a href="module-%25E5%25BC%25B9%25E6%2580%25A7%25E6%2590%259C%25E7%25B4%25A2%25E6%259C%258D%25E5%258A%25A1.EsCatlogService.html">EsCatlogService</a></li><li><a href="module-%25E5%25BC%25B9%25E6%2580%25A7%25E6%2590%259C%25E7%25B4%25A2%25E6%259C%258D%25E5%258A%25A1.ESGeoCode.html">ESGeoCode</a></li><li><a href="module-%25E5%25BC%25B9%25E6%2580%25A7%25E6%2590%259C%25E7%25B4%25A2%25E6%259C%258D%25E5%258A%25A1.EsGeocodeParameter.html">EsGeocodeParameter</a></li><li><a href="module-%25E5%25BC%25B9%25E6%2580%25A7%25E6%2590%259C%25E7%25B4%25A2%25E6%259C%258D%25E5%258A%25A1.EsGeocodeService.html">EsGeocodeService</a></li><li><a href="module-%25E5%25BC%25B9%25E6%2580%25A7%25E6%2590%259C%25E7%25B4%25A2%25E6%259C%258D%25E5%258A%25A1.ESGeoDecode.html">ESGeoDecode</a></li><li><a href="module-%25E5%25BC%25B9%25E6%2580%25A7%25E6%2590%259C%25E7%25B4%25A2%25E6%259C%258D%25E5%258A%25A1.ESQueryStats.html">ESQueryStats</a></li><li><a href="module-%25E5%25BC%25B9%25E6%2580%25A7%25E6%2590%259C%25E7%25B4%25A2%25E6%259C%258D%25E5%258A%25A1.EsSpaceTimeQueryByAgg.html">EsSpaceTimeQueryByAgg</a></li><li><a href="module-%25E5%25BC%25B9%25E6%2580%25A7%25E6%2590%259C%25E7%25B4%25A2%25E6%259C%258D%25E5%258A%25A1.EsTableService.html">EsTableService</a></li><li><a href="module-%25E7%259B%25AE%25E5%25BD%2595%25E6%259C%258D%25E5%258A%25A1.CatalogService.html">CatalogService</a></li><li><a href="module-%25E7%259B%25AE%25E5%25BD%2595%25E6%259C%258D%25E5%258A%25A1.ColorInfo.html">ColorInfo</a></li><li><a href="module-%25E7%259B%25AE%25E5%25BD%2595%25E6%259C%258D%25E5%258A%25A1.GDBInfo.html">GDBInfo</a></li><li><a href="module-%25E7%259B%25AE%25E5%25BD%2595%25E6%259C%258D%25E5%258A%25A1.MapDoc.html">MapDoc</a></li><li><a href="module-%25E7%259B%25AE%25E5%25BD%2595%25E6%259C%258D%25E5%258A%25A1.SystomInfo.html">SystomInfo</a></li><li><a href="module-%25E7%259B%25AE%25E5%25BD%2595%25E6%259C%258D%25E5%258A%25A1.TileLayer.html">TileLayer</a></li><li><a href="module-%25E7%259B%25AE%25E5%25BD%2595%25E6%259C%258D%25E5%258A%25A1.VectorLayer.html">VectorLayer</a></li><li><a href="module-%25E7%259F%25A2%25E9%2587%258F%25E5%25A4%25A7%25E6%2595%25B0%25E6%258D%25AE.SparkBufferService.html">SparkBufferService</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.EditDocFeature.html">EditDocFeature</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.EditLayerFeature.html">EditLayerFeature</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.EditServiceBase.html">EditServiceBase</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.MultiGeoQuery.html">MultiGeoQuery</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.MultiGeoQueryParameter.html">MultiGeoQueryParameter</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.ObjClsQuery.html">ObjClsQuery</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.ObjClsQueryParameter.html">ObjClsQueryParameter</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.QueryByLayerParameter.html">QueryByLayerParameter</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.QueryDocFeature.html">QueryDocFeature</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.QueryFeatureRule.html">QueryFeatureRule</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.QueryFeatureStruct.html">QueryFeatureStruct</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.QueryLayerFeature.html">QueryLayerFeature</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.QueryParameter.html">QueryParameter</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.QueryParameterBase.html">QueryParameterBase</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.QueryServiceBase.html">QueryServiceBase</a></li><li><a href="module-%25E8%25A6%2581%25E7%25B4%25A0%25E6%259C%258D%25E5%258A%25A1.QueryUnifyFeature.html">QueryUnifyFeature</a></li><li><a href="module=ArcGis.ArcGisFindParameters.html">ArcGisFindParameters</a></li><li><a href="module=ArcGis.ArcGisIdentifyParameters.html">ArcGisIdentifyParameters</a></li><li><a href="RangeTheme3DLayer.html">RangeTheme3DLayer</a></li><li><a href="SocketService.html">SocketService</a></li><li><a href="Theme3DLayer.html">Theme3DLayer</a></li><li><a href="TimeSpaceCubeLayer_TimeSpaceCubeLayer.html">TimeSpaceCubeLayer</a></li><li><a href="Zondy.Catalog.G3DMapDoc.html">G3DMapDoc</a></li><li><a href="Zondy.Catalog.G3DMapDoc_GetFeature.html">GetFeature</a></li><li><a href="Zondy.Catalog.G3DService.html">G3DService</a></li><li><a href="Zondy.Catalog.SystomInfo.html#GetSystemLibrary">GetSystemLibrary</a></li><li><a href="Zondy.Format.WMSCapabilities.html">WMSCapabilities</a></li><li><a href="Zondy.Format.WMTSCapabilities.html">WMTSCapabilities</a></li><li><a href="Zondy.Map.GeoFeatureThemeLayer.html">GeoFeatureThemeLayer</a></li><li><a href="Zondy.Map.graphThemeLayer.html">graphThemeLayer</a></li><li><a href="Zondy.Map.randomThemeLayer.html">randomThemeLayer</a></li><li><a href="Zondy.Map.rangeThemeLayer.html">rangeThemeLayer</a></li><li><a href="Zondy.Map.rankSymbolThemeLayer.html">rankSymbolThemeLayer</a></li><li><a href="Zondy.Map.simpleThemeLayer.html">simpleThemeLayer</a></li><li><a href="Zondy.Map.ThemeLayer.html">ThemeLayer</a></li><li><a href="Zondy.Map.ThemeStyle.html">ThemeStyle</a></li><li><a href="Zondy.Map.uniqueThemeLayer.html">uniqueThemeLayer</a></li><li><a href="Zondy.Object.AnyLine.html">AnyLine</a></li><li><a href="Zondy.Object.Arc.html">Arc</a></li><li><a href="Zondy.Object.CAttDataRow.html">CAttDataRow</a></li><li><a href="Zondy.Object.CAttStruct.html">CAttStruct</a></li><li><a href="Zondy.Object.CDisplayStyle.html">CDisplayStyle</a></li><li><a href="Zondy.Object.CDisplayStyleExtend.html">CDisplayStyleExtend</a></li><li><a href="Zondy.Object.CDynNoteInfo.html">CDynNoteInfo</a></li><li><a href="Zondy.Object.Circle.html">Circle</a></li><li><a href="Zondy.Object.CLineInfo.html">CLineInfo</a></li><li><a href="Zondy.Object.ContourAnalyse.ContourParam.html">ContourParam</a></li><li><a href="Zondy.Object.ContourAnalyse.MeshingParam.html">MeshingParam</a></li><li><a href="Zondy.Object.ContourAnalyse.SlopLineParam.html">SlopLineParam</a></li><li><a href="Zondy.Object.CPointInfo.html">CPointInfo</a></li><li><a href="Zondy.Object.CRegionInfo.html">CRegionInfo</a></li><li><a href="Zondy.Object.DynNoteLableType.html">DynNoteLableType</a></li><li><a href="Zondy.Object.DynShowStyle.html">DynShowStyle</a></li><li><a href="Zondy.Object.Feature.html">Feature</a></li><li><a href="Zondy.Object.FeatureGeometry.html">FeatureGeometry</a></li><li><a href="Zondy.Object.FeatureGraphicBase.html">FeatureGraphicBase</a></li><li><a href="Zondy.Object.FeatureSet.html">FeatureSet</a></li><li><a href="Zondy.Object.GLine.html">GLine</a></li><li><a href="Zondy.Object.GPoint.html">GPoint</a></li><li><a href="Zondy.Object.GRegion.html">GRegion</a></li><li><a href="Zondy.Object.LabelLinInfo.html">LabelLinInfo</a></li><li><a href="Zondy.Object.LabelRegInfo.html">LabelRegInfo</a></li><li><a href="Zondy.Object.LablePntInfo.html">LablePntInfo</a></li><li><a href="Zondy.Object.MultiPolygon.html">MultiPolygon</a></li><li><a href="Zondy.Object.Point2D.html">Point2D</a></li><li><a href="Zondy.Object.Polygon.html">Polygon</a></li><li><a href="Zondy.Object.PolyLine.html">PolyLine</a></li><li><a href="Zondy.Object.Rectangle.html">Rectangle</a></li><li><a href="Zondy.Object.Tangram.html">Tangram</a></li><li><a href="Zondy.Object.VectCls.html">VectCls</a></li><li><a href="Zondy.Object.WebGraphicsInfo.html">WebGraphicsInfo</a></li><li><a href="Zondy.Service.ServiceBase.html">ServiceBase</a></li></ul><div class="mapgis-menu-span">事件</div><ul class="mapgis-sidebar-menus"><li><a href="Zondy.Map.GeoFeatureThemeLayer.html#event:changelayer">changelayer</a></li><li><a href="Zondy.Map.GeoFeatureThemeLayer.html#event:featuresremoved">featuresremoved</a></li><li><a href="Zondy.Map.graphThemeLayer.html#event:changelayer">changelayer</a></li><li><a href="Zondy.Map.graphThemeLayer.html#event:featuresremoved">featuresremoved</a></li><li><a href="Zondy.Map.randomThemeLayer.html#event:changelayer">changelayer</a></li><li><a href="Zondy.Map.randomThemeLayer.html#event:featuresremoved">featuresremoved</a></li><li><a href="Zondy.Map.rangeThemeLayer.html#event:changelayer">changelayer</a></li><li><a href="Zondy.Map.rangeThemeLayer.html#event:featuresremoved">featuresremoved</a></li><li><a href="Zondy.Map.simpleThemeLayer.html#event:changelayer">changelayer</a></li><li><a href="Zondy.Map.simpleThemeLayer.html#event:featuresremoved">featuresremoved</a></li><li><a href="Zondy.Map.ThemeLayer.html#event:changelayer">changelayer</a></li><li><a href="Zondy.Map.ThemeLayer.html#event:featuresremoved">featuresremoved</a></li><li><a href="Zondy.Map.uniqueThemeLayer.html#event:changelayer">changelayer</a></li><li><a href="Zondy.Map.uniqueThemeLayer.html#event:featuresremoved">featuresremoved</a></li></ul><div class="mapgis-menu-span">全局</div><ul class="mapgis-sidebar-menus"><li><a href="global.html#addFeatures">addFeatures</a></li><li><a href="global.html#addTo">addTo</a></li><li><a href="global.html#appendUrl">appendUrl</a></li><li><a href="global.html#base">base</a></li><li><a href="global.html#baseHeightField">baseHeightField</a></li><li><a href="global.html#BroadcastEvent">BroadcastEvent</a></li><li><a href="global.html#CItemType">CItemType</a></li><li><a href="global.html#CLinAdjustType">CLinAdjustType</a></li><li><a href="global.html#CLinHeadType">CLinHeadType</a></li><li><a href="global.html#CLinJointType">CLinJointType</a></li><li><a href="global.html#CLinStyleMakeType">CLinStyleMakeType</a></li><li><a href="global.html#colorStops">colorStops</a></li><li><a href="global.html#copyProperties">copyProperties</a></li><li><a href="global.html#EightDirType">EightDirType</a></li><li><a href="global.html#enableHighlight">enableHighlight</a></li><li><a href="global.html#EsCatlogName">EsCatlogName</a></li><li><a href="global.html#EsCatlogType">EsCatlogType</a></li><li><a href="global.html#EsGeoHashType">EsGeoHashType</a></li><li><a href="global.html#extend">extend</a></li><li><a href="global.html#FeatureType">FeatureType</a></li><li><a href="global.html#FontShape">FontShape</a></li><li><a href="global.html#getData">getData</a></li><li><a href="global.html#getHighlightStyleOptions">getHighlightStyleOptions</a></li><li><a href="global.html#getLayerStyleOptions">getLayerStyleOptions</a></li><li><a href="global.html#height">height</a></li><li><a href="global.html#heightField">heightField</a></li><li><a href="global.html#heightStops">heightStops</a></li><li><a href="global.html#highlight">highlight</a></li><li><a href="global.html#id">id</a></li><li><a href="global.html#interpolateLagrange">interpolateLagrange</a></li><li><a href="global.html#ISShowArc">ISShowArc</a></li><li><a href="global.html#LabelLinType">LabelLinType</a></li><li><a href="global.html#LabelPntType">LabelPntType</a></li><li><a href="global.html#LabelRegType">LabelRegType</a></li><li><a href="global.html#LabelSpreadType">LabelSpreadType</a></li><li><a href="global.html#LayerEvent">LayerEvent</a></li><li><a href="global.html#LayerStatusType">LayerStatusType</a></li><li><a href="global.html#legendOrientation">legendOrientation</a></li><li><a href="global.html#legendPosition">legendPosition</a></li><li><a href="global.html#legendRatio">legendRatio</a></li><li><a href="global.html#legendTheme">legendTheme</a></li><li><a href="global.html#legendTitle">legendTitle</a></li><li><a href="global.html#LineConstrain">LineConstrain</a></li><li><a href="global.html#map">map</a></li><li><a href="global.html#MapType">MapType</a></li><li><a href="global.html#mix">mix</a></li><li><a href="global.html#NetAnalyType">NetAnalyType</a></li><li><a href="global.html#NetElemType">NetElemType</a></li><li><a href="global.html#objectStack%255Bundefined%255D">objectStack[undefined]</a></li><li><a href="global.html#opacity">opacity</a></li><li><a href="global.html#PARAM_BRACKET_LEFT">PARAM_BRACKET_LEFT</a></li><li><a href="global.html#PARAM_BRACKET_RIGHT">PARAM_BRACKET_RIGHT</a></li><li><a href="global.html#PARAM_COMMA">PARAM_COMMA</a></li><li><a href="global.html#PARAM_SPACE">PARAM_SPACE</a></li><li><a href="global.html#PARAM_SPLIT">PARAM_SPLIT</a></li><li><a href="global.html#PARAM_SUB">PARAM_SUB</a></li><li><a href="global.html#parseNumber">parseNumber</a></li><li><a href="global.html#remove">remove</a></li><li><a href="global.html#RepeatType">RepeatType</a></li><li><a href="global.html#setData">setData</a></li><li><a href="global.html#setLayerOptions">setLayerOptions</a></li><li><a href="global.html#show">show</a></li><li><a href="global.html#showLegend">showLegend</a></li><li><a href="global.html#SPACE_ENUM_POLYGON">SPACE_ENUM_POLYGON</a></li><li><a href="global.html#SubscribeEvent">SubscribeEvent</a></li><li><a href="global.html#themeField">themeField</a></li><li><a href="global.html#TotalCount">TotalCount</a></li><li><a href="global.html#VectClsType">VectClsType</a></li><li><a href="global.html#XClsType">XClsType</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <span class="page-title-sub">service/ArcGis/FeatureLayer.js</span>
+                    <span class="page-title-main">Source</span>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import {
+    Zondy,formatQuery,formatEdits,extend
+} from '../common';
+import {ArcGisServiceBase} from "./ServiceBase";
+import {ArcGisQuery} from "./Query";
+
+/**
+ * @class module:ArcGis.ArcGisFeatureLayer
+ * @description ArcGis服务
+ * @author 基础平台-杨琨
+ */
+class ArcGisFeatureLayer {
+    constructor(options) {
+        this.id = null;
+        this.uid = null;
+        this.indexes = {
+            items : []
+        };
+        this.load = null;
+
+        this.attributionVisible = true;
+        this.listMode = "show";
+        this.hasAttributionData = false;
+        this.createQueryVersion = 1;
+        this.blendMode = "normal";
+        this.capabilities = null;
+        this.copyright = null;
+        this.loadError = null;
+        this.loadStatus = "not-loaded";
+        this.loaded = false;
+        this.loadWarnings = [];
+        this.customParameters = null;
+        this.definitionExpression = null;
+        this.displayField = null;
+        this.dynamicDataSource = null;
+        this.editFieldsInfo = null;
+        this.editingEnabled = true;
+        this.editingInfo = null;
+        this.effect = null;
+        this.elevationInfo = null;
+        this.featureReduction = null;
+        this.fields = null;
+        this.fieldsIndex = {
+            dateFields:[],
+            fields:[],
+            uid:""
+        };
+        this.formTemplate = null;
+        this.gdbVersion = null;
+        this.geometryType = null;
+        this.hasM = null;
+        this.hasZ = null;
+        this.historicMoment = null;
+        this.isTable = false;
+        this.labelingInfo = null;
+        this.labelsVisible = true;
+        this.layerId = null;
+        this.legendEnabled = true;
+        this.maxScale = 0;
+        this.minScale = 0;
+        this.opacity = 1;
+        this.operationalLayerType = "ArcGisFeatureLayer";
+        this.objectIdField = null;
+        this.outFields = null;
+        this.parent = null;
+        this.path = null;
+        this.parsedUrl = null;
+        this.popupEnabled = true;
+        this.popupTemplate = null;
+        this.portalItem = null;
+        this.refreshInterval = 0;
+        this.relationships = null;
+        this.renderer = null;
+        this.returnM = null;
+        this.returnZ = null;
+        this.resourceReferences = {
+            paths:[],
+            portalItem: null
+        };
+        this.screenSizePerspectiveEnabled = true;
+        this.serviceDefinitionExpression = null;
+        this.source = null;
+        this.scaleRangeId = "0,0";
+        this.sourceJSON = null;
+        this.spatialReference = {
+            imageCoordinateSystem: null,
+            isGeographic: true,
+            isWGS84: true,
+            isWebMercator: false,
+            isWrappable: true,
+            latestVcsWkid: null,
+            latestWkid: null,
+            vcsWkid: null,
+            wkid: 4326,
+            wkt: "GEOGCS['GCS_WGS_1984',DATUM['D_WGS_1984',SPHEROID['WGS_1984',6378137.0,298.257223563]],PRIMEM['Greenwich',0.0],UNIT['Degree',0.0174532925199433]]"
+        };
+        this.templates = null;
+        this.sublayerTitleMode = "item-title";
+        this.timeExtent = null;
+        this.timeInfo = null;
+        this.timeOffset = null;
+        this.title = "";
+        this.trackIdField = null;
+        this.type = "feature";
+        this.typeIdField = null;
+        this.types = null;
+        this.url = null;
+        this.useViewTime = true;
+        this.version = null;
+        this.userIsAdmin = false;
+        this.visible = true;
+
+        extend(this,options)
+        
+        //判断是查询整个地图还是单个图层
+        this._queryService = this.url &amp;&amp; this.url.indexOf('FeatureServer') + 'FeatureServer'.length === this.url.length ? 'queryByMap' : 'queryByLayer'
+        this._applyEditsService = this.url &amp;&amp; this.url.indexOf('FeatureServer') + 'FeatureServer'.length === this.url.length ? 'applyEditsByMap' : 'applyEditsByLayer'
+        let service = new ArcGisServiceBase();
+        //对整个地图查询，url为http://localhost:6080/arcgis/rest/services/wuhan_2/FeatureServer
+        this.queryByMap = function (query) {
+            let url = this.url + "/query?f=json";
+            url = formatQuery(query,url,["geometry","layerDefs"],null);
+            return service.getPromise(url);
+        }
+        //对单个图层查询，url为http://localhost:6080/arcgis/rest/services/wuhan_2/FeatureServer/{layerId}
+        this.queryByLayer = function (query) {
+            let url = this.url + "/query?f=json";
+            url = formatQuery(query,url,["geometry"],null);
+            return service.getPromise(url);
+        }
+
+        //单个图层编辑
+        this.applyEditsByLayer = function (edits,options) {
+            let url = this.url + "/applyEdits",dataStr="",me = this;
+            options = options ? options : {
+                gdbVersion:[],
+                rollbackOnFailure: true,
+                f:'json'
+            }
+            //处理edits
+            let editArr = ["addFeatures","updateFeatures","deleteFeatures"];
+            if(edits.deleteFeatures){
+                let IdsArr = [];
+                for(let i = 0;i &lt; edits.deleteFeatures.length;i++){
+                    IdsArr.push(edits.deleteFeatures[i].objectId);
+                }
+                edits.deleteFeatures = IdsArr.join(",");
+            }
+            dataStr = formatEdits(dataStr,edits,editArr);
+            //处理options
+            dataStr = formatEdits(dataStr,options);
+            //去聊多余的&amp;符号
+            dataStr = dataStr.substring(0,dataStr.length - 1);
+            return service.getPromiseP(url,dataStr);
+        }
+
+        //整个地图编辑
+        this.applyEditsByMap = function (edits,options) {
+            options = options ? options : {
+                gdbVersion:[],
+                rollbackOnFailure: true,
+                f:'json'
+            }
+            let url = this.url + "/applyEdits",dataStr="";
+            //处理请求参数
+            //处理edits
+            dataStr += "edits=" + encodeURIComponent(JSON.stringify(edits)) + "&amp;";
+            //处理options
+            dataStr = formatEdits(dataStr,options);
+            //去聊多余的&amp;符号
+            dataStr = dataStr.substring(0,dataStr.length - 1);
+            return service.getPromiseP(url,dataStr);
+        }
+    }
+}
+
+/**
+ * @function module:ArcGis.ArcGisFeatureLayer.prototype.createQuery
+ * @description 创建查询参数对象
+ * @author 基础平台-杨琨
+ */
+ArcGisFeatureLayer.prototype.createQuery = function () {
+    return new ArcGisQuery();
+}
+
+
+/**
+ * @function  module:ArcGis.ArcGisFeatureLayer.prototype.queryFeatures
+ * @description 查询要素信息
+ * @author 基础平台-杨琨
+ * @param query - {String} 必选项，查询参数。
+ * @param {String} [query.geometry] 可选项。几何对象，要素查询条件，形式为x,y坐标。支持单个点，多个点、线、矩形、多边形。无需配合where使用，可单独查询。
+ * 格式为：geometry对象或xmin,ymin,xmax,ymax点坐标；Example：单个点：geometry=-104,35.6；封闭矩形：geometry=-104,35.6,-94.32,41；geometry对象：{xmin: -104, ymin: 35.6, xmax: -94.32, ymax: 41}；
+ * 参考链接：Geometry objects：https://developers.arcgis.com/documentation/common-data-types/geometry-objects.htm
+ * @param {String} [query.geometryType] 可选项。配合geometry使用，当通过几何对象进行要素查询时，集合对象的类型，默认为矩形。可选值为：esriGeometryPoint | esriGeometryMultipoint | esriGeometryPolyline | esriGeometryPolygon | esriGeometryEnvelope
+ * Example：geometryType=esriGeometryEnvelope
+ * @param {String} [query.spatialRel] 可选项。空间关系。即所选的几何对象与图层的相交关系。例如包含、相交、相离等，默认值为esriSpatialRelIntersects。
+ * 可选值为：esriSpatialRelIntersects | esriSpatialRelContains | esriSpatialRelCrosses | esriSpatialRelEnvelopeIntersects | esriSpatialRelIndexIntersects | esriSpatialRelOverlaps | esriSpatialRelTouches | esriSpatialRelWithin
+ * Example：spatialRel=esriSpatialRelIntersects
+ * @param {String} [query.returnGeometry] 可选项。返回要素集合时，是否返回几何信息。默认为true。返回几何信息。可选值：true | false
+ * @param {String} [query.geometryPrecision] 可选项。指定返回的要素集合中x、y坐标的小数位数。Example：geometryPrecision=3
+ * @param {String} [query.maxAllowableOffset] 可选项。简化返回的几何要素时，允许的最大偏移量。对返回的要素的geometry对象起作用。
+ * @param {String} [query.where] 可选项。通过where进行条件查询。与整个地图的查询相比没有返回值过滤。Example：where=POP2000 > 350000
+ * 参考链接：SQL语句：https://developers.arcgis.com/rest/services-reference/query-feature-service-.htm#ESRI_SECTION2_07DD2C5127674F6A814CE6C07D39AD46
+ * @param {String} [query.sqlFormat] 可选项。sql语句的格式，默认为none。
+ * @param {String} [query.objectIds] 可选项。通过Id查询要素。格式：objectIds=&lt;objectId1>, &lt;objectId2>；Example：objectIds=37, 462
+ * @param {String} [query.orderByFields] 可选项。返回的要素几何以何种方式进行排序。是升序或降序。格式：orderByFields=field1 &lt;ORDER>, field2 &lt;ORDER>, field3 &lt;ORDER>；
+ * Example： orderByFields=STATE_NAME ASC, RACE DESC, GENDER
+ * @param {String} [query.groupByFieldsForStatistics] 可选项。"以某个字段进行分组。只有当outStatistics 为true是有效
+ * 格式：groupByFieldsForStatistics=field1, field2；Example：groupByFieldsForStatistics=STATE_NAME, GENDER"
+ * @param {String} [query.outFields] 可选项。指定要显示的返回字段，为空时都不显示。Example：outFields=AREANAME,ST,POP2000；outFields=*
+ * @param {String} [query.inSR] 可选项。几何对象的空间参考系。当不指定时，默认为地图的空间参考系。
+ * @param {String} [query.outSR] 可选项。返回的要素几何的空间参考系。默认为地图的空间参考系。
+ * @param {String} [query.returnCentroid] 可选项。返回要素集合时，是否返回每个要素的中心点。仅对layer有效。默认false；可选值：true | false
+ * @param {String} [query.returnM] 可选项。是否返回m值，默认为false。可选值：true | false
+ * @param {String} [query.returnZ] 可选项。是否返回z轴的值，默认为false。可选值：true | false
+ * @param {String} [query.time] 可选项。按照时间进行查询。有两种方式瞬时查询和范围查询。Example：瞬时查询：time=&lt;timeInstant>；time=1199145600000，即 (1 Jan 2008 00:00:00 GMT)
+ * 范围查询：time=&lt;startTime>, &lt;endTime>；time=1199145600000, 1230768000000，即 (1 Jan 2008 00:00:00 GMT to 1 Jan 2009 00:00:00 GMT)；起始时间或结束时间可为null，即time=null, 1230768000000
+ * @param {String} [query.distance] 可选项。缓冲距离。Example：distance=&lt;distance>；distance=100
+ * @param {String} [query.units] 可选项。缓冲距离单位。可选值：esriSRUnit_Meter | esriSRUnit_StatuteMile | esriSRUnit_Foot | esriSRUnit_Kilometer |
+ * esriSRUnit_NauticalMile | esriSRUnit_USNauticalMile
+ * @param {String} [query.supportsQueryWithDistance] 可选项。是否开启缓冲距离。默认false，不开启。可选项：true | false
+ * @param {String} [query.returnDistinctValues] 可选项。返回值是否去重，只保留不同的值。默认为false。最好配合outfields一起使用。也可以和returnCountOnly使用。不能和geometry配合使用可选值：true | false
+ * @param {String} [query.returnIdsOnly] 可选项。是只返回要素的ID还是返回要素集合。默认为false，即返回要素集合。可选值：true | false
+ * @param {String} [query.returnCountOnly] 可选项。是只返回查询到的要素数量还是要素集合。默认为false，即返回要素集合。可选值：true | false
+ * @param {String} [query.returnExtentOnly] 可选项。是否返回要素范围。
+ * @param {String} [query.resultOffset] 可选项。当返回要素集合时，返回从resultOffset开始的要素。默认值为0；Example：resultRecordCount=10
+ * @param {String} [query.resultRecordCount] 可选项。指定返回结果数量。
+ * @param {String} [query.signal ] 可选项。是否取消异步任务。
+ * @example
+ *           //加载地图容器
+            map = new mapboxgl.Map({
+                container: 'map',
+                crs: 'EPSG:4326',
+                minZoom: 3,
+                zoom: 6,
+                center: [(114.02942023086823 + 114.9174350782441)/2,(30.562371200134724 + 30.96640367892471)/2]
+            });
+            //加载容器的级数控件，非必须
+            var navigationControl = new mapboxgl.NavigationControl();
+            map.addControl(navigationControl, 'top-left');
+            //加载一个地图
+            mapDocLayer = new mapboxgl.Zondy.Map.ArcGisTileLayer({
+                url: 'http://219.142.81.85/arcgis/rest/services/10wanZH/MapServer',
+                mapgisOffset: -1
+            });
+            mapDocLayer.addToMap(map);
+            //&lt;-----------------------------查询单个图层------------------------------->
+            //初始化要素编辑对象
+            var queryServiceByLayer = new Zondy.Service.ArcGisFeatureLayer({
+                //要查询的图层url，记得发布地图时，勾选Feature Access
+                url:  'http://localhost:6080/arcgis/rest/services/wuhan_2/FeatureServer/1'
+            });
+            //创建查询参数对象
+            var queryParamsLayer = queryServiceByLayer.createQuery();
+            //示例一 =====> objectIds查询，这里我查询objectId为155的要素，并返回该要素的全部字段
+            queryParamsLayer.objectIds = "155";
+            queryParamsLayer.outFields = "*";
+            //示例二 =====> where查询，这里我查询Name为金口街道的要素，并返回该要素的Name,countyname字段
+            queryParamsLayer.where = "Name = '金口街道'";
+            queryParamsLayer.outFields = "Name,countyname";
+            //示例三 =====> geometry查询--简单点查询（封闭矩形），并设置returnCountOnly为true只返回要素数量
+            queryParamsLayer = queryServiceByLayer.createQuery();
+            queryParamsLayer.geometry = "114.100,30.399,114.42,30608";
+            queryParamsLayer.returnCountOnly = true;
+            //示例四 =====> geometry查询--多边形查询，此时geometryType也要设成相应的值esriGeometryPolygon（多边形）
+            queryParamsLayer.geometry = {
+                           "rings" : [[[114.100,30.399],[114.214,30.723],[114.321,32.344],[114.42,30608],
+                               [114.100,30.399]]],
+                           "spatialReference" : {"wkid" : 4326}
+                       }
+            queryParamsLayer.geometryType = "esriGeometryPolygon";
+            queryParamsLayer.returnCountOnly = false;
+            //调用查询方法，并在then方法中执行之后的处理步骤
+            queryServiceByLayer.queryFeatures(queryParamsLayer).then(function (data){
+                console.log('查询单个图层')
+                console.log(JSON.parse(data))
+            })
+            //&lt;-----------------------------查询整个地图------------------------------->
+            //初始化要素编辑对象
+            var queryServiceByMap = new Zondy.Service.ArcGisFeatureLayer({
+                //要查询的图层url，记得发布地图时，勾选Feature Access
+                //此处url没有加layerId！！！，因此查询的是整个地图
+                url:  'http://localhost:6080/arcgis/rest/services/wuhan_2/FeatureServer'
+            });
+            //创建查询参数对象
+            var queryParamsMap = queryServiceByLayer.createQuery();
+            //示例一 =====> layerDefs(where)查询，layerId即图层id，where即查询语句，outFields选择显示的字段
+            queryParamsMap.layerDefs = [{"layerId" : 1, "where" : "OBJECTID=155", "outFields" : "Name,pyname"}];
+            //示例二 =====> geometry查询--简单点查询（封闭矩形），layerId即图层id，outFields选择显示的字段，注意因为是在整个地图文档上查询
+            // 此处必须在layerDefs指定查询的图层，因此不能单独使用geometry
+            queryParamsMap.layerDefs = [{"layerId" : 1, "outFields" : "Name,pyname"}];
+            queryParamsMap.geometry = "114.100,30.399,114.42,30608";
+            //示例三 =====> geometry查询--多边形查询
+            queryParamsMap.layerDefs = [{"layerId" : 1, "outFields" : "Name,pyname"}];
+            //设置要查询的多边形对象，rings为多边形点数组，spatialReference为多边形的坐标系可选填
+            queryParamsMap.geometry = {
+                           "rings" : [[[114.100,30.399],[114.214,30.723],[114.321,32.344],[114.42,30608],
+                               [114.100,30.399]]],
+                           "spatialReference" : {"wkid" : 4326}
+                       }
+            //如果是多边形，这里也要设成相应的选项
+            queryParamsMap.geometryType = "esriGeometryPolygon";
+            //调用查询方法，并在then方法中执行之后的处理步骤
+            queryServiceByMap.queryFeatures(queryParamsMap).then(function (data){
+                console.log('查询整个地图')
+                console.log(JSON.parse(data))
+            })
+ */
+ArcGisFeatureLayer.prototype.queryFeatures = function (query) {
+    return this[this._queryService](query);
+}
+
+/**
+ * @function module:ArcGis.ArcGisFeatureLayer.prototype.applyEdits
+ * @description 要素编辑
+ * @author 基础平台-杨琨
+ * @param edits - {Object} 必选项，要执行的要素编辑操作。
+ * @param {Array} [edits.addFeatures] 可选项。添加要素的集合。格式addFeatures:[feature-object1,feature-object2,...]。
+ * feature-object没有必填项，也就是说空值也会新增。[{},{}]如此则新增两个空数据。其中OBJECTID是自增的，无法指定。
+ * 格式为：
+ * [
+ *   {
+ *      "geometry":{},
+ *      "attributes":{}
+ *    }
+ * ]
+ * 参考文档：https://developers.arcgis.com/documentation/common-data-types/feature-object.htm
+ * @param {Array} [edits.updateFeatures] 可选项。要更新要素的集合。格式updateFeatures:[feature-object1,feature-object2,...]。
+ * OBJECTID必须填写，其他选填。
+ * 格式为：
+ * [
+ *   {
+ *      "geometry":{},
+ *      "attributes":{
+ *            "OBJECTID":"Your-ID",//OBJECTID必填，其他的都是选填。
+ *            ...
+ *      }
+ *    }
+ * ]
+ * 参考文档：https://developers.arcgis.com/documentation/common-data-types/feature-object.htm
+ * @param {String} [edits.deleteFeatures] 可选项。删除要素。
+ * @param {String} [edits.deleteFeatures.objectIds  ] 可选项。通过ObjectId来删除要素。
+ * @param {String} [edits.deleteFeatures.where  ] 可选项。通过where语句来删除要素。
+ * @param {String} [edits.deleteFeatures.geometry  ] 可选项。通过geometry对象来删除要素。
+ * @param {String} [edits.deleteFeatures.geometryType  ] 可选项。指定geometry的想的类型。
+ * @param {String} [edits.deleteFeatures.inSR  ] 可选项。指定geometry对象的坐标系，默认为地图坐标系。
+ * @param {String} [edits.deleteFeatures.spatialRel  ] 可选项。指定geometry与图层的相交关系，例如包含、相交、相离等，默认值为esriSpatialRelIntersects。
+ 可选值为：esriSpatialRelIntersects | esriSpatialRelContains | esriSpatialRelCrosses | esriSpatialRelEnvelopeIntersects | esriSpatialRelIndexIntersects | esriSpatialRelOverlaps | esriSpatialRelTouches | esriSpatialRelWithin
+ Example：spatialRel:esriSpatialRelIntersects
+ * @param options  - {Object} 可选项，额外编辑选项。
+ * @param {String} [options.gdbVersion] 可选项，地理数据库版本号。
+ * @param {String} [options.rollbackOnFailure ] 可选项，是否允许回滚，默认为true，可选值true|false。
+ * @param {String} [options.useGlobalIds] 可选项，是否允许使用GlobalId，可选值true|false。
+ * @example
+ *            //要素集合
+ *            var features = [
+ *                {
+                      "geometry": {
+                          "points": [
+                              [
+                                  114.23201742000003,
+                                  30.576808980000067
+                              ]
+                          ]
+                      },
+                      "attributes": {
+                          "gml_id": "layer_lottery_pt.58836",
+                          "Name": "彩票销售店",
+                          "pyname": "cpxsd",
+                          "kind": "AE04",
+                          "zipcode": null,
+                          "telephone": "027-83876450",
+                          "display_x": "114.23746",
+                          "display_y": "30.57435",
+                          "side": "L",
+                          "address": "汉宜路170号附近",
+                          "mpLayer": 0
+                      }
+                  }
+            ]
+            //&lt;-------------------------单个图层的编辑操作示例----------------------------------------->
+            //初始化要素服务对象
+            var queryService = new Zondy.Service.ArcGisFeatureLayer({
+                url:  'http://localhost:6080/arcgis/rest/services/wuhan_2/FeatureServer/0'
+            });
+            //新增操作
+            //调用编辑服务
+            queryService.applyEdits({
+                addFeatures: features
+            }).then(function (data){
+                //在这里编写成功之后的操作
+                console.log('新增成功')
+                console.log(data)
+            })
+            //更新操作
+            //更新操作必须指定OBJECTID
+            features[0].attributes.OBJECTID='577'
+            //调用编辑服务
+            queryService.applyEdits({
+                updateFeatures: features
+            }).then(function (data){
+                //在这里编写成功之后的操作
+                console.log('更新成功')
+                console.log(data)
+            })
+            //删除操作，通过ObjectId删除要素
+            queryService.applyEdits({
+                deleteFeatures: 4020
+            }).then(function (data){
+                //在这里编写成功之后的操作
+                console.log('删除成功')
+                console.log(data)
+            })
+            //先新增要素，然后进行查询操作、新增要素、删除要素、
+                //要编辑的要素对象
+                var features = [
+                {
+                    "geometry": {
+                        "points": [
+                            [
+                                114.23201742000003,
+                                30.576808980000067
+                            ]
+                        ]
+                    },
+                    "attributes": {
+                        "gml_id": "layer_lottery_pt.58836",
+                        "Name": "彩票销售店",
+                        "pyname": "cpxsd",
+                        "kind": "AE04",
+                        "zipcode": null,
+                        "telephone": "027-83876450",
+                        "display_x": "114.23746",
+                        "display_y": "30.57435",
+                        "side": "L",
+                        "address": "汉宜路170号附近",
+                        "mpLayer": 0
+                    }
+                }
+            ]
+            //初始化要素服务对象
+            var queryService = new Zondy.Service.ArcGisFeatureLayer({
+                           url:  'http://localhost:6080/arcgis/rest/services/wuhan_2/FeatureServer/0'
+                       });
+            //调用编辑服务，新增要素
+            queryService.applyEdits({
+                addFeatures: features
+            }).then(function (addData){
+                //在这里编写成功之后的操作
+                console.log('新增成功');
+                addData = JSON.parse(addData);
+                console.log(addData);
+                //创建查询参数对象
+                var queryParamsLayer = queryService.createQuery();
+                //设置查询条件，根据objectIds进行查询
+                queryParamsLayer.objectIds = addData.addResults[0].objectId;
+                queryParamsLayer.outFields = "*";
+                queryService.queryFeatures(queryParamsLayer).then(function (queryData) {
+                    console.log('查询成功');
+                    queryData = JSON.parse(queryData);
+                    console.log(queryData);
+                    features[0].attributes.objectId = queryData.features[0].attributes.OBJECTID;
+                    features[0].attributes.Name = "修改名字";
+                    queryService.applyEdits({
+                        updateFeatures:features
+                    }).then(function (updateData) {
+                        console.log('更新成功');
+                        updateData = JSON.parse(updateData);
+                        console.log(updateData);
+                        var objIds = updateData.updateResults[0].objectId;
+                        queryService.applyEdits({
+                            deleteFeatures:objIds
+                        }).then(function (deleteData) {
+                            console.log('删除成功');
+                            deleteData = JSON.parse(deleteData);
+                            console.log(deleteData);
+                        });
+                    });
+                });
+            })
+            //&lt;----------------------整个地图的编辑操作----------------------------------->
+            //初始化要素服务对象
+            var queryService = new Zondy.Service.ArcGisFeatureLayer({
+                            //编辑整个地图，因此末尾不带layerId
+                           url:  'http://localhost:6080/arcgis/rest/services/wuhan_2/FeatureServer'
+                       });
+            //设置返回格式
+            var options = {
+                gdbVersion:[],
+                rollbackOnFailure: true,
+                f:'json'
+            }
+            //新增要素
+            //新增要素的格式，[{第0个图层新增操作},{第1个图层新增操作},...]，对每个图层的操作分开来写，要带上layerid
+            var edit = [
+                    {
+                        //id即为layerId，必须带，否则不知道编辑哪一个图层
+                        "id" : 0,
+                        //adds操作，[feature-object1,feature-object2,feature-object3,...]
+                        adds: [
+                            {
+                                "geometry": {
+                                    "points": [
+                                        [
+                                            114.23201742000003,
+                                            30.576808980000067
+                                        ]
+                                    ]
+                                },
+                                "attributes": {
+                                    "gml_id": "layer_lottery_pt.58836",
+                                    "Name": "彩票销售店",
+                                    "pyname": "cpxsd",
+                                    "kind": "AE04",
+                                    "zipcode": null,
+                                    "telephone": "027-83876450",
+                                    "display_x": "114.23746",
+                                    "display_y": "30.57435",
+                                    "side": "L",
+                                    "address": "汉宜路170号附近",
+                                    "mpLayer": 0
+                                }
+                            }
+                        ]
+                    }
+                ]
+            queryService.applyEdits(edit,options).then(function (data){
+                //在这里编写成功之后的操作
+                console.log('新增成功')
+                console.log(data)
+            })
+            //更新要素
+            var edit = [
+                {
+                    //id即为layerId，必须带，否则不知道编辑哪一个图层
+                    "id" : 0,
+                    //updates操作，[feature-object1,feature-object2,feature-object3,...]
+                    updates: [
+                        {
+                            "geometry": {
+                                "points": [
+                                    [
+                                        114.23201742000003,
+                                        30.576808980000067
+                                    ]
+                                ]
+                            },
+                            "attributes": {
+                                "gml_id": "layer_lottery_pt.58836",
+                                //objectId也必须要带
+                                "objectId":4013,
+                                "Name": "彩票销售店",
+                                "pyname": "cpxsd",
+                                "kind": "AE04",
+                                "zipcode": null,
+                                "telephone": "027-83876450",
+                                "display_x": "114.23746",
+                                "display_y": "30.57435",
+                                "side": "L",
+                                "address": "汉宜路170号附近",
+                                "mpLayer": 0
+                            }
+                        }
+                    ]
+                }
+            ]
+            queryService.applyEdits(edit,options).then(function (data){
+                //在这里编写成功之后的操作
+                console.log('更新成功')
+                console.log(data)
+            })
+            //根据ObjectId删除要素
+            var edit = [
+                {
+                    //id即为layerId，必须带，否则不知道编辑哪一个图层
+                    "id" : 0,
+                    deletes: [4014]
+                }
+            ]
+            queryService.applyEdits(edit,options).then(function (data){
+                //在这里编写成功之后的操作
+                console.log('删除成功')
+                console.log(data)
+            })
+            //新增、更新、删除同时进行，图层0、1分别进行操作
+            var edit = [
+                    //对图层0进行操作
+                    {
+                        //id即为layerId，必须带，否则不知道编辑哪一个图层
+                        "id" : 0,
+                        adds:[
+                            {
+                                "geometry": {
+                                    "points": [
+                                        [
+                                            114.23201742000003,
+                                            30.576808980000067
+                                        ]
+                                    ]
+                                },
+                                "attributes": {
+                                    "gml_id": "layer_lottery_pt.58836",
+                                    "Name": "彩票销售店",
+                                    "pyname": "cpxsd",
+                                    "kind": "AE04",
+                                    "zipcode": null,
+                                    "telephone": "027-83876450",
+                                    "display_x": "114.23746",
+                                    "display_y": "30.57435",
+                                    "side": "L",
+                                    "address": "汉宜路170号附近",
+                                    "mpLayer": 0
+                                }
+                            }
+                        ],
+                        updates:[
+                            {
+                                "geometry": {
+                                    "points": [
+                                        [
+                                            114.23201742000003,
+                                            30.576808980000067
+                                        ]
+                                    ]
+                                },
+                                "attributes": {
+                                    "gml_id": "layer_lottery_pt.58836",
+                                    "objectId":4017,
+                                    "Name": "彩票销售店",
+                                    "pyname": "cpxsd",
+                                    "kind": "AE04",
+                                    "zipcode": null,
+                                    "telephone": "027-83876450",
+                                    "display_x": "114.23746",
+                                    "display_y": "30.57435",
+                                    "side": "L",
+                                    "address": "汉宜路170号附近",
+                                    "mpLayer": 0
+                                }
+                            }
+                        ],
+                        deletes:[4016]
+                    },
+                    //对图层1进行操作
+                    {
+                        id:1,
+                        deletes: [155]
+                    }
+                ]
+                queryService.applyEdits(edit,options).then(function (data){
+                    //在这里编写成功之后的操作
+                    console.log('编辑完成')
+                    console.log(data)
+                })
+ */
+ArcGisFeatureLayer.prototype.applyEdits = function (edits,options) {
+    return this[this._applyEditsService](edits,options);
+}
+
+/**
+ * @function module:ArcGis.ArcGisFeatureLayer.prototype.queryFeatureCount
+ * @description 要素查询，仅返回要素数量
+ * @author 基础平台-杨琨
+ * @param query - {String} 必选项，查询参数。
+ * @param options - {String} 可选项，是否取消异步操作。
+ * @example 调用方法同queryObjectIds
+ */
+ArcGisFeatureLayer.prototype.queryFeatureCount = function (query,options) {
+    query.returnCountOnly = true;
+    return this[this._queryService](query);
+}
+
+/**
+ * @function module:ArcGis.ArcGisFeatureLayer.prototype.queryObjectIds
+ * @description 要素查询，仅返回ObjectId
+ * @author 基础平台-杨琨
+ * @param query - {String} 必选项，查询参数，参考queryFeatures方法。
+ * @param options - {String} 可选项，是否取消异步操作。
+ * @example
+        //加载地图容器
+        map = new mapboxgl.Map({
+                       container: 'map',
+                       crs: 'EPSG:4326',
+                       minZoom: 3,
+                       zoom: 6,
+                       center: [(114.02942023086823 + 114.9174350782441)/2,(30.562371200134724 + 30.96640367892471)/2]
+                   });
+        //加载容器的级数控件，非必须
+        var navigationControl = new mapboxgl.NavigationControl();
+        map.addControl(navigationControl, 'top-left');
+        //加载一个地图
+        mapDocLayer = new mapboxgl.Zondy.Map.ArcGisTileLayer({
+                       url: 'http://219.142.81.85/arcgis/rest/services/10wanZH/MapServer',
+                       mapgisOffset: -1
+                   });
+        mapDocLayer.addToMap(map);
+        //&lt;-----------------------------查询单个图层------------------------------->
+        //初始化要素编辑对象
+        var queryServiceByLayer = new Zondy.Service.ArcGisFeatureLayer({
+                       //要查询的图层url，记得发布地图时，勾选Feature Access
+                       url:  'http://localhost:6080/arcgis/rest/services/wuhan_2/FeatureServer/1'
+                   });
+        //创建查询参数对象
+        var queryParamsLayer = queryServiceByLayer.createQuery();
+        //查询layerId为1，countyname为江夏区的要素，并返回其Id
+        queryParamsLayer.where = "countyname='江夏区'"
+        queryServiceByLayer.queryObjectIds(queryParamsLayer).then(function (data){
+                       console.log('查询单个图层')
+                       console.log(JSON.parse(data))
+                   })
+        //&lt;-----------------------------查询整个地图------------------------------->
+        //初始化要素编辑对象
+        var queryServiceByMap = new Zondy.Service.ArcGisFeatureLayer({
+                       //要查询的图层url，记得发布地图时，勾选Feature Access
+                       //此处url没有加layerId！！！，因此查询的是整个地图
+                       url:  'http://localhost:6080/arcgis/rest/services/wuhan_2/FeatureServer'
+                   });
+        //创建查询参数对象
+        var queryParamsMap = queryServiceByLayer.createQuery();
+        //查询layerId为1，countyname为江夏区的要素，并返回其Id
+        queryParamsMap.layerDefs = {"1":"countyname = '江夏区'"}
+        queryServiceByMap.queryObjectIds(queryParamsMap).then(function (data){
+                       console.log('查询整个地图')
+                       console.log(JSON.parse(data))
+                   })
+ */
+ArcGisFeatureLayer.prototype.queryObjectIds = function (query,options) {
+    query.returnIdsOnly = true;
+    return this[this._queryService](query);
+}
+
+/**
+ * @function module:ArcGis.ArcGisFeatureLayer.prototype.queryExtent
+ * @description 要素查询，仅返回要素geometry数组
+ * @author 基础平台-杨琨
+ * @param query - {String} 必选项，查询参数。
+ * @param options - {String} 可选项，是否取消异步操作。
+ * @example 调用方法同queryObjectIds
+ */
+ArcGisFeatureLayer.prototype.queryExtent = function (query) {
+    query.returnExtentOnly = true;
+    return this[this._queryService](query);
+}
+
+export {ArcGisFeatureLayer};
+Zondy.Service.ArcGisFeatureLayer = ArcGisFeatureLayer;</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>文档生成<a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://www.smaryun.com" target="_blank">司马云</a> <span>© 2020 云生态圈</span>
+                        <a href="http://develop.smaryun.com:8899/" target="_blank">MapGIS Client for JavaScript</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+<script src="scripts/search.js"> </script>
+
+</body>
+</html>

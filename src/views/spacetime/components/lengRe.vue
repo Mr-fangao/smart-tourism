@@ -5,7 +5,6 @@
   </div>
 </template>
 <script>
-import { loadModules } from 'esri-loader'
 export default {
   name: 'LengRe',
   props: {
