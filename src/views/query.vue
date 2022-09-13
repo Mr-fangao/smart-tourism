@@ -133,11 +133,14 @@ export default {
   methods: {
     initmap() {
       var that = this;
+      //地图视图
       var webGlobe = new Cesium.WebSceneControl("map", {
         terrainExaggeration: 1,
       });
+      //表面底图
       var blueImage = new Cesium.UrlTemplateImageryProvider({
         url: "https://map.geoq.cn/arcgis/rest/services/ChinaOnlineStreetPurplishBlue/MapServer/tile/{z}/{y}/{x}",
+        
         tilingScheme: new Cesium.WebMercatorTilingScheme(),
         maximumLevel: 12,
       });
@@ -149,12 +152,14 @@ export default {
       });
     },
     flyToLocation(x, y) {
-      console.log(x, y);
-      this.map.flyTo({
-        center: [x, y], // 中心点
-        zoom: 16.5, // 缩放比例
-        pitch: 45, // 倾斜度
-      });
+      // this.map=null;
+      // console.log("111");
+      // console.log(x, y);
+      // this.map.flyTo({
+      //   center: [x, y], // 中心点
+      //   zoom: 16.5, // 缩放比例
+      //   pitch: 45, // 倾斜度
+      // });
     },
     handleCurrentChange(val) {
       this.currentPage = val;
