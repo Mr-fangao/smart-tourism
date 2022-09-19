@@ -117,6 +117,7 @@ export default {
   mounted() {
     let that = this;
     this.initmap();
+    // this.init();
     this.load();
     window.onresize = function () {
       that.getHeight();
@@ -134,22 +135,50 @@ export default {
     initmap() {
       var that = this;
       //地图视图
-      var webGlobe = new Cesium.WebSceneControl("map", {
-        terrainExaggeration: 1,
+      // var webGlobe = new Cesium.WebSceneControl("map", {
+      //   terrainExaggeration: 1,
+      // });
+      // //表面底图
+      // var blueImage = new Cesium.UrlTemplateImageryProvider({
+      //   url: "https://map.geoq.cn/arcgis/rest/services/ChinaOnlineStreetPurplishBlue/MapServer/tile/{z}/{y}/{x}",
+
+      //   tilingScheme: new Cesium.WebMercatorTilingScheme(),
+      //   maximumLevel: 12,
+      // });
+      // webGlobe.viewer.imageryLayers.addImageryProvider(blueImage);
+      // that.map = webGlobe.viewer;
+      // var center = Cesium.Cartesian3.fromDegrees(114, 30, 8000000.0);
+      // that.map.scene.camera.setView({
+      //   destination: center,
+      // });
+      // var commonDataManager = new CesiumZondy.Manager.CommonDataManager({
+      //   viewer: webGlobe.viewer
+      // });
+
+
+      var webGlobe = new Cesium.WebSceneControl('map', {});
+
+      //构造第三方图层对象
+      var thirdPartyLayer = new CesiumZondy.Layer.ThirdPartyLayer({
+        viewer: webGlobe.viewer
       });
-      //表面底图
-      var blueImage = new Cesium.UrlTemplateImageryProvider({
-        url: "https://map.geoq.cn/arcgis/rest/services/ChinaOnlineStreetPurplishBlue/MapServer/tile/{z}/{y}/{x}",
-        
-        tilingScheme: new Cesium.WebMercatorTilingScheme(),
-        maximumLevel: 12,
+      var osm = thirdPartyLayer.appendOsmMap();
+
+      //构造通用数据管理对象
+      var commonDataManager = new CesiumZondy.Manager.CommonDataManager({
+        viewer: webGlobe.viewer
       });
-      webGlobe.viewer.imageryLayers.addImageryProvider(blueImage);
-      that.map = webGlobe.viewer;
-      var center = Cesium.Cartesian3.fromDegrees(114, 30, 8000000.0);
-      that.map.scene.camera.setView({
-        destination: center,
-      });
+      // var path = '../assets/json/Tileset/tileset.json';
+      // 加载3DTile数据
+      var tiles = commonDataManager.append3DTile(
+        '../../static/3dtile/tileset.json',
+        load,
+      );
+      //回调函数未执行
+      function load(layer) {
+        webGlobe.viewer.flyTo(layer);
+        console.log("这是一个加载成功回调");
+      }
     },
     flyToLocation(x, y) {
       // this.map=null;
