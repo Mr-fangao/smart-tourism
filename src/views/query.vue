@@ -109,6 +109,8 @@ export default {
 
       //三维地图相关
       map: null,
+      webGlobe:null,
+      
     };
   },
   created() {
@@ -154,13 +156,9 @@ export default {
       // var commonDataManager = new CesiumZondy.Manager.CommonDataManager({
       //   viewer: webGlobe.viewer
       // });
-
-
-      var webGlobe = new Cesium.WebSceneControl('map', {});
-
+      that.webGlobe = new Cesium.WebSceneControl('map', {});
       //构造第三方图层对象
       var thirdPartyLayer = new CesiumZondy.Layer.ThirdPartyLayer({
-<<<<<<< HEAD
         viewer: that.webGlobe.viewer
       });
       //加载天地图
@@ -171,13 +169,8 @@ export default {
         token: "3b4ce3e89ce946fff2bf31ff2b20375c",
         //地图类型 'vec'矢量 'img'影像 'ter'地形
         ptype: "img"
-=======
-        viewer: webGlobe.viewer
->>>>>>> parent of 1d9e1dc (三维模型提交)
       });
-      var osm = thirdPartyLayer.appendOsmMap();
 
-<<<<<<< HEAD
       // 视点跳转（经度，纬度，视角高度，方位角，俯仰角，翻滚角）
       sceneManager.flyToEx(118.2932880, 32.2888299, {
         height: 570,
@@ -185,21 +178,14 @@ export default {
         pitch: -25,
         roll: 0
       });
-      // const resource = new Cesium.IonResource.fromAssetId(1325569);
-      // const entity =  that.webGlobe.viewer.entities.add({
-      //   model: { uri: resource },
-      // });
-      // 添加GLTF模型
-=======
+
       //构造通用数据管理对象
->>>>>>> parent of 1d9e1dc (三维模型提交)
       var commonDataManager = new CesiumZondy.Manager.CommonDataManager({
-        viewer: webGlobe.viewer
+        viewer: that.webGlobe.viewer
       });
-<<<<<<< HEAD
 
       //添加模型（gltf文件）
-      that.model = commonDataManager.appendModel(
+      var model = commonDataManager.appendModel(
         //模型id
         'model',
         //模型文件URL路径
@@ -210,20 +196,6 @@ export default {
         //缩放比
         200
       );
-      that.webGlobe.viewer.zoomTo(entity)
-=======
-      // var path = '../assets/json/Tileset/tileset.json';
-      // 加载3DTile数据
-      var tiles = commonDataManager.append3DTile(
-        '../../static/3dtile/tileset.json',
-        load,
-      );
-      //回调函数未执行
-      function load(layer) {
-        webGlobe.viewer.flyTo(layer);
-        console.log("这是一个加载成功回调");
-      }
->>>>>>> parent of 1d9e1dc (三维模型提交)
     },
     flyToLocation(x, y) {
       // this.map=null;
