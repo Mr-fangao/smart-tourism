@@ -109,8 +109,8 @@ export default {
 
       //三维地图相关
       map: null,
-      webGlobe:null,
-      
+      webGlobe: null,
+
     };
   },
   created() {
@@ -118,7 +118,7 @@ export default {
   },
   mounted() {
     let that = this;
-    this.initmap();
+    this.initmap1();
     // this.init();
     this.load();
     window.onresize = function () {
@@ -134,6 +134,104 @@ export default {
     // this.load();
   },
   methods: {
+    initmap1() {
+      // const viewer = new Cesium.Viewer("map", {
+      //   infoBox: false,
+      //   selectionIndicator: false,
+      //   shadows: true,
+      //   shouldAnimate: true,
+      // });
+
+      // var position = Cesium.Cartesian3.fromDegrees(118.2932880, 32.2888299, 6.0);
+      // var heading = Cesium.Math.toRadians(45);
+      // var pitch = 0;
+      // var roll = 0;
+      // var hpr = new Cesium.HeadingPitchRoll(heading, pitch, roll);
+      // var orientation = Cesium.Transforms.headingPitchRollQuaternion(
+      //   position,
+      //   hpr
+      // );
+      // var model_entity = viewer.entities.add({
+      //   id: "build",
+      //   position: position,
+      //   orientation: orientation,
+      //   model: {
+      //     show: true,
+      //     uri: '../../static/model.gltf',//注意是uri 不是url
+      //   },
+      // });
+      // viewer.zoomTo(model_entity);
+
+      //构造三维视图对象（视图容器div的id，三维视图设置参数）
+      var webGlobe = new Cesium.WebSceneControl('map', {});
+
+      //构造视图功能管理对象（视图）
+      var sceneManager = new CesiumZondy.Manager.SceneManager({
+        viewer: webGlobe.viewer
+      });
+
+      //构造第三方图层对象
+      var thirdPartyLayer = new CesiumZondy.Layer.ThirdPartyLayer({
+        viewer: webGlobe.viewer
+      });
+      //加载天地图
+      var tdtLayer = thirdPartyLayer.appendTDTuMap({
+        //天地图经纬度数据
+        url: 'http://t0.tianditu.com/DataServer?T=vec_c&X={x}&Y={y}&L={l}',
+        //开发token （请到天地图官网申请自己的开发token，自带token仅做功能验证随时可能失效）
+        token: "9c157e9585486c02edf817d2ecbc7752",
+        //地图类型 'vec'矢量 'img'影像 'ter'地形
+        ptype: "img"
+      });
+
+      // sceneManager.flyToEx(118.2932880, 32.2888299, {
+      //   height: 570,
+      //   heading: -27,
+      //   pitch: -25,
+      //   roll: 0
+      // });
+
+      const position = Cesium.Cartesian3.fromDegrees(
+        118.2932880, 32.2888299,
+        4000.0
+      );
+      const heading = Cesium.Math.toRadians(135);
+      const pitch = 0;
+      const roll = 0;
+      const hpr = new Cesium.HeadingPitchRoll(heading, pitch, roll);
+      const orientation = Cesium.Transforms.headingPitchRollQuaternion(
+        position,
+        hpr
+      );
+
+      const entity = webGlobe.viewer.entities.add({
+        name: "../../static/model.gltf",
+        position: position,
+        orientation: orientation,
+        model: {
+          uri: "../../static/model.gltf",
+          minimumPixelSize: 128,
+          maximumScale: 20000,
+        },
+      });
+      webGlobe.viewer.trackedEntity = entity;
+
+      // const options = [
+      //   {
+      //     text: "Aircraft",
+      //     onselect: function () {
+      //       createModel(
+      //         "../../static/model.gltf",
+      //         5000.0
+      //       );
+      //     },
+      //   },
+
+      // ];
+
+      // Sandcastle.addToolbarMenu(options);
+
+    },
     initmap() {
       var that = this;
       //地图视图
@@ -156,46 +254,46 @@ export default {
       // var commonDataManager = new CesiumZondy.Manager.CommonDataManager({
       //   viewer: webGlobe.viewer
       // });
-      that.webGlobe = new Cesium.WebSceneControl('map', {});
-      //构造第三方图层对象
-      var thirdPartyLayer = new CesiumZondy.Layer.ThirdPartyLayer({
-        viewer: that.webGlobe.viewer
-      });
-      //加载天地图
-      var tdtLayer = thirdPartyLayer.appendTDTuMap({
-        //天地图经纬度数据
-        url: 'http://t0.tianditu.com/DataServer?T=vec_c&X={x}&Y={y}&L={l}',
-        //开发token （请到天地图官网申请自己的开发token，自带token仅做功能验证随时可能失效）
-        token: "3b4ce3e89ce946fff2bf31ff2b20375c",
-        //地图类型 'vec'矢量 'img'影像 'ter'地形
-        ptype: "img"
-      });
+      // that.webGlobe = new Cesium.WebSceneControl('map', {});
+      // //构造第三方图层对象
+      // var thirdPartyLayer = new CesiumZondy.Layer.ThirdPartyLayer({
+      //   viewer: that.webGlobe.viewer
+      // });
+      // //加载天地图
+      // var tdtLayer = thirdPartyLayer.appendTDTuMap({
+      //   //天地图经纬度数据
+      //   url: 'http://t0.tianditu.com/DataServer?T=vec_c&X={x}&Y={y}&L={l}',
+      //   //开发token （请到天地图官网申请自己的开发token，自带token仅做功能验证随时可能失效）
+      //   token: "3b4ce3e89ce946fff2bf31ff2b20375c",
+      //   //地图类型 'vec'矢量 'img'影像 'ter'地形
+      //   ptype: "img"
+      // });
 
-      // 视点跳转（经度，纬度，视角高度，方位角，俯仰角，翻滚角）
-      sceneManager.flyToEx(118.2932880, 32.2888299, {
-        height: 570,
-        heading: -27,
-        pitch: -25,
-        roll: 0
-      });
+      // // 视点跳转（经度，纬度，视角高度，方位角，俯仰角，翻滚角）
+      // sceneManager.flyToEx(118.2932880, 32.2888299, {
+      //   height: 570,
+      //   heading: -27,
+      //   pitch: -25,
+      //   roll: 0
+      // });
 
-      //构造通用数据管理对象
-      var commonDataManager = new CesiumZondy.Manager.CommonDataManager({
-        viewer: that.webGlobe.viewer
-      });
+      // //构造通用数据管理对象
+      // var commonDataManager = new CesiumZondy.Manager.CommonDataManager({
+      //   viewer: that.webGlobe.viewer
+      // });
 
-      //添加模型（gltf文件）
-      var model = commonDataManager.appendModel(
-        //模型id
-        'model',
-        //模型文件URL路径
-        '../../static/model.gltf',
-        //模型经度、纬度、高度
-        118.2932880, 32.2888299,
-        400,
-        //缩放比
-        200
-      );
+      // //添加模型（gltf文件）
+      // var model = commonDataManager.appendModel(
+      //   //模型id
+      //   'model',
+      //   //模型文件URL路径
+      //   '../../static/model.gltf',
+      //   //模型经度、纬度、高度
+      //   118.2932880, 32.2888299,
+      //   400,
+      //   //缩放比
+      //   200
+      // );
     },
     flyToLocation(x, y) {
       // this.map=null;
