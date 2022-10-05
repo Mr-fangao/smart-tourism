@@ -34,7 +34,6 @@ export default new Router({
       path: '/recommend',
       name: 'recommend',
       component: () => import("@/views/recommend"),
-      // component: () => import("@/views/recommend-copy"),
       meta: {
         keepAlive: true
       }
@@ -43,7 +42,6 @@ export default new Router({
       path: '/sensation',
       name: 'sensation',
       component: () => import("@/views/sensation"),
-      // component: () => import("@/views/theme"),
       meta: {
         keepAlive: true
       }
