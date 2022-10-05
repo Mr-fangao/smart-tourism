@@ -9,17 +9,14 @@
         <li id="u1">
           <router-link to="/recommend" exact>智能推荐</router-link>
           <router-link to="/query" exact>景点查询</router-link>
-          <router-link to="/ArcMap" exact>时空分析</router-link>
-          <!-- <router-link to="/thememap" exact>专题地图</router-link> -->
-          <!-- <router-link to="/sensation" exact>形象感知</router-link> -->
+          <router-link to="/sensation" exact>形象感知</router-link>
         </li>
       </ul>
       <h1>旅游景点智能推荐与分析系统</h1>
       <ul>
         <li id="u2">
-          <router-link to="/odAnalysis" exact>客流分析</router-link>
-          <router-link to="/sensation" exact>形象感知</router-link>
           <router-link to="/feelings" exact>情感分析</router-link>
+          <router-link to="/odAnalysis" exact>客流分析</router-link>
         </li>
       </ul>
     </nav>
@@ -29,25 +26,13 @@
         <span class="el-dropdown-link">
           个人中心<i class="el-icon-arrow-down el-icon--right"></i>
         </span>
-        <el-dropdown-menu
-          slot="dropdown"
-          style="background: #62b6cf; border: #a5e5f6"
-        >
-          <el-dropdown-item @click.native="showPop('1111111111')"
-            >个人中心</el-dropdown-item
-          >
-          <el-dropdown-item @click.native="routerjump()"
-            >返回首页</el-dropdown-item
-          >
+        <el-dropdown-menu slot="dropdown" style="background: #62b6cf; border: #a5e5f6">
+          <el-dropdown-item @click.native="showPop('1111111111')">个人中心</el-dropdown-item>
+          <el-dropdown-item @click.native="routerjump()">返回首页</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </div>
-    <poppage
-      :show="show"
-      :porpID="porpID"
-      @hideModal="hideModal"
-      @submit="submit"
-    >
+    <poppage :show="show" :porpID="porpID" @hideModal="hideModal" @submit="submit">
     </poppage>
   </div>
 </template>
@@ -130,13 +115,16 @@ export default {
   background-position-x: 50%;
   display: flex;
   align-items: center;
+
   #date {
     color: #ffffff;
     font-size: 14px;
     padding-left: 12%;
     color: #d4d9dd;
   }
+
   background-color: #02191f;
+
   .times {
     width: 7%;
     display: -webkit-box;
@@ -148,26 +136,32 @@ export default {
     color: #b8c1c8a1;
     margin-top: 7px;
   }
+
   .times:hover {
     color: #2fa9ce;
   }
+
   nav {
     height: 50px;
     width: 84%;
     padding: 0px;
     display: flex;
     align-items: center;
+
     h1 {
       width: 32%;
       font-size: 25px;
       color: #39fcff;
       font-family: Microsoft YaHei;
     }
+
     ul {
       height: 100%;
       width: 34%;
-      list-style-type: none; /*消除黑点*/
+      list-style-type: none;
+      /*消除黑点*/
       text-align: center;
+
       li {
         height: 100%;
         width: 100%;
@@ -176,13 +170,16 @@ export default {
         justify-content: flex-end;
         // justify-content: space-evenly;
         align-items: center;
+
         a {
           font-size: 16px;
           width: 34%;
-          color: #528c8c; /*设置字体颜色*/
+          color: #528c8c;
+          /*设置字体颜色*/
           font-family: Microsoft YaHei;
           font-weight: bold;
-          text-decoration: none; /*消除下划线*/
+          text-decoration: none;
+          /*消除下划线*/
           border-radius: 0px;
           margin: 0px 0px -10px 0px;
           line-height: 30px;
@@ -193,6 +190,7 @@ export default {
       }
     }
   }
+
   /*选中则发生一些变化*/
   .router-link-active {
     color: #e0fbff;
@@ -202,6 +200,7 @@ export default {
     background-size: 105% 160%;
     background-position: -85% 0%;
   }
+
   .user {
     height: 50px;
     width: 8%;
@@ -209,6 +208,7 @@ export default {
     right: 0;
     display: flex;
     align-items: center;
+
     .userpng {
       height: 100%;
       width: 30%;
@@ -222,12 +222,17 @@ export default {
 #u1 {
   // margin-left: 4%;
 }
+
 #u2 {
+  flex-direction: row-reverse;
+
   a {
+    flex-direction: row-reverse;
     background: url(../assets/img/rightbutton.png) no-repeat;
     background-size: 100% 90%;
     background-position: 100% 100%;
   }
+
   .router-link-active {
     background: url(../assets/img/rightbuttonative.png) no-repeat;
     margin: 0px 0px -12px 0px;
@@ -236,6 +241,7 @@ export default {
     background-position: 114% 0%;
   }
 }
+
 /deep/.el-dropdown {
   display: inline-block;
   position: relative;
@@ -244,10 +250,12 @@ export default {
   line-height: 57px;
   height: 100%;
 }
+
 /deep/.el-dropdown-menu {
   background: #62b6cf;
   border: #a5e5f6;
 }
+
 .el-dropdown-link {
   cursor: pointer;
   display: flex;
@@ -255,6 +263,7 @@ export default {
   justify-content: center;
   align-items: center;
 }
+
 .el-dropdown-menu__item:focus,
 .el-dropdown-menu__item:not(.is-disabled):hover {
   background-color: #2fa9ce;

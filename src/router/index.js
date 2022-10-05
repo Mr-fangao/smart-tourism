@@ -57,14 +57,6 @@ export default new Router({
       }
     },
     {
-      path: '/ArcMap',
-      name: 'ArcMap',
-      component: () => import("@/views/spacetime/index"),
-      meta: {
-        keepAlive: true
-      }
-    },
-    {
       path: '/feelings',
       name: 'feelings',
       component: () => import("@/views/feelings"),
