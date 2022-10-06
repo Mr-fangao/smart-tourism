@@ -585,6 +585,7 @@ export default {
         }
         for (let i = 0; i < middata.length; i++) {
           const element = middata[i];
+          console.log(element);
           qianxidata.push({
             middata: element,
             from: element.拐出省,
@@ -653,6 +654,7 @@ export default {
           showClose: true,
         });
       } else {
+        console.log("qianxidata"+qianxidata);
         qianxidata.sort(function (a, b) {
           return a.count - b.count;
         });
@@ -771,6 +773,7 @@ export default {
     },
     // 省市拐卖线路
     addcurveLayer(datas) {
+
       var that = this;
       var qianxi = new mapv.DataSet(datas);
       var qianxiData = qianxi.get();

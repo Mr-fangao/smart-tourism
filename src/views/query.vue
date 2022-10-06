@@ -193,7 +193,7 @@ export default {
 
       const position = Cesium.Cartesian3.fromDegrees(
         118.2932880, 32.2888299,
-        4000.0
+        400.0
       );
       const heading = Cesium.Math.toRadians(135);
       const pitch = 0;
