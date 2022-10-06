@@ -554,14 +554,14 @@ export default {
         data = shengline;
         if (that.mode === "流出") {
           const map1 = data.reduce((result, item) => {
-            result[item.拐出省] = result[item.拐出省] || [];
-            result[item.拐出省].push(item);
+            result[item.流出省] = result[item.流出省] || [];
+            result[item.流出省].push(item);
             return result;
           }, {});
           const result = Object.values(map1);
           const name = [];
           for (let index = 0; index < result.length; index++) {
-            const element = result[index][0].拐出省;
+            const element = result[index][0].流出省;
             name.push(element);
             if (element === that.json.name) {
               middata = result[index];
@@ -570,13 +570,13 @@ export default {
           }
         } else {
           const map1 = data.reduce((result, item) => {
-            result[item.拐入省] = result[item.拐入省] || [];
-            result[item.拐入省].push(item);
+            result[item.流入省] = result[item.流入省] || [];
+            result[item.流入省].push(item);
             return result;
           }, {});
           const result = Object.values(map1);
           for (let index = 0; index < result.length; index++) {
-            const element = result[index][0].拐入省;
+            const element = result[index][0].流入省;
             if (element === that.json.name) {
               middata = result[index];
               break;
@@ -588,11 +588,11 @@ export default {
           console.log(element);
           qianxidata.push({
             middata: element,
-            from: element.拐出省,
-            fromCenter: { lng: element.拐出经度, lat: element.拐出纬度 },
-            toCenter: { lng: element.拐入经度, lat: element.拐入纬度 },
+            from: element.流出省,
+            fromCenter: { lng: element.流出经度, lat: element.流出纬度 },
+            toCenter: { lng: element.流入经度, lat: element.流入纬度 },
             count: element.数量,
-            to: element.拐入省,
+            to: element.流入省,
             number: element.数量,
           });
         }
@@ -600,13 +600,13 @@ export default {
         data = shiline;
         if (that.mode === "流出") {
           const map1 = data.reduce((result, item) => {
-            result[item.拐出市] = result[item.拐出市] || [];
-            result[item.拐出市].push(item);
+            result[item.流出市] = result[item.流出市] || [];
+            result[item.流出市].push(item);
             return result;
           }, {});
           const result = Object.values(map1);
           for (let index = 0; index < result.length; index++) {
-            const element = result[index][0].拐出市;
+            const element = result[index][0].流出市;
             if (element === that.json.name) {
               middata = result[index];
               break;
@@ -614,13 +614,13 @@ export default {
           }
         } else {
           const map1 = data.reduce((result, item) => {
-            result[item.拐入市] = result[item.拐入市] || [];
-            result[item.拐入市].push(item);
+            result[item.流入市] = result[item.流入市] || [];
+            result[item.流入市].push(item);
             return result;
           }, {});
           const result = Object.values(map1);
           for (let index = 0; index < result.length; index++) {
-            const element = result[index][0].拐入市;
+            const element = result[index][0].流入市;
             if (element === that.json.name) {
               middata = result[index];
               break;
@@ -632,11 +632,11 @@ export default {
           console.log(element);
           qianxidata.push({
             middata: element,
-            from: element.拐出市,
-            fromCenter: { lng: element.拐出经度, lat: element.拐出纬度 },
-            toCenter: { lng: element.拐入经度, lat: element.拐入纬度 },
+            from: element.流出市,
+            fromCenter: { lng: element.流出经度, lat: element.流出纬度 },
+            toCenter: { lng: element.流入经度, lat: element.流入纬度 },
             count: element.数量,
-            to: element.拐入市,
+            to: element.流入市,
             number: element.数量,
           });
         }
@@ -704,8 +704,8 @@ export default {
       }
       for (let index = 0; index < datas.length; index++) {
         const element = datas[index];
-        const cityCenter1 = { lng: element.拐出经度, lat: element.拐出纬度 };
-        const cityCenter2 = { lng: element.拐入经度, lat: element.拐入纬度 };
+        const cityCenter1 = { lng: element.流出经度, lat: element.流出纬度 };
+        const cityCenter2 = { lng: element.流入经度, lat: element.流入纬度 };
         if (Math.random() > 0.7) {
           curive(cityCenter2, cityCenter1, 50);
         }
@@ -771,7 +771,7 @@ export default {
         );
       }
     },
-    // 省市拐卖线路
+    // 省市流动线路
     addcurveLayer(datas) {
 
       var that = this;
