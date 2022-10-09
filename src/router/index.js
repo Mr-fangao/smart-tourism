@@ -41,7 +41,7 @@ export default new Router({
     {
       path: '/sensation',
       name: 'sensation',
-      component: () => import("@/views/sensation"),
+      component: () => import("@/components/sensations/city"),
       meta: {
         keepAlive: true
       }
@@ -70,7 +70,14 @@ export default new Router({
         keepAlive: true
       }
     },
-
+    {
+      path: '/featuresearch',
+      name: 'featuresearch',
+      component: () => import("@/components/sensations/features.vue"),
+      meta: {
+        keepAlive: true
+      }
+    },
     {
       path: '/test',
       name: 'test',

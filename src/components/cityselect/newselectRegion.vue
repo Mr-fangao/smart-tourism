@@ -7,7 +7,9 @@
         <li @click="tan()">
           <span>{{ json.name }}</span>
         </li>
-        <li><icon name="loc" :w="25" :h="25"></icon></li>
+        <li>
+          <icon name="loc" :w="25" :h="25"></icon>
+        </li>
       </ul>
     </div>
     <!-- 弹出框 -->
@@ -22,24 +24,14 @@
         <el-tabs v-model="activeName" type="border-card">
           <el-tab-pane label="历史" name="fourth">
             <ul>
-              <li
-                v-for="(value, item) in citys"
-                :key="item"
-                class="publiz"
-                @click="xuan(value)"
-              >
+              <li v-for="(value, item) in citys" :key="item" class="publiz" @click="xuan(value)">
                 {{ value.name }}
               </li>
             </ul>
           </el-tab-pane>
           <el-tab-pane label="省份" name="first">
             <ul>
-              <li
-                v-for="(value, item) in sheng"
-                :key="item"
-                class="publiz"
-                @click="shengD(value)"
-              >
+              <li v-for="(value, item) in sheng" :key="item" class="publiz" @click="shengD(value)">
                 {{ value.name }}
               </li>
             </ul>
@@ -47,12 +39,7 @@
           <el-tab-pane label="城市" name="second">
             <div v-if="shiji.length === 0" class="nothing">暂无数据</div>
             <ul v-if="shiji.length !== 0">
-              <li
-                v-for="(value, item) in shiji"
-                :key="item"
-                class="publiz"
-                @click="shijiD(value)"
-              >
+              <li v-for="(value, item) in shiji" :key="item" class="publiz" @click="shijiD(value)">
                 {{ value.name }}
               </li>
             </ul>
@@ -148,8 +135,8 @@ export default {
     };
   },
   computed: {},
-  created() {},
-  beforeDestroy() {},
+  created() { },
+  beforeDestroy() { },
   mounted() {
     if (this.defaultplace != "中国") {
       this.json.name = this.defaultplace;
@@ -364,34 +351,41 @@ export default {
 </script>
 <style>
 @keyframes appear {
+
   /* 出现动画 */
   0% {
     width: 0;
     height: 0;
   }
+
   50% {
     width: 800px;
     height: 5px;
     background-color: #fff;
   }
+
   100% {
     width: 800px;
     height: 420px;
     background-color: rgb(21 62 109);
   }
 }
+
 @keyframes nappear {
+
   /* 隐藏动画 */
   0% {
     width: 800px;
     height: 420px;
     background-color: rgb(21 62 109);
   }
+
   50% {
     width: 800px;
     height: 5px;
     background-color: #fff;
   }
+
   100% {
     width: 0;
     height: 0;
@@ -409,9 +403,11 @@ p {
   padding: 0;
   list-style-type: none;
 }
+
 .xuan {
   background-color: #1abbbb;
 }
+
 /* 城市 */
 #selectRegion .city {
   display: inline-block;
@@ -435,15 +431,22 @@ p {
   z-index: 10;
   border-radius: 3px;
 }
+
 #selectRegion .city li:nth-child(1) {
   position: absolute;
   left: 0;
-  top: -2px;
+  HEIGHT: 100%;
+  top: 0px;
   width: 25px;
   font-size: 15px;
   border-right: 1px solid rgba(175, 233, 215, 0.4);
   cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
 }
+
 #selectRegion .city li:nth-child(2) {
   position: absolute;
   left: 25px;
@@ -452,6 +455,7 @@ p {
   font-size: 15px;
   cursor: pointer;
 }
+
 #selectRegion .city li:nth-child(3) {
   position: absolute;
   right: 0;
@@ -460,6 +464,7 @@ p {
   font-size: 18px;
   border-left: 1px solid rgba(175, 233, 215, 0.4);
 }
+
 /* 弹出层 */
 #selectRegion #choice {
   opacity: 0;
@@ -477,6 +482,7 @@ p {
   border-radius: 3px;
   overflow: hidden;
 }
+
 /* 头部 */
 #selectRegion #choice .top {
   height: 40px;
@@ -490,32 +496,38 @@ p {
   position: relative;
   cursor: move;
 }
+
 #selectRegion #choice .top span:nth-child(1) {
   letter-spacing: 5px;
 }
+
 #selectRegion #choice .top span:nth-child(2) {
   position: absolute;
   right: 10px;
   top: 50%;
   transform: translateY(-50%);
 }
-#selectRegion #choice .top >>> i {
+
+#selectRegion #choice .top>>>i {
   transform: 2s;
   font-size: 20px;
   transition: all 1.5s;
   color: rgba(255, 255, 255, 0.65);
   cursor: pointer !important;
 }
-#selectRegion #choice .top >>> i:hover {
+
+#selectRegion #choice .top>>>i:hover {
   color: rgba(255, 255, 255, 1);
   transform: rotate(360deg);
 }
+
 /* 身体 */
 #selectRegion #choice .bottom {
   width: 100%;
   height: 300px;
 }
-#selectRegion #choice .bottom >>> .el-tabs--border-card {
+
+#selectRegion #choice .bottom>>>.el-tabs--border-card {
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
   border: none;
@@ -524,31 +536,30 @@ p {
   border: 1px solid rgba(44, 165, 202, 0.589);
   background-color: #0d1f2ee3;
 }
+
 /* 卡片头部 */
-#selectRegion #choice .bottom >>> .el-tabs__nav {
+#selectRegion #choice .bottom>>>.el-tabs__nav {
   width: 100%;
   color: #fff;
   font-family: KuHei;
   letter-spacing: 4px;
   font-size: 18px;
 }
-#selectRegion #choice .bottom >>> .el-tabs--border-card > .el-tabs__header {
+
+#selectRegion #choice .bottom>>>.el-tabs--border-card>.el-tabs__header {
   border: none;
   background-color: #ff797900;
 }
-#selectRegion #choice .bottom >>> .el-tabs__item {
+
+#selectRegion #choice .bottom>>>.el-tabs__item {
   margin: 0;
   padding: 0;
   border: none;
   border-bottom: 2px solid #fff;
   color: #fff;
 }
-#selectRegion
-  #choice
-  .bottom
-  >>> .el-tabs--border-card
-  > .el-tabs__header
-  .el-tabs__item.is-active {
+
+#selectRegion #choice .bottom>>>.el-tabs--border-card>.el-tabs__header .el-tabs__item.is-active {
   /* color: #ff7979; */
   /* background-color: rgba(40, 43, 57, 1); */
   background-color: #12546050;
@@ -557,26 +568,17 @@ p {
   border-bottom: 2px solid #0cf3f3;
   font-weight: bold;
 }
-#selectRegion
-  #choice
-  .bottom
-  >>> .el-tabs--border-card
-  > .el-tabs__header
-  .el-tabs__item
-  + .el-tabs__item,
-#selectRegion
-  #choice
-  .bottom
-  >>> .el-tabs--border-card
-  > .el-tabs__header
-  .el-tabs__item:first-child {
+
+#selectRegion #choice .bottom>>>.el-tabs--border-card>.el-tabs__header .el-tabs__item+.el-tabs__item,
+#selectRegion #choice .bottom>>>.el-tabs--border-card>.el-tabs__header .el-tabs__item:first-child {
   width: calc(100% / 3 + 1.1px);
   height: 50px;
   line-height: 50px;
   text-align: center;
 }
+
 /* 卡片底部 */
-#selectRegion #choice .bottom >>> .el-tabs--border-card > .el-tabs__content {
+#selectRegion #choice .bottom>>>.el-tabs--border-card>.el-tabs__content {
   padding: 0;
   width: 100%;
   height: 246px;
@@ -584,17 +586,17 @@ p {
   font-family: KuHei;
   text-align: center;
 }
-#selectRegion
-  #choice
-  .bottom
-  >>> .el-tabs__item:focus.is-active.is-focus:not(:active) {
+
+#selectRegion #choice .bottom>>>.el-tabs__item:focus.is-active.is-focus:not(:active) {
   box-shadow: none !important;
 }
+
 #selectRegion #choice .bottom .nothing {
   width: 100%;
   height: 246px;
   line-height: 246px;
 }
+
 #selectRegion #choice .bottom ul {
   height: 246px;
   line-height: 246px;
@@ -604,6 +606,7 @@ p {
   align-items: center;
   flex-wrap: wrap;
 }
+
 #selectRegion #choice .bottom li {
   display: inline-block;
   vertical-align: top;
@@ -620,10 +623,12 @@ p {
   letter-spacing: 2px;
   border-radius: 3px;
 }
+
 #selectRegion #choice .bottom li:hover {
   /* background-color: #ff7979; */
   background-color: #1abbbb;
 }
+
 /* 底部 */
 #selectRegion #choice .center {
   width: 100%;
@@ -634,6 +639,7 @@ p {
   padding: 0 5px;
   position: relative;
 }
+
 #selectRegion #choice .center .left {
   position: absolute;
   top: -3px;
@@ -641,6 +647,7 @@ p {
   width: 600px;
   text-align: center;
 }
+
 #selectRegion #choice .center .right {
   position: absolute;
   top: -3px;
@@ -648,6 +655,7 @@ p {
   width: 200px;
   text-align: center;
 }
+
 #selectRegion #choice .center .right span {
   display: flex;
   justify-content: center;
@@ -657,10 +665,12 @@ p {
   transition: all 1s;
   cursor: pointer;
 }
+
 #selectRegion #choice .center .right span:hover {
   color: #fff;
 }
-#selectRegion #choice .center .right >>> i {
+
+#selectRegion #choice .center .right>>>i {
   font-size: 20px;
   margin-right: 10px;
   margin-top: 1px;

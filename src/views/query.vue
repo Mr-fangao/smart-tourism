@@ -109,7 +109,6 @@ export default {
 
       //三维地图相关
       map: null,
-      webGlobe: null,
 
     };
   },
@@ -118,8 +117,8 @@ export default {
   },
   mounted() {
     let that = this;
-    this.initmap1();
-    // this.init();
+    // this.initmap1();
+    this.init();
     this.load();
     window.onresize = function () {
       that.getHeight();
@@ -134,104 +133,113 @@ export default {
     // this.load();
   },
   methods: {
-    initmap1() {
-      // const viewer = new Cesium.Viewer("map", {
-      //   infoBox: false,
-      //   selectionIndicator: false,
-      //   shadows: true,
-      //   shouldAnimate: true,
-      // });
-
-      // var position = Cesium.Cartesian3.fromDegrees(118.2932880, 32.2888299, 6.0);
-      // var heading = Cesium.Math.toRadians(45);
-      // var pitch = 0;
-      // var roll = 0;
-      // var hpr = new Cesium.HeadingPitchRoll(heading, pitch, roll);
-      // var orientation = Cesium.Transforms.headingPitchRollQuaternion(
-      //   position,
-      //   hpr
-      // );
-      // var model_entity = viewer.entities.add({
-      //   id: "build",
-      //   position: position,
-      //   orientation: orientation,
-      //   model: {
-      //     show: true,
-      //     uri: '../../static/model.gltf',//注意是uri 不是url
-      //   },
-      // });
-      // viewer.zoomTo(model_entity);
-
-      //构造三维视图对象（视图容器div的id，三维视图设置参数）
-      var webGlobe = new Cesium.WebSceneControl('map', {});
-
-      //构造视图功能管理对象（视图）
-      var sceneManager = new CesiumZondy.Manager.SceneManager({
-        viewer: webGlobe.viewer
+    init() {
+      let that = this;
+      this.$mapboxgl.accessToken =
+        "pk.eyJ1IjoiY2hlbmpxIiwiYSI6ImNrcWFmdWt2bjBtZGsybmxjb29oYmRzZzEifQ.mnpiwx7_cBEyi8YiJiMRZg";
+      that.map = new this.$mapboxgl.Map({
+        container: "map",
+        style: "mapbox://styles/chenjq/cl084urgf004014ny2nhu1xre",
       });
-
-      //构造第三方图层对象
-      var thirdPartyLayer = new CesiumZondy.Layer.ThirdPartyLayer({
-        viewer: webGlobe.viewer
-      });
-      //加载天地图
-      var tdtLayer = thirdPartyLayer.appendTDTuMap({
-        //天地图经纬度数据
-        url: 'http://t0.tianditu.com/DataServer?T=vec_c&X={x}&Y={y}&L={l}',
-        //开发token （请到天地图官网申请自己的开发token，自带token仅做功能验证随时可能失效）
-        token: "9c157e9585486c02edf817d2ecbc7752",
-        //地图类型 'vec'矢量 'img'影像 'ter'地形
-        ptype: "img"
-      });
-
-      // sceneManager.flyToEx(118.2932880, 32.2888299, {
-      //   height: 570,
-      //   heading: -27,
-      //   pitch: -25,
-      //   roll: 0
-      // });
-
-      const position = Cesium.Cartesian3.fromDegrees(
-        118.2932880, 32.2888299,
-        400.0
-      );
-      const heading = Cesium.Math.toRadians(135);
-      const pitch = 0;
-      const roll = 0;
-      const hpr = new Cesium.HeadingPitchRoll(heading, pitch, roll);
-      const orientation = Cesium.Transforms.headingPitchRollQuaternion(
-        position,
-        hpr
-      );
-
-      const entity = webGlobe.viewer.entities.add({
-        name: "../../static/model.gltf",
-        position: position,
-        orientation: orientation,
-        model: {
-          uri: "../../static/model.gltf",
-          minimumPixelSize: 128,
-          maximumScale: 20000,
-        },
-      });
-      webGlobe.viewer.trackedEntity = entity;
-
-      // const options = [
-      //   {
-      //     text: "Aircraft",
-      //     onselect: function () {
-      //       createModel(
-      //         "../../static/model.gltf",
-      //         5000.0
-      //       );
-      //     },
-      //   },
-
-      // ];
-
-      // Sandcastle.addToolbarMenu(options);
-
     },
+    // initmap1() {
+    //   // const viewer = new Cesium.Viewer("map", {
+    //   //   infoBox: false,
+    //   //   selectionIndicator: false,
+    //   //   shadows: true,
+    //   //   shouldAnimate: true,
+    //   // });
+
+    //   // var position = Cesium.Cartesian3.fromDegrees(118.2932880, 32.2888299, 6.0);
+    //   // var heading = Cesium.Math.toRadians(45);
+    //   // var pitch = 0;
+    //   // var roll = 0;
+    //   // var hpr = new Cesium.HeadingPitchRoll(heading, pitch, roll);
+    //   // var orientation = Cesium.Transforms.headingPitchRollQuaternion(
+    //   //   position,
+    //   //   hpr
+    //   // );
+    //   // var model_entity = viewer.entities.add({
+    //   //   id: "build",
+    //   //   position: position,
+    //   //   orientation: orientation,
+    //   //   model: {
+    //   //     show: true,
+    //   //     uri: '../../static/model.gltf',//注意是uri 不是url
+    //   //   },
+    //   // });
+    //   // viewer.zoomTo(model_entity);
+
+    //   //构造三维视图对象（视图容器div的id，三维视图设置参数）
+    //   var webGlobe = new Cesium.WebSceneControl('map', {});
+
+    //   //构造视图功能管理对象（视图）
+    //   var sceneManager = new CesiumZondy.Manager.SceneManager({
+    //     viewer: webGlobe.viewer
+    //   });
+
+    //   //构造第三方图层对象
+    //   var thirdPartyLayer = new CesiumZondy.Layer.ThirdPartyLayer({
+    //     viewer: webGlobe.viewer
+    //   });
+    //   //加载天地图
+    //   var tdtLayer = thirdPartyLayer.appendTDTuMap({
+    //     //天地图经纬度数据
+    //     url: 'http://t0.tianditu.com/DataServer?T=vec_c&X={x}&Y={y}&L={l}',
+    //     //开发token （请到天地图官网申请自己的开发token，自带token仅做功能验证随时可能失效）
+    //     token: "9c157e9585486c02edf817d2ecbc7752",
+    //     //地图类型 'vec'矢量 'img'影像 'ter'地形
+    //     ptype: "img"
+    //   });
+
+    //   // sceneManager.flyToEx(118.2932880, 32.2888299, {
+    //   //   height: 570,
+    //   //   heading: -27,
+    //   //   pitch: -25,
+    //   //   roll: 0
+    //   // });
+
+    //   const position = Cesium.Cartesian3.fromDegrees(
+    //     118.2932880, 32.2888299,
+    //     100.0
+    //   );
+    //   const heading = Cesium.Math.toRadians(135);
+    //   const pitch = 0;
+    //   const roll = 0;
+    //   const hpr = new Cesium.HeadingPitchRoll(heading, pitch, roll);
+    //   const orientation = Cesium.Transforms.headingPitchRollQuaternion(
+    //     position,
+    //     hpr
+    //   );
+
+    //   const entity = webGlobe.viewer.entities.add({
+    //     name: "../../static/model.gltf",
+    //     position: position,
+    //     orientation: orientation,
+    //     model: {
+    //       uri: "../../static/model.gltf",
+    //       minimumPixelSize: 128,
+    //       maximumScale: 20000,
+    //     },
+    //   });
+    //   webGlobe.viewer.trackedEntity = entity;
+
+    //   // const options = [
+    //   //   {
+    //   //     text: "Aircraft",
+    //   //     onselect: function () {
+    //   //       createModel(
+    //   //         "../../static/model.gltf",
+    //   //         5000.0
+    //   //       );
+    //   //     },
+    //   //   },
+
+    //   // ];
+
+    //   // Sandcastle.addToolbarMenu(options);
+
+    // },
     initmap() {
       var that = this;
       //地图视图
@@ -298,12 +306,12 @@ export default {
     flyToLocation(x, y) {
       // this.map=null;
       // console.log("111");
-      // console.log(x, y);
-      // this.map.flyTo({
-      //   center: [x, y], // 中心点
-      //   zoom: 16.5, // 缩放比例
-      //   pitch: 45, // 倾斜度
-      // });
+      console.log(x, y);
+      this.map.flyTo({
+        center: [x, y], // 中心点
+        zoom: 16.5, // 缩放比例
+        pitch: 45, // 倾斜度
+      });
     },
     handleCurrentChange(val) {
       this.currentPage = val;

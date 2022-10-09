@@ -9,12 +9,13 @@
         <li id="u1">
           <router-link to="/recommend" exact>智能推荐</router-link>
           <router-link to="/query" exact>景点查询</router-link>
-          <router-link to="/sensation" exact>形象感知</router-link>
+          <router-link to="/featuresearch" exact>特征查询</router-link>
         </li>
       </ul>
       <h1>旅游景点智能推荐与分析系统</h1>
       <ul>
         <li id="u2">
+          <router-link to="/sensation" exact>形象感知</router-link>
           <router-link to="/feelings" exact>情感分析</router-link>
           <router-link to="/odAnalysis" exact>客流分析</router-link>
         </li>

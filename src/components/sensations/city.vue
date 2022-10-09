@@ -66,7 +66,7 @@
     </div>
     <div class="city-content">
       <el-row>
-        <el-col :span="16"
+        <el-col :span="14"
           ><div class="col-content">
             <div class="row2title">
               <div class="imgBK"></div>
@@ -75,7 +75,7 @@
             <div class="row1chartcontent" id="chart3"></div>
           </div>
         </el-col>
-        <el-col :span="8">
+        <el-col :span="6">
           <div class="col-content">
             <div class="row3title">
               <div class="imgBK"></div>
@@ -1252,7 +1252,7 @@ export default {
   }
 }
 .city-content {
-  width: 51%;
+  width: 53%;
   position: absolute;
   z-index: 1;
   height: 37%;
@@ -1325,7 +1325,7 @@ export default {
 }
 .city-travels {
   position: absolute;
-  right: 3%;
+  right: 1%;
   width: 22.5%;
   height: 100%;
   background: url("../../assets/img/side.png") no-repeat;
