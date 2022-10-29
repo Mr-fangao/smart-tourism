@@ -559,7 +559,7 @@ export default {
         shadowOffsetY: 0,
         shadowColor: "rgba(0,0,0,0.3)",
       },
-      city: "北京",
+      city: "南京",
       travelsdata: {
         figure: "",
         daycount: "",

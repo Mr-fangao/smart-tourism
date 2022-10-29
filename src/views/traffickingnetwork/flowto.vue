@@ -72,7 +72,7 @@
       </div>
     </div>
 
-    <selectRegion :right="520" />
+    <selectRegion :right="320" />
   </div>
 </template>
 

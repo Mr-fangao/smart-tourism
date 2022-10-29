@@ -18,7 +18,7 @@ export default {
         container: "map",
         style: "mapbox://styles/chenjq/cl010ychv001214pdpa5xyq5a",
          center: [112, 31],
-        zoom: 4,
+        zoom: 3,
       });
 
       map.on("load", function () {

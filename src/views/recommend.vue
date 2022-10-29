@@ -2535,7 +2535,7 @@ export default {
   flex-direction: column;
   flex-wrap: wrap;
   display: flex;
-  background-color: #15cfee38;
+  background-color:#15cfee6b;
 }
 .person-name {
   width: 28%;

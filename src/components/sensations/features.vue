@@ -34,7 +34,7 @@
               type="monthrange"
               range-separator="-"
               start-placeholder="2015.01"
-              end-placeholder="2022.09"
+              end-placeholder="2022.10"
             >
             </el-date-picker>
           </div>

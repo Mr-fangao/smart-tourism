@@ -102,7 +102,7 @@ export default {
         container: "map",
         style: "mapbox://styles/chenjq/cl010ychv001214pdpa5xyq5a",
         center: [112, 31],
-        zoom: 4,
+        zoom: 3,
       });
       map.on("load", () => {
         map.addSource("sensicjson", {
@@ -174,10 +174,10 @@ export default {
           },
           //"source-layer": "button2"
         });
-        map.fitBounds([
-          [70, 45], // 边界的西南角
-          [150  , 30], // 边界的东北角
-        ]);
+        // map.fitBounds([
+        //   [90, 50], // 边界的西南角
+        //   [130  , 100], // 边界的东北角
+        // ]);
       });
       //添加数据源1
       document.getElementById("button3").addEventListener("click", () => {
@@ -257,10 +257,10 @@ export default {
           },
           //"source-layer": "button2"
         });
-        map.fitBounds([
-          [90, 45], // 边界的西南角
-          [120, 30], // 边界的东北角
-        ]);
+        // map.fitBounds([
+        //   [90, 45], // 边界的西南角
+        //   [120, 30], // 边界的东北角
+        // ]);
       });
       //添加数据源类型2
       document.getElementById("button4").addEventListener("click", () => {
@@ -341,10 +341,10 @@ export default {
           },
           //"source-layer": "button2"
         });
-        map.fitBounds([
-          [90, 45], // 边界的西南角
-          [120, 30], // 边界的东北角
-        ]);
+        // map.fitBounds([
+        //   [90, 45], // 边界的西南角
+        //   [120, 30], // 边界的东北角
+        // ]);
       });
 
       // map.on("click", "unclustered-point", (e) => {

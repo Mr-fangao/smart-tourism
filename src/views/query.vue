@@ -140,6 +140,8 @@ export default {
       that.map = new this.$mapboxgl.Map({
         container: "map",
         style: "mapbox://styles/chenjq/cl084urgf004014ny2nhu1xre",
+        center: [100, 31],
+        zoom: 3,
       });
     },
     // initmap1() {

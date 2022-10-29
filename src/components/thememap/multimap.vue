@@ -29,7 +29,7 @@ export default {
         container: "map",
         style: "mapbox://styles/chenjq/cl010ychv001214pdpa5xyq5a",
         center:  [118.77949013671878, 31.54501247139361],
-        zoom: 8,
+        zoom: 3,
       });
       map.on("load", () => {
         map.addSource("njmark", {
