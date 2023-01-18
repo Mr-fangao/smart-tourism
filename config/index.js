@@ -13,8 +13,8 @@ module.exports = {
     proxyTable: {
       '/api': {
         // target: 'http://47.96.186.60:6060/', //你要跨域的网址 比如 'http://news.baidu.com',
-        target: 'http://124.221.111.73:7070/', //你要跨域的网址 比如 'http://news.baidu.com',
-        secure: true, // 如果是https接口，需要配置这个参数
+        target: 'http://localhost:7070/', //你要跨域的网址 比如 'http://news.baidu.com',
+        // secure: true, // 如果是https接口，需要配置这个参数
         changeOrigin: true,
         pathRewrite: {
         '^/api': ''
